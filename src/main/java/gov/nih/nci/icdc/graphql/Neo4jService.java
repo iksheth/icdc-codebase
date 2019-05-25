@@ -60,9 +60,9 @@ public class Neo4jService implements AutoCloseable {
 		driver.close();
 	}
 
-	public List<Iterator<Map<String, Object>>> queryWithOutJDBC(String graphQl) {
+	public List<List<Map<String, Object>>> queryWithOutJDBC(String graphQl) {
 		List<Cypher> cyphers = this.translate(graphQl);
-		List<Iterator<Map<String, Object>>> results = new ArrayList<Iterator<Map<String, Object>>>();
+		List<List<Map<String, Object>>> results = new ArrayList<List<Map<String, Object>>>();
 		for (Cypher cypher : cyphers) {
 			// cypher = preProcessing(cypher.getQuery(), cypher.getParams());
 			results.add(queryByGraphDatabaseDriver(cypher.getQuery(), cypher.getParams()));
@@ -70,38 +70,20 @@ public class Neo4jService implements AutoCloseable {
 		return results;
 	}
 
-	public Iterator<Map<String, Object>> queryByGraphDatabaseDriver(String query, Map<String, Object> params) {
+	public List<Map<String, Object>> queryByGraphDatabaseDriver(String query, Map<String, Object> params) {
 
 		try (Session session = driver.session()) {
-			Iterator<Map<String, Object>> re = session
-					.writeTransaction(new TransactionWork<Iterator<Map<String, Object>>>() {
+			List<Map<String, Object>> re = session
+					.writeTransaction(new TransactionWork<List<Map<String, Object>>>() {
 						@Override
-						public Iterator<Map<String, Object>> execute(Transaction tx) {
+						public List<Map<String, Object>> execute(Transaction tx) {
 
-							StatementResult result = tx.run("MATCH (n:Movie) RETURN n LIMIT 25");
-							return new Iterator<Map<String, Object>>() {
-
-								boolean hasNext = result.hasNext();
-								public List<String> columns;
-
-								@Override
-								public boolean hasNext() {
-									return hasNext;
-								}
-
-								@Override
-								public Map<String, Object> next() {
-									if (hasNext) {
-										Record rc = result.next();
-										return rc.asMap();
-									} else
-										throw new NoSuchElementException();
-								}
-
-								@Override
-								public void remove() {
-								}
-							};
+							StatementResult result = tx.run(query,params);
+							List<Map<String, Object>> listRES =new ArrayList<Map<String, Object>>();
+							while(result.hasNext()) {
+								listRES.add(result.next().asMap());
+							}
+							return listRES;
 						}
 
 					});
@@ -201,32 +183,6 @@ public class Neo4jService implements AutoCloseable {
 			int index = Integer.parseInt(entry.getKey());
 			statement.setObject(index, entry.getValue());
 		}
-	}
-	
-	private static List<String> matchPersonNodes( Transaction tx )
-	{
-	    List<String> names = new ArrayList<>();
-	    StatementResult result = tx.run( "MATCH (a:agent) RETURN a.project_id ORDER BY a.project_id" );
-	    while ( result.hasNext() )
-	    {
-	        names.add( result.next().get( 0 ).asString() );
-	    }
-	    return names;
-	}
-	
-	
-
-  public static void main( String... args ) {
-
-		Driver driver = GraphDatabase.driver("bolt://localhost", AuthTokens.basic("neo4j", "123456"));
-		Session session = driver.session();
-		session.readTransaction(new TransactionWork<List<String>>() {
-
-			@Override
-			public List<String> execute(Transaction tx) {
-				return matchPersonNodes(tx);
-			}
-		});
 	}
 
 }

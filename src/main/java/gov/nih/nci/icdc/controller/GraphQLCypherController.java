@@ -33,7 +33,7 @@ public class GraphQLCypherController {
 	
 	@RequestMapping(value = "/person", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Iterator<Map<String, Object>>>  get(HttpEntity<String> httpEntity,HttpServletResponse response) throws JsonParseException, IOException {
+	public List<List<Map<String, Object>>>  get(HttpEntity<String> httpEntity,HttpServletResponse response) throws JsonParseException, IOException {
 		
 		// STEP 1 : GET GRAPHQL QUERY FROM RESTFUL API.
 		String reqBody = httpEntity.getBody().toString();
