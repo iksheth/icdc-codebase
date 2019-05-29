@@ -5,6 +5,12 @@ import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
+
+/**
+ * Entity bean refers to database Person node. 
+ */
+
+
 @NodeEntity
 public class Person {
 

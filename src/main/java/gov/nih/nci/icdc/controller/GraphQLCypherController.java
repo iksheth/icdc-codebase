@@ -18,14 +18,14 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import gov.nih.nci.icdc.graphql.Neo4jService;
+import gov.nih.nci.icdc.service.GraphQLToCypherService;
 
 @RestController
 @RequestMapping(value="/v1/graphql/cypher")
 public class GraphQLCypherController {
 
 	@Autowired
-	private Neo4jService neo4jService;
+	private GraphQLToCypherService neo4jService;
 	
 	public static final Gson GSON = new Gson();
 	
@@ -33,16 +33,19 @@ public class GraphQLCypherController {
 	
 	@RequestMapping(value = "/person", method = RequestMethod.POST)
 	@ResponseBody
-	public List<List<Map<String, Object>>>  get(HttpEntity<String> httpEntity,HttpServletResponse response) throws JsonParseException, IOException {
+	public List<List<Map<String, Object>>>  getPerson(HttpEntity<String> httpEntity,HttpServletResponse response) throws JsonParseException, IOException {
 		
-		// STEP 1 : GET GRAPHQL QUERY FROM RESTFUL API.
+		// Get graphql query from request
 		String reqBody = httpEntity.getBody().toString();
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(reqBody, JsonObject.class);
 		String sdl = new String(jsonObject.get("query").getAsString().getBytes(),"UTF-8");
+	
 		
-		
-		// STEP 2: User Cypher to get data and return to the client		return neo4jService.query(sdl);
-		return neo4jService.queryWithOutJDBC(sdl);
+		//assign graphql to neo4j service, neo4j will translate graphql into cypher then  return cypher result
+		return neo4jService.query(sdl);
 	}
+	
+	
+
 }

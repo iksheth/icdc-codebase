@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 
-import gov.nih.nci.icdc.graphql.GraphQLProvider;
+import gov.nih.nci.icdc.model.GraphQLProvider;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
 
@@ -31,18 +31,15 @@ public class GraphQLController {
 	@ResponseBody
 	public String get(HttpEntity<String> httpEntity,HttpServletResponse response) throws JsonParseException, IOException {
 		
-		// STEP 1 : GET GRAPHQL QUERY FROM RESTFUL API.
-
+		// Get graphql query from request
 		String reqBody = httpEntity.getBody().toString();
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(reqBody, JsonObject.class);
 		String sdl = new String(jsonObject.get("query").getAsString().getBytes(),"UTF-8");
 		
-		// STEP 2 : USE GRAPHQL QUERY TO GET DATA AND RETRUN TO THE CLIENT
+		//use graphql to get data 
 		GraphQL build = graphQLProvider.graphQL();
-		System.out.print(sdl);
 		ExecutionResult executionResult = build.execute(sdl);
-	    System.out.print(executionResult.toString());
 		return  GSON.toJson(executionResult.toString(),String.class);
 	}
 }

@@ -13,6 +13,11 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
+/**
+ * A Configuration bean read configuration setting from
+ * classpth:application.properties. This class provides configuration settings.
+ */
+
 @Configuration
 @PropertySource("classpath:application.properties")
 public class ConfigurationDAO {
@@ -28,14 +33,18 @@ public class ConfigurationDAO {
 
 	@Value("${graphql.schema}")
 	private List<String> graphqlSchemas;
-	
+
 	@Value("${neo4j.java.driver.server}")
 	private String neo4jJavaDriverServerURI;
-	
 
-	// Read GraphQL Schemas from application.properties
+
+	/**
+	 * Read GraphQL Schemas from application.properties
+	 * 
+	 * @return schema as a String, if fails to read schemas will return empty  string.
+	 */
 	public String getGraphSchemas() {
-	
+
 		StringBuilder sb = new StringBuilder();
 		for (String schema : graphqlSchemas) {
 			URL url = Resources.getResource(schema);
@@ -48,7 +57,6 @@ public class ConfigurationDAO {
 				e.printStackTrace();
 			}
 		}
-
 		return sb.toString();
 
 	}
@@ -84,7 +92,7 @@ public class ConfigurationDAO {
 	public void setNeo4jJDBCServerURI(String neo4jJDBCServerURI) {
 		this.neo4jJDBCServerURI = neo4jJDBCServerURI;
 	}
-	
+
 	public String getNeo4jJavaDriverServerURI() {
 		return neo4jJavaDriverServerURI;
 	}
