@@ -34,7 +34,7 @@ def camelCase(org):
     if type(org) == str:
         return ''.join([x.capitalize() for x in org.split('_')])
     else:
-        print('NOT a string, can\'t be camel cased!')
+        print('##### NOT a string, can\'t be camel cased!')
         return org
 
 # Get type info from description
@@ -55,7 +55,7 @@ def getType(name, desc):
         if result in mapping:
             result = mapping[result]
         else:
-            print("################## unknown type: {}".format(result))
+            print("########## unknown type: {}".format(result))
     # Desc has Enum info
     elif 'enum' in desc:
         result = getEnumType(desc['enum'])
@@ -68,33 +68,31 @@ def getType(name, desc):
         for i, t in enumerate(desc['anyOf']):
             enum.append(getType('{}_{}'.format(name, i), t))
         result = getType(name, {'enum': enum})
-        # print('### anyOf => {}'.format(result))
     # Treat oneOf as enum
     elif 'oneOf' in desc:
         enum = []
         for i, t in enumerate(desc['oneOf']):
             enum.append(getType('{}_{}'.format(name, i), t))
         result = getType(name, {'enum': enum})
-        # print('### oneOf => {}'.format(result))
     else:
-        print('############### unknown data type description: {}'.format(desc))
+        print('######### unknown data type description: {}'.format(desc))
 
     return result
 
 # Get type from first element of input array
 def getEnumType(array):
     if not type(array) is list:
-        print('#### enum is not an array: {}'.format(array))
+        print('###### input is not an array: {}'.format(array))
         return None
     if len(array) == 0:
-        print('### enum is empty!')
+        print('###### input is empty!')
         return None
     if type(array[0]) is str:
         return 'String'
     elif type(array[0]) is int:
         return 'Int'
     else:
-        print('#### Unknown data type in Enum: {}'.format(array[0]))
+        print('###### Unknown data type in Enum: {}'.format(array[0]))
 
 # Get $ref type from description
 # Assume all Ref Types are defined inside DEFINITION_YAML object
@@ -110,13 +108,11 @@ def getRefType(desc):
 
         if desc[ref].startswith(DEFINITION_YAML):
             subType = desc[ref].split('#/')[1]
-            # print(subType)
-            # print(definitions[subType])
             result = getType(subType, definitions[subType])
         else:
-            print('##### Wrong ref type: {}'.format(desc[ref]))
+            print('###### Wrong ref type: {}'.format(desc[ref]))
     else:
-        print('##### "{}" is not a Ref Type!'.format(desc))
+        print('###### "{}" is not a Ref Type!'.format(desc))
     return result
 
 def processNode(name, desc):
@@ -156,14 +152,14 @@ def processEdges(name, desc):
                     props['next_{}'.format(linkName)] = '[{}] @relation(name:"{}")'.format(targetType, label)
                     props['prior_{}'.format(linkName)] = '[{}] @relation(name:"{}", direction:IN)'.format(targetType, label)
                 elif id == targetType:
-                    print('#### Special loop edge needs to be addressed!')
+                    print('###### Special loop edge needs to be addressed!')
                     print(rel)
                 # Normal relationship
                 else:
                     props[linkName] = '[{}] @relation(name:"{}")'.format(targetType, label)
                     nodes[targetType][backRef] = '[{}] @relation(name:"{}", direction:IN)'.format(id, label)
             else:
-                print('#### wrong relation: {}'.format(relation))
+                print('###### wrong relation: {}'.format(relation))
                 print(rel)
         else:
             print('###### Wrong link format: {}'.format(rel))
@@ -195,7 +191,7 @@ if __name__ == '__main__':
                     processEdges(key, value)
 
     else:
-        print('{} is not a file'.format(args.json))
+        print('##### {} is not a file'.format(args.json))
 
     with open(args.graphql, 'w') as graphql_file:
         # Output Types
