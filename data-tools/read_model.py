@@ -58,40 +58,43 @@ def getType(name, desc):
             print("################## unknown type: {}".format(result))
     # Desc has Enum info
     elif 'enum' in desc:
-        name = camelCase(name)
-        enum = desc['enum']
-        if len(enum) == 1:
-            result = ','.join(enum)
-        else:
-            if name in ignoreTypes:
-                result = name
-            else:
-                enum_set = set(enum)
-                if name in enums:
-                    if not enums[name] == enum_set:
-                        print('Different enum with same name: {}'.format(name))
-                        print(enums[name] ^ enum_set)
-                        name += '1'
-                else:
-                    enums[name] = enum_set
-                result = name
+        result = getEnumType(desc['enum'])
     # Desc has $ref info
     elif '$ref' in desc:
         result = getRefType(desc)
+    # Treat anyOf as enum
     elif 'anyOf' in desc:
         enum = []
         for i, t in enumerate(desc['anyOf']):
             enum.append(getType('{}_{}'.format(name, i), t))
         result = getType(name, {'enum': enum})
+        # print('### anyOf => {}'.format(result))
+    # Treat oneOf as enum
     elif 'oneOf' in desc:
         enum = []
         for i, t in enumerate(desc['oneOf']):
             enum.append(getType('{}_{}'.format(name, i), t))
         result = getType(name, {'enum': enum})
+        # print('### oneOf => {}'.format(result))
     else:
         print('############### unknown data type description: {}'.format(desc))
 
     return result
+
+# Get type from first element of input array
+def getEnumType(array):
+    if not type(array) is list:
+        print('#### enum is not an array: {}'.format(array))
+        return None
+    if len(array) == 0:
+        print('### enum is empty!')
+        return None
+    if type(array[0]) is str:
+        return 'String'
+    elif type(array[0]) is int:
+        return 'Int'
+    else:
+        print('#### Unknown data type in Enum: {}'.format(array[0]))
 
 # Get $ref type from description
 # Assume all Ref Types are defined inside DEFINITION_YAML object
@@ -111,9 +114,9 @@ def getRefType(desc):
             # print(definitions[subType])
             result = getType(subType, definitions[subType])
         else:
-            print('Wrong ref type: {}'.format(desc[ref]))
+            print('##### Wrong ref type: {}'.format(desc[ref]))
     else:
-        print('"{}" is not a Ref Type!'.format(desc))
+        print('##### "{}" is not a Ref Type!'.format(desc))
     return result
 
 def processNode(name, desc):
@@ -126,10 +129,9 @@ def processNode(name, desc):
     # Gather properties
     for prop, prop_desc in desc[PROPERTIES].items():
         prop_type = getType(prop, prop_desc)
-        # Assume 'type' property must be same as 'id' of the node
         if prop == OBJ_TYPE:
-            if prop_type != id:
-                print('############### Wrong type: {}'.format(prop_type))
+            # Don't use 'type' property
+            pass
         elif prop_type in ignoreTypes:
             pass
         else:
@@ -172,7 +174,6 @@ if __name__ == '__main__':
     parser.add_argument('graphql', help='Output GraphQL schema file name')
     args = parser.parse_args()
 
-    enums = {}
     nodes = {}
     definitions = {}
 
@@ -197,21 +198,6 @@ if __name__ == '__main__':
         print('{} is not a file'.format(args.json))
 
     with open(args.graphql, 'w') as graphql_file:
-        # Output Enums
-        for name, enum in enums.items():
-            enumLine = 'enum {} {{'.format(name)
-            print(enumLine)
-            print(enumLine, file=graphql_file)
-
-            for item in enum:
-                enumItem = '  {}'.format(item)
-                print(enumItem)
-                print(enumItem, file=graphql_file)
-
-            enumEnd = '}\n'
-            print(enumEnd)
-            print(enumEnd, file=graphql_file)
-
         # Output Types
         for name, props in nodes.items():
             typeLine = 'type {} {{'.format(name)
@@ -225,4 +211,4 @@ if __name__ == '__main__':
             print(typeEnd)
             print(typeEnd, file=graphql_file)
 
-    print('Types: {}, Enunms: {}'.format(len(nodes), len(enums)))
+    print('Types: {}'.format(len(nodes)))
