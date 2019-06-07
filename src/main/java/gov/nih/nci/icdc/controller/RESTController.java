@@ -14,7 +14,7 @@ import gov.nih.nci.icdc.model.Person;
 import gov.nih.nci.icdc.service.RESTService;
 
 @RestController
-@RequestMapping(value = "/v1/rest")
+@RequestMapping(value = "√")
 public class RESTController {
 
 	private static final Logger logger = LogManager.getLogger(RESTController.class);
@@ -25,7 +25,7 @@ public class RESTController {
 	// for testing purpose
 	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	public String ping() {
-		logger.info("hit end point /ping and response pong");
+		logger.info("hit end point:/ping");
 		return "pong";
 	}
 

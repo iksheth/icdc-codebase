@@ -15,5 +15,4 @@ public class IndexController {
 		logger.info("Hit the landing page");
 		return "index";
 	}
-
 }
