@@ -107,7 +107,7 @@ public class GraphQLToCypherService implements AutoCloseable {
 	 * @return List<Map<String, Object>>, if fails to execute cypher will return empty object;
 	 */
 	
-	private List<Map<String, Object>> query(String query, Map<String, Object> params) {
+	public List<Map<String, Object>> query(String query, Map<String, Object> params) {
 		try (Session session = driver.session()) {
 			List<Map<String, Object>> re = session.writeTransaction(new TransactionWork<List<Map<String, Object>>>() {
 				@Override

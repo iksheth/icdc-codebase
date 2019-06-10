@@ -125,7 +125,7 @@ parser.add_argument('dir', help='Data directory')
 args = parser.parse_args()
 
 uri = "bolt://localhost:7687"
-driver = GraphDatabase.driver(uri, auth=("neo4j", os.environ['PGPASSWORD']))
+driver = GraphDatabase.driver(uri, auth=("neo4j", os.environ['NEO_PASSWORD']))
 
 
 with driver.session() as session:

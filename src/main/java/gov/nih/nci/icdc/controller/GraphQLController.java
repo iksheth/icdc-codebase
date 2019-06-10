@@ -11,35 +11,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
+import com.mashape.unirest.http.JsonNode;
 
-import gov.nih.nci.icdc.model.GraphQLProvider;
-import graphql.ExecutionResult;
-import graphql.GraphQL;
+import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 
 @RestController
-@RequestMapping(value="/v1/graphql")
 public class GraphQLController {
 
 	@Autowired
-	private GraphQLProvider graphQLProvider;
+	private Neo4JGraphQLService neo4jService;
+	
+	
 	public static final Gson GSON = new Gson();
 	
-	@RequestMapping(value = "/person", method = RequestMethod.POST)
+	
+	
+	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.POST)
 	@ResponseBody
-	public String get(HttpEntity<String> httpEntity,HttpServletResponse response) throws JsonParseException, IOException {
+	public String  getPerson(HttpEntity<String> httpEntity,HttpServletResponse response) throws IOException {
 		
 		// Get graphql query from request
 		String reqBody = httpEntity.getBody().toString();
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(reqBody, JsonObject.class);
 		String sdl = new String(jsonObject.get("query").getAsString().getBytes(),"UTF-8");
+
 		
-		//use graphql to get data 
-		GraphQL build = graphQLProvider.graphQL();
-		ExecutionResult executionResult = build.execute(sdl);
-		return  GSON.toJson(executionResult.toString(),String.class);
+		//assign graphql to neo4j service, neo4j will translate graphql into cypher then  return cypher result
+		return neo4jService.query(sdl).toString();
 	}
 }

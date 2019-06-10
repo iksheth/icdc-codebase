@@ -20,7 +20,7 @@ import com.google.gson.JsonObject;
 import gov.nih.nci.icdc.service.GraphQLToCypherService;
 
 @RestController
-@RequestMapping(value="/v1/graphql/cypher")
+@RequestMapping(value="/v1/cypher")
 public class GraphQLCypherController {
 
 	@Autowired

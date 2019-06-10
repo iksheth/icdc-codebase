@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class IndexController {
+public class ViewController {
 	
-	private static final Logger logger = LogManager.getLogger(IndexController.class);
+	private static final Logger logger = LogManager.getLogger(ViewController.class);
 
 	@RequestMapping("/")
 	public String landing() {
