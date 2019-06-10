@@ -141,7 +141,13 @@
 			<artifactId>swagger-ui</artifactId>
 			<version>3.22.2</version>
 		</dependency>
-
+	  <!--CODE-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+	
 	</dependencies>
 
 	<build>
