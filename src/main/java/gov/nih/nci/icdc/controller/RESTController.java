@@ -14,7 +14,7 @@ import gov.nih.nci.icdc.model.Person;
 import gov.nih.nci.icdc.service.RESTService;
 
 @RestController
-@RequestMapping(value = "√")
+@RequestMapping(value = "/v1/rest/")
 public class RESTController {
 
 	private static final Logger logger = LogManager.getLogger(RESTController.class);
