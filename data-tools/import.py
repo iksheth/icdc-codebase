@@ -121,11 +121,12 @@ other_tables = [
 
 parser = argparse.ArgumentParser(description='Import GEN3 PostgreSQL database in csv files into Neo4j')
 parser.add_argument('dir', help='Data directory')
+parser.add_argument('-u', '--uri', help='Neo4j uri like bolt://12.34.56.78:7687')
 
 args = parser.parse_args()
 
-uri = "bolt://localhost:7687"
-driver = GraphDatabase.driver(uri, auth=("neo4j", os.environ['PGPASSWORD']))
+uri = args.uri if args.uri else "bolt://localhost:7687"
+driver = GraphDatabase.driver(uri, auth=("neo4j", os.environ['NEO_PASSWORD']))
 
 
 with driver.session() as session:
