@@ -3,5 +3,9 @@ target/
 .settings/
 .project
 .DS_Store
+.factorypath
+.vscode
+.apt_generated
+.apt_generated_tests
 *.iml
 .sts4-cache/*
