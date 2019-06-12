@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.mashape.unirest.http.JsonNode;
 
-import gov.nih.nci.icdc.error.ResourceNotFoundException;
 import gov.nih.nci.icdc.model.Mocker;
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 
@@ -67,15 +65,8 @@ public class GraphQLController {
 			responseText=mocker.getCase_detail();
 		}
 		else {
-			JsonNode neo4jData = neo4jService.query(sdl);
-			// if neo4j response an error will throw that error to the front end
-			if(neo4jData.getObject().has("errors")) {
-				throw new ResourceNotFoundException(neo4jData.getObject().get("errors").toString());
-			}else {
-				responseText = neo4jData.toString();
-			}
+			responseText=neo4jService.query(sdl);
 		}
-
 		return responseText;
 		
 	}

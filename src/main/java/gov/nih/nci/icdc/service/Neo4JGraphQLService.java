@@ -11,6 +11,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import gov.nih.nci.icdc.error.ResourceNotFoundException;
 import gov.nih.nci.icdc.model.ConfigurationDAO;
 
 
@@ -22,7 +23,7 @@ public class Neo4JGraphQLService {
 	private ConfigurationDAO config;
     
     
-    public JsonNode query(String graphQLQuery) {
+    public String query(String graphQLQuery) {
     	JSONObject jo = new JSONObject(); 
 		jo.put("query", graphQLQuery);
 		jo.toString();
@@ -40,7 +41,12 @@ public class Neo4JGraphQLService {
 			throw new RuntimeException(e);
 		}
     	
-    	return jsonResponse.getBody();
+    	JsonNode neo4jResponse = jsonResponse.getBody();
+    	// if neo4j response an error will throw that error to the front end
+    	if(neo4jResponse.getObject().has("errors")) {
+			throw new ResourceNotFoundException(neo4jResponse.getObject().get("errors").toString());
+		}
+    	return neo4jResponse.toString();
     	
     }
 }

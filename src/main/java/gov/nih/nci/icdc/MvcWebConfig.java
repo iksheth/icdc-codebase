@@ -36,8 +36,8 @@ public class MvcWebConfig implements WebMvcConfigurer {
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
 		registry.addResourceHandler("/data/**").addResourceLocations("/WEB-INF/data/")
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
-		registry.addResourceHandler("/*.html").addResourceLocations("/WEB-INF/")
-				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+//		registry.addResourceHandler("/*.html").addResourceLocations("/WEB-INF/")
+//				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
 
 	}
 }
