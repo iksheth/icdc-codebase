@@ -15,4 +15,6 @@ public class ViewController {
 		logger.info("Hit the landing page");
 		return "index";
 	}
+	
+	
 }
