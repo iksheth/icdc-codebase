@@ -1,0 +1,593 @@
+type demographic {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  breed: String
+  patient_age_at_enrollment: String
+  date_of_birth: String
+  sex: String
+  crf_id: String
+  submitter_id: String
+  cases: [case] @relation(name:"of_case")
+}
+
+type disease_extent {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  crf_id: String
+  submitter_id: String
+  evaluations: [evaluation] @relation(name:"at_evaluation")
+}
+
+type assay {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  submitter_id: String
+  samples: [sample] @relation(name:"of_sample")
+  images: [image] @relation(name:"of_assay", direction:IN)
+  files: [file] @relation(name:"of_assay", direction:IN)
+}
+
+type experiment {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  submitter_id: String
+  name: String
+  study_arms: [study_arm] @relation(name:"member_of")
+  projects: [project] @relation(name:"member_of")
+  cohorts: [cohort] @relation(name:"member_of", direction:IN)
+}
+
+type physical_exam {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  date_of_examination: String
+  day_in_cycle: String
+  body_system: String
+  pe_finding: String
+  pe_comment: String
+  phase_pe: String
+  assessment_timepoint: String
+  crf_id: String
+  submitter_id: String
+  evaluations: [evaluation] @relation(name:"at_evaluation")
+  enrollments: [enrollment] @relation(name:"at_enrollment")
+}
+
+type study {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  clinical_study_name: String
+  clinical_study_designation: String
+  clinical_study_id: String
+  date_of_iacuc_approval: String
+  submitter_id: String
+  projects: [project] @relation(name:"member_of")
+  study_sites: [study_site] @relation(name:"of_study", direction:IN)
+  study_arms: [study_arm] @relation(name:"member_of", direction:IN)
+  principal_investigators: [principal_investigator] @relation(name:"of_study", direction:IN)
+}
+
+type cohort {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  cohort_description: String
+  cohort_dose: String
+  submitter_id: String
+  study_arms: [study_arm] @relation(name:"member_of")
+  experiments: [experiment] @relation(name:"member_of")
+  cases: [case] @relation(name:"member_of", direction:IN)
+}
+
+type project {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  dbgap_accession_number: String
+  name: String
+  code: String
+  submitter_id: String
+  availability_type: String
+  programs: [program] @relation(name:"member_of")
+  experiments: [experiment] @relation(name:"member_of", direction:IN)
+  studies: [study] @relation(name:"member_of", direction:IN)
+}
+
+type vital_signs {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  date_of_vital_signs: String
+  body_temperature: String
+  pulse: String
+  respiration_rate: String
+  respiration_pattern: String
+  systolic_bp: String
+  pulse_ox: String
+  patient_weight: String
+  body_surface_area: String
+  modified_ecog: String
+  ecg: String
+  assessment_timepoint: String
+  phase: String
+  crf_id: String
+  submitter_id: String
+  evaluations: [evaluation] @relation(name:"at_evaluation")
+}
+
+type study_site {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  site_short_name: String
+  veterinary_medical_center: String
+  registering_institution: String
+  submitter_id: String
+  studies: [study] @relation(name:"of_study")
+}
+
+type sample {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  submitter_id: String
+  visits: [visit] @relation(name:"on_visit")
+  samples: String
+  cases: [case] @relation(name:"member_of")
+  assays: [assay] @relation(name:"of_sample", direction:IN)
+  next_samples: [sample] @relation(name:"next")
+  prior_samples: [sample] @relation(name:"next", direction:IN)
+  aliquots: [aliquot] @relation(name:"member_of", direction:IN)
+}
+
+type evaluation {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  date_of_evaluation: String
+  submitter_id: String
+  visits: [visit] @relation(name:"on_visit")
+  disease_extents: [disease_extent] @relation(name:"at_evaluation", direction:IN)
+  physical_exams: [physical_exam] @relation(name:"at_evaluation", direction:IN)
+  vital_signs: [vital_signs] @relation(name:"at_evaluation", direction:IN)
+  adverse_events: [adverse_event] @relation(name:"at_evaluation", direction:IN)
+  lab_exams: [lab_exam] @relation(name:"at_evaluation", direction:IN)
+}
+
+type cycle {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  cycle_number: String
+  date_of_cycle_start: String
+  date_of_cycle_end: String
+  submitter_id: String
+  cases: [case] @relation(name:"of_case")
+  visits: [visit] @relation(name:"of_cycle", direction:IN)
+}
+
+type prior_therapy {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  date_of_first_dose: String
+  date_of_last_dose: String
+  agent_name: String
+  dose_schedule: String
+  total_dose: String
+  agent_units_of_measure: String
+  best_response: String
+  nonresponse_therapy_type: String
+  prior_therapy_type: String
+  prior_steroid_exposure: String
+  number_of_prior_regimens_steroid: String
+  total_number_of_doses_steroid: String
+  date_of_last_dose_steroid: String
+  prior_nsaid_exposure: String
+  number_of_prior_regimens_nsaid: String
+  total_number_of_doses_nsaid: String
+  date_of_last_dose_nsaid: String
+  tx_loc_geo_loc_ind_nsaid: String
+  min_rsdl_dz_tx_ind_nsaids_treatment_pe: String
+  therapy_type: String
+  any_therapy: String
+  number_of_prior_regimens_any_therapy: String
+  total_number_of_doses_any_therapy: String
+  date_of_last_dose_any_therapy: String
+  treatment_performed_at_site: String
+  treatment_performed_in_minimal_residual: String
+  submitter_id: String
+  enrollments: [enrollment] @relation(name:"at_enrollment")
+  prior_therapies: String
+  next_prior_therapies: [prior_therapy] @relation(name:"next")
+  prior_prior_therapies: [prior_therapy] @relation(name:"next", direction:IN)
+}
+
+type prior_surgery {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  date_of_surgery: String
+  procedure: String
+  anatomical_site_of_surgery: String
+  surgical_finding: String
+  residual_disease: String
+  therapeutic_indicator: String
+  crf_id: String
+  submitter_id: String
+  prior_surgeries: String
+  enrollments: [enrollment] @relation(name:"at_enrollment")
+  next_prior_surgeries: [prior_surgery] @relation(name:"next")
+  prior_prior_surgeries: [prior_surgery] @relation(name:"next", direction:IN)
+}
+
+type agent {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  medication: String
+  document_number: String
+  submitter_id: String
+  study_arms: [study_arm] @relation(name:"of_study_arm")
+  adverse_events: [adverse_event] @relation(name:"of_agent", direction:IN)
+  agent_administrations: [agent_administration] @relation(name:"of_agent", direction:IN)
+}
+
+type aliquot {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  submitter_id: String
+  samples: [sample] @relation(name:"member_of")
+}
+
+type off_treatment {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  document_number: String
+  date_off_treatment: String
+  reason_off_treatment: String
+  date_of_disease_progression: String
+  best_resp_vet_tx_tp_secondary_response: String
+  date_last_medication_administration: String
+  best_resp_vet_tx_tp_best_response: String
+  date_of_best_response: String
+  submitter_id: String
+  cases: [case] @relation(name:"went_off_treatment")
+}
+
+type follow_up {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  document_number: String
+  date_of_last_contact: String
+  patient_status: String
+  explain_unknown_status: String
+  contact_type: String
+  treatment_since_last_contact: String
+  physical_exam_performed: String
+  physical_exam_changes: String
+  crf_id: String
+  submitter_id: String
+  cases: [case] @relation(name:"of_case")
+}
+
+type study_arm {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  arm: String
+  ctep_treatment_assignment_code: String
+  submitter_id: String
+  studies: [study] @relation(name:"member_of")
+  experiments: [experiment] @relation(name:"member_of", direction:IN)
+  cohorts: [cohort] @relation(name:"member_of", direction:IN)
+  agents: [agent] @relation(name:"of_study_arm", direction:IN)
+}
+
+type principal_investigator {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  pi_first_name: String
+  pi_last_name: String
+  pi_middle_initial: String
+  submitter_id: String
+  studies: [study] @relation(name:"of_study")
+}
+
+type case {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  patient_id: String
+  patient_first_name: String
+  crf_id: String
+  submitter_id: String
+  cohorts: [cohort] @relation(name:"member_of")
+  demographics: [demographic] @relation(name:"of_case", direction:IN)
+  samples: [sample] @relation(name:"member_of", direction:IN)
+  cycles: [cycle] @relation(name:"of_case", direction:IN)
+  off_treatments: [off_treatment] @relation(name:"went_off_treatment", direction:IN)
+  follow_ups: [follow_up] @relation(name:"of_case", direction:IN)
+  adverse_events: [adverse_event] @relation(name:"had_adverse_event", direction:IN)
+  diagnoses: [diagnosis] @relation(name:"of_case", direction:IN)
+  off_studies: [off_study] @relation(name:"went_off_study", direction:IN)
+  enrollments: [enrollment] @relation(name:"of_case", direction:IN)
+}
+
+type adverse_event {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  ae_dose: String
+  ae_agent_name: String
+  day_in_cycle: String
+  date_resolved: String
+  adverse_event_term: String
+  adverse_event_description: String
+  adverse_event_grade: String
+  adverse_event_grade_description: String
+  attribution_to_research: String
+  attribution_to_ind: String
+  attribution_to_disease: String
+  attribution_to_commercial: String
+  attribution_to_other: String
+  ae_other: String
+  dose_limiting_toxicity: String
+  unexpected_adverse_event: String
+  crf_id: String
+  submitter_id: String
+  adverse_events: String
+  evaluations: [evaluation] @relation(name:"at_evaluation")
+  cases: [case] @relation(name:"had_adverse_event")
+  agents: [agent] @relation(name:"of_agent")
+  next_adverse_events: [adverse_event] @relation(name:"next")
+  prior_adverse_events: [adverse_event] @relation(name:"next", direction:IN)
+}
+
+type diagnosis {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  primary_disease_site: String
+  disease_term: String
+  stage_of_disease: String
+  histology_cytopathology: String
+  date_of_histology_confirmation: String
+  histological_grade: String
+  date_of_diagnosis: String
+  crf_id: String
+  submitter_id: String
+  cases: [case] @relation(name:"of_case")
+}
+
+type image {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  object_id: String
+  file_name: String
+  data_category: String
+  data_format: String
+  data_type: String
+  file_size: Int
+  submitter_id: String
+  md5sum: String
+  assays: [assay] @relation(name:"of_assay")
+}
+
+type lab_exam {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  submitter_id: String
+  evaluations: [evaluation] @relation(name:"at_evaluation")
+}
+
+type file {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  object_id: String
+  file_name: String
+  data_category: String
+  data_format: String
+  data_type: String
+  file_size: Int
+  submitter_id: String
+  md5sum: String
+  assays: [assay] @relation(name:"of_assay")
+}
+
+type visit {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  submitter_id: String
+  cycles: [cycle] @relation(name:"of_cycle")
+  visits: String
+  samples: [sample] @relation(name:"on_visit", direction:IN)
+  evaluations: [evaluation] @relation(name:"on_visit", direction:IN)
+  next_visits: [visit] @relation(name:"next")
+  prior_visits: [visit] @relation(name:"next", direction:IN)
+  agent_administrations: [agent_administration] @relation(name:"on_visit", direction:IN)
+}
+
+type off_study {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  document_number: String
+  date_off_study: String
+  reason_off_study: String
+  date_of_disease_progression: String
+  date_off_treatment: String
+  best_resp_vet_tx_tp_secondary_response: String
+  date_last_medication_administration: String
+  best_resp_vet_tx_tp_best_response: String
+  date_of_best_response: String
+  submitter_id: String
+  cases: [case] @relation(name:"went_off_study")
+}
+
+type enrollment {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  date_of_registration: String
+  registering_institution: String
+  initials: String
+  date_of_informed_consent: String
+  site_short_name: String
+  veterinary_medical_center: String
+  enrollment_document_number: String
+  cohort_description: String
+  patient_subgroup: String
+  submitter_id: String
+  cases: [case] @relation(name:"of_case")
+  physical_exams: [physical_exam] @relation(name:"at_enrollment", direction:IN)
+  prior_therapies: [prior_therapy] @relation(name:"at_enrollment", direction:IN)
+  prior_surgeries: [prior_surgery] @relation(name:"at_enrollment", direction:IN)
+}
+
+type agent_administration {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  document_number: String
+  medication: String
+  route_of_administration: String
+  medication_lot_number: String
+  medication_vial_id: String
+  medication_actual_units_of_measure: String
+  medication_duration: String
+  medication_units_of_measure: String
+  medication_actual_dose: String
+  phase: String
+  start_time: String
+  stop_time: String
+  dose_level: String
+  dose_units_of_measure: String
+  date_of_missed_dose: String
+  medication_missed_dose: String
+  missed_dose_amount: String
+  missed_dose_units_of_measure: String
+  medication_course_number: String
+  comment: String
+  crf_id: String
+  submitter_id: String
+  visits: [visit] @relation(name:"on_visit")
+  agents: [agent] @relation(name:"of_agent")
+}
+
+type program {
+  id: String
+  state: String
+  created_datetime: String
+  updated_datetime: String
+  project_id: String
+  name: String
+  dbgap_accession_number: String
+  submitter_id: String
+  projects: [project] @relation(name:"member_of", direction:IN)
+}
+
+schema {
+  query: QueryType
+}
+
+type BreedCaseCount {
+  breed: String
+  cases: Int
+}
+
+type DiseaseTermCaseCount {
+  disease_term: String
+  cases: Int
+}
+
+type CaseDetail {
+  patient_id: String
+  breed: String
+  patient_age_at_enrollment: String
+  sex: String
+  disease_term: String
+  stage_of_disease: String
+}
+
+type QueryType {
+  caseCountByBreed: [BreedCaseCount] @cypher(statement: "MATCH (c:case)<-[of_case]-(d:demographic) return d.breed as breed, count(c) as cases")
+  caseCountByDiseaseTerm: [DiseaseTermCaseCount] @cypher(statement: "MATCH (c:case)<-[of_case]-(diag:diagnosis) return d.disease_term as disease_term, count(c) as cases")
+  casesByStudyAndBreeds(study_name: String, breeds: [String], disease_terms: [String]): [CaseDetail] @cypher(statement: "MATCH (s:study)<-[:member_of]-(a:study_arm)<-[:member_of]-(c:cohort)<-[:member_of]-(case:case)<-[:of_case]-(d:demographic), (case)<-[:of_case]-(diag:diagnosis) WHERE s.clinical_study_name = $study_name and d.breed in $breeds and diag.disease_term in $disease_terms RETURN case.patient_id as patient_id, d.breed as breed, d.patient_age_at_enrollment as patient_age_at_enrollment, d.sex as sex, diag.disease_term as disease_term, diag.stage_of_disease as stage_of_disease")
+}
