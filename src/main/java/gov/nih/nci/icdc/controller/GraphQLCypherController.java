@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,9 @@ import gov.nih.nci.icdc.service.GraphQLToCypherService;
 @RequestMapping(value = "/v1/graphql/cypher")
 public class GraphQLCypherController {
 
+	
+	private static final Logger logger = LogManager.getLogger(GraphQLCypherController.class);
+	
 	@Autowired
 	private GraphQLToCypherService neo4jService;
 
@@ -32,7 +37,9 @@ public class GraphQLCypherController {
 	@ResponseBody
 	public List<List<Map<String, Object>>> getPerson(HttpEntity<String> httpEntity, HttpServletResponse response)
 			throws JsonParseException, IOException {
-
+		
+		logger.info("hit end point:/v1/graphql/cypher/person");
+		
 		// Get graphql query from request
 		String reqBody = httpEntity.getBody().toString();
 		Gson gson = new Gson();

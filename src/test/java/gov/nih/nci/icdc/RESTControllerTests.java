@@ -41,7 +41,7 @@ public class RESTControllerTests {
 	@Test
 	public void testPing() throws Exception {
 
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/ping"))
+		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/ping"))
 				.andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString("pong")))
 				.andDo(document("{ClassName}/{methodName}"));
