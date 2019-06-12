@@ -2,24 +2,16 @@ package gov.nih.nci.icdc.service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import javax.annotation.PostConstruct;
 
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Transaction;
@@ -32,10 +24,10 @@ import org.springframework.stereotype.Service;
 
 import gov.nih.nci.icdc.model.ConfigurationDAO;
 
-
 /**
- * Service bean for GraphQL to Cypher.  
- * This bean expose query function which take graphql and then translate graphql script into cypher, execute cypher return cypher result. 
+ * Service bean for GraphQL to Cypher. This bean expose query function which
+ * take graphql and then translate graphql script into cypher, execute cypher
+ * return cypher result.
  */
 
 @Service
@@ -48,14 +40,12 @@ public class GraphQLToCypherService implements AutoCloseable {
 
 	private Driver driver;
 
-	
-	
 	/**
-	 * This function will connect to the neo4j server and init drive. 
-	 * The function will be triggered after dependency injection done.
-	 * If connect to neo4j server fails, the whole application will fail to start. 
+	 * This function will connect to the neo4j server and init drive. The function
+	 * will be triggered after dependency injection done. If connect to neo4j server
+	 * fails, the whole application will fail to start.
 	 */
-	
+
 	@PostConstruct
 	public void initGraphQLService() throws ClassNotFoundException {
 		try {
@@ -69,22 +59,21 @@ public class GraphQLToCypherService implements AutoCloseable {
 		}
 	}
 
-	
-	
 	@Override
 	public void close() throws Exception {
 		driver.close();
 	}
-	
-	
+
 	/**
-	 * Exposed to the public, this function takes graphql script ( query / mutation ) translate into  cypher 
-	 * and then execute cypher return collection of map object
+	 * Exposed to the public, this function takes graphql script ( query / mutation
+	 * ) translate into cypher and then execute cypher return collection of map
+	 * object
 	 * 
 	 * 
 	 * @param graphql script
 	 * 
-	 * @return List<List<Map<String, Object>>>, if fails to execute cypher will return empty object;
+	 * @return List<List<Map<String, Object>>>, if fails to execute cypher will
+	 *         return empty object;
 	 */
 
 	public List<List<Map<String, Object>>> query(String graphQl) {
@@ -93,20 +82,20 @@ public class GraphQLToCypherService implements AutoCloseable {
 		for (Cypher cypher : cyphers) {
 			results.add(query(cypher.getQuery(), cypher.getParams()));
 		}
-		
+
 		return results;
 	}
-	
-	
 
 	/**
-	 * Private function  takes cypher script and params and execute cypher to get result.
+	 * Private function takes cypher script and params and execute cypher to get
+	 * result.
 	 * 
 	 * @param cypher script and params
 	 * 
-	 * @return List<Map<String, Object>>, if fails to execute cypher will return empty object;
+	 * @return List<Map<String, Object>>, if fails to execute cypher will return
+	 *         empty object;
 	 */
-	
+
 	private List<Map<String, Object>> query(String query, Map<String, Object> params) {
 		try (Session session = driver.session()) {
 			List<Map<String, Object>> re = session.writeTransaction(new TransactionWork<List<Map<String, Object>>>() {
@@ -126,9 +115,6 @@ public class GraphQLToCypherService implements AutoCloseable {
 		}
 	}
 
-	
-	
-
 	/**
 	 * Translator , translate graphql into cypher
 	 * 
@@ -141,6 +127,5 @@ public class GraphQLToCypherService implements AutoCloseable {
 		Translator translator = new Translator(SchemaBuilder.buildSchema(schema));
 		return translator.translate(graphql);
 	}
-
 
 }

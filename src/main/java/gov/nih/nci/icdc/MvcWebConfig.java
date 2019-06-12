@@ -15,16 +15,29 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan("gov.nih.nci.icdc.controller")
 public class MvcWebConfig implements WebMvcConfigurer {
 
-   @Override
-   public void configureViewResolvers(ViewResolverRegistry registry) {
-      registry.jsp("/WEB-INF/", ".jsp");
-   }
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		registry.jsp("/WEB-INF/", ".jsp");
+	}
 
-   @Override
-   public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-      // Register static
-      registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/")
-            .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
-   }
+		// Register static
+		registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/")
+				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/")
+				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+		registry.addResourceHandler("/plugins/**").addResourceLocations("/WEB-INF/plugins/")
+				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/")
+				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+		registry.addResourceHandler("/files/**").addResourceLocations("/WEB-INF/files/")
+				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+		registry.addResourceHandler("/data/**").addResourceLocations("/WEB-INF/data/")
+				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+//		registry.addResourceHandler("/*.html").addResourceLocations("/WEB-INF/")
+//				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+
+	}
 }

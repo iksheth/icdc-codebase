@@ -13,33 +13,51 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 
-import gov.nih.nci.icdc.model.GraphQLProvider;
-import graphql.ExecutionResult;
-import graphql.GraphQL;
+import gov.nih.nci.icdc.model.Mocker;
+import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 
 @RestController
-@RequestMapping(value="/v1/graphql")
+@RequestMapping(value = "/v1/graphql")
 public class GraphQLController {
 
 	@Autowired
-	private GraphQLProvider graphQLProvider;
+	private Neo4JGraphQLService neo4jService;
+
 	public static final Gson GSON = new Gson();
-	
-	@RequestMapping(value = "/person", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
-	public String get(HttpEntity<String> httpEntity,HttpServletResponse response) throws JsonParseException, IOException {
-		
+	public String getPerson(HttpEntity<String> httpEntity, HttpServletResponse response) throws IOException {
+
 		// Get graphql query from request
 		String reqBody = httpEntity.getBody().toString();
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(reqBody, JsonObject.class);
-		String sdl = new String(jsonObject.get("query").getAsString().getBytes(),"UTF-8");
-		
-		//use graphql to get data 
-		GraphQL build = graphQLProvider.graphQL();
-		ExecutionResult executionResult = build.execute(sdl);
-		return  GSON.toJson(executionResult.toString(),String.class);
+		String sdl = new String(jsonObject.get("query").getAsString().getBytes(), "UTF-8");
+
+		// mock data
+		Mocker mocker = new Mocker();
+		String responseText = "";
+
+		if (sdl.contains("dashboard(")) {
+			responseText = mocker.getDashboard();
+		} else if (sdl.contains("programs(")) {
+			responseText = mocker.getPrograms();
+		} else if (sdl.contains("program_study(")) {
+			responseText = mocker.getProgram_study();
+		} else if (sdl.contains("studies(")) {
+			responseText = mocker.getStudies();
+		} else if (sdl.contains("study_detail(")) {
+			responseText = mocker.getStudy_detail();
+		} else if (sdl.contains("cases(")) {
+			responseText = mocker.getCases();
+		} else if (sdl.contains("case_detail(")) {
+			responseText = mocker.getCase_detail();
+		} else {
+			responseText = neo4jService.query(sdl);
+		}
+		return responseText;
+
 	}
 }

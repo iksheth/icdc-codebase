@@ -7,5 +7,7 @@ target/
 .vscode
 .apt_generated
 .apt_generated_tests
+.idea
 *.iml
 .sts4-cache/*
+src/main/resources/application.properties
