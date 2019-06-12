@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,8 @@ import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 @RestController
 public class GraphQLController {
 
+	private static final Logger logger = LogManager.getLogger(GraphQLController.class);
+
 	@Autowired
 	private Neo4JGraphQLService neo4jService;
 
@@ -28,6 +32,8 @@ public class GraphQLController {
 	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.POST)
 	@ResponseBody
 	public String getPerson(HttpEntity<String> httpEntity, HttpServletResponse response) throws IOException {
+		
+		logger.info("hit end point:/v1/graphql/");
 
 		// Get graphql query from request
 		String reqBody = httpEntity.getBody().toString();
@@ -41,21 +47,29 @@ public class GraphQLController {
 
 		if (sdl.contains("dashboard(")) {
 			responseText = mocker.getDashboard();
-		} else if (sdl.contains("programs(")) {
+		}
+		else if (sdl.contains("programs(")) {
 			responseText = mocker.getPrograms();
-		} else if (sdl.contains("program_study(")) {
+		} 
+		else if (sdl.contains("program_study(")) {
 			responseText = mocker.getProgram_study();
-		} else if (sdl.contains("studies(")) {
+		} 
+		else if (sdl.contains("studies(")) {
 			responseText = mocker.getStudies();
-		} else if (sdl.contains("study_detail(")) {
+		} 
+		else if (sdl.contains("study_detail(")) {
 			responseText = mocker.getStudy_detail();
-		} else if (sdl.contains("cases(")) {
+		} 
+		else if (sdl.contains("cases(")) {
 			responseText = mocker.getCases();
-		} else if (sdl.contains("case_detail(")) {
+		} 
+		else if (sdl.contains("case_detail(")) {
 			responseText = mocker.getCase_detail();
-		} else {
+		} 
+		else {
 			responseText = neo4jService.query(sdl);
 		}
+		
 		return responseText;
 
 	}
