@@ -19,13 +19,6 @@ public class RESTController {
 	@Autowired
 	private Neo4JGraphQLService neo4jService;
 
-	// for testing purpose
-	@RequestMapping(value = "/ping", method = RequestMethod.GET)
-	@ResponseBody
-	public String ping() {
-		logger.info("hit end point:/ping");
-		return "pong";
-	}
 
 	@RequestMapping(value = "/programs", method = RequestMethod.GET)
 	@ResponseBody

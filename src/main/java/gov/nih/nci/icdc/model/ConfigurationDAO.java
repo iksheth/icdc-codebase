@@ -30,6 +30,10 @@ public class ConfigurationDAO {
 
 	@Value("${neo4j.jdbc.server}")
 	private String neo4jJDBCServerURI;
+	
+	@Value("${neo4j.authorization}")
+	private String neo4jHttpHeaderAuthorization;
+	
 
 	@Value("${graphql.schema}")
 	private List<String> graphqlSchemas;
@@ -110,6 +114,14 @@ public class ConfigurationDAO {
 
 	public void setNeo4jJavaDriverServerURI(String neo4jJavaDriverServerURI) {
 		this.neo4jJavaDriverServerURI = neo4jJavaDriverServerURI;
+	}
+
+	public String getNeo4jHttpHeaderAuthorization() {
+		return neo4jHttpHeaderAuthorization;
+	}
+
+	public void setNeo4jHttpHeaderAuthorization(String neo4jHttpHeaderAuthorization) {
+		this.neo4jHttpHeaderAuthorization = neo4jHttpHeaderAuthorization;
 	}
 
 	@Bean
