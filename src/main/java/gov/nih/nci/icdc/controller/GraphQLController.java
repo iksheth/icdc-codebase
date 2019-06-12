@@ -18,58 +18,46 @@ import gov.nih.nci.icdc.model.Mocker;
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 
 @RestController
-@RequestMapping(value="/v1/graphql")
+@RequestMapping(value = "/v1/graphql")
 public class GraphQLController {
 
 	@Autowired
 	private Neo4JGraphQLService neo4jService;
-	
-	
+
 	public static final Gson GSON = new Gson();
-	
-	
-	
+
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
-	public String  getPerson(HttpEntity<String> httpEntity,HttpServletResponse response) throws IOException {
-		
+	public String getPerson(HttpEntity<String> httpEntity, HttpServletResponse response) throws IOException {
+
 		// Get graphql query from request
 		String reqBody = httpEntity.getBody().toString();
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(reqBody, JsonObject.class);
-		String sdl = new String(jsonObject.get("query").getAsString().getBytes(),"UTF-8");
+		String sdl = new String(jsonObject.get("query").getAsString().getBytes(), "UTF-8");
 
-		//mock data
+		// mock data
 		Mocker mocker = new Mocker();
 		String responseText = "";
-			
-		if(sdl.contains("dashboard(")){
-			responseText=mocker.getDashboard();
-		}
-		else if(sdl.contains("programs(")){
-			responseText=mocker.getPrograms();
-		}
-		else if(sdl.contains("program_study(")){
-			responseText=mocker.getProgram_study();
-		}
-		else if(sdl.contains("studies(")){
-			responseText=mocker.getStudies();
-		}
-		else if(sdl.contains("study_detail(")){
-			responseText=mocker.getStudy_detail();
-		}
-		else if(sdl.contains("cases(")){
-			responseText=mocker.getCases();
-		}
-		else if(sdl.contains("case_detail(")){
-			responseText=mocker.getCase_detail();
-		}
-		else {
-			responseText=neo4jService.query(sdl);
+
+		if (sdl.contains("dashboard(")) {
+			responseText = mocker.getDashboard();
+		} else if (sdl.contains("programs(")) {
+			responseText = mocker.getPrograms();
+		} else if (sdl.contains("program_study(")) {
+			responseText = mocker.getProgram_study();
+		} else if (sdl.contains("studies(")) {
+			responseText = mocker.getStudies();
+		} else if (sdl.contains("study_detail(")) {
+			responseText = mocker.getStudy_detail();
+		} else if (sdl.contains("cases(")) {
+			responseText = mocker.getCases();
+		} else if (sdl.contains("case_detail(")) {
+			responseText = mocker.getCase_detail();
+		} else {
+			responseText = neo4jService.query(sdl);
 		}
 		return responseText;
-		
+
 	}
 }
-
-

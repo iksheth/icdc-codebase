@@ -37,10 +37,8 @@ public class ConfigurationDAO {
 	@Value("${neo4j.java.driver.server}")
 	private String neo4jJavaDriverServerURI;
 
-	
 	@Value("${neo4j.graphql.endpoint}")
 	private String neo4jGraphQLEndPoint;
-
 
 	public String getNeo4jGraphQLEndPoint() {
 		return neo4jGraphQLEndPoint;
@@ -53,7 +51,8 @@ public class ConfigurationDAO {
 	/**
 	 * Read GraphQL Schemas from application.properties
 	 * 
-	 * @return schema as a String, if fails to read schemas will return empty  string.
+	 * @return schema as a String, if fails to read schemas will return empty
+	 *         string.
 	 */
 	public String getGraphSchemas() {
 

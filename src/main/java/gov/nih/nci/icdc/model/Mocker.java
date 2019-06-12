@@ -17,17 +17,17 @@ public class Mocker {
 	private String case_detail;
 	private String landing;
 
-	public Mocker(){
+	public Mocker() {
 		this.dashboard = this.getResource("mock_data/dashboard.json");
 		this.programs = this.getResource("mock_data/programs.json");
 		this.program_study = this.getResource("mock_data/program_study.json");
-		this.studies =  this.getResource("mock_data/studies.json");
+		this.studies = this.getResource("mock_data/studies.json");
 		this.study_detail = this.getResource("mock_data/study_detail.json");
 		this.cases = this.getResource("mock_data/cases.json");
 		this.case_detail = this.getResource("mock_data/case_detail.json");
 		this.landing = this.getResource("mock_data/landing.json");
 	}
-	
+
 	public String getDashboard() {
 		return dashboard;
 	}
@@ -95,15 +95,15 @@ public class Mocker {
 	private String getResource(String filePath) {
 
 		StringBuilder sb = new StringBuilder();
-			URL url = Resources.getResource(filePath);
-			String sdl = "";
-			try {
-				sdl = Resources.toString(url, Charsets.UTF_8);
-				sb.append(sdl);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		URL url = Resources.getResource(filePath);
+		String sdl = "";
+		try {
+			sdl = Resources.toString(url, Charsets.UTF_8);
+			sb.append(sdl);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return sb.toString();
 
 	}

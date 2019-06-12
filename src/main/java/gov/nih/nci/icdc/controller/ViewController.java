@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ViewController {
-	
+
 	private static final Logger logger = LogManager.getLogger(ViewController.class);
 
 	@RequestMapping("/")
