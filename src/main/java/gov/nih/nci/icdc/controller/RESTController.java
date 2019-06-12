@@ -15,10 +15,11 @@ import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 public class RESTController {
 
 	private static final Logger logger = LogManager.getLogger(RESTController.class);
+	
 	@Autowired
 	private Neo4JGraphQLService neo4jService;
 
-	@RequestMapping(value = "/v1/ping", method = RequestMethod.GET)
+	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	@ResponseBody
 	public String ping() {
 		logger.info("hit end point:/ping");
@@ -28,7 +29,7 @@ public class RESTController {
 	@RequestMapping(value = "/v1/rest/programs", method = RequestMethod.GET)
 	@ResponseBody
 	public String getPrograms() {
-		logger.info("hit end point:/programs");
+		logger.info("hit end point:/v1/rest/programs");
 		String graphQL = "query {program {\n" + "   id\n" + "   state\n" + "   created_datetime\n"
 				+ "   updated_datetime\n" + "   name\n" + "   dbgap_accession_number\n" + "   submitter_id\n" + " }}";
 		return neo4jService.query(graphQL);
@@ -37,6 +38,7 @@ public class RESTController {
 	@RequestMapping(value = "/v1/rest/program/{id}/studies", method = RequestMethod.GET)
 	@ResponseBody
 	public String getProgramStudies(@PathVariable String id) {
+		logger.info("hit end point:/v1/rest/program/{id}/studie   id: "+ id );
 		String graphQL = "";
 		return neo4jService.query(graphQL);
 	}
@@ -44,6 +46,7 @@ public class RESTController {
 	@RequestMapping(value = "/v1/rest/studies", method = RequestMethod.GET)
 	@ResponseBody
 	public String getStudies() {
+		logger.info("hit end point:/v1/rest/studies " );
 		String graphQL = "";
 		return neo4jService.query(graphQL);
 	}
@@ -51,6 +54,7 @@ public class RESTController {
 	@RequestMapping(value = "/v1/rest/study/{id}/cases", method = RequestMethod.GET)
 	@ResponseBody
 	public String getStudyCases(@PathVariable String id) {
+		logger.info("hit end point:/v1/rest/study/{id}/cases   id: "+ id );
 		String graphQL = "";
 		return neo4jService.query(graphQL);
 	}
@@ -58,6 +62,7 @@ public class RESTController {
 	@RequestMapping(value = "/v1/rest/cases", method = RequestMethod.GET)
 	@ResponseBody
 	public String getCases() {
+		logger.info("hit end point:/v1/rest/cases " );
 		String graphQL = "";
 		return neo4jService.query(graphQL);
 	}

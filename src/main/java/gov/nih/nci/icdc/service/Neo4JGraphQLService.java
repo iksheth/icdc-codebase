@@ -1,5 +1,7 @@
 package gov.nih.nci.icdc.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,16 +11,21 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import gov.nih.nci.icdc.controller.RESTController;
 import gov.nih.nci.icdc.error.ResourceNotFoundException;
 import gov.nih.nci.icdc.model.ConfigurationDAO;
 
 @Service
 public class Neo4JGraphQLService {
 
+	
+	private static final Logger logger = LogManager.getLogger(Neo4JGraphQLService.class);
+	
 	@Autowired
 	private ConfigurationDAO config;
 
 	public String query(String graphQLQuery) {
+		logger.info("Query neo4j:  "+graphQLQuery);
 		JSONObject jo = new JSONObject();
 		jo.put("query", graphQLQuery);
 		jo.toString();
@@ -31,12 +38,14 @@ public class Neo4JGraphQLService {
 					.body(jo.toString()).asJson();
 
 		} catch (UnirestException e) {
+			logger.error("Exception in function query() "+e.getStackTrace());
 			throw new RuntimeException(e);
 		}
 
 		JsonNode neo4jResponse = jsonResponse.getBody();
 		// if neo4j response an error will throw that error to the front end
 		if (neo4jResponse.getObject().has("errors")) {
+			logger.error("Exception in function query() "+neo4jResponse.getObject().get("errors").toString());
 			throw new ResourceNotFoundException(neo4jResponse.getObject().get("errors").toString());
 		}
 		return neo4jResponse.toString();
