@@ -18,7 +18,6 @@ import gov.nih.nci.icdc.model.Mocker;
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 
 @RestController
-@RequestMapping(value = "/v1/graphql")
 public class GraphQLController {
 
 	@Autowired
@@ -26,7 +25,7 @@ public class GraphQLController {
 
 	public static final Gson GSON = new Gson();
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.POST)
 	@ResponseBody
 	public String getPerson(HttpEntity<String> httpEntity, HttpServletResponse response) throws IOException {
 

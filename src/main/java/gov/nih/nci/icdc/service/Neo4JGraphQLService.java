@@ -27,7 +27,7 @@ public class Neo4JGraphQLService {
 		try {
 
 			jsonResponse = Unirest.post(config.getNeo4jGraphQLEndPoint()).header("Content-Type", "application/json")
-					.header("Authorization", "Basic bmVvNGo6aWNkY0RCbmVvNGow").header("accept", "application/json")
+					.header("Authorization", config.getNeo4jHttpHeaderAuthorization()).header("accept", "application/json")
 					.body(jo.toString()).asJson();
 
 		} catch (UnirestException e) {
