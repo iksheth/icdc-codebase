@@ -16,5 +16,9 @@ public class ViewController {
 		return "index";
 	}
 	
-	
+	@RequestMapping("/error")
+	public String error() {
+		logger.info("Hit the error page");
+		return "err";
+	}
 }
