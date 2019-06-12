@@ -145,7 +145,7 @@ with driver.session() as session:
                     if props:
                         for key, val in props.items():
                             prop_statement += ', n.{} = "{}"'.format(key, val)
-                    statement = 'MERGE (n:{0} {{node_id: "{1}"}}) on create {2} on match {2}'.format(label, row['node_id'], prop_statement)
+                    statement = 'MERGE (n:{0} {{id: "{1}"}}) on create {2} on match {2}'.format(label, row['node_id'], prop_statement)
                     # print(statement)
                     print(session.run(statement))
     for table in edge_tables:
@@ -162,6 +162,6 @@ with driver.session() as session:
                     if props:
                         for key, val in props.items():
                             prop_statement += ', n.{} = "{}"'.format(key, val)
-                    statement = 'MATCH (n1 {{node_id: "{0}"}}), (n2 {{node_id: "{1}"}}) MERGE (n1)-[n:{2}]->(n2) on create {3} on match {3}'.format(row['src_id'], row['dst_id'], label, prop_statement)
+                    statement = 'MATCH (n1 {{id: "{0}"}}), (n2 {{id: "{1}"}}) MERGE (n1)-[n:{2}]->(n2) on create {3} on match {3}'.format(row['src_id'], row['dst_id'], label, prop_statement)
                     # print(statement)
                     print(session.run(statement))
