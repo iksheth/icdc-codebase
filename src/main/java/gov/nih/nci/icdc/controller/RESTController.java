@@ -29,10 +29,5 @@ public class RESTController {
 		return "pong";
 	}
 
-	@RequestMapping("/person")
-	public List<Person> getPersonByName(@RequestParam(value = "name") String name) {
-		// get data from data repository
-		return restService.findByName(name);
-	}
 
 }

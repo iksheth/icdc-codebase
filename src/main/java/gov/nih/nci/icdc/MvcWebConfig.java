@@ -22,7 +22,7 @@ public class MvcWebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		
+
 		// Register static
 		registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/")
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
@@ -38,5 +38,6 @@ public class MvcWebConfig implements WebMvcConfigurer {
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
 		registry.addResourceHandler("/*.html").addResourceLocations("/WEB-INF/")
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+
 	}
 }

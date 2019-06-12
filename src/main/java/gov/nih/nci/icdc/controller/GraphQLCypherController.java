@@ -29,7 +29,6 @@ public class GraphQLCypherController {
 	public static final Gson GSON = new Gson();
 	
 	
-	
 	@RequestMapping(value = "/person", method = RequestMethod.POST)
 	@ResponseBody
 	public List<List<Map<String, Object>>>  getPerson(HttpEntity<String> httpEntity,HttpServletResponse response) throws JsonParseException, IOException {
