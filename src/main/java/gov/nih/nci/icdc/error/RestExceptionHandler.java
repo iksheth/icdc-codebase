@@ -24,7 +24,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import lombok.extern.slf4j.Slf4j;
@@ -196,17 +195,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(apiError);
 	}
 
-
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler({Exception.class, ResourceNotFoundException.class})
+	@ExceptionHandler({ Exception.class, ResourceNotFoundException.class })
 	protected ResponseEntity<Object> ResourceNotFoundException(Exception ex) {
 		ApiError apiError = new ApiError(BAD_REQUEST);
 		apiError.setMessage(ex.getMessage());
 		apiError.setDebugMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
 	}
-	
-	
 
 	private ResponseEntity<Object> buildResponseEntity(ApiError Error) {
 		return new ResponseEntity<>(Error, Error.getStatus());
