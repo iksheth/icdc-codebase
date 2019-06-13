@@ -10,7 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
+
+@Api(value = "ICDC REST APIs")
 @RestController
 public class RESTController {
 
@@ -19,6 +24,7 @@ public class RESTController {
 	@Autowired
 	private Neo4JGraphQLService neo4jService;
 
+	
 	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	@ResponseBody
 	public String ping() {
@@ -26,6 +32,8 @@ public class RESTController {
 		return "pong";
 	}
 
+	
+	@ApiOperation(value = "Get list of programs")
 	@RequestMapping(value = "/v1/rest/programs", method = RequestMethod.GET)
 	@ResponseBody
 	public String getPrograms() {
@@ -35,14 +43,19 @@ public class RESTController {
 		return neo4jService.query(graphQL);
 	}
 
+	@ApiOperation(value = "Get list of studies by program id")
 	@RequestMapping(value = "/v1/rest/program/{id}/studies", method = RequestMethod.GET)
 	@ResponseBody
-	public String getProgramStudies(@PathVariable String id) {
+	public String getProgramStudies(
+			@ApiParam(value = "program_id", required = true)
+			@PathVariable String id) {
 		logger.info("hit end point:/v1/rest/program/{id}/studie   id: " + id);
 		String graphQL = "";
 		return "";
 	}
 
+	
+	@ApiOperation(value = "Get list of studies")
 	@RequestMapping(value = "/v1/rest/studies", method = RequestMethod.GET)
 	@ResponseBody
 	public String getStudies() {
@@ -66,14 +79,20 @@ public class RESTController {
 		return neo4jService.query(graphQL);
 	}
 
+	
+	@ApiOperation(value = "Get Cases by study id")
 	@RequestMapping(value = "/v1/rest/study/{id}/cases", method = RequestMethod.GET)
 	@ResponseBody
-	public String getStudyCases(@PathVariable String id) {
+	public String getStudyCases( 
+				@ApiParam(value = "study_id", required = true)
+				@PathVariable String id) {
 		logger.info("hit end point:/v1/rest/study/{id}/cases   id: " + id);
 		String graphQL = "";
 		return "";
 	}
-
+	
+	
+	@ApiOperation(value = "Get list of cases")
 	@RequestMapping(value = "/v1/rest/cases", method = RequestMethod.GET)
 	@ResponseBody
 	public String getCases() {
