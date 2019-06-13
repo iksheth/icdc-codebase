@@ -10,87 +10,121 @@ public class Mocker {
 
 	private String dashboard;
 	private String programs;
-	private String program_study;
+	private String programStudy;
 	private String studies;
-	private String study_detail;
+	private String studyDetail;
 	private String cases;
-	private String case_detail;
+	private String caseDetail;
 	private String landing;
 
 	public Mocker() {
 		this.dashboard = this.getResource("mock_data/dashboard.json");
 		this.programs = this.getResource("mock_data/programs.json");
-		this.program_study = this.getResource("mock_data/program_study.json");
+		this.programStudy = this.getResource("mock_data/program_study.json");
 		this.studies = this.getResource("mock_data/studies.json");
-		this.study_detail = this.getResource("mock_data/study_detail.json");
+		this.studyDetail = this.getResource("mock_data/study_detail.json");
 		this.cases = this.getResource("mock_data/cases.json");
-		this.case_detail = this.getResource("mock_data/case_detail.json");
+		this.caseDetail = this.getResource("mock_data/case_detail.json");
 		this.landing = this.getResource("mock_data/landing.json");
 	}
+
+	
 
 	public String getDashboard() {
 		return dashboard;
 	}
 
+
+
 	public void setDashboard(String dashboard) {
 		this.dashboard = dashboard;
 	}
+
+
 
 	public String getPrograms() {
 		return programs;
 	}
 
+
+
 	public void setPrograms(String programs) {
 		this.programs = programs;
 	}
 
-	public String getProgram_study() {
-		return program_study;
+
+
+	public String getProgramStudy() {
+		return programStudy;
 	}
 
-	public void setProgram_study(String program_study) {
-		this.program_study = program_study;
+
+
+	public void setProgramStudy(String programStudy) {
+		this.programStudy = programStudy;
 	}
+
+
 
 	public String getStudies() {
 		return studies;
 	}
 
+
+
 	public void setStudies(String studies) {
 		this.studies = studies;
 	}
 
-	public String getStudy_detail() {
-		return study_detail;
+
+
+	public String getStudyDetail() {
+		return studyDetail;
 	}
 
-	public void setStudy_detail(String study_detail) {
-		this.study_detail = study_detail;
+
+
+	public void setStudyDetail(String studyDetail) {
+		this.studyDetail = studyDetail;
 	}
+
+
 
 	public String getCases() {
 		return cases;
 	}
 
+
+
 	public void setCases(String cases) {
 		this.cases = cases;
 	}
 
-	public String getCase_detail() {
-		return case_detail;
+
+
+	public String getCaseDetail() {
+		return caseDetail;
 	}
 
-	public void setCase_detail(String case_detail) {
-		this.case_detail = case_detail;
+
+
+	public void setCaseDetail(String caseDetail) {
+		this.caseDetail = caseDetail;
 	}
+
+
 
 	public String getLanding() {
 		return landing;
 	}
 
+
+
 	public void setLanding(String landing) {
 		this.landing = landing;
 	}
+
+
 
 	private String getResource(String filePath) {
 

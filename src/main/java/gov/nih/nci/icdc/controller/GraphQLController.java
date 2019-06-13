@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.mashape.unirest.http.exceptions.UnirestException;
 
 import gov.nih.nci.icdc.model.Mocker;
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
@@ -31,7 +32,7 @@ public class GraphQLController {
 
 	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.POST)
 	@ResponseBody
-	public String getPerson(HttpEntity<String> httpEntity, HttpServletResponse response) throws IOException {
+	public String getPerson(HttpEntity<String> httpEntity, HttpServletResponse response) throws IOException, UnirestException {
 		
 		logger.info("hit end point:/v1/graphql/");
 
@@ -52,19 +53,19 @@ public class GraphQLController {
 			responseText = mocker.getPrograms();
 		} 
 		else if (sdl.contains("program_study(")) {
-			responseText = mocker.getProgram_study();
+			responseText = mocker.getProgramStudy();
 		} 
 		else if (sdl.contains("studies(")) {
 			responseText = mocker.getStudies();
 		} 
 		else if (sdl.contains("study_detail(")) {
-			responseText = mocker.getStudy_detail();
+			responseText = mocker.getStudyDetail();
 		} 
 		else if (sdl.contains("cases(")) {
 			responseText = mocker.getCases();
 		} 
 		else if (sdl.contains("case_detail(")) {
-			responseText = mocker.getCase_detail();
+			responseText = mocker.getCaseDetail();
 		}
 		else if (sdl.contains("landing(")) {
 			responseText = mocker.getLanding();
