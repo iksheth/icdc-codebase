@@ -24,7 +24,7 @@ public class Neo4JGraphQLService {
 	@Autowired
 	private ConfigurationDAO config;
 
-	public String query(String graphQLQuery) {
+	public String query(String graphQLQuery) throws UnirestException {
 		logger.info("Query neo4j:  "+graphQLQuery);
 		JSONObject jo = new JSONObject();
 		jo.put("query", graphQLQuery);
@@ -39,7 +39,7 @@ public class Neo4JGraphQLService {
 
 		} catch (UnirestException e) {
 			logger.error("Exception in function query() "+e.getStackTrace());
-			throw new RuntimeException(e);
+			throw new UnirestException(e);
 		}
 
 		JsonNode neo4jResponse = jsonResponse.getBody();

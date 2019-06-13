@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,7 +38,7 @@ public class RESTController {
 	@ApiOperation(value = "Get list of programs")
 	@RequestMapping(value = "/v1/rest/programs", method = RequestMethod.GET)
 	@ResponseBody
-	public String getPrograms() {
+	public String getPrograms() throws UnirestException {
 		logger.info("hit end point:/v1/rest/programs");
 		String graphQL = "query {program {\n" + "   id\n" + "   state\n" + "   created_datetime\n"
 				+ "   updated_datetime\n" + "   name\n" + "   dbgap_accession_number\n" + "   submitter_id\n" + " }}";
@@ -50,15 +52,14 @@ public class RESTController {
 			@ApiParam(value = "program_id", required = true)
 			@PathVariable String id) {
 		logger.info("hit end point:/v1/rest/program/{id}/studie   id: " + id);
-		String graphQL = "";
-		return "";
+		return "to be done";
 	}
 
 	
 	@ApiOperation(value = "Get list of studies")
 	@RequestMapping(value = "/v1/rest/studies", method = RequestMethod.GET)
 	@ResponseBody
-	public String getStudies() {
+	public String getStudies() throws UnirestException {
 		logger.info("hit end point:/v1/rest/studies ");
 		String graphQL = "query {study{\n" +
 				"  id\n" + 
@@ -87,15 +88,14 @@ public class RESTController {
 				@ApiParam(value = "study_id", required = true)
 				@PathVariable String id) {
 		logger.info("hit end point:/v1/rest/study/{id}/cases   id: " + id);
-		String graphQL = "";
-		return "";
+		return "to be done";
 	}
 	
 	
 	@ApiOperation(value = "Get list of cases")
 	@RequestMapping(value = "/v1/rest/cases", method = RequestMethod.GET)
 	@ResponseBody
-	public String getCases() {
+	public String getCases() throws UnirestException {
 		logger.info("hit end point:/v1/rest/cases ");
 		String graphQL = "query {case {\n" +
 				"id\n" + 

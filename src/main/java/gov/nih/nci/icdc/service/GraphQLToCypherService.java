@@ -36,27 +36,21 @@ public class GraphQLToCypherService implements AutoCloseable {
 	@Autowired
 	private ConfigurationDAO config;
 
-	private Connection conn;
-
 	private Driver driver;
 
 	/**
 	 * This function will connect to the neo4j server and init drive. The function
 	 * will be triggered after dependency injection done. If connect to neo4j server
 	 * fails, the whole application will fail to start.
+	 * 
+	 * @throws ClassNotFoundException
 	 */
 
 	@PostConstruct
-	public void initGraphQLService() throws ClassNotFoundException {
-		try {
+	public void initGraphQLService() throws ClassNotFoundException{
 			Class.forName("org.neo4j.jdbc.bolt.BoltDriver");
-			this.conn = (Connection) DriverManager.getConnection(config.getNeo4jJDBCServerURI(),
-					config.getNeo4jUserName(), config.getNeo4jPassword());
 			this.driver = GraphDatabase.driver(config.getNeo4jJavaDriverServerURI(),
 					AuthTokens.basic(config.getNeo4jUserName(), config.getNeo4jPassword()));
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	@Override

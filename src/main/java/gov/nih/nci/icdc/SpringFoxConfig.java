@@ -24,8 +24,8 @@ public class SpringFoxConfig {
 				.build();
 	}
 	
-	
-	 private ApiInfo apiEndPointsInfo() {
+	@SuppressWarnings("unused")
+	private ApiInfo apiEndPointsInfo() {
 	        return new ApiInfoBuilder().title("ICDC REST API")
 	            .description("ICDC REST API")
 	            .contact(new Contact("FirstName LastName", "google", "someone@gmail.com"))
