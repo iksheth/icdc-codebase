@@ -139,7 +139,7 @@ class ApiError {
 				((PathImpl) cv.getPropertyPath()).getLeafNode().asString(), cv.getInvalidValue(), cv.getMessage());
 	}
 
-	void addValidationErrors(Set<ConstraintViolation<?>> constraintViolations) {
+	public void addValidationErrors(Set<ConstraintViolation<?>> constraintViolations) {
 		constraintViolations.forEach(this::addValidationError);
 	}
 
