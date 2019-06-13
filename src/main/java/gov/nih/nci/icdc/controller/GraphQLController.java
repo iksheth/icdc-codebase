@@ -65,6 +65,9 @@ public class GraphQLController {
 		} 
 		else if (sdl.contains("case_detail(")) {
 			responseText = mocker.getCase_detail();
+		}
+		else if (sdl.contains("landing(")) {
+			responseText = mocker.getLanding();
 		} 
 		else {
 			responseText = neo4jService.query(sdl);
