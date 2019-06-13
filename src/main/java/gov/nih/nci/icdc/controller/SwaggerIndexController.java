@@ -15,5 +15,5 @@ public class SwaggerIndexController {
 		logger.info("Hit the swgger api page");
 		return "doc/api/index";
 	}
-
+	
 }

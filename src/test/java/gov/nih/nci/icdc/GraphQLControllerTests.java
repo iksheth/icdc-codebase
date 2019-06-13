@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,7 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RESTControllerTests {
+public class GraphQLControllerTests {
 
 	private MockMvc mockMvc;
 
@@ -38,44 +39,74 @@ public class RESTControllerTests {
 	@Autowired
 	private WebApplicationContext context;
 
-	@Test
-	public void testPing() throws Exception {
-
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/ping"))
+	
+	private void testGraphQLAPI(String parms)  throws Exception {
+		
+		this.mockMvc.perform(RestDocumentationRequestBuilders
+				.post("/v1/graphql/")
+				.content(parms)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
 				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("pong")))
+				.andExpect(content().string(containsString("data")))
 				.andDo(document("{ClassName}/{methodName}"));
+	}
+	@Test
+	public void testAPIDashboard() throws Exception {
+		
+		this.testGraphQLAPI("{\"query\":\"{ dashboard(){}}\"}");
 
 	}
 	
 	@Test
 	public void testAPIPrograms() throws Exception {
 
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/programs"))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("data")))
-				.andDo(document("{ClassName}/{methodName}"));
+		this.testGraphQLAPI("{\"query\":\"{ programs(){}}\"}");
+
 
 	}
 	
 	@Test
 	public void testAPIStudies() throws Exception {
 
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/studies"))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("data")))
-				.andDo(document("{ClassName}/{methodName}"));
+		this.testGraphQLAPI("{\"query\":\"{ studies(){}}\"}");
+
+
+	}
+	
+
+	@Test
+	public void testAPIStudyDetail() throws Exception {
+
+		this.testGraphQLAPI("{\"query\":\"{ study_detail(){}}\"}");
+
+
+	}
+	
+
+	@Test
+	public void testAPICases() throws Exception {
+
+		this.testGraphQLAPI("{\"query\":\"{ cases(){}}\"}");
+
 
 	}
 	
 	@Test
-	public void testAPICases() throws Exception {
+	public void testAPICaseDetail() throws Exception {
 
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/cases"))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("data")))
-				.andDo(document("{ClassName}/{methodName}"));
+		this.testGraphQLAPI("{\"query\":\"{ case_detail(){}}\"}");
+
 
 	}
+	
+	@Test
+	public void testAPILanding() throws Exception {
+
+		this.testGraphQLAPI("{\"query\":\"{ landing(){}}\"}");
+
+
+	}
+	
 
 }

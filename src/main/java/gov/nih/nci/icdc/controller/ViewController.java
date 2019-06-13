@@ -15,4 +15,10 @@ public class ViewController {
 		logger.info("Hit the landing page");
 		return "index";
 	}
+	
+//	@RequestMapping("/error")
+//	public String error() {
+//		logger.info("Hit the error page");
+//		return "err";
+//	}
 }
