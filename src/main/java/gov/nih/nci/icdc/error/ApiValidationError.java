@@ -1,12 +1,11 @@
 package gov.nih.nci.icdc.error;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-@AllArgsConstructor
 class ApiValidationError extends ApiSubError {
 	private String object;
 	private String field;
