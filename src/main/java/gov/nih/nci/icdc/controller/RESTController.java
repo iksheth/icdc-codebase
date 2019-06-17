@@ -1,5 +1,8 @@
 package gov.nih.nci.icdc.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,7 @@ import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
+import java.security.Principal;
 
 @Api(value = "ICDC REST APIs")
 @RestController
@@ -120,4 +123,17 @@ public class RESTController {
 				" }}";
 		return neo4jService.query(graphQL);
 	}
+	
+	
+	
+	@RequestMapping(value = "/authorize/accept", method = RequestMethod.GET)
+	public void authorizeCallBack(HttpServletRequest request,HttpServletResponse response,Principal principal) {
+		  System.out.print(response.getStatus());
+		  String redirect_url= "https://www.google.com";
+		 //logger.info("hit end point:/ping");
+		  
+		  response.setHeader("Location", redirect_url);
+		  response.setStatus(302);
+	}
+
 }
