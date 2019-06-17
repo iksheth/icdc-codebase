@@ -70,7 +70,7 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -156,18 +156,20 @@
 			<artifactId>unirest-java</artifactId>
 			<version>1.4.9</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<!-- To compile JSP files -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		
-		
-		 <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-          <!-- To compile JSP files -->
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
-        </dependency>
 	</dependencies>
 
 	<build>
@@ -223,47 +225,53 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+
+			<!-- plugin for smart regression testing -->
+			<plugin>
+				<groupId>org.hyrts</groupId>
+				<artifactId>hyrts-maven-plugin</artifactId>
+				<version>1.0.1</version>
+			</plugin>
 			
 			<plugin>
-               <groupId>com.github.eirslett</groupId>
-               <artifactId>frontend-maven-plugin</artifactId>
-               <version>1.7.6</version>
-               <configuration>
-                   <workingDirectory>src/main/frontend</workingDirectory>
-                   <installDirectory>target</installDirectory>
-               </configuration>
-               <executions>
-                   <execution>
-                       <id>install node and npm</id>
-                       <goals>
-                           <goal>install-node-and-npm</goal>
-                       </goals>
-                       <configuration>
-                           <nodeVersion>v12.4.0</nodeVersion>
-                           <npmVersion>6.9.0</npmVersion>
-                       </configuration>
-                   </execution>
-                   <execution>
-                       <id>npm install</id>
-                       <goals>
-                           <goal>npm</goal>
-                       </goals>
-                       <configuration>
-                           <arguments>install</arguments>
-                       </configuration>
-                   </execution>
-                   <execution>
-                       <id>npm run build</id>
-                       <goals>
-                           <goal>npm</goal>
-                       </goals>
-                       <configuration>
-                           <arguments>run build</arguments>
-                       </configuration>
-                   </execution>
-               </executions>
-            </plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.7.6</version>
+				<configuration>
+					<workingDirectory>src/main/frontend</workingDirectory>
+					<installDirectory>target</installDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v12.4.0</nodeVersion>
+							<npmVersion>6.9.0</npmVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm run build</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
