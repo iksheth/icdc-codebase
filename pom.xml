@@ -234,6 +234,7 @@
 						<resource>
 							<!-- Include the react app index.html and build.js -->
 							<directory>src/main/frontend/dist/</directory>
+							<targetPath>/WEB-INF/</targetPath>
 						</resource>
 					</webResources>
 				</configuration>
