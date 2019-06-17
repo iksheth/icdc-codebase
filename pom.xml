@@ -231,6 +231,10 @@
 							<directory>${project.build.directory}/generated-docs</directory>
 							<targetPath>/static/docs/api</targetPath>
 						</resource>
+						<resource>
+							<!-- Include the react app index.html and build.js -->
+							<directory>src/main/frontend/dist/</directory>
+						</resource>
 					</webResources>
 				</configuration>
 			</plugin>
