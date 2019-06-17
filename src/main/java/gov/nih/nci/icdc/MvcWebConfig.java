@@ -18,16 +18,14 @@ import org.springframework.web.servlet.view.JstlView;
 public class MvcWebConfig implements WebMvcConfigurer {
 
 	@Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/");
-        resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
-        registry.viewResolver(resolver);
-        registry.jsp();
-    }
-
-
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/");
+		resolver.setSuffix(".jsp");
+		resolver.setViewClass(JstlView.class);
+		registry.viewResolver(resolver);
+		registry.jsp();
+	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -46,6 +44,8 @@ public class MvcWebConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/data/**").addResourceLocations("/WEB-INF/data/")
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
 		registry.addResourceHandler("/*.html").addResourceLocations("/WEB-INF/")
+				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+		registry.addResourceHandler("/*.js").addResourceLocations("/WEB-INF/")
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
 
 	}
