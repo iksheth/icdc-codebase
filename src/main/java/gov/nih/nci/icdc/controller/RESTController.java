@@ -141,7 +141,6 @@ public class RESTController {
 		 return config.getApiVersion();
 	}
 	
-	
 	@RequestMapping(value = "/authorize/accept", method = RequestMethod.GET)
 	public void authorizeCallBack(HttpServletRequest request,HttpServletResponse response) {
 		  System.out.print(response.getStatus());
@@ -149,9 +148,7 @@ public class RESTController {
 		  String redirect_url= "http://localhost";
 		  if(null!=cookies) {
 			  for (int i = 0; i < cookies.length; i++) {
-				  String name = cookies[i].getName();
-				  
-				  String value = cookies[i].getValue();
+			
 				  response.addCookie(cookies[i]);
 				}
 		  }else {
@@ -169,18 +166,15 @@ public class RESTController {
 		  String token = "";
 		  if(null!=cookies) {
 			  for (int i = 0; i < cookies.length; i++) {
-				  String name = cookies[i].getName();
-				  String value = cookies[i].getValue();
-				  if("access_token".equals(name)) {
-					  token =value;
+				  if("access_token".equals(cookies[i].getName())) {
+					  token = cookies[i].getValue();
 				  }
 				}
 		  }else {
 			 throw new IllegalArgumentException();
-			  
 		  }
 		 
-		  if(""==token) {
+		  if("".equals(token)) {
 			  throw new IllegalArgumentException();
 		  }else {
 			 // validate token if the token can not be trust then throw exception
