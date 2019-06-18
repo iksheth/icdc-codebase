@@ -24,7 +24,7 @@ import java.security.Principal;
 @RestController
 public class RESTController {
 
-	private static final Logger logger = LogManager.getLogger(RESTController.class)
+	private static final Logger logger = LogManager.getLogger(RESTController.class);
 
 	@Autowired
 	private Neo4JGraphQLService neo4jService;
