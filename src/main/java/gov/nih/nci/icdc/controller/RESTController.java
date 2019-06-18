@@ -134,6 +134,7 @@ public class RESTController {
 		return neo4jService.query(graphQL);
 	}
 	
+	@ApiOperation(value = "Get API version")
 	@RequestMapping(value = "/api/version", method = RequestMethod.GET)
 	public String getAPIVersion()  {
 		 
