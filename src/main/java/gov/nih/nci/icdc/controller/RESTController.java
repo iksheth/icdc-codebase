@@ -1,5 +1,8 @@
 package gov.nih.nci.icdc.controller;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,11 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import gov.nih.nci.icdc.model.ConfigurationDAO;
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import java.security.Principal;
 
 @Api(value = "ICDC REST APIs")
 @RestController
@@ -29,6 +37,8 @@ public class RESTController {
 	@Autowired
 	private Neo4JGraphQLService neo4jService;
 
+	@Autowired
+	private ConfigurationDAO config;
 	
 	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	@ResponseBody
@@ -127,13 +137,52 @@ public class RESTController {
 	
 	
 	@RequestMapping(value = "/authorize/accept", method = RequestMethod.GET)
-	public void authorizeCallBack(HttpServletRequest request,HttpServletResponse response,Principal principal) {
+	public void authorizeCallBack(HttpServletRequest request,HttpServletResponse response) {
 		  System.out.print(response.getStatus());
-		  String redirect_url= "https://www.google.com";
-		 //logger.info("hit end point:/ping");
-		  
+		  Cookie[] cookies = request.getCookies();
+		  String redirect_url= "http://localhost";
+		  if(null!=cookies) {
+			  for (int i = 0; i < cookies.length; i++) {
+				  String name = cookies[i].getName();
+				  
+				  String value = cookies[i].getValue();
+				  response.addCookie(cookies[i]);
+				}
+		  }else {
+			  redirect_url=config.getErrorRedirectURL();
+		  }
+		 
 		  response.setHeader("Location", redirect_url);
 		  response.setStatus(302);
 	}
-
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public void testReqiest(HttpServletRequest request,HttpServletResponse response) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
+		  // get token
+		  Cookie[] cookies = request.getCookies();
+		  String token = "";
+		  if(null!=cookies) {
+			  for (int i = 0; i < cookies.length; i++) {
+				  String name = cookies[i].getName();
+				  String value = cookies[i].getValue();
+				  if("access_token".equals(name)) {
+					  token =value;
+				  }
+				}
+		  }else {
+			 throw new IllegalArgumentException();
+			  
+		  }
+		 
+		  if(""==token) {
+			  throw new IllegalArgumentException();
+		  }else {
+			 // validate token if the token can not be trust then throw exception
+			 Jwts.parser()
+				.setSigningKey(config.getFencePublicKey().getBytes("UTF-8"))
+				.parseClaimsJws(token);
+		  }
+		 
+	}
+	
 }

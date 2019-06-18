@@ -43,6 +43,22 @@ public class ConfigurationDAO {
 
 	@Value("${neo4j.graphql.endpoint}")
 	private String neo4jGraphQLEndPoint;
+	
+	
+	@Value("${fence.url}")
+	private String fenceURL;
+	
+	@Value("${fence.public.key}")
+	private String fencePublicKey;
+	
+	
+	@Value("${error.redirect_url}")
+	private String errorRedirectURL;
+	
+	@Value("${api.version}")
+	private String apiVersion;
+	
+
 
 	public String getNeo4jGraphQLEndPoint() {
 		return neo4jGraphQLEndPoint;
@@ -122,6 +138,38 @@ public class ConfigurationDAO {
 
 	public void setNeo4jHttpHeaderAuthorization(String neo4jHttpHeaderAuthorization) {
 		this.neo4jHttpHeaderAuthorization = neo4jHttpHeaderAuthorization;
+	}
+
+	public String getFenceURL() {
+		return fenceURL;
+	}
+
+	public void setFenceURL(String fenceURL) {
+		this.fenceURL = fenceURL;
+	}
+
+	public String getFencePublicKey() {
+		return fencePublicKey;
+	}
+
+	public void setFencePublicKey(String fencePublicKey) {
+		this.fencePublicKey = fencePublicKey;
+	}
+
+	public String getErrorRedirectURL() {
+		return errorRedirectURL;
+	}
+
+	public void setErrorRedirectURL(String errorRedirectURL) {
+		this.errorRedirectURL = errorRedirectURL;
+	}
+
+	public String getApiVersion() {
+		return apiVersion;
+	}
+
+	public void setApiVersion(String apiVersion) {
+		this.apiVersion = apiVersion;
 	}
 
 	@Bean
