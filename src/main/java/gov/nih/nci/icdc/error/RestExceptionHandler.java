@@ -1,6 +1,10 @@
 package gov.nih.nci.icdc.error;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED;
+
+import java.util.Set;
 
 import javax.validation.ConstraintViolationException;
 
@@ -10,11 +14,14 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -87,7 +94,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ApiError apiError = new ApiError(BAD_REQUEST);
+		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
 		apiError.setMessage("Validation error");
 		apiError.addValidationErrors(ex.getBindingResult().getFieldErrors());
 		apiError.addValidationError(ex.getBindingResult().getGlobalErrors());
@@ -125,7 +132,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		ServletWebRequest servletWebRequest = (ServletWebRequest) request;
 		logger.info("{} to {}", servletWebRequest.getHttpMethod(), servletWebRequest.getRequest().getServletPath());
 		String error = "Malformed JSON request";
-		ApiError apiError = new ApiError(BAD_REQUEST, error, ex);
+		ApiError apiError = new ApiError(METHOD_NOT_ALLOWED, error, ex);
 		return buildResponseEntity(apiError);
 	}
 
@@ -142,7 +149,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		String error = "Error writing JSON output";
-		return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
+		return buildResponseEntity(new ApiError(HttpStatus.METHOD_NOT_ALLOWED, error, ex));
 	}
 
 	/**
@@ -157,7 +164,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
 			HttpStatus status, WebRequest request) {
-		ApiError apiError = new ApiError(BAD_REQUEST);
+		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
 		apiError.setMessage(
 				String.format("Could not find the %s method for URL %s", ex.getHttpMethod(), ex.getRequestURL()));
 		apiError.setDebugMessage(ex.getMessage());
@@ -180,6 +187,26 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex));
 	}
 
+
+	/**
+	 * Customize the response for HttpRequestMethodNotSupportedException.
+	 * <p>This method logs a warning, sets the "Allow" header, and delegates to
+	 * {@link #handleExceptionInternal}.
+	 * @param ex the exception
+	 * @param headers the headers to be written to the response
+	 * @param status the selected response status
+	 * @param request the current request
+	 * @return a {@code ResponseEntity} instance
+	 */
+	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
+			HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+		
+		ApiError apiError = new ApiError(BAD_REQUEST);
+		apiError.setMessage(ex.getMessage());
+		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
+	
 	/**
 	 * Handle Exception, handle generic Exception.class
 	 *
@@ -189,7 +216,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,
 			WebRequest request) {
-		ApiError apiError = new ApiError(BAD_REQUEST);
+		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
 		apiError.setMessage(String.format("The parameter '%s' of value '%s' could not be converted to type '%s'",
 				ex.getName(), ex.getValue(), ex.getRequiredType().getSimpleName()));
 		apiError.setDebugMessage(ex.getMessage());

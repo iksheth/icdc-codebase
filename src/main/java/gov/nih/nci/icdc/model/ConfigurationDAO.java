@@ -43,7 +43,25 @@ public class ConfigurationDAO {
 
 	@Value("${neo4j.graphql.endpoint}")
 	private String neo4jGraphQLEndPoint;
-
+	
+	
+	@Value("${fence.url}")
+	private String fenceURL;
+	
+	@Value("${fence.public.key}")
+	private String fencePublicKey;
+	
+	
+	@Value("${error.redirect_url}")
+	private String errorRedirectURL;
+	
+	@Value("${api.version}")
+	private String apiVersion;
+	
+	@Value("${session.timeout}")
+	private int sessionTimeOut;
+	
+	
 	public String getNeo4jGraphQLEndPoint() {
 		return neo4jGraphQLEndPoint;
 	}
@@ -76,14 +94,7 @@ public class ConfigurationDAO {
 
 	}
 
-	public List<String> getGraphqlSchemas() {
-		return graphqlSchemas;
-	}
-
-	public void setGraphqlSchemas(List<String> graphqlSchemas) {
-		this.graphqlSchemas = graphqlSchemas;
-	}
-
+	
 	public String getNeo4jUserName() {
 		return neo4jUserName;
 	}
@@ -108,6 +119,22 @@ public class ConfigurationDAO {
 		this.neo4jJDBCServerURI = neo4jJDBCServerURI;
 	}
 
+	public String getNeo4jHttpHeaderAuthorization() {
+		return neo4jHttpHeaderAuthorization;
+	}
+
+	public void setNeo4jHttpHeaderAuthorization(String neo4jHttpHeaderAuthorization) {
+		this.neo4jHttpHeaderAuthorization = neo4jHttpHeaderAuthorization;
+	}
+
+	public List<String> getGraphqlSchemas() {
+		return graphqlSchemas;
+	}
+
+	public void setGraphqlSchemas(List<String> graphqlSchemas) {
+		this.graphqlSchemas = graphqlSchemas;
+	}
+
 	public String getNeo4jJavaDriverServerURI() {
 		return neo4jJavaDriverServerURI;
 	}
@@ -116,12 +143,44 @@ public class ConfigurationDAO {
 		this.neo4jJavaDriverServerURI = neo4jJavaDriverServerURI;
 	}
 
-	public String getNeo4jHttpHeaderAuthorization() {
-		return neo4jHttpHeaderAuthorization;
+	public String getFenceURL() {
+		return fenceURL;
 	}
 
-	public void setNeo4jHttpHeaderAuthorization(String neo4jHttpHeaderAuthorization) {
-		this.neo4jHttpHeaderAuthorization = neo4jHttpHeaderAuthorization;
+	public void setFenceURL(String fenceURL) {
+		this.fenceURL = fenceURL;
+	}
+
+	public String getFencePublicKey() {
+		return fencePublicKey;
+	}
+
+	public void setFencePublicKey(String fencePublicKey) {
+		this.fencePublicKey = fencePublicKey;
+	}
+
+	public String getErrorRedirectURL() {
+		return errorRedirectURL;
+	}
+
+	public void setErrorRedirectURL(String errorRedirectURL) {
+		this.errorRedirectURL = errorRedirectURL;
+	}
+
+	public String getApiVersion() {
+		return apiVersion;
+	}
+
+	public void setApiVersion(String apiVersion) {
+		this.apiVersion = apiVersion;
+	}
+
+	public int getSessionTimeOut() {
+		return sessionTimeOut;
+	}
+
+	public void setSessionTimeOut(int sessionTimeOut) {
+		this.sessionTimeOut = sessionTimeOut;
 	}
 
 	@Bean
