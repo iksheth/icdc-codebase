@@ -143,10 +143,10 @@ public class ValidationAspect {
 		Date expire = jwt.getExpiresAt();
 		if (expire.compareTo(today) <= 0) {
 			logger.info("AOP : User's token is expired");
-			logger.info("AOP : Current time is:" + today + "  . Expired date is " + expire);
+			logger.info("AOP : Current time is:" + today + "  . The expiration date is " + expire);
 			logger.info("AOP : Token is " + token);
 			throw new ExpiredJwtException(null, null,
-					"The token is expired . " + " Current time is:" + today + "  . Expired date is " + expire, null);
+					"The token is expired . " + " Current time is:" + today + "  . The expiration date is " + expire, null);
 		}
 
 	}

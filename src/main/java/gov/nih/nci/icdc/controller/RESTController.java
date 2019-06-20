@@ -70,10 +70,6 @@ public class RESTController {
 		String graphQL = "query {study{\n" + "  id\n" + "  state\n" + "  created_datetime\n" + "  updated_datetime\n"
 				+ "  project_id\n" + "  clinical_study_name\n" + "  clinical_study_designation\n"
 				+ "  clinical_study_id\n" + "  date_of_iacuc_approval\n" + "  submitter_id\n" +
-//				"  projects\n" + 
-//				"  study_sites\n" + 
-//				"  study_arms\n" + 
-//				"  principal_investigators"+
 				"}}";
 		return neo4jService.query(graphQL);
 	}
@@ -94,16 +90,6 @@ public class RESTController {
 		logger.info("hit end point:/v1/rest/cases ");
 		String graphQL = "query {case {\n" + "id\n" + "  state\n" + "  created_datetime\n" + "  updated_datetime\n"
 				+ "  project_id\n" + "  patient_id\n" + "  patient_first_name\n" + "  crf_id\n" + "  submitter_id\n" +
-//				"  cohorts\n" + 
-//				"  demographics\n" + 
-//				"  samples\n" + 
-//				"  cycles\n" + 
-//				"  off_treatments\n" + 
-//				"  follow_ups\n" + 
-//				"  adverse_events\n" + 
-//				"  diagnoses\n" + 
-//				"  off_studies\n" + 
-//				"  enrollments"+
 				" }}";
 		return neo4jService.query(graphQL);
 	}
