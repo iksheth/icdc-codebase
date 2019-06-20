@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.security.auth.login.AccountExpiredException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;
@@ -40,8 +42,7 @@ public class ValidationAspect {
 //	}
 
 	@Pointcut("execution (* gov.nih.nci.icdc.controller.RESTController.TestToken(..))"
-			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.authorizeCallBack(..))"
-			)
+			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.authorizeCallBack(..))")
 	public void advisedMethods() {
 
 	}
@@ -53,40 +54,48 @@ public class ValidationAspect {
 	 * @param JoinPoint method will be executed next
 	 * @return Execption will be threw if one of checks fails otherwise get into
 	 *         JoinPoint
+	 * @throws AccountExpiredException
+	 * @throws HttpRequestMethodNotSupportedException
+	 * @throws ParseException
+	 * @throws JWTDecodeException
+	 * @throws ExpiredJwtException
 	 */
 
 	@Before("advisedMethods()")
-	public void validateBefore(JoinPoint joinPoint) throws Exception {
-		logger.info("AOP : Valiate Request");
-		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-		Object[] args = joinPoint.getArgs();
-		HttpServletRequest request = null;
-		for (Object arg : args) {
-			if (arg instanceof HttpServletRequest) {
-				request = (HttpServletRequest) arg;
-			}
-		}
-		if (null != request) {
-			logger.info("AOP : Valiate request session");
-			// check session
+	public void validateBefore(JoinPoint joinPoint) throws RuntimeException, AccountExpiredException,
+			HttpRequestMethodNotSupportedException, ExpiredJwtException, JWTDecodeException, ParseException {
 
-	 		if(isSessionExpired(request)) {
-				logger.info("AOP : User's session expired");
-				throw new Exception("user session expired");
+		logger.info("AOP : Valiate Request");
+			MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+			Object[] args = joinPoint.getArgs();
+			HttpServletRequest request = null;
+			for (Object arg : args) {
+				if (arg instanceof HttpServletRequest) {
+					request = (HttpServletRequest) arg;
+				}
 			}
-			logger.info("AOP : Request session is good");
-			logger.info("AOP : Valiate request token");
-			// check token
-			String token = isCookiesHasToken(request);
-			if (token == null) {
-				logger.info("AOP : user token is null");
-				throw new Exception("Bad Request");
+			if (null != request) {
+				logger.info("AOP : Valiate request session");
+				// check session
+
+				if (isSessionExpired(request)) {
+					logger.info("AOP : User's session expired");
+					throw new RuntimeException("User's session expired");
+				}
+				logger.info("AOP : Request session is good");
+				logger.info("AOP : Valiate request token");
+				// check token
+				String token = isCookiesHasToken(request);
+				if (token == null) {
+					logger.info("AOP : user token is null");
+					throw new RuntimeException("User's token is null");
+				} else {
+					isGoodCookies(token);
+				}
 			} else {
-				isGoodCookies(token);
+				throw new RuntimeException("Bad Request");
 			}
-		} else {
-			throw new Exception("Bad Request");
-		}
+		
 
 	}
 
@@ -97,8 +106,9 @@ public class ValidationAspect {
 	 * @return boolean true -> expired | false -> not expire
 	 */
 	public boolean isSessionExpired(HttpServletRequest request) {
-		//return request.getRequestedSessionId() != null && request.isRequestedSessionIdValid();
-		return true;
+		// return request.getRequestedSessionId() != null &&
+		// request.isRequestedSessionIdValid();
+		return false;
 	}
 
 	/**
@@ -135,7 +145,8 @@ public class ValidationAspect {
 			logger.info("AOP : User's token is expired");
 			logger.info("AOP : Current time is:" + today + "  . Expired date is " + expire);
 			logger.info("AOP : Token is " + token);
-			throw new ExpiredJwtException(null, null, "The token is expired" +" Current time is:" + today + "  . Expired date is " + expire , null);
+			throw new ExpiredJwtException(null, null,
+					"The token is expired . " + " Current time is:" + today + "  . Expired date is " + expire, null);
 		}
 
 	}

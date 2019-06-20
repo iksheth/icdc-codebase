@@ -4,6 +4,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED;
 
+import javax.security.auth.login.AccountExpiredException;
 import javax.validation.ConstraintViolationException;
 
 import org.apache.logging.log4j.LogManager;
@@ -219,6 +220,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(apiError);
 	}
 
+	
+	@ExceptionHandler(AccountExpiredException.class)
+	protected ResponseEntity<Object> handleAccountExpiredException(AccountExpiredException ex,
+			WebRequest request) {
+		ApiError apiError = new ApiError(BAD_REQUEST);
+		apiError.setMessage(String.format("User's session was expired."));
+		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
+
+	
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler({ Exception.class, ResourceNotFoundException.class })
 	protected ResponseEntity<Object> resourceNotFoundException(Exception ex) {
