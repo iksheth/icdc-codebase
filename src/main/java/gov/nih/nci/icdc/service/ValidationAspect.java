@@ -65,7 +65,7 @@ public class ValidationAspect {
 	public void validateBefore(JoinPoint joinPoint) throws RuntimeException, AccountExpiredException,
 			HttpRequestMethodNotSupportedException, ExpiredJwtException, JWTDecodeException, ParseException {
 
-		logger.info("AOP : Valiate Request");
+		logger.info("AOP : Validate Request");
 			MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 			Object[] args = joinPoint.getArgs();
 			HttpServletRequest request = null;
@@ -75,19 +75,19 @@ public class ValidationAspect {
 				}
 			}
 			if (null != request) {
-				logger.info("AOP : Valiate request session");
+				logger.info("AOP : Validate request session");
 				// check session
 
 				if (isSessionExpired(request)) {
 					logger.info("AOP : User's session expired");
 					throw new RuntimeException("User's session expired");
 				}
-				logger.info("AOP : Request session is good");
-				logger.info("AOP : Valiate request token");
+				logger.info("AOP : Session is good");
+				logger.info("AOP : Validate request token");
 				// check token
 				String token = isCookiesHasToken(request);
 				if (token == null) {
-					logger.info("AOP : user token is null");
+					logger.info("AOP : user's token is null");
 					throw new RuntimeException("User's token is null");
 				} else {
 					isGoodCookies(token);
