@@ -61,6 +61,8 @@ public class ConfigurationDAO {
 	@Value("${session.timeout}")
 	private int sessionTimeOut;
 	
+	@Value("${data.model.version}")
+	private String dataModelVersion;
 	
 	public String getNeo4jGraphQLEndPoint() {
 		return neo4jGraphQLEndPoint;
@@ -181,6 +183,14 @@ public class ConfigurationDAO {
 
 	public void setSessionTimeOut(int sessionTimeOut) {
 		this.sessionTimeOut = sessionTimeOut;
+	}
+
+	public String getDataModelVersion() {
+		return dataModelVersion;
+	}
+
+	public void setDataModelVersion(String dataModelVersion) {
+		this.dataModelVersion = dataModelVersion;
 	}
 
 	@Bean

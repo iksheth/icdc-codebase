@@ -1,7 +1,5 @@
 package gov.nih.nci.icdc.controller;
 
-import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,17 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import gov.nih.nci.icdc.model.ConfigurationDAO;
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -120,13 +111,22 @@ public class RESTController {
 	@ApiOperation(value = "Get API version")
 	@RequestMapping(value = "/api/version", method = RequestMethod.GET)
 	public String getAPIVersion(HttpServletRequest request, HttpServletResponse response) {
-		System.out.print("getting in get version");
+		logger.info("hit end point:/api/version ");
 		return config.getApiVersion();
 	}
+	
+	
+	@ApiOperation(value = "Get data model version")
+	@RequestMapping(value = "/data_model/version", method = RequestMethod.GET)
+	public String getDataModelVersion(HttpServletRequest request, HttpServletResponse response) {
+		logger.info("hit end point:/data_model/version ");
+		return config.getDataModelVersion();
+	}
+	
+	
 
 	@RequestMapping(value = "/authorize/accept", method = RequestMethod.GET)
 	public void authorizeCallBack(HttpServletRequest request, HttpServletResponse response) {
-		System.out.print(response.getStatus());
 		Cookie[] cookies = request.getCookies();
 		String redirect_url = "http://localhost";
 		if (null != cookies) {
@@ -147,30 +147,12 @@ public class RESTController {
 		response.setStatus(302);
 	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public void testReqiest(HttpServletRequest request, HttpServletResponse response)
-			throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException,
-			IllegalArgumentException, UnsupportedEncodingException {
-		// get token
-		Cookie[] cookies = request.getCookies();
-		String token = "";
-		if (null != cookies) {
-			for (int i = 0; i < cookies.length; i++) {
-				if ("access_token".equals(cookies[i].getName())) {
-					token = cookies[i].getValue();
-				}
-			}
-		} else {
-			throw new IllegalArgumentException();
-		}
-
-		if ("".equals(token)) {
-			throw new IllegalArgumentException();
-		} else {
-			// validate token if the token can not be trust then throw exception
-			Jwts.parser().setSigningKey(config.getFencePublicKey().getBytes("UTF-8")).parseClaimsJws(token);
-		}
-
+	
+	
+	@RequestMapping(value = "/test_token", method = RequestMethod.GET)
+	public String testToken(HttpServletRequest request, HttpServletResponse response) {
+		
+		return "Pass Token Test";
 	}
 
 }

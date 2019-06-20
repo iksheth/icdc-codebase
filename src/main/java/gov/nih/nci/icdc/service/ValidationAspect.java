@@ -2,7 +2,6 @@ package gov.nih.nci.icdc.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -15,14 +14,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
-import gov.nih.nci.icdc.model.ConfigurationDAO;
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
@@ -31,64 +28,85 @@ public class ValidationAspect {
 
 	private static final Logger logger = LogManager.getLogger(ValidationAspect.class);
 
-	@Autowired
-	private ConfigurationDAO config;
+//	@Pointcut("execution (* gov.nih.nci.icdc.controller.RESTController.getPrograms(..))"
+//			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.getProgramStudies(..))"
+//			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.getStudies(..))"
+//			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.getStudyCases(..))"
+//			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.getCases(..))"
+//			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.authorizeCallBack(..))"
+//			)
+//	public void allPublicMethods() {
+//
+//	}
 
-	
-	
-	@Pointcut("execution (* gov.nih.nci.icdc.controller.RESTController.getPrograms(..))"
-			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.getProgramStudies(..))"
-			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.getStudies(..))"
-			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.getStudyCases(..))"
-			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.getCases(..))"
+	@Pointcut("execution (* gov.nih.nci.icdc.controller.RESTController.TestToken(..))"
 			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.authorizeCallBack(..))"
 			)
-	public void allPublicMethods() {
+	public void advisedMethods() {
 
 	}
 
-	@Before("allPublicMethods()")
-	public void validateBefore(JoinPoint joinPoint)
-			throws Exception {
-		logger.info("Get in AOP");
+	/**
+	 * Validate if the request is valid request. 1. Check request session timeout 2.
+	 * Check token is valid or not 3. Check token is expired or not
+	 *
+	 * @param JoinPoint method will be executed next
+	 * @return Execption will be threw if one of checks fails otherwise get into
+	 *         JoinPoint
+	 */
+
+	@Before("advisedMethods()")
+	public void validateBefore(JoinPoint joinPoint) throws Exception {
+		logger.info("AOP : Valiate Request");
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-	     Object[] args = joinPoint.getArgs();
-	     HttpServletRequest request = null;
-	     logger.info("Get in AOP");
-	     for(Object arg : args) {
-	    	 if(arg instanceof HttpServletRequest) {
-	    		request = (HttpServletRequest)arg;
-	    	 }
-	     }
-	     if(null!=request) {
-//	 		if(isSessionExpired(request)) {
-//				logger.info("user session expired");
-//				throw new Exception("user session expired");
-//			}
-			String token =isCookiesHasToken(request);
-			if(token.equals(null)) {
-				logger.info("user token is null");
+		Object[] args = joinPoint.getArgs();
+		HttpServletRequest request = null;
+		for (Object arg : args) {
+			if (arg instanceof HttpServletRequest) {
+				request = (HttpServletRequest) arg;
+			}
+		}
+		if (null != request) {
+			logger.info("AOP : Valiate request session");
+			// check session
+
+	 		if(isSessionExpired(request)) {
+				logger.info("AOP : User's session expired");
+				throw new Exception("user session expired");
+			}
+			logger.info("AOP : Request session is good");
+			logger.info("AOP : Valiate request token");
+			// check token
+			String token = isCookiesHasToken(request);
+			if (token == null) {
+				logger.info("AOP : user token is null");
 				throw new Exception("Bad Request");
-			}else {
+			} else {
 				isGoodCookies(token);
 			}
-	     }else {
-	    	 throw new Exception("Bad Request");
-	     }
-
-
-	}
-
-	public boolean isSessionExpired(HttpServletRequest request) {
-
-		if (request.getRequestedSessionId() != null&&request.isRequestedSessionIdValid()) {
-			return false;
-		}else {
-			return true;
+		} else {
+			throw new Exception("Bad Request");
 		}
 
 	}
-	
+
+	/**
+	 * Check if the request has token in the cookie
+	 *
+	 * @param request HttpServletRequest request
+	 * @return boolean true -> expired | false -> not expire
+	 */
+	public boolean isSessionExpired(HttpServletRequest request) {
+		//return request.getRequestedSessionId() != null && request.isRequestedSessionIdValid();
+		return true;
+	}
+
+	/**
+	 * Check if the request has token in the cookie
+	 *
+	 * @param request HttpServletRequest request
+	 * @return token token | ""
+	 */
 	public String isCookiesHasToken(HttpServletRequest request) {
 		Cookie[] cookies = request.getCookies();
 		String token = "";
@@ -99,23 +117,27 @@ public class ValidationAspect {
 					return token;
 				}
 			}
-		} 
+		}
 		return null;
 	}
-	
-	public void isGoodCookies(String token) throws ExpiredJwtException,JWTDecodeException, ParseException {
+
+	/**
+	 * Validate Token and verify the expire date
+	 *
+	 * @param token encoded token from Fence
+	 */
+	public void isGoodCookies(String token) throws ExpiredJwtException, JWTDecodeException, ParseException {
 		DecodedJWT jwt = JWT.decode(token);
-		SimpleDateFormat sdf =  new SimpleDateFormat("MMM-dd-yyyy hh:mm:ss a"); 
-		Date today=  sdf.parse((String)new SimpleDateFormat("MMM-dd-yyyy hh:mm:ss a").format(new Date()));
-		Date expire =jwt.getExpiresAt();
-		if(expire.compareTo(today)<=0) {
-			logger.info("user token is expired");
-			logger.info("Current time is:" + today +"  expired date is " +expire );
-			logger.info("token is "+ token);
-			throw new ExpiredJwtException(null, null, "The token is expired", null);
+		SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyyy hh:mm:ss a");
+		Date today = sdf.parse((String) new SimpleDateFormat("MMM-dd-yyyy hh:mm:ss a").format(new Date()));
+		Date expire = jwt.getExpiresAt();
+		if (expire.compareTo(today) <= 0) {
+			logger.info("AOP : User's token is expired");
+			logger.info("AOP : Current time is:" + today + "  . Expired date is " + expire);
+			logger.info("AOP : Token is " + token);
+			throw new ExpiredJwtException(null, null, "The token is expired" +" Current time is:" + today + "  . Expired date is " + expire , null);
 		}
+
 	}
-	
-	
 
 }
