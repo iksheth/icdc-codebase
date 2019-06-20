@@ -2,8 +2,8 @@ import React from 'react';
 import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import icdc_logo from '../../assets/logo.png';
-import dctd_logo from '../../assets/nci_dctd.png';
+import icdcLogo from '../../assets/logo.png';
+import dctdLogo from '../../assets/nci_dctd.png';
 
 // import classes from '*.module.sass';
 
@@ -18,17 +18,17 @@ import dctd_logo from '../../assets/nci_dctd.png';
         <div className={classes.headerBarNavLogo}>
             <img
               className={classes.headerBarNavLogoImg}
-              src={icdc_logo}
+              src={icdcLogo}
               alt='icdc_logo'
             />
         </div>
-        <div role="button" tabindex="0" className={classes.headerBarHomeButton}><img src={dctd_logo} alt="dctd_logo"/></div>
+        <div role="button" tabindex="0" className={classes.headerBarHomeButton}><img src={dctdLogo} alt="dctd_logo"/></div>
       </nav>
     </div>
   </div>
  );
 
- const styles = theme => ({
+ const styles = ( theme ) => ({
     headerBar: {
         width: '100vw',
         backgroundColor: 'white',

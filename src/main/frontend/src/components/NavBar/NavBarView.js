@@ -79,7 +79,7 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
   </AppBar>
 );
 
-const styles = theme => ({
+const styles = (theme) => ({
   logotype: {
     color: "white",
     marginLeft: theme.spacing.unit * 2.5,

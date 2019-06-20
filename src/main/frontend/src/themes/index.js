@@ -2,7 +2,7 @@ import defaultTheme from './default';
 
 export default {
   default: defaultTheme
-}
+};
 
 export const overrides = {
   typography: {

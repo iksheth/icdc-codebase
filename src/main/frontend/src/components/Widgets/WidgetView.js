@@ -62,7 +62,7 @@ const Widget = ({
   </div>
 );
 
-const styles = theme => ({
+const styles = (theme) => ({
   widgetWrapper: {
     display: "flex",
     minHeight: "100%"

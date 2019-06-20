@@ -30,7 +30,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
 
 );
 
-const styles = theme => ({
+const styles = ( theme ) => ({
   root: {
     display: 'flex',
     maxWidth: '100vw',

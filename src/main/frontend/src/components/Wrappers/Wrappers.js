@@ -14,7 +14,7 @@ const getColor = (color, theme, brigtness = "main") => {
   }
 };
 
-const getFontWeight = style => {
+const getFontWeight = (style) => {
   switch (style) {
     case "light":
       return 300;

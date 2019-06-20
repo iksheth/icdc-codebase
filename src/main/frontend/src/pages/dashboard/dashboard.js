@@ -5,7 +5,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 import Widget from "../../components/Widgets/WidgetView";
-import { Typography } from "../../components/Wrappers/Wrappers"
+import { Typography } from "../../components/Wrappers/Wrappers";
 
 const Dashboard = ({ classes, theme, ...props }) => {
   return (
@@ -59,7 +59,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
   );
 };
 
-const styles = theme => ({
+const styles = (theme) => ({
   card: {
     minHeight: "100%",
     display: "flex",
