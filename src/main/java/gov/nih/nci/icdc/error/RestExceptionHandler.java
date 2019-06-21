@@ -27,15 +27,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 @Slf4j
-public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+public class RestExceptionHandler {
 
 	private static final Logger logger = LogManager.getLogger(RestExceptionHandler.class);
 
@@ -49,7 +49,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	 * @param request WebRequest
 	 * @return the ApiError object
 	 */
-	@Override
 	protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		String error = ex.getParameterName() + " parameter is missing";
@@ -66,7 +65,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	 * @param request WebRequest
 	 * @return the ApiError object
 	 */
-	@Override
 	protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		StringBuilder builder = new StringBuilder();
@@ -88,7 +86,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	 * @param request WebRequest
 	 * @return the ApiError object
 	 */
-	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
@@ -123,7 +120,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	 * @param request WebRequest
 	 * @return the ApiError object
 	 */
-	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		ServletWebRequest servletWebRequest = (ServletWebRequest) request;
@@ -142,30 +138,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	 * @param request WebRequest
 	 * @return the ApiError object
 	 */
-	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 		String error = "Error in writing JSON output";
 		return buildResponseEntity(new ApiError(METHOD_NOT_ALLOWED, error, ex));
 	}
 
-	/**
-	 * Handle NoHandlerFoundException.
-	 *
-	 * @param ex
-	 * @param headers
-	 * @param status
-	 * @param request
-	 * @return
-	 */
-	@Override
-	protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers,
-			HttpStatus status, WebRequest request) {
-		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
-		apiError.setMessage(
-				String.format("Could not find the %s method for URL %s", ex.getHttpMethod(), ex.getRequestURL()));
-		apiError.setDebugMessage(ex.getMessage());
-		return buildResponseEntity(apiError);
+
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public ModelAndView handle(Exception ex) {
+		return new ModelAndView("/index");
 	}
 
 	/**
@@ -184,26 +166,27 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(new ApiError(INTERNAL_SERVER_ERROR, ex));
 	}
 
-
 	/**
 	 * Customize the response for HttpRequestMethodNotSupportedException.
-	 * <p>This method logs a warning, sets the "Allow" header, and delegates to
+	 * <p>
+	 * This method logs a warning, sets the "Allow" header, and delegates to
 	 * {@link #handleExceptionInternal}.
-	 * @param ex the exception
+	 * 
+	 * @param ex      the exception
 	 * @param headers the headers to be written to the response
-	 * @param status the selected response status
+	 * @param status  the selected response status
 	 * @param request the current request
 	 * @return a {@code ResponseEntity} instance
 	 */
-	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
-			HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-		
+	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+
 		ApiError apiError = new ApiError(BAD_REQUEST);
 		apiError.setMessage(ex.getMessage());
 		apiError.setDebugMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
 	}
-	
+
 	/**
 	 * Handle Exception, handle generic Exception.class
 	 *
@@ -220,25 +203,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(apiError);
 	}
 
-	
 	@ExceptionHandler(AccountExpiredException.class)
-	protected ResponseEntity<Object> handleAccountExpiredException(AccountExpiredException ex,
-			WebRequest request) {
+	protected ResponseEntity<Object> handleAccountExpiredException(AccountExpiredException ex, WebRequest request) {
 		ApiError apiError = new ApiError(BAD_REQUEST);
 		apiError.setMessage(String.format("User's session was expired."));
 		apiError.setDebugMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
 	}
 
-	
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler({ Exception.class, ResourceNotFoundException.class })
-	protected ResponseEntity<Object> resourceNotFoundException(Exception ex) {
-		ApiError apiError = new ApiError(BAD_REQUEST);
-		apiError.setMessage(ex.getMessage());
-		apiError.setDebugMessage(ex.getMessage());
-		return buildResponseEntity(apiError);
+	protected ModelAndView resourceNotFoundException(Exception ex) {
+		return new ModelAndView("/index");
 	}
+	
 
 	private ResponseEntity<Object> buildResponseEntity(ApiError Error) {
 		return new ResponseEntity<>(Error, Error.getStatus());
