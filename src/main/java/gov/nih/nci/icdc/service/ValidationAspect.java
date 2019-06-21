@@ -62,7 +62,7 @@ public class ValidationAspect {
 	 */
 
 	@Before("advisedMethods()")
-	public void validateBefore(JoinPoint joinPoint) throws RuntimeException, AccountExpiredException,
+	public void validateBefore(JoinPoint joinPoint) throws IllegalArgumentException, AccountExpiredException,
 			HttpRequestMethodNotSupportedException, ExpiredJwtException, JWTDecodeException, ParseException {
 
 		logger.info("AOP : Validate Request");
@@ -80,7 +80,7 @@ public class ValidationAspect {
 
 				if (isSessionExpired(request)) {
 					logger.info("AOP : User's session expired");
-					throw new RuntimeException("User's session expired");
+					throw new IllegalArgumentException("User's session expired");
 				}
 				logger.info("AOP : Session is good");
 				logger.info("AOP : Validate request token");
@@ -88,12 +88,12 @@ public class ValidationAspect {
 				String token = isCookiesHasToken(request);
 				if (token == null) {
 					logger.info("AOP : user's token is null");
-					throw new RuntimeException("User's token is null");
+					throw new IllegalArgumentException("User's token is null");
 				} else {
 					isGoodCookies(token);
 				}
 			} else {
-				throw new RuntimeException("Bad Request");
+				throw new IllegalArgumentException("Bad Request");
 			}
 		
 
