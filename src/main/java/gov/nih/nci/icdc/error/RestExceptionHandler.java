@@ -4,8 +4,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED;
 
-import java.util.Set;
-
+import javax.security.auth.login.AccountExpiredException;
 import javax.validation.ConstraintViolationException;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,12 +13,10 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -148,8 +145,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		String error = "Error writing JSON output";
-		return buildResponseEntity(new ApiError(HttpStatus.METHOD_NOT_ALLOWED, error, ex));
+		String error = "Error in writing JSON output";
+		return buildResponseEntity(new ApiError(METHOD_NOT_ALLOWED, error, ex));
 	}
 
 	/**
@@ -184,7 +181,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		if (ex.getCause() instanceof ConstraintViolationException) {
 			return buildResponseEntity(new ApiError(HttpStatus.CONFLICT, "Database error", ex.getCause()));
 		}
-		return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex));
+		return buildResponseEntity(new ApiError(INTERNAL_SERVER_ERROR, ex));
 	}
 
 
@@ -223,6 +220,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(apiError);
 	}
 
+	
+	@ExceptionHandler(AccountExpiredException.class)
+	protected ResponseEntity<Object> handleAccountExpiredException(AccountExpiredException ex,
+			WebRequest request) {
+		ApiError apiError = new ApiError(BAD_REQUEST);
+		apiError.setMessage(String.format("User's session was expired."));
+		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
+
+	
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler({ Exception.class, ResourceNotFoundException.class })
 	protected ResponseEntity<Object> resourceNotFoundException(Exception ex) {
