@@ -12,6 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+//
+//public class MvcWebConfig{
+//	
+//}
+
 @Configuration
 @EnableWebMvc
 @ComponentScan
@@ -35,17 +40,11 @@ public class MvcWebConfig implements WebMvcConfigurer {
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
 		registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/")
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
-		registry.addResourceHandler("/plugins/**").addResourceLocations("/WEB-INF/plugins/")
-				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
-		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/")
-				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
-		registry.addResourceHandler("/files/**").addResourceLocations("/WEB-INF/files/")
-				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
-		registry.addResourceHandler("/data/**").addResourceLocations("/WEB-INF/data/")
-				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
 		registry.addResourceHandler("/*.html").addResourceLocations("/WEB-INF/")
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
 		registry.addResourceHandler("/*.js").addResourceLocations("/WEB-INF/")
+				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+		registry.addResourceHandler("/*.json").addResourceLocations("/WEB-INF/")
 				.setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
 
 	}
