@@ -43,7 +43,7 @@ public class ValidationAspect {
 	@Pointcut("execution (* gov.nih.nci.icdc.controller.RESTController.TestToken(..))"
 			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.authorizeCallBack(..))")
 	public void advisedMethods() {
-		
+		// nothing here
 	}
 
 	/**
