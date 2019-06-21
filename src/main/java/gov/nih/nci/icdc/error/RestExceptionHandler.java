@@ -145,8 +145,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		String error = "Error writing JSON output";
-		return buildResponseEntity(new ApiError(HttpStatus.METHOD_NOT_ALLOWED, error, ex));
+		String error = "Error in writing JSON output";
+		return buildResponseEntity(new ApiError(METHOD_NOT_ALLOWED, error, ex));
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		if (ex.getCause() instanceof ConstraintViolationException) {
 			return buildResponseEntity(new ApiError(HttpStatus.CONFLICT, "Database error", ex.getCause()));
 		}
-		return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex));
+		return buildResponseEntity(new ApiError(INTERNAL_SERVER_ERROR, ex));
 	}
 
 

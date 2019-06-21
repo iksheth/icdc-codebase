@@ -44,7 +44,7 @@ public class ValidationAspect {
 	@Pointcut("execution (* gov.nih.nci.icdc.controller.RESTController.TestToken(..))"
 			+ "||execution (* gov.nih.nci.icdc.controller.RESTController.authorizeCallBack(..))")
 	public void advisedMethods() {
-
+		
 	}
 
 	/**
@@ -66,7 +66,6 @@ public class ValidationAspect {
 			HttpRequestMethodNotSupportedException, ExpiredJwtException, JWTDecodeException, ParseException {
 
 		logger.info("AOP : Validate Request");
-			MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 			Object[] args = joinPoint.getArgs();
 			HttpServletRequest request = null;
 			for (Object arg : args) {
