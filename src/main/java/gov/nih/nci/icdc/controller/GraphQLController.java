@@ -29,10 +29,17 @@ public class GraphQLController {
 	private Neo4JGraphQLService neo4jService;
 
 	public static final Gson GSON = new Gson();
+	
 
+	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.GET)
+	@ResponseBody
+	public void getGraphQLResponseByGET(HttpEntity<String> httpEntity, HttpServletResponse response) throws IOException, UnirestException {
+		
+		throw new UnirestException("Could not find the GET method for URL /ICDC/v1/graphql/");
+	}
 	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.POST)
 	@ResponseBody
-	public String getPerson(HttpEntity<String> httpEntity, HttpServletResponse response) throws IOException, UnirestException {
+	public String getGraphQLResponse(HttpEntity<String> httpEntity, HttpServletResponse response) throws IOException, UnirestException {
 		
 		logger.info("hit end point:/v1/graphql/");
 
