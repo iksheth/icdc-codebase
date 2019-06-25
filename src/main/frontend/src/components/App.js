@@ -9,7 +9,7 @@ const theme = createMuiTheme({...themes.default, ...overrides});
 
 const App = () => (
     <MuiThemeProvider theme={theme}>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.REACT_APP_ROUTER_BASE || ''}>
       <Switch>
         <Route path="/" component={Layout} />
         {/* <Route component={Error} /> */}
