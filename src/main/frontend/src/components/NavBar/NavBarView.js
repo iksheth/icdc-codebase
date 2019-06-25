@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import {
   AppBar,
   Toolbar,
@@ -41,10 +43,10 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
           />
         )}
       </IconButton>
-      <Typography variant="h6" weight="medium" className={classes.logotype}>Dashboard</Typography>
-      <Typography variant="h6" weight="medium" className={classes.logotype}>Programs</Typography>
-      <Typography variant="h6" weight="medium" className={classes.logotype}>Studies</Typography>
-      <Typography variant="h6" weight="medium" className={classes.logotype}>Cases</Typography>
+      <Link to="/dashboard"><Typography variant="h6" weight="medium" className={classes.logotype}>Dashboard</Typography></Link>
+      <Link to="/programs"><Typography variant="h6" weight="medium" className={classes.logotype}>Programs</Typography></Link>
+      <Link to="/studies"><Typography variant="h6" weight="medium" className={classes.logotype}>Studies</Typography></Link>
+      <Link to="/cases"><Typography variant="h6" weight="medium" className={classes.logotype}>Cases</Typography></Link>
 
       <div className={classes.grow} />
       <IconButton
