@@ -10,6 +10,10 @@ const lightenRate = 7.5;
 const darkenRate = 15;
 
 export default {
+  custom: {
+    maxContentWidth: '1440px',
+    maxContent:'white'
+  },
   palette: {
     primary: {
       main: primary,
@@ -58,6 +62,7 @@ export default {
         .toHexString()
     },
     text: {
+      withbackground: "white",
       primary: "#4A4A4A",
       secondary: "#6E6E6E",
       hint: "#B9B9B9"
