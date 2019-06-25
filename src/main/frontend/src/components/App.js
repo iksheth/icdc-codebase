@@ -10,7 +10,7 @@ const theme = createMuiTheme({...themes.default, ...overrides});
 const App = () => (
     <MuiThemeProvider theme={theme}>
       {/* Replace /ICDC this with env varaible */}
-    <BrowserRouter basename='/dist'>
+    <BrowserRouter basename='/ICDC'>
       <Switch>
         <Route path="/" component={Layout} />
         {/* <Route component={Error} /> */}
