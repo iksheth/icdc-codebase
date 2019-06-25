@@ -13,7 +13,7 @@ import Dashboard from '../../pages/dashboard/dashboard';
 const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
   <React.Fragment>
     <CssBaseline />
-    <BrowserRouter>
+    <BrowserRouter basename='/ICDC'>
       <React.Fragment>
           <Header />
            <NavBar />
