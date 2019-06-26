@@ -8,11 +8,13 @@ import NavBar from '../NavBar/NavBarView';
 
 // pages
 import Dashboard from '../../pages/dashboard/dashboard';
-
+import Cases from '../../pages/cases/cases';
+import Programs from '../../pages/programs/programs';
 
 const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
   <React.Fragment>
     <CssBaseline />
+    {/* Replace /ICDC this with env varaible */}
     <BrowserRouter>
       <React.Fragment>
           <Header />
@@ -21,7 +23,9 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
           <div className={classnames(classes.content, { [classes.contentShift]: isSidebarOpened })}>
             <Switch>
               <Route path="/dashboard" component={Dashboard} />
-              <Route path="/case" component={Dashboard} />
+              <Route path="/cases" component={Cases} />
+              <Route path="/programs" component={Programs} />
+              <Route path="/studies" component={Dashboard} />
             </Switch>
           </div>
       </React.Fragment>
