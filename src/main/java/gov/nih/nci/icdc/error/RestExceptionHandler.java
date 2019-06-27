@@ -211,9 +211,17 @@ public class RestExceptionHandler {
 		return buildResponseEntity(apiError);
 	}
 
-	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler({ Exception.class, ResourceNotFoundException.class })
-	protected ModelAndView resourceNotFoundException(Exception ex) {
+	protected ResponseEntity<Object>  resourceNotFoundException(Exception ex) {
+		ApiError apiError = new ApiError(BAD_REQUEST);
+		apiError.setMessage(ex.getMessage());
+		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
+	
+	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	protected ModelAndView NoFound(Exception ex) {
 		return new ModelAndView("/index");
 	}
 	

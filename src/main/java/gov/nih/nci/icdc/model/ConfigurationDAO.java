@@ -64,6 +64,26 @@ public class ConfigurationDAO {
 	@Value("${data.model.version}")
 	private String dataModelVersion;
 	
+	@Value("${allow_grapqh_query}")
+	private boolean allowGraphQLQuery;
+	
+	
+	@Value("${allow_graphql_mutation}")
+	private boolean allowGraphQLMutation;
+	
+	
+	@Value("${executable_graphql_query}")
+	private  List<String> executabledGrapQLQuery;
+	
+	
+	public List<String> getExecutabledGrapQLQuery() {
+		return executabledGrapQLQuery;
+	}
+
+	public void setExecutabledGrapQLQuery(List<String> executabledGrapQLQuery) {
+		this.executabledGrapQLQuery = executabledGrapQLQuery;
+	}
+
 	public String getNeo4jGraphQLEndPoint() {
 		return neo4jGraphQLEndPoint;
 	}
@@ -191,6 +211,22 @@ public class ConfigurationDAO {
 
 	public void setDataModelVersion(String dataModelVersion) {
 		this.dataModelVersion = dataModelVersion;
+	}
+
+	public boolean isAllowGraphQLQuery() {
+		return allowGraphQLQuery;
+	}
+
+	public void setAllowGraphQLQuery(boolean allowGraphQLQuery) {
+		this.allowGraphQLQuery = allowGraphQLQuery;
+	}
+
+	public boolean isAllowGraphQLMutation() {
+		return allowGraphQLMutation;
+	}
+
+	public void setAllowGraphQLMutation(boolean allowGraphQLMutation) {
+		this.allowGraphQLMutation = allowGraphQLMutation;
 	}
 
 	@Bean
