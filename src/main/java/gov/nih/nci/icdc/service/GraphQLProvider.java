@@ -67,10 +67,7 @@ public class GraphQLProvider {
     public boolean validation(Document document) {
     	Validator validator = new Validator();
         List<ValidationError> validationErrors = validator.validateDocument(this.schema, document);
-        if (validationErrors.size() > 0) {
-        	return false;
-        }
-    	return true;
+    	return validationErrors.size() > 0;
     }
     
     /**

@@ -71,7 +71,7 @@ public class GraphQLController {
 		// mock data
 		Mocker mocker = new Mocker();
 		String responseText = "";
-		if (sdl == "") {
+		if (("").equals(sdl)) {
 			throw new HttpRequestMethodNotSupportedException("Invalid Graphql query");
 		} else {
 			if (sdl.contains("dashboard(")) {
@@ -91,7 +91,7 @@ public class GraphQLController {
 			} else if (sdl.contains("landing(")) {
 				responseText = mocker.getLanding();
 			} else {
-				if (GraphQLValidation(sdl)) {
+				if (graphQLValidation(sdl)) {
 					responseText = neo4jService.query(sdl);
 				} else {
 					throw new UnirestException	("Invalid Graphql query");
@@ -103,7 +103,7 @@ public class GraphQLController {
 
 	}
 
-	private boolean GraphQLValidation(String requestQuery) {
+	private boolean graphQLValidation(String requestQuery) {
 		Parser parser = new Parser();
 		Document document = parser.parseDocument(requestQuery);
 		return graphQLService.validation(document);

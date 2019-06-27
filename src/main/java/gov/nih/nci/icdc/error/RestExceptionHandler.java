@@ -221,7 +221,7 @@ public class RestExceptionHandler {
 	
 	
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-	protected ModelAndView NoFound(Exception ex) {
+	protected ModelAndView noFound(Exception ex) {
 		return new ModelAndView("/index");
 	}
 	
