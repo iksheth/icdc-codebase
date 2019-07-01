@@ -71,18 +71,6 @@ public class ConfigurationDAO {
 	@Value("${allow_graphql_mutation}")
 	private boolean allowGraphQLMutation;
 	
-	
-	@Value("${executable_graphql_query}")
-	private  List<String> executabledGrapQLQuery;
-	
-	
-	public List<String> getExecutabledGrapQLQuery() {
-		return executabledGrapQLQuery;
-	}
-
-	public void setExecutabledGrapQLQuery(List<String> executabledGrapQLQuery) {
-		this.executabledGrapQLQuery = executabledGrapQLQuery;
-	}
 
 	public String getNeo4jGraphQLEndPoint() {
 		return neo4jGraphQLEndPoint;
