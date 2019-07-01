@@ -10,7 +10,25 @@ type case {
   submitter_id: String
 }
 
+type enrollment {
+	id: String
+	state: String
+	created_datetime: String
+	updated_datetime: String
+	project_id: String
+	date_of_registration: String
+	registering_institution: String
+	initials: String
+	date_of_informed_consent: String
+	site_short_name: String
+	veterinary_medical_center: String
+	enrollment_document_number: String
+	cohort_description: String
+	patient_subgroup: String
+	submitter_id: String
+}
 
 type Query {
     case: case
+    enrollment:enrollment
 }

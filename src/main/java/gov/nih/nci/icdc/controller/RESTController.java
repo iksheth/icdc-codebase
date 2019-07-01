@@ -114,7 +114,7 @@ public class RESTController {
 	@RequestMapping(value = "/authorize/accept", method = RequestMethod.GET)
 	public void authorizeCallBack(HttpServletRequest request, HttpServletResponse response) {
 		Cookie[] cookies = request.getCookies();
-		String redirect_url = "http://localhost";
+		String redirect_url = "http://localhost/?passed";
 		if (null != cookies) {
 			for (int i = 0; i < cookies.length; i++) {
 				if ("access_token".equals(cookies[i].getName())) {

@@ -91,7 +91,7 @@ public class GraphQLController {
 			} else if (sdl.contains("landing(")) {
 				responseText = mocker.getLanding();
 			} else {
-				if (graphQLValidation(sdl)) {
+				if (isvalidQraphQL(sdl)) {
 					responseText = neo4jService.query(sdl);
 				} else {
 					throw new UnirestException	("Invalid Graphql query");
@@ -103,10 +103,10 @@ public class GraphQLController {
 
 	}
 
-	private boolean graphQLValidation(String requestQuery) {
+	private boolean isvalidQraphQL(String requestQuery) {
 		Parser parser = new Parser();
 		Document document = parser.parseDocument(requestQuery);
-		return graphQLService.validation(document);
+		return graphQLService.isVaild(document);
 	}
 
 }
