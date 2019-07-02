@@ -107,6 +107,35 @@ public class GraphQLControllerTests {
 
 
 	}
+
+	@Test
+	public void testGraphQLEndPointWithValidPayLoad() throws Exception {
+		
+		 this.mockMvc.perform(
+				 RestDocumentationRequestBuilders.post("/v1/graphql/")
+				 	.contentType(MediaType.APPLICATION_JSON)
+			  		.content("{\"query\":\"{enrollment{id}}\"}")
+				 )
+				.andDo(print()).andExpect(status().isOk())
+				.andExpect(content().string(containsString("data")))
+				.andDo(document("{ClassName}/{methodName}"));
+
+	}
+	
+	
+	@Test
+	public void testGraphQLEndPointWithInValidPayLoad() throws Exception {
+		
+		
+		 this.mockMvc.perform(
+				 RestDocumentationRequestBuilders.post("/v1/graphql/")
+				 	.contentType(MediaType.APPLICATION_JSON)
+			  		.content("{\"query\":\"{e{id}}\"}")
+				 )
+				.andDo(print()).andExpect(status().is4xxClientError())
+				.andDo(document("{ClassName}/{methodName}"));
+
+	}
 	
 
 }

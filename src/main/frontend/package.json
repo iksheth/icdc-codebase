@@ -1,7 +1,7 @@
 {
+  "homepage": ".",
   "name": "icdc-frontend",
   "version": "0.1.0",
-  "homepage": ".",
   "dependencies": {
     "@babel/core": "7.2.2",
     "@material-ui/core": "^3.9.2",

@@ -77,5 +77,5 @@ public class RESTControllerTests {
 				.andDo(document("{ClassName}/{methodName}"));
 
 	}
-
+	
 }
