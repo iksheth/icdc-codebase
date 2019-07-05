@@ -50,25 +50,24 @@ const Footer = ({ classes }) => (
         </div>
           <div className={classes.footerRow}>
             <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
-                <Typography><a title="link to NCI Policies" href="http://www.cancer.gov/global/web/policies" class="ext" target="icdc-nci">Policies<span className="ext">&nbsp;|&nbsp;</span></a></Typography>
-                <Typography><a title="link to NCI Accessibility Policies" href="http://www.cancer.gov/global/web/policies/accessibility" class="ext" target="icdc-nci">Accessibility<span class="ext">&nbsp;|&nbsp;</span></a></Typography>
-                <Typography><a title="link to NCI Tools for Viewing Files" href="http://www.cancer.gov/global/viewing-files" class="ext" target="icdc-nci">Viewing Files<span class="ext">&nbsp;|&nbsp;</span></a></Typography>
-                <Typography><a title="link to FOIA" href="http://www.cancer.gov/global/web/policies/foia" class="ext" target="icdc-nci">FOIA</a></Typography>
+                <Typography><a title="link to NCI Policies" href="http://www.cancer.gov/global/web/policies" target="icdc-nci">Policies<span className={classes.ext}>&nbsp;|&nbsp;</span></a></Typography>
+                <Typography><a title="link to NCI Accessibility Policies" href="http://www.cancer.gov/global/web/policies/accessibility" target="icdc-nci">Accessibility<span className={classes.ext}>&nbsp;|&nbsp;</span></a></Typography>
+                <Typography><a title="link to NCI Tools for Viewing Files" href="http://www.cancer.gov/global/viewing-files" target="icdc-nci">Viewing Files<span className={classes.ext}>&nbsp;|&nbsp;</span></a></Typography>
+                <Typography><a title="link to FOIA" href="http://www.cancer.gov/global/web/policies/foia"  target="icdc-nci">FOIA</a></Typography>
             </div>
         </div>
         <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
         <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
-                <Typography><a href="https://www.hhs.gov" >U.S. Department of Health and Human Services<span class="ext">&nbsp;|&nbsp;</span></a></Typography>
-                <Typography><a href="https://www.nih.gov" >National Institutes of Health<span class="ext">&nbsp;|&nbsp;</span></a></Typography>
-                <Typography><a href="https://www.cancer.gov">National Cancer Institute<span class="ext">&nbsp;|&nbsp;</span></a></Typography>
-                <Typography><a href="https://www.usa.gov" >USA.gov<span class="ext" aria-label="(link is external)"></span></a></Typography>
+                <Typography><a href="https://www.hhs.gov" >U.S. Department of Health and Human Services<span className={classes.ext}>&nbsp;|&nbsp;</span></a></Typography>
+                <Typography><a href="https://www.nih.gov" >National Institutes of Health<span className={classes.ext}>&nbsp;|&nbsp;</span></a></Typography>
+                <Typography><a href="https://www.cancer.gov">National Cancer Institute<span className={classes.ext}>&nbsp;|&nbsp;</span></a></Typography>
+                <Typography><a href="https://www.usa.gov" >USA.gov<span className={classes.ext} aria-label="(link is external)"></span></a></Typography>
 
             </div>
         </div>
         <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
         <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
                 <Typography><a>NIH … Turning Discovery Into Health<sup>®</sup></a></Typography>
-
             </div>
         </div>
       
