@@ -48,34 +48,34 @@ public class RESTControllerTests {
 
 	}
 	
-	@Test
-	public void testAPIPrograms() throws Exception {
-
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/programs"))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("data")))
-				.andDo(document("{ClassName}/{methodName}"));
-
-	}
-	
-	@Test
-	public void testAPIStudies() throws Exception {
-
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/studies"))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("data")))
-				.andDo(document("{ClassName}/{methodName}"));
-
-	}
-	
-	@Test
-	public void testAPICases() throws Exception {
-
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/cases"))
-				.andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString("data")))
-				.andDo(document("{ClassName}/{methodName}"));
-
-	}
-	
+//	@Test
+//	public void testAPIPrograms() throws Exception {
+//
+//		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/programs"))
+//				.andDo(print()).andExpect(status().isOk())
+//				.andExpect(content().string(containsString("data")))
+//				.andDo(document("{ClassName}/{methodName}"));
+//
+//	}
+//	
+//	@Test
+//	public void testAPIStudies() throws Exception {
+//
+//		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/studies"))
+//				.andDo(print()).andExpect(status().isOk())
+//				.andExpect(content().string(containsString("data")))
+//				.andDo(document("{ClassName}/{methodName}"));
+//
+//	}
+//	
+//	@Test
+//	public void testAPICases() throws Exception {
+//
+//		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/rest/cases"))
+//				.andDo(print()).andExpect(status().isOk())
+//				.andExpect(content().string(containsString("data")))
+//				.andDo(document("{ClassName}/{methodName}"));
+//
+//	}
+//	
 }
