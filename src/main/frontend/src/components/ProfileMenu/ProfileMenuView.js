@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, Menu, MenuItem } from '@material-ui/core';
+import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import { AccountCircle as AccountIcon, Person  as PersonIcon} from '@material-ui/icons';
 import { Typography } from "../Wrappers/Wrappers";
 
@@ -24,7 +24,9 @@ export default function ProfileMenu() {
                 onClick={handleClick}
 
             >
+             <Tooltip title="Profile" placement="bottom-end">
                 <AccountIcon />
+            </Tooltip>
             </IconButton>
 
             <Menu
