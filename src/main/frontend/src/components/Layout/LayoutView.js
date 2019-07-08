@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import classnames from 'classnames';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarView';
+import Footer from '../Footer/FooterView';
+
 // import Sidebar from '../Sidebar';
 
 // pages
@@ -19,6 +21,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
       <React.Fragment>
           <Header />
            <NavBar />
+           
           {/* <Sidebar />  */}
           <div className={classnames(classes.content, { [classes.contentShift]: isSidebarOpened })}>
             <Switch>
@@ -28,6 +31,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
               <Route path="/studies" component={Dashboard} />
             </Switch>
           </div>
+          <Footer />
       </React.Fragment>
     </BrowserRouter>
   </React.Fragment>
