@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolationException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -30,6 +31,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import gov.nih.nci.icdc.model.ConfigurationDAO;
 import lombok.extern.slf4j.Slf4j;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -37,6 +39,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RestExceptionHandler {
 
+	
+	@Autowired
+	private ConfigurationDAO config;
+	
 	private static final Logger logger = LogManager.getLogger(RestExceptionHandler.class);
 
 	/**
@@ -146,8 +152,29 @@ public class RestExceptionHandler {
 
 
 	@ExceptionHandler(NoHandlerFoundException.class)
-	public ModelAndView handle(Exception ex) {
-		return new ModelAndView("/index");
+	public Object handleNoHandlerFoundException(NoHandlerFoundException ex) {
+		if(ex.getRequestURL().contains(config.getApiVersion())) {
+			return handleAPINoHandlerFoundException(ex);
+		}else {
+			return new ModelAndView("/index");
+		}
+	}
+
+	/**
+	 * Handle NoHandlerFoundException.
+	 *
+	 * @param ex
+	 * @param headers
+	 * @param status
+	 * @param request
+	 * @return
+	 */
+	protected ResponseEntity<Object> handleAPINoHandlerFoundException(NoHandlerFoundException ex) {
+		ApiError apiError = new ApiError(BAD_REQUEST);
+		apiError.setMessage(
+				String.format("Could not find the %s method for URL %s", ex.getHttpMethod(), ex.getRequestURL()));
+		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
 	}
 
 	/**
@@ -211,14 +238,22 @@ public class RestExceptionHandler {
 		return buildResponseEntity(apiError);
 	}
 
-	@ExceptionHandler({ Exception.class, ResourceNotFoundException.class })
-	protected ResponseEntity<Object>  resourceNotFoundException(Exception ex) {
-		ApiError apiError = new ApiError(BAD_REQUEST);
+	@ExceptionHandler({ Exception.class })
+	protected ResponseEntity<Object>  handleException(Exception ex) {
+		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
 		apiError.setMessage(ex.getMessage());
 		apiError.setDebugMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
 	}
 	
+	
+	@ExceptionHandler({ ResourceNotFoundException.class })
+	protected ResponseEntity<Object>  resourceNotFoundException(ResourceNotFoundException ex) {
+		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
+		apiError.setMessage(ex.getMessage());
+		apiError.setDebugMessage(ex.getMessage());
+		return buildResponseEntity(apiError);
+	}
 	
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	protected ModelAndView noFound(Exception ex) {

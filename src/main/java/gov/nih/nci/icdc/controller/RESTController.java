@@ -133,7 +133,7 @@ public class RESTController {
 		response.setStatus(302);
 	}
 
-	
+
 	
 	@RequestMapping(value = "/test_token", method = RequestMethod.GET)
 	public String testToken(HttpServletRequest request, HttpServletResponse response) {
