@@ -15,7 +15,7 @@ const Stats = ({ classes, theme, ...props }) => {
                 <Paper className={classes.paper}>
                     <Grid container>
                         <Grid item xs={1} ></Grid>
-                        {statsData.stats.map(stat => (
+                        {statsData.stats.map((stat) => (
                             <Grid item xs={12} sm={4} lg={2}>
                                 <Typography variant="headline" color="secondary" size="xxl">
                                     {stat.value}
