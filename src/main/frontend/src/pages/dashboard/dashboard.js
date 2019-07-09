@@ -5,23 +5,13 @@ import {
   withStyles,
 } from "@material-ui/core";
 import Widget from "../../components/Widgets/WidgetView";
+import Stats from "../../components/Stats/StatsView";
 import { Typography } from "../../components/Wrappers/Wrappers";
 
 const Dashboard = ({ classes, theme, ...props }) => {
   return (
     <React.Fragment>
-      <Grid container spacing={32}>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-           <Typography variant="headline" color="secondary" size="xxl">
-              620
-            </Typography>
-            <Typography variant="headline" color="primary">
-              Biospecimen Aliquots
-            </Typography>
-          </Paper>
-        </Grid>
-        </Grid>
+      <Stats />
       <Grid container spacing={32}>
         <Grid item lg={4} md={4} sm={6} xs={12}>
           <Widget

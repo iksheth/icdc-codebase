@@ -24,7 +24,7 @@ const Widget = ({
           props.header
         ) : (
           <React.Fragment>
-            <Typography variant="headline" color="textSecondary">
+            <Typography variant="headline" color="secondary">
               {title}
             </Typography>
           </React.Fragment>
@@ -39,26 +39,6 @@ const Widget = ({
         {children}
       </div>
     </Paper>
-    <Menu
-      id="widget-menu"
-      open={props.isMoreMenuOpen}
-      anchorEl={props.moreButtonRef}
-      onClose={() => props.setMoreMenuOpen(false)}
-      disableAutoFocusItem
-    >
-      <MenuItem>
-        <Typography>Edit</Typography>
-      </MenuItem>
-      <MenuItem>
-        <Typography>Copy</Typography>
-      </MenuItem>
-      <MenuItem>
-        <Typography>Delete</Typography>
-      </MenuItem>
-      <MenuItem>
-        <Typography>Print</Typography>
-      </MenuItem>
-    </Menu>
   </div>
 );
 

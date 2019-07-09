@@ -5,11 +5,12 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  withStyles
+  withStyles,
+  Tooltip
 } from "@material-ui/core";
 import {
   Menu as MenuIcon,
-  NotificationsNone as NotificationsIcon,
+  ColorLens as ColorLensIcon,
   ArrowBack as ArrowBackIcon,
 } from "@material-ui/icons";
 import classNames from "classnames";
@@ -44,9 +45,10 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
         )}
       </IconButton>
       <Link to="/dashboard"><Typography variant="h6" weight="medium" className={classes.logotype}>Dashboard</Typography></Link>
-      <Link to="/programs"><Typography variant="h6" weight="medium" className={classes.logotype}>Programs</Typography></Link>
-      <Link to="/studies"><Typography variant="h6" weight="medium" className={classes.logotype}>Studies</Typography></Link>
-      <Link to="/cases"><Typography variant="h6" weight="medium" className={classes.logotype}>Cases</Typography></Link>
+      <Link to="/programs"><Typography variant="h6" weight="medium" className={classes.logotype}>All Programs</Typography></Link>
+      <Link to="/studies"><Typography variant="h6" weight="medium" className={classes.logotype}>All Studies</Typography></Link>
+      <Link to="/cases"><Typography variant="h6" weight="medium" className={classes.logotype}>All Cases</Typography></Link>
+      <Link to="/cases"><Typography variant="h6" weight="medium" className={classes.logotype}>About</Typography></Link>
 
       <div className={classes.grow} />
       <IconButton
@@ -56,25 +58,9 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
         onClick={props.openNotificationsMenu}
         className={classes.headerMenuButton}
       >
-          <NotificationsIcon classes={{ root: classes.headerIcon }} />
-      </IconButton>
-      <IconButton
-        color="inherit"
-        aria-haspopup="true"
-        aria-controls="mail-menu"
-        onClick={props.openNotificationsMenu}
-        className={classes.headerMenuButton}
-      >
-          <NotificationsIcon classes={{ root: classes.headerIcon }} />
-      </IconButton>
-      <IconButton
-        color="inherit"
-        aria-haspopup="true"
-        aria-controls="mail-menu"
-        onClick={props.openNotificationsMenu}
-        className={classes.headerMenuButton}
-      >
-          <NotificationsIcon classes={{ root: classes.headerIcon }} />
+        <Tooltip title="Light/Dark Theme" placement="bottom-end">
+          <ColorLensIcon classes={{ root: classes.headerIcon }} />
+          </Tooltip>
       </IconButton>
       <ProfileMenu />
     </Toolbar>
@@ -136,8 +122,7 @@ const styles = (theme) => ({
     marginRight: theme.spacing.unit * 2
   },
   headerIcon: {
-    fontSize: 28,
-    color: "rgba(255, 255, 255, 0.35)"
+    fontSize: 28
   },
   headerIconCollapse: {
     color: "white"
