@@ -94,7 +94,7 @@ public class RestExceptionHandler {
 	 */
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
+		ApiError apiError = new ApiError(BAD_REQUEST);
 		apiError.setMessage("Validation error");
 		apiError.addValidationErrors(ex.getBindingResult().getFieldErrors());
 		apiError.addValidationError(ex.getBindingResult().getGlobalErrors());
@@ -223,7 +223,7 @@ public class RestExceptionHandler {
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,
 			WebRequest request) {
-		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
+		ApiError apiError = new ApiError(BAD_REQUEST);
 		apiError.setMessage(String.format("The parameter '%s' of value '%s' could not be converted to type '%s'",
 				ex.getName(), ex.getValue(), ex.getRequiredType().getSimpleName()));
 		apiError.setDebugMessage(ex.getMessage());
@@ -240,7 +240,7 @@ public class RestExceptionHandler {
 
 	@ExceptionHandler({ Exception.class })
 	protected ResponseEntity<Object>  handleException(Exception ex) {
-		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
+		ApiError apiError = new ApiError(BAD_REQUEST);
 		apiError.setMessage(ex.getMessage());
 		apiError.setDebugMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
@@ -249,7 +249,7 @@ public class RestExceptionHandler {
 	
 	@ExceptionHandler({ ResourceNotFoundException.class })
 	protected ResponseEntity<Object>  resourceNotFoundException(ResourceNotFoundException ex) {
-		ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
+		ApiError apiError = new ApiError(BAD_REQUEST);
 		apiError.setMessage(ex.getMessage());
 		apiError.setDebugMessage(ex.getMessage());
 		return buildResponseEntity(apiError);
