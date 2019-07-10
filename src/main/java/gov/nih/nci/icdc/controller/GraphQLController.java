@@ -1,4 +1,4 @@
-	package gov.nih.nci.icdc.controller;
+package gov.nih.nci.icdc.controller;
 
 import java.io.IOException;
 
@@ -23,6 +23,7 @@ import gov.nih.nci.icdc.model.Mocker;
 import gov.nih.nci.icdc.service.GraphQLProvider;
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 import graphql.language.Document;
+import graphql.language.OperationDefinition;
 import graphql.parser.Parser;
 
 @RestController
@@ -41,7 +42,6 @@ public class GraphQLController {
 	public static final Gson GSON = new Gson();
 
 	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.GET)
-	@ResponseBody
 	public void getGraphQLResponseByGET(HttpEntity<String> httpEntity, HttpServletResponse response)
 			throws IOException, UnirestException {
 
@@ -59,54 +59,57 @@ public class GraphQLController {
 		String reqBody = httpEntity.getBody().toString();
 		Gson gson = new Gson();
 		JsonObject jsonObject = gson.fromJson(reqBody, JsonObject.class);
-		String sdl = "";
-		if (jsonObject.has("query") && config.isAllowGraphQLQuery()) {
-			sdl = new String(jsonObject.get("query").getAsString().getBytes(), "UTF-8");
-		}
+		String sdl = new String(jsonObject.get("query").getAsString().getBytes(), "UTF-8");
 
-		if (jsonObject.has("mutation") && config.isAllowGraphQLMutation()) {
-			sdl = new String(jsonObject.get("mutation").getAsString().getBytes(), "UTF-8");
-		}
-
-		// mock data
-		Mocker mocker = new Mocker();
-		String responseText = "";
-		if (("").equals(sdl)) {
-			throw new HttpRequestMethodNotSupportedException("Invalid Graphql query");
-		} else {
-			if (sdl.contains("dashboard(")) {
-				responseText = mocker.getDashboard();
-			} else if (sdl.contains("programs(")) {
-				responseText = mocker.getPrograms();
-			} else if (sdl.contains("program_study(")) {
-				responseText = mocker.getProgramStudy();
-			} else if (sdl.contains("studies(")) {
-				responseText = mocker.getStudies();
-			} else if (sdl.contains("study_detail(")) {
-				responseText = mocker.getStudyDetail();
-			} else if (sdl.contains("cases(")) {
-				responseText = mocker.getCases();
-			} else if (sdl.contains("case_detail(")) {
-				responseText = mocker.getCaseDetail();
-			} else if (sdl.contains("landing(")) {
-				responseText = mocker.getLanding();
-			} else {
-				if (isvalidQraphQL(sdl)) {
-					responseText = neo4jService.query(sdl);
-				} else {
-					throw new UnirestException	("Invalid Graphql query");
-				}
-
-			}
-		}
-		return responseText;
-
-	}
-
-	private boolean isvalidQraphQL(String requestQuery) {
 		Parser parser = new Parser();
-		Document document = parser.parseDocument(requestQuery);
-		return graphQLService.isVaild(document);
+		Document document = parser.parseDocument(sdl);
+		OperationDefinition def = (OperationDefinition) document.getDefinitions().get(0);
+
+		if ((def.getOperation().toString().toLowerCase().equals("query") && config.isAllowGraphQLQuery())
+				|| (def.getOperation().toString().toLowerCase().equals("mutation")
+						&& config.isAllowGraphQLMutation())) {
+
+			// mock data
+			Mocker mocker = new Mocker();
+			String responseText = "";
+			if (("").equals(sdl)) {
+				throw new HttpRequestMethodNotSupportedException("Invalid Graphql query");
+			} else {
+				if (sdl.contains("dashboard(")) {
+					responseText = mocker.getDashboard();
+				} else if (sdl.contains("programs(")) {
+					responseText = mocker.getPrograms();
+				} else if (sdl.contains("program_study(")) {
+					responseText = mocker.getProgramStudy();
+				} else if (sdl.contains("studies(")) {
+					responseText = mocker.getStudies();
+				} else if (sdl.contains("study_detail(")) {
+					responseText = mocker.getStudyDetail();
+				} else if (sdl.contains("cases(")) {
+					responseText = mocker.getCases();
+				} else if (sdl.contains("case_detail(")) {
+					responseText = mocker.getCaseDetail();
+				} else if (sdl.contains("landing(")) {
+					responseText = mocker.getLanding();
+				} else {
+					//if (isvalidQraphQL(sdl)) {
+						responseText = neo4jService.query(sdl);
+					//} else {
+					//	throw new UnirestException("Invalid Graphql query");
+					//}
+				}
+				return responseText;
+			}
+		} else {
+			throw new UnirestException("Invalid Graphql query");
+		}
+
 	}
+
+//	private boolean isvalidQraphQL(String requestQuery) {
+//		Parser parser = new Parser();
+//		Document document = parser.parseDocument(requestQuery);
+//		return graphQLService.isVaild(document);
+//	}
 
 }
