@@ -8,8 +8,8 @@ import nciLogo from '../../assets/nci_logo.svg';
 
 const Footer = ({ classes }) => (
     <footer className={classes.footerComponent}>
-        <div className="footerRow">
-            <div className="footerRowSection">
+        <div className={classes.footerRow}>
+            <div className={classes.footerRowSection}>
                 <ul>
                     <li><Typography variant="h6" weight="medium" className={cn(classes.footerText, classes.listHeader)}>About ICDC</Typography></li>
                     <li><Typography className={classes.footerText}>ICDC Team</Typography></li>
@@ -18,7 +18,7 @@ const Footer = ({ classes }) => (
                     <li><Typography className={classes.footerText}>ICDC FAQs</Typography></li>
                 </ul>
             </div>
-            <div className="footerRowSection">
+            <div className={classes.footerRowSection}>
                 <ul>
                     <li><Typography variant="h6" weight="medium" className={cn(classes.footerText, classes.listHeader)}>About the Data</Typography></li>
                     <li><Typography className={classes.footerText}>Data Access Policies</Typography></li>
@@ -26,7 +26,7 @@ const Footer = ({ classes }) => (
                     <li><Typography className={classes.footerText}>Authentication and Saved Data Policy</Typography></li>
                 </ul>
             </div>
-            <div className="footerRowSection">
+            <div className={classes.footerRowSection}>
                 <ul>
                     <li><Typography variant="h6" weight="medium" className={cn(classes.footerText, classes.listHeader)}>Data Submission</Typography></li>
                     <li><Typography className={classes.footerText}>Process and Tools</Typography></li>
@@ -34,21 +34,21 @@ const Footer = ({ classes }) => (
                     <li><Typography className={classes.footerText}>Submission Guide</Typography></li>
                 </ul>
             </div>
-            <div className="footerRowSection">
+            <div className={classes.footerRowSection}>
                 <ul>
-                    <li><Typography variant="h6" weight="medium" className={cn(classes.footerText, classes.listHeader)}>API's and Contact</Typography></li>
+                    <li><Typography variant="h6" weight="medium" className={cn(classes.footerText, classes.listHeader)}>APIs and Contact</Typography></li>
                     <li><Typography className={classes.footerText}>API Usage for Developers</Typography></li>
                     <li><Typography className={classes.footerText}>Contact Us</Typography></li>
                     <li><Typography className={classes.footerText}>External Links</Typography></li>
                 </ul>
             </div>
-            <div className="footerRowSection footerNciColumn">
+            <div className={cn(classes.footerRowSection, classes.footerNciColumn)}>
                 <a href="https://www.cancer.gov/" target="icdc-nci" rel="nofollow">
                     <img className="nciBadge" src={nciLogo} alt="National Cancer Insistitute" />
                 </a>
             </div>
         </div>
-          <div className={classes.footerRow}>
+        <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
             <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
                 <Typography><a title="link to NCI Policies" href="http://www.cancer.gov/global/web/policies" target="icdc-nci">Policies<span className={classes.ext}>&nbsp;|&nbsp;</span></a></Typography>
                 <Typography><a title="link to NCI Accessibility Policies" href="http://www.cancer.gov/global/web/policies/accessibility" target="icdc-nci">Accessibility<span className={classes.ext}>&nbsp;|&nbsp;</span></a></Typography>
@@ -67,7 +67,7 @@ const Footer = ({ classes }) => (
         </div>
         <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
         <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
-                <Typography><a>NIH … Turning Discovery Into Health<sup>®</sup></a></Typography>
+                <Typography><span className={classes.turningNIH}>NIH … Turning Discovery Into Health<sup>®</sup></span></Typography>
             </div>
         </div>
       
@@ -91,12 +91,6 @@ const styles = (theme) => ({
         [theme.breakpoints.down("xs")]: {
             fontSize: 12,
         }
-    },
-    contentJustifyCenter:{
-        justifyContent: 'center',
-        '@media (min-width: 600px)': {
-            justifyContent: 'center'
-        },
     },
     nciLinks: {
         display: 'flex',
@@ -145,119 +139,44 @@ const styles = (theme) => ({
                 textDecoration: 'underline'
             }
         },
+    },
+    footerRow: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '0 auto',
 
-        '& .footerRow': {
-            display: 'flex',
-            flexDirection: 'column',
-            margin: '0 auto',
-
-            '@media (min-width: 600px)': {
-                flexDirection: 'row',
-                justifyContent: 'space-between'
-            },
-
-            '& .footerRowSection': {
-                marginTop: '16px'
-            }
-        },
-
-        '& .footer-stay-in-touch-column': {
-            display: 'flex',
+        '@media (min-width: 600px)': {
             flexDirection: 'row',
-
-            '@media (min-width: 600px)': {
-                flexDirection: 'column',
-                width: '150px'
-            },
-
-            '@media (min-width: 720px)': {
-                width: '200px'
-            },
-
-            '@media (min-width: 960px)': {
-                flexDirection: 'row',
-                width: '300px'
-            }
+            justifyContent: 'space-between'
+        },
+    },
+    footerRowSection: {
+        marginTop: '16px'
+    },
+    turningNIH:{
+        color: '#FFFFFF',
+        textDecoration: 'none',
+    },
+    footerNciColumn: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        '@media (max-width: 600px)': {
+            marginLeft: '20px'
         },
 
-        '& .footerNciColumn': {
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            '@media (max-width: 600px)': {
-                marginLeft: '20px'
-            },
-
-            '@media (min-width: 600px)': {
-                width: '200px'
-            },
-
-            '@media (min-width: 960px)': {
-                width: '300px'
-            },
-
-            '& .nciBadge': {
-                border: '0',
-                height: '40px'
-            },
-
-            '& a.feefo': {
-                marginTop: '16px',
-
-                '& img': {
-                    border: '0',
-                    height: 'auto',
-                    width: '196px'
-                }
-            }
+        '@media (min-width: 600px)': {
+            width: '200px'
         },
 
-        '& .footer-customer-service-list': {
-            '& i': {
-                fontSize: '16px',
-                marginRight: '4px',
-                verticalAlign: 'middle'
-            }
+        '@media (min-width: 960px)': {
+            width: '300px'
         },
 
-        '& .social-links': {
-            '& i': {
-                fontSize: '14px',
-                marginRight: '8px',
-                verticalAlign: 'middle'
-            }
+        '& .nciBadge': {
+            border: '0',
+            height: '40px'
         },
-
-        '& .tc-copy': {
-            fontSize: '12px'
-        },
-
-        '& .tc-links': {
-            display: 'flex',
-            flexDirection: 'column',
-
-            '@media (min-width: 960px)': {
-                flexDirection: 'row'
-            }
-        },
-
-        /* Customizations for WSJ */
-        '& .footer-row.wsj': {
-            '& .footerRowSection': {
-                minWidth: '150px'
-            },
-
-            '@media (min-width: 600px)': {
-                justifyContent: 'flex-start'
-            }
-        },
-
-        // TODO Should this live elsewhere?
-        '@media (max-width: 959px)': {
-            '& .hide-lt-md': {
-                display: 'none'
-            }
-        }
     },
 
     footerBar: {
@@ -271,20 +190,11 @@ const styles = (theme) => ({
         justifyContent: 'center',
         boxSizing: 'border-box',
         padding: '14px',
-        marginTop: '48px',
-
-        '& .footer-bar-text': {
-            fontSize: '12px',
-            lineHeight: '1.2',
-            paddingLeft: '60px',
-            paddingRight: '60px',
-            position: 'relative',
-            margin: '0',
-            '@media (min-width: 600px)': {
-                fontSize: '14px'
-            }
-        }
-    }
+        marginTop: '48px'
+    },
+    contentJustifyCenter:{
+        justifyContent: 'center',
+    },
 });
 
 Footer.propTypes = {

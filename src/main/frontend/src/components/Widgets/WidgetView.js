@@ -2,8 +2,6 @@ import React from "react";
 import classnames from "classnames";
 import {
   Paper,
-  Menu,
-  MenuItem,
   withStyles
 } from "@material-ui/core";
 import Typography from "@material-ui/core/es/Typography/Typography";
