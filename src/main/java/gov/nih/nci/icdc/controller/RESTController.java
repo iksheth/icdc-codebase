@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,7 +36,7 @@ public class RESTController {
 
 	@Autowired
 	private ConfigurationDAO config;
-
+	@CrossOrigin
 	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	@ResponseBody
 	public String ping(HttpServletRequest request, HttpServletResponse response) {
@@ -44,6 +45,7 @@ public class RESTController {
 	}
 
 	@ApiOperation(value = "Get list of programs")
+	@CrossOrigin
 	@RequestMapping(value = "/v1/rest/programs", method = RequestMethod.GET)
 	@ResponseBody
 	public String getPrograms(HttpServletRequest request, HttpServletResponse response) throws UnirestException {
@@ -54,6 +56,7 @@ public class RESTController {
 	}
 
 	@ApiOperation(value = "Get list of studies by program id")
+	@CrossOrigin
 	@RequestMapping(value = "/v1/rest/program/{id}/studies", method = RequestMethod.GET)
 	@ResponseBody
 	public String getProgramStudies(@ApiParam(value = "program_id", required = true) @PathVariable String id,
@@ -63,6 +66,7 @@ public class RESTController {
 	}
 
 	@ApiOperation(value = "Get list of studies")
+	@CrossOrigin
 	@RequestMapping(value = "/v1/rest/studies", method = RequestMethod.GET)
 	@ResponseBody
 	public String getStudies(HttpServletRequest request, HttpServletResponse response) throws UnirestException {
@@ -75,6 +79,7 @@ public class RESTController {
 	}
 
 	@ApiOperation(value = "Get Cases by study id")
+	@CrossOrigin
 	@RequestMapping(value = "/v1/rest/study/{id}/cases", method = RequestMethod.GET)
 	@ResponseBody
 	public String getStudyCases(@ApiParam(value = "study_id", required = true) @PathVariable String id,
@@ -84,6 +89,7 @@ public class RESTController {
 	}
 
 	@ApiOperation(value = "Get list of cases")
+	@CrossOrigin
 	@RequestMapping(value = "/v1/rest/cases", method = RequestMethod.GET)
 	@ResponseBody
 	public String getCases(HttpServletRequest request, HttpServletResponse response) throws UnirestException {
@@ -95,6 +101,7 @@ public class RESTController {
 	}
 
 	@ApiOperation(value = "Get API version")
+	@CrossOrigin
 	@RequestMapping(value = "/api/version", method = RequestMethod.GET)
 	public String getAPIVersion(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("hit end point:/api/version ");
@@ -103,6 +110,7 @@ public class RESTController {
 	
 	
 	@ApiOperation(value = "Get data model version")
+	@CrossOrigin
 	@RequestMapping(value = "/data_model/version", method = RequestMethod.GET)
 	public String getDataModelVersion(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("hit end point:/data_model/version ");
