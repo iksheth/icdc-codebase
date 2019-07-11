@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,14 +41,16 @@ public class GraphQLController {
 	private GraphQLProvider graphQLService;
 
 	public static final Gson GSON = new Gson();
-
+	
+	@CrossOrigin
 	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.GET)
 	public void getGraphQLResponseByGET(HttpEntity<String> httpEntity, HttpServletResponse response)
 			throws IOException, UnirestException {
 
 		throw new UnirestException("Could not find the GET method for URL /ICDC/v1/graphql/");
 	}
-
+	
+	@CrossOrigin
 	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.POST)
 	@ResponseBody
 	public String getGraphQLResponse(HttpEntity<String> httpEntity, HttpServletResponse response)
