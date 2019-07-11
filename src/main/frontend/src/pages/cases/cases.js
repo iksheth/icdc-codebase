@@ -14,7 +14,7 @@ const Cases = ({ classes, theme, ...props }) => {
       {/* Start of case view conatiner*/}
       <div className={classes.caseCardContainer}>
       <Widget
-                title="ALL CASES > #0402 (Molly-MCD)"
+                title="Case Detail #COTC007B1234: Molly (MM)"
                 upperTitle
                 bodyClass={classes.fullHeightBody}
                 className={classes.card}
@@ -91,7 +91,7 @@ const Cases = ({ classes, theme, ...props }) => {
                         <Typography weight="bold">Disease</Typography>
                       </Grid>
                       <Grid item xs={8}>
-                        <Typography>Malignanat Lymphoma </Typography>
+                        <Typography>Malignant Lymphoma </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -103,7 +103,7 @@ const Cases = ({ classes, theme, ...props }) => {
                         <Typography weight="bold">Stage of Disease</Typography>
                       </Grid>
                       <Grid item xs={8}>
-                        <Typography>Va</Typography>
+                        <Typography>IVB</Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -127,7 +127,7 @@ const Cases = ({ classes, theme, ...props }) => {
                         <Typography weight="bold">Primary Site</Typography>
                       </Grid>
                       <Grid item xs={8}>
-                        <Typography>Lymph Node</Typography>
+                        <Typography>LYMPH NODE</Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -139,7 +139,7 @@ const Cases = ({ classes, theme, ...props }) => {
                         <Typography weight="bold">Histology/Cytology</Typography>
                       </Grid>
                       <Grid item xs={8}>
-                        <Typography>Cytology= large cell lymphomia</Typography>
+                        <Typography>Cytology = large cell lymphomia</Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -148,7 +148,7 @@ const Cases = ({ classes, theme, ...props }) => {
                   <Grid item xs={12}>
                     <Grid container spacing={8}>
                       <Grid item xs={4}>
-                        <Typography weight="bold">Historical Grade</Typography>
+                        <Typography weight="bold">Histological Grade</Typography>
                       </Grid>
                       <Grid item xs={8}>
                         <Typography>Null</Typography>
@@ -181,7 +181,7 @@ const Cases = ({ classes, theme, ...props }) => {
                   <Typography weight="bold">Assigned to Study</Typography>
                 </Grid>
                 <Grid item xs={8}>
-                  <Typography>COTC 007B</Typography>
+                  <Typography>COTC007B</Typography>
                 </Grid>
               </Grid>
             </Grid>
@@ -205,7 +205,7 @@ const Cases = ({ classes, theme, ...props }) => {
                   <Typography weight="bold">Assigned to Cohort</Typography>
                 </Grid>
                 <Grid item xs={8}>
-                  <Typography>NSC 70674450mg/m/day</Typography>
+                  <Typography>NSC 70674450mg/m<sup>2</sup>/day</Typography>
                 </Grid>
               </Grid>
             </Grid>
@@ -272,16 +272,16 @@ const Cases = ({ classes, theme, ...props }) => {
             <Grid item xs={12}>
               <Grid container spacing={8}>
                 <Grid item xs={4}>
-                  <Typography weight="bold">Primary Data Site</Typography>
+                  <Typography weight="bold">TBD</Typography>
                 </Grid>
                 <Grid item xs={8}>
-                  <Typography>LN</Typography>
+                  <Typography></Typography>
                 </Grid>
               </Grid>
             </Grid>
             {/* End of Row  */}
             {/* Start of Row  */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Grid container spacing={8}>
                 <Grid item xs={4}>
                   <Typography weight="bold">Disease Term</Typography>
@@ -290,10 +290,10 @@ const Cases = ({ classes, theme, ...props }) => {
                   <Typography>Malignant Lymphoma</Typography>
                 </Grid>
               </Grid>
-            </Grid>
+            </Grid> */}
             {/* End of Row  */}
             {/* Start of Row  */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Grid container spacing={8}>
                 <Grid item xs={4}>
                   <Typography weight="bold">Date of Confirmation History</Typography>
@@ -302,10 +302,10 @@ const Cases = ({ classes, theme, ...props }) => {
                   <Typography>07/10/11</Typography>
                 </Grid>
               </Grid>
-            </Grid>
+            </Grid> */}
             {/* End of Row  */}
             {/* Start of Row  */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Grid container spacing={8}>
                 <Grid item xs={4}>
                   <Typography weight="bold">Date of Informed Consent</Typography>
@@ -314,10 +314,10 @@ const Cases = ({ classes, theme, ...props }) => {
                   <Typography>10/24/19</Typography>
                 </Grid>
               </Grid>
-            </Grid>
+            </Grid> */}
             {/* End of Row  */}
             {/* Start of Row  */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Grid container spacing={8}>
                 <Grid item xs={4}>
                   <Typography weight="bold">Cohort</Typography>
@@ -326,7 +326,7 @@ const Cases = ({ classes, theme, ...props }) => {
                   <Typography>28</Typography>
                 </Grid>
               </Grid>
-            </Grid>
+            </Grid> */}
             {/* End of Row  */}
             </Grid>
             {/* End of Study data Grid */}
