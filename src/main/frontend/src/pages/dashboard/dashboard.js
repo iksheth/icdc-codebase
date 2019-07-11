@@ -1,12 +1,10 @@
 import React from "react";
 import {
   Grid,
-  Paper,
   withStyles,
 } from "@material-ui/core";
 import Widget from "../../components/Widgets/WidgetView";
 import Stats from "../../components/Stats/StatsView";
-import { Typography } from "../../components/Wrappers/Wrappers";
 
 const Dashboard = ({ classes, theme, ...props }) => {
   return (

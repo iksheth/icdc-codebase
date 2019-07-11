@@ -12,6 +12,13 @@ const Cases = ({ classes, theme, ...props }) => {
     <React.Fragment>
       <Stats />
       {/* Start of case view conatiner*/}
+      <div className={classes.caseCardContainer}>
+      <Widget
+                title="ALL CASES > #0402 (Molly-MCD)"
+                upperTitle
+                bodyClass={classes.fullHeightBody}
+                className={classes.card}
+              >
       <Grid container spacing={32}>
         <Grid item lg={6} md={6} sm={6} xs={12}>
           {/* Start of case view left grid*/}
@@ -327,6 +334,8 @@ const Cases = ({ classes, theme, ...props }) => {
         </Grid>
         {/* End of case view right grid*/}
       </Grid>
+      </Widget>
+      </div>
       {/* End of case view conatiner*/}
     </React.Fragment>
   );
@@ -337,6 +346,9 @@ const styles = (theme) => ({
     minHeight: "100%",
     display: "flex",
     flexDirection: "column"
+  },
+  caseCardContainer:{
+    marginTop: '32px'
   },
   paper: {
     textAlign: 'center'
