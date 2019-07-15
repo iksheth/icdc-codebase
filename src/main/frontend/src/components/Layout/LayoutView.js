@@ -5,30 +5,32 @@ import classnames from 'classnames';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarView';
 import Footer from '../Footer/FooterView';
-
 // import Sidebar from '../Sidebar';
 
 // pages
 import Dashboard from '../../pages/dashboard/dashboard';
 import Cases from '../../pages/cases/cases';
 import Programs from '../../pages/programs/programs';
+import modelPage from '../../pages/modelPage/modelPageView';
 
 const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
   <React.Fragment>
     <CssBaseline />
-    {/* Replace /ICDC this with env varaible */}
     <BrowserRouter>
       <React.Fragment>
           <Header />
            <NavBar />
            
           {/* <Sidebar />  */}
+          {/* Reminder: Ajay need to replace the ICDC with env variable and change build npm to read env variable*/}
           <div className={classnames(classes.content, { [classes.contentShift]: isSidebarOpened })}>
             <Switch>
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/cases" component={Cases} />
-              <Route path="/programs" component={Programs} />
-              <Route path="/studies" component={Dashboard} />
+              <Route path="/ICDC/dashboard" component={Dashboard} />
+              <Route path="/ICDC/cases" component={Cases} />
+              <Route path="/ICDC/programs" component={Programs} />
+              <Route path="/ICDC/studies" component={Dashboard} />
+              <Route path="/ICDC/modelPage" component={modelPage} />
+
             </Switch>
           </div>
           <Footer />

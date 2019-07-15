@@ -41,8 +41,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
               <div className={classes.fakeToolbar} />
           </Widget>
         </Grid>
-      </Grid>
-      
+      </Grid>  
     </React.Fragment>
   );
 };
