@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
   
 </head>
-<body scroll="no" class="hashover" style="overflow: hidden;">
+<body>
   <%@ include file="index.html" %>
 
 </body>
