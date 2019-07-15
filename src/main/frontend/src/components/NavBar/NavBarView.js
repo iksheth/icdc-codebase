@@ -42,11 +42,12 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
           />
         )}
       </IconButton>
-      <Link className={classes.link} to="/dashboard"><Typography variant="h6" weight="medium" className={classes.logotype}>Dashboard</Typography></Link>
-      <Link className={classes.link} to="/programs"><Typography variant="h6" weight="medium" className={classes.logotype}>All Programs</Typography></Link>
-      <Link className={classes.link} to="/studies"><Typography variant="h6" weight="medium" className={classes.logotype}>All Studies</Typography></Link>
-      <Link className={classes.link} to="/cases"><Typography variant="h6" weight="medium" className={classes.logotype}>All Cases</Typography></Link>
-      <Link className={classes.link} to="/cases"><Typography variant="h6" weight="medium" className={classes.logotype}>About</Typography></Link>
+      {/* Reminder: Ajay will to replace the ICDC with env variable and change build npm to read env variable*/}
+      <Link className={classes.link} to="/ICDC/dashboard"><Typography variant="h6" weight="medium" className={classes.logotype}>Dashboard</Typography></Link>
+      <Link className={classes.link} to="/ICDC/programs"><Typography variant="h6" weight="medium" className={classes.logotype}>All Programs</Typography></Link>
+      <Link className={classes.link} to="/ICDC/studies"><Typography variant="h6" weight="medium" className={classes.logotype}>All Studies</Typography></Link>
+      <Link className={classes.link} to="/ICDC/cases"><Typography variant="h6" weight="medium" className={classes.logotype}>All Cases</Typography></Link>
+      <Link className={classes.link} to="/ICDC/cases"><Typography variant="h6" weight="medium" className={classes.logotype}>About</Typography></Link>
 
       <div className={classes.grow} />
       <IconButton
