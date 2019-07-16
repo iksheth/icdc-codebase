@@ -41,7 +41,7 @@ public class GraphQLController {
 	private GraphQLProvider graphQLService;
 
 	public static final Gson GSON = new Gson();
-	
+
 	@CrossOrigin
 	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.GET)
 	public void getGraphQLResponseByGET(HttpEntity<String> httpEntity, HttpServletResponse response)
@@ -49,7 +49,7 @@ public class GraphQLController {
 
 		throw new UnirestException("Could not find the GET method for URL /ICDC/v1/graphql/");
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping(value = "/v1/graphql/", method = RequestMethod.POST)
 	@ResponseBody
@@ -72,35 +72,16 @@ public class GraphQLController {
 				|| (def.getOperation().toString().toLowerCase().equals("mutation")
 						&& config.isAllowGraphQLMutation())) {
 
-			// mock data
-			Mocker mocker = new Mocker();
 			String responseText = "";
 			if (("").equals(sdl)) {
 				throw new HttpRequestMethodNotSupportedException("Invalid Graphql query");
 			} else {
-				if (sdl.contains("dashboard(")) {
-					responseText = mocker.getDashboard();
-				} else if (sdl.contains("programs(")) {
-					responseText = mocker.getPrograms();
-				} else if (sdl.contains("program_study(")) {
-					responseText = mocker.getProgramStudy();
-				} else if (sdl.contains("studies(")) {
-					responseText = mocker.getStudies();
-				} else if (sdl.contains("study_detail(")) {
-					responseText = mocker.getStudyDetail();
-				} else if (sdl.contains("cases(")) {
-					responseText = mocker.getCases();
-				} else if (sdl.contains("case_detail(")) {
-					responseText = mocker.getCaseDetail();
-				} else if (sdl.contains("landing(")) {
-					responseText = mocker.getLanding();
-				} else {
-					//if (isvalidQraphQL(sdl)) {
-						responseText = neo4jService.query(sdl);
-					//} else {
-					//	throw new UnirestException("Invalid Graphql query");
-					//}
-				}
+
+				// if (isvalidQraphQL(sdl)) {
+				responseText = neo4jService.query(sdl);
+				// } else {
+				// throw new UnirestException("Invalid Graphql query");
+				// }
 				return responseText;
 			}
 		} else {
