@@ -36,7 +36,7 @@ const Footer = ({ classes }) => (
             </div>
             <div className={classes.footerRowSection}>
                 <ul>
-                    <li><Typography variant="h6" weight="medium" className={cn(classes.footerText, classes.listHeader)}>APIs and Contact</Typography></li>
+                    <li><Typography variant="h6" weight="medium" className={cn(classes.footerText, classes.listHeader)}>APIs and Contacts</Typography></li>
                     <li><Typography className={classes.footerText}>API Usage for Developers</Typography></li>
                     <li><Typography className={classes.footerText}>Contact Us</Typography></li>
                     <li><Typography className={classes.footerText}>External Links</Typography></li>
@@ -66,7 +66,7 @@ const Footer = ({ classes }) => (
             </div>
         </div>
         <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
-        <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
+        <div className={cn(classes.extraPadding, classes.nciLinks, classes.contentJustifyCenter)}>
                 <Typography><span className={classes.turningNIH}>NIH … Turning Discovery Into Health<sup>®</sup></span></Typography>
             </div>
         </div>
@@ -79,6 +79,12 @@ const styles = (theme) => ({
     ext:{
         '@media (max-width: 600px)': {
             display: 'none'
+        },
+    },
+    extraPadding:{
+        marginTop: '20px',
+        '@media (max-width: 600px)': {
+            marginTop: '0px',
         },
     },
     footerText: {
@@ -154,6 +160,7 @@ const styles = (theme) => ({
         marginTop: '16px'
     },
     turningNIH:{
+        fontSize:'16px',
         color: '#FFFFFF',
         textDecoration: 'none',
     },
