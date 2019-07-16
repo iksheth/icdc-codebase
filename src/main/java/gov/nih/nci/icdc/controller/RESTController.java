@@ -112,7 +112,7 @@ public class RESTController {
 	@ResponseBody
 	public String getCases(HttpServletRequest request, HttpServletResponse response) throws UnirestException {
 		logger.info("hit end point:/v1/rest/cases ");
-		String graphQL = "query "+"{{case{\n" + 
+		String graphQL = "query "+"{case{\n" + 
 				"    patient_id\n" + 
 				"    patient_first_name\n" + 
 				"    crf_id\n" + 
@@ -194,7 +194,7 @@ public class RESTController {
 				"        date_of_best_response\n" + 
 				"    }\n" + 
 				"  }\n" + 
-				"}}";
+				"}";
 		return neo4jService.query(graphQL);
 	}
 
