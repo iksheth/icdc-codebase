@@ -25,6 +25,8 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
           {/* Reminder: Ajay need to replace the ICDC with env variable and change build npm to read env variable*/}
           <div className={classnames(classes.content, { [classes.contentShift]: isSidebarOpened })}>
             <Switch>
+              <Route exact path="/ICDC/" component={Dashboard} />
+              <Route exact path="/" component={Dashboard} />
               <Route path="/ICDC/dashboard" component={Dashboard} />
               <Route path="/ICDC/cases" component={Cases} />
               <Route path="/ICDC/programs" component={Programs} />
