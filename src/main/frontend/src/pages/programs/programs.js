@@ -6,57 +6,27 @@ import {
 } from "@material-ui/core";
 import Widget from "../../components/Widgets/WidgetView";
 import { Typography } from "../../components/Wrappers/Wrappers";
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+
+const GET_DOGS = gql`{
+  numberOfStudies
+}
+`;
 
 const Programs = ({ classes, theme, ...props }) => {
   return (
-    <React.Fragment>
-      <Grid container spacing={32}>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-           <Typography variant="headline" color="secondary" size="xxl">
-             This is a programs page
-            </Typography>
-            <Typography variant="headline" color="primary">
-             This is a programs page
-            </Typography>
-          </Paper>
-        </Grid>
-        </Grid>
-      <Grid container spacing={32}>
-        <Grid item lg={4} md={4} sm={6} xs={12}>
-          <Widget
-            title="Studies"
-            upperTitle
-            bodyClass={classes.fullHeightBody}
-            className={classes.card}
-          >
-          </Widget>
-        </Grid>
-        <Grid item lg={4} md={4} sm={6} xs={12}>
-          <Widget
-            title="Breed"
-            upperTitle
-            bodyClass={classes.fullHeightBody}
-            className={classes.card}
-          >
-                       <div className={classes.fakeToolbar} />
-
-          </Widget>
-        </Grid>
-        <Grid item lg={4} md={4} sm={6} xs={12}>
-          <Widget
-            title="Diagnosis"
-            upperTitle
-            bodyClass={classes.fullHeightBody}
-            className={classes.card}
-          >
-              <div className={classes.fakeToolbar} />
-          </Widget>
-        </Grid>
-      </Grid>
-      
-    </React.Fragment>
-  );
+    <Query query={GET_DOGS}>
+    {({ loading, error, data }) => {
+      if (loading) return <div>Fetching</div>
+      if (error) return <div>Error</div>
+      const linksToRender = data.numberOfStudies
+      return (
+       <div>{linksToRender}</div>
+      )
+    }}
+    </Query>
+  )
 };
 
 const styles = (theme) => ({
