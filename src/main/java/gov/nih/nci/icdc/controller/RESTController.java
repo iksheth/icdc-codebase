@@ -112,7 +112,7 @@ public class RESTController {
 	@ResponseBody
 	public String getCases(HttpServletRequest request, HttpServletResponse response) throws UnirestException {
 		logger.info("hit end point:/v1/rest/cases ");
-		String graphQL = "query "+"{case{\n" + 
+		String graphQL = "query "+"{  case{\n" + 
 				"    patient_id\n" + 
 				"    patient_first_name\n" + 
 				"    crf_id\n" + 
@@ -173,7 +173,7 @@ public class RESTController {
 				"        crf_id\n" + 
 				"    }\n" + 
 				"    off_study{\n" + 
-				"        document_number\n" + 
+				"       document_number\n" + 
 				"        date_off_study\n" + 
 				"        reason_off_study\n" + 
 				"        date_of_disease_progression\n" + 
