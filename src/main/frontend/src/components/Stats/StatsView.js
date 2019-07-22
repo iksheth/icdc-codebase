@@ -5,31 +5,66 @@ import {
     withStyles,
 } from "@material-ui/core";
 import { Typography } from "../Wrappers/Wrappers";
-import statsData from "./statsMockData";
+import { Query } from 'react-apollo';
+import { GET_STATS } from './StatsController';
 
 
 const Stats = ({ classes, theme, ...props }) => {
     return (
+        <Query query={GET_STATS}>
+            {({data}) =>
         <Grid container spacing={32}>
             <Grid item xs={12}>
                 <Paper className={classes.paper}>
                     <Grid container>
                         <Grid item xs={1} ></Grid>
-                        {statsData.stats.map((stat) => (
                             <Grid item xs={12} sm={4} lg={2}>
                                 <Typography variant="headline" color="secondary" size="xxl">
-                                    {stat.value}
+                                {data.numberOfStudies?data.numberOfStudies:0}          
                                 </Typography>
                                 <Typography variant="headline" color="primary">
-                                    {stat.title}
+                                  Studies
                                 </Typography>
                             </Grid>
-                        ))}
-                        <Grid item xs={1}></Grid>
+                            <Grid item xs={12} sm={4} lg={2}>
+                                <Typography variant="headline" color="secondary" size="xxl">
+                                {data.numberOfCases?data.numberOfCases:0}          
+                                </Typography>
+                                <Typography variant="headline" color="primary">
+                                  Cases
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={4} lg={2}>
+                                <Typography variant="headline" color="secondary" size="xxl">
+                                {data.numberOfSamples?data.numberOfSamples:0}          
+                                </Typography>
+                                <Typography variant="headline" color="primary">
+                                  Samples
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={4} lg={2}>
+                                <Typography variant="headline" color="secondary" size="xxl">
+                                {data.numberOfFiles?data.numberOfFiles:0}          
+                                </Typography>
+                                <Typography variant="headline" color="primary">
+                                  Files
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} sm={4} lg={2}>
+                                <Typography variant="headline" color="secondary" size="xxl">
+                                {data.numberOfBiospecimenAliquots?data.numberOfBiospecimenAliquots:0}          
+                                </Typography>
+                                <Typography variant="headline" color="primary">
+                                  Biospecimen Aliquots
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={1}></Grid>
                     </Grid>
                 </Paper>
             </Grid>
         </Grid>
+            }
+        </Query>
     );
 };
 
