@@ -27,11 +27,11 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
             <Switch>
               <Route exact path="/ICDC/" component={Dashboard} />
               <Route exact path="/" component={Dashboard} />
-              <Route path="/ICDC/dashboard" component={Dashboard} />
-              <Route path="/ICDC/cases" component={Cases} />
-              <Route path="/ICDC/programs" component={Programs} />
-              <Route path="/ICDC/studies" component={Dashboard} />
-              <Route path="/ICDC/modelPage" component={modelPage} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/cases" component={Cases} />
+              <Route path="/programs" component={Programs} />
+              <Route path="/studies" component={Dashboard} />
+              <Route path="/modelPage" component={modelPage} />
 
             </Switch>
           </div>
