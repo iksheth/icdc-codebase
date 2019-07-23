@@ -10,7 +10,7 @@ const theme = createMuiTheme({...themes.default, ...overrides});
 const App = () => (
     <MuiThemeProvider theme={theme}>
       {/* Reminder: Ajay need to replace the ICDC with env variable and change build npm to read env variable*/}
-      <BrowserRouter basename='/ICDC'>
+      <BrowserRouter>
       <Switch>
         <Route path="/" component={Layout} />
         {/* <Route component={Error} /> */}

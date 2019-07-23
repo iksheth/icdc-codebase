@@ -6,10 +6,12 @@ import {
 } from "@material-ui/core";
 import Widget from "../../components/Widgets/WidgetView";
 import { Typography } from "../../components/Wrappers/Wrappers";
+import Stats from "../../components/Stats/StatsView";
 
 const Programs = ({ classes, theme, ...props }) => {
   return (
     <React.Fragment>
+      <Stats />
       <Grid container spacing={32}>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
