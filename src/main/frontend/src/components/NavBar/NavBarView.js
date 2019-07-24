@@ -54,7 +54,8 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
         color="inherit"
         aria-haspopup="true"
         aria-controls="mail-menu"
-        onClick={props.openNotificationsMenu}
+        onClick={()=>{localStorage.getItem('isDarkTheme')?localStorage.removeItem("isDarkTheme"):localStorage.setItem("isDarkTheme", "1");window.location.reload();
+      }}
         className={classes.headerMenuButton}
       >
         <Tooltip title="Light/Dark Theme" placement="bottom-end">

@@ -1,7 +1,9 @@
-import defaultTheme from './default';
+import lightTheme from './default';
+import darkTheme from './dark';
 
 export default {
-  default: defaultTheme
+  light: lightTheme,
+  dark: darkTheme
 };
 
 export const overrides = {
