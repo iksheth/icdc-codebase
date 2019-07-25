@@ -114,7 +114,6 @@ const styles = (theme) => ({
         '-webkit-font-smoothing': 'antialiased',
         background: "#2e2a24",
         color: '#FFFFFF',
-        marginTop: '24px',
         padding: '24px 16px 64px 24px',
         '& ul': {
             listStyle: 'none',
