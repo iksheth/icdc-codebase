@@ -53,7 +53,7 @@ const styles = (theme) => ({
     alignItems: "center"
   },
   widgetRoot: {
-    boxShadow: theme.customShadows.widget
+    // boxShadow: theme.customShadows.widget
   },
   widgetBody: {
     paddingBottom: theme.spacing.unit * 3,
@@ -67,7 +67,8 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
-    overflow: "hidden"
+    overflow: "hidden",
+    background: theme.custom.cardBackGround
   }
 });
 

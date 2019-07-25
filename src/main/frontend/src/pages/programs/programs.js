@@ -68,7 +68,8 @@ const styles = (theme) => ({
     flexDirection: "column"
   },
   paper: {
-    textAlign: 'center'
+    textAlign: 'center',
+    background: theme.custom.cardBackGround
   },
   fakeToolbar: {
     ...theme.mixins.toolbar,
