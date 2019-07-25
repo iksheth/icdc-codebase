@@ -1,40 +1,53 @@
 import React from "react";
-import styled, { ThemeProvider } from 'styled-components';
-import { backgroundColor, textColor } from './theme';
+import { MuiThemeProvider ,createMuiTheme } from '@material-ui/core/styles';
+import themes, { overrides } from '../themes';
+const lightTheme = createMuiTheme({...themes.light, ...overrides});
+const darkTheme = createMuiTheme({...themes.dark, ...overrides});
 
-const ThemeToggleContext = React.createContext();
+const defaultContextData = {
+  dark: false,
+  toggleTheme: () => {}
+};
 
-export const useTheme = () => React.useContext(ThemeToggleContext);
+const ThemeContext = React.createContext(defaultContextData);
+const useTheme = () => React.useContext(ThemeContext);
 
-export const MyThemeProvider = ({ children }) => {
-
+const useEffectDarkMode = () => {
   const [themeState, setThemeState] = React.useState({
-    mode: 'light'
+    dark: false,
+    hasThemeMounted: false
   });
+  React.useEffect(() => {
+    const lsDark = localStorage.getItem("dark") === "true";
+    setThemeState({ ...themeState, dark: lsDark, hasThemeMounted: true });
+  }, []);
 
-  const Wrapper = styled.div`
-    background-color: ${backgroundColor};
-    color: ${textColor};
-  `;
+  return [themeState, setThemeState];
+};
 
-  const toggle = () => {
-    const mode = (themeState.mode === 'light' ? `dark` : `light`);
-    setThemeState({ mode: mode });
+const CustomThemeProvider = ({ children }) => {
+  const [themeState, setThemeState] = useEffectDarkMode();
+
+  const toggleTheme = () => {
+    const dark = !themeState.dark;
+    localStorage.setItem("dark", JSON.stringify(dark));
+    setThemeState({ ...themeState, dark });
   };
 
+  const computedTheme = themeState.dark ? darkTheme : lightTheme;
+
   return (
-    <ThemeToggleContext.Provider value={{ toggle: toggle }}>
-      <ThemeProvider
-        theme={{
-          mode: themeState.mode
+    <MuiThemeProvider theme={computedTheme}>
+      <ThemeContext.Provider
+        value={{
+          dark: themeState.dark,
+          toggleTheme
         }}
       >
-        <Wrapper>
-          {children}
-        </Wrapper>
-      </ThemeProvider>
-    </ThemeToggleContext.Provider>
+        {children}
+      </ThemeContext.Provider>
+    </MuiThemeProvider>
   );
 };
 
-export default ThemeProvider;
+export { CustomThemeProvider, useTheme };

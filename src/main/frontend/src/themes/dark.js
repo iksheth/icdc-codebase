@@ -12,7 +12,8 @@ const darkenRate = 15;
 export default {
   custom: {
     maxContentWidth: '1440px',
-    maxContent:'black'
+    maxContent:'black',
+    bodyBackGround: 'black'
   },
   palette: {
     primary: {

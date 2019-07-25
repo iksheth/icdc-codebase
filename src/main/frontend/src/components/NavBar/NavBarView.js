@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTheme } from "../ThemeContext";
+
 
 import {
   AppBar,
@@ -17,7 +19,11 @@ import classNames from "classnames";
 import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import { Typography } from "../Wrappers/Wrappers";
 
-const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
+
+const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => {
+  const themeState = useTheme();
+
+  return(
   <AppBar position="relative" className={classes.appBar} color="primary">
     <Toolbar className={classes.toolbar}>
       <IconButton
@@ -54,8 +60,7 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
         color="inherit"
         aria-haspopup="true"
         aria-controls="mail-menu"
-        onClick={()=>{localStorage.getItem('isDarkTheme')?localStorage.removeItem("isDarkTheme"):localStorage.setItem("isDarkTheme", "1");window.location.reload();
-      }}
+        onClick={()=>{ themeState.toggleTheme() }}
         className={classes.headerMenuButton}
       >
         <Tooltip title="Light/Dark Theme" placement="bottom-end">
@@ -65,7 +70,8 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
       <ProfileMenu />
     </Toolbar>
   </AppBar>
-);
+  )}
+;
 
 const styles = (theme) => ({
   logotype: {
