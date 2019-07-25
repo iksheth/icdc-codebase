@@ -53,7 +53,7 @@ const styles = (theme) => ({
     alignItems: "center"
   },
   widgetRoot: {
-    boxShadow: theme.customShadows.widget
+    // boxShadow: theme.customShadows.widget
   },
   widgetBody: {
     paddingBottom: theme.spacing.unit * 3,
