@@ -13,7 +13,7 @@ export default {
   custom: {
     maxContentWidth: '1440px',
     maxContent:'black',
-    bodyBackGround: 'black'
+    bodyBackGround: '#4A4A4A'
   },
   palette: {
     primary: {
