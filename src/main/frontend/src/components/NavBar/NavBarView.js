@@ -60,7 +60,7 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => {
         color="inherit"
         aria-haspopup="true"
         aria-controls="mail-menu"
-        onClick={()=>{ themeState.toggleTheme() }}
+        onClick={()=> { themeState.toggleTheme(); }}
         className={classes.headerMenuButton}
       >
         <Tooltip title="Light/Dark Theme" placement="bottom-end">

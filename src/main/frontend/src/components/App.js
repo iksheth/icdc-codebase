@@ -16,7 +16,7 @@ const App = () => {
       </Switch>
     </BrowserRouter>
   </CustomThemeProvider>
-  )
+  );
   };
 
 export default App;
