@@ -67,7 +67,8 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
-    overflow: "hidden"
+    overflow: "hidden",
+    background: theme.custom.cardBackGround
   }
 });
 
