@@ -52,7 +52,7 @@ const Stats = ({ classes, theme, ...props }) => {
                             </Grid>
                             <Grid item xs={12} sm={4} lg={2}>
                                 <Typography variant="headline" color="secondary" size="xxl">
-                                {data.numberOfBiospecimenAliquots?data.numberOfBiospecimenAliquots:0}          
+                                {data.numberOfAliquots?data.numberOfBiospecimenAliquots:0}          
                                 </Typography>
                                 <Typography variant="headline" color="primary">
                                   Biospecimen Aliquots
