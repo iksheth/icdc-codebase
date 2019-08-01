@@ -41,7 +41,7 @@
     "jest-watch-typeahead": "^0.2.1",
     "line-awesome": "icons8/line-awesome",
     "mini-css-extract-plugin": "0.5.0",
-    "mui-datatables": "^2.0.0-beta.58",
+    "mui-datatables": "^2.6.4",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.2.1",
     "postcss-flexbugs-fixes": "4.1.0",

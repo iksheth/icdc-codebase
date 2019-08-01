@@ -10,6 +10,7 @@ import Footer from '../Footer/FooterView';
 // pages
 import Dashboard from '../../pages/dashboard/dashboard';
 import Cases from '../../pages/cases/cases';
+import Studies from '../../pages/studies/studies';
 import Programs from '../../pages/programs/programs';
 import modelPage from '../../pages/modelPage/modelPageView';
 
@@ -30,7 +31,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/cases" component={Cases} />
               <Route path="/programs" component={Programs} />
-              <Route path="/studies" component={Dashboard} />
+              <Route path="/studies" component={Studies} />
               <Route path="/modelPage" component={modelPage} />
 
             </Switch>
