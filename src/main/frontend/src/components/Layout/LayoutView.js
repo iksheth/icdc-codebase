@@ -10,9 +10,10 @@ import Footer from '../Footer/FooterView';
 // pages
 import Dashboard from '../../pages/dashboard/dashboard';
 import Cases from '../../pages/cases/cases';
-import Studies from '../../pages/studies/studies';
+import Studies from '../../pages/studies/studiesController';
 import Programs from '../../pages/programs/programs';
 import modelPage from '../../pages/modelPage/modelPageView';
+import table from '../../pages/table/tableView';
 
 const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
   <React.Fragment>
@@ -33,6 +34,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
               <Route path="/programs" component={Programs} />
               <Route path="/studies" component={Studies} />
               <Route path="/modelPage" component={modelPage} />
+              <Route path="/table" component={table} />
 
             </Switch>
           </div>
