@@ -26,7 +26,7 @@ const Stats = ({ classes, theme, ...props }) => {
                                         </Typography>
                                         <Typography variant="headline" color="primary">
                                             Studies
-                                </Typography>
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={4} lg={2}>
                                         <Typography variant="headline" color="secondary" size="xxl">
@@ -34,7 +34,7 @@ const Stats = ({ classes, theme, ...props }) => {
                                         </Typography>
                                         <Typography variant="headline" color="primary">
                                             Cases
-                                </Typography>
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={4} lg={2}>
                                         <Typography variant="headline" color="secondary" size="xxl">
@@ -42,7 +42,7 @@ const Stats = ({ classes, theme, ...props }) => {
                                         </Typography>
                                         <Typography variant="headline" color="primary">
                                             Samples
-                                </Typography>
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={4} lg={2}>
                                         <Typography variant="headline" color="secondary" size="xxl">
@@ -50,7 +50,7 @@ const Stats = ({ classes, theme, ...props }) => {
                                         </Typography>
                                         <Typography variant="headline" color="primary">
                                             Files
-                                </Typography>
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={12} sm={4} lg={2}>
                                         <Typography variant="headline" color="secondary" size="xxl">
@@ -58,7 +58,7 @@ const Stats = ({ classes, theme, ...props }) => {
                                         </Typography>
                                         <Typography variant="headline" color="primary">
                                             Biospecimen Aliquots
-                                </Typography>
+                                        </Typography>
                                     </Grid>
                                     <Grid item xs={1}></Grid>
                                 </Grid>
