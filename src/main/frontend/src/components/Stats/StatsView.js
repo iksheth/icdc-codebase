@@ -1,4 +1,5 @@
 import React from "react";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import {
     Grid,
     Paper,
@@ -12,7 +13,8 @@ import { GET_STATS } from './StatsController';
 const Stats = ({ classes, theme, ...props }) => {
     return (
         <Query query={GET_STATS}>
-            {({data}) =>
+            {({data, loading, error}) =>{
+                return (loading ? < CircularProgress /> : (error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography> :
         <Grid container spacing={32}>
             <Grid item xs={12}>
                 <Paper className={classes.paper}>
@@ -63,7 +65,10 @@ const Stats = ({ classes, theme, ...props }) => {
                 </Paper>
             </Grid>
         </Grid>
+                )
+                )
             }
+        }
         </Query>
     );
 };

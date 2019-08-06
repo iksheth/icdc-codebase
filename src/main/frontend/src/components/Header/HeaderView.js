@@ -22,7 +22,7 @@ import dctdLogo from '../../assets/nci_dctd.png';
               alt='icdc_logo'
             />
         </div>
-        <div role="button" tabindex="0" className={classes.headerBarHomeButton}><img src={dctdLogo} alt="dctd_logo"/></div>
+        <div role="button" tabIndex="0" className={classes.headerBarHomeButton}><img src={dctdLogo} alt="dctd_logo"/></div>
       </nav>
     </div>
   </div>
@@ -62,8 +62,6 @@ import dctdLogo from '../../assets/nci_dctd.png';
  });
 
  Header.propTypes = {
-  navItems: PropTypes.array.isRequired,
-  dictIcons: PropTypes.object.isRequired,
   navTitle: PropTypes.string,
   activeTab: PropTypes.string,
   onActiveTab: PropTypes.func,
