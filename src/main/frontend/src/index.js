@@ -18,7 +18,7 @@ import { ApolloProvider } from 'react-apollo';
 //   cache: new InMemoryCache(),
 // });
 const client = new ApolloClient({
-  uri: 'https://k9dc.essential-dev.com/v1/graphql/'
+  uri: 'https://caninecommons-dev.cancer.gov/v1/graphql/'
 });
 
 ReactDOM.render(<ApolloProvider client={client}><App /></ApolloProvider>, document.getElementById('root'),
