@@ -11,7 +11,7 @@ const columns = [{ name: "program_id", label: "Program" },
 { name: "clinical_study_name", label: "Study Name" },
 { name: "clinical_study_type", label: "Study Type" },
 { name: "numberOfCases", label: "Cases" },
-]
+];
 
 const options = {
   selectableRows: false,
@@ -25,7 +25,6 @@ const options = {
 };
 
 const Studies = ({ classes, theme, data }) => {
-  console.log(data.studiesByProgram);
   return (
     <React.Fragment>
       <Stats />

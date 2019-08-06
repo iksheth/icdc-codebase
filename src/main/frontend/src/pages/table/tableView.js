@@ -37,7 +37,6 @@ const options = {
 };
 
 const Studies = ({ classes, theme, ...props }) => {
-  console.log(data.studiesByProgram);
   return (
     <React.Fragment>
       <Grid container spacing={32}>

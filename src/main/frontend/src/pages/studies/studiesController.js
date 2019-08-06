@@ -35,7 +35,7 @@ const studiesContainer = ({ classes, theme, ...props }) => {
             {({ data, loading, error }) => {
                 return (loading ? < CircularProgress /> : (error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography> :
                     <Studies data={data} />
-                ))
+                ));
             }
             }
         </Query>
