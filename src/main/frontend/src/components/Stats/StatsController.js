@@ -5,5 +5,6 @@ export const GET_STATS = gql`{
   numberOfCases
   numberOfSamples
   numberOfFiles
+  numberOfAliquots
   }
   `;
