@@ -112,9 +112,22 @@ export default {
         backgroundColor: "white"
       }
     },
+    MUIDataTableHeadCell: {
+      fixedHeader:{
+        backgroundColor: primary,
+        color: 'white'
+      }
+    },
     MuiTableRow: {
       root: {
         height: 56,
+      }
+    },
+    MUIDataTableBodyRow: {
+      root: {
+        '&:nth-child(even)': { 
+          backgroundColor: '#f5f5f5'
+        }
       }
     },
     MuiTableCell: {
