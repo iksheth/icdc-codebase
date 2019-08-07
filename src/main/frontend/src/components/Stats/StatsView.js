@@ -81,7 +81,8 @@ const styles = (theme) => ({
     },
     paper: {
         textAlign: 'center',
-        background: theme.custom.cardBackGround
+        background: theme.custom.cardBackGround,
+        boxShadow: 'none'
     },
 });
 

@@ -6,8 +6,6 @@ import {
 } from "@material-ui/core";
 import { Typography } from "../Wrappers/Wrappers";
 import WarningIcon from '@material-ui/icons/Warning';
-import cn from '../../utils/classNameConcat';
-
 
 
  function PositionedSnackbar({ classes }) {
