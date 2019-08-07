@@ -5,6 +5,7 @@ import {
 } from "@material-ui/core";
 import Widget from "../../components/Widgets/WidgetView";
 import Stats from "../../components/Stats/StatsView";
+import PositionedSnackbar from "../../components/Disclaimer/DisclaimerView"
 import sunburstImage from '../../assets/dashboard/dashboard_sunburst';
 import breedsImage from '../../assets/dashboard/dashboard_breeds';
 import diagnosisImage from '../../assets/dashboard/dashboard_diagnosis.gif';
@@ -110,6 +111,9 @@ const Dashboard = ({ classes, theme, ...props }) => {
           </Widget>
         </Grid>
       </Grid>
+    
+    {/* Addingg diclaimer for Dev */}
+    <PositionedSnackbar />
     </React.Fragment>
   );
 };
