@@ -62,6 +62,15 @@ export default {
         .darken(darkenRate)
         .toHexString()
     },
+    textWhite: {
+      main: "white",
+      light: tinycolor(info)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(info)
+        .darken(darkenRate)
+        .toHexString()
+    },
     text: {
       withbackground: "white",
       primary: "#4A4A4A",
