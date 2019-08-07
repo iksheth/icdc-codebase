@@ -5,6 +5,9 @@ import {
   withStyles
 } from "@material-ui/core";
 import { Typography } from "../Wrappers/Wrappers";
+import WarningIcon from '@material-ui/icons/Warning';
+import cn from '../../utils/classNameConcat';
+
 
 
  function PositionedSnackbar({ classes }) {
@@ -35,7 +38,7 @@ import { Typography } from "../Wrappers/Wrappers";
       ContentProps={{
         "aria-describedby": "message-id"
       }}
-      message={<Typography color="textWhite"><b>Please note:</b>&nbsp;Data is purely representational and does not reflect actual values </Typography>}
+      message={<span className={classes.inline}><WarningIcon className={classes.icon}/><Typography color="textWhite"><b>Please note:</b>&nbsp;Data is purely representational and does not reflect actual values </Typography></span>}
     />
       </Snackbar>
     </div>
@@ -44,7 +47,15 @@ import { Typography } from "../Wrappers/Wrappers";
 
 const styles = {
   warning: {
-      backgroundColor: 'red',
+      backgroundColor: '#FFA000',
+  },
+  icon: {
+    opacity: 0.9,
+    marginRight: '8px',
+    fontSize:'20px'
+  },
+  inline:{
+    display: 'inline-flex'
   }
 };
 
