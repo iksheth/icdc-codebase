@@ -117,6 +117,14 @@ export default {
       fixedHeader:{
         backgroundColor: primary,
         color: 'white'
+      },
+      sortActive: {
+        color: 'white'
+      }
+    },
+    MuiTableSortLabel: {
+      active: {
+        color: 'white'
       }
     },
     MUIDataTableBodyRow: {
