@@ -36,7 +36,7 @@ import WarningIcon from '@material-ui/icons/Warning';
       ContentProps={{
         "aria-describedby": "message-id"
       }}
-      message={<span className={classes.inline}><WarningIcon className={classes.icon}/><Typography color="textWhite"><b>Please note:</b>&nbsp;Data is purely representational and does not reflect actual values </Typography></span>}
+      message={<span className={classes.inline}><WarningIcon className={classes.icon}/><Typography color="textWhite"><b>Please note:</b>&nbsp;Data is purely representational and does not reflect actual values or subjects </Typography></span>}
     />
       </Snackbar>
     </div>
