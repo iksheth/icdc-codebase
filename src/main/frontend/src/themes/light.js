@@ -115,11 +115,21 @@ export default {
     MUIDataTableHeadCell: {
       fixedHeader:{
         backgroundColor: primary,
-        color: 'white'
+        color: 'white',
+        textDecoration: 'underline',
+        fontWeight: '600',
+        textAlign: 'center',
+        fontSize: '18px'
       },
       sortActive: {
         color: 'white'
-      }
+      },
+      toolButton:{
+         cursor: 'pointer',
+         display: 'inline-flex',
+         outline: 'none'
+  
+        }
     },
     MuiTableSortLabel: {
       active: {

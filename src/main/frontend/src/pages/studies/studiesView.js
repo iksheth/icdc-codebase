@@ -6,11 +6,11 @@ import {
 import Stats from "../../components/Stats/StatsView";
 import MUIDataTable from "mui-datatables";
 
-const columns = [{ name: "program_id", label: "Program ^v" },
-{ name: "clinical_study_designation", label: "Study Code ^v" },
-{ name: "clinical_study_name", label: "Study Name ^v" },
-{ name: "clinical_study_type", label: "Study Type ^v" },
-{ name: "numberOfCases", label: "Cases ^v" },
+const columns = [{ name: "program_id", label: "Program" },
+{ name: "clinical_study_designation", label: "Study Code" },
+{ name: "clinical_study_name", label: "Study Name" },
+{ name: "clinical_study_type", label: "Study Type" },
+{ name: "numberOfCases", label: "Cases" },
 ];
 
 const options = {
@@ -22,7 +22,6 @@ const options = {
   download: false,
   viewColumns: false,
   pagination: false,
-  hideSortIcon: true
 };
 
 const Studies = ({ classes, theme, data }) => {
