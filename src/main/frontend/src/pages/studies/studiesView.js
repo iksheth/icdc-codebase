@@ -21,7 +21,7 @@ const options = {
   print: false,
   download: false,
   viewColumns: false,
-  pagination: false
+  pagination: false,
 };
 
 const Studies = ({ classes, theme, data }) => {

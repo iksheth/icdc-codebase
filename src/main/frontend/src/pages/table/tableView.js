@@ -5,8 +5,12 @@ import {
 } from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 
-const columns = ["Program", "Study Code", "Study Name", "Study Type", "Cases"];
-
+const columns = [{ name: "program_id", label: "Program" },
+{ name: "clinical_study_designation", label: "Study Code" },
+{ name: "clinical_study_name", label: "Study Name" },
+{ name: "clinical_study_type", label: "Study Type" },
+{ name: "numberOfCases", label: "Cases" },
+];
 const data = [
   ["COP", "COTC007B", "Preclinical Evaluation of three indenoisquinoline Candidated in Tumor Bearing Dogs", "Clinical Trial", "85"],
   ["COP", "COTC008", "Preclinical Evaluation of three indenoisquinoline Candidated in Tumor Bearing Dogs", "Clinical Trial", "52"],
@@ -42,7 +46,7 @@ const Studies = ({ classes, theme, ...props }) => {
       <Grid container spacing={32}>
         <Grid item xs={12}>
           <MUIDataTable
-            title={"All Studies"}
+            title={"Sample Table"}
             data={data}
             columns={columns}
             options={options}
