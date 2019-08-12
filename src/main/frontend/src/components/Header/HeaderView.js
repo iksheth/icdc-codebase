@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import icdcLogo from '../../assets/logo.png';
-import dctdLogo from '../../assets/nci_dctd.png';
+import dctdLogo from '../../assets/icdc_logo.png';
 
 // import classes from '*.module.sass';
 
@@ -15,6 +15,8 @@ import dctdLogo from '../../assets/nci_dctd.png';
     <div className={classes.root}>
     <div className={classes.headerBar}>
       <nav className={classes.headerBarNavLeft}>
+        <div role="button" tabIndex="0" className={classes.headerBarHomeButton}><img src={dctdLogo} alt="dctd_logo"/></div>
+        <div className={classes.grow} />
         <div className={classes.headerBarNavLogo}>
             <img
               className={classes.headerBarNavLogoImg}
@@ -22,7 +24,6 @@ import dctdLogo from '../../assets/nci_dctd.png';
               alt='icdc_logo'
             />
         </div>
-        <div role="button" tabIndex="0" className={classes.headerBarHomeButton}><img src={dctdLogo} alt="dctd_logo"/></div>
       </nav>
     </div>
   </div>
@@ -38,10 +39,12 @@ import dctdLogo from '../../assets/nci_dctd.png';
       headerBarNavLeft: {
         float: 'left',
         display: 'inline-flex',
+        width: '100vw'
       },
       headerBarNavLogo: {
         padding: '8px 0',
         display: 'inline-block',
+        paddingRight: theme.spacing.unit * 2
       },
       headerBarNavLogoImg: {
         height: '64px',
@@ -56,7 +59,10 @@ import dctdLogo from '../../assets/nci_dctd.png';
         height: '64px',
         margin: 'auto',
         borderLeft: '1px solid #d1d1d1',
-      }
+      },
+      grow: {
+        flexGrow: 3
+      },
       
       
  });
