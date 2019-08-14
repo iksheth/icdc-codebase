@@ -36,6 +36,7 @@ public class RESTController {
 
 	@Autowired
 	private ConfigurationDAO config;
+	
 	@CrossOrigin
 	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	@ResponseBody
@@ -43,6 +44,27 @@ public class RESTController {
 		logger.info("hit end point:/ping");
 		return "pong";
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/v1/idl/update", method = RequestMethod.GET)
+	@ResponseBody
+	public String updateSchema(HttpServletRequest request, HttpServletResponse response) throws UnirestException {
+		String graphQL = " query {  __type(name: \"case\") {\n" + 
+				"    name\n" + 
+				"    fields {\n" + 
+				"      name\n" + 
+				"      type {\n" + 
+				"        name\n" + 
+				"        kind\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"  }}";
+		neo4jService.query(graphQL);
+		
+		return null;
+	}
+
+	
 
 	@ApiOperation(value = "Get list of programs")
 	@CrossOrigin
