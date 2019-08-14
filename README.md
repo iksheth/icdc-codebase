@@ -34,7 +34,7 @@ Back-end provides two types of APIs , GraphQL and REST for purposes.
     │	│	├── frontend			# Front end source files
     │	│	├── java/gov/nih/nci/icdc 	# Back end source files
     │	│	├── resource			# configuration files
-    │	├── webapp				# web html files
+    │	│	└── webapp			# web html files
     │	└── test				# Test scripts
     ├── mvnw   
     ├── mvnw.cmd  
