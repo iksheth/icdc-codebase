@@ -8,7 +8,7 @@ The ICDC will  create a new, dynamic data commons for canine cancer data, includ
 
 
 
-# General Overview and Design Guidelines
+## General Overview and Design Guidelines
 
 ![ Image 1](doc/system.png)
 
@@ -23,7 +23,7 @@ Back-end provides two types of APIs , GraphQL and REST for purposes.
 
 
 
-# Set up
+## Set up
 
 * dependencies 
 
@@ -59,7 +59,7 @@ Use Maven to build the whole project into War file. Details can be found in POM 
 
 
 
-# Front End
+## Front End
 
 After deploy to the tomcat, should able to see the page like this. 
 
@@ -67,7 +67,7 @@ After deploy to the tomcat, should able to see the page like this.
  -<img src="doc/front-end.png" width="80%">
  
 
-# GraphQL Endpoint
+## GraphQL Endpoint
 
 The Graphql endpoints have three components: <domain>, <version> and <query>
 
@@ -108,7 +108,7 @@ The picture below shows how to use POSTMAN to query the GraphQL.
 -<img src="doc/postman.png" width="80%">
 
 
-# REST Endpoint
+## REST Endpoint
 
 The Graphql endpoints have three components: <domain>, <version> and <query>
 
