@@ -87,7 +87,7 @@ After deploy to the tomcat, should able to see the page like this.
 
 ## GraphQL Endpoint
 
-The Graphql endpoints have three components: <domain>, <version> and <query>
+The Graphql endpoints have three components: domain, version and query.
 
 
 	https://domain/<version>/graphql/ 
@@ -128,7 +128,7 @@ The picture below shows how to use POSTMAN to query the GraphQL.
 
 ## REST Endpoint
 
-The Graphql endpoints have three components: <domain>, <version> and <query>
+The Graphql endpoints have three components: domain, version and query.
 
 The formate looks like below:
 
