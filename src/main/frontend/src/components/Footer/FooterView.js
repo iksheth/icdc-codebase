@@ -71,7 +71,7 @@ const Footer = ({ classes }) => (
         </div>
         </div>
         {/* Quick and dirty for adding version number in footer */}
-        <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
+        <div className={cn(classes.footerRow, classes.contentJustifyLeft)}>
         <div className={cn(classes.extraPadding, classes.nciLinks, classes.contentJustifyCenter)}>
                 <Typography><span className={classes.turningNIH}>Version 0.2</span></Typography>
         </div>
@@ -207,6 +207,9 @@ const styles = (theme) => ({
     contentJustifyCenter:{
         justifyContent: 'center',
     },
+    contentJustifyLeft:{
+        justifyContent: 'left',
+    }
 });
 
 Footer.propTypes = {
