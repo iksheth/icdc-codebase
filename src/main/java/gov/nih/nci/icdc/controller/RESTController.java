@@ -36,6 +36,7 @@ public class RESTController {
 
 	@Autowired
 	private ConfigurationDAO config;
+	
 	@CrossOrigin
 	@RequestMapping(value = "/ping", method = RequestMethod.GET)
 	@ResponseBody
@@ -43,6 +44,27 @@ public class RESTController {
 		logger.info("hit end point:/ping");
 		return "pong";
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/v1/idl/update", method = RequestMethod.GET)
+	@ResponseBody
+	public String updateSchema(HttpServletRequest request, HttpServletResponse response) throws UnirestException {
+		String graphQL = " query {  __type(name: \"case\") {\n" + 
+				"    name\n" + 
+				"    fields {\n" + 
+				"      name\n" + 
+				"      type {\n" + 
+				"        name\n" + 
+				"        kind\n" + 
+				"      }\n" + 
+				"    }\n" + 
+				"  }}";
+		neo4jService.query(graphQL);
+		
+		return null;
+	}
+
+	
 
 	@ApiOperation(value = "Get list of programs")
 	@CrossOrigin
@@ -112,7 +134,7 @@ public class RESTController {
 	@ResponseBody
 	public String getCases(HttpServletRequest request, HttpServletResponse response) throws UnirestException {
 		logger.info("hit end point:/v1/rest/cases ");
-		String graphQL = "query "+"{{case{\n" + 
+		String graphQL = "query "+"{  case{\n" + 
 				"    patient_id\n" + 
 				"    patient_first_name\n" + 
 				"    crf_id\n" + 
@@ -173,7 +195,7 @@ public class RESTController {
 				"        crf_id\n" + 
 				"    }\n" + 
 				"    off_study{\n" + 
-				"        document_number\n" + 
+				"       document_number\n" + 
 				"        date_off_study\n" + 
 				"        reason_off_study\n" + 
 				"        date_of_disease_progression\n" + 
@@ -194,7 +216,7 @@ public class RESTController {
 				"        date_of_best_response\n" + 
 				"    }\n" + 
 				"  }\n" + 
-				"}}";
+				"}";
 		return neo4jService.query(graphQL);
 	}
 
