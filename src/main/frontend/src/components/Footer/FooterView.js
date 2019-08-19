@@ -68,9 +68,15 @@ const Footer = ({ classes }) => (
         <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
         <div className={cn(classes.extraPadding, classes.nciLinks, classes.contentJustifyCenter)}>
                 <Typography><span className={classes.turningNIH}>NIH … Turning Discovery Into Health<sup>®</sup></span></Typography>
-            </div>
         </div>
-      
+        </div>
+        {/* Quick and dirty for adding version number in footer */}
+        <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
+        <div className={cn(classes.extraPadding, classes.nciLinks, classes.contentJustifyCenter)}>
+                <Typography><span className={classes.turningNIH}>Version 0.2</span></Typography>
+        </div>
+        </div>
+      {/* End of Quick and dirty for adding version number in footer */}
 
     </footer>
 );
