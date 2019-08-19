@@ -112,6 +112,11 @@ export default {
         backgroundColor: "white"
       }
     },
+    // MUIDataTableSelectCell: {
+    //   headerCell: {
+    //     backgroundColor: primary
+    //   }
+    // },
     MUIDataTableHeadCell: {
       fixedHeader:{
         backgroundColor: primary,

@@ -5,6 +5,7 @@ import {
 } from "@material-ui/core";
 import Widget from "../../components/Widgets/WidgetView";
 import Stats from "../../components/Stats/StatsView";
+import Cases from './caseTable/caseController';
 import PositionedSnackbar from "../../components/Disclaimer/DisclaimerView"
 import sunburstImage from '../../assets/dashboard/dashboard_sunburst';
 import breedsImage from '../../assets/dashboard/dashboard_breeds';
@@ -112,6 +113,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
         </Grid>
       </Grid>
     
+    <Cases />    
     {/* Addingg diclaimer for Dev */}
     <PositionedSnackbar />
     </React.Fragment>
