@@ -5,6 +5,8 @@ import classnames from 'classnames';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarView';
 import Footer from '../Footer/FooterView';
+import Error from '../../pages/error/Error';
+
 // import Sidebar from '../Sidebar';
 
 // pages
@@ -35,6 +37,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
               <Route path="/studies" component={Studies} />
               <Route path="/modelPage" component={modelPage} />
               <Route path="/table" component={table} />
+              <Route component={Error} />
 
             </Switch>
           </div>
