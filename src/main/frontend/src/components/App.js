@@ -12,7 +12,6 @@ const App = () => {
       <BrowserRouter>
       <Switch>
         <Route path="/" component={Layout} />
-        {/* <Route component={Error} /> */}
       </Switch>
     </BrowserRouter>
   </CustomThemeProvider>
