@@ -112,19 +112,19 @@ export default {
         backgroundColor: "white"
       }
     },
-    // MUIDataTableSelectCell: {
-    //   headerCell: {
-    //     backgroundColor: primary
-    //   }
-    // },
+    MUIDataTableSelectCell: {
+      headerCell: {
+        backgroundColor: primary
+      }
+    },
     MUIDataTableHeadCell: {
       fixedHeader:{
         backgroundColor: primary,
         color: 'white',
         textDecoration: 'underline',
         fontWeight: '600',
-        textAlign: 'center',
-        fontSize: '18px'
+        // textAlign: 'center',
+        // fontSize: '18px'
       },
       sortActive: {
         color: 'white'
