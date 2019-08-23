@@ -23,6 +23,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
     <BrowserRouter>
       <React.Fragment>
           <Header />
+          {/* <Sidebar /> */}
            <NavBar />
            
           {/* <Sidebar />  */}
@@ -57,7 +58,7 @@ const styles = ( theme ) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    //width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
+    // width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
     width: `calc(100vw)`,  // Remove this on adding sidebar
     background: theme.custom.bodyBackGround
   },
