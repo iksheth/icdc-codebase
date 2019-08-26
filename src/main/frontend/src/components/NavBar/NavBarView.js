@@ -5,68 +5,48 @@ import classnames from 'classnames';
 
 import {
   AppBar,
-  Toolbar,
-  IconButton,
-  withStyles,
-  Tooltip,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
+  Divider,
   Drawer,
-  Divider
+  IconButton,
+  Toolbar,
+  Tooltip,
+  withStyles
 } from "@material-ui/core";
 import {
   Menu as MenuIcon,
   ColorLens as ColorLensIcon,
-  ArrowBack as ArrowBackIcon,
+  ChevronLeft as ChevronLeftIcon
 } from "@material-ui/icons";
-import classNames from "classnames";
 import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import { Typography } from "../Wrappers/Wrappers";
+import SideBarContent from "../SideBar/SideBarView";
 
 const drawerWidth = 240;
 
 
-const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => {
+const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
 
-  function handleDrawerOpen() {
-    setOpen(true);
-  }
-
-  function handleDrawerClose() {
-    setOpen(false);
+  function toggleSideBar() {
+    isSidebarOpen?setIsSidebarOpen(true):setIsSidebarOpen(false)
+    setIsSidebarOpen(isSidebarOpen === true ? false : true);
   }
 
   return(
   <React.Fragment>
 
-<AppBar position="relative" className={classnames(classes.appBar, { [classes.appBarShift]: open })} color="primary">
+<AppBar position="relative" className={classnames(classes.appBar, { [classes.appBarShift]: isSidebarOpen })} color="primary">
 
   <Toolbar>
-{open?
   <IconButton
-      color="inherit"
-      aria-label="Open drawer"
-      onClick={handleDrawerClose}
-      edge="start"
-      className={classes.menuButton}
-    >
-              <ArrowBackIcon />
-    </IconButton>
-    :
-    <IconButton
-      color="inherit"
-      aria-label="Open drawer"
-      onClick={handleDrawerOpen}
-      edge="start"
-      className={classes.menuButton}
-    >
-              <MenuIcon />
-    </IconButton>
-}
+            color="inherit"
+            aria-label="open drawer"
+            onClick={toggleSideBar}
+            edge="start"
+            className={classnames(classes.menuButton, {[classes.hide]: isSidebarOpen})}
+          >
+            <MenuIcon />
+          </IconButton>
       {/* Reminder: Ajay will to replace the ICDC with env variable and change build npm to read env variable*/}
       <Link className={classes.link} to="/dashboard"><Typography variant="h6" weight="medium" className={classes.logotype}>Dashboard</Typography></Link>
       <Link className={classes.link} to="/programs"><Typography variant="h6" weight="medium" className={classes.logotype}>All Programs</Typography></Link>
@@ -93,18 +73,18 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => {
   className={classes.drawer}
   variant="persistent"
   anchor="left"
-  open={open}
+  open={isSidebarOpen}
   classes={{
     paper: classes.drawerPaper,
   }}
 >
-  <List>
-    {['Studies', 'Breed', 'Sex', 'Disease'].map((text, index) => (
-      <ListItem button key={text}>
-        <ListItemText primary={text} />
-      </ListItem>
-    ))}
-  </List>
+<div className={classes.drawerHeader} onClick={toggleSideBar}>
+          <IconButton >
+            <ChevronLeftIcon /> 
+          </IconButton>
+        </div>
+        <Divider />
+<SideBarContent />
 </Drawer>
 </ React.Fragment>
 
@@ -225,15 +205,6 @@ const styles = (theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing.unit * 2,
-  },
-  hide: {
-    display: 'none',
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
