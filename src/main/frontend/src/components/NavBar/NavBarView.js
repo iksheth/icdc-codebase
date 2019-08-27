@@ -1,53 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../ThemeContext";
-
+import classnames from 'classnames';
 
 import {
   AppBar,
-  Toolbar,
+  Divider,
+  Drawer,
   IconButton,
-  withStyles,
-  Tooltip
+  Toolbar,
+  Tooltip,
+  withStyles
 } from "@material-ui/core";
 import {
   Menu as MenuIcon,
   ColorLens as ColorLensIcon,
-  ArrowBack as ArrowBackIcon,
+  ChevronLeft as ChevronLeftIcon
 } from "@material-ui/icons";
-import classNames from "classnames";
 import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import { Typography } from "../Wrappers/Wrappers";
+import SideBarContent from "../SideBar/SideBarView";
+
+const drawerWidth = 240;
 
 
-const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => {
-  const themeState = useTheme();
+const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
+  const theme = useTheme();
+
+  function toggleSideBar() {
+    isSidebarOpen?setIsSidebarOpen(true):setIsSidebarOpen(false)
+    setIsSidebarOpen(isSidebarOpen === true ? false : true);
+  }
 
   return(
-  <AppBar position="relative" className={classes.appBar} color="primary">
-    <Toolbar className={classes.toolbar}>
-      <IconButton
-        color="inherit"
-        onClick={toggleSidebar}
-        className={classNames(
-          classes.headerMenuButton,
-          classes.headerMenuButtonCollapse
-        )}
-      >
-        {isSidebarOpened ? (
-          <ArrowBackIcon
-            classes={{
-              root: classNames(classes.headerIcon, classes.headerIconCollapse)
-            }}
-          />
-        ) : (
-          <MenuIcon
-            classes={{
-              root: classNames(classes.headerIcon, classes.headerIconCollapse)
-            }}
-          />
-        )}
-      </IconButton>
+  <React.Fragment>
+
+<AppBar position="relative" className={classnames(classes.appBar, { [classes.appBarShift]: isSidebarOpen })} color="primary">
+
+  <Toolbar>
+  <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={toggleSideBar}
+            edge="start"
+            className={classnames(classes.menuButton, {[classes.hide]: isSidebarOpen})}
+          >
+            <MenuIcon />
+          </IconButton>
       {/* Reminder: Ajay will to replace the ICDC with env variable and change build npm to read env variable*/}
       <Link className={classes.link} to="/dashboard"><Typography variant="h6" weight="medium" className={classes.logotype}>Dashboard</Typography></Link>
       <Link className={classes.link} to="/programs"><Typography variant="h6" weight="medium" className={classes.logotype}>All Programs</Typography></Link>
@@ -60,7 +59,7 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => {
         color="inherit"
         aria-haspopup="true"
         aria-controls="mail-menu"
-        onClick={()=> { themeState.toggleTheme(); }}
+        onClick={()=> { theme.toggleTheme(); }}
         className={classes.headerMenuButton}
       >
         <Tooltip title="Light/Dark Theme" placement="bottom-end">
@@ -68,8 +67,27 @@ const NavBar = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => {
           </Tooltip>
       </IconButton>
       <ProfileMenu />
-    </Toolbar>
-  </AppBar>
+  </Toolbar>
+</AppBar>
+<Drawer
+  className={classes.drawer}
+  variant="persistent"
+  anchor="left"
+  open={isSidebarOpen}
+  classes={{
+    paper: classes.drawerPaper,
+  }}
+>
+<div className={classes.drawerHeader} onClick={toggleSideBar}>
+          <IconButton >
+            <ChevronLeftIcon /> 
+          </IconButton>
+        </div>
+        <Divider />
+<SideBarContent />
+</Drawer>
+</ React.Fragment>
+
   )}
 ;
 
@@ -184,7 +202,26 @@ const styles = (theme) => ({
   },
   link:{
     textDecoration: 'none'
-  }
+  },
+  menuButton: {
+    marginRight: theme.spacing.unit * 2,
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    marginTop: '80px'
+  },
 });
 
 export default withStyles(styles)(NavBar);

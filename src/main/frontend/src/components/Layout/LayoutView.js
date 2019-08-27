@@ -16,18 +16,23 @@ import Studies from '../../pages/studies/studiesController';
 import Programs from '../../pages/programs/programs';
 import modelPage from '../../pages/modelPage/modelPageView';
 import table from '../../pages/table/tableView';
+const drawerWidth = 240;
 
-const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
+const Layout = ({ classes }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+
+  return(
   <React.Fragment>
     <CssBaseline />
     <BrowserRouter>
       <React.Fragment>
           <Header />
-           <NavBar />
+          {/* <Sidebar /> */}
+           <NavBar isSidebarOpen = {isSidebarOpen} setIsSidebarOpen = {setIsSidebarOpen} />
            
           {/* <Sidebar />  */}
           {/* Reminder: Ajay need to replace the ICDC with env variable and change build npm to read env variable*/}
-          <div className={classnames(classes.content, { [classes.contentShift]: isSidebarOpened })}>
+          <div className={classnames(classes.content, { [classes.contentShift]: isSidebarOpen })}>
             <Switch>
               <Route exact path="/ICDC/" component={Dashboard} />
               <Route exact path="/" component={Dashboard} />
@@ -46,7 +51,7 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => (
     </BrowserRouter>
   </React.Fragment>
 
-);
+)};
 
 const styles = ( theme ) => ({
   root: {
@@ -57,14 +62,15 @@ const styles = ( theme ) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    //width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
+    // width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
     width: `calc(100vw)`,  // Remove this on adding sidebar
     background: theme.custom.bodyBackGround
   },
   contentShift: {
-    width: `calc(100vw - ${240 + theme.spacing.unit * 6}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
