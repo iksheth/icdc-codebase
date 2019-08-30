@@ -45,12 +45,6 @@ public class ConfigurationDAO {
 	private String neo4jGraphQLEndPoint;
 	
 	
-	@Value("${fence.url}")
-	private String fenceURL;
-	
-	@Value("${fence.public.key}")
-	private String fencePublicKey;
-	
 	
 	@Value("${error.redirect_url}")
 	private String errorRedirectURL;
@@ -70,6 +64,23 @@ public class ConfigurationDAO {
 	
 	@Value("${allow_graphql_mutation}")
 	private boolean allowGraphQLMutation;
+	
+	
+
+	@Value("${fence.url}")
+	private String fenceURL;
+
+	
+	@Value("${fence.client_credential}")
+	private String fenceCredential;
+	
+	
+	@Value("${fence.client_id}")
+	private String fencdId;
+	
+	
+	@Value("${fence.redirect_url}")
+	private String fencdRedirect;
 	
 
 	public String getNeo4jGraphQLEndPoint() {
@@ -161,13 +172,7 @@ public class ConfigurationDAO {
 		this.fenceURL = fenceURL;
 	}
 
-	public String getFencePublicKey() {
-		return fencePublicKey;
-	}
 
-	public void setFencePublicKey(String fencePublicKey) {
-		this.fencePublicKey = fencePublicKey;
-	}
 
 	public String getErrorRedirectURL() {
 		return errorRedirectURL;
@@ -215,6 +220,32 @@ public class ConfigurationDAO {
 
 	public void setAllowGraphQLMutation(boolean allowGraphQLMutation) {
 		this.allowGraphQLMutation = allowGraphQLMutation;
+	}
+
+	
+	
+	public String getFenceCredential() {
+		return fenceCredential;
+	}
+
+	public void setFenceCredential(String fenceCredential) {
+		this.fenceCredential = fenceCredential;
+	}
+
+	public String getFencdId() {
+		return fencdId;
+	}
+
+	public void setFencdId(String fencdId) {
+		this.fencdId = fencdId;
+	}
+
+	public String getFencdRedirect() {
+		return fencdRedirect;
+	}
+
+	public void setFencdRedirect(String fencdRedirect) {
+		this.fencdRedirect = fencdRedirect;
 	}
 
 	@Bean
