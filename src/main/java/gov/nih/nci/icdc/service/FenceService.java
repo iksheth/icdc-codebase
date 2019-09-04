@@ -35,13 +35,13 @@ public class FenceService {
 	public String getToken(String code) throws UnirestException {
 		HttpResponse<JsonNode> jsonResponse;
 		try {
-			jsonResponse= Unirest.post(config.getFenceURL()+"user/oauth2/token/")
-							 	   .basicAuth(config.getFencdId(), config.getFenceCredential())
+			jsonResponse= Unirest.post(config.getFenceTokenExchange())
+							 	   .basicAuth(config.getFenceId(), config.getFenceCredential())
 							 	   .header("Content-Type", "application/x-www-form-urlencoded")
 							 	   .field("grant_type", "authorization_code")
 							 	   .field("code",code)
-							 	   .field("redirect_uri",config.getFencdRedirect())
-							 	   .field("client_id", config.getFencdId())
+							 	   .field("redirect_uri",config.getFenceRedirect())
+							 	   .field("client_id", config.getFenceId())
 							 	   .asJson();
 
 		} catch (UnirestException e) {

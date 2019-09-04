@@ -76,11 +76,19 @@ public class ConfigurationDAO {
 	
 	
 	@Value("${fence.client_id}")
-	private String fencdId;
+	private String fenceId;
 	
 	
 	@Value("${fence.redirect_url}")
-	private String fencdRedirect;
+	private String fenceRedirect;
+	
+	
+	@Value("${fence.exchange_token_url}")
+	private String fenceTokenExchange;
+	
+	
+	@Value("${fence.log_out_url}")
+	private String fenceLogOut;
 	
 
 	public String getNeo4jGraphQLEndPoint() {
@@ -232,20 +240,38 @@ public class ConfigurationDAO {
 		this.fenceCredential = fenceCredential;
 	}
 
-	public String getFencdId() {
-		return fencdId;
+	
+
+	public String getFenceId() {
+		return fenceId;
 	}
 
-	public void setFencdId(String fencdId) {
-		this.fencdId = fencdId;
+	public void setFenceId(String fenceId) {
+		this.fenceId = fenceId;
 	}
 
-	public String getFencdRedirect() {
-		return fencdRedirect;
+	public String getFenceRedirect() {
+		return fenceRedirect;
 	}
 
-	public void setFencdRedirect(String fencdRedirect) {
-		this.fencdRedirect = fencdRedirect;
+	public void setFenceRedirect(String fenceRedirect) {
+		this.fenceRedirect = fenceRedirect;
+	}
+
+	public String getFenceTokenExchange() {
+		return fenceTokenExchange;
+	}
+
+	public void setFenceTokenExchange(String fenceTokenExchange) {
+		this.fenceTokenExchange = fenceTokenExchange;
+	}
+
+	public String getFenceLogOut() {
+		return fenceLogOut;
+	}
+
+	public void setFenceLogOut(String fenceLogOut) {
+		this.fenceLogOut = fenceLogOut;
 	}
 
 	@Bean
