@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import gov.nih.nci.icdc.model.ConfigurationDAO;
+import gov.nih.nci.icdc.model.VersionDao;
 import lombok.extern.slf4j.Slf4j;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -42,6 +43,10 @@ public class RestExceptionHandler {
 	
 	@Autowired
 	private ConfigurationDAO config;
+	
+	
+	@Autowired
+	private VersionDao versionConfig;
 	
 	private static final Logger logger = LogManager.getLogger(RestExceptionHandler.class);
 
@@ -153,7 +158,7 @@ public class RestExceptionHandler {
 
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public Object handleNoHandlerFoundException(NoHandlerFoundException ex) {
-		if(ex.getRequestURL().contains(config.getApiVersion())) {
+		if(ex.getRequestURL().contains(versionConfig.getApiVersion())) {
 			return handleAPINoHandlerFoundException(ex);
 		}else {
 			return new ModelAndView("/index");
