@@ -1,18 +1,15 @@
 import React from "react";
-import {
-  Grid,
-  withStyles,
-} from "@material-ui/core";
+import { Grid, withStyles } from "@material-ui/core";
 import Widget from "../../components/Widgets/WidgetView";
 import Stats from "../../components/Stats/StatsView";
-import Cases from './caseTable/caseController';
-import PositionedSnackbar from "../../components/Disclaimer/DisclaimerView"
-import sunburstImage from '../../assets/dashboard/dashboard_sunburst';
-import breedsImage from '../../assets/dashboard/dashboard_breeds';
-import diagnosisImage from '../../assets/dashboard/dashboard_diagnosis.gif';
-import diseaseSiteImage from '../../assets/dashboard/dashboard_proposed_disease_site.gif';
-import proposedSexImage from '../../assets/dashboard/dashboard_proposed_sex.gif';
-import tumorStageImage from '../../assets/dashboard/dashboard_proposed_tumor_stage.gif';
+import Cases from "./caseTable/caseController";
+import PositionedSnackbar from "../../components/Disclaimer/DisclaimerView";
+import sunburstImage from "../../assets/dashboard/dashboard_sunburst";
+import diseaseSiteImage from "../../assets/dashboard/dashboard_proposed_disease_site.gif";
+import proposedSexImage from "../../assets/dashboard/dashboard_proposed_sex.gif";
+import tumorStageImage from "../../assets/dashboard/dashboard_proposed_tumor_stage.gif";
+import BreedDonut from "../../components/Widgets/PieCharts/BreedDonut/BreedDonut";
+import DiagnosisDonut from "../../components/Widgets/PieCharts/DiagnosisDonut/DiagnosisDonut";
 
 const Dashboard = ({ classes, theme, ...props }) => {
   return (
@@ -21,53 +18,39 @@ const Dashboard = ({ classes, theme, ...props }) => {
       <Grid container spacing={32}>
         <Grid item lg={4} md={4} sm={6} xs={12}>
           <Widget
-            title="Programs and Studies"
+            title='Programs and Studies'
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
             <div className={classes.sunburst}>
-            <img
-              src={sunburstImage}
-              alt='sunburst'
-            />
+              <img src={sunburstImage} alt='sunburst' />
             </div>
           </Widget>
         </Grid>
         <Grid item lg={4} md={4} sm={6} xs={12}>
           <Widget
-            title="Breed"
+            title='Breed'
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-                <div className={classes.sunburst}>
-            <img
-              src={breedsImage}
-              alt='breedsImage'
-            />
-            </div>
-
+            <BreedDonut />
           </Widget>
         </Grid>
         <Grid item lg={4} md={4} sm={6} xs={12}>
           <Widget
-            title="Diagnosis"
+            title='Diagnosis'
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-              <div className={classes.sunburst}>
-            <img
-              src={diagnosisImage}
-              alt='diagnosisImage'
-            />
-            </div>
+            <DiagnosisDonut />
           </Widget>
         </Grid>
-      </Grid>  
-    {/* second row Grids */}
-    <Grid container spacing={32}>
+      </Grid>
+      {/* second row Grids */}
+      <Grid container spacing={32}>
         <Grid item lg={4} md={4} sm={6} xs={12}>
           <Widget
             upperTitle
@@ -75,10 +58,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
             className={classes.card}
           >
             <div className={classes.sunburst}>
-            <img
-              src={diseaseSiteImage}
-              alt='diseaseSiteImage'
-            />
+              <img src={diseaseSiteImage} alt='diseaseSiteImage' />
             </div>
           </Widget>
         </Grid>
@@ -88,13 +68,9 @@ const Dashboard = ({ classes, theme, ...props }) => {
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-                <div className={classes.sunburst}>
-            <img
-              src={proposedSexImage}
-              alt='proposedSexImage'
-            />
+            <div className={classes.sunburst}>
+              <img src={proposedSexImage} alt='proposedSexImage' />
             </div>
-
           </Widget>
         </Grid>
         <Grid item lg={4} md={4} sm={6} xs={12}>
@@ -103,37 +79,34 @@ const Dashboard = ({ classes, theme, ...props }) => {
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-              <div className={classes.sunburst}>
-            <img
-              src={tumorStageImage}
-              alt='tumorStageImage'
-            />
+            <div className={classes.sunburst}>
+              <img src={tumorStageImage} alt='tumorStageImage' />
             </div>
           </Widget>
         </Grid>
       </Grid>
-    
-    <Cases />    
-    {/* Addingg diclaimer for Dev */}
-    <PositionedSnackbar />
+
+      <Cases />
+      {/* Addingg diclaimer for Dev */}
+      <PositionedSnackbar />
     </React.Fragment>
   );
 };
 
-const styles = (theme) => ({
+const styles = theme => ({
   card: {
     minHeight: "100%",
     display: "flex",
     flexDirection: "column"
   },
   paper: {
-    textAlign: 'center'
+    textAlign: "center"
   },
   fakeToolbar: {
-    ...theme.mixins.toolbar,
+    ...theme.mixins.toolbar
   },
-  sunburst:{
-    textAlign: 'center'
+  sunburst: {
+    textAlign: "center"
   }
 });
 
