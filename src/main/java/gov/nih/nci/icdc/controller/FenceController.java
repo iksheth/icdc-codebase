@@ -54,7 +54,7 @@ public class FenceController {
 	        theSession.invalidate();
 	      }
 	    }
-	    response.setHeader("Location", config.getFenceURL()+"next="+config.getFencdRedirect());
+	    response.setHeader("Location", config.getFenceLogOut()+"?next="+config.getFenceRedirect());
 	    response.setStatus(302);
 		
 	}
