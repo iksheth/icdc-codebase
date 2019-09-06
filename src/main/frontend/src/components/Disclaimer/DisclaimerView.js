@@ -11,7 +11,7 @@ import WarningIcon from '@material-ui/icons/Warning';
  function PositionedSnackbar({ classes }) {
   const [state, setState] = React.useState({
     open: true,
-    vertical: "top",
+    vertical: "bottom",
     horizontal: "right"
   });
 
@@ -29,6 +29,7 @@ import WarningIcon from '@material-ui/icons/Warning';
         key={`${vertical},${horizontal}`}
         open={open}
         onClose={handleClose}
+        // classes={{ anchorOriginTopRight: classes.myClassName }}
         
       >
         <SnackbarContent
@@ -54,7 +55,10 @@ const styles = {
   },
   inline:{
     display: 'inline-flex'
-  }
+  },
+  // myClassName: {
+  //     top: '140px'
+  //   }
 };
 
 export default withStyles(styles)(PositionedSnackbar);
