@@ -12,17 +12,16 @@ const COLORS = ['#523175','#6e7ff5','#fc4b5b','#2b69a3','#287d6d','#af66ff' ];
 
 
 export default class DiagnosisDonut extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/3Leoa7f4/';
 
   render() {
     return (
       <PieChart width={400} height={200} onMouseEnter={this.onPieEnter}>
         <Pie
           data={data}
-          cx="50%"
+          cx="55%"
           cy="50%"
           innerRadius={60}
-          outerRadius={90}
+          outerRadius={95}
           fill="#8884d8"
           paddingAngle={1}
           dataKey="value"

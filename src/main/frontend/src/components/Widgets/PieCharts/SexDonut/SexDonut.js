@@ -4,15 +4,15 @@ import {
 } from 'recharts';
 
 const data = [
-  { name: 'Beagle', value: 400 },
-  { name: 'Boxer', value: 300 },
-  { name: 'Mallinois Dog', value: 300 },
-  { name: 'Australian Shepherd', value: 200 },
+  { name: 'Male', value: 400 },
+  { name: 'Female', value: 300 },
+  { name: 'Castrated male', value: 120 },
+  { name: 'Spayed female', value: 130 },
 ];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#523175','#6e7ff5','#fc4b5b','#2b69a3','#287d6d','#af66ff' ];
 
 
-export default class BreedDonut extends PureComponent {
+export default class SexDonut extends PureComponent {
 
   render() {
     return (

@@ -5,11 +5,11 @@ import Stats from "../../components/Stats/StatsView";
 import Cases from "./caseTable/caseController";
 import PositionedSnackbar from "../../components/Disclaimer/DisclaimerView";
 import sunburstImage from "../../assets/dashboard/dashboard_sunburst";
-import diseaseSiteImage from "../../assets/dashboard/dashboard_proposed_disease_site.gif";
-import proposedSexImage from "../../assets/dashboard/dashboard_proposed_sex.gif";
-import tumorStageImage from "../../assets/dashboard/dashboard_proposed_tumor_stage.gif";
 import BreedDonut from "../../components/Widgets/PieCharts/BreedDonut/BreedDonut";
 import DiagnosisDonut from "../../components/Widgets/PieCharts/DiagnosisDonut/DiagnosisDonut";
+import SexDonut from "../../components/Widgets/PieCharts/SexDonut/SexDonut";
+import TumorDonut from "../../components/Widgets/PieCharts/TumorDonut/TumorDonut";
+import DiseaseDonut from "../../components/Widgets/PieCharts/DiseaseDonut/DiseaseDonut";
 
 const Dashboard = ({ classes, theme, ...props }) => {
   return (
@@ -53,35 +53,32 @@ const Dashboard = ({ classes, theme, ...props }) => {
       <Grid container spacing={32}>
         <Grid item lg={4} md={4} sm={6} xs={12}>
           <Widget
+            title='Proposed: Primary Disease Site'
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-            <div className={classes.sunburst}>
-              <img src={diseaseSiteImage} alt='diseaseSiteImage' />
-            </div>
+            <DiseaseDonut />
           </Widget>
         </Grid>
         <Grid item lg={4} md={4} sm={6} xs={12}>
           <Widget
+            title='Proposed: Sex'
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-            <div className={classes.sunburst}>
-              <img src={proposedSexImage} alt='proposedSexImage' />
-            </div>
+            <SexDonut />
           </Widget>
         </Grid>
         <Grid item lg={4} md={4} sm={6} xs={12}>
           <Widget
+            title='Proposed: Tumor Stage'
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-            <div className={classes.sunburst}>
-              <img src={tumorStageImage} alt='tumorStageImage' />
-            </div>
+            <TumorDonut />
           </Widget>
         </Grid>
       </Grid>

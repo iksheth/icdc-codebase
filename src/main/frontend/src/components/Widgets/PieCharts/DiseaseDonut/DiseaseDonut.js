@@ -4,16 +4,16 @@ import {
 } from 'recharts';
 
 const data = [
-  { name: 'Beagle', value: 400 },
-  { name: 'Boxer', value: 300 },
-  { name: 'Mallinois Dog', value: 300 },
-  { name: 'Australian Shepherd', value: 200 },
+  { name: 'A', value: 400 },
+  { name: 'B', value: 300 },
+  { name: 'C', value: 300 },
+  { name: 'D', value: 200 },
+  { name: 'E', value: 400 },
+  { name: 'F', value: 200 },
 ];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#523175','#6e7ff5','#fc4b5b','#2b69a3','#287d6d','#af66ff' ];
 
-
-export default class BreedDonut extends PureComponent {
-
+export default class DiseaseDonut extends PureComponent {
   render() {
     return (
       <PieChart width={400} height={200} onMouseEnter={this.onPieEnter}>
