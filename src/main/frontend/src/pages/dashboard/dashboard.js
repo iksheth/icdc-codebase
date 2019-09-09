@@ -19,10 +19,20 @@ class Dashboard extends React.Component {
     console.log(values.code) // "the value from code query param"
     if(values.code){
     fetch('https://k9dc.essential-dev.com/fence/login/' + values.code)
+    .then(function(response) {
+      if (!response.ok) {
+        throw Error(response.statusText);
+    }
+      return response.json();
+    })
     .then(function(result) {
-      localStorage.setItem("username", result.user);
-      localStorage.setItem("isAuthenticated","true" );
-     });
+    localStorage.setItem("username", JSON.stringify(result));
+     window.alert(JSON.stringify(result));
+    })
+    .catch(function(error) {
+      localStorage.removeItem("username");
+      console.log(error);
+  });
     }
   }
 

@@ -27,7 +27,8 @@ const drawerWidth = 240;
 
 const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
   const theme = useTheme();
-  // const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  const username = JSON.parse(localStorage.getItem("username")) !== null;
+  console.log(username);
   function toggleSideBar() {
     isSidebarOpen ? setIsSidebarOpen(true) : setIsSidebarOpen(false);
     setIsSidebarOpen(isSidebarOpen === true ? false : true);
@@ -115,9 +116,11 @@ const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
               <ColorLensIcon classes={{ root: classes.headerIcon }} />
             </Tooltip>
           </IconButton>
+          { username?
           <ProfileMenu />
-          <Button href="https://nci-crdc-staging.datacommons.io/user/oauth2/authorize?client_id=82pslYFJqA7auRvKYfTOK67jzQAMb8f6C33tlmZz&response_type=code&redirect_uri=https%3A%2F%2Fk9dc.essential-dev.com%2F&scope=openid%20user" color="inherit">LOGIN</Button>
-        </Toolbar>
+          :<Button href="https://nci-crdc-staging.datacommons.io/user/oauth2/authorize?client_id=82pslYFJqA7auRvKYfTOK67jzQAMb8f6C33tlmZz&response_type=code&redirect_uri=https%3A%2F%2Fk9dc.essential-dev.com%2F&scope=openid%20user" color="inherit">LOGIN</Button>
+          }
+          </Toolbar>
       </AppBar>
       <Drawer
         className={classes.drawer}
