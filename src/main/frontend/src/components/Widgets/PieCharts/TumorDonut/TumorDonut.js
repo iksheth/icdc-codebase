@@ -4,14 +4,14 @@ import {
 } from 'recharts';
 
 const data = [
-  { name: 'Lymphoma', value: 400 },
-  { name: 'Osteosarcoma', value: 300 },
-  { name: 'Lipoma', value: 300 },
-  { name: 'Oral Melanoma', value: 200 },
-  { name: 'Mammary Gland Carcinoma', value: 400 },
-  { name: 'Primary Lung Tumor', value: 300 },
-  { name: 'Thyroid Carcinoma', value: 300 },
-  { name: 'Hemangiosarcoma', value: 200 },
+  { name: 'III', value: 400 },
+  { name: 'IIIA', value: 300 },
+  { name: 'IIIB', value: 300 },
+  { name: 'IV', value: 200 },
+  { name: 'V', value: 400 },
+  { name: 'VA', value: 300 },
+  { name: 'VB', value: 300 },
+  { name: 'VC', value: 200 },
   
 ];
 const COLORS = ['#523175','#6e7ff5','#fc4b5b','#2b69a3','#287d6d','#af66ff' ];

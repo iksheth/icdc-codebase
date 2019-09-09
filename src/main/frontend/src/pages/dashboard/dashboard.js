@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, withStyles } from "@material-ui/core";
+import queryString from 'query-string'
 import Widget from "../../components/Widgets/WidgetView";
 import Stats from "../../components/Stats/StatsView";
 import Cases from "./caseTable/caseController";
@@ -11,8 +12,26 @@ import SexDonut from "../../components/Widgets/PieCharts/SexDonut/SexDonut";
 import TumorDonut from "../../components/Widgets/PieCharts/TumorDonut/TumorDonut";
 import DiseaseDonut from "../../components/Widgets/PieCharts/DiseaseDonut/DiseaseDonut";
 
-const Dashboard = ({ classes, theme, ...props }) => {
-  return (
+class Dashboard extends React.Component {
+  // This is justa POC for fence longin eventually need to replace with better solution
+  componentDidMount() {
+    const values = queryString.parse(this.props.location.search)
+    console.log(values.code) // "the value from code query param"
+    if(values.code){
+    fetch('https://k9dc.essential-dev.com/fence/login/' + values.code)
+    .then(function(result) {
+      localStorage.setItem("username", result.user);
+      localStorage.setItem("isAuthenticated","true" );
+     });
+    }
+  }
+
+  render() {
+    const props = this.props;
+
+    const classes = props.classes;
+
+    return (
     <React.Fragment>
       <Stats />
       <Grid container spacing={32}>
@@ -87,7 +106,8 @@ const Dashboard = ({ classes, theme, ...props }) => {
       {/* Addingg diclaimer for Dev */}
       <PositionedSnackbar />
     </React.Fragment>
-  );
+    );
+  };
 };
 
 const styles = theme => ({

@@ -6,6 +6,7 @@ import { Typography } from "../Wrappers/Wrappers";
 
 export default function ProfileMenu() {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const username = localStorage.getItem("username");
 
     function handleClick(event) {
         setAnchorEl(event.currentTarget);
@@ -39,7 +40,7 @@ export default function ProfileMenu() {
 
                 <MenuItem onClick={handleClose}>
                     <PersonIcon /><Typography variant="h4" weight="medium">
-                        John Doe
+                        {username}
                     </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
