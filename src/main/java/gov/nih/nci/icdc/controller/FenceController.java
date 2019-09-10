@@ -98,34 +98,8 @@ public class FenceController {
 		        
 		        // store token in session 
 		        session.setAttribute("token", jwt);
-		        
 		    	
 		    	String payload =  jwt.getPayload();
-		    	//		    	{
-				//		    		  "pur": "access",
-				//		    		  "aud": [
-				//		    		    "openid",
-				//		    		    "user",
-				//		    		    "82pslYFJqA7auRvKYfTOK67jzQAMb8f6C33tlmZz"
-				//		    		  ],
-				//		    		  "sub": "5567",
-				//		    		  "iss": "https://nci-crdc-staging.datacommons.io/user",
-				//		    		  "iat": 1566578028,
-				//		    		  "exp": 1566579228,
-				//		    		  "jti": "69443545-ade5-443c-b25b-b39ba06013f7",
-				//		    		  "context": {
-				//		    		    "user": {
-				//		    		      "name": "cheny39",
-				//		    		      "is_admin": false,
-				//		    		      "projects": {},
-				//		    		      "google": {
-				//		    		        "proxy_group": null
-				//		    		      }
-				//		    		    }
-				//		    		  },
-				//		    		  "azp": "82pslYFJqA7auRvKYfTOK67jzQAMb8f6C33tlmZz"
-				//		    		}
-		    	
 		    	
 		    	// payload is Base64Url encoded
 		    	String token = new String(Base64.getDecoder().decode(payload));
