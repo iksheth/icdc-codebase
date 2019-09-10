@@ -9,8 +9,7 @@ const data = [
   { name: 'Mallinois Dog', value: 300 },
   { name: 'Australian Shepherd', value: 200 },
 ];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-
+const COLORS = ['#523175','#6e7ff5','#fc4b5b','#2b69a3','#287d6d','#af66ff' ];
 
 export default class BreedDonut extends PureComponent {
 

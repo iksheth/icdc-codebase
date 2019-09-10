@@ -4,7 +4,7 @@ const primary = "#092756";
 const secondary = "#2A71A5";
 const warning = "#FFC260";
 const success = "#3CD4A0";
-const info = "#9013FE";
+const info = "#3f2b2f";
 
 const lightenRate = 7.5;
 const darkenRate = 15;
