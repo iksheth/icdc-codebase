@@ -1,3 +1,5 @@
+import React from "react";
+import queryString from "query-string";
 import {
   AppBar,
   Button,
@@ -14,7 +16,6 @@ import {
   Menu as MenuIcon
 } from "@material-ui/icons";
 import classnames from "classnames";
-import React from "react";
 import { Link } from "react-router-dom";
 import ProfileMenu from "../ProfileMenu/ProfileMenuView";
 import SideBarContent from "../SideBar/SideBarView";
@@ -22,17 +23,49 @@ import { useTheme } from "../ThemeContext";
 import { Typography } from "../Wrappers/Wrappers";
 
 const drawerWidth = 240;
-
-
+// const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
+const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
+const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 
 const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
   const theme = useTheme();
-  const username = JSON.parse(localStorage.getItem("username")) !== null;
-  console.log(username);
+  const [authState, setAuthState] = React.useState({
+    isAuthorized: localStorage.getItem("isAuthorized") === "true"
+  });
+  // Similar to componentDidMount and componentDidUpdate:
+  // Empty second argument of react useEffect will avoid the infinte loop that caused due to component update
+  React.useEffect(() => {
+    const values = queryString.parse(window.location.search);
+
+    if (values.code) {
+      fetch(BACKEND_GETUSERINFO_API + values.code)
+        .then(function(response) {
+          if (!response.ok) {
+            throw Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then(function(result) {
+          setAuthState({
+            ...authState,
+            isAuthorized: true
+          });
+          localStorage.setItem("username", JSON.stringify(result.user));
+          localStorage.setItem("isAuthorized", "true");          
+        })
+        .catch(function(error) {
+          // Need to update this
+          // setAuthState({ ...authState, username: "", isAuthorized: false });
+          // localStorage.setItem("isAuthorized", "false");
+        });
+    }
+  }, []);
+
   function toggleSideBar() {
     isSidebarOpen ? setIsSidebarOpen(true) : setIsSidebarOpen(false);
     setIsSidebarOpen(isSidebarOpen === true ? false : true);
   }
+console.log('hey'+BACKEND_GETUSERINFO_API);
 
   return (
     <React.Fragment>
@@ -116,11 +149,17 @@ const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
               <ColorLensIcon classes={{ root: classes.headerIcon }} />
             </Tooltip>
           </IconButton>
-          { username?
-          <ProfileMenu />
-          :<Button href="https://nci-crdc-staging.datacommons.io/user/oauth2/authorize?client_id=82pslYFJqA7auRvKYfTOK67jzQAMb8f6C33tlmZz&response_type=code&redirect_uri=https%3A%2F%2Fk9dc.essential-dev.com%2F&scope=openid%20user" color="inherit">LOGIN</Button>
-          }
-          </Toolbar>
+          {authState.isAuthorized ? (
+            <ProfileMenu />
+          ) : (
+            <Button
+              href={FENCE_LOGIN_URL}
+              color='inherit'
+            >
+              LOGIN
+            </Button>
+          )}
+        </Toolbar>
       </AppBar>
       <Drawer
         className={classes.drawer}

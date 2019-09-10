@@ -22,7 +22,7 @@ const Widget = ({
           props.header
         ) : (
           <React.Fragment>
-            <Typography variant="headline" color="secondary">
+            <Typography variant="headline" color="info">
               {title}
             </Typography>
           </React.Fragment>
