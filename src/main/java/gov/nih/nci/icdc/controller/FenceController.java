@@ -136,7 +136,7 @@ public class FenceController {
 		    		 if(payLoadContext.isJsonObject()) {
 		    			 JsonObject objectPayLoadContext = payLoadContext.getAsJsonObject();
 		    			 JsonObject ObjectUser = objectPayLoadContext.get("user").getAsJsonObject();
-			    		 String userName = ObjectUser.get("name").toString();
+			    		 String userName = ObjectUser.get("name").getAsString();
 			    		 HashMap<String, String> map = new HashMap<>(); 
 			    		 map.put("user", userName); 
 			    		 
