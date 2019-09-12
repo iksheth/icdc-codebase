@@ -5,9 +5,9 @@ import Stats from "../../components/Stats/StatsView";
 import Cases from "./caseTable/caseController";
 import PositionedSnackbar from "../../components/Disclaimer/DisclaimerView";
 import sunburstImage from "../../assets/dashboard/dashboard_sunburst";
-import BreedDonut from "../../components/Widgets/PieCharts/BreedDonut/BreedDonut";
-import DiagnosisDonut from "../../components/Widgets/PieCharts/DiagnosisDonut/DiagnosisDonut";
-import SexDonut from "../../components/Widgets/PieCharts/SexDonut/SexDonut";
+import BreedDonut from "../../components/Widgets/PieCharts/BreedDonut/BreedDonutController";
+import DiagnosisDonut from "../../components/Widgets/PieCharts/DiagnosisDonut/DiagnosisDonutController";
+import SexDonut from "../../components/Widgets/PieCharts/GenderDonut/GenderDonutController";
 import TumorDonut from "../../components/Widgets/PieCharts/TumorDonut/TumorDonut";
 import DiseaseDonut from "../../components/Widgets/PieCharts/DiseaseDonut/DiseaseDonut";
 
