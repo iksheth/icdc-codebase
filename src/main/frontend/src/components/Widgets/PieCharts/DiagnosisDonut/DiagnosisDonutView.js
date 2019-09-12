@@ -13,7 +13,7 @@ const COLORS = [
 export default class DiagnosisDonut extends PureComponent {
   render() {
     var diagnosDataObj = this.props.data;
-    // Need to replace this with a utility function
+    // Ajay Need to replace this with a utility function
     var data = diagnosDataObj.map(function(obj) {
       return {
         name: obj.diagnosis,

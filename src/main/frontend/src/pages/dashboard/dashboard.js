@@ -7,11 +7,11 @@ import PositionedSnackbar from "../../components/Disclaimer/DisclaimerView";
 import sunburstImage from "../../assets/dashboard/dashboard_sunburst";
 import BreedDonut from "../../components/Widgets/PieCharts/BreedDonut/BreedDonutController";
 import DiagnosisDonut from "../../components/Widgets/PieCharts/DiagnosisDonut/DiagnosisDonutController";
-import SexDonut from "../../components/Widgets/PieCharts/GenderDonut/GenderDonutController";
+import GenderDonut from "../../components/Widgets/PieCharts/GenderDonut/GenderDonutController";
 import TumorDonut from "../../components/Widgets/PieCharts/TumorDonut/TumorDonut";
 import DiseaseDonut from "../../components/Widgets/PieCharts/DiseaseDonut/DiseaseDonut";
-
-const Dashboard = ({ classes, theme, ...props }) => {
+const Dashboard = ({ classes, theme,data, ...props }) => {
+console.log(data)
   return (
     <React.Fragment>
       <Stats />
@@ -35,7 +35,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-            <BreedDonut />
+            <BreedDonut data={data.caseCountByBreed}/>
           </Widget>
         </Grid>
         <Grid item lg={4} md={4} sm={6} xs={12}>
@@ -45,7 +45,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-            <DiagnosisDonut />
+            <DiagnosisDonut data={data.caseCountByDiagnosis}/>
           </Widget>
         </Grid>
       </Grid>
@@ -68,7 +68,7 @@ const Dashboard = ({ classes, theme, ...props }) => {
             bodyClass={classes.fullHeightBody}
             className={classes.card}
           >
-            <SexDonut />
+            <GenderDonut data={data.caseCountByGender}/>
           </Widget>
         </Grid>
         <Grid item lg={4} md={4} sm={6} xs={12}>

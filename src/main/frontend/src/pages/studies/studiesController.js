@@ -18,17 +18,6 @@ const GET_STUDYTABLE_DATA_QUERY = gql`{
   }
   `;
 
-//   const GET_STUDYTABLE_DATA = () => {
-//     return (
-//     <Query query={GET_STUDYTABLE_DATA_QUERY}>
-//     {({ data }) => {
-//         return data;
-//       }}
-// }
-// </Query>
-//     )
-//   }
-
 const studiesContainer = ({ classes, theme, ...props }) => {
     return (
         <Query query={GET_STUDYTABLE_DATA_QUERY}>

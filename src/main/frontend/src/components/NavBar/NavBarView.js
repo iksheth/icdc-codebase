@@ -54,7 +54,7 @@ const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
           localStorage.setItem("isAuthorized", "true");          
         })
         .catch(function(error) {
-          // Need to update this
+          // Ajay Need to update this
           // setAuthState({ ...authState, username: "", isAuthorized: false });
           // localStorage.setItem("isAuthorized", "false");
         });
@@ -65,7 +65,6 @@ const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
     isSidebarOpen ? setIsSidebarOpen(true) : setIsSidebarOpen(false);
     setIsSidebarOpen(isSidebarOpen === true ? false : true);
   }
-console.log('hey'+BACKEND_GETUSERINFO_API);
 
   return (
     <React.Fragment>

@@ -10,7 +10,7 @@ import Error from '../../pages/error/Error';
 // import Sidebar from '../Sidebar';
 
 // pages
-import Dashboard from '../../pages/dashboard/dashboard';
+import Dashboard from '../../pages/dashboard/dashboardController';
 import Cases from '../../pages/cases/cases';
 import Studies from '../../pages/studies/studiesController';
 import Programs from '../../pages/programs/programs';
