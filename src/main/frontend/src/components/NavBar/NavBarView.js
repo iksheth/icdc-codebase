@@ -20,7 +20,6 @@ import { NavLink } from "react-router-dom";
 import ProfileMenu from "../ProfileMenu/ProfileMenuView";
 import SideBarContent from "../SideBar/SideBarView";
 import { useTheme } from "../ThemeContext";
-import { Typography, Button as ButtonCustom } from "../Wrappers/Wrappers";
 
 const drawerWidth = 240;
 // const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
