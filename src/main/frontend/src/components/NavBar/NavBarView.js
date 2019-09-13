@@ -26,13 +26,12 @@ const drawerWidth = 240;
 const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 
-
 const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
   const theme = useTheme();
   const [authState, setAuthState] = React.useState({
     isAuthorized: localStorage.getItem("isAuthorized") === "true"
   });
-  
+
   // Similar to componentDidMount and componentDidUpdate:
   // Empty second argument of react useEffect will avoid the infinte loop that caused due to component update
   React.useEffect(() => {
@@ -52,7 +51,7 @@ const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
             isAuthorized: true
           });
           localStorage.setItem("username", JSON.stringify(result.user));
-          localStorage.setItem("isAuthorized", "true");          
+          localStorage.setItem("isAuthorized", "true");
         })
         .catch(function(error) {
           // Ajay Need to update this
@@ -89,34 +88,34 @@ const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
             <MenuIcon />
           </IconButton>
           {/* Reminder: Ajay will to replace the ICDC with env variable and change build npm to read env variable*/}
-          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/dashboard'>
-            <Button
-              variant='h6'
-              weight='medium'
-              className={classes.logotype}
-            >
+          <NavLink
+            className={classes.link}
+            activeStyle={{ borderBottom: "4px solid white" }}
+            to='/dashboard'
+          >
+            <Button variant='h6' weight='medium' className={classes.logotype}>
               Dashboard
             </Button>
           </NavLink>
-          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/programs'>
-            <Button
-              variant='h6'
-              weight='medium'
-              className={classes.logotype}
-            >
+          <NavLink
+            className={classes.link}
+            activeStyle={{ borderBottom: "4px solid white" }}
+            to='/programs'
+          >
+            <Button variant='h6' weight='medium' className={classes.logotype}>
               All Programs
             </Button>
           </NavLink>
-          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/studies'>
-            <Button
-              variant='h6'
-              weight='medium'
-              className={classes.logotype}
-            >
+          <NavLink
+            className={classes.link}
+            activeStyle={{ borderBottom: "4px solid white" }}
+            to='/studies'
+          >
+            <Button variant='h6' weight='medium' className={classes.logotype}>
               All Studies
             </Button>
           </NavLink>
-          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/cases'>
+          {/* <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/cases'>
             <Button
               variant='h6'
               weight='medium'
@@ -124,13 +123,13 @@ const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
             >
               All Cases
             </Button>
-          </NavLink>
-          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/cases'>
-            <Button
-              variant='h6'
-              weight='medium'
-              className={classes.logotype}
-            >
+          </NavLink> */}
+          <NavLink
+            className={classes.link}
+            activeStyle={{ borderBottom: "4px solid white" }}
+            to='/about'
+          >
+            <Button variant='h6' weight='medium' className={classes.logotype}>
               About
             </Button>
           </NavLink>
@@ -152,10 +151,7 @@ const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
           {authState.isAuthorized ? (
             <ProfileMenu />
           ) : (
-            <Button
-              href={FENCE_LOGIN_URL}
-              color='inherit'
-            >
+            <Button href={FENCE_LOGIN_URL} color='inherit'>
               LOGIN
             </Button>
           )}
@@ -189,7 +185,7 @@ const styles = theme => ({
     fontWeight: 500,
     fontSize: 18,
     whiteSpace: "nowrap",
-    minHeight: '60px',
+    minHeight: "60px",
     [theme.breakpoints.down("xs")]: {
       display: "none"
     }
@@ -312,7 +308,7 @@ const styles = theme => ({
   drawerPaper: {
     width: drawerWidth,
     marginTop: "80px"
-  },
+  }
 });
 
 export default withStyles(styles)(NavBar);
