@@ -16,22 +16,23 @@ import {
   Menu as MenuIcon
 } from "@material-ui/icons";
 import classnames from "classnames";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ProfileMenu from "../ProfileMenu/ProfileMenuView";
 import SideBarContent from "../SideBar/SideBarView";
 import { useTheme } from "../ThemeContext";
-import { Typography } from "../Wrappers/Wrappers";
 
 const drawerWidth = 240;
 // const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
 const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 
+
 const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
   const theme = useTheme();
   const [authState, setAuthState] = React.useState({
     isAuthorized: localStorage.getItem("isAuthorized") === "true"
   });
+  
   // Similar to componentDidMount and componentDidUpdate:
   // Empty second argument of react useEffect will avoid the infinte loop that caused due to component update
   React.useEffect(() => {
@@ -88,51 +89,51 @@ const NavBar = ({ classes, isSidebarOpen, setIsSidebarOpen, ...props }) => {
             <MenuIcon />
           </IconButton>
           {/* Reminder: Ajay will to replace the ICDC with env variable and change build npm to read env variable*/}
-          <Link className={classes.link} to='/dashboard'>
-            <Typography
+          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/dashboard'>
+            <Button
               variant='h6'
               weight='medium'
               className={classes.logotype}
             >
               Dashboard
-            </Typography>
-          </Link>
-          <Link className={classes.link} to='/programs'>
-            <Typography
+            </Button>
+          </NavLink>
+          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/programs'>
+            <Button
               variant='h6'
               weight='medium'
               className={classes.logotype}
             >
               All Programs
-            </Typography>
-          </Link>
-          <Link className={classes.link} to='/studies'>
-            <Typography
+            </Button>
+          </NavLink>
+          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/studies'>
+            <Button
               variant='h6'
               weight='medium'
               className={classes.logotype}
             >
               All Studies
-            </Typography>
-          </Link>
-          <Link className={classes.link} to='/cases'>
-            <Typography
+            </Button>
+          </NavLink>
+          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/cases'>
+            <Button
               variant='h6'
               weight='medium'
               className={classes.logotype}
             >
               All Cases
-            </Typography>
-          </Link>
-          <Link className={classes.link} to='/cases'>
-            <Typography
+            </Button>
+          </NavLink>
+          <NavLink className={classes.link} activeStyle={{borderBottom: '4px solid white'}} to='/cases'>
+            <Button
               variant='h6'
               weight='medium'
               className={classes.logotype}
             >
               About
-            </Typography>
-          </Link>
+            </Button>
+          </NavLink>
 
           <div className={classes.grow} />
           <IconButton
@@ -188,6 +189,7 @@ const styles = theme => ({
     fontWeight: 500,
     fontSize: 18,
     whiteSpace: "nowrap",
+    minHeight: '60px',
     [theme.breakpoints.down("xs")]: {
       display: "none"
     }
@@ -310,7 +312,7 @@ const styles = theme => ({
   drawerPaper: {
     width: drawerWidth,
     marginTop: "80px"
-  }
+  },
 });
 
 export default withStyles(styles)(NavBar);
