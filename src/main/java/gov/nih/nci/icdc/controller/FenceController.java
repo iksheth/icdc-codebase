@@ -64,18 +64,8 @@ public class FenceController {
 	public Map<String,String> login(@PathVariable("code") String code, 
 	        HttpServletRequest request, 
 	        HttpServletResponse response) throws Exception {
-		
-		// exchange code for token from fence. 
-		
-		//		{
-		//			"access_token": "",
-		//			"expires_in": 1200,
-		//			"id_token": "",
-		//			"refresh_token": "",
-		//			"token_type": "Bearer"
-		//		}
+
 		String getTokens = service.getToken(code);
-		
 		
 		JsonParser parser = new JsonParser();
 		
