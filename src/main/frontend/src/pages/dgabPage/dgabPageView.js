@@ -4,11 +4,11 @@ import { Typography } from "../../components/Wrappers/Wrappers";
 import dataGovenanceImage from "../../assets/dataSubmission/governance.png";
 import guidelinesDoc from "../../assets/dataSubmission/guidelines.docx";
 
-const SteeringCommittee = ({ classes, theme, data }) => {
+const dgab = ({ classes, theme, data }) => {
   return (
     <div className={classes.pageContainer}>
       <div className={classes.titleContainer}>
-        <div className={classes.pageTitle}>Data Submission Page</div>
+        <div className={classes.pageTitle}>Data Governance Advisory Board</div>
       </div>
       <div className={classes.paragraphContainer}>
         <Typography>
@@ -143,4 +143,4 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles, { withTheme: true })(SteeringCommittee);
+export default withStyles(styles, { withTheme: true })(dgab);

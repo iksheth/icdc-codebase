@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs, Tab, withStyles } from "@material-ui/core";
 import SteeringCommittee from "../steeringCommittee/steeringCommitteeView";
-import DGAB from "../dataSubmissionPage/dataSubmissionPageView";
+import DGAB from "../dgabPage/dgabPageView";
 
 const About = ({ classes }) => {
   const [value, setValue] = React.useState(0);

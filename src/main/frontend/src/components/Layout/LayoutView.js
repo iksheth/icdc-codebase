@@ -18,7 +18,7 @@ import Programs from "../../pages/programs/programs";
 import modelPage from "../../pages/modelPage/modelPageView";
 import table from "../../pages/table/tableView";
 import SteeringCommittee from "../../pages/steeringCommittee/steeringCommitteeView";
-import DataSubmissionPage from "../../pages/dataSubmissionPage/dataSubmissionPageView";
+import DataSubmissionPage from "../../pages/dgabPage/dgabPageView";
 
 const drawerWidth = 240;
 
