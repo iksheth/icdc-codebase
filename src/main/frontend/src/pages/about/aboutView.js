@@ -3,8 +3,8 @@ import { Tabs, Tab, withStyles } from "@material-ui/core";
 import SteeringCommittee from "../steeringCommittee/steeringCommitteeView";
 import DGAB from "../dgabPage/dgabPageView";
 
-const About = ({ classes }) => {
-  const [value, setValue] = React.useState(0);
+const About = ({ classes, currentTab }) => {
+  const [value, setValue] = React.useState(currentTab);
 
   function handleChange(event, newValue) {
     console.log(newValue);
@@ -38,5 +38,9 @@ const styles = theme => ({
     maxWidth: "900px"
   }
 });
+
+About.defaultProps = {
+  currentTab: 0
+};
 
 export default withStyles(styles, { withTheme: true })(About);

@@ -18,7 +18,7 @@ import Programs from "../../pages/programs/programs";
 import modelPage from "../../pages/modelPage/modelPageView";
 import table from "../../pages/table/tableView";
 import SteeringCommittee from "../../pages/steeringCommittee/steeringCommitteeView";
-import DataSubmissionPage from "../../pages/dgabPage/dgabPageView";
+import DGAB from "../../pages/dgabPage/dgbaRoute";
 
 const drawerWidth = 240;
 
@@ -55,8 +55,8 @@ const Layout = ({ classes }) => {
               <Route path='/table' component={table} />
               <Route path='/steeringCommittee' component={SteeringCommittee} />
               <Route
-                path='/dataSubmissionPage'
-                component={DataSubmissionPage}
+                path='/dgab'
+                component={DGAB}
               />
               <Route path='/about' component={About} />
               <Route component={Error} />
