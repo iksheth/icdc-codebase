@@ -12,6 +12,7 @@ const About = ({ classes }) => {
   }
   return (
     <React.Fragment>
+      <div className={classes.tabContainer}>
       <Tabs
         indicatorColor='primary'
         textColor='primary'
@@ -26,42 +27,15 @@ const About = ({ classes }) => {
       </Tabs>
       {value === 0 && <SteeringCommittee />}
       {value === 1 && <DGAB />}
+      </div>
     </React.Fragment>
   );
 };
 
 const styles = theme => ({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    top: 0,
-    left: 0
-  },
-  divider: {
-    height: "1px",
-    width: "800px"
-  },
-  paperRoot: {
-    boxShadow: "none",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    paddingTop: theme.spacing.unit * 12,
-    paddingBottom: theme.spacing.unit * 16,
-    paddingLeft: theme.spacing.unit * 6,
-    paddingRight: theme.spacing.unit * 6,
-    maxWidth: 800
-  },
-  errorTextRow: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: 500
-  },
-  dogHumanHelix: {
-    width: 400
+  tabContainer: {
+    margin: "16px auto",
+    maxWidth: "900px"
   }
 });
 
