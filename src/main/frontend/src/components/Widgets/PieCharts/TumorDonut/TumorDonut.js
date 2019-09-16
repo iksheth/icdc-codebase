@@ -11,7 +11,7 @@ const data = [
   { name: 'V', value: 400 },
   { name: 'VA', value: 300 },
   { name: 'VB', value: 300 },
-  { name: 'VC', value: 200 },
+  { name: 'VC', value: 400 },
   
 ];
 const COLORS = ['#523175','#6e7ff5','#fc4b5b','#2b69a3','#287d6d','#af66ff' ];
