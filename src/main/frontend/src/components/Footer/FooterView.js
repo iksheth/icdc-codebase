@@ -22,7 +22,7 @@ const Footer = ({ classes }) => (
           </li>
           <li>
             <Typography className={classes.footerText}>
-            <Link className={classes.link} to='/steeringCommittee'>
+            <Link className={classes.link} to='/about'>
               Steering Committee
             </Link>
             </Typography>
@@ -76,9 +76,11 @@ const Footer = ({ classes }) => (
             </Typography>
           </li>
           <li>
+          <Link className={classes.link} to='/dgab'>
             <Typography className={classes.footerText}>
               Data Governance Advisory Board
             </Typography>
+            </Link>
           </li>
           <li>
             <Typography className={classes.footerText}>
@@ -103,23 +105,31 @@ const Footer = ({ classes }) => (
               NIH Policies
             </Typography>
           </li>
-          <li href='https://www.cancer.gov/policies/disclaimer'>
+          <li >
             <Typography className={classes.footerText}>
+              <a target="icdc-external" href='https://www.cancer.gov/policies/disclaimer'>
               Disclaimer Policies
+              </a>
             </Typography>
           </li>
-          <li href='https://www.cancer.gov/policies/accessibility'>
+          <li>
             <Typography className={classes.footerText}>
+            <a target="icdc-external" href='https://www.cancer.gov/policies/accessibility'>
               accessibility
+              </a>
             </Typography>
           </li>
-          <li href='https://www.cancer.gov/policies/foia'>
-            <Typography className={classes.footerText}>FOIA</Typography>
+          <li >
+            <Typography className={classes.footerText}>
+              <a target="icdc-external" href='https://www.cancer.gov/policies/foia'>
+              FOIA
+              </a>
+              </Typography>
           </li>
         </ul>
       </div>
       {/* <div className={cn(classes.footerRowSection, classes.footerNciColumn)}>
-                <a href="https://www.cancer.gov/" target="icdc-nci" rel="nofollow">
+                <a target="icdc-external" target="icdc-external" href="https://www.cancer.gov/" target="icdc-nci" rel="nofollow">
                     <img className="nciBadge" src={nciLogo} alt="National Cancer Insistitute" />
                 </a>
             </div> */}
@@ -128,25 +138,25 @@ const Footer = ({ classes }) => (
     <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
       <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
         <Typography>
-          <a href='https://www.hhs.gov'>
+          <a target="icdc-external" href='https://www.hhs.gov'>
             U.S. Department of Health and Human Services
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
         </Typography>
         <Typography>
-          <a href='https://www.nih.gov'>
+          <a target="icdc-external" href='https://www.nih.gov'>
             National Institutes of Health
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
         </Typography>
         <Typography>
-          <a href='https://www.cancer.gov'>
+          <a target="icdc-external" href='https://www.cancer.gov'>
             National Cancer Institute
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
         </Typography>
         <Typography>
-          <a href='https://www.usa.gov'>
+          <a target="icdc-external" href='https://www.usa.gov'>
             USA.gov
             <span
               className={classes.ext}
@@ -159,20 +169,18 @@ const Footer = ({ classes }) => (
     <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
       <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
         <Typography>
-          <a
+          <a target="icdc-external"
             title='link to  Division of Cancer Treatment and Diagnosis'
             href='https://dctd.cancer.gov/'
-            target='icdc-dctd'
           >
             Division of Cancer Treatment and Diagnosis
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
         </Typography>
         <Typography>
-          <a
+          <a target="icdc-external"
             title='link to Center for Biomedical Informatics and Information Technology'
             href='https://datascience.cancer.gov/'
-            target='icdc-cbiit'
           >
             Center for Biomedical Informatics and Information Technology
           </a>
