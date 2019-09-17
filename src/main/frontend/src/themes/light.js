@@ -2,7 +2,7 @@ import tinycolor from "tinycolor2";
 
 const primary = "#092756";
 const secondary = "#2A71A5";
-const warning = "#FFC260";
+const warning = "#ff7f0b";
 const success = "#3CD4A0";
 const info = "#3f2b2f";
 
@@ -75,7 +75,8 @@ export default {
       withbackground: "white",
       primary: "#4A4A4A",
       secondary: "#6E6E6E",
-      hint: "#B9B9B9"
+      hint: "#B9B9B9",
+      link: "#1669aa"
     },
     background: {
       default: "#fafafa",

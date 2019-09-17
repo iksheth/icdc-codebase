@@ -37,6 +37,9 @@ const getFontSize = (size, variant = "", theme) => {
     case "md":
       multiplier = 1.5;
       break;
+    case "l":
+      multiplier = 1.7;
+      break;
     case "xl":
       multiplier = 2;
       break;
