@@ -66,14 +66,7 @@ public class FenceController {
 	        HttpServletResponse response) throws Exception {
 		
 		// exchange code for token from fence. 
-		
-		//		{
-		//			"access_token": "",
-		//			"expires_in": 1200,
-		//			"id_token": "",
-		//			"refresh_token": "",
-		//			"token_type": "Bearer"
-		//		}
+	
 		String getTokens = service.getToken(code);
 		
 		
