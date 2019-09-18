@@ -68,8 +68,7 @@ public class FenceController {
 		// exchange code for token from fence. 
 	
 		String getTokens = service.getToken(code);
-		
-		
+			
 		JsonParser parser = new JsonParser();
 		
 		JsonElement jsonTree = parser.parse(getTokens);
