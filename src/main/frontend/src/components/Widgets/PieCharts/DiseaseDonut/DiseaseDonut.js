@@ -11,7 +11,7 @@ const data = [
   { name: 'E', value: 400 },
   { name: 'F', value: 200 },
 ];
-const COLORS = ['#523175','#6e7ff5','#fc4b5b','#2b69a3','#287d6d','#af66ff' ];
+const COLORS = ['#523175', '#6e7ff5', '#fc4b5b', '#2b69a3', '#287d6d', '#af66ff'];
 
 export default class DiseaseDonut extends PureComponent {
   render() {

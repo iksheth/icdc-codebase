@@ -1,25 +1,23 @@
-import React from "react";
+import React from 'react';
 import {
   withStyles,
-} from "@material-ui/core";
-import icdcSchema from "../../assets/icdcSchema.svg";
+} from '@material-ui/core';
+import icdcSchema from '../../assets/icdcSchema.svg';
 
-const ModelPage = ({ classes, theme, ...props }) => {
-  return (
-    <React.Fragment>
-          <div className={classes.schema}>
-            <img src={icdcSchema} alt="ICDC schema"/>
-          </div>
-    </React.Fragment>
-  );
-};
+const ModelPage = ({ classes }) => (
+  <>
+    <div className={classes.schema}>
+      <img src={icdcSchema} alt="ICDC schema" />
+    </div>
+  </>
+);
 
-const styles = (theme) => ({
+const styles = () => ({
   schema: {
     overflowX: 'scroll',
-    maxWidth:'100%',
-    overflowY: 'scroll'
-  }
+    maxWidth: '100%',
+    overflowY: 'scroll',
+  },
 });
 
 export default withStyles(styles, { withTheme: true })(ModelPage);

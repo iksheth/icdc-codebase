@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const GET_STATS = gql`{
+const GET_STATS = gql`{
   numberOfStudies
   numberOfCases
   numberOfSamples
@@ -8,3 +8,5 @@ export const GET_STATS = gql`{
   numberOfAliquots
   }
   `;
+
+export default (GET_STATS);

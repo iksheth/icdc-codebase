@@ -1,10 +1,9 @@
-import React from "react";
+import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import CaseView from './caseView';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Typography } from "../../../components/Wrappers/Wrappers";
-
+import CaseView from './caseView';
+import { Typography } from '../../../components/Wrappers/Wrappers';
 
 
 const GET_STUDYTABLE_DATA_QUERY = gql`{
@@ -23,18 +22,12 @@ const GET_STUDYTABLE_DATA_QUERY = gql`{
   `;
 
 
-const caseContainer = ({ classes, theme, ...props }) => {
-    return (
-        <Query query={GET_STUDYTABLE_DATA_QUERY}>
-            {({ data, loading, error }) => {
-                return (loading ? < CircularProgress /> : (error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography> :
-                    <CaseView data={data} />
-                ));
-            }
-            }
-        </Query>
-    );
-};
+const caseContainer = () => (
+  <Query query={GET_STUDYTABLE_DATA_QUERY}>
+    {({ data, loading, error }) => (loading ? <CircularProgress /> : (error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
+      : <CaseView data={data} />
+    ))}
+  </Query>
+);
 
 export default caseContainer;
-

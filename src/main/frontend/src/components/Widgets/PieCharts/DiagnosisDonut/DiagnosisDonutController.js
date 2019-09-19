@@ -1,8 +1,8 @@
-import React from "react";
-import DiagnosisDonutView from "./DiagnosisDonutView";
+import React from 'react';
+import DiagnosisDonutView from './DiagnosisDonutView';
 
-const DiagnosisDonutController = ({ classes, theme,data, ...props }) => {
-  return <DiagnosisDonutView data={data} />
-};
+const DiagnosisDonutController = ({
+  data,
+}) => <DiagnosisDonutView data={data} />;
 
 export default DiagnosisDonutController;
