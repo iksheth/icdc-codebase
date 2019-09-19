@@ -55,13 +55,25 @@ const StudyDetailView = ({ classes, theme, data }) => {
       principal_investigators.push(<li key={ d.principal_investigators[k].pi_first_name}>{d.principal_investigators[k].pi_first_name,d.principal_investigators[k].pi_last_name}</li>);
     }
   }
+
+  let file_type =[]
+  let file_type_added = [];
+  if(data.fileOfStudy){
+     for (var m = data.fileOfStudy.length - 1;m>= 0; m--) {
+      if(!file_type_added.includes(data.fileOfStudy[m].file_type)){
+            file_type_added.push(data.fileOfStudy[m].file_type);
+            file_type.push(<li key={ data.fileOfStudy[m].file_type}>{data.fileOfStudy[m].file_type}</li>);
+      }
+  
+    }
+  }
   
   let stat ={
-    numberOfStudies:0,
-    numberOfCases:0,
-    numberOfSamples:0,
-    numberOfFiles:0,
-    numberOfBiospecimenAliquots:0
+    numberOfStudies:1,
+    numberOfCases:data.caseCountOfStudy,
+    numberOfSamples:data.sampleCountOfStudy,
+    numberOfFiles:data.fileCountOfStudy,
+    numberOfBiospecimenAliquots:data.aliguotCountOfStudy
   }
   return (
     <React.Fragment>
@@ -87,11 +99,19 @@ const StudyDetailView = ({ classes, theme, data }) => {
            <p>{d.dates_of_conduct}</p>
        
         </Grid>
-        <Grid item lg={6} md={6} sm={6} xs={12}>
+        <Grid item lg={3} md={3} sm={6} xs={12}>
            <p className={classes.paragraphStyle}>
             DIAGNOSES:
           </p>
           <p>{diagnoses}</p>
+       
+        </Grid>
+
+        <Grid item lg={3} md={3} sm={6} xs={12}>
+           <p className={classes.paragraphStyle}>
+            File Type:
+          </p>
+          <p>{file_type}</p>
        
         </Grid>
       </Grid>
