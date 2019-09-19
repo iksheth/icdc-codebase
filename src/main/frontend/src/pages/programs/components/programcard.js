@@ -1,58 +1,58 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/";
-import cotcImg from "../../../assets/cotc.png";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import { Typography, Button } from "../../../components/Wrappers/Wrappers";
+import React from 'react';
+import { withStyles } from '@material-ui/core/';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import cotcImg from '../../../assets/cotc.png';
+import { Typography, Button } from '../../../components/Wrappers/Wrappers';
 
-const styles = theme => ({
+const styles = (theme) => ({
   card: {
     maxWidth: 345,
-    "& a": {
+    '& a': {
       color: theme.palette.text.link,
-      textDecoration: "none",
-        "&:hover": {
-        cursor: "pointer",
-        textDecoration: "underline"
-      }
-    }
+      textDecoration: 'none',
+      '&:hover': {
+        cursor: 'pointer',
+        textDecoration: 'underline',
+      },
+    },
   },
   media: {
     height: 0,
-    paddingTop: "56.25%" // 16:9
+    paddingTop: '56.25%', // 16:9
   },
   cardHeaderContainer: {
-    padding: "16px",
-    alignItems: "center"
-  }
+    padding: '16px',
+    alignItems: 'center',
+  },
 });
 
-const ProgramCard = ({ classes, title, subheader, shortDesc, link }) => {
-  return (
-    <Card className={classes.card}>
-      <div className={classes.cardHeaderContainer}>
-        <Typography weight='bold' size='l' color='warning'>
-          {title}
-        </Typography>
-        <Typography color='primary'>{subheader}</Typography>
-      </div>
-      <CardMedia className={classes.media} image={cotcImg} title='cotc' />
-      <CardContent>
-        <Typography component='p'>{shortDesc}</Typography>
-        <Typography>
-          <a href='/' target="icdc">Read More >></a>
-        </Typography>
-        <Typography>
+const ProgramCard = ({
+  classes, title, subheader, shortDesc, link,
+}) => (
+  <Card className={classes.card}>
+    <div className={classes.cardHeaderContainer}>
+      <Typography weight="bold" size="l" color="warning">
+        {title}
+      </Typography>
+      <Typography color="primary">{subheader}</Typography>
+    </div>
+    <CardMedia className={classes.media} image={cotcImg} title="cotc" />
+    <CardContent>
+      <Typography component="p">{shortDesc}</Typography>
+      <Typography>
+        <a href="/" target="icdc">Read More >></a>
+      </Typography>
+      <Typography>
         <a href={link} target="icdc">{link}</a>
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <Button color='secondary'>Associated Studies</Button>
-      </CardActions>
-    </Card>
-  );
-};
+      </Typography>
+    </CardContent>
+    <CardActions disableSpacing>
+      <Button color="secondary">Associated Studies</Button>
+    </CardActions>
+  </Card>
+);
 
 export default withStyles(styles, { withTheme: true })(ProgramCard);
