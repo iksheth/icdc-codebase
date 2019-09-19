@@ -3,7 +3,7 @@ import darkTheme from './dark';
 
 export default {
   light: lightTheme,
-  dark: darkTheme
+  dark: darkTheme,
 };
 
 export const overrides = {
@@ -25,6 +25,6 @@ export const overrides = {
     },
     h6: {
       fontSize: '1.142rem',
-    }
-  }
+    },
+  },
 };
