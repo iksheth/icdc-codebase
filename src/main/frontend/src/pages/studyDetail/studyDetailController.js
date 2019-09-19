@@ -9,17 +9,17 @@ import { Typography } from "../../components/Wrappers/Wrappers";
 const GET_STUDYTABLE_DATA_QUERY = gql`
   query Study($clinical_study_designation: String!) {
 
- sampleCountOfStudy(study_code:$clinical_study_designation)
+   sampleCountOfStudy(study_code:$clinical_study_designation)
 
- fileCountOfStudy(study_code: $clinical_study_designation)
+   fileCountOfStudy(study_code: $clinical_study_designation)
 
- aliguotCountOfStudy(study_code: $clinical_study_designation)
+   aliguotCountOfStudy(study_code: $clinical_study_designation)
 
- caseCountOfStudy(study_code: $clinical_study_designation)
+   caseCountOfStudy(study_code: $clinical_study_designation)
 
- fileOfStudy(study_code: $clinical_study_designation){
-  file_type
- }
+   fileOfStudy(study_code: $clinical_study_designation){
+    file_type
+   }
 
   study(clinical_study_designation: $clinical_study_designation){
     clinical_study_id

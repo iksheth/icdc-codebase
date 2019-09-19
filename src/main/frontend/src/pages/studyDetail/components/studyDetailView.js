@@ -32,7 +32,7 @@ const StudyDetailView = ({ classes, theme, data }) => {
       cases = d.cases;
   }
   let diagnoses = [];
-  let diagnoses_added = [];
+  let diagnoses_added = []; // for skiping duplicated disease_term
   if(cases!=""){
     for (var i = cases.length - 1; i >= 0; i--) {
      if(cases[i].diagnoses){
@@ -57,7 +57,7 @@ const StudyDetailView = ({ classes, theme, data }) => {
   }
 
   let file_type =[]
-  let file_type_added = [];
+  let file_type_added = []; //for skiping duplicated file type
   if(data.fileOfStudy){
      for (var m = data.fileOfStudy.length - 1;m>= 0; m--) {
       if(!file_type_added.includes(data.fileOfStudy[m].file_type)){
