@@ -1,9 +1,11 @@
-import React from "react";
+/* eslint-disable */
+
+import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import StudyDetailView from "./components/studyDetailView"
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Typography } from "../../components/Wrappers/Wrappers";
+import StudyDetailView from './components/studyDetailView';
+import { Typography } from '../../components/Wrappers/Wrappers';
 
 
 const GET_STUDYTABLE_DATA_QUERY = gql`
@@ -44,26 +46,18 @@ const GET_STUDYTABLE_DATA_QUERY = gql`
   
  }`;
 
-const StudyDetailContainer = ({match}) => {
-
-
-    return (
-        <Query query={GET_STUDYTABLE_DATA_QUERY} variables={{"clinical_study_designation":match.params.id}}>
-            {({ data, loading, error }) => {
-                return (
-                        loading ? < CircularProgress /> : 
-                        (
-                          error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography> :
-                            (
-                              data && data.study[0] ? <StudyDetailView data={data} /> : <Typography variant="headline" color="warning" size="sm">{`No data`}</Typography> 
-                              )
-                         ) 
-                      );
-            }
-            }
-        </Query>
-    );
-};
+const StudyDetailContainer = ({ match }) => (
+  <Query query={GET_STUDYTABLE_DATA_QUERY} variables={{ clinical_study_designation: match.params.id }}>
+    {({ data, loading, error }) => (
+      loading ? <CircularProgress />
+        : (
+          error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
+            : (
+              data && data.study[0] ? <StudyDetailView data={data} /> : <Typography variant="headline" color="warning" size="sm">No data</Typography>
+            )
+        )
+    )}
+  </Query>
+);
 
 export default StudyDetailContainer;
-

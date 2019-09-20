@@ -12,15 +12,15 @@ import Error from '../../pages/error/Error';
 
 // pages
 
-import Dashboard from "../../pages/dashboard/dashboardController";
-import Cases from "../../pages/cases/cases";
-import Studies from "../../pages/studies/studiesController";
-import Programs from "../../pages/programs/programs";
-import modelPage from "../../pages/modelPage/modelPageView";
-import table from "../../pages/table/tableView";
-import SteeringCommittee from "../../pages/steeringCommittee/steeringCommitteeView";
-import DGAB from "../../pages/dgabPage/dgbaRoute";
-import StudyDetail from "../../pages/studyDetail/studyDetailController";
+import Dashboard from '../../pages/dashboard/dashboardController';
+import Cases from '../../pages/cases/cases';
+import Studies from '../../pages/studies/studiesController';
+import Programs from '../../pages/programs/programs';
+import modelPage from '../../pages/modelPage/modelPageView';
+import table from '../../pages/table/tableView';
+import SteeringCommittee from '../../pages/steeringCommittee/steeringCommitteeView';
+import DGAB from '../../pages/dgabPage/dgbaRoute';
+import StudyDetail from '../../pages/studyDetail/studyDetailController';
 
 
 const drawerWidth = 240;
@@ -63,8 +63,8 @@ const Layout = ({ classes }) => {
                 component={DGAB}
               />
 
-              <Route path='/about' component={About} />
-              <Route path='/studyDetail/:id' component={StudyDetail} />
+              <Route path="/about" component={About} />
+              <Route path="/studyDetail/:id" component={StudyDetail} />
 
               <Route component={Error} />
             </Switch>
