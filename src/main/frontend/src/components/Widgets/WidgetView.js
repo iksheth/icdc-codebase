@@ -1,10 +1,11 @@
-import React from "react";
-import classnames from "classnames";
+/* eslint-disable */
+import React from 'react';
+import classnames from 'classnames';
 import {
   Paper,
-  withStyles
-} from "@material-ui/core";
-import Typography from "@material-ui/core/es/Typography/Typography";
+  withStyles,
+} from '@material-ui/core';
+import Typography from '@material-ui/core/es/Typography/Typography';
 
 const Widget = ({
   classes,
@@ -13,6 +14,7 @@ const Widget = ({
   noBodyPadding,
   bodyClass,
   className,
+  header,
   ...props
 }) => (
   <div className={classes.widgetWrapper}>
@@ -21,17 +23,17 @@ const Widget = ({
         {props.header ? (
           props.header
         ) : (
-          <React.Fragment>
+          <>
             <Typography variant="headline" color="info">
               {title}
             </Typography>
-          </React.Fragment>
+          </>
         )}
       </div>
       <div
         className={classnames(classes.widgetBody, {
           [classes.noPadding]: noBodyPadding,
-          [bodyClass]: bodyClass
+          [bodyClass]: bodyClass,
         })}
       >
         {children}
@@ -42,15 +44,15 @@ const Widget = ({
 
 const styles = (theme) => ({
   widgetWrapper: {
-    display: "flex",
-    minHeight: "100%"
+    display: 'flex',
+    minHeight: '100%',
   },
   widgetHeader: {
     padding: theme.spacing.unit * 3,
     paddingBottom: theme.spacing.unit,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   widgetRoot: {
     // boxShadow: theme.customShadows.widget
@@ -58,18 +60,18 @@ const styles = (theme) => ({
   widgetBody: {
     paddingBottom: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
-    paddingLeft: theme.spacing.unit * 3
+    paddingLeft: theme.spacing.unit * 3,
   },
   noPadding: {
-    padding: 0
+    padding: 0,
   },
   paper: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     flexGrow: 1,
-    overflow: "hidden",
-    background: theme.custom.cardBackGround
-  }
+    overflow: 'hidden',
+    background: theme.custom.cardBackGround,
+  },
 });
 
 export default withStyles(styles, { withTheme: true })(Widget);

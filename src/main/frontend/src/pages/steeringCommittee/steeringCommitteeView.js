@@ -1,16 +1,15 @@
-import React from "react";
-import { withStyles } from "@material-ui/core";
-import SteeringCommitteeTable from "./steeringCommitteeTable";
-import { Typography } from "../../components/Wrappers/Wrappers";
+import React from 'react';
+import { withStyles } from '@material-ui/core';
+import SteeringCommitteeTable from './steeringCommitteeTable';
+import { Typography } from '../../components/Wrappers/Wrappers';
 
-const SteeringCommittee = ({ classes, theme, data }) => {
-  return (
-    <div className={classes.pageContainer}>
-      <div className={classes.titleContainer}>
-        <div className={classes.pageTitle}>Steering Committee</div>
-      </div>
-      <Typography>
-        <p className={classes.paragraphStyle}>
+const SteeringCommittee = ({ classes }) => (
+  <div className={classes.pageContainer}>
+    <div className={classes.titleContainer}>
+      <div className={classes.pageTitle}>Steering Committee</div>
+    </div>
+    <Typography>
+      <p className={classes.paragraphStyle}>
           Among the important NCI principles related to data commons is
           "community-driven", meaning that the data commons will be built with
           input and collaboration from many groups to foster a diversity of
@@ -21,17 +20,20 @@ const SteeringCommittee = ({ classes, theme, data }) => {
           ICDC and identify use cases for working with the data in the ICDC. The
           Steering Committee plays an important role in sourcing data for
           incorporation in the ICDC and in early use and feedback of the ICDC
-          focusing on the gathered use cases.{" "}
-        </p>{" "}
-      </Typography>
-      <Typography>
-        <p className={classes.paragraphStyle}>
+          focusing on the gathered use cases.
+        {' '}
+      </p>
+      {' '}
+    </Typography>
+    <Typography>
+      <p className={classes.paragraphStyle}>
           The SC has two subcommittees: the Data Governance Advisory Board
           (DGAB) and the Best Practices Sub-Committee (BPSC).
-        </p>{" "}
-      </Typography>
-      <Typography>
-        <p className={classes.paragraphStyle}>
+      </p>
+      {' '}
+    </Typography>
+    <Typography>
+      <p className={classes.paragraphStyle}>
           The DGAB is charged with managing the data submission requests (link
           to data submission page) to the ICDC during the prototype phase of the
           project. It has developed a process by which the community can request
@@ -40,10 +42,11 @@ const SteeringCommittee = ({ classes, theme, data }) => {
           provided to a Senior Advisory Committee at NCI, which determines which
           data will be included in ICDC. Decisions are tracked and communicated
           to all relevant stakeholders, in a timely manner.
-        </p>{" "}
-      </Typography>
-      <Typography>
-        <p className={classes.paragraphStyle}>
+      </p>
+      {' '}
+    </Typography>
+    <Typography>
+      <p className={classes.paragraphStyle}>
           The Best Practices Subcommittee (BPSC) has responsibility for
           identifying and recommending best practices that the ICDC will
           implement to streamline and harmonize data collection, standardize
@@ -53,41 +56,43 @@ const SteeringCommittee = ({ classes, theme, data }) => {
           goal of the BPSC will be to streamline and standardize data collection
           and management for canine studies. The BPSC will examine past and
           planned studies and will recommend prospective standards for data
-          collection and management.{" "}
-        </p>{" "}
-      </Typography>
-      <Typography>
-        <p className={classes.paragraphStyle}>
-          <SteeringCommitteeTable />
-        </p>{" "}
-      </Typography>
-    </div>
-  );
-};
+          collection and management.
+        {' '}
+      </p>
+      {' '}
+    </Typography>
+    <Typography>
+      <p className={classes.paragraphStyle}>
+        <SteeringCommitteeTable />
+      </p>
+      {' '}
+    </Typography>
+  </div>
+);
 
-const styles = theme => ({
+const styles = () => ({
   pageContainer: {
-    margin: "0 auto",
-    padding: "0px 16px",
-    maxWidth: "1440px",
-    minHeight: "160px",
-    fontWeight: "400",
-    lineHeight: "1.5"
+    margin: '0 auto',
+    padding: '0px 16px',
+    maxWidth: '1440px',
+    minHeight: '160px',
+    fontWeight: '400',
+    lineHeight: '1.5',
   },
   titleContainer: {
-    marginBottom: "16px",
-    textAlign: "center",
-    width: "100%"
+    marginBottom: '16px',
+    textAlign: 'center',
+    width: '100%',
   },
   pageTitle: {
-    color: "#142A4E",
-    fontSize: "2.8125rem",
-    fontWeight: "400"
+    color: '#142A4E',
+    fontSize: '2.8125rem',
+    fontWeight: '400',
   },
   paragraphStyle: {
-    margin: "16px auto",
-    maxWidth: "900px"
-  }
+    margin: '16px auto',
+    maxWidth: '900px',
+  },
 });
 
 export default withStyles(styles, { withTheme: true })(SteeringCommittee);

@@ -1,14 +1,15 @@
-import React from "react";
+/* eslint-disable */
+import React from 'react';
 import {
   withStyles,
   withTheme,
   Badge as BadgeBase,
   Typography as TypographyBase,
-  Button as ButtonBase
-} from "@material-ui/core";
-import classnames from "classnames";
+  Button as ButtonBase,
+} from '@material-ui/core';
+import classnames from 'classnames';
 
-const getColor = (color, theme, brigtness = "main") => {
+const getColor = (color, theme, brigtness = 'main') => {
   if (color && theme.palette[color] && theme.palette[color][brigtness]) {
     return theme.palette[color][brigtness];
   }
@@ -16,34 +17,34 @@ const getColor = (color, theme, brigtness = "main") => {
 
 const getFontWeight = (style) => {
   switch (style) {
-    case "light":
+    case 'light':
       return 300;
-    case "medium":
+    case 'medium':
       return 500;
-    case "bold":
+    case 'bold':
       return 600;
     default:
       return 400;
   }
 };
 
-const getFontSize = (size, variant = "", theme) => {
+const getFontSize = (size, variant = '', theme) => {
   let multiplier;
 
   switch (size) {
-    case "sm":
+    case 'sm':
       multiplier = 0.8;
       break;
-    case "md":
+    case 'md':
       multiplier = 1.5;
       break;
-    case "l":
+    case 'l':
       multiplier = 1.7;
       break;
-    case "xl":
+    case 'xl':
       multiplier = 2;
       break;
-    case "xxl":
+    case 'xxl':
       multiplier = 3;
       break;
     default:
@@ -51,16 +52,15 @@ const getFontSize = (size, variant = "", theme) => {
       break;
   }
 
-  const defaultSize =
-    variant && theme.typography[variant]
-      ? theme.typography[variant].fontSize
-      : theme.typography.fontSize + "px";
+  const defaultSize = variant && theme.typography[variant]
+    ? theme.typography[variant].fontSize
+    : `${theme.typography.fontSize}px`;
 
   return `calc(${defaultSize} * ${multiplier})`;
 };
 
 const createStyled = (styles, options) => {
-  const Styled = props => {
+  const Styled = (props) => {
     const { children, ...other } = props;
     return children(other);
   };
@@ -68,19 +68,21 @@ const createStyled = (styles, options) => {
   return withStyles(styles, options)(Styled);
 };
 
-const BadgeExtended = ({ classes, theme, children, colorBrightness, ...props }) => {
+const BadgeExtended = ({
+  classes, theme, children, colorBrightness, ...props
+}) => {
   const Styled = createStyled({
     badge: {
-      backgroundColor: getColor(props.color, theme, colorBrightness)
-    }
+      backgroundColor: getColor(props.color, theme, colorBrightness),
+    },
   });
 
   return (
     <Styled>
-      {styledProps => (
+      {(styledProps) => (
         <BadgeBase
           classes={{
-            badge: classnames(classes.badge, styledProps.classes.badge)
+            badge: classnames(classes.badge, styledProps.classes.badge),
           }}
           {...props}
         >
@@ -92,22 +94,24 @@ const BadgeExtended = ({ classes, theme, children, colorBrightness, ...props }) 
 };
 
 export const Badge = withStyles(
-  theme => ({
+  () => ({
     badge: {
       fontWeight: 600,
       height: 16,
-      minWidth: 16
-    }
+      minWidth: 16,
+    },
   }),
-  { withTheme: true }
+  { withTheme: true },
 )(BadgeExtended);
 
-const TypographyExtended = ({ theme, children, weight, size, colorBrightness, ...props }) => (
+const TypographyExtended = ({
+  theme, children, weight, size, colorBrightness, ...props
+}) => (
   <TypographyBase
     style={{
       color: getColor(props.color, theme, colorBrightness),
       fontWeight: getFontWeight(weight),
-      fontSize: getFontSize(size, props.variant, theme)
+      fontSize: getFontSize(size, props.variant, theme),
     }}
     {...props}
   >
@@ -126,8 +130,8 @@ const ButtonExtended = ({ theme, children, ...props }) => {
       '&:hover': {
         backgroundColor: getColor(props.color, theme, 'light'),
         boxShadow: theme.customShadows.widgetWide,
-      }
-    }
+      },
+    },
   });
 
   return (

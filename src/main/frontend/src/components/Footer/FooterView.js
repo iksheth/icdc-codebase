@@ -1,9 +1,8 @@
-import React from "react";
-import { withStyles } from "@material-ui/core";
-import PropTypes from "prop-types";
-import { Typography } from "../Wrappers/Wrappers";
-import cn from "../../utils/classNameConcat";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { withStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Typography } from '../Wrappers/Wrappers';
+import cn from '../../utils/classNameConcat';
 // import nciLogo from '../../assets/nci_logo.svg';
 
 const Footer = ({ classes }) => (
@@ -13,8 +12,8 @@ const Footer = ({ classes }) => (
         <ul>
           <li>
             <Typography
-              variant='h6'
-              weight='medium'
+              variant="h6"
+              weight="medium"
               className={cn(classes.footerText, classes.listHeader)}
             >
               About ICDC
@@ -22,9 +21,9 @@ const Footer = ({ classes }) => (
           </li>
           <li>
             <Typography className={classes.footerText}>
-            <Link className={classes.link} to='/about'>
+              <Link className={classes.link} to="/about">
               Steering Committee
-            </Link>
+              </Link>
             </Typography>
           </li>
           <li>
@@ -42,8 +41,8 @@ const Footer = ({ classes }) => (
         <ul>
           <li>
             <Typography
-              variant='h6'
-              weight='medium'
+              variant="h6"
+              weight="medium"
               className={cn(classes.footerText, classes.listHeader)}
             >
               About the Data
@@ -68,18 +67,18 @@ const Footer = ({ classes }) => (
         <ul>
           <li>
             <Typography
-              variant='h6'
-              weight='medium'
+              variant="h6"
+              weight="medium"
               className={cn(classes.footerText, classes.listHeader)}
             >
               About Data Submission
             </Typography>
           </li>
           <li>
-          <Link className={classes.link} to='/dgab'>
-            <Typography className={classes.footerText}>
+            <Link className={classes.link} to="/dgab">
+              <Typography className={classes.footerText}>
               Data Governance Advisory Board
-            </Typography>
+              </Typography>
             </Link>
           </li>
           <li>
@@ -98,33 +97,33 @@ const Footer = ({ classes }) => (
         <ul>
           <li>
             <Typography
-              variant='h6'
-              weight='medium'
+              variant="h6"
+              weight="medium"
               className={cn(classes.footerText, classes.listHeader)}
             >
               NIH Policies
             </Typography>
           </li>
-          <li >
+          <li>
             <Typography className={classes.footerText}>
-              <a target="icdc-external" href='https://www.cancer.gov/policies/disclaimer'>
+              <a target="icdc-external" href="https://www.cancer.gov/policies/disclaimer">
               Disclaimer Policies
               </a>
             </Typography>
           </li>
           <li>
             <Typography className={classes.footerText}>
-            <a target="icdc-external" href='https://www.cancer.gov/policies/accessibility'>
+              <a target="icdc-external" href="https://www.cancer.gov/policies/accessibility">
               accessibility
               </a>
             </Typography>
           </li>
-          <li >
+          <li>
             <Typography className={classes.footerText}>
-              <a target="icdc-external" href='https://www.cancer.gov/policies/foia'>
+              <a target="icdc-external" href="https://www.cancer.gov/policies/foia">
               FOIA
               </a>
-              </Typography>
+            </Typography>
           </li>
         </ul>
       </div>
@@ -138,30 +137,30 @@ const Footer = ({ classes }) => (
     <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
       <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
         <Typography>
-          <a target="icdc-external" href='https://www.hhs.gov'>
+          <a target="icdc-external" href="https://www.hhs.gov">
             U.S. Department of Health and Human Services
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
         </Typography>
         <Typography>
-          <a target="icdc-external" href='https://www.nih.gov'>
+          <a target="icdc-external" href="https://www.nih.gov">
             National Institutes of Health
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
         </Typography>
         <Typography>
-          <a target="icdc-external" href='https://www.cancer.gov'>
+          <a target="icdc-external" href="https://www.cancer.gov">
             National Cancer Institute
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
         </Typography>
         <Typography>
-          <a target="icdc-external" href='https://www.usa.gov'>
+          <a target="icdc-external" href="https://www.usa.gov">
             USA.gov
             <span
               className={classes.ext}
-              aria-label='(link is external)'
-            ></span>
+              aria-label="(link is external)"
+            />
           </a>
         </Typography>
       </div>
@@ -169,18 +168,20 @@ const Footer = ({ classes }) => (
     <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
       <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
         <Typography>
-          <a target="icdc-external"
-            title='link to  Division of Cancer Treatment and Diagnosis'
-            href='https://dctd.cancer.gov/'
+          <a
+            target="icdc-external"
+            title="link to  Division of Cancer Treatment and Diagnosis"
+            href="https://dctd.cancer.gov/"
           >
             Division of Cancer Treatment and Diagnosis
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
         </Typography>
         <Typography>
-          <a target="icdc-external"
-            title='link to Center for Biomedical Informatics and Information Technology'
-            href='https://datascience.cancer.gov/'
+          <a
+            target="icdc-external"
+            title="link to Center for Biomedical Informatics and Information Technology"
+            href="https://datascience.cancer.gov/"
           >
             Center for Biomedical Informatics and Information Technology
           </a>
@@ -192,12 +193,13 @@ const Footer = ({ classes }) => (
         className={cn(
           classes.extraPadding,
           classes.nciLinks,
-          classes.contentJustifyCenter
+          classes.contentJustifyCenter,
         )}
       >
         <Typography>
           <span className={classes.turningNIH}>
-            NIH … Turning Discovery Into Health<sup>®</sup>
+            NIH … Turning Discovery Into Health
+            <sup>®</sup>
           </span>
         </Typography>
       </div>
@@ -208,7 +210,7 @@ const Footer = ({ classes }) => (
         className={cn(
           classes.extraPadding,
           classes.nciLinks,
-          classes.contentJustifyCenter
+          classes.contentJustifyCenter,
         )}
       >
         <Typography>
@@ -220,144 +222,140 @@ const Footer = ({ classes }) => (
   </footer>
 );
 
-const styles = theme => ({
+const styles = (theme) => ({
   ext: {
-    "@media (max-width: 600px)": {
-      display: "none"
-    }
+    '@media (max-width: 600px)': {
+      display: 'none',
+    },
   },
   extraPadding: {
-    marginTop: "20px",
-    "@media (max-width: 600px)": {
-      marginTop: "0px"
-    }
+    marginTop: '20px',
+    '@media (max-width: 600px)': {
+      marginTop: '0px',
+    },
   },
   footerText: {
-    color: "white",
+    color: 'white',
     marginLeft: theme.spacing.unit * 2.5,
     marginRight: theme.spacing.unit * 2.5,
     fontWeight: 500,
-    lineHeight: "1.71",
-    whiteSpace: "nowrap",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: 12
-    }
+    lineHeight: '1.71',
+    whiteSpace: 'nowrap',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: 12,
+    },
   },
   nciLinks: {
-    display: "flex",
-    "@media (max-width: 600px)": {
-      flexDirection: "column",
-      marginLeft: "20px"
-    }
+    display: 'flex',
+    '@media (max-width: 600px)': {
+      flexDirection: 'column',
+      marginLeft: '20px',
+    },
   },
   listHeader: {
-    paddingBottom: "8px"
+    paddingBottom: '8px',
   },
   footerComponent: {
-    lineHeight: "1.42857143",
-    margin: "0",
-    "-webkit-font-smoothing": "antialiased",
-    background: "#2e2a24",
-    color: "#FFFFFF",
-    padding: "24px 16px 64px 24px",
-    "& ul": {
-      listStyle: "none",
-      margin: "0",
-      padding: "0"
+    lineHeight: '1.42857143',
+    margin: '0',
+    '-webkit-font-smoothing': 'antialiased',
+    background: '#2e2a24',
+    color: '#FFFFFF',
+    padding: '24px 16px 64px 24px',
+    '& ul': {
+      listStyle: 'none',
+      margin: '0',
+      padding: '0',
     },
 
-    "& li": {
-      lineHeight: "2.17"
+    '& li': {
+      lineHeight: '2.17',
     },
 
     /* Style a button like a link for accessibility */
-    "& button": {
-      background: "none!important",
-      color: "inherit",
-      border: "none",
-      padding: "0!important",
-      font: "inherit",
-      cursor: "pointer"
+    '& button': {
+      background: 'none!important',
+      color: 'inherit',
+      border: 'none',
+      padding: '0!important',
+      font: 'inherit',
+      cursor: 'pointer',
     },
 
-    "& a, & button": {
-      color: "#FFFFFF",
-      textDecoration: "none",
+    '& a, & button': {
+      color: '#FFFFFF',
+      textDecoration: 'none',
 
-      "&:hover": {
-        cursor: "pointer",
-        textDecoration: "underline"
-      }
-    }
+      '&:hover': {
+        cursor: 'pointer',
+        textDecoration: 'underline',
+      },
+    },
   },
   footerRow: {
-    display: "flex",
-    flexDirection: "column",
-    width: "1440px",
-    margin: "0 auto",
+    display: 'flex',
+    flexDirection: 'column',
+    width: '1440px',
+    margin: '0 auto',
 
-    "@media (min-width: 600px)": {
-      flexDirection: "row",
-      justifyContent: "space-between"
-    }
+    '@media (min-width: 600px)': {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
   },
   footerRowSection: {
-    marginTop: "16px"
+    marginTop: '16px',
   },
   turningNIH: {
-    fontSize: "16px",
-    color: "#FFFFFF",
-    textDecoration: "none"
+    fontSize: '16px',
+    color: '#FFFFFF',
+    textDecoration: 'none',
   },
   footerNciColumn: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    "@media (max-width: 600px)": {
-      marginLeft: "20px"
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    '@media (max-width: 600px)': {
+      marginLeft: '20px',
     },
 
-    "@media (min-width: 600px)": {
-      width: "200px"
+    '@media (min-width: 600px)': {
+      width: '200px',
     },
 
-    "@media (min-width: 960px)": {
-      width: "300px"
+    '@media (min-width: 960px)': {
+      width: '300px',
     },
 
-    "& .nciBadge": {
-      border: "0",
-      height: "40px"
-    }
+    '& .nciBadge': {
+      border: '0',
+      height: '40px',
+    },
   },
 
   footerBar: {
-    color: "#FFFFFF",
-    backgroundColor: "#4F536B",
-    width: "100%",
-    textAlign: "center",
-    "-webkit-font-smoothing": "antialiased",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    boxSizing: "border-box",
-    padding: "14px",
-    marginTop: "48px"
+    color: '#FFFFFF',
+    backgroundColor: '#4F536B',
+    width: '100%',
+    textAlign: 'center',
+    '-webkit-font-smoothing': 'antialiased',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxSizing: 'border-box',
+    padding: '14px',
+    marginTop: '48px',
   },
   contentJustifyCenter: {
-    justifyContent: "center"
+    justifyContent: 'center',
   },
   contentJustifyLeft: {
-    justifyContent: "left"
-  }
+    justifyContent: 'left',
+  },
 });
 
-Footer.propTypes = {
-  hidden: PropTypes.bool
-};
-
 Footer.defaultProps = {
-  hidden: false
+  hidden: false,
 };
 
 export default withStyles(styles)(Footer);
