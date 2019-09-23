@@ -4,7 +4,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
-import Stats from '../../components/Stats/StatsView';
+import Stats from '../../components/Stats/StatsController';
 
 const columns = [{ name: 'program_id', label: 'Program' },
   { name: 'clinical_study_designation', label: 'Study Code' },

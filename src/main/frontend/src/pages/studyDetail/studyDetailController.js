@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
@@ -9,21 +7,21 @@ import { Typography } from '../../components/Wrappers/Wrappers';
 
 
 const GET_STUDYTABLE_DATA_QUERY = gql`
-  query Study($clinical_study_designation: String!) {
+  query Study($csd: String!) {
 
-   sampleCountOfStudy(study_code:$clinical_study_designation)
+   sampleCountOfStudy(study_code:$csd)
 
-   fileCountOfStudy(study_code: $clinical_study_designation)
+   fileCountOfStudy(study_code: $csd)
 
-   aliguotCountOfStudy(study_code: $clinical_study_designation)
+   aliguotCountOfStudy(study_code: $csd)
 
-   caseCountOfStudy(study_code: $clinical_study_designation)
+   caseCountOfStudy(study_code: $csd)
 
-   fileOfStudy(study_code: $clinical_study_designation){
+   fileOfStudy(study_code: $csd){
     file_type
    }
 
-  study(clinical_study_designation: $clinical_study_designation){
+  study(clinical_study_designation: $csd){
     clinical_study_id
     clinical_study_name
     clinical_study_designation
@@ -47,14 +45,12 @@ const GET_STUDYTABLE_DATA_QUERY = gql`
  }`;
 
 const StudyDetailContainer = ({ match }) => (
-  <Query query={GET_STUDYTABLE_DATA_QUERY} variables={{ clinical_study_designation: match.params.id }}>
+  <Query query={GET_STUDYTABLE_DATA_QUERY} variables={{ csd: match.params.id }}>
     {({ data, loading, error }) => (
       loading ? <CircularProgress />
         : (
-          error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
-            : (
-              data && data.study[0] ? <StudyDetailView data={data} /> : <Typography variant="headline" color="warning" size="sm">No data</Typography>
-            )
+          error || !data || !data.study[0] ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
+            : <StudyDetailView data={data} />
         )
     )}
   </Query>

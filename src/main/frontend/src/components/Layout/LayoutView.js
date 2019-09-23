@@ -64,7 +64,7 @@ const Layout = ({ classes }) => {
               />
 
               <Route path="/about" component={About} />
-              <Route path="/studyDetail/:id" component={StudyDetail} />
+              <Route path="/study/:id" component={StudyDetail} />
 
               <Route component={Error} />
             </Switch>
