@@ -3,7 +3,8 @@ import { withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Typography } from '../Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
-// import nciLogo from '../../assets/nci_logo.svg';
+
+const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
 
 const Footer = ({ classes }) => (
   <footer className={classes.footerComponent}>
@@ -214,7 +215,10 @@ const Footer = ({ classes }) => (
         )}
       >
         <Typography>
-          <span className={classes.turningNIH}>Version 0.2</span>
+          <span className={classes.turningNIH}>
+            Version 0.2 /&nbsp;
+            {VERSION}
+          </span>
         </Typography>
       </div>
     </div>
