@@ -3,7 +3,7 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import Stats from '../../components/Stats/StatsView';
+import Stats from '../../components/Stats/StatsController';
 import Widget from '../../components/Widgets/WidgetView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 
