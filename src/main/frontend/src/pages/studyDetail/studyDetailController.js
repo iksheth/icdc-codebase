@@ -6,7 +6,7 @@ import StudyDetailView from './components/studyDetailView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 
 
-const GET_STUDYTABLE_DATA_QUERY = gql`
+const GET_STUDY_DETAIL_DATA_QUERY = gql`
   query Study($csd: String!) {
 
    sampleCountOfStudy(study_code:$csd)
@@ -29,6 +29,11 @@ const GET_STUDYTABLE_DATA_QUERY = gql`
     clinical_study_type
     date_of_iacuc_approval
     dates_of_conduct
+    study_arms{
+      cohorts{
+        cohort_dose_unit
+      }
+    }
     principal_investigators{
       pi_first_name
       pi_last_name
@@ -45,7 +50,7 @@ const GET_STUDYTABLE_DATA_QUERY = gql`
  }`;
 
 const StudyDetailContainer = ({ match }) => (
-  <Query query={GET_STUDYTABLE_DATA_QUERY} variables={{ csd: match.params.id }}>
+  <Query query={GET_STUDY_DETAIL_DATA_QUERY} variables={{ csd: match.params.id }}>
     {({ data, loading, error }) => (
       loading ? <CircularProgress />
         : (
