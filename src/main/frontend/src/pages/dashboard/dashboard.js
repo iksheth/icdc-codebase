@@ -54,7 +54,7 @@ const Dashboard = ({
     <Grid container spacing={32}>
       <Grid item lg={4} md={4} sm={6} xs={12}>
         <Widget
-          title="Proposed: Primary Disease Site"
+          title="Primary Disease Site"
           upperTitle
           bodyClass={classes.fullHeightBody}
           className={classes.card}
@@ -64,7 +64,7 @@ const Dashboard = ({
       </Grid>
       <Grid item lg={4} md={4} sm={6} xs={12}>
         <Widget
-          title="Proposed: Sex"
+          title="Sex"
           upperTitle
           bodyClass={classes.fullHeightBody}
           className={classes.card}
@@ -74,7 +74,7 @@ const Dashboard = ({
       </Grid>
       <Grid item lg={4} md={4} sm={6} xs={12}>
         <Widget
-          title="Proposed: Tumor Stage"
+          title="Tumor Stage"
           upperTitle
           bodyClass={classes.fullHeightBody}
           className={classes.card}
