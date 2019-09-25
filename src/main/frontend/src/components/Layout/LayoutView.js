@@ -68,7 +68,7 @@ const Layout = ({ classes }) => {
                 component={DGAB}
               />
 
-              <Route path="/about" component={About} currentTab="1" />
+              <Route path="/about" component={About} />
               <Route path="/study/:id" component={StudyDetail} />
 
               <Route component={Error} />
