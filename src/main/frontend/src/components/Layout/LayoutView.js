@@ -18,13 +18,17 @@ import Studies from '../../pages/studies/studiesController';
 import Programs from '../../pages/programs/programs';
 import modelPage from '../../pages/modelPage/modelPageView';
 import table from '../../pages/table/tableView';
-import SteeringCommittee from '../../pages/steeringCommittee/steeringCommitteeView';
+import SteeringCommittee from '../../pages/steeringCommittee/steeringCommitteeRoute';
 import DGAB from '../../pages/dgabPage/dgbaRoute';
 import StudyDetail from '../../pages/studyDetail/studyDetailController';
 
 
 const drawerWidth = 240;
 
+const ScrollToTop = () => {
+  window.scrollTo(0, 0);
+  return null;
+};
 const Layout = ({ classes }) => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
@@ -48,6 +52,7 @@ const Layout = ({ classes }) => {
               [classes.contentShift]: isSidebarOpen,
             })}
           >
+            <Route component={ScrollToTop} />
             <Switch>
               <Route exact path="/ICDC/" component={Dashboard} />
               <Route exact path="/" component={Dashboard} />

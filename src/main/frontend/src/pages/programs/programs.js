@@ -3,7 +3,7 @@ import { Grid, withStyles } from '@material-ui/core';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import mockData from './content';
 
-import Stats from '../../components/Stats/StatsView';
+import Stats from '../../components/Stats/StatsController';
 import ProgramCard from './components/programcard';
 
 const Programs = ({ classes }) => (

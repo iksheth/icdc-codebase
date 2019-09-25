@@ -77,11 +77,8 @@ public class GraphQLController {
 				throw new HttpRequestMethodNotSupportedException("Invalid Graphql query");
 			} else {
 
-				// if (isvalidQraphQL(sdl)) {
-				responseText = neo4jService.query(sdl);
-				// } else {
-				// throw new UnirestException("Invalid Graphql query");
-				// }
+				responseText = neo4jService.query(reqBody);
+
 				return responseText;
 			}
 		} else {
@@ -90,10 +87,5 @@ public class GraphQLController {
 
 	}
 
-//	private boolean isvalidQraphQL(String requestQuery) {
-//		Parser parser = new Parser();
-//		Document document = parser.parseDocument(requestQuery);
-//		return graphQLService.isVaild(document);
-//	}
 
 }

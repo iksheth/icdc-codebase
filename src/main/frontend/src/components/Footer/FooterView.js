@@ -3,7 +3,8 @@ import { withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Typography } from '../Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
-// import nciLogo from '../../assets/nci_logo.svg';
+
+const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
 
 const Footer = ({ classes }) => (
   <footer className={classes.footerComponent}>
@@ -21,7 +22,7 @@ const Footer = ({ classes }) => (
           </li>
           <li>
             <Typography className={classes.footerText}>
-              <Link className={classes.link} to="/about">
+              <Link className={classes.link} to="/steeringCommittee/#">
               Steering Committee
               </Link>
             </Typography>
@@ -75,7 +76,7 @@ const Footer = ({ classes }) => (
             </Typography>
           </li>
           <li>
-            <Link className={classes.link} to="/dgab">
+            <Link className={classes.link} to="/dgab/#">
               <Typography className={classes.footerText}>
               Data Governance Advisory Board
               </Typography>
@@ -139,20 +140,20 @@ const Footer = ({ classes }) => (
         <Typography>
           <a target="icdc-external" href="https://www.hhs.gov">
             U.S. Department of Health and Human Services
-            <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
+          <span className={classes.ext}>&nbsp;|&nbsp;</span>
         </Typography>
         <Typography>
           <a target="icdc-external" href="https://www.nih.gov">
             National Institutes of Health
-            <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
+          <span className={classes.ext}>&nbsp;|&nbsp;</span>
         </Typography>
         <Typography>
           <a target="icdc-external" href="https://www.cancer.gov">
             National Cancer Institute
-            <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
+          <span className={classes.ext}>&nbsp;|&nbsp;</span>
         </Typography>
         <Typography>
           <a target="icdc-external" href="https://www.usa.gov">
@@ -174,8 +175,8 @@ const Footer = ({ classes }) => (
             href="https://dctd.cancer.gov/"
           >
             Division of Cancer Treatment and Diagnosis
-            <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </a>
+          <span className={classes.ext}>&nbsp;|&nbsp;</span>
         </Typography>
         <Typography>
           <a
@@ -214,7 +215,10 @@ const Footer = ({ classes }) => (
         )}
       >
         <Typography>
-          <span className={classes.turningNIH}>Version 0.2</span>
+          <span className={classes.turningNIH}>
+            Version 0.2 /&nbsp;
+            {VERSION}
+          </span>
         </Typography>
       </div>
     </div>
@@ -224,6 +228,7 @@ const Footer = ({ classes }) => (
 
 const styles = (theme) => ({
   ext: {
+    color: 'white',
     '@media (max-width: 600px)': {
       display: 'none',
     },
@@ -334,7 +339,7 @@ const styles = (theme) => ({
   },
 
   footerBar: {
-    color: '#FFFFFF',
+    color: 'white',
     backgroundColor: '#4F536B',
     width: '100%',
     textAlign: 'center',

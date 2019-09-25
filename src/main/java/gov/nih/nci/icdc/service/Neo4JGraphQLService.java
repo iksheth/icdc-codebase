@@ -6,6 +6,8 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -25,16 +27,14 @@ public class Neo4JGraphQLService {
 
 	public String query(String graphQLQuery) throws UnirestException {
 		logger.info("Query neo4j:  "+graphQLQuery);
-		JSONObject jo = new JSONObject();
-		jo.put("query", graphQLQuery);
-		jo.toString();
 
 		HttpResponse<JsonNode> jsonResponse;
 		try {
 
-			jsonResponse = Unirest.post(config.getNeo4jGraphQLEndPoint()).header("Content-Type", "application/json")
+			jsonResponse = Unirest.post(config.getNeo4jGraphQLEndPoint
+					()).header("Content-Type", "application/json")
 					.header("Authorization", config.getNeo4jHttpHeaderAuthorization()).header("accept", "application/json")
-					.body(jo.toString()).asJson();
+					.body(graphQLQuery).asJson();
 
 		} catch (UnirestException e) {
 			logger.error("Exception in function query() "+e.getStackTrace());
