@@ -61,6 +61,7 @@ function copyPublicFolder() {
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
+
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.
@@ -102,7 +103,7 @@ checkBrowsers(paths.appPath, isInteractive)
         previousFileSizes,
         paths.appBuild,
         WARN_AFTER_BUNDLE_GZIP_SIZE,
-        WARN_AFTER_CHUNK_GZIP_SIZE
+        WARN_AFTER_CHUNK_GZIP_SIZE,
       );
       console.log();
 
@@ -115,16 +116,16 @@ checkBrowsers(paths.appPath, isInteractive)
         publicUrl,
         publicPath,
         buildFolder,
-        useYarn
+        useYarn,
       );
     },
     (err) => {
       console.log(chalk.red('Failed to compile.\n'));
       printBuildError(err);
       process.exit(1);
-    }
+    },
   )
-  .catch(err => {
+  .catch((err) => {
     if (err && err.message) {
       console.log(err.message);
     }
@@ -170,7 +171,7 @@ function build(previousFileSizes) {
           chalk.yellow(
             '\nTreating warnings as errors because process.env.CI = true.\n' +
               'Most CI servers set it automatically.\n'
-          )
+          ),
         );
         return reject(new Error(messages.warnings.join('\n\n')));
       }
@@ -184,11 +185,10 @@ function build(previousFileSizes) {
         return bfj
           .write(paths.appBuild + '/bundle-stats.json', stats.toJson())
           .then(() => resolve(resolveArgs))
-          .catch(error => reject(new Error(error)));
+          .catch((error) => reject(new Error(error)));
       }
 
       return resolve(resolveArgs);
     });
   });
 }
-
