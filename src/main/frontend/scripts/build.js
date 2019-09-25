@@ -51,6 +51,13 @@ const writeStatsJson = argv.indexOf('--stats') !== -1;
 // Generate configuration
 const config = configFactory('production');
 
+function copyPublicFolder() {
+  fs.copySync(paths.appPublic, paths.appBuild, {
+    dereference: true,
+    filter: (file) => file !== paths.appHtml,
+  });
+}
+
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
@@ -67,6 +74,7 @@ checkBrowsers(paths.appPath, isInteractive)
     // Merge with the public folder
     copyPublicFolder();
     // Start the webpack build
+    // eslint-disable-next-line no-use-before-define
     return build(previousFileSizes);
   })
   .then(
@@ -184,9 +192,3 @@ function build(previousFileSizes) {
   });
 }
 
-function copyPublicFolder() {
-  fs.copySync(paths.appPublic, paths.appBuild, {
-    dereference: true,
-    filter: file => file !== paths.appHtml,
-  });
-}
