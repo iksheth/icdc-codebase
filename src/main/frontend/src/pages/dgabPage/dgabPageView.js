@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import dataGovenanceImage from '../../assets/dataSubmission/governance.png';
-import guidelinesDoc from '../../assets/dataSubmission/guidelines.docx';
+import guidelinesDoc from '../../assets/dataSubmission/guidelines.pdf';
 
 const dgab = ({ classes }) => (
   <div className={classes.pageContainer}>
