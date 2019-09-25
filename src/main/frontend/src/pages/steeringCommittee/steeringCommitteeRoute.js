@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core';
 import About from '../about/aboutView';
 
 const steeringCommittee = () => (
-  // Currently this is temporary solution  for DGAB route in footer need to replace this
+  // Currently this is temporary solution  for route in footer need to replace this
   <About currentTab={0} />
 );
 
