@@ -30,23 +30,23 @@ const styles = (theme) => ({
 });
 
 const ProgramCard = ({
-  classes, title, subheader, shortDesc, link,
+  classes, data,
 }) => (
   <Card className={classes.card}>
     <div className={classes.cardHeaderContainer}>
       <Typography weight="bold" size="l" color="warning">
-        {title}
+        {data.title}
       </Typography>
-      <Typography color="primary">{subheader}</Typography>
+      <Typography color="primary">{data.subheader}</Typography>
     </div>
     <CardMedia className={classes.media} image={cotcImg} title="cotc" />
     <CardContent>
-      <Typography component="p">{shortDesc}</Typography>
+      <Typography component="p">{data.shortDesc}</Typography>
       <Typography>
         <a href="/" target="icdc">Read More >></a>
       </Typography>
       <Typography>
-        <a href={link} target="icdc">{link}</a>
+        <a href={data.link} target="icdc">{data.link}</a>
       </Typography>
     </CardContent>
     <CardActions disableSpacing>
