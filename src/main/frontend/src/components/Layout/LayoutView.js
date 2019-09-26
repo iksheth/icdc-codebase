@@ -20,6 +20,7 @@ import modelPage from '../../pages/modelPage/modelPageView';
 import table from '../../pages/table/tableView';
 import SteeringCommittee from '../../pages/steeringCommittee/steeringCommitteeRoute';
 import DGAB from '../../pages/dgabPage/dgbaRoute';
+import BPSC from '../../pages/bpsc/bpscRoute';
 import StudyDetail from '../../pages/studyDetail/studyDetailController';
 
 
@@ -63,6 +64,8 @@ const Layout = ({ classes }) => {
               <Route path="/modelPage" component={modelPage} />
               <Route path="/table" component={table} />
               <Route path="/steeringCommittee" component={SteeringCommittee} />
+              <Route path="/bpsc" component={BPSC} />
+
               <Route
                 path="/dgab"
                 component={DGAB}

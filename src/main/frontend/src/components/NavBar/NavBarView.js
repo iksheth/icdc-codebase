@@ -13,7 +13,7 @@ import {
 import {
   ChevronLeft as ChevronLeftIcon,
   ColorLens as ColorLensIcon,
-  Menu as MenuIcon,
+  FilterList as FilterIcon,
 } from '@material-ui/icons';
 import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
@@ -91,7 +91,7 @@ const NavBar = ({
               [classes.hide]: isSidebarOpen,
             })}
           >
-            <MenuIcon />
+            <FilterIcon />
           </IconButton>
           {/* Reminder: Ajay will to replace the ICDC with env variable
            and change build npm to read env variable */}

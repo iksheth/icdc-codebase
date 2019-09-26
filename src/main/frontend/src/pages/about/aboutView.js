@@ -3,6 +3,7 @@ import { Tabs, Tab, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import SteeringCommittee from '../steeringCommittee/steeringCommitteeView';
 import DGAB from '../dgabPage/dgabPageView';
+import BPSC from '../bpsc/bpscView';
 
 const About = ({ classes, currentTab }) => {
   const [value, setValue] = React.useState(currentTab);
@@ -21,10 +22,11 @@ const About = ({ classes, currentTab }) => {
         >
           <Tab label="Steering Committee" component={Link} to="/steeringCommittee" />
           <Tab label="DGAB" component={Link} to="/dgab" />
-          <Tab label="BPSC" disabled />
+          <Tab label="BPSC" component={Link} to="/bpsc" />
         </Tabs>
         {value === 0 && <SteeringCommittee />}
         {value === 1 && <DGAB />}
+        {value === 2 && <BPSC />}
       </div>
     </>
   );
