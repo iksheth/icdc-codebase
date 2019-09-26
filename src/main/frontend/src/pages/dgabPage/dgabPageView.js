@@ -21,7 +21,7 @@ const dgab = ({ classes }) => (
             document outlining the ICDC data prioritization process during the
             prototype phase of the ICDC. As there is an ongoing refinement to
             the process, please continue to refer to the latest version for
-            changes. Any questions may be addressed to:
+            changes. Any questions may be addressed to:&nbsp;
           <a href="mailto:ICDCHelpDesk@mail.nih.gov" target="_top">
               ICDCHelpDesk@mail.nih.gov
           </a>
