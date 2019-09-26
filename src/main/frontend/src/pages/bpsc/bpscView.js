@@ -72,7 +72,7 @@ Connie Sommers, Shaying Zhao
 
       <Typography>
         <p>
-The BPSC is supported by FNL staff as needed.  FNL contact is:
+The BPSC is supported by FNL staff as needed.  FNL contact is:&nbsp;
           <a href="mailto:ICDCHelpDesk@mail.nih.gov" target="_top">
               ICDCHelpDesk@mail.nih.gov
           </a>
