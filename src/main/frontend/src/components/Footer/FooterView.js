@@ -22,7 +22,7 @@ const Footer = ({ classes }) => (
           </li>
           <li>
             <Typography className={classes.footerText}>
-              <Link className={classes.link} to="/steeringCommittee/#">
+              <Link className={classes.link} to="/steeringCommittee">
               Steering Committee
               </Link>
             </Typography>
@@ -76,7 +76,7 @@ const Footer = ({ classes }) => (
             </Typography>
           </li>
           <li>
-            <Link className={classes.link} to="/dgab/#">
+            <Link className={classes.link} to="/dgab">
               <Typography className={classes.footerText}>
               Data Governance Advisory Board
               </Typography>
