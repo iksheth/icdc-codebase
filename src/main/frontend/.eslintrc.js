@@ -29,6 +29,7 @@ module.exports = {
     "react/no-array-index-key":"off", // This is for passing the array index in .map need to remove this soon
     "no-nested-ternary":"off",
     "jsx-a11y/no-static-element-interactions":"off",
-    "jsx-a11y/click-events-have-key-events":"off"
+    "jsx-a11y/click-events-have-key-events":"off",
+    "react/jsx-props-no-spreading":"off",
   },
 };

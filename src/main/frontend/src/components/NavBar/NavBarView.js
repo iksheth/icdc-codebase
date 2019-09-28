@@ -13,7 +13,6 @@ import {
 import {
   ChevronLeft as ChevronLeftIcon,
   ColorLens as ColorLensIcon,
-  FilterList as FilterIcon,
 } from '@material-ui/icons';
 import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
@@ -82,7 +81,7 @@ const NavBar = ({
         color="primary"
       >
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={toggleSideBar}
@@ -92,7 +91,22 @@ const NavBar = ({
             })}
           >
             <FilterIcon />
-          </IconButton>
+          </IconButton> */}
+
+          <Button
+            variant="h6"
+            weight="medium"
+            aria-label="open drawer"
+            onClick={toggleSideBar}
+            edge="start"
+            className={classnames(classes.menuButton, classes.logotype, {
+              [classes.hide]: isSidebarOpen,
+            })}
+          >
+              FILTERS
+          </Button>
+
+
           {/* Reminder: Ajay will to replace the ICDC with env variable
            and change build npm to read env variable */}
           <NavLink

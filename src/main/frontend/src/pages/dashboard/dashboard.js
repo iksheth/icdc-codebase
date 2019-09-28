@@ -4,7 +4,7 @@ import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/StatsController';
 import Cases from './caseTable/caseController';
 import PositionedSnackbar from '../../components/Disclaimer/DisclaimerView';
-import sunburstImage from '../../assets/dashboard/dashboard_sunburst';
+import sunburstImage from '../../assets/dashboard/dashboard_sunburst.png';
 import BreedDonut from '../../components/Widgets/PieCharts/BreedDonut/BreedDonutController';
 import DiagnosisDonut from '../../components/Widgets/PieCharts/DiagnosisDonut/DiagnosisDonutController';
 import GenderDonut from '../../components/Widgets/PieCharts/GenderDonut/GenderDonutController';
@@ -16,7 +16,7 @@ const Dashboard = ({
 }) => (
   <>
     <Stats />
-    <Grid container spacing={32}>
+    <Grid container spacing={32} className={classes.donutContainer}>
       <Grid item lg={4} md={4} sm={6} xs={12}>
         <Widget
           title="Programs and Studies"
@@ -36,7 +36,15 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <BreedDonut data={data.caseCountByBreed} />
+          <BreedDonut
+            data={data.caseCountByBreed}
+            width={225}
+            height={225}
+            innerRadius={50}
+            outerRadius={85}
+            cx="38%"
+            cy="50%"
+          />
         </Widget>
       </Grid>
       <Grid item lg={4} md={4} sm={6} xs={12}>
@@ -46,20 +54,35 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <DiagnosisDonut data={data.caseCountByDiagnosis} />
+          <DiagnosisDonut
+            data={data.caseCountByDiagnosis}
+            width={225}
+            height={225}
+            innerRadius={50}
+            outerRadius={85}
+            cx="38%"
+            cy="50%"
+          />
         </Widget>
       </Grid>
     </Grid>
     {/* second row Grids */}
-    <Grid container spacing={32}>
+    <Grid container spacing={32} className={classes.donutContainer}>
       <Grid item lg={4} md={4} sm={6} xs={12}>
         <Widget
-          title="Primary Disease Site"
+          title="Disease Site"
           upperTitle
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <DiseaseDonut />
+          <DiseaseDonut
+            width={225}
+            height={225}
+            innerRadius={50}
+            outerRadius={85}
+            cx="38%"
+            cy="50%"
+          />
         </Widget>
       </Grid>
       <Grid item lg={4} md={4} sm={6} xs={12}>
@@ -69,7 +92,15 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <GenderDonut data={data.caseCountByGender} />
+          <GenderDonut
+            data={data.caseCountByGender}
+            width={225}
+            height={225}
+            innerRadius={50}
+            outerRadius={85}
+            cx="38%"
+            cy="50%"
+          />
         </Widget>
       </Grid>
       <Grid item lg={4} md={4} sm={6} xs={12}>
@@ -79,7 +110,14 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <TumorDonut />
+          <TumorDonut
+            width={225}
+            height={225}
+            innerRadius={50}
+            outerRadius={85}
+            cx="38%"
+            cy="50%"
+          />
         </Widget>
       </Grid>
     </Grid>
@@ -95,6 +133,10 @@ const styles = (theme) => ({
     minHeight: '100%',
     display: 'flex',
     flexDirection: 'column',
+  },
+  donutContainer: {
+    maxWidth: '775px',
+    margin: '16px auto',
   },
   paper: {
     textAlign: 'center',

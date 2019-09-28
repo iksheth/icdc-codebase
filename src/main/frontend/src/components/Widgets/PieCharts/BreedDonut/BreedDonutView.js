@@ -14,7 +14,9 @@ const COLORS = [
 
 export default class BreedDonut extends PureComponent {
   render() {
-    const { data: breedDataObj } = this.props;
+    const {
+      data: breedDataObj, width, height, innerRadius, outerRadius, cx, cy,
+    } = this.props;
     // Ajay Need to replace this with a utility function
     const data = breedDataObj.map((obj) => ({
       name: obj.breed,
@@ -22,13 +24,13 @@ export default class BreedDonut extends PureComponent {
     }));
 
     return (
-      <PieChart width={400} height={200} onMouseEnter={this.onPieEnter}>
+      <PieChart width={width} height={height} onMouseEnter={this.onPieEnter}>
         <Pie
           data={data}
-          cx="55%"
-          cy="50%"
-          innerRadius={60}
-          outerRadius={95}
+          cx={cx}
+          cy={cy}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
           fill="#8884d8"
           paddingAngle={1}
           dataKey="value"

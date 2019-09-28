@@ -31,7 +31,7 @@ const ScrollToTop = () => {
   return null;
 };
 const Layout = ({ classes }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
 
   return (
     <>
