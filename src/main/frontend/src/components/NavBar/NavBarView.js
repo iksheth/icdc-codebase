@@ -81,18 +81,6 @@ const NavBar = ({
         color="primary"
       >
         <Toolbar>
-          {/* <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleSideBar}
-            edge="start"
-            className={classnames(classes.menuButton, {
-              [classes.hide]: isSidebarOpen,
-            })}
-          >
-            <FilterIcon />
-          </IconButton> */}
-
           <Button
             variant="h6"
             weight="medium"
