@@ -37,7 +37,7 @@ const StudyCodesPanel = (classes) => {
         {exapandStudyCodesPanel ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={exapandStudyCodesPanel} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List component="div" disablePadding dense>
           <ListItem className={classes.nested} onClick={handleToggle(1)}>
             <Checkbox checked={checked.indexOf(1) !== -1} tabIndex={-1} disableRipple color="primary" />
             <ListItemText primary="COTC007B" />

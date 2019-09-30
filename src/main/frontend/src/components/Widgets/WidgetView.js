@@ -5,7 +5,7 @@ import {
   Paper,
   withStyles,
 } from '@material-ui/core';
-import Typography from '@material-ui/core/es/Typography/Typography';
+import { Typography } from '../Wrappers/Wrappers';
 
 const Widget = ({
   classes,
@@ -24,7 +24,7 @@ const Widget = ({
           props.header
         ) : (
           <>
-            <Typography variant="headline" color="info">
+            <Typography size="md" color="info">
               {title}
             </Typography>
           </>

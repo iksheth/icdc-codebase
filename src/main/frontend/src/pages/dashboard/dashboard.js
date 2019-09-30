@@ -38,11 +38,11 @@ const Dashboard = ({
         >
           <BreedDonut
             data={data.caseCountByBreed}
-            width={225}
-            height={225}
+            width={400}
+            height={200}
             innerRadius={50}
             outerRadius={85}
-            cx="38%"
+            cx="50%"
             cy="50%"
           />
         </Widget>
@@ -56,11 +56,11 @@ const Dashboard = ({
         >
           <DiagnosisDonut
             data={data.caseCountByDiagnosis}
-            width={225}
-            height={225}
+            width={400}
+            height={200}
             innerRadius={50}
             outerRadius={85}
-            cx="38%"
+            cx="50%"
             cy="50%"
           />
         </Widget>
@@ -76,11 +76,11 @@ const Dashboard = ({
           className={classes.card}
         >
           <DiseaseDonut
-            width={225}
-            height={225}
+            width={400}
+            height={200}
             innerRadius={50}
             outerRadius={85}
-            cx="38%"
+            cx="50%"
             cy="50%"
           />
         </Widget>
@@ -94,11 +94,11 @@ const Dashboard = ({
         >
           <GenderDonut
             data={data.caseCountByGender}
-            width={225}
-            height={225}
+            width={400}
+            height={200}
             innerRadius={50}
             outerRadius={85}
-            cx="38%"
+            cx="50%"
             cy="50%"
           />
         </Widget>
@@ -111,11 +111,11 @@ const Dashboard = ({
           className={classes.card}
         >
           <TumorDonut
-            width={225}
-            height={225}
+            width={400}
+            height={200}
             innerRadius={50}
             outerRadius={85}
-            cx="38%"
+            cx="50%"
             cy="50%"
           />
         </Widget>
@@ -135,8 +135,7 @@ const styles = (theme) => ({
     flexDirection: 'column',
   },
   donutContainer: {
-    maxWidth: '775px',
-    margin: '16px auto',
+    background: '#bcbcbc',
   },
   paper: {
     textAlign: 'center',
