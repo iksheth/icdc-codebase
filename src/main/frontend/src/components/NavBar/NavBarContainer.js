@@ -1,8 +1,9 @@
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { toggleSidebar } from './LayoutState';
-import LayoutView from './LayoutView';
 
+import NavBarView from './NavBarView';
+// import { signOut } from '../../pages/login/LoginState';
+import { toggleSidebar } from '../Layout/LayoutState';
 
 export default compose(
   connect(
@@ -11,4 +12,4 @@ export default compose(
     }),
     { toggleSidebar },
   ),
-)(LayoutView);
+)(NavBarView);

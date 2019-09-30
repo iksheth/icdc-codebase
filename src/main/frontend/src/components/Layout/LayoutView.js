@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import classnames from 'classnames';
 import About from '../../pages/about/aboutView';
 import Header from '../Header/HeaderView';
-import NavBar from '../NavBar/NavBarView';
+import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
 
@@ -30,8 +30,10 @@ const ScrollToTop = () => {
   window.scrollTo(0, 0);
   return null;
 };
-const Layout = ({ classes }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
+
+// eslint-disable-next-line arrow-body-style, no-unused-vars
+const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => {
+  // const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
 
   return (
     <>
@@ -40,17 +42,14 @@ const Layout = ({ classes }) => {
         <>
           <Header />
           {/* <Sidebar /> */}
-          <NavBar
-            isSidebarOpen={isSidebarOpen}
-            setIsSidebarOpen={setIsSidebarOpen}
-          />
+          <NavBar />
 
           {/* <Sidebar />  */}
           {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
           <div
             className={classnames(classes.content, {
-              [classes.contentShift]: isSidebarOpen,
+              [classes.contentShift]: isSidebarOpened,
             })}
           >
             <Route component={ScrollToTop} />
