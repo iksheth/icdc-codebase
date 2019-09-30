@@ -24,6 +24,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import gov.nih.nci.icdc.error.ResourceNotFoundException;
 import gov.nih.nci.icdc.model.ConfigurationDAO;
 import gov.nih.nci.icdc.service.FenceService;
 import io.swagger.annotations.Api;
@@ -81,7 +82,7 @@ public class FenceController {
 		    JsonElement idToken = jsonObject.get("id_token");
 		    JsonElement tokenType = jsonObject.get("token_type");
 		    
-		    if(null!=accessToken && accessToken.toString()!="") {
+		    if(null!=accessToken && !accessToken.toString().contentEquals("")) {
 		    	// decode accessToken
 		    	DecodedJWT jwt = JWT.decode(accessToken.toString());
 		    	
@@ -126,7 +127,7 @@ public class FenceController {
 		
 		if(hasErr) {
 			logger.error("Not able to retrieve the token , err message : " + getTokens);
-			throw new Exception("Not able to retrieve the token , err message : " + getTokens);
+			throw new ResourceNotFoundException("Not able to retrieve the token , err message : " + getTokens);
 		}
 		
 		return null;

@@ -34,7 +34,6 @@ public class VersionDao {
 	@Value("${neo4j_query.getversion}")
 	private String neo4jQueryVersion;
 
-	private String DataModelVersion;
 
 	public String getGraphQLAPIVersion() {
 		return GraphQLAPIVersion;
@@ -72,10 +71,7 @@ public class VersionDao {
 	}
 
 
-	public void setDataModelVersion(String dataModelVersion) throws UnirestException {
 
-		DataModelVersion = dataModelVersion;
-	}
 
 	public String getApiVersion() {
 		return apiVersion;

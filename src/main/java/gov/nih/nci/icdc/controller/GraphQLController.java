@@ -20,8 +20,6 @@ import com.google.gson.JsonObject;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import gov.nih.nci.icdc.model.ConfigurationDAO;
-import gov.nih.nci.icdc.model.Mocker;
-import gov.nih.nci.icdc.service.GraphQLProvider;
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 import graphql.language.Document;
 import graphql.language.OperationDefinition;
@@ -37,8 +35,6 @@ public class GraphQLController {
 	@Autowired
 	private Neo4JGraphQLService neo4jService;
 
-	@Autowired
-	private GraphQLProvider graphQLService;
 
 	public static final Gson GSON = new Gson();
 
