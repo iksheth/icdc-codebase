@@ -4,7 +4,9 @@ import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import { Provider } from 'react-redux';
 import { ApolloProvider as ApolloProviderHooks } from "react-apollo-hooks";
+import store from './store';
 
 const BACKEND = process.env.REACT_APP_BACKEND_API;
 
@@ -16,7 +18,9 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     {" "}
     <ApolloProviderHooks client={client}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ApolloProviderHooks>
   </ApolloProvider>,
   document.getElementById("root")
