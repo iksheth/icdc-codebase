@@ -4,7 +4,10 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import cotcImg from '../../../assets/cotc.png';
+import Badge from '@material-ui/core/Badge';
+import COP from '../../../assets/programCards/COP.png';
+import NCATS from '../../../assets/programCards/NCATS.png';
+import NIH from '../../../assets/programCards/NIH.png';
 import { Typography, Button } from '../../../components/Wrappers/Wrappers';
 
 const styles = (theme) => ({
@@ -29,28 +32,45 @@ const styles = (theme) => ({
   },
 });
 
+const programCardFile = (programAcronym) => {
+  switch (programAcronym) {
+    case 'COP':
+      return COP;
+    case 'NCATS':
+      return NCATS;
+    default:
+      return NIH;
+  }
+};
+
 const ProgramCard = ({
   classes, data,
 }) => (
   <Card className={classes.card}>
     <div className={classes.cardHeaderContainer}>
       <Typography weight="bold" size="l" color="warning">
-        {data.title}
+        {data.program_acronym}
       </Typography>
-      <Typography color="primary">{data.subheader}</Typography>
+      <Typography color="primary">{data.program_name}</Typography>
     </div>
-    <CardMedia className={classes.media} image={cotcImg} title="cotc" />
+    <CardMedia
+      className={classes.media}
+      image={programCardFile(data.program_acronym)}
+      title={data.program_acronym}
+    />
     <CardContent>
-      <Typography component="p">{data.shortDesc}</Typography>
+      <Typography component="p">{data.program_short_description}</Typography>
       <Typography>
         <a href="/" target="icdc">Read More >></a>
       </Typography>
       <Typography>
-        <a href={data.link} target="icdc">{data.link}</a>
+        <a href={`https://${data.program_external_url}`} target="icdc">{data.program_external_url}</a>
       </Typography>
     </CardContent>
     <CardActions disableSpacing>
-      <Button color="secondary">Associated Studies</Button>
+      <Badge color="primary" badgeContent={data.studies.length}>
+        <Button color="secondary">Associated Studies</Button>
+      </Badge>
     </CardActions>
   </Card>
 );

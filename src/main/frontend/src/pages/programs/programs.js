@@ -1,12 +1,11 @@
 import React from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import { Typography } from '../../components/Wrappers/Wrappers';
-import mockData from './content';
 
 import Stats from '../../components/Stats/StatsController';
 import ProgramCard from './components/programcard';
 
-const Programs = ({ classes }) => (
+const Programs = ({ classes, data }) => (
   <>
     <Stats />
     <div className={classes.cardContainer}>
@@ -14,9 +13,9 @@ const Programs = ({ classes }) => (
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <Typography weight="bold" size="xxl" color="warning">ALL PROGRAMS</Typography>
         </Grid>
-        {mockData.programs.map((data) => (
+        {data.program.map((programCardData) => (
           <Grid item lg={4} md={6} sm={6} xs={12}>
-            <ProgramCard data={data} />
+            <ProgramCard data={programCardData} />
           </Grid>
         ))}
       </Grid>

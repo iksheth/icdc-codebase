@@ -15,7 +15,7 @@ import Error from '../../pages/error/Error';
 import Dashboard from '../../pages/dashboard/dashboardController';
 import Cases from '../../pages/cases/cases';
 import Studies from '../../pages/studies/studiesController';
-import Programs from '../../pages/programs/programs';
+import Programs from '../../pages/programs/programController';
 import modelPage from '../../pages/modelPage/modelPageView';
 import table from '../../pages/table/tableView';
 import SteeringCommittee from '../../pages/steeringCommittee/steeringCommitteeRoute';
