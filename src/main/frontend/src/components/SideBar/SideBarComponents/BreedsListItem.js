@@ -37,7 +37,7 @@ const BreedsPanel = (classes) => {
         {exapandBreedsPanel ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={exapandBreedsPanel} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List component="div" disablePadding dense>
           <ListItem button onClick={handleToggle(1)} className={classes.nested}>
             <Checkbox checked={checked.indexOf(1) !== -1} tabIndex={-1} disableRipple color="primary" />
             <ListItemText primary="American Staffordshire Terrier" />

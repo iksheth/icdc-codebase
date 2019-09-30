@@ -36,7 +36,7 @@ const DiagnosisPanel = (classes) => {
         {exapandDiagnosisPanel ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={exapandDiagnosisPanel} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List component="div" disablePadding dense>
           <ListItem button onClick={handleToggle(7)} className={classes.nested}>
             <Checkbox checked={checked.indexOf(7) !== -1} tabIndex={-1} disableRipple color="primary" />
             <ListItemText primary="Bone Sarcomas" />

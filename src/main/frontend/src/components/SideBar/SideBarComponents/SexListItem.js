@@ -37,7 +37,7 @@ const SexPanel = (classes) => {
         {exapandSexPanel ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={exapandSexPanel} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List component="div" disablePadding dense>
           <ListItem button onClick={handleToggle(1)} className={classes.nested}>
             <Checkbox checked={checked.indexOf(1) !== -1} tabIndex={-1} disableRipple color="primary" />
             <ListItemText primary="Male" />
