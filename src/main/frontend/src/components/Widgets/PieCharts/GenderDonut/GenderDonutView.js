@@ -14,7 +14,9 @@ const COLORS = [
 
 export default class GenderDonut extends PureComponent {
   render() {
-    const { data: genderDataObj } = this.props;
+    const {
+      data: genderDataObj, width, height, innerRadius, outerRadius, cx, cy,
+    } = this.props;
 
     // Ajay Need to replace this with a utility function
     const data = genderDataObj.map((obj) => ({
@@ -22,13 +24,13 @@ export default class GenderDonut extends PureComponent {
       value: obj.cases,
     }));
     return (
-      <PieChart width={400} height={200} onMouseEnter={this.onPieEnter}>
+      <PieChart width={width} height={height} onMouseEnter={this.onPieEnter}>
         <Pie
           data={data}
-          cx="55%"
-          cy="50%"
-          innerRadius={60}
-          outerRadius={95}
+          cx={cx}
+          cy={cy}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
           fill="#8884d8"
           paddingAngle={1}
           dataKey="value"

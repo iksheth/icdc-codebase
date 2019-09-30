@@ -19,14 +19,17 @@ const COLORS = ['#523175', '#6e7ff5', '#fc4b5b', '#2b69a3', '#287d6d', '#af66ff'
 
 export default class TumorDonut extends PureComponent {
   render() {
+    const {
+      width, height, innerRadius, outerRadius, cx, cy,
+    } = this.props;
     return (
-      <PieChart width={400} height={200} onMouseEnter={this.onPieEnter}>
+      <PieChart width={width} height={height} onMouseEnter={this.onPieEnter}>
         <Pie
           data={data}
-          cx="55%"
-          cy="50%"
-          innerRadius={60}
-          outerRadius={95}
+          cx={cx}
+          cy={cy}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
           fill="#8884d8"
           paddingAngle={1}
           dataKey="value"
