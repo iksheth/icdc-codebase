@@ -1,5 +1,5 @@
 export const initialState = {
-  isSidebarOpened: false,
+  isSidebarOpened: true,
 };
 
 export const TOGGLE_SIDEBAR = 'Layout/TOGGLE_SIDEBAR';
@@ -8,8 +8,7 @@ export const toggleSidebar = () => ({
   type: TOGGLE_SIDEBAR,
 });
 
-// eslint-disable-next-line no-unused-vars
-export default function LoginReducer(state = initialState, { type, payload }) {
+export default function LayoutReducer(state = initialState, { type }) {
   switch (type) {
     case TOGGLE_SIDEBAR:
       return {

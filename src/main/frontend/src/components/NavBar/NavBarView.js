@@ -26,7 +26,7 @@ const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 
 const NavBar = ({
-  classes, isSidebarOpen, setIsSidebarOpen,
+  classes, isSidebarOpened, toggleSidebar,
 }) => {
   const theme = useTheme();
   const [authState, setAuthState] = React.useState({
@@ -65,18 +65,18 @@ const NavBar = ({
     }
   }, []);
 
-  function toggleSideBar() {
-    // eslint-disable-next-line no-unused-expressions
-    isSidebarOpen ? setIsSidebarOpen(true) : setIsSidebarOpen(false);
-    setIsSidebarOpen(isSidebarOpen !== true);
-  }
+  // function toggleSideBar() {
+  //   // eslint-disable-next-line no-unused-expressions
+  //   isSidebarOpen ? setIsSidebarOpen(true) : setIsSidebarOpen(false);
+  //   setIsSidebarOpen(isSidebarOpen !== true);
+  // }
 
   return (
     <>
       <AppBar
         position="relative"
         className={classnames(classes.appBar, {
-          [classes.appBarShift]: isSidebarOpen,
+          [classes.appBarShift]: isSidebarOpened,
         })}
         color="primary"
       >
@@ -85,10 +85,10 @@ const NavBar = ({
             variant="h6"
             weight="medium"
             aria-label="open drawer"
-            onClick={toggleSideBar}
+            onClick={toggleSidebar}
             edge="start"
             className={classnames(classes.menuButton, classes.logotype, {
-              [classes.hide]: isSidebarOpen,
+              [classes.hide]: isSidebarOpened,
             })}
           >
               FILTERS
@@ -124,17 +124,6 @@ const NavBar = ({
               All Studies
             </Button>
           </NavLink>
-          {/* <NavLink className={classes.link}
-          activeStyle={{borderBottom: '4px solid white'}} to='/cases'
-          >
-            <Button
-              variant='h6'
-              weight='medium'
-              className={classes.logotype}
-            >
-              All Cases
-            </Button>
-          </NavLink> */}
           <NavLink
             className={classes.link}
             activeStyle={{ borderBottom: '4px solid white' }}
@@ -172,12 +161,12 @@ const NavBar = ({
         className={classes.drawer}
         variant="persistent"
         anchor="left"
-        open={isSidebarOpen}
+        open={isSidebarOpened}
         classes={{
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader} onClick={toggleSideBar}>
+        <div className={classes.drawerHeader} onClick={toggleSidebar}>
           <IconButton>
             <ChevronLeftIcon />
           </IconButton>
