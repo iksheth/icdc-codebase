@@ -135,8 +135,7 @@ const styles = (theme) => ({
     flexDirection: 'column',
   },
   donutContainer: {
-    // maxWidth: '775px',
-    margin: '16px auto',
+    background: '#bcbcbc',
   },
   paper: {
     textAlign: 'center',
