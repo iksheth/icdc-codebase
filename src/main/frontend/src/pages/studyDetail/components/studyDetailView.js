@@ -2,15 +2,34 @@ import React from 'react';
 import {
   Grid,
   withStyles,
+  Link,
 } from '@material-ui/core';
+import MUIDataTable from 'mui-datatables';
 import StatsView from '../../../components/Stats/StatsView';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 
+const columns = [
+  { name: 'arm', label: 'Arms' },
+  { name: 'description', label: 'Description' },
+  { name: 'chorts', label: 'chorts' },
+];
+
+const options = {
+  selectableRows: false,
+  search: false,
+  filter: false,
+  searchable: false,
+  print: false,
+  download: false,
+  viewColumns: false,
+  pagination: true,
+
+};
 
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
-  const fileTypes = [...new Set(data.fileOfStudy.map((fileOfStudy) => (fileOfStudy.file_type)))];
+  const fileTypes = [...new Set(data.filesOfStudy.map((fileOfStudy) => (fileOfStudy.file_type)))];
   const stat = {
     numberOfStudies: 1,
     numberOfCases: data.caseCountOfStudy,
@@ -62,6 +81,22 @@ const StudyDetailView = ({ classes, data }) => {
           <p>
             {fileTypes.map((fileType) => <li>{fileType}</li>)}
           </p>
+          <p>
+
+            <Link color="inherit" href={`/study_cases/${studyData.clinical_study_designation}`}>
+                Cases
+            </Link>
+          </p>
+        </Grid>
+      </Grid>
+      <Grid container spacing={32}>
+        <Grid item lg={12} md={12} sm={12} xs={12}>
+          <MUIDataTable
+            title="COHORT AND DOSING"
+            data={data.filesOfCase}
+            columns={columns}
+            options={options}
+          />
 
         </Grid>
       </Grid>

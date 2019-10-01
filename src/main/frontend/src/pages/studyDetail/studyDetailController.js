@@ -17,7 +17,7 @@ const GET_STUDY_DETAIL_DATA_QUERY = gql`
 
    caseCountOfStudy(study_code: $csd)
 
-   fileOfStudy(study_code: $csd){
+   filesOfStudy(study_code: $csd){
     file_type
    }
 
@@ -29,11 +29,21 @@ const GET_STUDY_DETAIL_DATA_QUERY = gql`
     clinical_study_type
     date_of_iacuc_approval
     dates_of_conduct
-    study_arms{
-      cohorts{
-        cohort_dose_unit
-      }
+    cohorts{
+        cohort_dose
+        cohort_description
     }
+
+    study_arms{
+      arm
+      ctep_treatment_assignment_code
+      cohorts{
+        cohort_dose
+        cohort_description
+      }
+
+    }
+
     principal_investigators{
       pi_first_name
       pi_last_name
@@ -54,7 +64,7 @@ const StudyDetailContainer = ({ match }) => (
     {({ data, loading, error }) => (
       loading ? <CircularProgress />
         : (
-          error || !data || !data.study[0] ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
+          error || !data ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
             : <StudyDetailView data={data} />
         )
     )}

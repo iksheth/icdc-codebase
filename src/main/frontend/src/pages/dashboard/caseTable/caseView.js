@@ -26,6 +26,16 @@ const options = {
   download: false,
   viewColumns: false,
   pagination: true,
+  onCellClick: (colData, cellMeta) => {
+    // redirect to study details
+    if (cellMeta.colIndex === 0) {
+      window.open(`/case/${colData}`);
+    }
+    // redirect to case details
+    if (cellMeta.colIndex === 1) {
+      window.open(`/study/${colData}`);
+    }
+  },
   customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
     <CustomFooter
       count={count}
@@ -36,6 +46,7 @@ const options = {
       onChangePage={(_, page) => changePage(page)}
     />
   ),
+
 };
 
 const Cases = ({ data }) => (

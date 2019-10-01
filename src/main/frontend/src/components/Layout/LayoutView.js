@@ -13,7 +13,8 @@ import Error from '../../pages/error/Error';
 // pages
 
 import Dashboard from '../../pages/dashboard/dashboardController';
-import Cases from '../../pages/cases/cases';
+import CaseDetail from '../../pages/caseDetail/caseDetailController';
+import Cases from '../../pages/cases/casesController';
 import Studies from '../../pages/studies/studiesController';
 import Programs from '../../pages/programs/programController';
 import modelPage from '../../pages/modelPage/modelPageView';
@@ -73,6 +74,8 @@ const Layout = ({ classes }) => {
 
               <Route path="/about" component={About} />
               <Route path="/study/:id" component={StudyDetail} />
+              <Route path="/case/:id" component={CaseDetail} />
+              <Route path="/study_cases/:id" component={Cases} />
 
               <Route component={Error} />
             </Switch>
