@@ -8,8 +8,8 @@ import sunburstImage from '../../assets/dashboard/dashboard_sunburst.png';
 import BreedDonut from '../../components/Widgets/PieCharts/BreedDonut/BreedDonutController';
 import DiagnosisDonut from '../../components/Widgets/PieCharts/DiagnosisDonut/DiagnosisDonutController';
 import GenderDonut from '../../components/Widgets/PieCharts/GenderDonut/GenderDonutController';
-import TumorDonut from '../../components/Widgets/PieCharts/TumorDonut/TumorDonut';
-import DiseaseDonut from '../../components/Widgets/PieCharts/DiseaseDonut/DiseaseDonut';
+import TumorDonut from '../../components/Widgets/PieCharts/TumorDonut/TumorDonutController';
+import DiseaseDonut from '../../components/Widgets/PieCharts/DiseaseDonut/DiseaseDonutController';
 
 const Dashboard = ({
   classes, data,
@@ -76,6 +76,7 @@ const Dashboard = ({
           className={classes.card}
         >
           <DiseaseDonut
+            data={data.caseCountByDiseaseSite}
             width={400}
             height={200}
             innerRadius={50}
@@ -111,6 +112,7 @@ const Dashboard = ({
           className={classes.card}
         >
           <TumorDonut
+            data={data.caseCountByStageOfDisease}
             width={400}
             height={200}
             innerRadius={50}
