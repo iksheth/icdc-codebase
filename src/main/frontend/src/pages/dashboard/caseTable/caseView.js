@@ -4,10 +4,30 @@ import {
   withStyles,
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
+import { Link } from 'react-router-dom';
 import CustomFooter from './customFooter';
 
-const columns = [{ name: 'case_id', label: 'Case ID' },
-  { name: 'study_code', label: 'Study Code' },
+const columns = [
+  {
+    name: 'case_id',
+    label: 'Case ID',
+    options: {
+      filter: false,
+      customBodyRender: (value) => (
+        <Link to={`/case/${value}`}>{value}</Link>
+      ),
+    },
+  },
+  {
+    name: 'study_code',
+    label: 'Study Code',
+    options: {
+      filter: false,
+      customBodyRender: (value) => (
+        <Link to={`/study/${value}`}>{value}</Link>
+      ),
+    },
+  },
   { name: 'study_type', label: 'Study Type' },
   { name: 'breed', label: 'Breed' },
   { name: 'diagnosis', label: 'Diagnosis' },
@@ -26,16 +46,7 @@ const options = {
   download: false,
   viewColumns: false,
   pagination: true,
-  onCellClick: (colData, cellMeta) => {
-    // redirect to study details
-    if (cellMeta.colIndex === 0) {
-      window.open(`/case/${colData}`);
-    }
-    // redirect to case details
-    if (cellMeta.colIndex === 1) {
-      window.open(`/study/${colData}`);
-    }
-  },
+
   customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
     <CustomFooter
       count={count}

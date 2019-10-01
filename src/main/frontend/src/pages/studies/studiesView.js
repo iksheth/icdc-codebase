@@ -4,10 +4,20 @@ import {
   withStyles,
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
+import { Link } from 'react-router-dom';
 import Stats from '../../components/Stats/StatsController';
 
 const columns = [{ name: 'program_id', label: 'Program' },
-  { name: 'clinical_study_designation', label: 'Study Code' },
+  {
+    name: 'clinical_study_designation',
+    label: 'Study Code',
+    options: {
+      filter: false,
+      customBodyRender: (value) => (
+        <Link to={`/study/${value}`}>{value}</Link>
+      ),
+    },
+  },
   { name: 'clinical_study_name', label: 'Study Name' },
   { name: 'clinical_study_type', label: 'Study Type' },
   { name: 'numberOfCases', label: 'Cases' },
