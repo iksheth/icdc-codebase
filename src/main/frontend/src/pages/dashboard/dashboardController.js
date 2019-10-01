@@ -21,6 +21,14 @@ const GET_DONUT_DATA_QUERY = gql`
       cases
       diagnosis
     }
+    caseCountByDiseaseSite { 
+      cases
+      disease_site 
+    }
+    caseCountByStageOfDisease { 
+      cases
+      stage_of_disease 
+    }
   }
 `;
 
