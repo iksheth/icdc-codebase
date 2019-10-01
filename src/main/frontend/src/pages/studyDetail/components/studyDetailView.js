@@ -2,16 +2,32 @@ import React from 'react';
 import {
   Grid,
   withStyles,
-  Link,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
 import StatsView from '../../../components/Stats/StatsView';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 
 const columns = [
   { name: 'arm', label: 'Arms' },
-  { name: 'description', label: 'Description' },
-  { name: 'chorts', label: 'chorts' },
+  {
+    name: 'description',
+    label: 'Description',
+    options: {
+      customBodyRender: (value) => (
+        value.split('#').map((desc) => (desc === '' ? '' : <li>{desc}</li>))
+      ),
+    },
+  },
+  {
+    name: 'does',
+    label: 'cohorts',
+    options: {
+      customBodyRender: (value) => (
+        value.split('#').map((desc) => (desc === '' ? '' : <li>{desc}</li>))
+      ),
+    },
+  },
 ];
 
 const options = {
@@ -37,6 +53,22 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfFiles: data.fileCountOfStudy,
     numberOfBiospecimenAliquots: data.aliguotCountOfStudy,
   };
+
+  const cohortAndDosingTableData = [];
+  studyData.study_arms.forEach((arm) => {
+    const cohortAndDosing = {
+      arm: arm.arm,
+      description: '',
+      does: '',
+    };
+    arm.cohorts.forEach((cohort) => {
+      cohortAndDosing.description += `${cohort.cohort_description}#`;
+      cohortAndDosing.does += `${cohort.cohort_dose}#`;
+    });
+
+    cohortAndDosingTableData.push(cohortAndDosing);
+  });
+
   return (
     <>
       <StatsView data={stat} />
@@ -83,7 +115,7 @@ const StudyDetailView = ({ classes, data }) => {
           </p>
           <p>
 
-            <Link color="inherit" href={`/study_cases/${studyData.clinical_study_designation}`}>
+            <Link to={`/study_cases/${studyData.clinical_study_designation}`}>
                 Cases
             </Link>
           </p>
@@ -93,7 +125,7 @@ const StudyDetailView = ({ classes, data }) => {
         <Grid item lg={12} md={12} sm={12} xs={12}>
           <MUIDataTable
             title="COHORT AND DOSING"
-            data={data.filesOfCase}
+            data={cohortAndDosingTableData}
             columns={columns}
             options={options}
           />

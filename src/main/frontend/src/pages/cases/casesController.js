@@ -39,7 +39,7 @@ const studyCaseContainer = ({ match }) => (
       loading ? <CircularProgress />
         : (
           error || !data || !data.caseOverview ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
-            : <CasesView data={data} />
+            : <CasesView data={({ ...data, title: `${match.params.id}'s Cases` })} />
         )
     )}
   </Query>
