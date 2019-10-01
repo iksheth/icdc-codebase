@@ -78,8 +78,8 @@ const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => {
 
               <Route component={Error} />
             </Switch>
+            <Footer />
           </div>
-          <Footer />
         </>
       </BrowserRouter>
     </>
