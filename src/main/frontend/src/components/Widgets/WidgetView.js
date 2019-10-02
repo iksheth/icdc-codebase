@@ -9,6 +9,7 @@ import { Typography } from '../Wrappers/Wrappers';
 
 const Widget = ({
   classes,
+  color,
   children,
   title,
   noBodyPadding,
@@ -24,7 +25,7 @@ const Widget = ({
           props.header
         ) : (
           <>
-            <Typography size="md" color="info">
+            <Typography size="md" color={color}>
               {title}
             </Typography>
           </>
@@ -73,5 +74,10 @@ const styles = (theme) => ({
     background: theme.custom.cardBackGround,
   },
 });
+
+
+Widget.defaultProps = {
+  color: "info",
+}
 
 export default withStyles(styles, { withTheme: true })(Widget);

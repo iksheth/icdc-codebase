@@ -3,10 +3,10 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
 import StatsView from '../../../components/Stats/StatsView';
-import { Typography } from '../../../components/Wrappers/Wrappers';
+import Widget from '../../../components/Widgets/WidgetView';
+import { Typography, Button } from '../../../components/Wrappers/Wrappers';
 
 const columns = [
   { name: 'arm', label: 'Arms' },
@@ -15,16 +15,16 @@ const columns = [
     label: 'Description',
     options: {
       customBodyRender: (value) => (
-        value.split('#').map((desc) => (desc === '' ? '' : <li>{desc}</li>))
+        value.split('#').map((desc) => (desc === '' ? '' : <li style={{ listStyleType: 'none' }}>{desc}</li>))
       ),
     },
   },
   {
     name: 'does',
-    label: 'cohorts',
+    label: 'Cohorts',
     options: {
       customBodyRender: (value) => (
-        value.split('#').map((desc) => (desc === '' ? '' : <li>{desc}</li>))
+        value.split('#').map((desc) => (desc === '' ? '' : <li style={{ listStyleType: 'none' }}>{desc}</li>))
       ),
     },
   },
@@ -72,66 +72,119 @@ const StudyDetailView = ({ classes, data }) => {
   return (
     <>
       <StatsView data={stat} />
-      <Typography variant="headline" color="warning" size="sm">
-        <p className={classes.paragraphStyle}>
-          {studyData.clinical_study_designation}
-        </p>
-      </Typography>
-      {studyData.clinical_study_name}
-      <Grid container spacing={32}>
-        <Grid item lg={6} md={6} sm={6} xs={12}>
+      <div className={classes.studyDetailContainer}>
+        <div className={classes.studyDetailHeader}>
+          <Typography variant="headline" color="warning" size="sm">
+            {studyData.clinical_study_designation}
+          </Typography>
+          <Typography variant="headline" size="sm">
+            {`: ${studyData.clinical_study_name}`}
+          </Typography>
+        </div>
+        <Grid container spacing={32}>
+          <Grid item lg={6} md={6} sm={6} xs={12}>
+            <Grid container spacing={32} direction="column">
+              <Grid item xs={12}>
+                <Widget
+                  title="SUMMARY"
+                  upperTitle
+                  bodyClass={classes.fullHeightBody}
+                  className={classes.card}
+                  color="warning"
+                >
+                  <Grid item xs={12}>
+                    <Typography>
+                      {studyData.clinical_study_description}
+                      <br />
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <br />
+                    <Typography weight="bold">Principal Investigators:</Typography>
+                    <br />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>
+                      {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => <li>{principalInvestigator}</li>) : ''}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography weight="bold">IACUC Approval:</Typography>
+                    <br />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>
+                      {studyData.date_of_iacuc_approval}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <br />
+                    <Typography weight="bold">Study Date:</Typography>
+                    <br />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>
+                      {studyData.dates_of_conduct}
+                    </Typography>
+                  </Grid>
+                </Widget>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item lg={6} md={6} sm={6} xs={12}>
+            <Widget>
+              <Grid container spacing={16}>
+                {/* Divding the Paper into two parts */}
+                <Grid item xs={6}>
+                  <Typography size="md" color="warning">
+              DIAGNOSES
+                  </Typography>
+                  <Typography>
+                    {diagnoses.map((diagnosis) => (
+                      <>
+                        <li style={{ listStyleType: 'none' }}>{diagnosis}</li>
+                        <br />
+                      </>
+                    ))}
+                  </Typography>
+                </Grid>
+                {/* End of part one */}
+                {/* Divding the Paper into two parts */}
+                <Grid item xs={6}>
+                  <Typography size="md" color="warning">
+              DATA TYPES
+                  </Typography>
+                  <Typography>
+                    {fileTypes.map((fileType) => <li style={{ listStyleType: 'none' }}>{fileType}</li>)}
+                  </Typography>
+                </Grid>
+                {/* End of part two */}
+                {/* Divding the Paper into two parts */}
+                <Grid item xs={12}>
+                  <div className={classes.studyDetailButton}>
+                    <Typography size="md" color="info">
+                      <Button color="secondary" href={`/study_cases/${studyData.clinical_study_designation}`}>CASES</Button>
+                    </Typography>
+                  </div>
+                </Grid>
+                {/* End of part one */}
+              </Grid>
+            </Widget>
+          </Grid>
 
-          <p className={classes.paragraphStyle}>
-            Summary:
-          </p>
-          <p>{studyData.clinical_study_description}</p>
-          <p>Principal Investigators</p>
-          <p>
-            {' '}
-            {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => <li>{principalInvestigator}</li>) : ''}
-          </p>
-          <p>IACUC Approval</p>
-          <p>{studyData.date_of_iacuc_approval}</p>
-          <p>Study Date</p>
-          <p>{studyData.dates_of_conduct}</p>
+          <Grid container spacing={32}>
+            <Grid item lg={12} md={12} sm={12} xs={12}>
+              <MUIDataTable
+                title="COHORT AND DOSING"
+                data={cohortAndDosingTableData}
+                columns={columns}
+                options={options}
+              />
 
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid item lg={3} md={3} sm={6} xs={12}>
-          <p className={classes.paragraphStyle}>
-            DIAGNOSES:
-          </p>
-          <p>{diagnoses.map((diagnosis) => <li>{diagnosis}</li>)}</p>
-
-
-        </Grid>
-
-
-        <Grid item lg={3} md={3} sm={6} xs={12}>
-          <p className={classes.paragraphStyle}>
-            New File Type:
-          </p>
-          <p>
-            {fileTypes.map((fileType) => <li>{fileType}</li>)}
-          </p>
-          <p>
-
-            <Link to={`/study_cases/${studyData.clinical_study_designation}`}>
-                Cases
-            </Link>
-          </p>
-        </Grid>
-      </Grid>
-      <Grid container spacing={32}>
-        <Grid item lg={12} md={12} sm={12} xs={12}>
-          <MUIDataTable
-            title="COHORT AND DOSING"
-            data={cohortAndDosingTableData}
-            columns={columns}
-            options={options}
-          />
-
-        </Grid>
-      </Grid>
+      </div>
     </>
   );
 };
@@ -144,6 +197,17 @@ const styles = (theme) => ({
   },
   caseCardContainer: {
     marginTop: '32px',
+  },
+  studyDetailHeader: {
+    display: 'inline-flex',
+    paddingTop: 'inherit',
+  },
+  studyDetailButton: {
+    float: 'right',
+  },
+  studyDetailContainer: {
+    maxWidth: '1000px',
+    margin: '16px auto',
   },
   paper: {
     textAlign: 'center',
