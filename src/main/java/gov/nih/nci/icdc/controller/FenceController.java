@@ -24,6 +24,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import gov.nih.nci.icdc.error.ResourceNotFoundException;
 import gov.nih.nci.icdc.model.ConfigurationDAO;
 import gov.nih.nci.icdc.service.FenceService;
 import io.swagger.annotations.Api;
@@ -65,12 +66,10 @@ public class FenceController {
 	        HttpServletRequest request, 
 	        HttpServletResponse response) throws Exception {
 
+
 		String getTokens = service.getToken(code);
-		
 		JsonParser parser = new JsonParser();
-		
 		JsonElement jsonTree = parser.parse(getTokens);
-		
 		Boolean hasErr = false;
 		if(jsonTree.isJsonObject()) {
 		    JsonObject jsonObject = jsonTree.getAsJsonObject();
@@ -79,7 +78,7 @@ public class FenceController {
 		    JsonElement idToken = jsonObject.get("id_token");
 		    JsonElement tokenType = jsonObject.get("token_type");
 		    
-		    if(null!=accessToken && accessToken.toString()!="") {
+		    if(null!=accessToken && !accessToken.toString().contentEquals("")) {
 		    	// decode accessToken
 		    	DecodedJWT jwt = JWT.decode(accessToken.toString());
 		    	
@@ -90,7 +89,7 @@ public class FenceController {
 		        session.setAttribute("token", jwt);
 		    	
 		    	String payload =  jwt.getPayload();
-		    	
+
 		    	// payload is Base64Url encoded
 		    	String token = new String(Base64.getDecoder().decode(payload));
 		    	JsonElement jsonPayload= parser.parse(token);
@@ -122,7 +121,7 @@ public class FenceController {
 		
 		if(hasErr) {
 			logger.error("Not able to retrieve the token , err message : " + getTokens);
-			throw new Exception("Not able to retrieve the token , err message : " + getTokens);
+			throw new ResourceNotFoundException("Not able to retrieve the token , err message : " + getTokens);
 		}
 		
 		return null;

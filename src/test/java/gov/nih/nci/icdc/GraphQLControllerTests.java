@@ -24,20 +24,22 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class GraphQLControllerTests {
-
+	
+	@Autowired
+	private WebApplicationContext context;
+	
 	private MockMvc mockMvc;
 
 	@Rule
 	public JUnitRestDocumentation jUnitRestDocumentation = new JUnitRestDocumentation();
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context)
 				.apply(documentationConfiguration(this.jUnitRestDocumentation)).build();
 	}
 
-	@Autowired
-	private WebApplicationContext context;
+	
 
 	private void testGraphQLAPI(String parms) throws Exception {
 

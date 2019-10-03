@@ -1,10 +1,10 @@
-import tinycolor from "tinycolor2";
+import tinycolor from 'tinycolor2';
 
-const primary = "#092756";
-const secondary = "#2A71A5";
-const warning = "#FFC260";
-const success = "#3CD4A0";
-const info = "#9013FE";
+const primary = '#092756';
+const secondary = '#2A71A5';
+const warning = '#ff7f0b';
+const success = '#3CD4A0';
+const info = '#3f2b2f';
 
 const lightenRate = 7.5;
 const darkenRate = 15;
@@ -12,8 +12,8 @@ const darkenRate = 15;
 export default {
   custom: {
     maxContentWidth: '1440px',
-    maxContent:'white',
-    bodyBackGround: 'white'
+    maxContent: 'white',
+    bodyBackGround: 'white',
   },
   palette: {
     primary: {
@@ -23,7 +23,7 @@ export default {
         .toHexString(),
       dark: tinycolor(primary)
         .darken(darkenRate)
-        .toHexString()
+        .toHexString(),
     },
     secondary: {
       main: secondary,
@@ -33,7 +33,7 @@ export default {
       dark: tinycolor(secondary)
         .darken(darkenRate)
         .toHexString(),
-      contrastText: "#FFFFFF"
+      contrastText: '#FFFFFF',
     },
     warning: {
       main: warning,
@@ -42,7 +42,7 @@ export default {
         .toHexString(),
       dark: tinycolor(warning)
         .darken(darkenRate)
-        .toHexString()
+        .toHexString(),
     },
     success: {
       main: success,
@@ -51,7 +51,7 @@ export default {
         .toHexString(),
       dark: tinycolor(success)
         .darken(darkenRate)
-        .toHexString()
+        .toHexString(),
     },
     info: {
       main: info,
@@ -60,65 +60,66 @@ export default {
         .toHexString(),
       dark: tinycolor(info)
         .darken(darkenRate)
-        .toHexString()
+        .toHexString(),
     },
     textWhite: {
-      main: "white",
+      main: 'white',
       light: tinycolor(info)
         .lighten(lightenRate)
         .toHexString(),
       dark: tinycolor(info)
         .darken(darkenRate)
-        .toHexString()
+        .toHexString(),
     },
     text: {
-      withbackground: "white",
-      primary: "#4A4A4A",
-      secondary: "#6E6E6E",
-      hint: "#B9B9B9"
+      withbackground: 'white',
+      primary: '#4A4A4A',
+      secondary: '#6E6E6E',
+      hint: '#B9B9B9',
+      link: '#1669aa',
     },
     background: {
-      default: "#fafafa",
-      light: "#F3F5FF"
-    }
+      default: '#fafafa',
+      light: '#F3F5FF',
+    },
   },
   customShadows: {
     widget:
-      "0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+      '0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A',
     widgetDark:
-      "0px 3px 18px 0px #4558A3B3, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A",
+      '0px 3px 18px 0px #4558A3B3, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A',
     widgetWide:
-      "0px 12px 33px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A"
+      '0px 12px 33px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A',
   },
   overrides: {
     MuiBackdrop: {
       root: {
-        backgroundColor: "#4A4A4A1A"
-      }
+        backgroundColor: '#4A4A4A1A',
+      },
     },
     MuiMenu: {
       paper: {
         boxShadow:
-          "0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A"
-      }
+          '0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A',
+      },
     },
     MuiSelect: {
       icon: {
-        color: "#B9B9B9",
-      }
+        color: '#B9B9B9',
+      },
     },
     MuiTouchRipple: {
       child: {
-        backgroundColor: "white"
-      }
+        backgroundColor: 'white',
+      },
     },
     MUIDataTableSelectCell: {
       headerCell: {
-        backgroundColor: primary
-      }
+        backgroundColor: primary,
+      },
     },
     MUIDataTableHeadCell: {
-      fixedHeader:{
+      fixedHeader: {
         backgroundColor: primary,
         color: 'white',
         textDecoration: 'underline',
@@ -127,31 +128,31 @@ export default {
         // fontSize: '18px'
       },
       sortActive: {
-        color: 'white'
+        color: 'white',
       },
-      toolButton:{
-         cursor: 'pointer',
-         display: 'inline-flex',
-         outline: 'none'
-  
-        }
+      toolButton: {
+        cursor: 'pointer',
+        display: 'inline-flex',
+        outline: 'none',
+
+      },
     },
     MuiTableSortLabel: {
       active: {
-        color: 'white'
-      }
+        color: 'white',
+      },
     },
     MuiTableRow: {
       root: {
         height: 56,
-      }
+      },
     },
     MUIDataTableBodyRow: {
       root: {
-        '&:nth-child(even)': { 
-          backgroundColor: '#f5f5f5'
-        }
-      }
+        '&:nth-child(even)': {
+          backgroundColor: '#f5f5f5',
+        },
+      },
     },
     MuiTableCell: {
       root: {
@@ -162,7 +163,7 @@ export default {
       },
       body: {
         fontSize: '0.95rem',
-      }
-    }
-  }
+      },
+    },
+  },
 };

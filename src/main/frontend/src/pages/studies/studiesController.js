@@ -1,10 +1,9 @@
-import React from "react";
+import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import Studies from './studiesView';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Typography } from "../../components/Wrappers/Wrappers";
-
+import Studies from './studiesView';
+import { Typography } from '../../components/Wrappers/Wrappers';
 
 
 const GET_STUDYTABLE_DATA_QUERY = gql`{
@@ -18,29 +17,12 @@ const GET_STUDYTABLE_DATA_QUERY = gql`{
   }
   `;
 
-//   const GET_STUDYTABLE_DATA = () => {
-//     return (
-//     <Query query={GET_STUDYTABLE_DATA_QUERY}>
-//     {({ data }) => {
-//         return data;
-//       }}
-// }
-// </Query>
-//     )
-//   }
-
-const studiesContainer = ({ classes, theme, ...props }) => {
-    return (
-        <Query query={GET_STUDYTABLE_DATA_QUERY}>
-            {({ data, loading, error }) => {
-                return (loading ? < CircularProgress /> : (error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography> :
-                    <Studies data={data} />
-                ));
-            }
-            }
-        </Query>
-    );
-};
+const studiesContainer = () => (
+  <Query query={GET_STUDYTABLE_DATA_QUERY}>
+    {({ data, loading, error }) => (loading ? <CircularProgress /> : (error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
+      : <Studies data={data} />
+    ))}
+  </Query>
+);
 
 export default studiesContainer;
-

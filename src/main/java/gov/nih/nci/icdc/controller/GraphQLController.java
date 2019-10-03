@@ -20,8 +20,6 @@ import com.google.gson.JsonObject;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
 import gov.nih.nci.icdc.model.ConfigurationDAO;
-import gov.nih.nci.icdc.model.Mocker;
-import gov.nih.nci.icdc.service.GraphQLProvider;
 import gov.nih.nci.icdc.service.Neo4JGraphQLService;
 import graphql.language.Document;
 import graphql.language.OperationDefinition;
@@ -37,8 +35,6 @@ public class GraphQLController {
 	@Autowired
 	private Neo4JGraphQLService neo4jService;
 
-	@Autowired
-	private GraphQLProvider graphQLService;
 
 	public static final Gson GSON = new Gson();
 
@@ -77,11 +73,8 @@ public class GraphQLController {
 				throw new HttpRequestMethodNotSupportedException("Invalid Graphql query");
 			} else {
 
-				// if (isvalidQraphQL(sdl)) {
-				responseText = neo4jService.query(sdl);
-				// } else {
-				// throw new UnirestException("Invalid Graphql query");
-				// }
+				responseText = neo4jService.query(reqBody);
+
 				return responseText;
 			}
 		} else {
@@ -90,10 +83,5 @@ public class GraphQLController {
 
 	}
 
-//	private boolean isvalidQraphQL(String requestQuery) {
-//		Parser parser = new Parser();
-//		Document document = parser.parseDocument(requestQuery);
-//		return graphQLService.isVaild(document);
-//	}
 
 }
