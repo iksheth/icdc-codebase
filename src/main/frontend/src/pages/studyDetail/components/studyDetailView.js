@@ -4,6 +4,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
+import { Link } from 'react-router-dom';
 import StatsView from '../../../components/Stats/StatsView';
 import Widget from '../../../components/Widgets/WidgetView';
 import { Typography, Button } from '../../../components/Wrappers/Wrappers';
@@ -100,6 +101,17 @@ const StudyDetailView = ({ classes, data }) => {
                   </Grid>
                   <Grid item xs={12}>
                     <br />
+                    <Typography weight="bold">Study Type:</Typography>
+                    <br />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>
+                      {studyData.clinical_study_type}
+                      <br />
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <br />
                     <Typography weight="bold">Principal Investigators:</Typography>
                     <br />
                   </Grid>
@@ -163,7 +175,7 @@ const StudyDetailView = ({ classes, data }) => {
                 <Grid item xs={12}>
                   <div className={classes.studyDetailButton}>
                     <Typography size="md" color="info">
-                      <Button color="secondary" href={`/study_cases/${studyData.clinical_study_designation}`}>CASES</Button>
+                      <Link to={`/study_cases/${studyData.clinical_study_designation}`}><Button color="secondary">CASES</Button></Link>
                     </Typography>
                   </div>
                 </Grid>
