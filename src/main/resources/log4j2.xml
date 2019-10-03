@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration>
 	<Appenders>
-		<Console name="LogToConsole" target="SYSTEM_OUT">
+		<Console name="LogToConsole" target="SYSTEM_OUT" >
 			<PatternLayout
 				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 		</Console>
@@ -41,7 +41,7 @@
         </Async>
 	</Appenders>
 	<Loggers>
-		<Logger name="icdc" level="info" additivity="false">
+		<Logger name="gov.nih.nci.icdc" level="info" additivity="false">
 			<AppenderRef ref="AsyncInfo" />
 			<AppenderRef ref="LogToConsole" />
 		</Logger>

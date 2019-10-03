@@ -13,6 +13,7 @@ const columns = [
     label: 'Case ID',
     options: {
       filter: false,
+      sortDirection: 'asc',
       customBodyRender: (value) => (
         <Link to={`/case/${value}`}>{value}</Link>
       ),

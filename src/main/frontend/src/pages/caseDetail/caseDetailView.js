@@ -11,7 +11,7 @@ import { Typography } from '../../components/Wrappers/Wrappers';
 
 const columns = [
   { name: 'parent', label: 'parent' },
-  { name: 'file_name', label: 'name' },
+  { name: 'file_name', label: 'name', sortDirection: 'asc' },
   { name: 'file_type', label: 'type' },
   { name: 'file_description', label: 'description' },
   { name: 'file_format', label: 'format' },
