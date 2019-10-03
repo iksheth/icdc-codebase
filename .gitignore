@@ -11,6 +11,8 @@ target/
 *.iml
 .sts4-cache/*
 src/main/resources/application.properties
+logs/
 src/main/resources/application_dev.properties
 src/main/resources/application_local.properties
+
 

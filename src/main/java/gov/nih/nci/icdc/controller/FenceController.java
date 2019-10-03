@@ -65,15 +65,11 @@ public class FenceController {
 	public Map<String,String> login(@PathVariable("code") String code, 
 	        HttpServletRequest request, 
 	        HttpServletResponse response) throws Exception {
-		
-		// exchange code for token from fence. 
-	
+
+
 		String getTokens = service.getToken(code);
-			
 		JsonParser parser = new JsonParser();
-		
 		JsonElement jsonTree = parser.parse(getTokens);
-		
 		Boolean hasErr = false;
 		if(jsonTree.isJsonObject()) {
 		    JsonObject jsonObject = jsonTree.getAsJsonObject();
@@ -91,11 +87,9 @@ public class FenceController {
 		        
 		        // store token in session 
 		        session.setAttribute("token", jwt);
-		        
 		    	
 		    	String payload =  jwt.getPayload();
-		    	
-		    	
+
 		    	// payload is Base64Url encoded
 		    	String token = new String(Base64.getDecoder().decode(payload));
 		    	JsonElement jsonPayload= parser.parse(token);
