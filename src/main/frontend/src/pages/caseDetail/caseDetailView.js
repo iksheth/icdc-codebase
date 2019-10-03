@@ -40,12 +40,14 @@ const CaseDetail = ({ classes, data }) => {
     numberOfBiospecimenAliquots: data.aliquotCountOfCase,
   };
   const caseDetail = data.case[0];
+
+  const notProvided = '';
   return (
     <>
       <StatsView data={stat} />
       <div className={classes.caseCardContainer}>
         <Widget
-          title={`Case Detail #${caseDetail.case_id}:${caseDetail.patient_first_name}`}
+          title={`Case Detail #${caseDetail.case_id}: Patient name: ${caseDetail.patient_first_name}`}
           upperTitle
           bodyClass={classes.fullHeightBody}
           className={classes.card}
@@ -68,7 +70,7 @@ const CaseDetail = ({ classes, data }) => {
                           </Grid>
                           <Grid item xs={8}>
                             <Typography>
-                              {caseDetail.demographic.breed}
+                              {caseDetail.demographic ? caseDetail.demographic.breed : notProvided}
                               {' '}
                             </Typography>
                           </Grid>
@@ -82,7 +84,7 @@ const CaseDetail = ({ classes, data }) => {
                           <Grid item xs={8}>
                             <Typography>
                               {' '}
-                              {caseDetail.demographic.sex}
+                              {caseDetail.demographic ? caseDetail.demographic.sex : notProvided}
                               {' '}
                             </Typography>
                           </Grid>
@@ -95,7 +97,8 @@ const CaseDetail = ({ classes, data }) => {
                           </Grid>
                           <Grid item xs={8}>
                             <Typography>
-                              {caseDetail.demographic.patient_age_at_enrollment}
+                              {caseDetail.demographic
+                                ? caseDetail.demographic.patient_age_at_enrollment : notProvided}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -196,7 +199,10 @@ const CaseDetail = ({ classes, data }) => {
                         <Typography weight="bold">Assigned to Study</Typography>
                       </Grid>
                       <Grid item xs={8}>
-                        <Typography>{caseDetail.study.clinical_study_designation}</Typography>
+                        <Typography>
+                          {caseDetail.study
+                            ? caseDetail.study.clinical_study_designation : notProvided}
+                        </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -206,7 +212,11 @@ const CaseDetail = ({ classes, data }) => {
                         <Typography weight="bold">Assigned to Arm</Typography>
                       </Grid>
                       <Grid item xs={8}>
-                        <Typography>{caseDetail.cohort.study_arm.arm}</Typography>
+                        <Typography>
+                          {caseDetail.cohort
+                            ? (caseDetail.cohort.study_arm
+                              ? caseDetail.cohort.study_arm.arm : notProvided) : notProvided}
+                        </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -218,7 +228,7 @@ const CaseDetail = ({ classes, data }) => {
                       <Grid item xs={8}>
                         <Typography>
                           {' '}
-                          {caseDetail.cohort.cohort_description}
+                          {caseDetail.cohort ? caseDetail.cohort.cohort_description : notProvided}
                           {' '}
                         </Typography>
                       </Grid>
@@ -230,7 +240,10 @@ const CaseDetail = ({ classes, data }) => {
                         <Typography weight="bold">Patient Subgroup</Typography>
                       </Grid>
                       <Grid item xs={8}>
-                        <Typography>{caseDetail.enrollment.patient_subgroup}</Typography>
+                        <Typography>
+                          {caseDetail.enrollment
+                            ? caseDetail.enrollment.patient_subgroup : notProvided}
+                        </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -240,7 +253,10 @@ const CaseDetail = ({ classes, data }) => {
                         <Typography weight="bold">Date of Informed Consent</Typography>
                       </Grid>
                       <Grid item xs={8}>
-                        <Typography>{caseDetail.enrollment.date_of_informed_consent}</Typography>
+                        <Typography>
+                          {caseDetail.enrollment
+                            ? caseDetail.enrollment.date_of_informed_consent : notProvided}
+                        </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -250,7 +266,10 @@ const CaseDetail = ({ classes, data }) => {
                         <Typography weight="bold">Date of Enrollment</Typography>
                       </Grid>
                       <Grid item xs={8}>
-                        <Typography>{caseDetail.enrollment.date_of_registration}</Typography>
+                        <Typography>
+                          {caseDetail.enrollment
+                            ? caseDetail.enrollment.date_of_registration : notProvided}
+                        </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -261,13 +280,13 @@ const CaseDetail = ({ classes, data }) => {
                       </Grid>
                       <Grid item xs={8}>
                         <Typography>
-                          {caseDetail.study.study_sites.map((site) => (
+                          {caseDetail.study ? caseDetail.study.study_sites.map((site) => (
                             <li>
                               {' '}
                               {site.site_short_name}
                               {' '}
                             </li>
-                          ))}
+                          )) : notProvided}
                         </Typography>
                       </Grid>
                     </Grid>

@@ -64,7 +64,7 @@ const StudyDetailContainer = ({ match }) => (
     {({ data, loading, error }) => (
       loading ? <CircularProgress />
         : (
-          error || !data ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
+          error || !data || !data.study[0] ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
             : <StudyDetailView data={data} />
         )
     )}
