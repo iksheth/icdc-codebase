@@ -91,12 +91,8 @@ const NavBar = ({
               [classes.hide]: isSidebarOpened,
             })}
           >
-              FILTERS
+            &lt;&lt;&nbsp;FILTERS
           </Button>
-
-
-          {/* Reminder: Ajay will to replace the ICDC with env variable
-           and change build npm to read env variable */}
           <NavLink
             className={classes.link}
             activeStyle={{ borderBottom: '4px solid white' }}
