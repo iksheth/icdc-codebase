@@ -32,59 +32,51 @@ const ScrollToTop = () => {
   return null;
 };
 
-// eslint-disable-next-line arrow-body-style, no-unused-vars
-const Layout = ({ classes, isSidebarOpened, toggleSidebar }) => {
-  // const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
-
-  return (
-    <>
-      <CssBaseline />
-      <BrowserRouter>
-        <>
-          <Header />
-          {/* <Sidebar /> */}
-          <NavBar />
-
-          {/* <Sidebar />  */}
-          {/* Reminder: Ajay need to replace the ICDC with env variable and
+const Layout = ({ classes, isSidebarOpened }) => (
+  <>
+    <CssBaseline />
+    <BrowserRouter>
+      <>
+        <Header />
+        <NavBar />
+        {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
-          <div
-            className={classnames(classes.content, {
-              [classes.contentShift]: isSidebarOpened,
-            })}
-          >
-            <Route component={ScrollToTop} />
-            <Switch>
-              <Route exact path="/ICDC/" component={Dashboard} />
-              <Route exact path="/" component={Dashboard} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/cases" component={Cases} />
-              <Route path="/programs" component={Programs} />
-              <Route path="/studies" component={Studies} />
-              <Route path="/modelPage" component={modelPage} />
-              <Route path="/table" component={table} />
-              <Route path="/steeringCommittee" component={SteeringCommittee} />
-              <Route path="/bpsc" component={BPSC} />
+        <div
+          className={classnames(classes.content, {
+            [classes.contentShift]: isSidebarOpened,
+          })}
+        >
+          <Route component={ScrollToTop} />
+          <Switch>
+            <Route exact path="/ICDC/" component={Dashboard} />
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/cases" component={Cases} />
+            <Route path="/programs" component={Programs} />
+            <Route path="/studies" component={Studies} />
+            <Route path="/modelPage" component={modelPage} />
+            <Route path="/table" component={table} />
+            <Route path="/steeringCommittee" component={SteeringCommittee} />
+            <Route path="/bpsc" component={BPSC} />
 
-              <Route
-                path="/dgab"
-                component={DGAB}
-              />
+            <Route
+              path="/dgab"
+              component={DGAB}
+            />
 
-              <Route path="/about" component={About} />
-              <Route path="/study/:id" component={StudyDetail} />
-              <Route path="/case/:id" component={CaseDetail} />
-              <Route path="/study_cases/:id" component={Cases} />
+            <Route path="/about" component={About} />
+            <Route path="/study/:id" component={StudyDetail} />
+            <Route path="/case/:id" component={CaseDetail} />
+            <Route path="/study_cases/:id" component={Cases} />
 
-              <Route component={Error} />
-            </Switch>
-            <Footer />
-          </div>
-        </>
-      </BrowserRouter>
-    </>
-  );
-};
+            <Route component={Error} />
+          </Switch>
+          <Footer />
+        </div>
+      </>
+    </BrowserRouter>
+  </>
+);
 
 const styles = (theme) => ({
   root: {
