@@ -115,7 +115,7 @@ export default {
     },
     MUIDataTableSelectCell: {
       headerCell: {
-        backgroundColor: primary,
+        backgroundColor: '#fff',
       },
     },
     MUIDataTableHeadCell: {
