@@ -5,6 +5,7 @@ const secondary = '#FF5C93';
 const warning = '#FFC260';
 const success = '#3CD4A0';
 const info = '#9013FE';
+const tableHeader = '#000';
 
 const lightenRate = 7.5;
 const darkenRate = 15;
@@ -13,8 +14,9 @@ export default {
   custom: {
     maxContentWidth: '1440px',
     maxContent: 'black',
-    bodyBackGround: '#4A4A4A',
+    bodyBackGround: 'white',
     cardBackGround: '#D9F3F2',
+    footorBackground: '#2e2a24',
   },
   palette: {
     primary: {
@@ -77,6 +79,7 @@ export default {
       primary: '#4A4A4A',
       secondary: '#6E6E6E',
       hint: '#B9B9B9',
+      footerText: 'white',
     },
     background: {
       default: '#fafafa',
@@ -115,7 +118,7 @@ export default {
     },
     MUIDataTableHeadCell: {
       fixedHeader: {
-        backgroundColor: primary,
+        backgroundColor: tableHeader,
         color: 'white',
         textDecoration: 'underline',
         fontWeight: '600',
