@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import classnames from 'classnames';
 import About from '../../pages/about/aboutView';
 import Header from '../Header/HeaderView';
-import NavBar from '../NavBar/NavBarView';
+import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
 
@@ -31,61 +31,52 @@ const ScrollToTop = () => {
   window.scrollTo(0, 0);
   return null;
 };
-const Layout = ({ classes }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
 
-  return (
-    <>
-      <CssBaseline />
-      <BrowserRouter>
-        <>
-          <Header />
-          {/* <Sidebar /> */}
-          <NavBar
-            isSidebarOpen={isSidebarOpen}
-            setIsSidebarOpen={setIsSidebarOpen}
-          />
-
-          {/* <Sidebar />  */}
-          {/* Reminder: Ajay need to replace the ICDC with env variable and
+const Layout = ({ classes, isSidebarOpened }) => (
+  <>
+    <CssBaseline />
+    <BrowserRouter>
+      <>
+        <Header />
+        <NavBar />
+        {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
-          <div
-            className={classnames(classes.content, {
-              [classes.contentShift]: isSidebarOpen,
-            })}
-          >
-            <Route component={ScrollToTop} />
-            <Switch>
-              <Route exact path="/ICDC/" component={Dashboard} />
-              <Route exact path="/" component={Dashboard} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/cases" component={Cases} />
-              <Route path="/programs" component={Programs} />
-              <Route path="/studies" component={Studies} />
-              <Route path="/modelPage" component={modelPage} />
-              <Route path="/table" component={table} />
-              <Route path="/steeringCommittee" component={SteeringCommittee} />
-              <Route path="/bpsc" component={BPSC} />
+        <div
+          className={classnames(classes.content, {
+            [classes.contentShift]: isSidebarOpened,
+          })}
+        >
+          <Route component={ScrollToTop} />
+          <Switch>
+            <Route exact path="/ICDC/" component={Dashboard} />
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/cases" component={Cases} />
+            <Route path="/programs" component={Programs} />
+            <Route path="/studies" component={Studies} />
+            <Route path="/modelPage" component={modelPage} />
+            <Route path="/table" component={table} />
+            <Route path="/steeringCommittee" component={SteeringCommittee} />
+            <Route path="/bpsc" component={BPSC} />
 
-              <Route
-                path="/dgab"
-                component={DGAB}
-              />
+            <Route
+              path="/dgab"
+              component={DGAB}
+            />
 
-              <Route path="/about" component={About} />
-              <Route path="/study/:id" component={StudyDetail} />
-              <Route path="/case/:id" component={CaseDetail} />
-              <Route path="/study_cases/:id" component={Cases} />
+            <Route path="/about" component={About} />
+            <Route path="/study/:id" component={StudyDetail} />
+            <Route path="/case/:id" component={CaseDetail} />
+            <Route path="/study_cases/:id" component={Cases} />
 
-              <Route component={Error} />
-            </Switch>
-          </div>
+            <Route component={Error} />
+          </Switch>
           <Footer />
-        </>
-      </BrowserRouter>
-    </>
-  );
-};
+        </div>
+      </>
+    </BrowserRouter>
+  </>
+);
 
 const styles = (theme) => ({
   root: {

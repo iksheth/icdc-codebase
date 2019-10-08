@@ -1,10 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import SexPanel from './SideBarComponents/SexListItem';
-import DiagnosisPanel from './SideBarComponents/DiagnosisListItem';
-import StudyCodesPanel from './SideBarComponents/StudyCodesListItem';
-import BreedsPanel from './SideBarComponents/BreedsListItem';
+import FacetFilter from './SideBarComponents/FacetFilters';
 
 const styles = (theme) => ({
   root: {
@@ -16,10 +13,7 @@ const styles = (theme) => ({
 
 const SideBarContent = () => (
   <List component="nav" aria-label="main mailbox folders">
-    <StudyCodesPanel />
-    <BreedsPanel />
-    <DiagnosisPanel />
-    <SexPanel />
+    <FacetFilter />
   </List>
 );
 
