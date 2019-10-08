@@ -188,17 +188,19 @@ const StudyDetailView = ({ classes, data }) => {
             </Widget>
           </Grid>
 
-          <Grid container spacing={32}>
-            <Grid item lg={12} md={12} sm={12} xs={12}>
-              <MUIDataTable
-                title="COHORT AND DOSING"
-                data={cohortAndDosingTableData}
-                columns={columns}
-                options={options}
-              />
-
+          <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Grid container spacing={32} direction="column">
+              <Grid item xs={12}>
+                <MUIDataTable
+                  title="COHORT AND DOSING"
+                  data={cohortAndDosingTableData}
+                  columns={columns}
+                  options={options}
+                />
+              </Grid>
             </Grid>
           </Grid>
+
         </Grid>
       </div>
     </>
@@ -211,19 +213,18 @@ const styles = (theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  caseCardContainer: {
-    marginTop: '32px',
-  },
+
   studyDetailHeader: {
     display: 'inline-flex',
     paddingTop: 'inherit',
+    paddingBottom: '10px',
   },
   studyDetailButton: {
     float: 'right',
   },
   studyDetailContainer: {
-    maxWidth: '1000px',
-    margin: '16px auto',
+    padding: `${theme.spacing.unit * 2}px`,
+    background: theme.custom.cardBackGround,
   },
   paper: {
     textAlign: 'center',

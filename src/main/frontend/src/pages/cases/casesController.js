@@ -17,7 +17,6 @@ const GET_CASES_QUERY = gql`
 
    caseCountOfStudy(study_code: $study_id)
 
-
    caseOverview(study_codes:[$study_id]) {   
         case_id  
         study_code   
@@ -31,7 +30,6 @@ const GET_CASES_QUERY = gql`
      }
   }
   `;
-
 
 const studyCaseContainer = ({ match }) => (
   <Query query={GET_CASES_QUERY} variables={{ study_id: match.params.id }}>

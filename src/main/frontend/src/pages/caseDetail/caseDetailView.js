@@ -379,8 +379,9 @@ const styles = (theme) => ({
     flexDirection: 'column',
   },
   caseCardContainer: {
-    padding: theme.spacing.unit * 2,
-    background: '#f0f6f8',
+    padding: `${theme.spacing.unit * 2}px`,
+    background: theme.custom.cardBackGround,
+
   },
   caseDetailHeader: {
     display: 'inline-flex',
