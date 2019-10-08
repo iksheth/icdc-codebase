@@ -58,14 +58,18 @@ const StudyDetailView = ({ classes, data }) => {
   const cohortAndDosingTableData = [];
   studyData.study_arms.forEach((arm) => {
     const cohortAndDosing = {
-      arm: arm.arm,
-      description: '',
+      arm: arm.arm ? arm.arm : 'This study is not divided into arms',
+      description: arm.description ? arm.description : '',
       does: '',
     };
     arm.cohorts.forEach((cohort) => {
-      cohortAndDosing.description += `${cohort.cohort_description}#`;
-      cohortAndDosing.does += `${cohort.cohort_dose}#`;
+      if (cohort.cohort_dose !== '' && cohort.cohort_dose !== null) {
+        cohortAndDosing.does += `${cohort.cohort_dose}#`;
+      }
     });
+    if (cohortAndDosing.does === '') {
+      cohortAndDosing.does = 'This study is not divided into cohorts';
+    }
 
     cohortAndDosingTableData.push(cohortAndDosing);
   });
