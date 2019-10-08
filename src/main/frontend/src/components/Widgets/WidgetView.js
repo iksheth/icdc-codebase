@@ -59,6 +59,7 @@ const styles = (theme) => ({
     // boxShadow: theme.customShadows.widget
   },
   widgetBody: {
+    margin:'0px auto',
     paddingBottom: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 3,

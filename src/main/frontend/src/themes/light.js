@@ -15,7 +15,9 @@ export default {
     maxContentWidth: '1440px',
     maxContent: 'white',
     bodyBackGround: '#f0f6f8',
+    cardBackGround: '#f0f6f8',
     footorBackground: '#a6d3eb',
+
   },
   palette: {
     primary: {

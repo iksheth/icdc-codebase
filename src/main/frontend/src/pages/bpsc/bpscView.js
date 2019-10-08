@@ -100,8 +100,9 @@ const styles = () => ({
   },
   pageTitle: {
     color: '#142A4E',
-    fontSize: '2.8125rem',
-    fontWeight: '400',
+    fontSize: '30px',
+    fontWeight: '600',
+    fontFamily: 'sans-serif',
   },
   paragraphContainer: {
     margin: '16px auto',

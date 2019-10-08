@@ -46,31 +46,118 @@ const CaseDetail = ({ classes, data }) => {
     <>
       <StatsView data={stat} />
       <div className={classes.caseCardContainer}>
-        <Widget
-          title={`Case Detail #${caseDetail.case_id}: Patient name: ${caseDetail.patient_first_name}`}
-          upperTitle
-          bodyClass={classes.fullHeightBody}
-          className={classes.card}
-        >
-          <Grid container spacing={32}>
-            <Grid item lg={6} md={6} sm={6} xs={12}>
-              <Grid container spacing={32} direction="column">
-                <Grid item xs={12}>
-                  <Widget
-                    title="DEMOGRAPHICS"
-                    upperTitle
-                    bodyClass={classes.fullHeightBody}
-                    className={classes.card}
-                  >
+
+        <div className={classes.caseDetailHeader}>
+
+          <Typography variant="headline" size="sm">
+            <span className={classes.warning}>
+               Case Detail
+            </span>
+            <span>
+              {' '}
+              {' '}
+               #
+              {' '}
+              {caseDetail.case_id}
+            </span>
+
+
+            {caseDetail.patient_first_name === '' || caseDetail.patient_first_name === null
+              ? '' : (
+                <span>
+                  <span className={classes.warning}>
+
+                    {' '}
+                Patient Name :
+                    {' '}
+                    {' '}
+                  </span>
+                  <span>
+                    {' '}
+                    {caseDetail.patient_first_name}
+                    {' '}
+                  </span>
+                </span>
+              )}
+
+          </Typography>
+
+
+        </div>
+
+        <Grid container spacing={32}>
+          <Grid item lg={6} md={6} sm={6} xs={12}>
+            <Grid container spacing={32} direction="column">
+              <Grid item xs={12}>
+                <Widget
+                  title="DEMOGRAPHICS"
+                  upperTitle
+                  bodyClass={classes.fullHeightBody}
+                  className={classes.card}
+                >
+                  <Grid container spacing={8}>
+                    <Grid item xs={12}>
+                      <Grid container spacing={8}>
+                        <Grid item xs={4}>
+                          <Typography weight="bold">Breed</Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Typography>
+                            {caseDetail.demographic ? caseDetail.demographic.breed : notProvided}
+                            {' '}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container spacing={8}>
+                        <Grid item xs={4}>
+                          <Typography weight="bold">Sex</Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Typography>
+                            {' '}
+                            {caseDetail.demographic ? caseDetail.demographic.sex : notProvided}
+                            {' '}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container spacing={8}>
+                        <Grid item xs={4}>
+                          <Typography weight="bold">Age of Enrollment</Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Typography>
+                            {caseDetail.demographic
+                              ? caseDetail.demographic.patient_age_at_enrollment : notProvided}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Widget>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Widget
+                  title="DIAGNOSIS"
+                  upperTitle
+                  bodyClass={classes.fullHeightBody}
+                  className={classes.card}
+                >
+                  { caseDetail.diagnoses.map((diagnosis) => (
                     <Grid container spacing={8}>
                       <Grid item xs={12}>
                         <Grid container spacing={8}>
                           <Grid item xs={4}>
-                            <Typography weight="bold">Breed</Typography>
+                            <Typography weight="bold">Disease</Typography>
                           </Grid>
                           <Grid item xs={8}>
                             <Typography>
-                              {caseDetail.demographic ? caseDetail.demographic.breed : notProvided}
+                              {diagnosis.patient_age_at_enrollment
+                                ? diagnosis.patient_age_at_enrollment : notProvided}
                               {' '}
                             </Typography>
                           </Grid>
@@ -79,13 +166,12 @@ const CaseDetail = ({ classes, data }) => {
                       <Grid item xs={12}>
                         <Grid container spacing={8}>
                           <Grid item xs={4}>
-                            <Typography weight="bold">Sex</Typography>
+                            <Typography weight="bold">Stage of Disease</Typography>
                           </Grid>
                           <Grid item xs={8}>
                             <Typography>
-                              {' '}
-                              {caseDetail.demographic ? caseDetail.demographic.sex : notProvided}
-                              {' '}
+                              {diagnosis.stage_of_disease
+                                ? diagnosis.stage_of_disease : notProvided}
                             </Typography>
                           </Grid>
                         </Grid>
@@ -93,235 +179,194 @@ const CaseDetail = ({ classes, data }) => {
                       <Grid item xs={12}>
                         <Grid container spacing={8}>
                           <Grid item xs={4}>
-                            <Typography weight="bold">Age of Enrollment</Typography>
+                            <Typography weight="bold">Date of Diagnosis</Typography>
                           </Grid>
                           <Grid item xs={8}>
                             <Typography>
-                              {caseDetail.demographic
-                                ? caseDetail.demographic.patient_age_at_enrollment : notProvided}
+                              {diagnosis.date_of_diagnosis
+                                ? diagnosis.date_of_diagnosis : notProvided}
                             </Typography>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Grid container spacing={8}>
+                          <Grid item xs={4}>
+                            <Typography weight="bold">Primary Site</Typography>
+                          </Grid>
+                          <Grid item xs={8}>
+                            <Typography>
+                              {diagnosis.primary_disease_site
+                                ? diagnosis.primary_disease_site : notProvided}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Grid container spacing={8}>
+                          <Grid item xs={4}>
+                            <Typography weight="bold">Histology/Cytology</Typography>
+                          </Grid>
+                          <Grid item xs={8}>
+                            <Typography>
+                              {diagnosis.histology_cytopathology
+                                ? diagnosis.histology_cytopathology : notProvided}
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Grid container spacing={8}>
+                          <Grid item xs={4}>
+                            <Typography weight="bold">Histological Grade</Typography>
+                          </Grid>
+                          <Grid item xs={8}>
+                            <Typography>{diagnosis.histological_grade === '' ? 'Null' : diagnosis.histological_grade}</Typography>
                           </Grid>
                         </Grid>
                       </Grid>
                     </Grid>
-                  </Widget>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Widget
-                    title="DIAGNOSIS"
-                    upperTitle
-                    bodyClass={classes.fullHeightBody}
-                    className={classes.card}
-                  >
-                    { caseDetail.diagnoses.map((diagnosis) => (
-                      <Grid container spacing={8}>
-                        <Grid item xs={12}>
-                          <Grid container spacing={8}>
-                            <Grid item xs={4}>
-                              <Typography weight="bold">Disease</Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                              <Typography>
-                                {diagnosis.patient_age_at_enrollment}
-                                {' '}
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={12}>
-                          <Grid container spacing={8}>
-                            <Grid item xs={4}>
-                              <Typography weight="bold">Stage of Disease</Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                              <Typography>{diagnosis.stage_of_disease}</Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={12}>
-                          <Grid container spacing={8}>
-                            <Grid item xs={4}>
-                              <Typography weight="bold">Date of Diagnosis</Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                              <Typography>{diagnosis.date_of_diagnosis}</Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={12}>
-                          <Grid container spacing={8}>
-                            <Grid item xs={4}>
-                              <Typography weight="bold">Primary Site</Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                              <Typography>{diagnosis.primary_disease_site}</Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={12}>
-                          <Grid container spacing={8}>
-                            <Grid item xs={4}>
-                              <Typography weight="bold">Histology/Cytology</Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                              <Typography>{diagnosis.histology_cytopathology}</Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                        <Grid item xs={12}>
-                          <Grid container spacing={8}>
-                            <Grid item xs={4}>
-                              <Typography weight="bold">Histological Grade</Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                              <Typography>{diagnosis.histological_grade === '' ? 'Null' : diagnosis.histological_grade}</Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    ))}
-                  </Widget>
-                </Grid>
+                  ))}
+                </Widget>
               </Grid>
             </Grid>
-            <Grid item lg={6} md={6} sm={6} xs={12}>
-              <Widget
-                title="STUDY"
-                upperTitle
-                bodyClass={classes.fullHeightBody}
-                className={classes.card}
-              >
-                <Grid container spacing={8}>
-                  <Grid item xs={12}>
-                    <Grid container spacing={8}>
-                      <Grid item xs={4}>
-                        <Typography weight="bold">Assigned to Study</Typography>
-                      </Grid>
-                      <Grid item xs={8}>
-                        <Typography>
-                          {caseDetail.study
-                            ? caseDetail.study.clinical_study_designation : notProvided}
-                        </Typography>
-                      </Grid>
+          </Grid>
+          <Grid item lg={6} md={6} sm={6} xs={12}>
+            <Widget
+              title="STUDY"
+              upperTitle
+              bodyClass={classes.fullHeightBody}
+              className={classes.card}
+            >
+              <Grid container spacing={8}>
+                <Grid item xs={12}>
+                  <Grid container spacing={8}>
+                    <Grid item xs={4}>
+                      <Typography weight="bold">Assigned to Study</Typography>
                     </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container spacing={8}>
-                      <Grid item xs={4}>
-                        <Typography weight="bold">Assigned to Arm</Typography>
-                      </Grid>
-                      <Grid item xs={8}>
-                        <Typography>
-                          {caseDetail.cohort
-                            ? (caseDetail.cohort.study_arm
-                              ? caseDetail.cohort.study_arm.arm : notProvided) : notProvided}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container spacing={8}>
-                      <Grid item xs={4}>
-                        <Typography weight="bold">Assigned to Cohort</Typography>
-                      </Grid>
-                      <Grid item xs={8}>
-                        <Typography>
-                          {' '}
-                          {caseDetail.cohort ? caseDetail.cohort.cohort_description : notProvided}
-                          {' '}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container spacing={8}>
-                      <Grid item xs={4}>
-                        <Typography weight="bold">Patient Subgroup</Typography>
-                      </Grid>
-                      <Grid item xs={8}>
-                        <Typography>
-                          {caseDetail.enrollment
-                            ? caseDetail.enrollment.patient_subgroup : notProvided}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container spacing={8}>
-                      <Grid item xs={4}>
-                        <Typography weight="bold">Date of Informed Consent</Typography>
-                      </Grid>
-                      <Grid item xs={8}>
-                        <Typography>
-                          {caseDetail.enrollment
-                            ? caseDetail.enrollment.date_of_informed_consent : notProvided}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container spacing={8}>
-                      <Grid item xs={4}>
-                        <Typography weight="bold">Date of Enrollment</Typography>
-                      </Grid>
-                      <Grid item xs={8}>
-                        <Typography>
-                          {caseDetail.enrollment
-                            ? caseDetail.enrollment.date_of_registration : notProvided}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container spacing={8}>
-                      <Grid item xs={4}>
-                        <Typography weight="bold">Study Site</Typography>
-                      </Grid>
-                      <Grid item xs={8}>
-                        <Typography>
-                          {caseDetail.study ? caseDetail.study.study_sites.map((site) => (
-                            <li>
-                              {' '}
-                              {site.site_short_name}
-                              {' '}
-                            </li>
-                          )) : notProvided}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                  <Grid item xs={12}> </Grid>
-                  <Grid item xs={12}>
-                    <Typography variant="headline" color="secondary">
-              AVAILABLE DATA
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container spacing={8}>
-                      <Grid item xs={12}>
-                        <Typography weight="bold">
-
-                          <MUIDataTable
-
-                            title="File View"
-                            data={data.filesOfCase}
-                            columns={columns}
-                            options={options}
-                          />
-
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={8}>
-                        <Typography />
-                      </Grid>
+                    <Grid item xs={8}>
+                      <Typography>
+                        {caseDetail.study
+                          ? caseDetail.study.clinical_study_designation : notProvided}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
-              </Widget>
-            </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={8}>
+                    <Grid item xs={4}>
+                      <Typography weight="bold">Assigned to Arm</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>
+                        {caseDetail.cohort
+                          ? (caseDetail.cohort.study_arm
+                            ? caseDetail.cohort.study_arm.arm : notProvided) : notProvided}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={8}>
+                    <Grid item xs={4}>
+                      <Typography weight="bold">Assigned to Cohort</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>
+                        {' '}
+                        {caseDetail.cohort ? caseDetail.cohort.cohort_description : notProvided}
+                        {' '}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={8}>
+                    <Grid item xs={4}>
+                      <Typography weight="bold">Patient Subgroup</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>
+                        {caseDetail.enrollment
+                          ? caseDetail.enrollment.patient_subgroup : notProvided}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={8}>
+                    <Grid item xs={4}>
+                      <Typography weight="bold">Date of Informed Consent</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>
+                        {caseDetail.enrollment
+                          ? caseDetail.enrollment.date_of_informed_consent : notProvided}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={8}>
+                    <Grid item xs={4}>
+                      <Typography weight="bold">Date of Enrollment</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>
+                        {caseDetail.enrollment
+                          ? caseDetail.enrollment.date_of_registration : notProvided}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={8}>
+                    <Grid item xs={4}>
+                      <Typography weight="bold">Study Site</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography>
+                        {caseDetail.study ? caseDetail.study.study_sites.map((site) => (
+                          <li>
+                            {' '}
+                            {site.site_short_name}
+                            {' '}
+                          </li>
+                        )) : notProvided}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}> </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="headline" color="secondary">
+              AVAILABLE DATA
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Grid container spacing={8}>
+                    <Grid item xs={12}>
+                      <Typography weight="bold">
+
+                        <MUIDataTable
+
+                          title="File View"
+                          data={data.filesOfCase}
+                          columns={columns}
+                          options={options}
+                        />
+
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Widget>
           </Grid>
-        </Widget>
+        </Grid>
       </div>
     </>
   );
@@ -334,7 +379,15 @@ const styles = (theme) => ({
     flexDirection: 'column',
   },
   caseCardContainer: {
-    marginTop: '32px',
+    padding: theme.spacing.unit * 2,
+    background: '#f0f6f8',
+  },
+  caseDetailHeader: {
+    display: 'inline-flex',
+    paddingTop: 'inherit',
+  },
+  warning: {
+    color: theme.palette.warning.main,
   },
   paper: {
     textAlign: 'center',

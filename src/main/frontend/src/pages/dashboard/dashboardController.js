@@ -29,6 +29,14 @@ const GET_DONUT_DATA_QUERY = gql`
       cases
       stage_of_disease 
     }
+    studiesByProgram {
+      program_id
+      clinical_study_designation
+      clinical_study_name
+      clinical_study_type
+      numberOfCases
+      case_ids
+   }
   }
 `;
 

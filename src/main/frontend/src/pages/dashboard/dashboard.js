@@ -4,12 +4,12 @@ import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/StatsController';
 import Cases from './caseTable/caseController';
 import PositionedSnackbar from '../../components/Disclaimer/DisclaimerView';
-import sunburstImage from '../../assets/dashboard/dashboard_sunburst.png';
 import BreedDonut from '../../components/Widgets/PieCharts/BreedDonut/BreedDonutController';
 import DiagnosisDonut from '../../components/Widgets/PieCharts/DiagnosisDonut/DiagnosisDonutController';
 import GenderDonut from '../../components/Widgets/PieCharts/GenderDonut/GenderDonutController';
 import TumorDonut from '../../components/Widgets/PieCharts/TumorDonut/TumorDonutController';
 import DiseaseDonut from '../../components/Widgets/PieCharts/DiseaseDonut/DiseaseDonutController';
+import ProgramSunburst from '../../components/Widgets/PieCharts/ProgramSunburst/ProgramSunburstController';
 
 const Dashboard = ({
   classes, data,
@@ -24,9 +24,15 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <div className={classes.sunburst}>
-            <img src={sunburstImage} alt="sunburst" />
-          </div>
+          <ProgramSunburst
+            data={data.studiesByProgram}
+            width={400}
+            height={200}
+            innerRadius={50}
+            outerRadius={85}
+            cx="50%"
+            cy="50%"
+          />
         </Widget>
       </Grid>
       <Grid item lg={4} md={4} sm={6} xs={12}>
