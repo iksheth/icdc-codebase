@@ -16,7 +16,7 @@ const Dashboard = ({
 }) => (
   <>
     <Stats />
-    <Grid container spacing={32} className={classes.donutContainer}>
+    <Grid container spacing={32}>
       <Grid item lg={4} md={4} sm={6} xs={12}>
         <Widget
           title="Programs and Studies"
@@ -67,7 +67,7 @@ const Dashboard = ({
       </Grid>
     </Grid>
     {/* second row Grids */}
-    <Grid container spacing={32} className={classes.donutContainer}>
+    <Grid container spacing={32}>
       <Grid item lg={4} md={4} sm={6} xs={12}>
         <Widget
           title="Disease Site"
@@ -135,9 +135,6 @@ const styles = (theme) => ({
     minHeight: '100%',
     display: 'flex',
     flexDirection: 'column',
-  },
-  donutContainer: {
-    background: '#bcbcbc',
   },
   paper: {
     textAlign: 'center',

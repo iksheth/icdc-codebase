@@ -1,10 +1,11 @@
 import tinycolor from 'tinycolor2';
 
-const primary = '#092756';
+const primary = '#1c5379';
 const secondary = '#2A71A5';
 const warning = '#ff7f0b';
 const success = '#3CD4A0';
 const info = '#3f2b2f';
+const tableHeader = '#0078a4';
 
 const lightenRate = 7.5;
 const darkenRate = 15;
@@ -13,7 +14,8 @@ export default {
   custom: {
     maxContentWidth: '1440px',
     maxContent: 'white',
-    bodyBackGround: 'white',
+    bodyBackGround: '#f0f6f8',
+    footorBackground: '#a6d3eb',
   },
   palette: {
     primary: {
@@ -77,6 +79,7 @@ export default {
       secondary: '#6E6E6E',
       hint: '#B9B9B9',
       link: '#1669aa',
+      footerText: '#25282a',
     },
     background: {
       default: '#fafafa',
@@ -120,12 +123,10 @@ export default {
     },
     MUIDataTableHeadCell: {
       fixedHeader: {
-        backgroundColor: primary,
+        backgroundColor: tableHeader,
         color: 'white',
         textDecoration: 'underline',
         fontWeight: '600',
-        // textAlign: 'center',
-        // fontSize: '18px'
       },
       sortActive: {
         color: 'white',

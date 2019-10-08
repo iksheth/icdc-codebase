@@ -228,7 +228,7 @@ const Footer = ({ classes }) => (
 
 const styles = (theme) => ({
   ext: {
-    color: 'white',
+    color: theme.palette.text.footerText,
     '@media (max-width: 600px)': {
       display: 'none',
     },
@@ -240,7 +240,7 @@ const styles = (theme) => ({
     },
   },
   footerText: {
-    color: 'white',
+    color: theme.palette.text.footerText,
     marginLeft: theme.spacing.unit * 2.5,
     marginRight: theme.spacing.unit * 2.5,
     fontWeight: 500,
@@ -264,8 +264,8 @@ const styles = (theme) => ({
     lineHeight: '1.42857143',
     margin: '0',
     '-webkit-font-smoothing': 'antialiased',
-    background: '#2e2a24',
-    color: '#FFFFFF',
+    background: theme.custom.footorBackground,
+    color: theme.palette.text.footerText,
     padding: '24px 16px 64px 24px',
     '& ul': {
       listStyle: 'none',
@@ -288,7 +288,7 @@ const styles = (theme) => ({
     },
 
     '& a, & button': {
-      color: '#FFFFFF',
+      color: theme.palette.text.footerText,
       textDecoration: 'none',
 
       '&:hover': {
@@ -313,7 +313,7 @@ const styles = (theme) => ({
   },
   turningNIH: {
     fontSize: '16px',
-    color: '#FFFFFF',
+    color: theme.palette.text.footerText,
     textDecoration: 'none',
   },
   footerNciColumn: {
@@ -339,7 +339,7 @@ const styles = (theme) => ({
   },
 
   footerBar: {
-    color: 'white',
+    color: theme.palette.text.footerText,
     backgroundColor: '#4F536B',
     width: '100%',
     textAlign: 'center',
