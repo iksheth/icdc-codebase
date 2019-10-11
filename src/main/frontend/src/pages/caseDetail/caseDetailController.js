@@ -27,6 +27,7 @@ const GET_CASE_DETAIL_DATA_QUERY = gql`
             breed
             sex
             patient_age_at_enrollment
+            neutered_indicator
         }
         cohort{
             cohort_description
@@ -39,6 +40,7 @@ const GET_CASE_DETAIL_DATA_QUERY = gql`
             date_of_registration
             patient_subgroup
             date_of_informed_consent
+            initials
         }
         diagnoses{
             disease_term

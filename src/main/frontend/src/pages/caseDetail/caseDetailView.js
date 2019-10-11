@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Grid,
@@ -51,7 +50,7 @@ const CaseDetail = ({ classes, data }) => {
 
           <Typography variant="headline" size="sm">
             <span className={classes.warning}>
-               Case Detail
+               Case Id
             </span>
             <span>
               {' '}
@@ -68,7 +67,7 @@ const CaseDetail = ({ classes, data }) => {
                   <span className={classes.warning}>
 
                     {' '}
-                Patient Name :
+                Case Name :
                     {' '}
                     {' '}
                   </span>
@@ -80,6 +79,23 @@ const CaseDetail = ({ classes, data }) => {
                 </span>
               )}
 
+            {caseDetail.enrollment && caseDetail.enrollment.initials !== '' && caseDetail.enrollment.initials !== null
+              ? (
+                <span>
+                  <span className={classes.warning}>
+
+                    {' '}
+                Initials :
+                    {' '}
+                    {' '}
+                  </span>
+                  <span>
+                    {' '}
+                    {caseDetail.enrollment.initials}
+                    {' '}
+                  </span>
+                </span>
+              ) : ''}
           </Typography>
 
 
@@ -126,6 +142,21 @@ const CaseDetail = ({ classes, data }) => {
                     <Grid item xs={12}>
                       <Grid container spacing={8}>
                         <Grid item xs={4}>
+                          <Typography weight="bold">Neutered Status</Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Typography>
+                            {' '}
+                            {caseDetail.demographic
+                              ? caseDetail.demographic.neutered_indicator : notProvided}
+                            {' '}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container spacing={8}>
+                        <Grid item xs={4}>
                           <Typography weight="bold">Age of Enrollment</Typography>
                         </Grid>
                         <Grid item xs={8}>
@@ -156,8 +187,8 @@ const CaseDetail = ({ classes, data }) => {
                           </Grid>
                           <Grid item xs={8}>
                             <Typography>
-                              {diagnosis.patient_age_at_enrollment
-                                ? diagnosis.patient_age_at_enrollment : notProvided}
+                              {diagnosis.disease_term
+                                ? diagnosis.disease_term : notProvided}
                               {' '}
                             </Typography>
                           </Grid>
