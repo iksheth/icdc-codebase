@@ -1,4 +1,3 @@
-/*eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -80,7 +79,7 @@ const CaseDetail = ({ classes, data }) => {
                 </span>
               )}
 
-               {caseDetail.enrollment && caseDetail.enrollment.initials !== '' && caseDetail.enrollment.initials !== null
+            {caseDetail.enrollment && caseDetail.enrollment.initials !== '' && caseDetail.enrollment.initials !== null
               ? (
                 <span>
                   <span className={classes.warning}>
@@ -140,7 +139,7 @@ const CaseDetail = ({ classes, data }) => {
                         </Grid>
                       </Grid>
                     </Grid>
-                       <Grid item xs={12}>
+                    <Grid item xs={12}>
                       <Grid container spacing={8}>
                         <Grid item xs={4}>
                           <Typography weight="bold">Neutered Status</Typography>
@@ -148,7 +147,8 @@ const CaseDetail = ({ classes, data }) => {
                         <Grid item xs={8}>
                           <Typography>
                             {' '}
-                            {caseDetail.demographic ? caseDetail.demographic.neutered_indicator : notProvided}
+                            {caseDetail.demographic
+                              ? caseDetail.demographic.neutered_indicator : notProvided}
                             {' '}
                           </Typography>
                         </Grid>
