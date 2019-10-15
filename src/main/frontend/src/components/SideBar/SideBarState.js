@@ -1,12 +1,9 @@
+import TOGGLE_SIDEBAR from '../../store';
+
+
 export const initialState = {
   isSidebarOpened: true,
 };
-
-export const TOGGLE_SIDEBAR = 'Layout/TOGGLE_SIDEBAR';
-
-export const toggleSidebar = () => ({
-  type: TOGGLE_SIDEBAR,
-});
 
 export default function LayoutReducer(state = initialState, { type }) {
   switch (type) {

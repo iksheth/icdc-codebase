@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -61,13 +62,28 @@ const options = {
 
 };
 
-const Cases = ({ data }) => (
+const dataFilter= (row,filters) => {
+  if(filters.length===0){
+    return true;
+  };
+  let display = false;
+  filters.forEach(function(filer){
+      if(filer.groupName === "Breeds"){
+         if(row.breed===filer.name){
+          return display = true 
+        }
+      }
+    })
+  return display ;
+}
+
+const Cases = ({ data, filters }) => (
   <>
     <Grid container spacing={32}>
       <Grid item xs={12}>
         <MUIDataTable
           title={data.title ? data.title : 'All Cases'}
-          data={data.caseOverview}
+          data={data.filter(d=> (dataFilter(d,filters)))}
           columns={columns}
           options={options}
         />

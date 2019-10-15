@@ -1,58 +1,31 @@
-import React from 'react';
+/* eslint-disable */
+import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useQuery } from 'react-apollo-hooks';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import Dashboard from './dashboard';
+import { connect } from 'react-redux'
+import {fetchDataForDashboardDataTable} from "../../store/actions"
 
-// Ajay Need to break Widgets into seperate dashboard component
 
-const GET_DONUT_DATA_QUERY = gql`
-  {
-    caseCountByBreed {
-      cases
-      breed
-    }
-    caseCountByGender {
-      cases
-      gender
-    }
-    caseCountByDiagnosis {
-      cases
-      diagnosis
-    }
-    caseCountByDiseaseSite { 
-      cases
-      disease_site 
-    }
-    caseCountByStageOfDisease { 
-      cases
-      stage_of_disease 
-    }
-    studiesByProgram {
-      program_id
-      clinical_study_designation
-      clinical_study_name
-      clinical_study_type
-      numberOfCases
-      case_ids
-   }
+class DashboardController extends Component {
+  constructor(props) {
+    super(props);
   }
-`;
 
-const DashboardController = () => {
-  const { data, loading, error } = useQuery(GET_DONUT_DATA_QUERY);
-  if (loading) {
-    return <CircularProgress />;
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchDataForDashboardDataTable());
   }
-  if (error) {
-    return (
-      <Typography variant="headline" color="warning" size="sm">
-        {error && `An error has occurred in loading stats component: ${error}`}
-      </Typography>
-    );
-  }
-  return <Dashboard data={data} />;
-};
 
-export default DashboardController;
+  render() {
+   return this.props.dashboard.widgets?  <Dashboard data={this.props.dashboard.widgets} /> :"";
+  }
+}
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps)(DashboardController);

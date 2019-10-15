@@ -7,12 +7,7 @@ import { ApolloProvider } from "react-apollo";
 import { Provider } from 'react-redux';
 import { ApolloProvider as ApolloProviderHooks } from "react-apollo-hooks";
 import store from './store';
-
-const BACKEND = process.env.REACT_APP_BACKEND_API;
-
-const client = new ApolloClient({
-  uri: BACKEND
-});
+import client from './utils/graphqlClient'
 
 ReactDOM.render(
   <ApolloProvider client={client}>

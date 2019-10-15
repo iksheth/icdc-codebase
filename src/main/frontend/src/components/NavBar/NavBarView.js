@@ -173,6 +173,8 @@ const NavBar = ({
     </>
   );
 };
+
+
 const styles = (theme) => ({
   logotype: {
     color: 'white',
