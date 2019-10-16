@@ -252,7 +252,7 @@ const CaseDetail = ({ classes, data }) => {
                             <Typography weight="bold">Histological Grade</Typography>
                           </Grid>
                           <Grid item xs={8}>
-                            <Typography>{diagnosis.histological_grade === '' ? 'Null' : diagnosis.histological_grade}</Typography>
+                            <Typography>{diagnosis.histological_grade === '' || diagnosis.histological_grade === null ? '' : diagnosis.histological_grade}</Typography>
                           </Grid>
                         </Grid>
                       </Grid>
