@@ -40,37 +40,13 @@ const getStateFromDT = (data, cate) => {
   return 0;
 };
 const getStudiesByProgramFromDT = (data) => {
-  // construct data tree
-  // let mapData = new Map();
-  // let color_index = 0;
-  // data.forEach(function(d){
-  //    if(mapData.has(d.program)){ // has program 
-  //       if(mapData.get(d.program).has(d.study_code)){ // has study
-  //           mapData.get(d.program).set(d.study_code,
-  //               mapData.get(d.program).get(d.study_code).children.push({
-  //                 title:d.case_id,
-  //                 color:mapData.get(d.program).get(d.study_code).color,
-  //                 size:1,
-  //               }))
-  //       }else{ // new study
-  //          mapData.get(d.program).set(d.study_code,{
-  //           title:d.study_code,
-  //           color:mapData.get(d.program).color,
-  //           children:[
-  //             {
-  //               title:d.case_id,
-  //               color:mapData.get(d.program).color,
-  //               size:1,
-  //             }
-  //           ]
-  //          }
+  //construct data tree
+  let mapData = {};
+  let color_index = 0;
+  data.forEach(function(d){
 
-  //       }
-  //    }else{// new program
-  //     mapData.set(d.program,new Map())
-
-  //    }
-  // });
+    
+  });
   //convert map to object. 
    //return  Array.from(mapData.entries()).reduce((main, [key, value]) => ({...main, [key]: value}), {});
    return "";

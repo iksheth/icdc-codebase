@@ -67,6 +67,7 @@ export const DASHBOARD_QUERY = gql`
         data_types
         disease_site
         samples
+        files
      }
   }
 `;
