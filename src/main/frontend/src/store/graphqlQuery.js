@@ -2,6 +2,12 @@ import gql from 'graphql-tag';
 
 export const DASHBOARD_QUERY = gql`
   {
+    numberOfStudies
+    numberOfCases
+    numberOfSamples
+    numberOfFiles
+    numberOfAliquots
+  
     caseCountByBreed {
       cases
       breed
@@ -30,7 +36,7 @@ export const DASHBOARD_QUERY = gql`
       numberOfCases
    }
 
-      caseOverview{   
+   caseOverview{   
         case_id  
         study_code   
         study_type   

@@ -4,6 +4,7 @@ export const dashboardState = {
     isLoading: false,
     error: '',
     hasError: false,
+    state: {},
     caseOverview: {
       data: [],
     },

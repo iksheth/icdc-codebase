@@ -10,7 +10,24 @@ import {
 
 const NOT_PROVIDED = 'Not Specified';
 
-
+const getStateFromDT = (data, cate) => {
+  if (cate === 'case') {
+    return data.length;
+  }
+  if (cate === 'study') {
+    return [...new Set(data.map((d) => d.study_code))].length;
+  }
+  if (cate === 'aliquot') {
+    return 0;
+  }
+  if (cate === 'sample') {
+    return 0;
+  }
+  if (cate === 'file') {
+    return 0;
+  }
+  return 0;
+};
 const getStudiesByProgramFromDT = (data) => data;
 
 
@@ -180,6 +197,13 @@ export default function dashboardReducer(state = dashboardState, action) {
       const tableData = state.caseOverview.data.filter((d) => (dataFilter(d, dataTableFilters)));
       return {
         ...state,
+        state: {
+          numberOfStudies: getStateFromDT(tableData, 'study'),
+          numberOfCases: getStateFromDT(tableData, 'case'),
+          numberOfSamples: getStateFromDT(tableData, 'sample'),
+          numberOfFiles: getStateFromDT(tableData, 'file'),
+          numberOfAliquots: getStateFromDT(tableData, 'aliquot'),
+        },
         datatable: {
           ...state.datatable,
           data: tableData,
@@ -204,6 +228,13 @@ export default function dashboardReducer(state = dashboardState, action) {
           isLoading: false,
           hasError: false,
           error: '',
+          state: {
+            numberOfStudies: action.payload.data.numberOfStudies,
+            numberOfCases: action.payload.data.numberOfCases,
+            numberOfSamples: action.payload.data.numberOfSamples,
+            numberOfFiles: action.payload.data.numberOfFiles,
+            numberOfAliquots: action.payload.data.numberOfAliquots,
+          },
           caseOverview: {
             data: action.payload.data.caseOverview,
           },
