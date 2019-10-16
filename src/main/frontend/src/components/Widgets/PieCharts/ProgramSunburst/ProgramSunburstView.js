@@ -2,16 +2,11 @@
 import React, { PureComponent } from 'react';
 import { Sunburst } from 'react-vis';
 
-const COLORS = [
-  '#523175',
-  '#6e7ff5',
-  '#fc4b5b',
-  '#2b69a3',
-  '#287d6d',
-  '#af66ff',
-];
 
+function updateDate(data){
 
+	
+}
 
 export default class ProgramSunburst extends PureComponent {
     render() {

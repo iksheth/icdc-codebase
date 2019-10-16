@@ -32,10 +32,10 @@ const getStateFromDT = (data, cate) => {
     return 0;
   }
   if (cate === 'sample') {
-    return 0;
+     return [...new Set(data.reduce((output, d) => output.concat(d.samples ? d.samples : []), []))].length;
   }
   if (cate === 'file') {
-    return 0;
+     return [...new Set(data.reduce((output, d) => output.concat(d.files ? d.files : []), []))].length;
   }
   return 0;
 };
