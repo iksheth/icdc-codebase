@@ -4,6 +4,7 @@ import {
         TOGGLE_SIDEBAR,
         RECEIVE_DASHBOARD,
         TOGGLE_CHECKBOX,
+        UPDATE_WIDGETS,
       } from './actionTypes';
 import React from 'react';
 import client from '../utils/graphqlClient'

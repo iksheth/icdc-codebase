@@ -5,21 +5,21 @@ import { Query } from 'react-apollo';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CaseView from './caseView';
 import { Typography } from '../../../components/Wrappers/Wrappers';
-import { useSelector } from 'react-redux'
-
-
+import { useSelector,useDispatch } from 'react-redux'
 
 
 const caseContainer = () => {
-  
 
 // data from store
- const { data, filters }  =useSelector(function(state){
-        return state.dashboard&&state.dashboard.datatable&&state.dashboard.datatable.data?{ data : state.dashboard.datatable.data, filters :state.dashboard.datatable.filters }:{data:{},filters:{}};
+ const   tableData  =useSelector(function(state){
+        return state.dashboard
+        	&&state.dashboard.datatable
+        		&&state.dashboard.datatable.data
+        			?state.dashboard.datatable.data:{};
     } );
 
 
-  return <CaseView data={data} filters={filters} />;
+  return <CaseView data={tableData} />;
 };
 
 export default caseContainer;

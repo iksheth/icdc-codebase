@@ -29,7 +29,6 @@ export const DASHBOARD_QUERY = gql`
       clinical_study_name
       clinical_study_type
       numberOfCases
-      case_ids
    }
 
       caseOverview {   

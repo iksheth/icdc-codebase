@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { dashboardState } from "../constant";
-import { TOGGLE_CHECKBOX,RECEIVE_DASHBOARD,DASHBOARD_QUERY_ERR} from "../actionTypes";
+import { TOGGLE_CHECKBOX,RECEIVE_DASHBOARD,DASHBOARD_QUERY_ERR,} from "../actionTypes";
 
 const NOT_PROVIDED = "Not Specified";
 
@@ -8,11 +8,96 @@ export default function dashboardReducer(state = dashboardState, action) {
   switch (action.type) {
     // if checkbox status has been changed, dashboard data table need to be update as well.
     case TOGGLE_CHECKBOX:
-      let filters = state.datatable.filters;
+      let dataTableFilters = getFilters(state.datatable.filters,action.payload);
+      let tableData = state.caseOverview.data.filter(d=> (dataFilter(d,dataTableFilters)));
+      return {
+        ...state,
+           datatable:{
+              ...state.datatable,
+              data:tableData,
+              filters:dataTableFilters,
+           },
+           widgets:{
+              studiesByProgram:getStudiesByProgramFromDT(tableData),
+              caseCountByBreed:getWidegtDataFromDT(tableData,'breed') ,
+              caseCountByDiagnosis:getWidegtDataFromDT(tableData,'diagnosis') ,
+              caseCountByDiseaseSite:getWidegtDataFromDT(tableData,'case_id'),
+              caseCountByGender:getWidegtDataFromDT(tableData,'sex'),
+              caseCountByStageOfDisease:getWidegtDataFromDT(tableData,'stage_of_disease'),
+            }
+      };
+    case RECEIVE_DASHBOARD:
+          // get action data
+          return action.payload.data ?
+           {
+            ...state.dashboard,
+            caseOverview:{
+              data:action.payload.data.caseOverview,
+            },
+            checkbox :{
+                isFetched:true,
+                data:customCheckBox(action.payload.data),
+            },
+            datatable:{
+               isFetched:true,
+               data:action.payload.data.caseOverview,
+               filters:[],
+            },
+            widgets:{
+              studiesByProgram:getStudiesByProgramFromDT(action.payload.data.caseOverview),
+              caseCountByBreed:getWidegtDataFromDT(action.payload.data.caseOverview,'breed') ,
+              caseCountByDiagnosis:getWidegtDataFromDT(action.payload.data.caseOverview,'diagnosis') ,
+              caseCountByDiseaseSite:getWidegtDataFromDT(action.payload.data.caseOverview,'case_id'),
+              caseCountByGender:getWidegtDataFromDT(action.payload.data.caseOverview,'sex'),
+              caseCountByStageOfDisease:getWidegtDataFromDT(action.payload.data.caseOverview,'stage_of_disease'),
+                }
 
-       action.payload.forEach(function(checkbox){
+      } : {...state};
+
+    case DASHBOARD_QUERY_ERR:
+        // get action data
+          console.log(action.payload.graphQLErrors);
+          console.log(action.payload.networkError);
+           return {...state};
+    default:
+      return state;
+  }
+}
+const getStudiesByProgramFromDT =(data)=>{
+  return [];
+}
+const getWidegtDataFromDT=(data,dtField)=>{
+  const output = []; 
+  Object.entries(data.reduce(function(accumulator, currentValue){
+     accumulator[currentValue[dtField]]? accumulator[currentValue[dtField]] +=1 : accumulator[currentValue[dtField]]=1;
+     return accumulator;
+  },{})).forEach(([key, value]) => {output.push({item:key,cases:value})});
+
+return output;
+}
+
+
+const dataFilter= (row,filters) => {
+  if(filters.length===0){
+    return true;
+  };
+  let display = false;
+  filters.forEach(function(filer){
+      if(filer.groupName === "Breeds"){
+         if(row.breed===filer.name){
+          return display = true 
+        }
+      }
+    })
+  return display ;
+}
+
+
+
+function getFilters(orginFilter,newCheckBoxs){
+       newCheckBoxs.forEach(function(checkbox){
         let isExist = false;
-         filters = filters.filter(function(filter){
+         orginFilter = orginFilter.filter(function(filter){
             if(checkbox.groupName === filter.groupName && checkbox.name === filter.name ){
               isExist =true;
               if(!checkbox.isChecked){
@@ -25,52 +110,12 @@ export default function dashboardReducer(state = dashboardState, action) {
             }
          })
         if(!isExist&&checkbox.isChecked){
-          filters.push(checkbox);
+          orginFilter.push(checkbox);
         }
        });
+       return orginFilter;
 
- 
-      return {
-        ...state,
-           datatable:{
-              ...state.datatable,
-              filters:filters,
-           }
-      };
-    case RECEIVE_DASHBOARD:
-          // get action data
-          return action.payload.data ?
-           {
-            ...state.dashboard,
-            checkbox :{
-                isFetched:true,
-                data:customCheckBox(action.payload.data),
-            },
-            datatable:{
-               isFetched:true,
-               data:action.payload.data.caseOverview,
-               filters:[],
-            },
-            widgets:{
-              studiesByProgram:action.payload.data.studiesByProgram ,
-              caseCountByBreed:action.payload.data.caseCountByBreed ,
-              caseCountByDiagnosis:action.payload.data.caseCountByDiagnosis ,
-              caseCountByDiseaseSite:action.payload.data.caseCountByDiseaseSite ,
-              caseCountByGender:action.payload.data.caseCountByGender ,
-              caseCountByStageOfDisease:action.payload.data.caseCountByStageOfDisease ,
-            }
-
-      } : {...state};
-    case DASHBOARD_QUERY_ERR:
-        // get action data
-          console.log(action.payload.graphQLErrors);
-          console.log(action.payload.networkError);
-
-    default:
-      return state;
-  }
 }
-
 
 function customCheckBox(data){
    return ([
