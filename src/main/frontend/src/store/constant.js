@@ -1,8 +1,23 @@
-/* eslint-disable */
 export const dashboardState = {
   dashboard: {
-    checkbox: [],
-    datatable: [],
-    widgets: [],
+    isFetched: false,
+    isLoading: false,
+    error: '',
+    hasError: false,
+    caseOverview: {
+      data: [],
+    },
+    checkbox: {
+      data: [],
+    },
+    datatable: {
+      filters: [],
+      data: [],
+    },
+    widgets: {},
   },
 };
+
+
+// not used
+export const initialState = {};

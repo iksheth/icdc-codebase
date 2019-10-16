@@ -1,7 +1,5 @@
-/* eslint-disable */
 import React from 'react';
-import { connect } from 'react-redux'
-import {toggleCheckBox} from '../../../store/actions'
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Checkbox,
   List,
@@ -12,17 +10,18 @@ import {
   ExpansionPanelSummary,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { useSelector,useDispatch } from 'react-redux'
+import { toggleCheckBox } from '../../../store/actions';
 
 
 const FacetPanel = (classes) => {
-
-   // data from store
-  const sideBarContent =useSelector(function(state){
-      return state.dashboard&&state.dashboard.checkbox&&state.dashboard.checkbox.data?state.dashboard.checkbox.data:[];
-  } );
+  // data from store
+  const sideBarContent = useSelector((state) => (
+    state.dashboard
+    && state.dashboard.checkbox
+    && state.dashboard.checkbox.data
+      ? state.dashboard.checkbox.data : []));
   // redux use actions
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [checked, setChecked] = React.useState([0]);
   const [expanded, setExpanded] = React.useState(false);
@@ -37,7 +36,7 @@ const FacetPanel = (classes) => {
     let isChecked = false;
     if (currentIndex === -1) {
       newChecked.push(value);
-      isChecked =true;
+      isChecked = true;
     } else {
       newChecked.splice(currentIndex, 1);
     }
@@ -46,15 +45,11 @@ const FacetPanel = (classes) => {
 
     // dispatch toggleCheckBox action
     dispatch(toggleCheckBox([{
-      groupName:value.split("$$")[1],
-      name:value.split("$$")[0],
-      isChecked:isChecked,
-    }]))
-
-   
+      groupName: value.split('$$')[1],
+      name: value.split('$$')[0],
+      isChecked,
+    }]));
   };
-
- 
 
   return (
     <>
@@ -91,6 +86,4 @@ const FacetPanel = (classes) => {
   );
 };
 
-
-// export default Todo;
 export default FacetPanel;

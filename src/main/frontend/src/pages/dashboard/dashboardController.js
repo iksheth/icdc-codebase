@@ -1,31 +1,54 @@
-/* eslint-disable */
 import React, { Component } from 'react';
-import gql from 'graphql-tag';
+import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useQuery } from 'react-apollo-hooks';
-import { Typography } from '../../components/Wrappers/Wrappers';
 import Dashboard from './dashboard';
-import { connect } from 'react-redux'
-import {fetchDataForDashboardDataTable} from "../../store/actions"
+import { fetchDataForDashboardDataTable } from '../../store/actions';
+import { Typography } from '../../components/Wrappers/Wrappers';
 
 
 class DashboardController extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchDataForDashboardDataTable());
   }
 
   render() {
-   return this.props.dashboard.widgets?  <Dashboard data={this.props.dashboard.widgets} /> :"";
+    const {
+      isLoading, hasError, error, widgets, isFetched,
+    } = this.props;
+
+    if (hasError) {
+      return (
+        <Typography variant="headline" color="warning" size="sm">
+          { error && `An error has occurred in loading stats component: ${error}`}
+        </Typography>
+      );
+    }
+    if (isLoading) {
+      return <CircularProgress />;
+    }
+    if (isFetched) {
+      return <Dashboard data={widgets} />;
+    }
+    return (
+      <Typography variant="headline" color="warning" size="sm">
+        { error && `An error has occurred in loading stats component: ${error}`}
+      </Typography>
+    );
   }
 }
 
 function mapStateToProps(state) {
-  return state;
+  const {
+    isLoading, isFetched, hasError, error, widgets,
+  } = state.dashboard;
+  return {
+    isLoading,
+    hasError,
+    error,
+    widgets,
+    isFetched,
+  };
 }
 
 export default connect(mapStateToProps)(DashboardController);

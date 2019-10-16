@@ -1,4 +1,3 @@
-/* eslint-disable */
 import gql from 'graphql-tag';
 
 export const DASHBOARD_QUERY = gql`
@@ -31,7 +30,7 @@ export const DASHBOARD_QUERY = gql`
       numberOfCases
    }
 
-      caseOverview {   
+      caseOverview{   
         case_id  
         study_code   
         study_type   
@@ -45,3 +44,14 @@ export const DASHBOARD_QUERY = gql`
   }
 `;
 
+// not used
+export const GET_STUDYTABLE_DATA_QUERY = gql`{
+    studiesByProgram {
+        program_id
+        clinical_study_designation
+        clinical_study_name
+         clinical_study_type
+         numberOfCases
+    }
+  }
+  `;

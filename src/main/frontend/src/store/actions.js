@@ -1,14 +1,13 @@
-/*eslint-disable */
 import {
-        DASHBOARD_QUERY_ERR,
-        TOGGLE_SIDEBAR,
-        RECEIVE_DASHBOARD,
-        TOGGLE_CHECKBOX,
-        UPDATE_WIDGETS,
-      } from './actionTypes';
-import React from 'react';
-import client from '../utils/graphqlClient'
-import { DASHBOARD_QUERY } from './graphqlQuery'
+  DASHBOARD_QUERY_ERR,
+  TOGGLE_SIDEBAR,
+  RECEIVE_DASHBOARD,
+  TOGGLE_CHECKBOX,
+  READY_DASHBOARD,
+  REQUEST_DASHBOARD,
+} from './actionTypes';
+import client from '../utils/graphqlClient';
+import { DASHBOARD_QUERY } from './graphqlQuery';
 
 export const toggleSidebar = () => ({
   type: TOGGLE_SIDEBAR,
@@ -16,55 +15,57 @@ export const toggleSidebar = () => ({
 
 export const toggleCheckBox = (payload) => ({
   type: TOGGLE_CHECKBOX,
-  payload: payload,
+  payload,
 });
 
 
 function shouldFetchDataForDashboardDataTable(state) {
-  return !(state.dashboard
-  				&& state.dashboard.datatable
-  						&& state.dashboard.datatable.isFetched
-                && state.dashboard.checkbox
-                  && state.dashboard.checkbox.isFetched
-                    && state.dashboard.widgets
-                      && state.dashboard.widgets.isFetched);
+  return !(state.dashboard.isFetched);
 }
 
+function postRequestFetchDataDashboard() {
+  return {
+    type: REQUEST_DASHBOARD,
+  };
+}
 
 function receiveDashboard(json) {
   return {
     type: RECEIVE_DASHBOARD,
-    payload: 
+    payload:
     {
-      data:json.data
-    }
-  }
+      data: json.data,
+    },
+  };
 }
 
 
-function error(error,type) {
+function errorhandler(error, type) {
   return {
-    type: type,
-    payload: 
-    {
-      data:error
-    }
-  }
+    type,
+    error,
+  };
 }
 
 
-function fetchDashboard(){
-    return dispatch => { 
-      return client
+function readyDashboard() {
+  return {
+    type: READY_DASHBOARD,
+  };
+}
+
+
+function fetchDashboard() {
+  return (dispatch) => {
+    dispatch(postRequestFetchDataDashboard());
+    return client
       .query({
-        query: DASHBOARD_QUERY
+        query: DASHBOARD_QUERY,
       })
-      .then(result => dispatch(receiveDashboard(result)))
-      .catch(error => dispatch(receiveDashboard(error,DASHBOARD_QUERY_ERR)));
-      }
+      .then((result) => dispatch(receiveDashboard(result)))
+      .catch((error) => dispatch(errorhandler(error, DASHBOARD_QUERY_ERR)));
+  };
 }
-
-
 
 
 export function fetchDataForDashboardDataTable() {
@@ -72,5 +73,6 @@ export function fetchDataForDashboardDataTable() {
     if (shouldFetchDataForDashboardDataTable(getState())) {
       return dispatch(fetchDashboard());
     }
+    return dispatch(readyDashboard());
   };
 }
