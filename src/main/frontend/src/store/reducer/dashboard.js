@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { dashboardState } from '../constant';
 import {
   TOGGLE_CHECKBOX,
@@ -28,7 +29,10 @@ const getStateFromDT = (data, cate) => {
   }
   return 0;
 };
-const getStudiesByProgramFromDT = (data) => data;
+const getStudiesByProgramFromDT = (data) => {
+
+
+};
 
 
 const getWidegtDataFromDT = (data, dtField) => {
