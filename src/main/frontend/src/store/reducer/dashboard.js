@@ -9,6 +9,16 @@ import {
 } from '../actionTypes';
 
 
+const COLORS = [
+  '#523175',
+  '#6e7ff5',
+  '#fc4b5b',
+  '#2b69a3',
+  '#287d6d',
+  '#af66ff',
+];
+
+
 const NOT_PROVIDED = 'Not Specified';
 
 const getStateFromDT = (data, cate) => {
@@ -30,8 +40,40 @@ const getStateFromDT = (data, cate) => {
   return 0;
 };
 const getStudiesByProgramFromDT = (data) => {
+  // construct data tree
+  // let mapData = new Map();
+  // let color_index = 0;
+  // data.forEach(function(d){
+  //    if(mapData.has(d.program)){ // has program 
+  //       if(mapData.get(d.program).has(d.study_code)){ // has study
+  //           mapData.get(d.program).set(d.study_code,
+  //               mapData.get(d.program).get(d.study_code).children.push({
+  //                 title:d.case_id,
+  //                 color:mapData.get(d.program).get(d.study_code).color,
+  //                 size:1,
+  //               }))
+  //       }else{ // new study
+  //          mapData.get(d.program).set(d.study_code,{
+  //           title:d.study_code,
+  //           color:mapData.get(d.program).color,
+  //           children:[
+  //             {
+  //               title:d.case_id,
+  //               color:mapData.get(d.program).color,
+  //               size:1,
+  //             }
+  //           ]
+  //          }
 
+  //       }
+  //    }else{// new program
+  //     mapData.set(d.program,new Map())
 
+  //    }
+  // });
+  //convert map to object. 
+   //return  Array.from(mapData.entries()).reduce((main, [key, value]) => ({...main, [key]: value}), {});
+   return "";
 };
 
 
@@ -55,19 +97,33 @@ const dataFilter = (row, filters) => {
   }
   let display = false;
   const mappings = [
-    { group: 'Breeds', field: 'breed' },
-    { group: 'Diagnosis', field: 'diagnosis' },
+    { group: 'Program', field: 'program' },
     { group: 'Study', field: 'study_code' },
     { group: 'Study Type', field: 'study_type' },
+    { group: 'Breeds', field: 'breed' },
+    { group: 'Diagnosis', field: 'diagnosis' },
+    { group: 'Primary Disease Site', field: 'disease_site' },
     { group: 'Tumor Stage', field: 'stage_of_disease' },
     { group: 'Gender', field: 'sex' },
     { group: 'Age', field: 'age' },
+    { group: 'Data Types', field: 'data_types' },
+
   ];
   filters.forEach((filter) => {
     mappings.forEach((mapping) => {
       if (filter.groupName === mapping.group) {
-        if (row[mapping.field] === (filter.name === NOT_PROVIDED ? '' : filter.name)) {
-          display = true;
+        if (row[mapping.field]){
+            // array includes
+          if(Array.isArray(row[mapping.field])){
+              if(row[mapping.field].includes(filter.name)){
+                 display = true;
+              }
+          }else{
+            // string eql 
+            if(row[mapping.field].toString() === (filter.name === NOT_PROVIDED ? '' : filter.name)) {
+            display = true;
+          }
+         }
         }
       }
     });
@@ -98,96 +154,44 @@ function customCheckBox(data) {
   return ([
     {
       groupName: 'Program',
-      checkboxItems: [
-        {
-          name: 'COP',
-          cases: 0,
-          isChecked: false,
-        },
-        {
-          name: 'NCATS',
-          cases: 0,
-          isChecked: false,
-        },
-      ],
+      checkboxItems: data.caseCountByProgram.map((el) => ({ name: el.program === ''|| !el.program ? NOT_PROVIDED : el.program, isChecked: false, cases: el.cases })),
+
     },
     {
       groupName: 'Study',
-      checkboxItems: [
-        {
-          name: 'COTC007B',
-          cases: 0,
-          isChecked: false,
-        },
-        {
-          name: 'NCATS01',
-          cases: 0,
-          isChecked: false,
-        },
-      ],
+      checkboxItems: data.caseCountByStudyCode.map((el) => ({ name: el.study_code === ''|| !el.study_code? NOT_PROVIDED : el.study_code, isChecked: false, cases: el.cases })),
     },
     {
       groupName: 'Study Type',
-      checkboxItems: [
-        {
-          name: 'Clinical Trial',
-          cases: 0,
-          isChecked: false,
-        },
-        {
-          name: 'transcriptomics',
-          cases: 0,
-          isChecked: false,
-        },
-      ],
+      checkboxItems: data.caseCountByStudyType.map((el) => ({ name: el.study_type === ''||!el.study_type ? NOT_PROVIDED : el.study_type, isChecked: false, cases: el.cases })),
     },
     {
       groupName: 'Breeds',
-      checkboxItems: data.caseCountByBreed.map((el) => ({ name: el.breed === '' ? NOT_PROVIDED : el.breed, isChecked: false, cases: el.cases })),
+      checkboxItems: data.caseCountByBreed.map((el) => ({ name: el.breed === '' || !el.breed? NOT_PROVIDED : el.breed, isChecked: false, cases: el.cases })),
     },
     {
       groupName: 'Diagnosis',
-      checkboxItems: data.caseCountByDiagnosis.map((el) => ({ name: el.diagnosis === '' ? NOT_PROVIDED : el.diagnosis, isChecked: false, cases: el.cases })),
+      checkboxItems: data.caseCountByDiagnosis.map((el) => ({ name: el.diagnosis === '' || !el.diagnosis? NOT_PROVIDED : el.diagnosis, isChecked: false, cases: el.cases })),
     },
     {
       groupName: 'Primary Disease Site',
-      checkboxItems: data.caseCountByDiseaseSite.map((el) => ({ name: el.disease_site === '' ? NOT_PROVIDED : el.disease_site, isChecked: false, cases: el.cases })),
+      checkboxItems: data.caseCountByDiseaseSite.map((el) => ({ name: el.disease_site === ''||!el.disease_site ? NOT_PROVIDED : el.disease_site, isChecked: false, cases: el.cases })),
     },
     {
       groupName: 'Tumor Stage',
-      checkboxItems: data.caseCountByStageOfDisease.map((el) => ({ name: el.stage_of_disease === '' ? NOT_PROVIDED : el.stage_of_disease, isChecked: false, cases: el.cases })),
+      checkboxItems: data.caseCountByStageOfDisease.map((el) => ({ name: el.stage_of_disease === ''||!el.stage_of_disease ? NOT_PROVIDED : el.stage_of_disease, isChecked: false, cases: el.cases })),
     },
     {
       groupName: 'Gender',
-      checkboxItems: data.caseCountByGender.map((el) => ({ name: el.gender === '' ? NOT_PROVIDED : el.gender, isChecked: false, cases: el.cases })),
+      checkboxItems: data.caseCountByGender.map((el) => ({ name: el.gender === ''||!el.gender ? NOT_PROVIDED : el.gender, isChecked: false, cases: el.cases })),
     },
     {
       groupName: 'Age',
-      checkboxItems: [
-        {
-          name: '1',
-        },
-        {
-          name: '2',
-        },
-        {
-          name: '3',
-        },
-        {
-          name: '4',
-        },
-      ],
+      checkboxItems: data.caseCountByAge.map((el) => ({ name: el.age === '' || !el.age ? NOT_PROVIDED : el.age, isChecked: false, cases: el.cases })),
     },
     {
       groupName: 'Data Types',
-      checkboxItems: [
-        {
-          name: 'Pathology Report',
-        },
-        {
-          name: 'Sequence File',
-        },
-      ],
+      checkboxItems: data.caseCountByDataType.map((el) => ({ name: el.data_type === ''||!el.data_type ? NOT_PROVIDED : el.data_type, isChecked: false, cases: el.cases })),
     },
   ]);
 }
@@ -217,7 +221,7 @@ export default function dashboardReducer(state = dashboardState, action) {
           studiesByProgram: getStudiesByProgramFromDT([]),
           caseCountByBreed: getWidegtDataFromDT(tableData, 'breed'),
           caseCountByDiagnosis: getWidegtDataFromDT(tableData, 'diagnosis'),
-          caseCountByDiseaseSite: getWidegtDataFromDT(tableData, 'case_id'),
+          caseCountByDiseaseSite: getWidegtDataFromDT(tableData, 'disease_site'),
           caseCountByGender: getWidegtDataFromDT(tableData, 'sex'),
           caseCountByStageOfDisease: getWidegtDataFromDT(tableData, 'stage_of_disease'),
         },
@@ -253,7 +257,7 @@ export default function dashboardReducer(state = dashboardState, action) {
             studiesByProgram: getStudiesByProgramFromDT(action.payload.data.caseOverview),
             caseCountByBreed: getWidegtDataFromDT(action.payload.data.caseOverview, 'breed'),
             caseCountByDiagnosis: getWidegtDataFromDT(action.payload.data.caseOverview, 'diagnosis'),
-            caseCountByDiseaseSite: getWidegtDataFromDT(action.payload.data.caseOverview, 'case_id'),
+            caseCountByDiseaseSite: getWidegtDataFromDT(action.payload.data.caseOverview, 'disease_site'),
             caseCountByGender: getWidegtDataFromDT(action.payload.data.caseOverview, 'sex'),
             caseCountByStageOfDisease: getWidegtDataFromDT(action.payload.data.caseOverview, 'stage_of_disease'),
           },

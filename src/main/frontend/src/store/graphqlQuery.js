@@ -28,16 +28,34 @@ export const DASHBOARD_QUERY = gql`
       cases
       stage_of_disease 
     }
-    studiesByProgram {
-      program_id
-      clinical_study_designation
-      clinical_study_name
-      clinical_study_type
-      numberOfCases
-   }
+
+    caseCountByStudyCode{
+      study_code
+     cases
+    }
+
+   caseCountByStudyType {
+     study_type
+     cases
+    }
+
+    caseCountByAge {
+     age
+     cases
+    }
+
+    caseCountByDataType {
+     data_type
+     cases
+    }
+    caseCountByProgram {
+     program
+     cases
+    }
 
    caseOverview{   
         case_id  
+        program
         study_code   
         study_type   
         breed   
@@ -46,6 +64,9 @@ export const DASHBOARD_QUERY = gql`
         age   
         sex   
         neutered_status
+        data_types
+        disease_site
+        samples
      }
   }
 `;
