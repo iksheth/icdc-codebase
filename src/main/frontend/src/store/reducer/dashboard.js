@@ -82,13 +82,24 @@ const dataFilter= (row,filters) => {
     return true;
   };
   let display = false;
+  const mappings =[
+    {group: "Breeds",field:"breed"},
+    {group: "Diagnosis",field:"diagnosis"},
+    {group: "Study",field:"study_code"},
+    {group: "Study Type",field:"study_type"},
+    {group: "Tumor Stage",field:"stage_of_disease"},
+    {group: "Gender",field:"sex"},
+    {group: "Age",field:"age"},
+  ]
   filters.forEach(function(filer){
-      if(filer.groupName === "Breeds"){
-         if(row.breed===filer.name){
+    mappings.forEach(function(mapping){
+      if(filer.groupName === mapping.group){
+         if(row[mapping.field]===filer.name){
           return display = true 
         }
       }
     })
+  })
   return display ;
 }
 
