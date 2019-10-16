@@ -10,13 +10,13 @@ import { Typography } from '../../components/Wrappers/Wrappers';
 
 const columns = [
 
-  { name: 'file_name', label: 'name', sortDirection: 'asc' },
-  { name: 'file_type', label: 'type' },
-  { name: 'parent', label: 'association' },
-  { name: 'file_description', label: 'description' },
-  { name: 'file_format', label: 'format' },
-  { name: 'file_size', label: 'size' },
-  { name: 'md5sum', label: 'md5sum' },
+  { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
+  { name: 'file_type', label: 'File Type' },
+  { name: 'parent', label: 'Association' },
+  { name: 'file_description', label: 'Description' },
+  { name: 'file_format', label: 'Format' },
+  { name: 'file_size', label: 'Size' },
+  { name: 'md5sum', label: 'MD5' },
 ];
 
 
