@@ -97,7 +97,11 @@ const getStudiesProgramWidgetFromDT = (data) => {
     }
   });// end foreach
 
-  return widgetData;
+  return ({
+    title:"root",
+    color:COLORS[color_index],
+    children:widgetData,
+  });
 };
 
 

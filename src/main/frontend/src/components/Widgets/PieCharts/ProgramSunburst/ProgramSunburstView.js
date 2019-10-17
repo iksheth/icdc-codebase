@@ -2,6 +2,55 @@
 import React, { PureComponent } from 'react';
 import { Sunburst, LabelSeries } from 'react-vis';
 
+
+const LABEL_STYLE = {
+    fontSize: '15px',
+    textAnchor: 'middle'
+};
+
+function getKeyPath(node) {
+  if (!node.parent) {
+    return ['root'];
+  }
+
+  return [(node.data && node.data.title) || node.title].concat(
+    getKeyPath(node.parent)
+  );
+}
+
+
+function updateData(data, keyPath) {
+  if (data.children) {
+    data.children.map(child => updateData(child, keyPath));
+  }
+
+  data.style = {
+    ...data.style,
+    fillOpacity: keyPath && !keyPath[data.title] ? 0.2 : 1
+  };
+
+  return data;
+}
+
+export default class ProgramSunburst extends PureComponent {
+
+    
+
+    constructor(props) {
+      super(props);
+      // Don't call this.setState() here!
+      this.state = {
+        pathValue: false,
+        widgetData: this.props.data,
+        finalValue: 'program studies sunburst',
+      };
+    }
+
+  
+
+    render() {
+
+
  const myData = {
             "title": "analytics",
             "color": "#523175",
@@ -49,55 +98,9 @@ import { Sunburst, LabelSeries } from 'react-vis';
             ]
         }
 
-const LABEL_STYLE = {
-    fontSize: '15px',
-    textAnchor: 'middle'
-};
-
-function getKeyPath(node) {
-  if (!node.parent) {
-    return ['root'];
-  }
-
-  return [(node.data && node.data.title) || node.title].concat(
-    getKeyPath(node.parent)
-  );
-}
-
-
-function updateData(data, keyPath) {
-  if (data.children) {
-    data.children.map(child => updateData(child, keyPath));
-  }
-
-  data.style = {
-    ...data.style,
-    fillOpacity: keyPath && !keyPath[data.title] ? 0.2 : 1
-  };
-
-  return data;
-}
-
-export default class ProgramSunburst extends PureComponent {
-
-    
-
-    constructor(props) {
-      super(props);
-      // Don't call this.setState() here!
-      this.state = {
-        pathValue: false,
-        widgetData: myData,
-        finalValue: 'SUNBURST',
-      };
-    }
-
-  
-
-    render() {
+        
         const { finalValue,pathValue,widgetData} = this.state;
         const {
-            data: sunburstData,
             width,
             height
         } = this.props;
