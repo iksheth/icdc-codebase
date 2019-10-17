@@ -5,6 +5,9 @@ export const dashboardState = {
     error: '',
     hasError: false,
     state: {},
+    checkboxForAll: {
+      data: [],
+    },
     caseOverview: {
       data: [],
     },

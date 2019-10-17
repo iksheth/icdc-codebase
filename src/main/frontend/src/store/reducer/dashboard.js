@@ -246,6 +246,7 @@ export default function dashboardReducer(state = dashboardState, action) {
     }
     case RECEIVE_DASHBOARD: {
       // get action data
+      const checkboxData =customCheckBox(action.payload.data);
       return action.payload.data
         ? {
           ...state.dashboard,
@@ -263,8 +264,11 @@ export default function dashboardReducer(state = dashboardState, action) {
           caseOverview: {
             data: action.payload.data.caseOverview,
           },
+          checkboxForAll:{
+            data: checkboxData,
+          },
           checkbox: {
-            data: customCheckBox(action.payload.data),
+            data: checkboxData,
           },
           datatable: {
             data: action.payload.data.caseOverview,
