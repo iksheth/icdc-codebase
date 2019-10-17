@@ -56,11 +56,11 @@ const getStudiesProgramWidgetFromDT = (data) => {
                 if(s.title === d.study_code){ // study exist
                   existStudy=true;
                   s.size = s.children.length+1;
-                  s.children.push({
-                      title:d.case_id,
-                      color:s.color,
-                      size:1,
-                    })
+                  // s.children.push({
+                  //     title:d.case_id,
+                  //     color:s.color,
+                  //     size:1,
+                  //   })
                 }
              }) // end find study
             if(!existStudy){ // new study
@@ -69,11 +69,11 @@ const getStudiesProgramWidgetFromDT = (data) => {
                 title:d.study_code,
                 color:p.color,
                 size:1,
-                children:[{
-                  title:d.case_id,
-                  color:p.color,
-                  size:1,
-                }]
+                // children:[{
+                //   title:d.case_id,
+                //   color:p.color,
+                //   size:1,
+                // }]
               })
             }
           }
@@ -86,11 +86,12 @@ const getStudiesProgramWidgetFromDT = (data) => {
         children:[{
           title:d.study_code,
           color:COLORS[color_index],
-          children:[{
-            title:d.case_id,
-            color:COLORS[color_index],
-            size:1,
-          }],
+          size:1,
+          // children:[{
+          //   title:d.case_id,
+          //   color:COLORS[color_index],
+          //   size:1,
+          // }],
         }],
       })
       color_index+=1;
