@@ -149,9 +149,28 @@ function updateCheckBoxData(data,field){
 }
 
 const getCheckBoxFromDT =(data)=>{
-  let updatedData = data;
-  //return customCheckBox(updatedData);
-  return data;
+  let updatedData =mappingCheckBoxToDataTable.map(mapping=>(
+    {
+       groupName: mapping.group,
+       checkboxItems: data.reduce(function(acc,d){
+        let filedExist = false;
+        acc.map(el=>{
+          if(el.name===d[mapping.field]){
+            el.cases +=1;
+            filedExist = true;
+          }
+        });
+        if(!filedExist){
+          acc.push({
+            name:d[mapping.field],
+            cases:1,
+          })
+        };
+        return acc;
+       },[]),
+  }))
+  console.log(updatedData);
+  return updatedData;
 }
 
 function customCheckBox(data) {
@@ -182,7 +201,7 @@ export default function dashboardReducer(state = dashboardState, action) {
           numberOfAliquots: getStateFromDT(tableData, 'aliquot'),
         },
         checkbox: {
-            data: state.checkboxForAll.data,
+            data: updatedCheckboxData,
           },
         datatable: {
           ...state.datatable,
