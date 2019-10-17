@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { dashboardState } from '../constant';
+import { dashboardState ,mappingCheckBoxToDataTable,COLORS,NOT_PROVIDED} from '../constant';
 import {
   TOGGLE_CHECKBOX,
   RECEIVE_DASHBOARD,
@@ -7,19 +7,6 @@ import {
   READY_DASHBOARD,
   REQUEST_DASHBOARD,
 } from '../actionTypes';
-
-
-const COLORS = [
-  '#523175',
-  '#6e7ff5',
-  '#fc4b5b',
-  '#2b69a3',
-  '#287d6d',
-  '#af66ff',
-];
-
-
-const NOT_PROVIDED = 'Not Specified';
 
 
 const getStateFromDT = (data, cate) => {
@@ -114,20 +101,9 @@ const filterData = (row, filters) => {
     return true;
   }
   let display = false;
-  const mappings = [
-    { group: 'Program', field: 'program' },
-    { group: 'Study', field: 'study_code' },
-    { group: 'Study Type', field: 'study_type' },
-    { group: 'Breeds', field: 'breed' },
-    { group: 'Diagnosis', field: 'diagnosis' },
-    { group: 'Primary Disease Site', field: 'disease_site' },
-    { group: 'Tumor Stage', field: 'stage_of_disease' },
-    { group: 'Gender', field: 'sex' },
-    { group: 'Age', field: 'age' },
-    { group: 'File Types', field: 'data_types' },
-  ];
+
   filters.forEach((filter) => {
-    mappings.forEach((mapping) => {
+    mappingCheckBoxToDataTable.forEach((mapping) => {
       if (filter.groupName === mapping.group) {
         if (row[mapping.field]){
             // array includes
@@ -174,53 +150,18 @@ function updateCheckBoxData(data,field){
 
 const getCheckBoxFromDT =(data)=>{
   let updatedData = data;
-  return customCheckBox(updatedData);
+  //return customCheckBox(updatedData);
+  return data;
 }
 
 function customCheckBox(data) {
-  return ([
+  return (
+    mappingCheckBoxToDataTable.map(mapping=>(
     {
-      groupName: 'Program',
-      checkboxItems: updateCheckBoxData(data.caseCountByProgram,"program"),
-
-    },
-    {
-      groupName: 'Study',
-      checkboxItems:updateCheckBoxData(data.caseCountByStudyCode,"study_code"),
-    },
-    {
-      groupName: 'Study Type',
-      checkboxItems:updateCheckBoxData(data.caseCountByStudyType,"study_type"),
-    },
-    {
-      groupName: 'Breeds',
-      checkboxItems:updateCheckBoxData(data.caseCountByBreed,"breed"),
-    },
-    {
-      groupName: 'Diagnosis',
-      checkboxItems: updateCheckBoxData(data.caseCountByDiagnosis,"diagnosis"),
-    },
-    {
-      groupName: 'Primary Disease Site',
-      checkboxItems:updateCheckBoxData(data.caseCountByDiseaseSite,"disease_site"),
-    },
-    {
-      groupName: 'Tumor Stage',
-      checkboxItems: updateCheckBoxData(data.caseCountByStageOfDisease,"stage_of_disease"),
-    },
-    {
-      groupName: 'Gender',
-      checkboxItems: updateCheckBoxData(data.caseCountByGender,"gender"),
-    },
-    {
-      groupName: 'Age',
-      checkboxItems: updateCheckBoxData(data.caseCountByAge,"age"),
-    },
-    {
-      groupName: 'File Types',
-      checkboxItems:updateCheckBoxData(data.caseCountByDataType,"data_type"),
-    },
-  ]);
+       groupName: mapping.group,
+       checkboxItems: updateCheckBoxData(data[mapping.api],mapping.field),
+    }))
+  );
 }
 
 
@@ -230,7 +171,7 @@ export default function dashboardReducer(state = dashboardState, action) {
     case TOGGLE_CHECKBOX: {
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
-      //const checkboxData = dataTableFilters&&dataTableFilters.length!==0 ? getCheckBoxFromDT(state.checkboxForAll.data):state.checkboxForAll.data;
+      const updatedCheckboxData = dataTableFilters&&dataTableFilters.length!==0 ? getCheckBoxFromDT(tableData):state.checkboxForAll.data;
       return {
         ...state,
         state: {
