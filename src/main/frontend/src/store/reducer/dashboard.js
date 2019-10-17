@@ -23,22 +23,26 @@ const NOT_PROVIDED = 'Not Specified';
 
 
 const getStateFromDT = (data, cate) => {
-  if (cate === 'case') {
-    return data.length;
+  switch(cate) {
+     case 'case':{
+      return data.length;
+    }
+    case 'study':{
+      return [...new Set(data.map((d) => d.study_code))].length;
+    }
+     case 'aliquot':{
+      return 0;
+    }
+     case 'sample':{
+      return [...new Set(data.reduce((output, d) => output.concat(d.samples ? d.samples : []), []))].length;
+    }
+     case 'file':{
+      return [...new Set(data.reduce((output, d) => output.concat(d.files ? d.files : []), []))].length;
+    }
+    default:{
+      return 0;
+    }
   }
-  if (cate === 'study') {
-    return [...new Set(data.map((d) => d.study_code))].length;
-  }
-  if (cate === 'aliquot') {
-    return 0;
-  }
-  if (cate === 'sample') {
-     return [...new Set(data.reduce((output, d) => output.concat(d.samples ? d.samples : []), []))].length;
-  }
-  if (cate === 'file') {
-     return [...new Set(data.reduce((output, d) => output.concat(d.files ? d.files : []), []))].length;
-  }
-  return 0;
 };
 
 
@@ -104,6 +108,7 @@ const getWidegtDataFromDT = (data, dtField) => {
 };
 
 
+
 const filterData = (row, filters) => {
   if (filters.length === 0) {
     return true;
@@ -167,6 +172,11 @@ function updateCheckBoxData(data,field){
   return data.map((el) => ({ name: el[field] === ''|| ! el[field] ? NOT_PROVIDED : el[field], isChecked: false, cases: el.cases }));
 }
 
+const getCheckBoxFromDT =(data)=>{
+  let updatedData = data;
+  return customCheckBox(updatedData);
+}
+
 function customCheckBox(data) {
   return ([
     {
@@ -220,6 +230,7 @@ export default function dashboardReducer(state = dashboardState, action) {
     case TOGGLE_CHECKBOX: {
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
+      //const checkboxData = dataTableFilters&&dataTableFilters.length!==0 ? getCheckBoxFromDT(state.checkboxForAll.data):state.checkboxForAll.data;
       return {
         ...state,
         state: {
@@ -229,6 +240,9 @@ export default function dashboardReducer(state = dashboardState, action) {
           numberOfFiles: getStateFromDT(tableData, 'file'),
           numberOfAliquots: getStateFromDT(tableData, 'aliquot'),
         },
+        checkbox: {
+            data: state.checkboxForAll.data,
+          },
         datatable: {
           ...state.datatable,
           data: tableData,
