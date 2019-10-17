@@ -55,7 +55,7 @@ const getStudiesProgramWidgetFromDT = (data) => {
              p.children.map(s=>{
                 if(s.title === d.study_code){ // study exist
                   existStudy=true;
-                  s.size = s.children.length+1;
+                  s.size = s.size+1;
                   // s.children.push({
                   //     title:d.case_id,
                   //     color:s.color,
