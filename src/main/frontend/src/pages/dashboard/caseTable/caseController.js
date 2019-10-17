@@ -5,7 +5,7 @@ import { Query } from 'react-apollo';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CaseView from './caseView';
 import { Typography } from '../../../components/Wrappers/Wrappers';
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 const caseContainer = () => {
