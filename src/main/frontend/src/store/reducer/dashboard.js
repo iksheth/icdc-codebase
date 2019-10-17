@@ -119,7 +119,7 @@ const filterData = (row, filters) => {
     { group: 'Tumor Stage', field: 'stage_of_disease' },
     { group: 'Gender', field: 'sex' },
     { group: 'Age', field: 'age' },
-    { group: 'Data Types', field: 'data_types' },
+    { group: 'File Types', field: 'data_types' },
   ];
   filters.forEach((filter) => {
     mappings.forEach((mapping) => {
@@ -207,7 +207,7 @@ function customCheckBox(data) {
       checkboxItems: updateCheckBoxData(data.caseCountByAge,"age"),
     },
     {
-      groupName: 'Data Types',
+      groupName: 'File Types',
       checkboxItems:updateCheckBoxData(data.caseCountByDataType,"data_type"),
     },
   ]);
