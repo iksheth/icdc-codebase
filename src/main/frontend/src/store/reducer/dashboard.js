@@ -21,6 +21,7 @@ const COLORS = [
 
 const NOT_PROVIDED = 'Not Specified';
 
+
 const getStateFromDT = (data, cate) => {
   if (cate === 'case') {
     return data.length;
@@ -39,17 +40,64 @@ const getStateFromDT = (data, cate) => {
   }
   return 0;
 };
-const getStudiesByProgramFromDT = (data) => {
+
+
+const getStudiesProgramWidgetFromDT = (data) => {
   //construct data tree
-  let mapData = {};
+  let widgetData = [];
   let color_index = 0;
   data.forEach(function(d){
+    let existProgram = false;
+    let existStudy = false;
+    widgetData.map(p=>{
+          if(p.title === d.program){ // program exist 
+             existProgram =true;
+             p.children.map(s=>{
+                if(s.title === d.study_code){ // study exist
+                  existStudy=true;
+                  s.size = s.children.length+1;
+                  s.children.push({
+                      title:d.case_id,
+                      color:s.color,
+                      size:1,
+                    })
+                }
+             }) // end find study
+            if(!existStudy){ // new study
+              p.size = p.children.length+1;
+              p.children.push({
+                title:d.study_code,
+                color:p.color,
+                size:1,
+                children:[{
+                  title:d.case_id,
+                  color:p.color,
+                  size:1,
+                }]
+              })
+            }
+          }
+        })// end find program 
 
-    
-  });
-  //convert map to object. 
-   //return  Array.from(mapData.entries()).reduce((main, [key, value]) => ({...main, [key]: value}), {});
-   return "";
+    if(!existProgram&&!existStudy){
+      widgetData.push({
+        title:d.program,
+        color:COLORS[color_index],
+        children:[{
+          title:d.study_code,
+          color:COLORS[color_index],
+          children:[{
+            title:d.case_id,
+            color:COLORS[color_index],
+            size:1,
+          }],
+        }],
+      })
+      color_index+=1;
+    }
+  });// end foreach
+
+  return widgetData;
 };
 
 
@@ -67,7 +115,7 @@ const getWidegtDataFromDT = (data, dtField) => {
 };
 
 
-const dataFilter = (row, filters) => {
+const filterData = (row, filters) => {
   if (filters.length === 0) {
     return true;
   }
@@ -83,7 +131,6 @@ const dataFilter = (row, filters) => {
     { group: 'Gender', field: 'sex' },
     { group: 'Age', field: 'age' },
     { group: 'Data Types', field: 'data_types' },
-
   ];
   filters.forEach((filter) => {
     mappings.forEach((mapping) => {
@@ -126,48 +173,53 @@ function getFilters(orginFilter, newCheckBoxs) {
   return ogFilter;
 }
 
+
+function updateCheckBoxData(data,field){
+  return data.map((el) => ({ name: el[field] === ''|| ! el[field] ? NOT_PROVIDED : el[field], isChecked: false, cases: el.cases }));
+}
+
 function customCheckBox(data) {
   return ([
     {
       groupName: 'Program',
-      checkboxItems: data.caseCountByProgram.map((el) => ({ name: el.program === ''|| !el.program ? NOT_PROVIDED : el.program, isChecked: false, cases: el.cases })),
+      checkboxItems: updateCheckBoxData(data.caseCountByProgram,"program"),
 
     },
     {
       groupName: 'Study',
-      checkboxItems: data.caseCountByStudyCode.map((el) => ({ name: el.study_code === ''|| !el.study_code? NOT_PROVIDED : el.study_code, isChecked: false, cases: el.cases })),
+      checkboxItems:updateCheckBoxData(data.caseCountByStudyCode,"study_code"),
     },
     {
       groupName: 'Study Type',
-      checkboxItems: data.caseCountByStudyType.map((el) => ({ name: el.study_type === ''||!el.study_type ? NOT_PROVIDED : el.study_type, isChecked: false, cases: el.cases })),
+      checkboxItems:updateCheckBoxData(data.caseCountByStudyType,"study_type"),
     },
     {
       groupName: 'Breeds',
-      checkboxItems: data.caseCountByBreed.map((el) => ({ name: el.breed === '' || !el.breed? NOT_PROVIDED : el.breed, isChecked: false, cases: el.cases })),
+      checkboxItems:updateCheckBoxData(data.caseCountByBreed,"breed"),
     },
     {
       groupName: 'Diagnosis',
-      checkboxItems: data.caseCountByDiagnosis.map((el) => ({ name: el.diagnosis === '' || !el.diagnosis? NOT_PROVIDED : el.diagnosis, isChecked: false, cases: el.cases })),
+      checkboxItems: updateCheckBoxData(data.caseCountByDiagnosis,"diagnosis"),
     },
     {
       groupName: 'Primary Disease Site',
-      checkboxItems: data.caseCountByDiseaseSite.map((el) => ({ name: el.disease_site === ''||!el.disease_site ? NOT_PROVIDED : el.disease_site, isChecked: false, cases: el.cases })),
+      checkboxItems:updateCheckBoxData(data.caseCountByDiseaseSite,"disease_site"),
     },
     {
       groupName: 'Tumor Stage',
-      checkboxItems: data.caseCountByStageOfDisease.map((el) => ({ name: el.stage_of_disease === ''||!el.stage_of_disease ? NOT_PROVIDED : el.stage_of_disease, isChecked: false, cases: el.cases })),
+      checkboxItems: updateCheckBoxData(data.caseCountByStageOfDisease,"stage_of_disease"),
     },
     {
       groupName: 'Gender',
-      checkboxItems: data.caseCountByGender.map((el) => ({ name: el.gender === ''||!el.gender ? NOT_PROVIDED : el.gender, isChecked: false, cases: el.cases })),
+      checkboxItems: updateCheckBoxData(data.caseCountByGender,"gender"),
     },
     {
       groupName: 'Age',
-      checkboxItems: data.caseCountByAge.map((el) => ({ name: el.age === '' || !el.age ? NOT_PROVIDED : el.age, isChecked: false, cases: el.cases })),
+      checkboxItems: updateCheckBoxData(data.caseCountByAge,"age"),
     },
     {
       groupName: 'Data Types',
-      checkboxItems: data.caseCountByDataType.map((el) => ({ name: el.data_type === ''||!el.data_type ? NOT_PROVIDED : el.data_type, isChecked: false, cases: el.cases })),
+      checkboxItems:updateCheckBoxData(data.caseCountByDataType,"data_type"),
     },
   ]);
 }
@@ -178,7 +230,7 @@ export default function dashboardReducer(state = dashboardState, action) {
     // if checkbox status has been changed, dashboard data table need to be update as well.
     case TOGGLE_CHECKBOX: {
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);
-      const tableData = state.caseOverview.data.filter((d) => (dataFilter(d, dataTableFilters)));
+      const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
       return {
         ...state,
         state: {
@@ -194,7 +246,7 @@ export default function dashboardReducer(state = dashboardState, action) {
           filters: dataTableFilters,
         },
         widgets: {
-          studiesByProgram: getStudiesByProgramFromDT([]),
+          studiesByProgram: getStudiesProgramWidgetFromDT(tableData),
           caseCountByBreed: getWidegtDataFromDT(tableData, 'breed'),
           caseCountByDiagnosis: getWidegtDataFromDT(tableData, 'diagnosis'),
           caseCountByDiseaseSite: getWidegtDataFromDT(tableData, 'disease_site'),
@@ -230,7 +282,7 @@ export default function dashboardReducer(state = dashboardState, action) {
             filters: [],
           },
           widgets: {
-            studiesByProgram: getStudiesByProgramFromDT(action.payload.data.caseOverview),
+            studiesByProgram: getStudiesProgramWidgetFromDT(action.payload.data.caseOverview),
             caseCountByBreed: getWidegtDataFromDT(action.payload.data.caseOverview, 'breed'),
             caseCountByDiagnosis: getWidegtDataFromDT(action.payload.data.caseOverview, 'diagnosis'),
             caseCountByDiseaseSite: getWidegtDataFromDT(action.payload.data.caseOverview, 'disease_site'),
