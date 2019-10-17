@@ -11,24 +11,18 @@ import {
 
 const getStateFromDT = (data, cate) => {
   switch(cate) {
-     case 'case':{
+     case 'case':
       return data.length;
-    }
-    case 'study':{
+    case 'study':
       return [...new Set(data.map((d) => d.study_code))].length;
-    }
-     case 'aliquot':{
+     case 'aliquot':
       return 0;
-    }
-     case 'sample':{
+     case 'sample':
       return [...new Set(data.reduce((output, d) => output.concat(d.samples ? d.samples : []), []))].length;
-    }
-     case 'file':{
+     case 'file':
       return [...new Set(data.reduce((output, d) => output.concat(d.files ? d.files : []), []))].length;
-    }
-    default:{
+    default:
       return 0;
-    }
   }
 };
 
@@ -148,29 +142,20 @@ function updateCheckBoxData(data,field){
   return data.map((el) => ({ name: el[field] === ''|| ! el[field] ? NOT_PROVIDED : el[field], isChecked: false, cases: el.cases }));
 }
 
-const getCheckBoxFromDT =(data)=>{
-  let updatedData =mappingCheckBoxToDataTable.map(mapping=>(
+const getCheckBoxFromDT =(data,newcheckboxs)=>{
+  // deep copy array
+  return JSON.parse(JSON.stringify(newcheckboxs)).map(checkbox=>
     {
-       groupName: mapping.group,
-       checkboxItems: data.reduce(function(acc,d){
-        let filedExist = false;
-        acc.map(el=>{
-          if(el.name===d[mapping.field]){
-            el.cases +=1;
-            filedExist = true;
-          }
-        });
-        if(!filedExist){
-          acc.push({
-            name:d[mapping.field],
-            cases:1,
-          })
-        };
-        return acc;
-       },[]),
-  }))
-  console.log(updatedData);
-  return updatedData;
+        checkbox["checkboxItems"].map(item =>{
+            data.forEach(function(d){
+              if(d[checkbox["datafield"]] === item["name"]){
+                  item["cases"]-=1;
+              };
+            });
+            return item;
+       })
+        return checkbox;
+  })
 }
 
 function customCheckBox(data) {
@@ -178,7 +163,8 @@ function customCheckBox(data) {
     mappingCheckBoxToDataTable.map(mapping=>(
     {
        groupName: mapping.group,
-       checkboxItems: updateCheckBoxData(data[mapping.api],mapping.field),
+       checkboxItems: updateCheckBoxData(data[mapping.api].sort(),mapping.field),
+       datafield:mapping.field,
     }))
   );
 }
@@ -190,7 +176,7 @@ export default function dashboardReducer(state = dashboardState, action) {
     case TOGGLE_CHECKBOX: {
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
-      const updatedCheckboxData = dataTableFilters&&dataTableFilters.length!==0 ? getCheckBoxFromDT(tableData):state.checkboxForAll.data;
+      const updatedCheckboxData = dataTableFilters&&dataTableFilters.length!==0 ? getCheckBoxFromDT(tableData,state.checkboxForAll.data): state.checkboxForAll.data;
       return {
         ...state,
         state: {

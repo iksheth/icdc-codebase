@@ -34,11 +34,8 @@ function updateData(data, keyPath) {
 
 export default class ProgramSunburst extends PureComponent {
 
-    
-
     constructor(props) {
       super(props);
-      // Don't call this.setState() here!
       this.state = {
         pathValue: false,
         widgetData: this.props.data,
@@ -46,58 +43,9 @@ export default class ProgramSunburst extends PureComponent {
       };
     }
 
-  
+
 
     render() {
-
-
- const myData = {
-            "title": "analytics",
-            "color": "#523175",
-            "children": [{
-                    "title": "cluster",
-                    "color": "#523175",
-                    "children": [{
-                        "title": "MergeEdge",
-                        "children": [
-                            { "title": "BetweennessCentrality", "size": 1 },
-                            { "title": "LinkDistance", "size": 1 },
-                            { "title": "MaxFlowMinCut", "size": 1 },
-                            { "title": "ShortestPaths", "size": 1 },
-                            { "title": "SpanningTree", "size": 1 }
-                        ]
-                    }]
-                },
-                {
-                    "title": "graph",
-                    "children": [{
-                            "title": "BetweennessCentrality",
-                            "children": [{
-                                "title": "graph2",
-                                "children": [
-                                    { "title": "BetweennessCentrality", "size": 1 },
-                                    { "title": "LinkDistance", "size": 1 },
-                                    { "title": "MaxFlowMinCut", "size": 1 },
-                                    { "title": "ShortestPaths", "size": 1 },
-                                    { "title": "SpanningTree", "size": 1 }
-                                ]
-                            }, ]
-                        },
-                        {
-                            "title": "SpanningTree",
-                            "children": [
-                                { "title": "BetweennessCentrality", "size": 1 },
-                                { "title": "LinkDistance", "size": 1 },
-                                { "title": "MaxFlowMinCut", "size": 1 },
-                                { "title": "ShortestPaths", "size": 1 },
-                                { "title": "SpanningTree", "size": 1 }
-                            ]
-                        }
-                    ]
-                },
-            ]
-        }
-
         
         const { finalValue,pathValue,widgetData} = this.state;
         const {
