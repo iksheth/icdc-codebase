@@ -90,32 +90,57 @@ const getWidegtDataFromDT = (data, dtField) => {
 
 
 
+/* filterData function evaluates a row of data with filters, 
+    to check if this row will be showed in the data table. 
+   
+   The rule for display is :
+   If no filter, then display this row. 
+   If has filters and for each group of filters, at least has one filter option 
+   is related to the data. 
+   Otherwise:  Hide this row. 
+*/
 const filterData = (row, filters) => {
+  //No filter
   if (filters.length === 0) {
     return true;
   }
-  let display = false;
+  // has filters
+  let groups ={};
 
   filters.forEach((filter) => {
-    mappingCheckBoxToDataTable.forEach((mapping) => {
-      if (filter.groupName === mapping.group) {
-        if (row[mapping.field]){
+    if(groups[filter.groupName]&&groups[filter.groupName]===true){
+        // do nothing
+    }else{
+      if (row[filter["datafield"]]){ // check if data has this attribute
             // array includes
-          if(Array.isArray(row[mapping.field])){
+          if(Array.isArray(row[filter["datafield"]])){
               if(row[mapping.field].includes(filter.name)){
-                 display = true;
+                 groups[filter.groupName]=true;
+              }else{
+                groups[filter.groupName]=false;
               }
           }else{
             // string eql 
-            if(row[mapping.field].toString() === (filter.name === NOT_PROVIDED ? '' : filter.name)) {
-            display = true;
+            if(row[filter["datafield"]].toString() === (filter.name === NOT_PROVIDED ? '' : filter.name)) {
+              groups[filter.groupName]=true;
+              }else{
+                groups[filter.groupName]=false;
+             }
           }
+         }else{
+          if(filter.name === NOT_PROVIDED){
+            groups[filter.groupName]=true;
+              }else{
+                groups[filter.groupName]=false;
+             }
          }
         }
-      }
     });
-  });
-  return display;
+  if(Object.values(groups).includes(false)){
+    return false;
+  }else{
+    return true;
+  }
 };
 
 

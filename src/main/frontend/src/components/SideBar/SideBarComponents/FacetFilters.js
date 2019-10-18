@@ -47,6 +47,7 @@ const FacetPanel = (classes) => {
     dispatch(toggleCheckBox([{
       groupName: value.split('$$')[1],
       name: value.split('$$')[0],
+      datafield: value.split('$$')[2],
       isChecked,
     }]));
   };
@@ -71,8 +72,8 @@ const FacetPanel = (classes) => {
               <List component="div" disablePadding dense>
                 {
             sideBarItem.checkboxItems.map((checkboxItem) => (
-              <ListItem button onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}`)} className={classes.nested}>
-                <Checkbox checked={checked.indexOf(`${checkboxItem.name}$$${sideBarItem.groupName}`) !== -1} tabIndex={-1} disableRipple color="primary" />
+              <ListItem button onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}`)} className={classes.nested}>
+                <Checkbox checked={checked.indexOf(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}`) !== -1} tabIndex={-1} disableRipple color="primary" />
                 <ListItemText primary={`${checkboxItem.name}(${checkboxItem.cases})`} />
               </ListItem>
             ))
