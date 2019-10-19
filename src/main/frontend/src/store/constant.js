@@ -24,16 +24,36 @@ export const dashboardState = {
 
 
 export const mappingCheckBoxToDataTable = [
-  { group: 'Program', field: 'program', api: 'caseCountByProgram' },
-  { group: 'Study', field: 'study_code', api: 'caseCountByStudyCode' },
-  { group: 'Study Type', field: 'study_type', api: 'caseCountByStudyType' },
-  { group: 'Breeds', field: 'breed', api: 'caseCountByBreed' },
-  { group: 'Diagnosis', field: 'diagnosis', api: 'caseCountByDiagnosis' },
-  { group: 'Primary Disease Site', field: 'disease_site', api: 'caseCountByDiseaseSite' },
-  { group: 'Tumor Stage', field: 'stage_of_disease', api: 'caseCountByStageOfDisease' },
-  { group: 'Gender', field: 'sex', api: 'caseCountByGender' },
-  { group: 'Age', field: 'age', api: 'caseCountByAge' },
-  { group: 'File Types', field: 'data_types', api: 'caseCountByDataType' },
+  {
+    group: 'Program', field: 'program', api: 'caseCountByProgram', datafield: 'program',
+  },
+  {
+    group: 'Study', field: 'study_code', api: 'caseCountByStudyCode', datafield: 'study_code',
+  },
+  {
+    group: 'Study Type', field: 'study_type', api: 'caseCountByStudyType', datafield: 'study_type',
+  },
+  {
+    group: 'Breeds', field: 'breed', api: 'caseCountByBreed', datafield: 'breed',
+  },
+  {
+    group: 'Diagnosis', field: 'diagnosis', api: 'caseCountByDiagnosis', datafield: 'diagnosis',
+  },
+  {
+    group: 'Primary Disease Site', field: 'disease_site', api: 'caseCountByDiseaseSite', datafield: 'disease_site',
+  },
+  {
+    group: 'Tumor Stage', field: 'stage_of_disease', api: 'caseCountByStageOfDisease', datafield: 'stage_of_disease',
+  },
+  {
+    group: 'Gender', field: 'gender', api: 'caseCountByGender', datafield: 'sex',
+  },
+  {
+    group: 'Age', field: 'age', api: 'caseCountByAge', datafield: 'age',
+  },
+  {
+    group: 'File Types', field: 'data_types', api: 'caseCountByDataType', datafield: 'data_types',
+  },
 ];
 
 
