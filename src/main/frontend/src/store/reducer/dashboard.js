@@ -62,10 +62,10 @@ const getStudiesProgramWidgetFromDT = (data) => {
     if (!existProgram && !existStudy) {
       widgetData.push({
         title: d.program,
-        color: COLORS[parseint(colorIndex)],
+        color: COLORS[parseInt(colorIndex, 10)],
         children: [{
           title: d.study_code,
-          color: COLORS[parseint(colorIndex)],
+          color: COLORS[parseInt(colorIndex, 10)],
           size: 1,
         }],
       });
@@ -75,7 +75,7 @@ const getStudiesProgramWidgetFromDT = (data) => {
 
   return ({
     title: 'root',
-    color: COLORS[parseint(colorIndex)],
+    color: COLORS[parseInt(colorIndex, 10)],
     children: widgetData,
   });
 };
@@ -85,7 +85,10 @@ const getWidegtDataFromDT = (data, dtField) => {
   const output = [];
   data.reduce((accumulator, currentValue) => {
     if (accumulator.has(currentValue[dtField.toString()])) {
-      accumulator.set(currentValue[dtField.toString()], accumulator.get(currentValue[dtField.toString()]) + 1);
+      accumulator.set(
+        currentValue[dtField.toString()],
+        accumulator.get(currentValue[dtField.toString()]) + 1,
+      );
     } else {
       accumulator.set(currentValue[dtField.toString()], 1);
     }
