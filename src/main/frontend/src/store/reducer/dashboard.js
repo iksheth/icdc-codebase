@@ -75,7 +75,7 @@ const getStudiesProgramWidgetFromDT = (data) => {
 
   return ({
     title: 'root',
-    color: Ccolor: COLORS[parseint(colorIndex)],
+    color: COLORS[parseint(colorIndex)],
     children: widgetData,
   });
 };
