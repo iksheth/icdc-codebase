@@ -62,10 +62,10 @@ const getStudiesProgramWidgetFromDT = (data) => {
     if (!existProgram && !existStudy) {
       widgetData.push({
         title: d.program,
-        color: COLORS[colorIndex],
+        color: COLORS[parseint(colorIndex)],
         children: [{
           title: d.study_code,
-          color: COLORS[colorIndex],
+          color: COLORS[parseint(colorIndex)],
           size: 1,
         }],
       });
@@ -75,7 +75,7 @@ const getStudiesProgramWidgetFromDT = (data) => {
 
   return ({
     title: 'root',
-    color: COLORS[colorIndex],
+    color: Ccolor: COLORS[parseint(colorIndex)],
     children: widgetData,
   });
 };
@@ -84,10 +84,10 @@ const getStudiesProgramWidgetFromDT = (data) => {
 const getWidegtDataFromDT = (data, dtField) => {
   const output = [];
   data.reduce((accumulator, currentValue) => {
-    if (accumulator.has(currentValue[dtField])) {
-      accumulator.set(currentValue[dtField], accumulator.get(currentValue[dtField]) + 1);
+    if (accumulator.has(currentValue[dtField.toString()])) {
+      accumulator.set(currentValue[dtField.toString()], accumulator.get(currentValue[dtField.toString()]) + 1);
     } else {
-      accumulator.set(currentValue[dtField], 1);
+      accumulator.set(currentValue[dtField.toString()], 1);
     }
     return accumulator;
   }, new Map()).forEach((value, key) => { output.push({ item: key, cases: value }); });
@@ -165,7 +165,7 @@ function getFilters(orginFilter, newCheckBoxs) {
 
 
 function updateCheckBoxData(data, field) {
-  return data.map((el) => ({ name: el[field] === '' || !el[field] ? NOT_PROVIDED : el[field], isChecked: false, cases: el.cases }));
+  return data.map((el) => ({ name: el[field.toString()] === '' || !el[field.toString()] ? NOT_PROVIDED : el[field.toString()], isChecked: false, cases: el.cases }));
 }
 
 const getCheckBoxFromDT = (data, checkboxs, oldCheckBox) => (

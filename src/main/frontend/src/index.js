@@ -7,7 +7,7 @@ import { ApolloProvider } from "react-apollo";
 import { Provider } from 'react-redux';
 import { ApolloProvider as ApolloProviderHooks } from "react-apollo-hooks";
 import store from './store';
-import client from './utils/graphqlClient'
+import client from './utils/graphqlClient';
 
 ReactDOM.render(
   <ApolloProvider client={client}>

@@ -67,7 +67,7 @@ export default class ProgramSunburst extends PureComponent {
         onValueMouseOver={(node) => {
           const path = getKeyPath(node).reverse();
           const pathAsMap = path.reduce((res, row) => {
-            res[row] = true;
+            res[row.toString()] = true;
             return res;
           }, {});
           const data = updateData(widgetData, pathAsMap);
