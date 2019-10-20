@@ -10,7 +10,7 @@ import {
 } from '../actionTypes';
 
 
-const getStateFromDT = function (data, cate) {
+function getStateFromDT(data, cate) {
   switch (cate) {
     case 'case':
       return data.length;
@@ -30,7 +30,7 @@ const getStateFromDT = function (data, cate) {
 };
 
 
-const getStudiesProgramWidgetFromDT = (data) => {
+function getStudiesProgramWidgetFromDT(data){
   // construct data tree
   const widgetData = [];
   let colorIndex = 0;
@@ -81,7 +81,7 @@ const getStudiesProgramWidgetFromDT = (data) => {
 };
 
 
-const getWidegtDataFromDT = (data, dtField) => {
+function getWidegtDataFromDT(data, dtField){
   const output = [];
   data.reduce((accumulator, currentValue) => {
     if (accumulator.has(currentValue[dtField.toString()])) {
@@ -211,7 +211,7 @@ function customCheckBox(data) {
 export default function dashboardReducer(state = dashboardState, action) {
   switch (action.type) {
     // if checkbox status has been changed, dashboard data table need to be update as well.
-    case TOGGLE_CHECKBOX:
+    case TOGGLE_CHECKBOX: {
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
       const updatedCheckboxData = dataTableFilters && dataTableFilters.length !== 0
@@ -244,7 +244,7 @@ export default function dashboardReducer(state = dashboardState, action) {
           caseCountByStageOfDisease: getWidegtDataFromDT(tableData, 'stage_of_disease'),
         },
       };
-
+    }
     case RECEIVE_DASHBOARD: {
       // get action data
       const checkboxData = customCheckBox(action.payload.data);

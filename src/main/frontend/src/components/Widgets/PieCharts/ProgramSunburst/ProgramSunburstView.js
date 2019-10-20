@@ -44,7 +44,8 @@ export default class ProgramSunburst extends PureComponent {
 
 
   render() {
-    const { finalValue, widgetData } = this.state;
+    const  finalValue = this.state.finalValue;
+    const  widgetData =this.state.widgetData;
     const { width, height } = this.props;
 
 
