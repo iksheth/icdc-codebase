@@ -1,7 +1,6 @@
+/* eslint-disable */
 import gql from 'graphql-tag';
-
-export const DASHBOARD_QUERY = gql`
-  {
+export const DASHBOARD_QUERY = gql`{
     numberOfStudies
     numberOfCases
     numberOfSamples
@@ -69,8 +68,7 @@ export const DASHBOARD_QUERY = gql`
         samples
         files
      }
-  }
-`;
+  }`;
 
 // not used
 export const GET_STUDYTABLE_DATA_QUERY = gql`{

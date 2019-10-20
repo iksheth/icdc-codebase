@@ -211,14 +211,14 @@ function customCheckBox(data) {
 export default function dashboardReducer(state = dashboardState, action) {
   switch (action.type) {
     // if checkbox status has been changed, dashboard data table need to be update as well.
-    case TOGGLE_CHECKBOX: {
+    case TOGGLE_CHECKBOX: 
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
       const updatedCheckboxData = dataTableFilters && dataTableFilters.length !== 0
         ? getCheckBoxFromDT(tableData, state.checkboxForAll.data,
           state.checkbox.data.filter((d) => action.payload[0].groupName === d.groupName)[0])
         : state.checkboxForAll.data;
-      return {
+       let output ={
         ...state,
         state: {
           numberOfStudies: getStateFromDT(tableData, 'study'),
@@ -243,8 +243,9 @@ export default function dashboardReducer(state = dashboardState, action) {
           caseCountByGender: getWidegtDataFromDT(tableData, 'sex'),
           caseCountByStageOfDisease: getWidegtDataFromDT(tableData, 'stage_of_disease'),
         },
-      };
-    }
+      }
+      return output;
+
     case RECEIVE_DASHBOARD: {
       // get action data
       const checkboxData = customCheckBox(action.payload.data);
