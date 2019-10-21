@@ -44,13 +44,18 @@ export default class ProgramSunburst extends PureComponent {
 
 
   render() {
-    const { finalValue } = this.state;
-    const { widgetData } = this.state;
-    const { width, height } = this.props;
-
+    const { finalValue, widgetData } = this.state;
+    const { width, height, data } = this.props;
+    if (data.key !== widgetData.key) {
+      this.setState({
+        widgetData: data,
+        finalValue: 'program studies sunburst',
+      });
+    }
 
     return (
       <Sunburst
+        id={widgetData.key}
         hideRootNode
         animation
         colorType="literal"
@@ -68,10 +73,10 @@ export default class ProgramSunburst extends PureComponent {
             res[row.toString()] = true;
             return res;
           }, {});
-          const data = updateData(widgetData, pathAsMap);
+          const wdata = updateData(widgetData, pathAsMap);
           this.setState({
             finalValue: node.title,
-            widgetData: data,
+            widgetData: wdata,
           });
         }}
         onValueMouseOut={() => {

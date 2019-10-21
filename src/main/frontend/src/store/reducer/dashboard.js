@@ -1,3 +1,4 @@
+import uuid from 'uuid';
 import {
   dashboardState, mappingCheckBoxToDataTable, COLORS, NOT_PROVIDED,
 } from '../constant';
@@ -74,6 +75,7 @@ function getStudiesProgramWidgetFromDT(data) {
   }); // end foreach
 
   return ({
+    key: uuid.v1(),
     title: 'root',
     color: COLORS[parseInt(colorIndex, 10)],
     children: widgetData,
