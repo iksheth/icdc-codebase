@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import classnames from 'classnames';
 import About from '../../pages/about/aboutView';
 import Header from '../Header/HeaderView';
@@ -35,7 +35,7 @@ const ScrollToTop = () => {
 const Layout = ({ classes, isSidebarOpened }) => (
   <>
     <CssBaseline />
-    <BrowserRouter>
+    <HashRouter>
       <>
         <Header />
         <NavBar />
@@ -74,7 +74,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
           <Footer />
         </div>
       </>
-    </BrowserRouter>
+    </HashRouter>
   </>
 );
 
