@@ -27,10 +27,10 @@ function getStateFromDT(data, cate) {
     default:
       return 0;
   }
-};
+}
 
 
-function getStudiesProgramWidgetFromDT(data){
+function getStudiesProgramWidgetFromDT(data) {
   // construct data tree
   const widgetData = [];
   let colorIndex = 0;
@@ -78,10 +78,10 @@ function getStudiesProgramWidgetFromDT(data){
     color: COLORS[parseInt(colorIndex, 10)],
     children: widgetData,
   });
-};
+}
 
 
-function getWidegtDataFromDT(data, dtField){
+function getWidegtDataFromDT(data, dtField) {
   const output = [];
   data.reduce((accumulator, currentValue) => {
     if (accumulator.has(currentValue[dtField.toString()])) {
@@ -95,7 +95,7 @@ function getWidegtDataFromDT(data, dtField){
     return accumulator;
   }, new Map()).forEach((value, key) => { output.push({ item: key, cases: value }); });
   return output;
-};
+}
 
 
 /* filterData function evaluates a row of data with filters,
