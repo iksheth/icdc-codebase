@@ -34,7 +34,9 @@ const Footer = ({ classes }) => (
             <Typography className={classes.footerText}>FAQs</Typography>
           </li>
           <li>
-            <Typography className={classes.footerText}>Contact Us</Typography>
+            <Typography className={classes.footerText}>
+              <a href="mailto:icdchelpdesk@nih.gov" target="icdc">Contact Us</a>
+            </Typography>
           </li>
         </ul>
       </div>
