@@ -23,6 +23,7 @@ import SteeringCommittee from '../../pages/steeringCommittee/steeringCommitteeRo
 import DGAB from '../../pages/dgabPage/dgbaRoute';
 import BPSC from '../../pages/bpsc/bpscRoute';
 import StudyDetail from '../../pages/studyDetail/studyDetailController';
+import ProgramDetail from '../../pages/programDetail/programDetailController';
 
 
 const drawerWidth = 240;
@@ -65,6 +66,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             />
 
             <Route path="/about" component={About} />
+            <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/case/:id" component={CaseDetail} />
             <Route path="/study_cases/:id" component={Cases} />

@@ -5,6 +5,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Badge from '@material-ui/core/Badge';
+import { Link } from 'react-router-dom';
 import COP from '../../../assets/programCards/COP.png';
 import NCATS from '../../../assets/programCards/NCATS.png';
 import NIH from '../../../assets/programCards/NIH.png';
@@ -61,7 +62,7 @@ const ProgramCard = ({
     <CardContent>
       <Typography component="p">{data.program_short_description}</Typography>
       <Typography>
-        <a href="/" target="icdc">Read More >></a>
+        <Link to={`/program/${data.program_acronym}`}>Read More >></Link>
       </Typography>
       <Typography>
         <a href={`https://${data.program_external_url}`} target="icdc">{data.program_external_url}</a>
