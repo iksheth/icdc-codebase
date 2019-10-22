@@ -5,8 +5,6 @@ import {
   withStyles,
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-
 import { Link } from 'react-router-dom';
 import CustomFooter from './customFooter';
 
