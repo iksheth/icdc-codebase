@@ -122,6 +122,11 @@ export default {
       headerCell: {
         backgroundColor: '#fff',
       },
+      root: {
+        '&:nth-child(even)': {
+          backgroundColor: '#f5f5f5',
+        },
+      },
     },
     MUIDataTableHeadCell: {
       fixedHeader: {
@@ -166,6 +171,15 @@ export default {
       },
       body: {
         fontSize: '0.95rem',
+      },
+    },
+    MUIDataTableBodyCell: {
+      root: {
+        // flex: '0 0 100px',
+        // // fontSize: '15px',
+        // maxWidth: '1px',
+        // width: '10%',
+        // overflow: 'hidden',
       },
     },
   },
