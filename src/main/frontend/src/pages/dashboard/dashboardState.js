@@ -1,5 +1,5 @@
 import client from '../../utils/graphqlClient';
-import { DASHBOARD_QUERY } from '../../utils/graphqlQuery';
+import { DASHBOARD_QUERY } from '../../utils/graphqlQueries';
 import {
   getStatDataFromDashboardData,
   getSunburstDataFromDashboardData,
