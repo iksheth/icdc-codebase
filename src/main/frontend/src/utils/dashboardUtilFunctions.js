@@ -38,7 +38,7 @@ export const mappingCheckBoxToDataTable = [
     group: 'Gender', field: 'gender', api: 'caseCountByGender', datafield: 'sex',
   },
   {
-    group: 'File Types', field: 'data_types', api: 'caseCountByDataType', datafield: 'data_types',
+    group: 'File Types', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types',
   },
 ];
 
@@ -206,6 +206,15 @@ export function updateCheckBoxData(data, field) {
   return data.map((el) => ({ name: el[field.toString()] === '' || !el[field.toString()] ? NOT_PROVIDED : el[field.toString()], isChecked: false, cases: el.cases }));
 }
 
+
+function sortCheckBox(a, b, flag) {
+  if (flag === 'alphabetical') {
+    return b.name[0] >= a.name[0] ? -1 : 1;
+  }
+  return b.cases - a.cases;
+}
+
+
 export const getCheckBoxFromDT = (data, checkboxs, oldCheckBox) => (
   // deep copy array
   JSON.parse(JSON.stringify(checkboxs)).map((ck) => {
@@ -223,7 +232,7 @@ export const getCheckBoxFromDT = (data, checkboxs, oldCheckBox) => (
           }
         });
         return item;
-      }).sort((a, b) => b.cases - a.cases);
+      }).sort((a, b) => sortCheckBox(a, b, 'count'));
     }
 
     return checkbox;
@@ -236,7 +245,7 @@ export function customCheckBox(data) {
     mappingCheckBoxToDataTable.map((mapping) => ({
       groupName: mapping.group,
       checkboxItems: updateCheckBoxData(data[mapping.api], mapping.field)
-        .sort((a, b) => b.cases - a.cases),
+        .sort((a, b) => sortCheckBox(a, b, 'alphabetical')),
       datafield: mapping.datafield,
     }))
   );
