@@ -4,11 +4,7 @@ import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/StatsController';
 import Cases from './caseTable/caseController';
 import PositionedSnackbar from '../../components/Disclaimer/DisclaimerView';
-import BreedDonut from '../../components/Widgets/PieCharts/BreedDonut/BreedDonutController';
-import DiagnosisDonut from '../../components/Widgets/PieCharts/DiagnosisDonut/DiagnosisDonutController';
-import GenderDonut from '../../components/Widgets/PieCharts/GenderDonut/GenderDonutController';
-import TumorDonut from '../../components/Widgets/PieCharts/TumorDonut/TumorDonutController';
-import DiseaseDonut from '../../components/Widgets/PieCharts/DiseaseDonut/DiseaseDonutController';
+import Donut from '../../components/Widgets/PieCharts/Donut/DonutController';
 import ProgramSunburst from '../../components/Widgets/PieCharts/ProgramSunburst/ProgramSunburstController';
 
 const Dashboard = ({
@@ -42,7 +38,7 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <BreedDonut
+          <Donut
             data={data.caseCountByBreed}
             width={400}
             height={200}
@@ -60,7 +56,7 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <DiagnosisDonut
+          <Donut
             data={data.caseCountByDiagnosis}
             width={400}
             height={200}
@@ -81,7 +77,7 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <DiseaseDonut
+          <Donut
             data={data.caseCountByDiseaseSite}
             width={400}
             height={200}
@@ -99,7 +95,7 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <GenderDonut
+          <Donut
             data={data.caseCountByGender}
             width={400}
             height={200}
@@ -117,7 +113,7 @@ const Dashboard = ({
           bodyClass={classes.fullHeightBody}
           className={classes.card}
         >
-          <TumorDonut
+          <Donut
             data={data.caseCountByStageOfDisease}
             width={400}
             height={200}

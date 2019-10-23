@@ -1,26 +1,16 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { Query } from 'react-apollo';
+import { useSelector } from 'react-redux';
 import StatsView from './StatsView';
 import { Typography } from '../Wrappers/Wrappers';
 
-const GET_STATS = gql`{
-  numberOfStudies
-  numberOfCases
-  numberOfSamples
-  numberOfFiles
-  numberOfAliquots
-  }
-  `;
+const Stats = () => {
+  const data = useSelector((state) => (
+    state.dashboard
+    && state.dashboard.state
+      ? state.dashboard.state : []));
 
-const Stats = () => (
-  <Query query={GET_STATS}>
-    {({ data, loading, error }) => (
-      loading ? <CircularProgress /> : (error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography> : <StatsView data={data} />)
-    )}
-  </Query>
-);
+  return (!data || data.length === 0 ? (<Typography variant="headline" color="warning" size="sm">An error has occurred in loading stats component: </Typography>) : <StatsView data={data} />);
+};
 
 
 export default (Stats);

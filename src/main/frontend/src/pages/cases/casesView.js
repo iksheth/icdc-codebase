@@ -18,7 +18,7 @@ const CasesView = ({ classes, data }) => {
       <StatsView data={stat} />
       {/* Start of case view conatiner */}
       <div className={classes.caseCardContainer}>
-        <CaseView data={data} />
+        <CaseView data={data.caseOverview} />
       </div>
     </>
   );

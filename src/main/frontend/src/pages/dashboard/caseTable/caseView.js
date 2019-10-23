@@ -7,7 +7,6 @@ import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
 import CustomFooter from './customFooter';
 
-
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
   overflow: 'hidden',
@@ -15,7 +14,6 @@ const tableStyle = (ratio = 1) => ({
   maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
 }
 );
-
 
 const columns = [
   {
@@ -176,13 +174,14 @@ const options = {
 
 };
 
+
 const Cases = ({ data }) => (
   <>
     <Grid container spacing={32}>
       <Grid item xs={12}>
         <MUIDataTable
           title={data.title ? data.title : 'All Cases'}
-          data={data.caseOverview}
+          data={data}
           columns={columns}
           options={options}
         />

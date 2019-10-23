@@ -1,21 +1,9 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Studies from './studiesView';
 import { Typography } from '../../components/Wrappers/Wrappers';
-
-
-const GET_STUDYTABLE_DATA_QUERY = gql`{
-    studiesByProgram {
-        program_id
-        clinical_study_designation
-        clinical_study_name
-         clinical_study_type
-         numberOfCases
-    }
-  }
-  `;
+import { GET_STUDYTABLE_DATA_QUERY } from '../../utils/graphqlQueries';
 
 const studiesContainer = () => (
   <Query query={GET_STUDYTABLE_DATA_QUERY}>
