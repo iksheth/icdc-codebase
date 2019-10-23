@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -176,9 +175,7 @@ const options = {
 };
 
 
-
-const Cases = ({ data }) => {
-  return (
+const Cases = ({ data }) => (
   <>
     <Grid container spacing={32}>
       <Grid item xs={12}>
@@ -191,7 +188,7 @@ const Cases = ({ data }) => {
       </Grid>
     </Grid>
   </>
-)};
+);
 
 const styles = () => ({
 
