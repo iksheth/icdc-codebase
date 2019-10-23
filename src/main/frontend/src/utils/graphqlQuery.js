@@ -1,5 +1,5 @@
-/* eslint-disable */
 import gql from 'graphql-tag';
+
 export const DASHBOARD_QUERY = gql`{
     numberOfStudies
     numberOfCases

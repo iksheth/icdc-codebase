@@ -10,7 +10,7 @@ import {
   ExpansionPanelSummary,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { toggleCheckBox } from '../../../store/actions';
+import { toggleCheckBox } from '../../../pages/dashboard/dashboardState';
 
 
 const FacetPanel = (classes) => {
