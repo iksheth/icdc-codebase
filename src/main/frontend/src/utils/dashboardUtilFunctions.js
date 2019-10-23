@@ -38,9 +38,6 @@ export const mappingCheckBoxToDataTable = [
     group: 'Gender', field: 'gender', api: 'caseCountByGender', datafield: 'sex',
   },
   {
-    group: 'Age', field: 'age', api: 'caseCountByAge', datafield: 'age',
-  },
-  {
     group: 'File Types', field: 'data_types', api: 'caseCountByDataType', datafield: 'data_types',
   },
 ];
