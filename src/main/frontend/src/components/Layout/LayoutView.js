@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import classnames from 'classnames';
 import About from '../../pages/about/aboutView';
 import Header from '../Header/HeaderView';
@@ -23,6 +23,7 @@ import SteeringCommittee from '../../pages/steeringCommittee/steeringCommitteeRo
 import DGAB from '../../pages/dgabPage/dgbaRoute';
 import BPSC from '../../pages/bpsc/bpscRoute';
 import StudyDetail from '../../pages/studyDetail/studyDetailController';
+import ProgramDetail from '../../pages/programDetail/programDetailController';
 
 
 const drawerWidth = 240;
@@ -35,7 +36,7 @@ const ScrollToTop = () => {
 const Layout = ({ classes, isSidebarOpened }) => (
   <>
     <CssBaseline />
-    <BrowserRouter>
+    <HashRouter>
       <>
         <Header />
         <NavBar />
@@ -65,6 +66,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             />
 
             <Route path="/about" component={About} />
+            <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/case/:id" component={CaseDetail} />
             <Route path="/study_cases/:id" component={Cases} />
@@ -74,7 +76,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
           <Footer />
         </div>
       </>
-    </BrowserRouter>
+    </HashRouter>
   </>
 );
 

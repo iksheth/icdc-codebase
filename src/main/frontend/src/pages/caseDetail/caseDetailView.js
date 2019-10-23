@@ -9,13 +9,14 @@ import Widget from '../../components/Widgets/WidgetView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 
 const columns = [
-  { name: 'parent', label: 'parent' },
-  { name: 'file_name', label: 'name', sortDirection: 'asc' },
-  { name: 'file_type', label: 'type' },
-  { name: 'file_description', label: 'description' },
-  { name: 'file_format', label: 'format' },
-  { name: 'file_size', label: 'size' },
-  { name: 'md5sum', label: 'md5' },
+
+  { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
+  { name: 'file_type', label: 'File Type' },
+  { name: 'parent', label: 'Association' },
+  { name: 'file_description', label: 'Description' },
+  { name: 'file_format', label: 'Format' },
+  { name: 'file_size', label: 'Size' },
+  { name: 'md5sum', label: 'MD5' },
 ];
 
 
@@ -252,7 +253,7 @@ const CaseDetail = ({ classes, data }) => {
                             <Typography weight="bold">Histological Grade</Typography>
                           </Grid>
                           <Grid item xs={8}>
-                            <Typography>{diagnosis.histological_grade === '' ? 'Null' : diagnosis.histological_grade}</Typography>
+                            <Typography>{diagnosis.histological_grade === '' || diagnosis.histological_grade === null ? '' : diagnosis.histological_grade}</Typography>
                           </Grid>
                         </Grid>
                       </Grid>
