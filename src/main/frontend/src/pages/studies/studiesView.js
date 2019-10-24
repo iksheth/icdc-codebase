@@ -31,7 +31,7 @@ const options = {
   print: false,
   download: false,
   viewColumns: false,
-  pagination: false,
+  pagination: true,
 };
 
 const Studies = ({ data }) => (
