@@ -1,8 +1,6 @@
 import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { Provider } from 'react-redux';
 import themes, { overrides } from '../themes';
-import store from '../store';
 
 const lightTheme = createMuiTheme({ ...themes.light, ...overrides });
 const darkTheme = createMuiTheme({ ...themes.dark, ...overrides });
@@ -40,18 +38,16 @@ const CustomThemeProvider = ({ children }) => {
   const computedTheme = themeState.dark ? darkTheme : lightTheme;
 
   return (
-    <Provider store={store}>
-      <MuiThemeProvider theme={computedTheme}>
-        <ThemeContext.Provider
-          value={{
-            dark: themeState.dark,
-            toggleTheme,
-          }}
-        >
-          {children}
-        </ThemeContext.Provider>
-      </MuiThemeProvider>
-    </Provider>
+    <MuiThemeProvider theme={computedTheme}>
+      <ThemeContext.Provider
+        value={{
+          dark: themeState.dark,
+          toggleTheme,
+        }}
+      >
+        {children}
+      </ThemeContext.Provider>
+    </MuiThemeProvider>
   );
 };
 
