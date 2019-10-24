@@ -163,5 +163,10 @@ export default {
         fontSize: '0.95rem',
       },
     },
+    MUIDataTableToolbarSelect: {
+      root: {
+        minHeight: '64px',
+      },
+    },
   },
 };
