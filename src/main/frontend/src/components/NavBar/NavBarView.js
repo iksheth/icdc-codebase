@@ -1,5 +1,6 @@
 import React from 'react';
 import queryString from 'query-string';
+import { withRouter, NavLink } from 'react-router-dom';
 import {
   AppBar,
   Button,
@@ -15,7 +16,7 @@ import {
   ColorLens as ColorLensIcon,
 } from '@material-ui/icons';
 import classnames from 'classnames';
-import { NavLink } from 'react-router-dom';
+
 import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
 import { useTheme } from '../ThemeContext';
@@ -26,7 +27,7 @@ const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 
 const NavBar = ({
-  classes, isSidebarOpened, toggleSidebar,
+  classes, isSidebarOpened, toggleSidebar, location,
 }) => {
   const theme = useTheme();
   const [authState, setAuthState] = React.useState({
@@ -70,7 +71,7 @@ const NavBar = ({
   //   isSidebarOpen ? setIsSidebarOpen(true) : setIsSidebarOpen(false);
   //   setIsSidebarOpen(isSidebarOpen !== true);
   // }
-
+  console.log('location', location.pathname);
   return (
     <>
       <AppBar
@@ -93,6 +94,7 @@ const NavBar = ({
           >
             &lt;&lt;&nbsp;FILTERS
           </Button>
+          {location.pathname === '/dashboard' && (
           <NavLink
             className={classes.link}
             activeStyle={{ borderBottom: '4px solid white' }}
@@ -102,6 +104,7 @@ const NavBar = ({
               Dashboard
             </Button>
           </NavLink>
+          )}
           <NavLink
             className={classes.link}
             activeStyle={{ borderBottom: '4px solid white' }}
@@ -308,4 +311,4 @@ const styles = (theme) => ({
   },
 });
 
-export default withStyles(styles)(NavBar);
+export default withRouter(withStyles(styles)(NavBar));
