@@ -1,5 +1,8 @@
+/* eslint-disable */
+
 import React from 'react';
 import queryString from 'query-string';
+import { isEqual } from 'lodash';
 import { withRouter, NavLink } from 'react-router-dom';
 import {
   AppBar,
@@ -71,7 +74,7 @@ const NavBar = ({
   //   isSidebarOpen ? setIsSidebarOpen(true) : setIsSidebarOpen(false);
   //   setIsSidebarOpen(isSidebarOpen !== true);
   // }
-  console.log('location', location.pathname);
+  console.log('location2', location.pathname);
   return (
     <>
       <AppBar
@@ -82,19 +85,21 @@ const NavBar = ({
         color="primary"
       >
         <Toolbar>
-          <Button
-            variant="h6"
-            weight="medium"
-            aria-label="open drawer"
-            onClick={toggleSidebar}
-            edge="start"
-            className={classnames(classes.menuButton, classes.logotype, {
-              [classes.hide]: isSidebarOpened,
-            })}
-          >
+          { (isEqual(location.pathname, '/dashboard')
+        || isEqual(location.pathname, '/')) && (
+        <Button
+          variant="h6"
+          weight="medium"
+          aria-label="open drawer"
+          onClick={toggleSidebar}
+          edge="start"
+          className={classnames(classes.menuButton, classes.logotype, {
+            [classes.hide]: isSidebarOpened,
+          })}
+        >
             &lt;&lt;&nbsp;FILTERS
-          </Button>
-          {location.pathname === '/dashboard' && (
+        </Button>
+        )}
           <NavLink
             className={classes.link}
             activeStyle={{ borderBottom: '4px solid white' }}
@@ -104,7 +109,6 @@ const NavBar = ({
               Dashboard
             </Button>
           </NavLink>
-          )}
           <NavLink
             className={classes.link}
             activeStyle={{ borderBottom: '4px solid white' }}
@@ -156,23 +160,26 @@ const NavBar = ({
           )}
         </Toolbar>
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={isSidebarOpened}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader} onClick={toggleSidebar}>
-          <IconButton>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <SideBarContent />
-      </Drawer>
+      { (isEqual(location.pathname, '/dashboard')
+        || isEqual(location.pathname, '/')) && (
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={isSidebarOpened}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <div className={classes.drawerHeader} onClick={toggleSidebar}>
+            <IconButton>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <SideBarContent />
+        </Drawer>
+        )}
     </>
   );
 };

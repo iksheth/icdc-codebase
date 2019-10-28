@@ -29,11 +29,13 @@ export default compose(
     // componentWillUnmount(){
     //   this.removeListen();
     // },
-    shouldComponentUpdate() {
+    shouldComponentUpdate({ location: nextLocation }) {
       const pathName = this.props.location.pathname;
+      console.log('pathName', pathName);
+      console.log('location', nextLocation.pathname);
 
       return (
-        isEqual(pathName, '/dashboard')
+        true
       );
     },
   }),
