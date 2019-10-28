@@ -1,9 +1,6 @@
 import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-// import { isEqual } from 'lodash';
-
-
 import NavBarView from './NavBarView';
 import { toggleSidebar } from '../Layout/LayoutState';
 
