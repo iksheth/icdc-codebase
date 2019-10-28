@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import queryString from 'query-string';
 import { isEqual } from 'lodash';
@@ -69,12 +67,6 @@ const NavBar = ({
     }
   }, []);
 
-  // function toggleSideBar() {
-  //   // eslint-disable-next-line no-unused-expressions
-  //   isSidebarOpen ? setIsSidebarOpen(true) : setIsSidebarOpen(false);
-  //   setIsSidebarOpen(isSidebarOpen !== true);
-  // }
-  console.log('location2', location.pathname);
   return (
     <>
       <AppBar
@@ -99,7 +91,7 @@ const NavBar = ({
         >
             &lt;&lt;&nbsp;FILTERS
         </Button>
-        )}
+          )}
           <NavLink
             className={classes.link}
             activeStyle={{ borderBottom: '4px solid white' }}
@@ -179,7 +171,7 @@ const NavBar = ({
           <Divider />
           <SideBarContent />
         </Drawer>
-        )}
+      )}
     </>
   );
 };
