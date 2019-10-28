@@ -1,6 +1,5 @@
 import React from 'react';
 import queryString from 'query-string';
-import { isEqual } from 'lodash';
 import { withRouter, NavLink } from 'react-router-dom';
 import {
   AppBar,
@@ -77,8 +76,8 @@ const NavBar = ({
         color="primary"
       >
         <Toolbar>
-          { (isEqual(location.pathname, '/dashboard')
-        || isEqual(location.pathname, '/')) && (
+          { ((location.pathname === '/dashboard')
+        || (location.pathname === '/')) && (
         <Button
           variant="h6"
           weight="medium"
@@ -152,8 +151,8 @@ const NavBar = ({
           )}
         </Toolbar>
       </AppBar>
-      { (isEqual(location.pathname, '/dashboard')
-        || isEqual(location.pathname, '/')) && (
+      { ((location.pathname === '/dashboard')
+        || (location.pathname === '/')) && (
         <Drawer
           className={classes.drawer}
           variant="persistent"

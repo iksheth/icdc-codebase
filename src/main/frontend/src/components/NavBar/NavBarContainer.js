@@ -19,7 +19,7 @@ export default compose(
     shouldComponentUpdate({ location: nextLocation }) {
       const pathName = this.props.location.pathname;
       return (
-        pathName !== nextLocation || false
+        pathName !== nextLocation || false // if the path is same don't update
       );
     },
   }),
