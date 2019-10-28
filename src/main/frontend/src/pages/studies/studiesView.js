@@ -32,6 +32,7 @@ const options = {
   download: false,
   viewColumns: false,
   pagination: true,
+  rowsPerPageOptions: [10, 25, 50, 100],
 };
 
 const Studies = ({ data }) => (

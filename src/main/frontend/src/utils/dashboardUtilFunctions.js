@@ -203,9 +203,9 @@ export function getFilters(orginFilter, newCheckBoxs) {
 
 function sortCheckBox(a, b, flag) {
   if (flag === 'alphabetical') {
-    if (b.name[0] > a.name[0]) { return -1; };
-    if (b.name[0] === a.name[0]) { return b.name - a.name;};
-    if (b.name[0] < a.name[0]) { return 1;};  
+    if (b.name[0] > a.name[0]) { return -1; }
+    if (b.name[0] === a.name[0]) { return b.name - a.name; }
+    if (b.name[0] < a.name[0]) { return 1; }
   }
   return b.cases - a.cases;
 }
@@ -223,9 +223,9 @@ export function updateCheckBoxData(data, field) {
     .sort((a, b) => sortCheckBox(a, b, 'alphabetical'))
     .forEach((el) => {
       // reduce the duplication
-      if (result[parseInt(preElementIndex,10)] && result[parseInt(preElementIndex,10)].name) {
-        if (result[parseInt(preElementIndex,10)].name === el.name) {
-          result[parseInt(preElementIndex,10)].cases += el.cases;
+      if (result[parseInt(preElementIndex, 10)] && result[parseInt(preElementIndex, 10)].name) {
+        if (result[parseInt(preElementIndex, 10)].name === el.name) {
+          result[parseInt(preElementIndex, 10)].cases += el.cases;
         } else {
           preElementIndex += 1;
           result.push(el);
