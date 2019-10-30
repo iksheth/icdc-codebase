@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -27,9 +26,9 @@ const getMuiTheme = () => createMuiTheme({
         backgroundColor: tableHeader,
 
       },
-      checkboxRoot:{
-        color:'inherit',
-      }
+      checkboxRoot: {
+        color: 'inherit',
+      },
     },
     MUIDataTableBodyRow: {
       root: {
@@ -286,12 +285,12 @@ const Cases = ({ classes, data }) => (
 );
 
 const styles = () => ({
-  root:{
+  root: {
     textTransform: 'uppercase',
     fontFamily: '"Open Sans", sans-serif',
     fontSize: '9pt',
     letterSpacing: '0.025em',
-     color: '#000',
+    color: '#000',
   },
   button: {
     borderRadius: '10px',
