@@ -475,8 +475,6 @@ const CaseDetail = ({ classes, data }) => {
                       <Typography weight="bold">
                        <MuiThemeProvider theme={getMuiTheme()}>
                         <MUIDataTable
-
-                          title="File View"
                           data={data.filesOfCase}
                           columns={columns}
                           options={options}
