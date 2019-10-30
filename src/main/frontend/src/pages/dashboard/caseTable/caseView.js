@@ -160,9 +160,7 @@ const options = {
   download: false,
   viewColumns: false,
   pagination: true,
-  customToolbarSelect: () => (
-    <></>
-  ),
+
   customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
     <CustomFooter
       count={count}
