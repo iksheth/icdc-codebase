@@ -201,32 +201,65 @@ export function getFilters(orginFilter, newCheckBoxs) {
   return ogFilter;
 }
 
-
-export function updateCheckBoxData(data, field) {
-  return data.map((el) => ({ name: el[field.toString()] === '' || !el[field.toString()] ? NOT_PROVIDED : el[field.toString()], isChecked: false, cases: el.cases }));
-}
-
-
 function sortCheckBox(a, b, flag) {
   if (flag === 'alphabetical') {
-    return b.name[0] >= a.name[0] ? -1 : 1;
+    if (b.name[0] > a.name[0]) { return -1; }
+    if (b.name[0] === a.name[0]) { return b.name - a.name; }
+    if (b.name[0] < a.name[0]) { return 1; }
   }
   return b.cases - a.cases;
 }
 
 
-export const getCheckBoxFromDT = (data, checkboxs, oldCheckBox) => (
+export function updateCheckBoxData(data, field) {
+  const result = [];
+  let preElementIndex = 0;
+  data.map((el) => ({
+    name: el[field.toString()] === '' || !el[field.toString()]
+      ? NOT_PROVIDED : el[field.toString()],
+    isChecked: false,
+    cases: el.cases,
+  }))
+    .sort((a, b) => sortCheckBox(a, b, 'alphabetical'))
+    .forEach((el) => {
+      // reduce the duplication
+      if (result[parseInt(preElementIndex, 10)] && result[parseInt(preElementIndex, 10)].name) {
+        if (result[parseInt(preElementIndex, 10)].name === el.name) {
+          result[parseInt(preElementIndex, 10)].cases += el.cases;
+        } else {
+          preElementIndex += 1;
+          result.push(el);
+        }
+      } else {
+        result.push(el);
+      }
+    });
+
+  return result;
+}
+
+
+export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) => (
   // deep copy array
-  JSON.parse(JSON.stringify(checkboxs)).map((ck) => {
+  JSON.parse(JSON.stringify(allCheckBoxs)).map((ck) => {
     const checkbox = ck;
-    if (checkbox.groupName === oldCheckBox.groupName) {
+    if (checkbox.groupName === activeCheckBoxs.groupName) {
       // overwrite with old checkbox
-      checkbox.checkboxItems = JSON.parse(JSON.stringify(oldCheckBox.checkboxItems));
+      checkbox.checkboxItems = JSON.parse(JSON.stringify(activeCheckBoxs.checkboxItems));
     } else {
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
         const item = el;
         item.cases = 0;
-        data.forEach((d) => {
+        const filterWithOutCurrentCate = filters.filter(
+          (f) => (f.groupName !== checkbox.groupName),
+        );
+        const subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
+        subData.forEach((d) => {
+          if (Array.isArray(d[checkbox.datafield])) {
+            if (d[checkbox.datafield].includes(item.name)) {
+              item.cases += 1;
+            }
+          }
           if (d[checkbox.datafield] === item.name) {
             item.cases += 1;
           }
@@ -244,8 +277,7 @@ export function customCheckBox(data) {
   return (
     mappingCheckBoxToDataTable.map((mapping) => ({
       groupName: mapping.group,
-      checkboxItems: updateCheckBoxData(data[mapping.api], mapping.field)
-        .sort((a, b) => sortCheckBox(a, b, 'alphabetical')),
+      checkboxItems: updateCheckBoxData(data[mapping.api], mapping.field),
       datafield: mapping.datafield,
     }))
   );

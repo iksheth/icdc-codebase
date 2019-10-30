@@ -6,7 +6,7 @@ import {
   getDonutDataFromDashboardData,
   filterData,
   getFilters,
-  getCheckBoxFromDT,
+  getCheckBoxData,
   customCheckBox,
 } from '../../utils/dashboardUtilFunctions';
 
@@ -118,8 +118,12 @@ export default function dashboardReducer(state = initialState, action) {
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
       const updatedCheckboxData = dataTableFilters && dataTableFilters.length !== 0
-        ? getCheckBoxFromDT(tableData, state.checkboxForAll.data,
-          state.checkbox.data.filter((d) => action.payload[0].groupName === d.groupName)[0])
+        ? getCheckBoxData(
+          state.caseOverview.data,
+          state.checkboxForAll.data,
+          state.checkbox.data.filter((d) => action.payload[0].groupName === d.groupName)[0],
+          dataTableFilters,
+        )
         : state.checkboxForAll.data;
       return {
         ...state,

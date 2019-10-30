@@ -3,6 +3,7 @@ import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import classnames from 'classnames';
 import About from '../../pages/about/aboutView';
+import MyCases from '../../pages/myCases/myCasesView';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
@@ -24,7 +25,8 @@ import DGAB from '../../pages/dgabPage/dgbaRoute';
 import BPSC from '../../pages/bpsc/bpscRoute';
 import StudyDetail from '../../pages/studyDetail/studyDetailController';
 import ProgramDetail from '../../pages/programDetail/programDetailController';
-
+import SelectedCases from '../../pages/selectedCases/selectedCasesRoute';
+import SelectedFiles from '../../pages/selectedFiles/selectedFilesRoute';
 
 const drawerWidth = 240;
 
@@ -59,6 +61,8 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/table" component={table} />
             <Route path="/steeringCommittee" component={SteeringCommittee} />
             <Route path="/bpsc" component={BPSC} />
+            <Route path="/selectedcases" component={SelectedCases} />
+            <Route path="/selectedfiles" component={SelectedFiles} />
 
             <Route
               path="/dgab"
@@ -66,6 +70,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             />
 
             <Route path="/about" component={About} />
+            <Route path="/mycases" component={MyCases} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/case/:id" component={CaseDetail} />

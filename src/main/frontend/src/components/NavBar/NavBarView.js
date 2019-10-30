@@ -1,5 +1,6 @@
 import React from 'react';
 import queryString from 'query-string';
+import { withRouter, NavLink } from 'react-router-dom';
 import {
   AppBar,
   Button,
@@ -15,7 +16,7 @@ import {
   ColorLens as ColorLensIcon,
 } from '@material-ui/icons';
 import classnames from 'classnames';
-import { NavLink } from 'react-router-dom';
+
 import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
 import { useTheme } from '../ThemeContext';
@@ -26,7 +27,7 @@ const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 
 const NavBar = ({
-  classes, isSidebarOpened, toggleSidebar,
+  classes, isSidebarOpened, toggleSidebar, location,
 }) => {
   const theme = useTheme();
   const [authState, setAuthState] = React.useState({
@@ -65,12 +66,6 @@ const NavBar = ({
     }
   }, []);
 
-  // function toggleSideBar() {
-  //   // eslint-disable-next-line no-unused-expressions
-  //   isSidebarOpen ? setIsSidebarOpen(true) : setIsSidebarOpen(false);
-  //   setIsSidebarOpen(isSidebarOpen !== true);
-  // }
-
   return (
     <>
       <AppBar
@@ -81,18 +76,21 @@ const NavBar = ({
         color="primary"
       >
         <Toolbar>
-          <Button
-            variant="h6"
-            weight="medium"
-            aria-label="open drawer"
-            onClick={toggleSidebar}
-            edge="start"
-            className={classnames(classes.menuButton, classes.logotype, {
-              [classes.hide]: isSidebarOpened,
-            })}
-          >
+          { ((location.pathname === '/dashboard')
+        || (location.pathname === '/')) && (
+        <Button
+          variant="h6"
+          weight="medium"
+          aria-label="open drawer"
+          onClick={toggleSidebar}
+          edge="start"
+          className={classnames(classes.menuButton, classes.logotype, {
+            [classes.hide]: isSidebarOpened,
+          })}
+        >
             &lt;&lt;&nbsp;FILTERS
-          </Button>
+        </Button>
+          )}
           <NavLink
             className={classes.link}
             activeStyle={{ borderBottom: '4px solid white' }}
@@ -118,6 +116,15 @@ const NavBar = ({
           >
             <Button variant="h6" weight="medium" className={classes.logotype}>
               All Studies
+            </Button>
+          </NavLink>
+          <NavLink
+            className={classes.link}
+            activeStyle={{ borderBottom: '4px solid white' }}
+            to="/mycases"
+          >
+            <Button variant="h6" weight="medium" className={classes.logotype}>
+              My Cases
             </Button>
           </NavLink>
           <NavLink
@@ -153,23 +160,26 @@ const NavBar = ({
           )}
         </Toolbar>
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={isSidebarOpened}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader} onClick={toggleSidebar}>
-          <IconButton>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <SideBarContent />
-      </Drawer>
+      { ((location.pathname === '/dashboard')
+        || (location.pathname === '/')) && (
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={isSidebarOpened}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <div className={classes.drawerHeader} onClick={toggleSidebar}>
+            <IconButton>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <SideBarContent />
+        </Drawer>
+      )}
     </>
   );
 };
@@ -308,4 +318,4 @@ const styles = (theme) => ({
   },
 });
 
-export default withStyles(styles)(NavBar);
+export default withRouter(withStyles(styles)(NavBar));
