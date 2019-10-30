@@ -559,6 +559,7 @@ const styles = (theme) => ({
     fontSize: '9pt',
     letterSpacing: '0.025em',
     color: '#000',
+    background: '#eee',
   },
   header: {
     background: '#fff',
@@ -629,9 +630,7 @@ const styles = (theme) => ({
     background: '#eee',
   },
   tableDiv:{
-    paddingTop:'50px',
-    paddingLeft: '50px',
-    paddingRight: '50px',
+    padding:'50px',
     maxWidth: '1440px',
     margin: 'auto',
   },
