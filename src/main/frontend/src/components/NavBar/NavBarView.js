@@ -69,7 +69,7 @@ const NavBar = ({
   return (
     <>
       <AppBar
-        position="relative"
+        position="fixed"
         className={classnames(classes.appBar, {
           [classes.appBarShift]: isSidebarOpened,
         })}
@@ -190,6 +190,7 @@ const styles = (theme) => ({
     },
   },
   appBar: {
+    marginTop: '80px',
     width: '100vw',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['margin'], {
