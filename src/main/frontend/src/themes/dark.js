@@ -11,10 +11,13 @@ const cobolt = '#FBB35D';
 const warning = '#FFC260';
 const success = '#3CD4A0';
 const info = '#9013FE';
-const tableHeader = '#000';
-
+const tableHeader = '#EEEEEE';
 const lightenRate = 7.5;
 const darkenRate = 15;
+const tableHeaderBorder = '#004c73 3px solid';
+const tableHeaderFontColor = '#194563';
+const tableFontFamily = 'Raleway, sans-serif';
+
 
 export default {
   custom: {
@@ -163,6 +166,22 @@ export default {
       '0px 12px 33px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A',
   },
   overrides: {
+    MUIDataTableSelectCell: {
+      fixedHeader: {
+        position: 'relative',
+      },
+      headerCell: {
+        borderTop: tableHeaderBorder,
+        borderBottom: tableHeaderBorder,
+        color: tableHeaderFontColor,
+        backgroundColor: tableHeader,
+
+      },
+      checkboxRoot: {
+        color: 'inherit',
+      },
+
+    },
     MuiBackdrop: {
       root: {
         backgroundColor: '#4A4A4A1A',
@@ -186,15 +205,19 @@ export default {
     },
     MUIDataTableHeadCell: {
       fixedHeader: {
+        borderTop: tableHeaderBorder,
+        borderBottom: tableHeaderBorder,
+        color: tableHeaderFontColor,
         backgroundColor: tableHeader,
-        color: 'white',
         textDecoration: 'underline',
-        fontWeight: '600',
-        textAlign: 'center',
-        fontSize: '18px',
+        fontFamily: tableFontFamily,
+        letterSpacing: '0.025em',
+        fontStyle: 'normal',
+        fontSize: '11pt',
+        fontWeight: 'bold',
       },
       sortActive: {
-        color: 'white',
+        color: tableHeaderFontColor,
       },
       toolButton: {
         cursor: 'pointer',
@@ -212,6 +235,10 @@ export default {
       root: {
         '&:nth-child(even)': {
           backgroundColor: '#f5f5f5',
+          color: '#5e8ca5',
+        },
+        '&:nth-child(odd)': {
+          color: '#1c2023',
         },
       },
     },
@@ -222,18 +249,30 @@ export default {
     },
     MuiTableCell: {
       root: {
-        borderBottom: '1px solid rgba(224, 224, 224, .5)',
-      },
-      head: {
-        fontSize: '0.95rem',
+        borderBottom: '0px',
       },
       body: {
+        color: 'inherit',
+        fontFamily: '"Open Sans", sans-serif',
+        letterSpacing: '0.025em',
+        fontStyle: 'normal',
+        fontSize: '10pt',
+        fontWeight: 'bold',
+      },
+      head: {
         fontSize: '0.95rem',
       },
     },
     MUIDataTableToolbarSelect: {
       root: {
-        minHeight: '64px',
+        backgroundColor: tableHeader,
+      },
+      titleText: {
+        color: tableHeaderFontColor,
+        fontSize: '25.2pt',
+        fontFamily: tableFontFamily,
+        letterSpacing: '0.025em',
+        fontStyle: 'normal',
       },
     },
   },
