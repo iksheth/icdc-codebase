@@ -6,37 +6,13 @@ import {
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
-import Stats from '../../components/Stats/StatsController';
+
+import Stats from '../../components/Stats/AllStatsController';
+import TableFooter from '@material-ui/core/TableFooter';
+import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-
-const columns = [{ name: 'program_id', label: 'Program' },
-  {
-    name: 'clinical_study_designation',
-    label: 'Study Code',
-    options: {
-      filter: false,
-      customBodyRender: (value) => (
-        <Link to={`/study/${value}`}>{value}</Link>
-      ),
-    },
-  },
-  { name: 'clinical_study_name', label: 'Study Name' },
-  { name: 'clinical_study_type', label: 'Study Type' },
-  { name: 'numberOfCases', label: 'Cases' },
-];
-
-const options = {
-  selectableRows: false,
-  search: false,
-  filter: false,
-  searchable: false,
-  print: false,
-  download: false,
-  viewColumns: false,
-  pagination: true,
-  rowsPerPageOptions: [10, 25, 50, 100],
-};
-
+import { Typography } from '../../components/Wrappers/Wrappers';
 
 const tableHeader = '#EEEEEE';
 const tableHeaderBorder = '#004c73 3px solid';
@@ -45,6 +21,11 @@ const tableFontFamily = 'Raleway, sans-serif';
 
 const getMuiTheme = () => createMuiTheme({
   overrides: {
+    MUIDataTable:{
+      paper:{
+      boxShadow:'none',
+      },
+    },
     MUIDataTableSelectCell: {
       fixedHeader: {
         position: 'relative',
@@ -56,9 +37,9 @@ const getMuiTheme = () => createMuiTheme({
         backgroundColor: tableHeader,
 
       },
-      checkboxRoot:{
-        color:'inherit',
-      }
+      checkboxRoot: {
+        color: 'inherit',
+      },
     },
     MUIDataTableBodyRow: {
       root: {
@@ -125,21 +106,88 @@ const getMuiTheme = () => createMuiTheme({
 
 
 
-const Studies = ({ data }) => (
+
+const columns = [{ name: 'program_id', label: 'Program' },
+  {
+    name: 'clinical_study_designation',
+    label: 'Study Code',
+    options: {
+      filter: false,
+      customBodyRender: (value) => (
+        <Link to={`/study/${value}`}>{value}</Link>
+      ),
+    },
+  },
+  { name: 'clinical_study_name', label: 'Study Name' },
+  { name: 'clinical_study_type', label: 'Study Type' },
+  { name: 'numberOfCases', label: 'Cases' },
+];
+
+const options = (classes) => ({
+  selectableRows: false,
+  search: false,
+  filter: false,
+  searchable: false,
+  print: false,
+  download: false,
+  viewColumns: false,
+  pagination: true,
+  rowsPerPageOptions: [10, 25, 50, 100],
+  customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
+    <TableFooter>
+      <TableRow>
+        <TablePagination
+          className={classes.root}
+          count={count}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          onChangePage={changePage}
+          onChangeRowsPerPage={changeRowsPerPage}
+        />
+      </TableRow>
+    </TableFooter>
+  ),
+});
+
+const Studies = ({ classes,data  }) => (
   <>
     <Stats />
-    <Grid container spacing={32}>
+    <div className={classes.tableContainer} >
+     <div className={classes.header}>
+            <div className={classes.logo}>
+            <img 
+            src="https://img.icons8.com/dusk/64/000000/4-circle.png"  
+            alt="ICDC case detail header logo"
+            />
+            
+            </div>
+            <div className={classes.headerTitle}>
+              <div className={classes.headerMainTitle}>
+                <span>
+                  <Typography weight="bold" variant="h3">
+                    {' '}
+                    <span> All Studies</span>
+                  </Typography>
+                </span>
+              </div>
+            </div>
+          </div>
+  
+
+    <div className={classes.tableDiv} >
+    <Grid container spacing={32} >
       <Grid item xs={12}>
        <MuiThemeProvider theme={getMuiTheme()}>
         <MUIDataTable
-          title="All Studies"
           data={data.studiesByProgram}
           columns={columns}
-          options={options}
+          options={options(classes)}
         />
          </MuiThemeProvider>
       </Grid>
     </Grid>
+    </div>
+  </div>
   </>
 );
 
@@ -157,6 +205,47 @@ const styles = (theme) => ({
   },
   fakeToolbar: {
     ...theme.mixins.toolbar,
+  },
+  root: {
+    textTransform: 'uppercase',
+    fontFamily: '"Open Sans", sans-serif',
+    fontSize: '9pt',
+    letterSpacing: '0.025em',
+    color: '#000',
+    background: '#eee',
+  },
+  header: {
+     background: '#eee',
+     paddingLeft: '20px',
+    paddingRight: '50px',
+     borderBottom: 'black 10px solid',
+    height: '90px',
+    maxWidth: '1440px',
+    margin: 'auto',
+  },
+  headerTitle: {
+    maxWidth: '1440px',
+    margin: 'auto',
+    float:'left',
+    marginLeft: '90px',
+  },
+  headerMainTitle:{
+   position: 'absolute',
+    marginTop: '52px',
+  },
+  logo: {
+    position:'absolute',
+    float:'left',
+    marginTop: '30px',
+    zIndex: '999',
+  },
+  tableContainer: {
+    background: '#eee',
+     paddingBottom: '50px',
+  },
+  tableDiv:{
+    maxWidth: '1440px',
+    margin: 'auto',
   },
 });
 

@@ -46,7 +46,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
           change build npm to read env variable */}
         <div
           className={classnames(classes.content, {
-            [classes.contentShift]: isSidebarOpened,
+            [classes.content]: isSidebarOpened,
           })}
         >
           <Route component={ScrollToTop} />

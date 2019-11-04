@@ -1,13 +1,110 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
   withStyles,
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
+import TableFooter from '@material-ui/core/TableFooter';
+import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import StatsView from '../../../components/Stats/StatsView';
 import Widget from '../../../components/Widgets/WidgetView';
+import StatsView from '../../../components/Stats/StudyDetailStatsView';
 import { Typography, Button } from '../../../components/Wrappers/Wrappers';
+
+
+const tableHeader = '#EEEEEE';
+const tableHeaderBorder = '#004c73 3px solid';
+const tableHeaderFontColor = '#194563';
+const tableFontFamily = 'Raleway, sans-serif';
+
+const getMuiTheme = () => createMuiTheme({
+  overrides: {
+    MUIDataTable:{
+      paper:{
+      boxShadow:'none',
+      },
+    },
+    MUIDataTableSelectCell: {
+      fixedHeader: {
+        position: 'relative',
+      },
+      headerCell: {
+        borderTop: tableHeaderBorder,
+        borderBottom: tableHeaderBorder,
+        color: tableHeaderFontColor,
+        backgroundColor: tableHeader,
+
+      },
+      checkboxRoot: {
+        color: 'inherit',
+      },
+    },
+    MUIDataTableBodyRow: {
+      root: {
+
+        '&:nth-child(even)': {
+          backgroundColor: '#f5f5f5',
+          color: '#5e8ca5',
+        },
+        '&:nth-child(odd)': {
+          color: '#1c2023',
+        },
+      },
+    },
+    MuiTableCell: {
+      root: {
+        borderBottom: '0px',
+      },
+      body: {
+        color: 'inherit',
+        fontFamily: '"Open Sans", sans-serif',
+        letterSpacing: '0.025em',
+        fontStyle: 'normal',
+        fontSize: '10pt',
+        fontWeight: 'bold',
+      },
+    },
+    MUIDataTableHeadCell: {
+      fixedHeader: {
+        borderTop: tableHeaderBorder,
+        borderBottom: tableHeaderBorder,
+        color: tableHeaderFontColor,
+        backgroundColor: tableHeader,
+        textDecoration: 'underline',
+        fontFamily: tableFontFamily,
+        letterSpacing: '0.025em',
+        fontStyle: 'normal',
+        fontSize: '11pt',
+        fontWeight: 'bold',
+      },
+      sortActive: {
+        color: tableHeaderFontColor,
+      },
+      toolButton: {
+        cursor: 'pointer',
+        display: 'inline-flex',
+        outline: 'none',
+
+      },
+    },
+    MUIDataTableToolbar: {
+      root: {
+        backgroundColor: tableHeader,
+      },
+      titleText: {
+        color: tableHeaderFontColor,
+        fontSize: '25.2pt',
+        fontFamily: tableFontFamily,
+        letterSpacing: '0.025em',
+        fontStyle: 'normal',
+      },
+    },
+  },
+});
+
 
 const columns = [
   { name: 'arm', label: 'Arms' },
@@ -31,7 +128,7 @@ const columns = [
   },
 ];
 
-const options = {
+const options = (classes) => ({
   selectableRows: false,
   search: false,
   filter: false,
@@ -40,8 +137,22 @@ const options = {
   download: false,
   viewColumns: false,
   pagination: true,
+  customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
+    <TableFooter>
+      <TableRow>
+        <TablePagination
+          className={classes.root}
+          count={count}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          onChangePage={changePage}
+          onChangeRowsPerPage={changeRowsPerPage}
+        />
+      </TableRow>
+    </TableFooter>
+  ),
+});
 
-};
 
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
@@ -76,39 +187,70 @@ const StudyDetailView = ({ classes, data }) => {
 
   return (
     <>
-      <StatsView data={stat} />
-      <div className={classes.studyDetailContainer}>
-        <div className={classes.studyDetailHeader}>
-          <Typography variant="headline" color="warning" size="sm">
-            {studyData.clinical_study_designation}
-          </Typography>
-          <Typography variant="headline" size="sm">
-            {`: ${studyData.clinical_study_name}`}
-          </Typography>
-        </div>
-        <Grid container spacing={32}>
-          <Grid item lg={6} md={6} sm={6} xs={12}>
-            <Grid container spacing={32} direction="column">
-              <Grid item xs={12}>
-                <Widget
-                  title="SUMMARY"
-                  upperTitle
-                  bodyClass={classes.fullHeightBody}
-                  className={classes.card}
-                  color="warning"
-                >
-                  <Grid item xs={12}>
+      <StatsView data={stat} study={studyData.clinical_study_designation} />
+      <div className={classes.container}>
+          <div className={classes.header}>
+            <div className={classes.logo}>
+            <img 
+            src="https://img.icons8.com/dusk/64/000000/4-circle.png"  
+            alt="ICDC case detail header logo"
+            />
+            
+            </div>
+            <div className={classes.headerTitle}>
+              <div className={classes.headerMainTitle}>
+                <span>
+                  <Typography weight="bold" variant="h3">
+                    {' '}
+                    <span className={classes.warning}> {studyData.clinical_study_designation}</span>
+                  </Typography>
+                </span>
+              </div>
+              <div className={classes.headerMSubTitle}>
+                <Typography weight="bold" >
+                    <span > {studyData.clinical_study_name}</span>
+                </Typography>
+
+
+              </div>
+              <div className={classes.headerNav}>
+                <Link to="/">ALL PROGRAM</Link>
+    /
+                <Link to="/">STUDIES</Link>
+    /
+                <Link to="/">CASES</Link>
+
+              </div>
+            </div>
+            <div className={classes.headerButton}>
+              <Link to={`/study_cases/${studyData.clinical_study_designation}`}><Button color="secondary">{studyData.clinical_study_designation} CASES</Button></Link>
+            </div>
+          </div>
+
+
+          <div className={classes.detailContainer}>
+
+            <Grid container  spacing={8} >
+              <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerLeft}>
+                <Grid container spacing={32} direction="column">
+                  <Grid item xs={12} pt={100}>
+                    <Typography variant="h4" ><span className={classes.warning}>SUMMARY</span></Typography>
+                  </Grid>
+                   <Grid item xs={12} pt={100}>
                     <Typography>
                       {studyData.clinical_study_description}
                       <br />
                     </Typography>
                   </Grid>
+
+                  <Grid container spacing={8}  className={classes.detailContainerItems}>
                   <Grid item xs={12}>
-                    <br />
-                    <Typography weight="bold">Study Type:</Typography>
-                    <br />
-                  </Grid>
-                  <Grid item xs={12}>
+                     <Grid item xs={12} pt={100}>
+                      <Typography>
+                       Study Type:
+                      </Typography>
+                    </Grid>
+                      <Grid item xs={12}>
                     <Typography>
                       {studyData.clinical_study_type}
                       <br />
@@ -143,88 +285,89 @@ const StudyDetailView = ({ classes, data }) => {
                       {studyData.dates_of_conduct}
                     </Typography>
                   </Grid>
-                </Widget>
+
+                  </Grid>
+                </Grid>
+              </Grid>
+              </Grid>
+              <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerRight}>
+                <Grid container spacing={32} direction="column">
+                    <Grid item lg={6} md={6} sm={6} xs={12} >
+                    <Grid container spacing={32} direction="column">
+                      <Grid item xs={12}>
+                        <Typography variant="h4" ><span className={classes.warning}>DIAGNOSIS</span></Typography>
+                      </Grid>
+
+                      {diagnoses.map((diagnosis) => (
+                        <Grid container spacing={8} >
+                          <Grid item xs={12}>
+                           <Typography weight="bold" ><span>{diagnosis}</span></Typography>
+                          </Grid>
+                        </Grid>
+                      ))}
+
+                    </Grid>
+                  </Grid>
+
+                  <Grid item lg={6} md={6} sm={6} xs={12} >
+                    <Grid container spacing={32} direction="column">
+                      <Grid item xs={12}>
+                        <Typography variant="h4" ><span className={classes.warning}>DIAGNOSIS</span></Typography>
+                      </Grid>
+
+                     {fileTypes.map((fileType) => (
+                        <Grid container spacing={8} >
+                          <Grid item xs={12}>
+                           <Typography weight="bold" ><span>{fileType}</span></Typography>
+                          </Grid>
+                        </Grid>
+                      ))}
+
+                    </Grid>
+                  </Grid>
+               </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item lg={6} md={6} sm={6} xs={12}>
-            <Widget>
-              <Grid container spacing={16}>
-                {/* Divding the Paper into two parts */}
-                <Grid item xs={6}>
-                  <Typography size="md" color="warning">
-              DIAGNOSES
-                  </Typography>
-                  <Typography>
-                    {diagnoses.map((diagnosis) => (
-                      <>
-                        <li style={{ listStyleType: 'none' }}>{diagnosis}</li>
-                        <br />
-                      </>
-                    ))}
-                  </Typography>
-                </Grid>
-                {/* End of part one */}
-                {/* Divding the Paper into two parts */}
-                <Grid item xs={6}>
-                  <Typography size="md" color="warning">
-              DATA TYPES
-                  </Typography>
-                  <Typography>
-                    {fileTypes.map((fileType) => <li style={{ listStyleType: 'none' }}>{fileType}</li>)}
-                  </Typography>
-                </Grid>
-                {/* End of part two */}
-                {/* Divding the Paper into two parts */}
+          </div>
+
+          <div className={classes.tableContainer} >
+
+             <div className={classes.tableDiv} >
+                <div className={classes.tableTitle} >
+                    <Typography variant="h4" ><span className={classes.warning}>COHORT AND DOSING</span></Typography>
+                </div> 
                 <Grid item xs={12}>
-                  <div className={classes.studyDetailButton}>
-                    <Typography size="md" color="info">
-                      <Link to={`/study_cases/${studyData.clinical_study_designation}`}><Button color="secondary">CASES</Button></Link>
-                    </Typography>
-                  </div>
+                      <Grid container spacing={8}>
+                        <Grid item xs={12}>
+                          <Typography weight="bold">
+                           <MuiThemeProvider theme={getMuiTheme()}>
+                            <MUIDataTable
+                              data={cohortAndDosingTableData}
+                              columns={columns}
+                              options={options(classes)}
+                            />
+                             </MuiThemeProvider>
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={8}>
+                          <Typography />
+                        </Grid>
+                      </Grid>
                 </Grid>
-                {/* End of part one */}
-              </Grid>
-            </Widget>
-          </Grid>
-
-          <Grid item lg={12} md={12} sm={12} xs={12}>
-            <Grid container spacing={32} direction="column">
-              <Grid item xs={12}>
-                <MUIDataTable
-                  title="COHORT AND DOSING"
-                  data={cohortAndDosingTableData}
-                  columns={columns}
-                  options={options}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-
-        </Grid>
-      </div>
+            </div> 
+          </div>
+        </div>
     </>
   );
 };
 
 const styles = (theme) => ({
-  card: {
-    minHeight: '100%',
-    display: 'flex',
-    flexDirection: 'column',
+  container: {
+    fontFamily:'Raleway, sans-serif',
+   
   },
-
-  studyDetailHeader: {
-    display: 'inline-flex',
-    paddingTop: 'inherit',
-    paddingBottom: '10px',
-  },
-  studyDetailButton: {
-    float: 'right',
-  },
-  studyDetailContainer: {
-    padding: `${theme.spacing.unit * 2}px`,
-    background: theme.custom.cardBackGround,
+  warning: {
+    color: theme.palette.warning.main,
   },
   paper: {
     textAlign: 'center',
@@ -232,6 +375,110 @@ const styles = (theme) => ({
   fakeToolbar: {
     ...theme.mixins.toolbar,
   },
+  root: {
+    textTransform: 'uppercase',
+    fontFamily: '"Open Sans", sans-serif',
+    fontSize: '9pt',
+    letterSpacing: '0.025em',
+    color: '#000',
+    background: '#eee',
+  },
+  header: {
+    background: '#fff',
+     paddingLeft: '50px',
+    paddingRight: '50px',
+     borderBottom: 'black 3px solid',
+    height: '90px',
+    maxWidth: '1440px',
+    margin: 'auto',
+  },
+  headerTitle: {
+    maxWidth: '1440px',
+    margin: 'auto',
+    float:'left',
+    marginLeft: '90px',
+  },
+  headerMainTitle:{
+
+  },
+  headerSubTitleCate:{
+    color: '#555',
+    fontWeight: 'bold',
+  },
+  headerSubTitleContent:{
+    color: '#000',
+    fontWeight: 'bold',
+  },
+  headerMSubTitle: {
+    paddingTop: '5px',
+  },
+  headerNav: {
+    paddingTop: '10px',
+    letterSpacing: '0.25px',
+  },
+  headerButton: {
+    float:'right',
+    paddingTop:'50px',
+  },
+  logo: {
+    position:'absolute',
+    float:'left',
+    marginTop: '39px',
+  },
+  detailContainer: {
+    maxWidth: '1440px',
+    margin: 'auto',
+    paddingTop:'50px',
+    paddingLeft: '70px',
+    paddingRight: '70px',
+  },
+  detailContainerBottom:{
+    borderTop: 'black 3px solid',
+    marginTop: '30px',
+     padding:' 50px 0 50px 0px !important',
+  },
+  detailContainerLeft:{
+    padding:'0px 0px 0 50px',
+    minHeight:'600px',
+    maxHeight:'580px',
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+  },
+  detailContainerRight:{
+    padding:'0 0 50px 80px !important',
+    borderLeft: 'black 3px solid',
+     minHeight:'600px',
+    maxHeight:'580px',
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+  },
+  tableContainer: {
+    background: '#eee',
+  },
+  tableDiv:{
+    padding:'50px',
+    maxWidth: '1440px',
+    margin: 'auto',
+  },
+  button: {
+    borderRadius: '10px',
+    width: '178px',
+    height: '27px',
+    lineHeight: '18px',
+    fontSize: '10pt',
+    color: '#fff',
+    backgroundColor: '#ff7f15',
+  },
+  detailContainerItems:{
+    paddingTop:'5px',
+    paddingLeft: '17px',
+  },
+  title:{
+    color:'#aaa',
+  },
+  tableTitle:{
+    paddingBottom:'20px',
+  }
 });
 
 export default withStyles(styles, { withTheme: true })(StudyDetailView);

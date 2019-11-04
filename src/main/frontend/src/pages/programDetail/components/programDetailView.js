@@ -3,14 +3,28 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
-import Stats from '../../../components/Stats/StatsController';
+import Stats from '../../../components/Stats/AllStatsController';
 import Widget from '../../../components/Widgets/WidgetView';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 
+
 const columns = [
   { name: 'program_id', label: 'Program' },
-  { name: 'clinical_study_designation', label: 'Study Code' },
+  {
+    name: 'clinical_study_designation',
+    label: 'Study Code',
+    options: {
+      customBodyRender: (value) => (
+        <div className="mui_td">
+          {' '}
+          <Link to={`/study/${value}`}>{value}</Link>
+          {' '}
+        </div>
+      ),
+    },
+  },
   { name: 'clinical_study_name', label: 'Study Name' },
   { name: 'clinical_study_type', label: 'Study Type' },
   { name: 'numberOfCases', label: 'Cases' },

@@ -7,7 +7,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Typography } from '../Wrappers/Wrappers';
 
-const StatsView = ({ classes, data }) => (
+const StatsView = ({ classes, data, study }) => (
   <Grid container spacing={32}>
     <Grid item xs={12}>
       <Paper className={classes.paper}>
@@ -15,7 +15,7 @@ const StatsView = ({ classes, data }) => (
           <Grid item xs={1} />
           <Grid item xs={12} sm={4} md={2} lg={2}>
             <Typography variant="headline" color="secondary" size="xl">
-              <Link to="/studies/">
+              <Link to={`/study/${study}`}>
                 {' '}
                 {data.numberOfStudies ? data.numberOfStudies : 0}
               </Link>
@@ -26,9 +26,8 @@ const StatsView = ({ classes, data }) => (
           </Grid>
           <Grid item xs={12} sm={4} md={2} lg={2}>
             <Typography variant="headline" color="secondary" size="xl">
-              <Link to="/">
-                {data.numberOfCases ? data.numberOfCases : 0}
-              </Link>
+              <Link to={`/study_cases/${study}`}>{data.numberOfCases ? data.numberOfCases : 0}</Link>
+
             </Typography>
             <Typography color="primary" size="md">
                                             Cases
