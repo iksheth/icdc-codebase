@@ -249,6 +249,7 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
       // update the checkbox items' status
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
         const item = el;
+        item.isChecked = false;
         filters.forEach((filter) => {
           if (item.name === filter.name) {
             item.isChecked = filter.isChecked;
@@ -274,7 +275,8 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
             item.cases += 1;
           }
         });
-        filterWithOutCurrentCate.forEach((filter) => {
+        item.isChecked = false;
+        filters.forEach((filter) => {
           if (item.name === filter.name) {
             item.isChecked = filter.isChecked;
           }

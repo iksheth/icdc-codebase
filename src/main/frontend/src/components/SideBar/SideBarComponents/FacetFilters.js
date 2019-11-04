@@ -23,7 +23,6 @@ const FacetPanel = (classes) => {
   // redux use actions
   const dispatch = useDispatch();
 
-  const [checked, setChecked] = React.useState([0]);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -31,24 +30,13 @@ const FacetPanel = (classes) => {
   };
 
   const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    let isChecked = false;
-    if (currentIndex === -1) {
-      newChecked.push(value);
-      isChecked = true;
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-
+    const valueList = value.split('$$');
     // dispatch toggleCheckBox action
     dispatch(toggleCheckBox([{
-      groupName: value.split('$$')[1],
-      name: value.split('$$')[0],
-      datafield: value.split('$$')[2],
-      isChecked,
+      groupName: valueList[1],
+      name: valueList[0],
+      datafield: valueList[2],
+      isChecked: !(valueList[3] === 'true'),
     }]));
   };
 
@@ -72,7 +60,7 @@ const FacetPanel = (classes) => {
               <List component="div" disablePadding dense>
                 {
             sideBarItem.checkboxItems.map((checkboxItem) => (
-              <ListItem button onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}`)} className={classes.nested}>
+              <ListItem button onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}`)} className={classes.nested}>
                 <Checkbox checked={checkboxItem.isChecked} tabIndex={-1} disableRipple color="primary" />
                 <ListItemText primary={`${checkboxItem.name}(${checkboxItem.cases})`} />
               </ListItem>
