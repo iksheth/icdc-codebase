@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
+
 import Stats from '../../components/Stats/AllStatsController';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
@@ -102,6 +103,7 @@ const getMuiTheme = () => createMuiTheme({
     },
   },
 });
+
 
 
 
