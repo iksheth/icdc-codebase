@@ -12,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '../../components/Wrappers/Wrappers';
-import StatsView from '../../components/Stats/StatsView';
+import StatsView from '../../components/Stats/StudyDetailStatsView';
 
 const tableHeader = '#EEEEEE';
 const tableHeaderBorder = '#004c73 3px solid';
@@ -275,7 +275,7 @@ const options = (classes) => ({
   ),
 });
 
-const CasesView = ({ classes, data }) => {
+const CasesView = ({ classes, data, study}) => {
   const stat = {
     numberOfStudies: 1,
     numberOfCases: data.caseCountOfStudy,
@@ -285,7 +285,8 @@ const CasesView = ({ classes, data }) => {
   };
 return (
   <>
-    <StatsView data={stat} />
+    <StatsView data={stat}  study={study}/>
+
     <div className={classes.tableContainer} >
      <div className={classes.header}>
             <div className={classes.logo}>
@@ -300,7 +301,7 @@ return (
                 <span>
                   <Typography weight="bold" variant="h3">
                     {' '}
-                    <span> All Cases</span>
+                    <span> {data.title}</span>
                   </Typography>
                 </span>
               </div>

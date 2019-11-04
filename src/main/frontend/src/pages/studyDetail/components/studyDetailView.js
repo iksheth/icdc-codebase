@@ -11,7 +11,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Widget from '../../../components/Widgets/WidgetView';
-import StatsView from '../../../components/Stats/StatsView';
+import StatsView from '../../../components/Stats/StudyDetailStatsView';
 import { Typography, Button } from '../../../components/Wrappers/Wrappers';
 
 
@@ -187,7 +187,7 @@ const StudyDetailView = ({ classes, data }) => {
 
   return (
     <>
-      <StatsView data={stat} />
+      <StatsView data={stat} study={studyData.clinical_study_designation} />
       <div className={classes.container}>
           <div className={classes.header}>
             <div className={classes.logo}>
