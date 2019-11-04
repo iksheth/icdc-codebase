@@ -246,14 +246,15 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
     if (checkbox.groupName === activeCheckBoxs.groupName) {
       // overwrite with old checkbox
       checkbox.checkboxItems = JSON.parse(JSON.stringify(activeCheckBoxs.checkboxItems));
-      checkbox.checkboxItems = checkbox.checkboxItems.map((element) => {
-        const el = element;
+      // update the checkbox items' status
+      checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
+        const item = el;
         filters.forEach((filter) => {
-          if (el.name === filter.name) {
-            el.isChecked = filter.isChecked;
+          if (item.name === filter.name) {
+            item.isChecked = filter.isChecked;
           }
         });
-        return el;
+        return item;
       });
     } else {
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
@@ -271,6 +272,11 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
           }
           if (d[checkbox.datafield] === item.name) {
             item.cases += 1;
+          }
+        });
+        filterWithOutCurrentCate.forEach((filter) => {
+          if (item.name === filter.name) {
+            item.isChecked = filter.isChecked;
           }
         });
         return item;
