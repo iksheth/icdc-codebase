@@ -1,5 +1,14 @@
 import gql from 'graphql-tag';
 
+export const STATS_QUERY = gql`{
+  numberOfStudies
+  numberOfCases
+  numberOfSamples
+  numberOfFiles
+  numberOfAliquots
+  }
+  `;
+
 export const DASHBOARD_QUERY = gql`{
     numberOfStudies
     numberOfCases

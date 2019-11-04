@@ -1,8 +1,7 @@
 import React from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import { Typography } from '../../components/Wrappers/Wrappers';
-
-import Stats from '../../components/Stats/StatsController';
+import Stats from '../../components/Stats/AllStatsController';
 import ProgramCard from './components/programcard';
 
 const Programs = ({ classes, data }) => (

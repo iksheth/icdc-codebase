@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import Widget from '../../components/Widgets/WidgetView';
-import Stats from '../../components/Stats/StatsController';
+import Stats from '../../components/Stats/DashboardStatsController';
 import Cases from './caseTable/caseController';
 import PositionedSnackbar from '../../components/Disclaimer/DisclaimerView';
 import Donut from '../../components/Widgets/PieCharts/Donut/DonutController';

@@ -17,7 +17,7 @@ export const initialState = {
     isLoading: false,
     error: '',
     hasError: false,
-    state: {},
+    stats: {},
     checkboxForAll: {
       data: [],
     },
@@ -127,7 +127,7 @@ export default function dashboardReducer(state = initialState, action) {
         : state.checkboxForAll.data;
       return {
         ...state,
-        state: {
+        stats: {
           numberOfStudies: getStatDataFromDashboardData(tableData, 'study'),
           numberOfCases: getStatDataFromDashboardData(tableData, 'case'),
           numberOfSamples: getStatDataFromDashboardData(tableData, 'sample'),
@@ -162,7 +162,7 @@ export default function dashboardReducer(state = initialState, action) {
           isLoading: false,
           hasError: false,
           error: '',
-          state: {
+          stats: {
             numberOfStudies: action.payload.data.numberOfStudies,
             numberOfCases: action.payload.data.numberOfCases,
             numberOfSamples: action.payload.data.numberOfSamples,
