@@ -541,6 +541,7 @@ const CaseDetail = ({ classes, data }) => {
 
 const styles = (theme) => ({
   container: {
+    paddingTop: '50px',
     fontFamily:'Raleway, sans-serif',
    
   },
@@ -559,13 +560,13 @@ const styles = (theme) => ({
     fontSize: '9pt',
     letterSpacing: '0.025em',
     color: '#000',
-    background: '#eee',
+    background: '#f3f3f3',
   },
   header: {
     background: '#fff',
      paddingLeft: '50px',
     paddingRight: '50px',
-     borderBottom: 'black 3px solid',
+     borderBottom: '#81a6b9 1px solid',
     height: '90px',
     maxWidth: '1440px',
     margin: 'auto',
@@ -606,14 +607,14 @@ const styles = (theme) => ({
   detailContainer: {
     maxWidth: '1440px',
     margin: 'auto',
-    paddingTop:'50px',
+    paddingTop:'45px',
     paddingLeft: '70px',
     paddingRight: '70px',
   },
   detailContainerBottom:{
-    borderTop: 'black 3px solid',
-    marginTop: '30px',
-     padding:' 50px 0 50px 0px !important',
+    borderTop: '#81a6b9 1px solid',
+    marginTop: '45px',
+     padding:' 35px 0 40px 0px !important',
   },
   detailContainerLeft:{
     padding:'0px 0px 0 50px',
@@ -624,10 +625,10 @@ const styles = (theme) => ({
     padding:'0 0 50px 80px !important',
     minHeight:'400px',
     maxHeight:'380px',
-    borderLeft: 'black 3px solid',
+    borderLeft: '#81a6b9 1px solid',
   },
   tableContainer: {
-    background: '#eee',
+    background: '#f3f3f3',
   },
   tableDiv:{
     padding:'50px',
