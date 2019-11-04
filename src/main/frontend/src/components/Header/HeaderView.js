@@ -29,9 +29,10 @@ const Header = ({ classes }) => (
 
 const styles = (theme) => ({
   headerBar: {
+    position: 'fixed',
     width: '100vw',
     backgroundColor: 'white',
-    borderBottom: '1px solid #d1d1d1',
+    top: '0px',
   },
 
   headerBarNavLeft: {

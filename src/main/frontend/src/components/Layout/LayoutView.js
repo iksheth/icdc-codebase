@@ -95,8 +95,9 @@ const styles = (theme) => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
     // width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
-    width: 'calc(100%)', // Remove this on adding sidebar
-    background: '#fff',
+    width: 'calc(100vw)', // Remove this on adding sidebar
+    background: theme.custom.bodyBackGround,
+    marginTop: '140px',
   },
   contentShift: {
     width: `calc(100% - ${drawerWidth}px)`,

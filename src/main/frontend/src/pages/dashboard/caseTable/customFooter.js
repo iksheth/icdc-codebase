@@ -7,7 +7,9 @@ import Button from '@material-ui/core/Button';
 
 import { withStyles } from '@material-ui/core/styles';
 
-const defaultFooterStyles = {};
+const defaultFooterStyles = {
+
+};
 
 const CustomFooter = ({
   classes,
@@ -16,12 +18,13 @@ const CustomFooter = ({
   rowsPerPage,
   onChangePage,
   onChangeRowsPerPage,
+  text,
 }) => (
   <TableFooter>
     <TableRow>
       <TableCell>
         <Button variant="contained" color="primary" className={classes.button}>
-          QUEUE FOR EXPORT AND ANALYSIS
+          {text}
         </Button>
       </TableCell>
       <TablePagination

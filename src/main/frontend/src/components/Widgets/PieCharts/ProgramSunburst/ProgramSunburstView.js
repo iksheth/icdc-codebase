@@ -38,7 +38,7 @@ export default class ProgramSunburst extends PureComponent {
     const { data } = this.props;
     this.state = {
       widgetData: data,
-      finalValue: 'program studies sunburst',
+      finalValue: false,
     };
   }
 
@@ -49,7 +49,7 @@ export default class ProgramSunburst extends PureComponent {
     if (data.key !== widgetData.key) {
       this.setState({
         widgetData: data,
-        finalValue: 'program studies sunburst',
+        finalValue: false,
       });
     }
 

@@ -7,11 +7,16 @@ import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
 import CustomFooter from './customFooter';
 
+
+const link = {
+  color: 'inherit',
+};
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
   overflow: 'hidden',
   wordBreak: 'break-word',
   maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
+  minWidth: '160px',
 }
 );
 
@@ -25,7 +30,7 @@ const columns = [
       customBodyRender: (value) => (
         <div className="mui_td" style={tableStyle(0.8)}>
           {' '}
-          <Link to={`/case/${value}`}>{value}</Link>
+          <Link to={`/case/${value}`} style={link}>{value}</Link>
           {' '}
         </div>
       ),
@@ -151,7 +156,7 @@ const columns = [
 ];
 
 
-const options = {
+const options = (classes) => ({
   selectableRows: true,
   search: false,
   filter: false,
@@ -160,9 +165,10 @@ const options = {
   download: false,
   viewColumns: false,
   pagination: true,
-
   customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
     <CustomFooter
+      text="SAVE TO MY CASES"
+      classes={classes}
       count={count}
       page={page}
       rowsPerPage={rowsPerPage}
@@ -172,10 +178,10 @@ const options = {
     />
   ),
 
-};
+});
 
 
-const Cases = ({ data }) => (
+const Cases = ({ classes, data }) => (
   <>
     <Grid container spacing={32}>
       <Grid item xs={12}>
@@ -183,14 +189,31 @@ const Cases = ({ data }) => (
           title={data.title ? data.title : 'All Cases'}
           data={data}
           columns={columns}
-          options={options}
+          options={options(classes)}
         />
       </Grid>
     </Grid>
+
   </>
 );
 
 const styles = () => ({
+  root: {
+    textTransform: 'uppercase',
+    fontFamily: '"Open Sans", sans-serif',
+    fontSize: '9pt',
+    letterSpacing: '0.025em',
+    color: '#000',
+  },
+  button: {
+    borderRadius: '10px',
+    width: '178px',
+    height: '27px',
+    lineHeight: '18px',
+    fontSize: '10pt',
+    color: '#fff',
+    backgroundColor: '#ff7f15',
+  },
 
 });
 
