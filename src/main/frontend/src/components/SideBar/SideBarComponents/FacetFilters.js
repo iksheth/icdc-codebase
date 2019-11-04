@@ -59,12 +59,17 @@ const FacetPanel = (classes) => {
             <ExpansionPanelDetails>
               <List component="div" disablePadding dense>
                 {
-            sideBarItem.checkboxItems.map((checkboxItem) => (
-              <ListItem button onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}`)} className={classes.nested}>
-                <Checkbox checked={checkboxItem.isChecked} tabIndex={-1} disableRipple color="primary" />
-                <ListItemText primary={`${checkboxItem.name}(${checkboxItem.cases})`} />
-              </ListItem>
-            ))
+            sideBarItem.checkboxItems.map((checkboxItem) => {
+              if (checkboxItem.cases === 0 && !checkboxItem.isChecked) {
+                return '';
+              }
+              return (
+                <ListItem button onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}`)} className={classes.nested}>
+                  <Checkbox checked={checkboxItem.isChecked} tabIndex={-1} disableRipple color="primary" />
+                  <ListItemText primary={`${checkboxItem.name}(${checkboxItem.cases})`} />
+                </ListItem>
+              );
+            })
           }
               </List>
             </ExpansionPanelDetails>
