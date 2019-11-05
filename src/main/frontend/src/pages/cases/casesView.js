@@ -10,100 +10,8 @@ import Stats from '../../components/Stats/AllStatsController';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import StatsView from '../../components/Stats/StudyDetailStatsView';
-
-const tableHeader = '#EEEEEE';
-const tableHeaderBorder = '#004c73 3px solid';
-const tableHeaderFontColor = '#194563';
-const tableFontFamily = 'Raleway, sans-serif';
-
-const getMuiTheme = () => createMuiTheme({
-  overrides: {
-    MUIDataTable:{
-      paper:{
-      boxShadow:'none',
-      },
-    },
-    MUIDataTableSelectCell: {
-      fixedHeader: {
-        position: 'relative',
-      },
-      headerCell: {
-        borderTop: tableHeaderBorder,
-        borderBottom: tableHeaderBorder,
-        color: tableHeaderFontColor,
-        backgroundColor: tableHeader,
-
-      },
-      checkboxRoot: {
-        color: 'inherit',
-      },
-    },
-    MUIDataTableBodyRow: {
-      root: {
-
-        '&:nth-child(even)': {
-          backgroundColor: '#f5f5f5',
-          color: '#5e8ca5',
-        },
-        '&:nth-child(odd)': {
-          color: '#1c2023',
-        },
-      },
-    },
-    MuiTableCell: {
-      root: {
-        borderBottom: '0px',
-      },
-      body: {
-        color: 'inherit',
-        fontFamily: '"Open Sans", sans-serif',
-        letterSpacing: '0.025em',
-        fontStyle: 'normal',
-        fontSize: '10pt',
-        fontWeight: 'bold',
-      },
-    },
-    MUIDataTableHeadCell: {
-      fixedHeader: {
-        borderTop: tableHeaderBorder,
-        borderBottom: tableHeaderBorder,
-        color: tableHeaderFontColor,
-        backgroundColor: tableHeader,
-        textDecoration: 'underline',
-        fontFamily: tableFontFamily,
-        letterSpacing: '0.025em',
-        fontStyle: 'normal',
-        fontSize: '11pt',
-        fontWeight: 'bold',
-      },
-      sortActive: {
-        color: tableHeaderFontColor,
-      },
-      toolButton: {
-        cursor: 'pointer',
-        display: 'inline-flex',
-        outline: 'none',
-
-      },
-    },
-    MUIDataTableToolbar: {
-      root: {
-        backgroundColor: tableHeader,
-      },
-      titleText: {
-        color: tableHeaderFontColor,
-        fontSize: '25.2pt',
-        fontFamily: tableFontFamily,
-        letterSpacing: '0.025em',
-        fontStyle: 'normal',
-      },
-    },
-  },
-});
-
 
 
 const tableStyle = (ratio = 1) => ({
@@ -312,13 +220,11 @@ return (
     <div className={classes.tableDiv} >
     <Grid container spacing={32} >
       <Grid item xs={12}>
-       <MuiThemeProvider theme={getMuiTheme()}>
         <MUIDataTable
           data={data.caseOverview}
           columns={columns}
           options={options(classes)}
         />
-         </MuiThemeProvider>
       </Grid>
     </Grid>
     </div>
