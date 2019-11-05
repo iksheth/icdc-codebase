@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SteeringCommittee from '../steeringCommittee/steeringCommitteeView';
 import DGAB from '../dgabPage/dgabPageView';
 import BPSC from '../bpsc/bpscView';
-import Stats from '../../components/Stats/DashboardStatsController';
+import Stats from '../../components/Stats/AllStatsController';
 
 const About = ({ classes, currentTab }) => {
   const [value, setValue] = React.useState(currentTab);
