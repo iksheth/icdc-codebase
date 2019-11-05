@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
-import StatsView from '../../../components/Stats/ProgramStatsView';
+import StatsView from '../../../components/Stats/StatsViewWithoutLink';
 import Widget from '../../../components/Widgets/WidgetView';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 

@@ -3,7 +3,7 @@ import { Tabs, Tab, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import SelectedFiles from '../selectedFiles/selectedFilesView';
 import SelectedCases from '../selectedCases/selectedCasesView';
-import Stats from '../../components/Stats/DashboardStatsController';
+import Stats from '../../components/Stats/AllStatsController';
 
 const MyCases = ({ classes, currentTab }) => {
   const [value, setValue] = React.useState(currentTab);
