@@ -303,7 +303,7 @@ const styles = (theme) => ({
     marginRight: theme.spacing.unit * 2,
   },
   appBarShift: {
-    width: '100%',
+    width: cal('100%',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,

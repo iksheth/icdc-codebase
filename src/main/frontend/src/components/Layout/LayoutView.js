@@ -46,7 +46,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
           change build npm to read env variable */}
         <div
           className={classnames(classes.content, {
-            [classes.content]: isSidebarOpened,
+            [classes.contentShift]: isSidebarOpened,
           })}
         >
           <Route component={ScrollToTop} />
@@ -98,6 +98,7 @@ const styles = (theme) => ({
     width: 'calc(100vw)', // Remove this on adding sidebar
     background: theme.custom.bodyBackGround,
     marginTop: '140px',
+    marginLeft: '0px !important',
   },
   contentShift: {
     width: `calc(100% - ${drawerWidth}px)`,
