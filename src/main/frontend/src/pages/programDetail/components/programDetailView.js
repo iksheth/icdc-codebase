@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
-import Stats from '../../../components/Stats/AllStatsController';
+import StatsView from '../../../components/Stats/ProgramStatsView';
 import Widget from '../../../components/Widgets/WidgetView';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 
@@ -44,10 +44,16 @@ const options = {
 
 const ProgramDetailView = ({ classes, data }) => {
   const programDetail = data.program[0];
-
+  const stat = {
+    numberOfStudies: data.studyCountOfProgram,
+    numberOfCases: data.caseCountOfProgram,
+    numberOfSamples: data.sampleCountOfProgram,
+    numberOfFiles: data.fileCountOfProgram,
+    numberOfBiospecimenAliquots: data.aliguotCountOfProgram,
+  };
   return (
     <>
-      <Stats />
+      <StatsView data={stat} />
       <div className={classes.programDetailContainer}>
         <div className={classes.programDetailHeader}>
           <Typography variant="headline" size="sm">
