@@ -177,6 +177,15 @@ export const GET_CASES_QUERY = gql`
 
 export const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
 query program($programTitle: String!) {
+
+
+  sampleCountOfProgram(program_id: $programTitle)
+  fileCountOfProgram(program_id: $programTitle)
+  aliguotCountOfProgram(program_id: $programTitle)
+  studyCountOfProgram(program_id: $programTitle)
+  caseCountOfProgram(program_id: $programTitle)
+ 
+  
   program(program_acronym: $programTitle)
   { 
     program_name
@@ -198,6 +207,8 @@ query program($programTitle: String!) {
       dates_of_conduct
       numberOfCases
       }
+
+
 }`;
 
 

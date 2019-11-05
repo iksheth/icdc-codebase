@@ -11,7 +11,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Widget from '../../components/Widgets/WidgetView';
-import StatsView from '../../components/Stats/StatsView';
+import StatsView from '../../components/Stats/StatsViewWithoutLink';
 import { Typography, Button } from '../../components/Wrappers/Wrappers';
 
 
