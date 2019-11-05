@@ -14,7 +14,7 @@ class DashboardController extends Component {
 
   render() {
     const {
-      isLoading, hasError, error, widgets, isFetched,
+      isLoading, hasError, error, widgets, isFetched, isSidebarOpened,
     } = this.props;
 
     if (hasError) {
@@ -28,7 +28,7 @@ class DashboardController extends Component {
       return <CircularProgress />;
     }
     if (isFetched) {
-      return <Dashboard data={widgets} />;
+      return <Dashboard data={widgets} isSidebarOpened={isSidebarOpened} />;
     }
     return (
       <Typography variant="headline" color="warning" size="sm">
@@ -42,12 +42,15 @@ function mapStateToProps(state) {
   const {
     isLoading, isFetched, hasError, error, widgets,
   } = state.dashboard;
+
+  const { isSidebarOpened } = state.layout;
   return {
     isLoading,
     hasError,
     error,
     widgets,
     isFetched,
+    isSidebarOpened,
   };
 }
 

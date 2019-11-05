@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import classnames from 'classnames';
 import About from '../../pages/about/aboutView';
 import MyCases from '../../pages/myCases/myCasesView';
 import Header from '../Header/HeaderView';
@@ -28,14 +27,12 @@ import ProgramDetail from '../../pages/programDetail/programDetailController';
 import SelectedCases from '../../pages/selectedCases/selectedCasesRoute';
 import SelectedFiles from '../../pages/selectedFiles/selectedFilesRoute';
 
-const drawerWidth = 240;
-
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
   return null;
 };
 
-const Layout = ({ classes, isSidebarOpened }) => (
+const Layout = ({ classes }) => (
   <>
     <CssBaseline />
     <HashRouter>
@@ -45,9 +42,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
         {/* Reminder: Ajay need to replace the ICDC with env variable and
           change build npm to read env variable */}
         <div
-          className={classnames(classes.content, {
-            [classes.contentShift]: isSidebarOpened,
-          })}
+          className={classes.content}
         >
           <Route component={ScrollToTop} />
           <Switch>
@@ -98,14 +93,6 @@ const styles = (theme) => ({
     width: 'calc(100vw)', // Remove this on adding sidebar
     background: theme.custom.bodyBackGround,
     marginTop: '140px',
-  },
-  contentShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
 });
 
