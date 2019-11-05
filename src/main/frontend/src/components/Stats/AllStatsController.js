@@ -5,10 +5,10 @@ import { Typography } from '../Wrappers/Wrappers';
 import { fetchDataForStats } from './StatsState';
 
 const Stats = () => {
- const data = useSelector((state) => {
+  const data = useSelector((state) => {
     if (!state.stats.isFetched) {
-    	 const dispatch = useDispatch();
-      	 dispatch(fetchDataForStats());
+      const dispatch = useDispatch();
+      dispatch(fetchDataForStats());
     }
     return state.stats.data;
   });

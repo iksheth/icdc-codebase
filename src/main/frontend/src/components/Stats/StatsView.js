@@ -4,7 +4,6 @@ import {
   Paper,
   withStyles,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import { Typography } from '../Wrappers/Wrappers';
 
 const StatsView = ({ classes, data }) => (
@@ -15,8 +14,8 @@ const StatsView = ({ classes, data }) => (
           <Grid item xs={1} />
           <Grid item xs={12} sm={4} md={2} lg={2}>
             <Typography variant="headline" color="secondary" size="xl">
-                {' '}
-                {data.numberOfStudies ? data.numberOfStudies : 0}
+              {' '}
+              {data.numberOfStudies ? data.numberOfStudies : 0}
             </Typography>
             <Typography color="primary" size="md">
                                             Studies
@@ -24,7 +23,7 @@ const StatsView = ({ classes, data }) => (
           </Grid>
           <Grid item xs={12} sm={4} md={2} lg={2}>
             <Typography variant="headline" color="secondary" size="xl">
-                {data.numberOfCases ? data.numberOfCases : 0}
+              {data.numberOfCases ? data.numberOfCases : 0}
             </Typography>
             <Typography color="primary" size="md">
                                             Cases
