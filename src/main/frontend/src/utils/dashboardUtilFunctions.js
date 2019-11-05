@@ -282,7 +282,7 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
           }
         });
         return item;
-      }).sort((a, b) => sortCheckBox(a, b, 'count'));
+      }).sort((a, b) => sortCheckBox(a, b, 'alphabetical'));
     }
 
     return checkbox;
