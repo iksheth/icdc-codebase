@@ -107,14 +107,14 @@ const StudyDetailView = ({ classes, data }) => {
             <div className={classes.headerTitle}>
               <div className={classes.headerMainTitle}>
                 <span>
-                  <Typography weight="bold" variant="h3">
+                  <Typography variant="h3">
                     {' '}
                     <span className={classes.warning}> {studyData.clinical_study_designation}</span>
                   </Typography>
                 </span>
               </div>
               <div className={classes.headerMSubTitle}>
-                <Typography weight="bold" >
+                <Typography >
                     <span > {studyData.clinical_study_name}</span>
                 </Typography>
 
@@ -145,10 +145,10 @@ const StudyDetailView = ({ classes, data }) => {
           <div className={classes.detailContainer}>
 
             <Grid container  spacing={8} >
-              <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerLeft}>
-                <Grid container spacing={32} direction="column">
+              <Grid item lg={6} md={6} sm={6} xs={12} >
+                <Grid container spacing={32} direction="column"  className={classes.detailContainerLeft}>
                   <Grid item xs={12} pt={100}>
-                    <Typography variant="h4" ><span className={classes.warning}>SUMMARY</span></Typography>
+                    <Typography><span className={classes.detailContainerHeader}>SUMMARY</span></Typography>
                   </Grid>
                    <Grid item xs={12} pt={100}>
                     <Typography>
@@ -204,21 +204,20 @@ const StudyDetailView = ({ classes, data }) => {
                 </Grid>
               </Grid>
               </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerRight}>
-                <Grid container spacing={32} direction="column">
+              <Grid item lg={6} md={6} sm={6} xs={12} >
+                <Grid container spacing={32} direction="column" className={classes.detailContainerRight}>
                     <Grid item lg={6} md={6} sm={6} xs={12} >
                     <Grid container spacing={32} direction="column">
                       <Grid item xs={12}>
-                        <Typography variant="h4" ><span className={classes.warning}>DIAGNOSIS</span></Typography>
+                        <Typography  ><span className={classes.detailContainerHeader}>DIAGNOSIS</span></Typography>
                       </Grid>
-
+                       <Grid container spacing={8}>
                       {diagnoses.map((diagnosis) => (
-                        <Grid container spacing={8} >
                           <Grid item xs={12}>
-                           <Typography weight="bold" ><span>{diagnosis}</span></Typography>
+                           <Typography ><span> {diagnosis}</span></Typography>
                           </Grid>
-                        </Grid>
                       ))}
+                      </Grid>
 
                     </Grid>
                   </Grid>
@@ -226,16 +225,15 @@ const StudyDetailView = ({ classes, data }) => {
                   <Grid item lg={6} md={6} sm={6} xs={12} >
                     <Grid container spacing={32} direction="column">
                       <Grid item xs={12}>
-                        <Typography variant="h4" ><span className={classes.warning}>DIAGNOSIS</span></Typography>
+                        <Typography  ><span className={classes.detailContainerHeader}>FILE TYPE</span></Typography>
                       </Grid>
-
-                     {fileTypes.map((fileType) => (
-                        <Grid container spacing={8} >
-                          <Grid item xs={12}>
-                           <Typography weight="bold" ><span>{fileType}</span></Typography>
-                          </Grid>
-                        </Grid>
-                      ))}
+                       <Grid container spacing={8} >
+                         {fileTypes.map((fileType) => (
+                              <Grid item xs={12}>
+                               <Typography ><span>{fileType}</span></Typography>
+                              </Grid>
+                          ))}
+                     </Grid>
 
                     </Grid>
                   </Grid>
@@ -248,7 +246,7 @@ const StudyDetailView = ({ classes, data }) => {
 
              <div className={classes.tableDiv} >
                 <div className={classes.tableTitle} >
-                    <Typography variant="h4" ><span className={classes.warning}>COHORT AND DOSING</span></Typography>
+                    <Typography  ><span className={classes.warning}>COHORT AND DOSING</span></Typography>
                 </div> 
                 <Grid item xs={12}>
                       <Grid container spacing={8}>
@@ -375,7 +373,7 @@ const styles = (theme) => ({
     margin: 'auto',
     paddingTop:'35px',
     paddingLeft: '70px',
-    paddingRight: '70px',
+    paddingRight: '50px',
     fontFamily:theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color:'#000000',
@@ -394,23 +392,28 @@ const styles = (theme) => ({
     padding:' 35px 0 63px 0px !important',
   },
   detailContainerLeft:{
-    padding:'0px 0px 0 50px',
-    minHeight:'400px',
-    maxHeight:'380px',
+    padding:'0px 20px 0 50px',
+    minHeight:'600px',
+    maxHeight:'580px',
+    overflowY: 'scroll',
+    overflowX: 'hidden',
   },
   detailContainerRight:{
-    padding:'0 0 40px 80px !important',
-    minHeight:'400px',
-    maxHeight:'380px',
+    padding:'0 0 0 80px !important',
     borderLeft: '#81a6b9 1px solid',
+    minHeight:'600px',
+    maxHeight:'580px',
+    overflowY: 'scroll',
+    overflowX: 'hidden',
   },
+
   tableContainer: {
     background: '#f3f3f3',
   },
   tableDiv:{
     padding:'60px',
     maxWidth: theme.custom.maxContentWidth,
-    margin: 'auto',
+    margin: '35px auto auto auto',
   },
   headerButtonLink:{
     textDecoration: 'none',
