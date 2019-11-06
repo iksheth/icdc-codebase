@@ -207,10 +207,7 @@ return (
             <div className={classes.headerTitle}>
               <div className={classes.headerMainTitle}>
                 <span>
-                  <Typography weight="bold" variant="h3">
-                    {' '}
-                    <span> {data.title}</span>
-                  </Typography>
+                    <span > Case : {data.title}</span>
                 </span>
               </div>
             </div>
@@ -233,20 +230,11 @@ return (
 );
 };
 
+const titleFontFamily = '"Open Sans", sans-serif';
+
 const styles = (theme) => ({
-  card: {
-    minHeight: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  caseCardContainer: {
-    marginTop: '32px',
-  },
   paper: {
     textAlign: 'center',
-  },
-  fakeToolbar: {
-    ...theme.mixins.toolbar,
   },
   root: {
     textTransform: 'uppercase',
@@ -259,7 +247,7 @@ const styles = (theme) => ({
   header: {
      background: '#eee',
      paddingLeft: '20px',
-    paddingRight: '50px',
+     paddingRight: '50px',
      borderBottom: 'black 10px solid',
     height: '90px',
     maxWidth: '1440px',
@@ -270,6 +258,7 @@ const styles = (theme) => ({
     margin: 'auto',
     float:'left',
     marginLeft: '90px',
+    
   },
   headerMainTitle:{
    position: 'absolute',

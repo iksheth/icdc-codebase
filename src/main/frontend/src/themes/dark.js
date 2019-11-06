@@ -26,6 +26,8 @@ export default {
     bodyBackGround: 'white',
     cardBackGround: '#D9F3F2',
     footorBackground: '#2e2a24',
+    fontFamilySans: '"Open Sans", sans-serif',
+    fontFamilyRaleway: 'Raleway, sans-serif',
   },
   palette: {
     primary: {

@@ -120,17 +120,24 @@ const StudyDetailView = ({ classes, data }) => {
 
 
               </div>
-              <div className={classes.headerNav}>
-                <Link to="/">ALL PROGRAM</Link>
+            <div className={classes.headerNav}>
+                <Link className={classes.headerNavLink} to="/">
+                    ALL PROGRAM  
+                 </Link>
     /
-                <Link to="/">STUDIES</Link>
+                <Link className={classes.headerNavLink} to="/">
+                    STUDIES
+                </Link>
     /
-                <Link to="/">CASES</Link>
+                <Link className={classes.headerNavLink} to="/">
+                    CASES
+                </Link>
 
+  
               </div>
             </div>
             <div className={classes.headerButton}>
-              <Link to={`/study_cases/${studyData.clinical_study_designation}`}><Button color="secondary">{studyData.clinical_study_designation} CASES</Button></Link>
+              <Link className={classes.headerButtonLink} to={`/study_cases/${studyData.clinical_study_designation}`}><Button  className={classes.button} >{studyData.clinical_study_designation} CASES</Button></Link>
             </div>
           </div>
 
@@ -266,8 +273,16 @@ const StudyDetailView = ({ classes, data }) => {
   );
 };
 
+
 const styles = (theme) => ({
+  paddingLeft8:{
+    paddingLeft:'8px',
+  },
+  paddingBottm17:{
+    paddingBottm:'17px',
+  },
   container: {
+    paddingTop: '50px',
     fontFamily:'Raleway, sans-serif',
    
   },
@@ -286,40 +301,65 @@ const styles = (theme) => ({
     fontSize: '9pt',
     letterSpacing: '0.025em',
     color: '#000',
-    background: '#eee',
+    background: '#f3f3f3',
   },
   header: {
-    background: '#fff',
-     paddingLeft: '50px',
+    paddingLeft: '50px',
     paddingRight: '50px',
-     borderBottom: 'black 3px solid',
-    height: '90px',
-    maxWidth: '1440px',
+    borderBottom: '#81a6b9 4px solid',
+    height: '100px',
+    maxWidth:theme.custom.maxContentWidth,
     margin: 'auto',
   },
   headerTitle: {
-    maxWidth: '1440px',
+    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float:'left',
     marginLeft: '90px',
-  },
-  headerMainTitle:{
 
   },
-  headerSubTitleCate:{
-    color: '#555',
+  headerMainTitle:{
+    fontFamily: theme.custom.fontFamilySans,
     fontWeight: 'bold',
+    letterSpacing: '0.017em',
+    color:"#ff8a00",
+    fontSize:'19pt',
+  },
+  headerSubTitleCate:{
+    color: '#606061',
+    fontWeight: 'bold',
+    fontFamily:theme.custom.fontFamilyRaleway,
+    textTransform: 'uppercase',
+    letterSpacing: '0.023em',
+    fontSize:'12pt',
   },
   headerSubTitleContent:{
-    color: '#000',
+    color: '#000000',
     fontWeight: 'bold',
+    fontFamily:theme.custom.fontFamilyRaleway,
+    textTransform: 'uppercase',
+    letterSpacing: '0.023em',
+    fontSize:'12pt',
   },
   headerMSubTitle: {
     paddingTop: '5px',
   },
   headerNav: {
-    paddingTop: '10px',
-    letterSpacing: '0.25px',
+    paddingTop: '17px',
+    color:'#5e8ca5',
+    paddingBottom: '8px',
+  
+  },
+  headerNavLink: {
+   paddingLeft:'6px',
+   paddingRight:'6px',
+   textDecoration: 'none',
+   color:'#5e8ca5',
+   textTransform: 'uppercase',
+   fontFamily:theme.custom.fontFamilySans,
+   fontSize:'9pt',
+   letterSpacing: '0.025em',
+
   },
   headerButton: {
     float:'right',
@@ -331,39 +371,49 @@ const styles = (theme) => ({
     marginTop: '39px',
   },
   detailContainer: {
-    maxWidth: '1440px',
+    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
-    paddingTop:'50px',
+    paddingTop:'35px',
     paddingLeft: '70px',
     paddingRight: '70px',
+    fontFamily:theme.custom.fontFamilySans,
+    letterSpacing: '0.014em',
+    color:'#000000',
+
+  },
+  detailContainerHeader:{
+    textTransform: 'uppercase',
+   fontFamily:theme.custom.fontFamilySans,
+   fontSize:'17pt',
+   letterSpacing: '0.017em',
+   color:'#ff8a00',
   },
   detailContainerBottom:{
-    borderTop: 'black 3px solid',
-    marginTop: '30px',
-     padding:' 50px 0 50px 0px !important',
+    borderTop: '#81a6b9 1px solid',
+    marginTop: '13px',
+    padding:' 35px 0 63px 0px !important',
   },
   detailContainerLeft:{
     padding:'0px 0px 0 50px',
-    minHeight:'600px',
-    maxHeight:'580px',
-    overflowY: 'scroll',
-    overflowX: 'hidden',
+    minHeight:'400px',
+    maxHeight:'380px',
   },
   detailContainerRight:{
-    padding:'0 0 50px 80px !important',
-    borderLeft: 'black 3px solid',
-     minHeight:'600px',
-    maxHeight:'580px',
-    overflowY: 'scroll',
-    overflowX: 'hidden',
+    padding:'0 0 40px 80px !important',
+    minHeight:'400px',
+    maxHeight:'380px',
+    borderLeft: '#81a6b9 1px solid',
   },
   tableContainer: {
-    background: '#eee',
+    background: '#f3f3f3',
   },
   tableDiv:{
-    padding:'50px',
-    maxWidth: '1440px',
+    padding:'60px',
+    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
+  },
+  headerButtonLink:{
+    textDecoration: 'none',
   },
   button: {
     borderRadius: '10px',
@@ -371,17 +421,30 @@ const styles = (theme) => ({
     height: '27px',
     lineHeight: '18px',
     fontSize: '10pt',
-    color: '#fff',
-    backgroundColor: '#ff7f15',
+    color: '#ffffff',
+    textTransform: 'uppercase',
+    backgroundColor: '#ff8a00',
+    fontFamily: theme.custom.fontFamilySans,
+    "&:hover": {
+      backgroundColor: '#ff8a00',
+    },
   },
   detailContainerItems:{
     paddingTop:'5px',
     paddingLeft: '17px',
   },
   title:{
-    color:'#aaa',
+    color:'#9d9d9c',
+   fontFamily:theme.custom.fontFamilySans,
+   fontSize: '12pt',
+   letterSpacing: '0.017em',
+   fontWeight:'600',
   },
   tableTitle:{
+    fontFamily:theme.custom.fontFamilySans,
+    fontSize: '17pt',
+    letterSpacing: '0.017em',
+    color:'#ff17f15',
     paddingBottom:'20px',
   }
 });
