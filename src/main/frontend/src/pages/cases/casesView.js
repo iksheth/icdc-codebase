@@ -12,7 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { Typography } from '../../components/Wrappers/Wrappers';
-import StatsView from '../../components/Stats/StudyDetailStatsView';
+import StatsView from '../../components/Stats/StatsView';
 
 const tableHeader = '#EEEEEE';
 const tableHeaderBorder = '#004c73 3px solid';
