@@ -14,7 +14,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import { Typography } from '../../components/Wrappers/Wrappers';
 
 
-const columns = [{ name: 'program_id', label: 'Program' },
+const columns = [
   {
     name: 'clinical_study_designation',
     label: 'Study Code',
@@ -25,6 +25,7 @@ const columns = [{ name: 'program_id', label: 'Program' },
       ),
     },
   },
+  { name: 'program_id', label: 'Program' },
   { name: 'clinical_study_name', label: 'Study Name' },
   { name: 'clinical_study_type', label: 'Study Type' },
   { name: 'numberOfCases', label: 'Cases' },

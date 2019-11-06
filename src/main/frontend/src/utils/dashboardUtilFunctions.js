@@ -38,7 +38,7 @@ export const mappingCheckBoxToDataTable = [
     group: 'Gender', field: 'gender', api: 'caseCountByGender', datafield: 'sex',
   },
   {
-    group: 'File Types', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types',
+    group: 'Associated Files', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types',
   },
 ];
 
@@ -136,7 +136,6 @@ export function getDonutDataFromDashboardData(data, widgetName) {
 /* filterData function evaluates a row of data with filters,
       to check if this row will be showed in the data table.
 
-     The rule for display is :
      If no filter, then display this row.
      If has filters and for each group of filters, at least has one filter option
      is related to the data.
@@ -155,20 +154,17 @@ export const filterData = (row, filters) => {
       // do nothing
     } else if (row[filter.datafield]) { // check if data has this attribute
       // array includes
+      const fName = (filter.name === NOT_PROVIDED ? '' : filter.name);
       if (Array.isArray(row[filter.datafield])) {
-        if (row[filter.datafield].includes(filter.name)) {
+        if (row[filter.datafield].includes(fName)) {
           groups[filter.groupName] = true;
         } else {
           groups[filter.groupName] = false;
         }
+      } else if (row[filter.datafield].toString() === fName) {
+        groups[filter.groupName] = true;
       } else {
-        // string eql
-        const fName = (filter.name === NOT_PROVIDED ? '' : filter.name);
-        if (row[filter.datafield].toString() === fName) {
-          groups[filter.groupName] = true;
-        } else {
-          groups[filter.groupName] = false;
-        }
+        groups[filter.groupName] = false;
       }
     } else if (filter.name === NOT_PROVIDED) {
       groups[filter.groupName] = true;
@@ -266,12 +262,17 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
         );
         const subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
         subData.forEach((d) => {
-          if (Array.isArray(d[checkbox.datafield])) {
-            if (d[checkbox.datafield].includes(item.name)) {
+          const fName = (item.name === NOT_PROVIDED ? '' : item.name);
+          if (d[checkbox.datafield]) {
+            if (Array.isArray(d[checkbox.datafield])) { // value in the array
+              if (d[checkbox.datafield].includes(fName)) {
+                item.cases += 1;
+              }
+            }
+            if (d[checkbox.datafield] === fName) { // Str compare
               item.cases += 1;
             }
-          }
-          if (d[checkbox.datafield] === item.name) {
+          } else if (item.name === NOT_PROVIDED) { // No such attribute
             item.cases += 1;
           }
         });
@@ -282,7 +283,7 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
           }
         });
         return item;
-      }).sort((a, b) => sortCheckBox(a, b, 'count'));
+      }).sort((a, b) => sortCheckBox(a, b, 'alphabetical'));
     }
 
     return checkbox;

@@ -11,7 +11,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import { Typography } from '../../components/Wrappers/Wrappers';
-import StatsView from '../../components/Stats/StudyDetailStatsView';
+import StatsView from '../../components/Stats/StatsView';
 
 
 const tableStyle = (ratio = 1) => ({

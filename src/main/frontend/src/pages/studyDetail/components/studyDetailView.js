@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import { Link } from 'react-router-dom';
 import Widget from '../../../components/Widgets/WidgetView';
-import StatsView from '../../../components/Stats/StudyDetailStatsView';
+import StatsView from '../../../components/Stats/StatsView';
 import { Typography, Button } from '../../../components/Wrappers/Wrappers';
 
 const columns = [
@@ -94,7 +94,7 @@ const StudyDetailView = ({ classes, data }) => {
 
   return (
     <>
-      <StatsView data={stat} study={studyData.clinical_study_designation} />
+      <StatsView data={stat}  />
       <div className={classes.container}>
           <div className={classes.header}>
             <div className={classes.logo}>
