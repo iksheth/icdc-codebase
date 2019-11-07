@@ -13,7 +13,7 @@ import { Link} from 'react-router-dom';
 import Widget from '../../components/Widgets/WidgetView';
 import StatsView from '../../components/Stats/StatsView';
 import { Typography, Button } from '../../components/Wrappers/Wrappers';
-
+import icon from '../../assets/icons/Icon-CaseDetail.svg';
 
 const columns = [
 
@@ -71,7 +71,7 @@ const CaseDetail = ({ classes, data }) => {
           <div className={classes.header}>
             <div className={classes.logo}>
             <img 
-            src="https://img.icons8.com/dusk/64/000000/4-circle.png"  
+            src={icon}  
             alt="ICDC case detail header logo"
             />
             
@@ -479,7 +479,7 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float:'left',
-    marginLeft: '90px',
+    marginLeft: '120px',
 
   },
   headerMainTitle:{
@@ -532,7 +532,8 @@ const styles = (theme) => ({
   logo: {
     position:'absolute',
     float:'left',
-    marginTop: '39px',
+    marginTop: '-5px',
+    width:'113px',
   },
   detailContainer: {
     maxWidth: theme.custom.maxContentWidth,
