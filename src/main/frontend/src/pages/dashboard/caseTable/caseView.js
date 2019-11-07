@@ -1,11 +1,16 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
   withStyles,
+  Avatar,
+  Chip,
 } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
 import CustomFooter from './customFooter';
+import { toggleCheckBox } from '../dashboardState';
 
 
 const link = {
@@ -19,6 +24,20 @@ const tableStyle = (ratio = 1) => ({
   minWidth: '160px',
 }
 );
+
+
+
+const handleDelete = data => () => {
+      // redux use actions
+    const dispatch = useDispatch();
+      // dispatch toggleCheckBox action
+    dispatch(toggleCheckBox([{
+      groupName: data.key.split("&&")[0],
+      name: data.label,
+      datafield: data.key.split("&&")[1],
+      isChecked: false,
+    }]));
+  };
 
 const columns = [
   {
@@ -181,8 +200,33 @@ const options = (classes) => ({
 });
 
 
-const Cases = ({ classes, data }) => (
+const Cases = ({ classes, data }) => {
+  const dispatch = useDispatch();
+   // data from store
+  const chipData   = useSelector((state) => (
+    state.dashboard.datatable
+    && state.dashboard.datatable.filters
+      ? state.dashboard.datatable.filters : []));
+
+  return (
   <>
+    <div>
+     {chipData.map(data => {
+      return(<Chip
+              key={data.groupName+"&&"+data.datafield}
+              label={data.name}
+              onDelete={() =>{
+                dispatch(toggleCheckBox([{
+      groupName: data.groupName,
+      name: data.name,
+      datafield: data.datafield,
+      isChecked: false,
+    }]))}
+              }
+            />)
+    })}
+      
+    </div>
     <Grid container spacing={32}>
       <Grid item xs={12}>
         <MUIDataTable
@@ -195,7 +239,7 @@ const Cases = ({ classes, data }) => (
     </Grid>
 
   </>
-);
+)};
 
 const styles = () => ({
   root: {

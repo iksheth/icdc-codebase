@@ -266,6 +266,16 @@ export default {
         fontSize: '0.95rem',
       },
     },
+    MUIDataTableToolbar: {
+      titleText: {
+        color: tableHeaderFontColor,
+        fontSize: '25.2pt',
+        fontFamily: tableFontFamily,
+        letterSpacing: '0.025em',
+        fontStyle: 'normal',
+      },
+
+    },
     MUIDataTableToolbarSelect: {
       root: {
         backgroundColor: tableHeader,
