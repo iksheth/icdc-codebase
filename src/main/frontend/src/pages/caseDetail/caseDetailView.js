@@ -487,7 +487,7 @@ Case :
 
 const styles = (theme) => ({
   paddingLeft8: {
-    paddingLeft: '8px',
+    paddingLeft: '12px',
   },
   paddingBottm17: {
     paddingBottm: '17px',
