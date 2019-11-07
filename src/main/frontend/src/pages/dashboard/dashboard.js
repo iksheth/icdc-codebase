@@ -15,7 +15,7 @@ const Dashboard = ({
   <>
     <div className={classnames({
       [classes.contentShift]: isSidebarOpened,
-    })}
+    }, classes.content)}
     >
       <Stats />
       <Grid container spacing={32}>
@@ -140,6 +140,9 @@ const Dashboard = ({
 );
 
 const styles = (theme) => ({
+  content: {
+    padding: theme.spacing.unit * 3,
+  },
   contentShift: {
     width: 'calc(100% - theme.custom.drawerWidth)',
     marginLeft: theme.custom.drawerWidth,
