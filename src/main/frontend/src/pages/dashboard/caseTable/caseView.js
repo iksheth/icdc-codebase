@@ -201,11 +201,7 @@ const Cases = ({ classes, data }) => {
     <div className={classes.chips}>
      {chipData.map(data => {
       return(<Chip
-              classes={{
-                root: classes.chipRoot,
-                deleteIcon: classes.chipDeleteIcon,
-              }}
-              key={data.groupName+"&&"+data.datafield}
+              key={data.datafield+data.name}
               label={data.name}
               onDelete={() =>{
                 dispatch(toggleCheckBox([{
@@ -215,6 +211,10 @@ const Cases = ({ classes, data }) => {
       isChecked: false,
     }]))}
               }
+              classes={{
+                root: classes.chipRoot,
+                deleteIcon: classes.chipDeleteIcon,
+              }}
             />)
     })}
       
@@ -238,6 +238,7 @@ const styles = () => ({
     position: 'absolute',
     marginLeft: '250px',
     marginTop: '36px',
+    zIndex: '999',
   },
    chipRoot:{
       color:'#ffffff',
@@ -249,6 +250,9 @@ const styles = () => ({
     },
    chipDeleteIcon:{
       color:'#ffffff',
+      '&:hover': {
+        color:'#ffffff',
+      }
     },
   root: {
     textTransform: 'uppercase',

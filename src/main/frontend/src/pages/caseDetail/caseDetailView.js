@@ -120,8 +120,6 @@ const CaseDetail = ({ classes, data }) => {
                 <Link className={classes.headerNavLink} to="/">
                     CASES
                 </Link>
-
-  
               </div>
             </div>
           </div>
