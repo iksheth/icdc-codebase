@@ -66,7 +66,7 @@ const FacetPanel = (classes) => {
               return (
                 <ListItem button onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}`)} className={classes.nested}>
                   <Checkbox checked={checkboxItem.isChecked} tabIndex={-1} disableRipple color="primary" />
-                  <ListItemText primary={`${checkboxItem.name}(${checkboxItem.cases})`} />
+                  <ListItemText primary={`${checkboxItem.name}  (${checkboxItem.cases})`} />
                 </ListItem>
               );
             })
