@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -27,7 +28,20 @@ const columns = [
   },
   { name: 'clinical_study_name', label: 'Study Name' },
   { name: 'clinical_study_type', label: 'Study Type' },
-  { name: 'numberOfCases', label: 'Cases' },
+  {
+    name: 'numberOfCases',
+    label: 'Cases',
+    options: {
+      customBodyRender: (value,tableMeta) => {
+        return(
+        <div className="mui_td">
+          {' '}
+          <Link to={`/study_cases/${tableMeta.rowData[1]}`}>{value}</Link>
+          {' '}
+        </div>
+      )},
+    },
+  },
 ];
 
 const options = {
