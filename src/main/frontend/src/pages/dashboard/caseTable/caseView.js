@@ -1,9 +1,7 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
   withStyles,
-  Avatar,
   Chip,
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,7 +22,6 @@ const tableStyle = (ratio = 1) => ({
   minWidth: '160px',
 }
 );
-
 
 
 const columns = [
@@ -190,66 +187,71 @@ const options = (classes) => ({
 
 const Cases = ({ classes, data }) => {
   const dispatch = useDispatch();
-   // data from store
-  const chipData   = useSelector((state) => (
+  // data from store
+  const chipData = useSelector((state) => (
     state.dashboard.datatable
     && state.dashboard.datatable.filters
       ? state.dashboard.datatable.filters : []));
 
   return (
-  <>
-    <div className={classes.chips}>
-     {chipData.map(data => {
-      return(<Chip
-              classes={{
-                root: classes.chipRoot,
-                deleteIcon: classes.chipDeleteIcon,
-              }}
-              key={data.groupName+"&&"+data.datafield}
-              label={data.name}
-              onDelete={() =>{
-                dispatch(toggleCheckBox([{
-      groupName: data.groupName,
-      name: data.name,
-      datafield: data.datafield,
-      isChecked: false,
-    }]))}
-              }
-            />)
-    })}
-      
-    </div>
-    <Grid container spacing={32}>
-      <Grid item xs={12}>
-        <MUIDataTable
-          title={data.title ? data.title : 'All Cases'}
-          data={data}
-          columns={columns}
-          options={options(classes)}
-        />
-      </Grid>
-    </Grid>
+    <>
+      <div className={classes.chips}>
+        {chipData.map((ckdata) => (
+          <Chip
+            key={ckdata.datafield + ckdata.name}
+            label={ckdata.name}
+            onDelete={() => {
+              dispatch(toggleCheckBox([{
+                groupName: ckdata.groupName,
+                name: ckdata.name,
+                datafield: ckdata.datafield,
+                isChecked: false,
+              }]));
+            }}
+            classes={{
+              root: classes.chipRoot,
+              deleteIcon: classes.chipDeleteIcon,
+            }}
+          />
+        ))}
 
-  </>
-)};
+      </div>
+      <Grid container spacing={32}>
+        <Grid item xs={12}>
+          <MUIDataTable
+            title={data.title ? data.title : 'All Cases'}
+            data={data}
+            columns={columns}
+            options={options(classes)}
+          />
+        </Grid>
+      </Grid>
+
+    </>
+  );
+};
 
 const styles = () => ({
-  chips:{
+  chips: {
     position: 'absolute',
     marginLeft: '250px',
     marginTop: '36px',
+    zIndex: '999',
   },
-   chipRoot:{
-      color:'#ffffff',
-      fontFamily: '"Open Sans", sans-serif',
-      letterSpacing: '0.075em',
-      marginLeft:'10px',
-      backgroundColor:'#9b9b9b',
-      fontSize: '9pt',
+  chipRoot: {
+    color: '#ffffff',
+    fontFamily: '"Open Sans", sans-serif',
+    letterSpacing: '0.075em',
+    marginLeft: '10px',
+    backgroundColor: '#9b9b9b',
+    fontSize: '9pt',
+  },
+  chipDeleteIcon: {
+    color: '#ffffff',
+    '&:hover': {
+      color: '#ffffff',
     },
-   chipDeleteIcon:{
-      color:'#ffffff',
-    },
+  },
   root: {
     textTransform: 'uppercase',
     fontFamily: '"Open Sans", sans-serif',

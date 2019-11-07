@@ -32,7 +32,7 @@ export const mappingCheckBoxToDataTable = [
     group: 'Primary Disease Site', field: 'disease_site', api: 'caseCountByDiseaseSite', datafield: 'disease_site',
   },
   {
-    group: 'Tumor Stage', field: 'stage_of_disease', api: 'caseCountByStageOfDisease', datafield: 'stage_of_disease',
+    group: 'Stage of Disease', field: 'stage_of_disease', api: 'caseCountByStageOfDisease', datafield: 'stage_of_disease',
   },
   {
     group: 'Gender', field: 'gender', api: 'caseCountByGender', datafield: 'sex',
