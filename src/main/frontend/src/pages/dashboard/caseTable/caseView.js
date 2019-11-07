@@ -201,7 +201,10 @@ const Cases = ({ classes, data }) => {
     <div className={classes.chips}>
      {chipData.map(data => {
       return(<Chip
-              className={classes.chip}
+              classes={{
+                root: classes.chipRoot,
+                deleteIcon: classes.chipDeleteIcon,
+              }}
               key={data.groupName+"&&"+data.datafield}
               label={data.name}
               onDelete={() =>{
@@ -236,6 +239,17 @@ const styles = () => ({
     marginLeft: '250px',
     marginTop: '36px',
   },
+   chipRoot:{
+      color:'#ffffff',
+      fontFamily: '"Open Sans", sans-serif',
+      letterSpacing: '0.075em',
+      marginLeft:'10px',
+      backgroundColor:'#9b9b9b',
+      fontSize: '9pt',
+    },
+   chipDeleteIcon:{
+      color:'#ffffff',
+    },
   root: {
     textTransform: 'uppercase',
     fontFamily: '"Open Sans", sans-serif',
