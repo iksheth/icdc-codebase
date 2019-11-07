@@ -27,18 +27,6 @@ const tableStyle = (ratio = 1) => ({
 
 
 
-const handleDelete = data => () => {
-      // redux use actions
-    const dispatch = useDispatch();
-      // dispatch toggleCheckBox action
-    dispatch(toggleCheckBox([{
-      groupName: data.key.split("&&")[0],
-      name: data.label,
-      datafield: data.key.split("&&")[1],
-      isChecked: false,
-    }]));
-  };
-
 const columns = [
   {
     name: 'case_id',
