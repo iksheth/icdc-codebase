@@ -114,7 +114,7 @@ const Dashboard = ({
         </Grid>
         <Grid item lg={4} md={4} sm={6} xs={12}>
           <Widget
-            title="Tumor Stage"
+            title="Stage of Disease"
             upperTitle
             bodyClass={classes.fullHeightBody}
             className={classes.card}
