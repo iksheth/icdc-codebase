@@ -62,15 +62,12 @@ const ProgramCard = ({
     <CardContent>
       <Typography component="p">{data.program_short_description}</Typography>
       <Typography>
-        <Link to={`/program/${data.program_acronym}`}>Read More >></Link>
-      </Typography>
-      <Typography>
         <a href={`https://${data.program_external_url}`} target="icdc">{data.program_external_url}</a>
       </Typography>
     </CardContent>
     <CardActions disableSpacing>
       <Badge color="primary" badgeContent={data.studies.length}>
-        <Button color="secondary">Associated Studies</Button>
+        <Button color="secondary"><Link to={`/program/${data.program_acronym}`}>Associated Studies>></Link></Button>
       </Badge>
     </CardActions>
   </Card>

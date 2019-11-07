@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import classnames from 'classnames';
 import { Grid, withStyles } from '@material-ui/core';
@@ -10,14 +9,14 @@ import Donut from '../../components/Widgets/PieCharts/Donut/DonutController';
 import ProgramSunburst from '../../components/Widgets/PieCharts/ProgramSunburst/ProgramSunburstController';
 
 
-
 const Dashboard = ({
   classes, data, isSidebarOpened,
 }) => (
   <>
-    <div    className={classnames({
-        [classes.contentShift]: isSidebarOpened,
-      })} >
+    <div className={classnames({
+      [classes.contentShift]: isSidebarOpened,
+    })}
+    >
       <Stats />
       <Grid container spacing={32}>
         <Grid item lg={4} md={4} sm={6} xs={12}>
@@ -142,7 +141,7 @@ const Dashboard = ({
 
 const styles = (theme) => ({
   contentShift: {
-    width: `calc(100% - theme.custom.drawerWidth)`,
+    width: 'calc(100% - theme.custom.drawerWidth)',
     marginLeft: theme.custom.drawerWidth,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,

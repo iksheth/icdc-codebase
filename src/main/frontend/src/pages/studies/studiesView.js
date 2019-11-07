@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -7,10 +6,10 @@ import {
 import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
 
-import Stats from '../../components/Stats/AllStatsController';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
+import Stats from '../../components/Stats/AllStatsController';
 import { Typography } from '../../components/Wrappers/Wrappers';
 
 
@@ -57,43 +56,43 @@ const options = (classes) => ({
   ),
 });
 
-const Studies = ({ classes,data  }) => (
+const Studies = ({ classes, data }) => (
   <>
     <Stats />
-    <div className={classes.tableContainer} >
-     <div className={classes.header}>
-            <div className={classes.logo}>
-            <img 
-            src="https://img.icons8.com/dusk/64/000000/4-circle.png"  
+    <div className={classes.tableContainer}>
+      <div className={classes.header}>
+        <div className={classes.logo}>
+          <img
+            src="https://img.icons8.com/dusk/64/000000/4-circle.png"
             alt="ICDC case detail header logo"
-            />
-            
-            </div>
-            <div className={classes.headerTitle}>
-              <div className={classes.headerMainTitle}>
-                <span>
-                  <Typography weight="bold" variant="h3">
-                    {' '}
-                    <span> All Studies</span>
-                  </Typography>
-                </span>
-              </div>
-            </div>
-          </div>
-  
+          />
 
-    <div className={classes.tableDiv} >
-    <Grid container spacing={32} >
-      <Grid item xs={12}>
-        <MUIDataTable
-          data={data.studiesByProgram}
-          columns={columns}
-          options={options(classes)}
-        />
-      </Grid>
-    </Grid>
+        </div>
+        <div className={classes.headerTitle}>
+          <div className={classes.headerMainTitle}>
+            <span>
+              <Typography weight="bold" variant="h3">
+                {' '}
+                <span> All Studies</span>
+              </Typography>
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+      <div className={classes.tableDiv}>
+        <Grid container spacing={32}>
+          <Grid item xs={12}>
+            <MUIDataTable
+              data={data.studiesByProgram}
+              columns={columns}
+              options={options(classes)}
+            />
+          </Grid>
+        </Grid>
+      </div>
     </div>
-  </div>
   </>
 );
 
@@ -121,10 +120,10 @@ const styles = (theme) => ({
     background: '#eee',
   },
   header: {
-     background: '#eee',
-     paddingLeft: '20px',
+    background: '#eee',
+    paddingLeft: '20px',
     paddingRight: '50px',
-     borderBottom: 'black 10px solid',
+    borderBottom: 'black 10px solid',
     height: '90px',
     maxWidth: '1440px',
     margin: 'auto',
@@ -132,24 +131,24 @@ const styles = (theme) => ({
   headerTitle: {
     maxWidth: '1440px',
     margin: 'auto',
-    float:'left',
+    float: 'left',
     marginLeft: '90px',
   },
-  headerMainTitle:{
-   position: 'absolute',
+  headerMainTitle: {
+    position: 'absolute',
     marginTop: '52px',
   },
   logo: {
-    position:'absolute',
-    float:'left',
+    position: 'absolute',
+    float: 'left',
     marginTop: '30px',
     zIndex: '999',
   },
   tableContainer: {
     background: '#eee',
-     paddingBottom: '50px',
+    paddingBottom: '50px',
   },
-  tableDiv:{
+  tableDiv: {
     maxWidth: '1440px',
     margin: 'auto',
   },

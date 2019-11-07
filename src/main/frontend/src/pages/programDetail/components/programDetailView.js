@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -32,14 +31,13 @@ const columns = [
     name: 'numberOfCases',
     label: 'Cases',
     options: {
-      customBodyRender: (value,tableMeta) => {
-        return(
+      customBodyRender: (value, tableMeta) => (
         <div className="mui_td">
           {' '}
           <Link to={`/study_cases/${tableMeta.rowData[1]}`}>{value}</Link>
           {' '}
         </div>
-      )},
+      ),
     },
   },
 ];

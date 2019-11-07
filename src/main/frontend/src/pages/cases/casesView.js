@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -6,11 +5,9 @@ import {
 } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
-import Stats from '../../components/Stats/AllStatsController';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
-import { Typography } from '../../components/Wrappers/Wrappers';
 import StatsView from '../../components/Stats/StatsView';
 
 
@@ -183,7 +180,7 @@ const options = (classes) => ({
   ),
 });
 
-const CasesView = ({ classes, data, study}) => {
+const CasesView = ({ classes, data, study }) => {
   const stat = {
     numberOfStudies: 1,
     numberOfCases: data.caseCountOfStudy,
@@ -191,46 +188,49 @@ const CasesView = ({ classes, data, study}) => {
     numberOfFiles: data.fileCountOfStudy,
     numberOfBiospecimenAliquots: data.aliguotCountOfStudy,
   };
-return (
-  <>
-    <StatsView data={stat}  study={study}/>
+  return (
+    <>
+      <StatsView data={stat} study={study} />
 
-    <div className={classes.tableContainer} >
-     <div className={classes.header}>
-            <div className={classes.logo}>
-            <img 
-            src="https://img.icons8.com/dusk/64/000000/4-circle.png"  
-            alt="ICDC case detail header logo"
+      <div className={classes.tableContainer}>
+        <div className={classes.header}>
+          <div className={classes.logo}>
+            <img
+              src="https://img.icons8.com/dusk/64/000000/4-circle.png"
+              alt="ICDC case detail header logo"
             />
-            
-            </div>
-            <div className={classes.headerTitle}>
-              <div className={classes.headerMainTitle}>
+
+          </div>
+          <div className={classes.headerTitle}>
+            <div className={classes.headerMainTitle}>
+              <span>
                 <span>
-                    <span > Case : {data.title}</span>
+                  {' '}
+Case :
+                  {data.title}
                 </span>
-              </div>
+              </span>
             </div>
           </div>
-  
+        </div>
 
-    <div className={classes.tableDiv} >
-    <Grid container spacing={32} >
-      <Grid item xs={12}>
-        <MUIDataTable
-          data={data.caseOverview}
-          columns={columns}
-          options={options(classes)}
-        />
-      </Grid>
-    </Grid>
-    </div>
-  </div>
-  </>
-);
+
+        <div className={classes.tableDiv}>
+          <Grid container spacing={32}>
+            <Grid item xs={12}>
+              <MUIDataTable
+                data={data.caseOverview}
+                columns={columns}
+                options={options(classes)}
+              />
+            </Grid>
+          </Grid>
+        </div>
+      </div>
+    </>
+  );
 };
 
-const titleFontFamily = '"Open Sans", sans-serif';
 
 const styles = (theme) => ({
   paper: {
@@ -238,17 +238,17 @@ const styles = (theme) => ({
   },
   root: {
     textTransform: 'uppercase',
-    fontFamily: '"Open Sans", sans-serif',
+    fontFamily: theme.custom.fontFamilySans,
     fontSize: '9pt',
     letterSpacing: '0.025em',
     color: '#000',
     background: '#eee',
   },
   header: {
-     background: '#eee',
-     paddingLeft: '20px',
-     paddingRight: '50px',
-     borderBottom: 'black 10px solid',
+    background: '#eee',
+    paddingLeft: '20px',
+    paddingRight: '50px',
+    borderBottom: 'black 10px solid',
     height: '90px',
     maxWidth: '1440px',
     margin: 'auto',
@@ -256,25 +256,25 @@ const styles = (theme) => ({
   headerTitle: {
     maxWidth: '1440px',
     margin: 'auto',
-    float:'left',
+    float: 'left',
     marginLeft: '90px',
-    
+
   },
-  headerMainTitle:{
-   position: 'absolute',
+  headerMainTitle: {
+    position: 'absolute',
     marginTop: '52px',
   },
   logo: {
-    position:'absolute',
-    float:'left',
+    position: 'absolute',
+    float: 'left',
     marginTop: '30px',
     zIndex: '999',
   },
   tableContainer: {
     background: '#eee',
-     paddingBottom: '50px',
+    paddingBottom: '50px',
   },
-  tableDiv:{
+  tableDiv: {
     maxWidth: '1440px',
     margin: 'auto',
   },
