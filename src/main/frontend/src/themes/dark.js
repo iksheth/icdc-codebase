@@ -26,6 +26,9 @@ export default {
     bodyBackGround: 'white',
     cardBackGround: '#D9F3F2',
     footorBackground: '#2e2a24',
+    fontFamilySans: '"Open Sans", sans-serif',
+    fontFamilyRaleway: 'Raleway, sans-serif',
+    drawerWidth: '240px',
   },
   palette: {
     primary: {
@@ -228,7 +231,7 @@ export default {
     },
     MuiTableSortLabel: {
       active: {
-        color: 'white',
+        color: '#ff8a00',
       },
     },
     MUIDataTableBodyRow: {
@@ -262,6 +265,16 @@ export default {
       head: {
         fontSize: '0.95rem',
       },
+    },
+    MUIDataTableToolbar: {
+      titleText: {
+        color: tableHeaderFontColor,
+        fontSize: '25.2pt',
+        fontFamily: tableFontFamily,
+        letterSpacing: '0.025em',
+        fontStyle: 'normal',
+      },
+
     },
     MUIDataTableToolbarSelect: {
       root: {

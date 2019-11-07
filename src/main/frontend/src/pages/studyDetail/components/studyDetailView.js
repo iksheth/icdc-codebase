@@ -8,103 +8,10 @@ import MUIDataTable from 'mui-datatables';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Widget from '../../../components/Widgets/WidgetView';
 import StatsView from '../../../components/Stats/StatsView';
 import { Typography, Button } from '../../../components/Wrappers/Wrappers';
-
-
-const tableHeader = '#EEEEEE';
-const tableHeaderBorder = '#004c73 3px solid';
-const tableHeaderFontColor = '#194563';
-const tableFontFamily = 'Raleway, sans-serif';
-
-const getMuiTheme = () => createMuiTheme({
-  overrides: {
-    MUIDataTable:{
-      paper:{
-      boxShadow:'none',
-      },
-    },
-    MUIDataTableSelectCell: {
-      fixedHeader: {
-        position: 'relative',
-      },
-      headerCell: {
-        borderTop: tableHeaderBorder,
-        borderBottom: tableHeaderBorder,
-        color: tableHeaderFontColor,
-        backgroundColor: tableHeader,
-
-      },
-      checkboxRoot: {
-        color: 'inherit',
-      },
-    },
-    MUIDataTableBodyRow: {
-      root: {
-
-        '&:nth-child(even)': {
-          backgroundColor: '#f5f5f5',
-          color: '#5e8ca5',
-        },
-        '&:nth-child(odd)': {
-          color: '#1c2023',
-        },
-      },
-    },
-    MuiTableCell: {
-      root: {
-        borderBottom: '0px',
-      },
-      body: {
-        color: 'inherit',
-        fontFamily: '"Open Sans", sans-serif',
-        letterSpacing: '0.025em',
-        fontStyle: 'normal',
-        fontSize: '10pt',
-        fontWeight: 'bold',
-      },
-    },
-    MUIDataTableHeadCell: {
-      fixedHeader: {
-        borderTop: tableHeaderBorder,
-        borderBottom: tableHeaderBorder,
-        color: tableHeaderFontColor,
-        backgroundColor: tableHeader,
-        textDecoration: 'underline',
-        fontFamily: tableFontFamily,
-        letterSpacing: '0.025em',
-        fontStyle: 'normal',
-        fontSize: '11pt',
-        fontWeight: 'bold',
-      },
-      sortActive: {
-        color: tableHeaderFontColor,
-      },
-      toolButton: {
-        cursor: 'pointer',
-        display: 'inline-flex',
-        outline: 'none',
-
-      },
-    },
-    MUIDataTableToolbar: {
-      root: {
-        backgroundColor: tableHeader,
-      },
-      titleText: {
-        color: tableHeaderFontColor,
-        fontSize: '25.2pt',
-        fontFamily: tableFontFamily,
-        letterSpacing: '0.025em',
-        fontStyle: 'normal',
-      },
-    },
-  },
-});
-
 
 const columns = [
   { name: 'arm', label: 'Arms' },
@@ -200,30 +107,37 @@ const StudyDetailView = ({ classes, data }) => {
             <div className={classes.headerTitle}>
               <div className={classes.headerMainTitle}>
                 <span>
-                  <Typography weight="bold" variant="h3">
+                  <Typography variant="h3">
                     {' '}
                     <span className={classes.warning}> {studyData.clinical_study_designation}</span>
                   </Typography>
                 </span>
               </div>
               <div className={classes.headerMSubTitle}>
-                <Typography weight="bold" >
+                <Typography >
                     <span > {studyData.clinical_study_name}</span>
                 </Typography>
 
 
               </div>
-              <div className={classes.headerNav}>
-                <Link to="/">ALL PROGRAM</Link>
+            <div className={classes.headerNav}>
+                <Link className={classes.headerNavLink} to="/">
+                    ALL PROGRAM  
+                 </Link>
     /
-                <Link to="/">STUDIES</Link>
+                <Link className={classes.headerNavLink} to="/">
+                    STUDIES
+                </Link>
     /
-                <Link to="/">CASES</Link>
+                <Link className={classes.headerNavLink} to="/">
+                    CASES
+                </Link>
 
+  
               </div>
             </div>
             <div className={classes.headerButton}>
-              <Link to={`/study_cases/${studyData.clinical_study_designation}`}><Button color="secondary">{studyData.clinical_study_designation} CASES</Button></Link>
+              <Link className={classes.headerButtonLink} to={`/study_cases/${studyData.clinical_study_designation}`}><Button  className={classes.button} >{studyData.clinical_study_designation} CASES</Button></Link>
             </div>
           </div>
 
@@ -231,10 +145,10 @@ const StudyDetailView = ({ classes, data }) => {
           <div className={classes.detailContainer}>
 
             <Grid container  spacing={8} >
-              <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerLeft}>
-                <Grid container spacing={32} direction="column">
+              <Grid item lg={6} md={6} sm={6} xs={12} >
+                <Grid container spacing={32} direction="column"  className={classes.detailContainerLeft}>
                   <Grid item xs={12} pt={100}>
-                    <Typography variant="h4" ><span className={classes.warning}>SUMMARY</span></Typography>
+                    <Typography><span className={classes.detailContainerHeader}>SUMMARY</span></Typography>
                   </Grid>
                    <Grid item xs={12} pt={100}>
                     <Typography>
@@ -290,21 +204,20 @@ const StudyDetailView = ({ classes, data }) => {
                 </Grid>
               </Grid>
               </Grid>
-              <Grid item lg={6} md={6} sm={6} xs={12} className={classes.detailContainerRight}>
-                <Grid container spacing={32} direction="column">
+              <Grid item lg={6} md={6} sm={6} xs={12} >
+                <Grid container spacing={32} direction="column" className={classes.detailContainerRight}>
                     <Grid item lg={6} md={6} sm={6} xs={12} >
                     <Grid container spacing={32} direction="column">
                       <Grid item xs={12}>
-                        <Typography variant="h4" ><span className={classes.warning}>DIAGNOSIS</span></Typography>
+                        <Typography  ><span className={classes.detailContainerHeader}>DIAGNOSIS</span></Typography>
                       </Grid>
-
+                       <Grid container spacing={8}>
                       {diagnoses.map((diagnosis) => (
-                        <Grid container spacing={8} >
                           <Grid item xs={12}>
-                           <Typography weight="bold" ><span>{diagnosis}</span></Typography>
+                           <Typography ><span> {diagnosis}</span></Typography>
                           </Grid>
-                        </Grid>
                       ))}
+                      </Grid>
 
                     </Grid>
                   </Grid>
@@ -312,16 +225,15 @@ const StudyDetailView = ({ classes, data }) => {
                   <Grid item lg={6} md={6} sm={6} xs={12} >
                     <Grid container spacing={32} direction="column">
                       <Grid item xs={12}>
-                        <Typography variant="h4" ><span className={classes.warning}>DIAGNOSIS</span></Typography>
+                        <Typography  ><span className={classes.detailContainerHeader}>FILE TYPE</span></Typography>
                       </Grid>
-
-                     {fileTypes.map((fileType) => (
-                        <Grid container spacing={8} >
-                          <Grid item xs={12}>
-                           <Typography weight="bold" ><span>{fileType}</span></Typography>
-                          </Grid>
-                        </Grid>
-                      ))}
+                       <Grid container spacing={8} >
+                         {fileTypes.map((fileType) => (
+                              <Grid item xs={12}>
+                               <Typography ><span>{fileType}</span></Typography>
+                              </Grid>
+                          ))}
+                     </Grid>
 
                     </Grid>
                   </Grid>
@@ -334,19 +246,17 @@ const StudyDetailView = ({ classes, data }) => {
 
              <div className={classes.tableDiv} >
                 <div className={classes.tableTitle} >
-                    <Typography variant="h4" ><span className={classes.warning}>COHORT AND DOSING</span></Typography>
+                    <Typography  ><span className={classes.warning}>COHORT AND DOSING</span></Typography>
                 </div> 
                 <Grid item xs={12}>
                       <Grid container spacing={8}>
                         <Grid item xs={12}>
                           <Typography weight="bold">
-                           <MuiThemeProvider theme={getMuiTheme()}>
                             <MUIDataTable
                               data={cohortAndDosingTableData}
                               columns={columns}
                               options={options(classes)}
                             />
-                             </MuiThemeProvider>
                           </Typography>
                         </Grid>
                         <Grid item xs={8}>
@@ -361,8 +271,16 @@ const StudyDetailView = ({ classes, data }) => {
   );
 };
 
+
 const styles = (theme) => ({
+  paddingLeft8:{
+    paddingLeft:'8px',
+  },
+  paddingBottm17:{
+    paddingBottm:'17px',
+  },
   container: {
+    paddingTop: '50px',
     fontFamily:'Raleway, sans-serif',
    
   },
@@ -381,40 +299,65 @@ const styles = (theme) => ({
     fontSize: '9pt',
     letterSpacing: '0.025em',
     color: '#000',
-    background: '#eee',
+    background: '#f3f3f3',
   },
   header: {
-    background: '#fff',
-     paddingLeft: '50px',
+    paddingLeft: '50px',
     paddingRight: '50px',
-     borderBottom: 'black 3px solid',
-    height: '90px',
-    maxWidth: '1440px',
+    borderBottom: '#81a6b9 4px solid',
+    height: '100px',
+    maxWidth:theme.custom.maxContentWidth,
     margin: 'auto',
   },
   headerTitle: {
-    maxWidth: '1440px',
+    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float:'left',
     marginLeft: '90px',
-  },
-  headerMainTitle:{
 
   },
-  headerSubTitleCate:{
-    color: '#555',
+  headerMainTitle:{
+    fontFamily: theme.custom.fontFamilySans,
     fontWeight: 'bold',
+    letterSpacing: '0.017em',
+    color:"#ff8a00",
+    fontSize:'19pt',
+  },
+  headerSubTitleCate:{
+    color: '#606061',
+    fontWeight: 'bold',
+    fontFamily:theme.custom.fontFamilyRaleway,
+    textTransform: 'uppercase',
+    letterSpacing: '0.023em',
+    fontSize:'12pt',
   },
   headerSubTitleContent:{
-    color: '#000',
+    color: '#000000',
     fontWeight: 'bold',
+    fontFamily:theme.custom.fontFamilyRaleway,
+    textTransform: 'uppercase',
+    letterSpacing: '0.023em',
+    fontSize:'12pt',
   },
   headerMSubTitle: {
     paddingTop: '5px',
   },
   headerNav: {
-    paddingTop: '10px',
-    letterSpacing: '0.25px',
+    paddingTop: '17px',
+    color:'#5e8ca5',
+    paddingBottom: '8px',
+  
+  },
+  headerNavLink: {
+   paddingLeft:'6px',
+   paddingRight:'6px',
+   textDecoration: 'none',
+   color:'#5e8ca5',
+   textTransform: 'uppercase',
+   fontFamily:theme.custom.fontFamilySans,
+   fontSize:'9pt',
+   letterSpacing: '0.025em',
+
   },
   headerButton: {
     float:'right',
@@ -426,39 +369,54 @@ const styles = (theme) => ({
     marginTop: '39px',
   },
   detailContainer: {
-    maxWidth: '1440px',
+    maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
-    paddingTop:'50px',
+    paddingTop:'35px',
     paddingLeft: '70px',
-    paddingRight: '70px',
+    paddingRight: '50px',
+    fontFamily:theme.custom.fontFamilySans,
+    letterSpacing: '0.014em',
+    color:'#000000',
+
+  },
+  detailContainerHeader:{
+    textTransform: 'uppercase',
+   fontFamily:theme.custom.fontFamilySans,
+   fontSize:'17pt',
+   letterSpacing: '0.017em',
+   color:'#ff8a00',
   },
   detailContainerBottom:{
-    borderTop: 'black 3px solid',
-    marginTop: '30px',
-     padding:' 50px 0 50px 0px !important',
+    borderTop: '#81a6b9 1px solid',
+    marginTop: '13px',
+    padding:' 35px 0 63px 0px !important',
   },
   detailContainerLeft:{
-    padding:'0px 0px 0 50px',
+    padding:'0px 20px 0 50px',
     minHeight:'600px',
     maxHeight:'580px',
     overflowY: 'scroll',
     overflowX: 'hidden',
   },
   detailContainerRight:{
-    padding:'0 0 50px 80px !important',
-    borderLeft: 'black 3px solid',
-     minHeight:'600px',
+    padding:'0 0 0 80px !important',
+    borderLeft: '#81a6b9 1px solid',
+    minHeight:'600px',
     maxHeight:'580px',
     overflowY: 'scroll',
     overflowX: 'hidden',
   },
+
   tableContainer: {
-    background: '#eee',
+    background: '#f3f3f3',
   },
   tableDiv:{
-    padding:'50px',
-    maxWidth: '1440px',
-    margin: 'auto',
+    padding:'60px',
+    maxWidth: theme.custom.maxContentWidth,
+    margin: '35px auto auto auto',
+  },
+  headerButtonLink:{
+    textDecoration: 'none',
   },
   button: {
     borderRadius: '10px',
@@ -466,17 +424,30 @@ const styles = (theme) => ({
     height: '27px',
     lineHeight: '18px',
     fontSize: '10pt',
-    color: '#fff',
-    backgroundColor: '#ff7f15',
+    color: '#ffffff',
+    textTransform: 'uppercase',
+    backgroundColor: '#ff8a00',
+    fontFamily: theme.custom.fontFamilySans,
+    "&:hover": {
+      backgroundColor: '#ff8a00',
+    },
   },
   detailContainerItems:{
     paddingTop:'5px',
     paddingLeft: '17px',
   },
   title:{
-    color:'#aaa',
+    color:'#9d9d9c',
+   fontFamily:theme.custom.fontFamilySans,
+   fontSize: '12pt',
+   letterSpacing: '0.017em',
+   fontWeight:'600',
   },
   tableTitle:{
+    fontFamily:theme.custom.fontFamilySans,
+    fontSize: '17pt',
+    letterSpacing: '0.017em',
+    color:'#ff17f15',
     paddingBottom:'20px',
   }
 });

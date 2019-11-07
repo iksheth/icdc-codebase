@@ -9,7 +9,7 @@ import PositionedSnackbar from '../../components/Disclaimer/DisclaimerView';
 import Donut from '../../components/Widgets/PieCharts/Donut/DonutController';
 import ProgramSunburst from '../../components/Widgets/PieCharts/ProgramSunburst/ProgramSunburstController';
 
-const drawerWidth = 240;
+
 
 const Dashboard = ({
   classes, data, isSidebarOpened,
@@ -142,8 +142,8 @@ const Dashboard = ({
 
 const styles = (theme) => ({
   contentShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    width: `calc(100% - theme.custom.drawerWidth)`,
+    marginLeft: theme.custom.drawerWidth,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,

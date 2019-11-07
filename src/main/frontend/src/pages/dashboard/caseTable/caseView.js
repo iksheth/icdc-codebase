@@ -1,11 +1,16 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
   withStyles,
+  Avatar,
+  Chip,
 } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
 import CustomFooter from './customFooter';
+import { toggleCheckBox } from '../dashboardState';
 
 
 const link = {
@@ -19,6 +24,8 @@ const tableStyle = (ratio = 1) => ({
   minWidth: '160px',
 }
 );
+
+
 
 const columns = [
   {
@@ -181,8 +188,37 @@ const options = (classes) => ({
 });
 
 
-const Cases = ({ classes, data }) => (
+const Cases = ({ classes, data }) => {
+  const dispatch = useDispatch();
+   // data from store
+  const chipData   = useSelector((state) => (
+    state.dashboard.datatable
+    && state.dashboard.datatable.filters
+      ? state.dashboard.datatable.filters : []));
+
+  return (
   <>
+    <div className={classes.chips}>
+     {chipData.map(data => {
+      return(<Chip
+              classes={{
+                root: classes.chipRoot,
+                deleteIcon: classes.chipDeleteIcon,
+              }}
+              key={data.groupName+"&&"+data.datafield}
+              label={data.name}
+              onDelete={() =>{
+                dispatch(toggleCheckBox([{
+      groupName: data.groupName,
+      name: data.name,
+      datafield: data.datafield,
+      isChecked: false,
+    }]))}
+              }
+            />)
+    })}
+      
+    </div>
     <Grid container spacing={32}>
       <Grid item xs={12}>
         <MUIDataTable
@@ -195,9 +231,25 @@ const Cases = ({ classes, data }) => (
     </Grid>
 
   </>
-);
+)};
 
 const styles = () => ({
+  chips:{
+    position: 'absolute',
+    marginLeft: '250px',
+    marginTop: '36px',
+  },
+   chipRoot:{
+      color:'#ffffff',
+      fontFamily: '"Open Sans", sans-serif',
+      letterSpacing: '0.075em',
+      marginLeft:'10px',
+      backgroundColor:'#9b9b9b',
+      fontSize: '9pt',
+    },
+   chipDeleteIcon:{
+      color:'#ffffff',
+    },
   root: {
     textTransform: 'uppercase',
     fontFamily: '"Open Sans", sans-serif',
