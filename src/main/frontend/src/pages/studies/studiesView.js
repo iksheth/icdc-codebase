@@ -48,8 +48,9 @@ const options = (classes) => ({
           count={count}
           page={page}
           rowsPerPage={rowsPerPage}
-          onChangePage={changePage}
-          onChangeRowsPerPage={changeRowsPerPage}
+          onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
+          // eslint-disable-next-line no-shadow
+          onChangePage={(_, page) => changePage(page)}
         />
       </TableRow>
     </TableFooter>

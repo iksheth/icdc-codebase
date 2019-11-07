@@ -50,8 +50,9 @@ const options = (classes) => ({
           count={count}
           page={page}
           rowsPerPage={rowsPerPage}
-          onChangePage={changePage}
-          onChangeRowsPerPage={changeRowsPerPage}
+          onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
+          // eslint-disable-next-line no-shadow
+          onChangePage={(_, page) => changePage(page)}
         />
       </TableRow>
     </TableFooter>
@@ -74,7 +75,7 @@ const StudyDetailView = ({ classes, data }) => {
   const cohortAndDosingTableData = [];
   studyData.study_arms.forEach((arm) => {
     const cohortAndDosing = {
-      arm: arm.arm ? arm.arm : 'This study is not divided into arms',
+      arm: arm.arm || arm.arm === '' ? arm.arm : 'This study is not divided into arms',
       description: arm.description ? arm.description : '',
       does: '',
     };
