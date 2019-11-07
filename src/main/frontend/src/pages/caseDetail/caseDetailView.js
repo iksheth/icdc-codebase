@@ -124,9 +124,6 @@ const CaseDetail = ({ classes, data }) => {
   
               </div>
             </div>
-            <div className={classes.headerButton}>
-              <Link className={classes.headerButtonLink} to="/"><Button  className={classes.button}>ADD TO MY CASES</Button></Link>
-            </div>
           </div>
 
 
