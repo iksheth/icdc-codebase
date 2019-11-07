@@ -10,10 +10,10 @@ const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
 
 const Footer = ({ classes, data }) => {
   const location = useLocation();
-  console.log(location);
+  const sideBarStatus = location.pathname === '/' || location.pathname === '/dashboard' ? data.isSidebarOpened : false;
   return (
     <footer className={classnames({
-      [classes.contentShift]: data.isSidebarOpened,
+      [classes.contentShift]: sideBarStatus,
     }, classes.footerComponent)}
     >
       <div className={classes.footerRow}>

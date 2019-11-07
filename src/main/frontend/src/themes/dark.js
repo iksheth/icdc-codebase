@@ -231,7 +231,7 @@ export default {
     },
     MuiTableSortLabel: {
       active: {
-        color: 'white',
+        color: '#ff8a00',
       },
     },
     MUIDataTableBodyRow: {
