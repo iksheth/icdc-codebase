@@ -32,7 +32,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-const Layout = ({ classes }) => (
+const Layout = ({ classes, isSidebarOpened }) => (
   <>
     <CssBaseline />
     <HashRouter>
@@ -73,7 +73,7 @@ const Layout = ({ classes }) => (
 
             <Route component={Error} />
           </Switch>
-          <Footer />
+          <Footer data={{ isSidebarOpened }} />
         </div>
       </>
     </HashRouter>

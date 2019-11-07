@@ -1,234 +1,251 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
+import classnames from 'classnames';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { Typography } from '../Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
 
 const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
 
-const Footer = ({ classes }) => (
-  <footer className={classes.footerComponent}>
-    <div className={classes.footerRow}>
-      <div className={classes.footerRowSection}>
-        <ul>
-          <li>
-            <Typography
-              variant="h6"
-              weight="medium"
-              className={cn(classes.footerText, classes.listHeader)}
-            >
+const Footer = ({ classes, data }) => {
+  const location = useLocation();
+  console.log(location);
+  return (
+    <footer className={classnames({
+      [classes.contentShift]: data.isSidebarOpened,
+    }, classes.footerComponent)}
+    >
+      <div className={classes.footerRow}>
+        <div className={classes.footerRowSection}>
+          <ul>
+            <li>
+              <Typography
+                variant="h6"
+                weight="medium"
+                className={cn(classes.footerText, classes.listHeader)}
+              >
               About ICDC
-            </Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>
-              <Link className={classes.link} to="/steeringCommittee">
-              Steering Committee
-              </Link>
-            </Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>Policies</Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>FAQs</Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>
-              <a href="mailto:icdchelpdesk@nih.gov" target="icdc">Contact Us</a>
-            </Typography>
-          </li>
-        </ul>
-      </div>
-      <div className={classes.footerRowSection}>
-        <ul>
-          <li>
-            <Typography
-              variant="h6"
-              weight="medium"
-              className={cn(classes.footerText, classes.listHeader)}
-            >
-              About the Data
-            </Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>
-              Data Access Policies
-            </Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>
-              Data Analysis
-            </Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>REST APIs</Typography>
-          </li>
-        </ul>
-      </div>
-      <div className={classes.footerRowSection}>
-        <ul>
-          <li>
-            <Typography
-              variant="h6"
-              weight="medium"
-              className={cn(classes.footerText, classes.listHeader)}
-            >
-              About Data Submission
-            </Typography>
-          </li>
-          <li>
-            <Link className={classes.link} to="/dgab">
-              <Typography className={classes.footerText}>
-              Data Governance Advisory Board
               </Typography>
-            </Link>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+                <Link className={classes.link} to="/steeringCommittee">
+              Steering Committee
+                </Link>
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>Policies</Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>FAQs</Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+                <a href="mailto:icdchelpdesk@nih.gov" target="icdc">Contact Us</a>
+              </Typography>
+            </li>
+          </ul>
+        </div>
+        <div className={classes.footerRowSection}>
+          <ul>
+            <li>
+              <Typography
+                variant="h6"
+                weight="medium"
+                className={cn(classes.footerText, classes.listHeader)}
+              >
+              About the Data
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+              Data Access Policies
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+              Data Analysis
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>REST APIs</Typography>
+            </li>
+          </ul>
+        </div>
+        <div className={classes.footerRowSection}>
+          <ul>
+            <li>
+              <Typography
+                variant="h6"
+                weight="medium"
+                className={cn(classes.footerText, classes.listHeader)}
+              >
+              About Data Submission
+              </Typography>
+            </li>
+            <li>
+              <Link className={classes.link} to="/dgab">
+                <Typography className={classes.footerText}>
+              Data Governance Advisory Board
+                </Typography>
+              </Link>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
               Process and Tools
-            </Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
               Submission Guide
-            </Typography>
-          </li>
-        </ul>
-      </div>
-      <div className={classes.footerRowSection}>
-        <ul>
-          <li>
-            <Typography
-              variant="h6"
-              weight="medium"
-              className={cn(classes.footerText, classes.listHeader)}
-            >
+              </Typography>
+            </li>
+          </ul>
+        </div>
+        <div className={classes.footerRowSection}>
+          <ul>
+            <li>
+              <Typography
+                variant="h6"
+                weight="medium"
+                className={cn(classes.footerText, classes.listHeader)}
+              >
               NIH Policies
-            </Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>
-              <a target="icdc-external" href="https://www.cancer.gov/policies/disclaimer">
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+                <a target="icdc-external" href="https://www.cancer.gov/policies/disclaimer">
               Disclaimer Policies
-              </a>
-            </Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>
-              <a target="icdc-external" href="https://www.cancer.gov/policies/accessibility">
+                </a>
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+                <a target="icdc-external" href="https://www.cancer.gov/policies/accessibility">
               accessibility
-              </a>
-            </Typography>
-          </li>
-          <li>
-            <Typography className={classes.footerText}>
-              <a target="icdc-external" href="https://www.cancer.gov/policies/foia">
+                </a>
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+                <a target="icdc-external" href="https://www.cancer.gov/policies/foia">
               FOIA
-              </a>
-            </Typography>
-          </li>
-        </ul>
-      </div>
-      {/* <div className={cn(classes.footerRowSection, classes.footerNciColumn)}>
+                </a>
+              </Typography>
+            </li>
+          </ul>
+        </div>
+        {/* <div className={cn(classes.footerRowSection, classes.footerNciColumn)}>
                 <a target="icdc-external" target="icdc-external" href="https://www.cancer.gov/" target="icdc-nci" rel="nofollow">
                     <img className="nciBadge" src={nciLogo} alt="National Cancer Insistitute" />
                 </a>
             </div> */}
-    </div>
+      </div>
 
-    <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
-      <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
-        <Typography>
-          <a target="icdc-external" href="https://www.hhs.gov">
+      <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
+        <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
+          <Typography>
+            <a target="icdc-external" href="https://www.hhs.gov">
             U.S. Department of Health and Human Services
-          </a>
-          <span className={classes.ext}>&nbsp;|&nbsp;</span>
-        </Typography>
-        <Typography>
-          <a target="icdc-external" href="https://www.nih.gov">
+            </a>
+            <span className={classes.ext}>&nbsp;|&nbsp;</span>
+          </Typography>
+          <Typography>
+            <a target="icdc-external" href="https://www.nih.gov">
             National Institutes of Health
-          </a>
-          <span className={classes.ext}>&nbsp;|&nbsp;</span>
-        </Typography>
-        <Typography>
-          <a target="icdc-external" href="https://www.cancer.gov">
+            </a>
+            <span className={classes.ext}>&nbsp;|&nbsp;</span>
+          </Typography>
+          <Typography>
+            <a target="icdc-external" href="https://www.cancer.gov">
             National Cancer Institute
-          </a>
-          <span className={classes.ext}>&nbsp;|&nbsp;</span>
-        </Typography>
-        <Typography>
-          <a target="icdc-external" href="https://www.usa.gov">
+            </a>
+            <span className={classes.ext}>&nbsp;|&nbsp;</span>
+          </Typography>
+          <Typography>
+            <a target="icdc-external" href="https://www.usa.gov">
             USA.gov
-            <span
-              className={classes.ext}
-              aria-label="(link is external)"
-            />
-          </a>
-        </Typography>
+              <span
+                className={classes.ext}
+                aria-label="(link is external)"
+              />
+            </a>
+          </Typography>
+        </div>
       </div>
-    </div>
-    <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
-      <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
-        <Typography>
-          <a
-            target="icdc-external"
-            title="link to  Division of Cancer Treatment and Diagnosis"
-            href="https://dctd.cancer.gov/"
-          >
+      <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
+        <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
+          <Typography>
+            <a
+              target="icdc-external"
+              title="link to  Division of Cancer Treatment and Diagnosis"
+              href="https://dctd.cancer.gov/"
+            >
             Division of Cancer Treatment and Diagnosis
-          </a>
-          <span className={classes.ext}>&nbsp;|&nbsp;</span>
-        </Typography>
-        <Typography>
-          <a
-            target="icdc-external"
-            title="link to Center for Biomedical Informatics and Information Technology"
-            href="https://datascience.cancer.gov/"
-          >
+            </a>
+            <span className={classes.ext}>&nbsp;|&nbsp;</span>
+          </Typography>
+          <Typography>
+            <a
+              target="icdc-external"
+              title="link to Center for Biomedical Informatics and Information Technology"
+              href="https://datascience.cancer.gov/"
+            >
             Center for Biomedical Informatics and Information Technology
-          </a>
-        </Typography>
+            </a>
+          </Typography>
+        </div>
       </div>
-    </div>
-    <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
-      <div
-        className={cn(
-          classes.extraPadding,
-          classes.nciLinks,
-          classes.contentJustifyCenter,
-        )}
-      >
-        <Typography>
-          <span className={classes.turningNIH}>
+      <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
+        <div
+          className={cn(
+            classes.extraPadding,
+            classes.nciLinks,
+            classes.contentJustifyCenter,
+          )}
+        >
+          <Typography>
+            <span className={classes.turningNIH}>
             NIH … Turning Discovery Into Health
-            <sup>®</sup>
-          </span>
-        </Typography>
+              <sup>®</sup>
+            </span>
+          </Typography>
+        </div>
       </div>
-    </div>
-    {/* Quick and dirty for adding version number in footer */}
-    <div className={cn(classes.footerRow, classes.contentJustifyLeft)}>
-      <div
-        className={cn(
-          classes.extraPadding,
-          classes.nciLinks,
-          classes.contentJustifyCenter,
-        )}
-      >
-        <Typography>
-          <span className={classes.turningNIH}>
+      {/* Quick and dirty for adding version number in footer */}
+      <div className={cn(classes.footerRow, classes.contentJustifyLeft)}>
+        <div
+          className={cn(
+            classes.extraPadding,
+            classes.nciLinks,
+            classes.contentJustifyCenter,
+          )}
+        >
+          <Typography>
+            <span className={classes.turningNIH}>
             Version 0.2 /&nbsp;
-            {VERSION}
-          </span>
-        </Typography>
+              {VERSION}
+            </span>
+          </Typography>
+        </div>
       </div>
-    </div>
-    {/* End of Quick and dirty for adding version number in footer */}
-  </footer>
-);
+      {/* End of Quick and dirty for adding version number in footer */}
+    </footer>
+  );
+};
 
 const styles = (theme) => ({
+  contentShift: {
+    width: `calc(100% - ${theme.custom.drawerWidth})`,
+    marginLeft: `${theme.custom.drawerWidth} !important`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
   ext: {
     color: theme.palette.text.footerText,
     '@media (max-width: 600px)': {

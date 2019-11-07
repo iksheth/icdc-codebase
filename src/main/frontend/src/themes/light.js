@@ -28,7 +28,7 @@ export default {
     footorBackground: '#a6d3eb',
     fontFamilySans: '"Open Sans", sans-serif',
     fontFamilyRaleway: 'Raleway, sans-serif',
-
+    drawerWidth: '240px',
   },
   palette: {
     primary: {
