@@ -14,16 +14,13 @@ const NOT_PROVIDED = 'Not Specified';
 
 export const mappingCheckBoxToDataTable = [
   {
-    group: 'Program', field: 'program', api: 'caseCountByProgram', datafield: 'program',
-  },
-  {
     group: 'Study', field: 'study_code', api: 'caseCountByStudyCode', datafield: 'study_code',
   },
   {
     group: 'Study Type', field: 'study_type', api: 'caseCountByStudyType', datafield: 'study_type',
   },
   {
-    group: 'Breeds', field: 'breed', api: 'caseCountByBreed', datafield: 'breed',
+    group: 'Breed', field: 'breed', api: 'caseCountByBreed', datafield: 'breed',
   },
   {
     group: 'Diagnosis', field: 'diagnosis', api: 'caseCountByDiagnosis', datafield: 'diagnosis',
@@ -40,6 +37,10 @@ export const mappingCheckBoxToDataTable = [
   {
     group: 'Associated File Type', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types',
   },
+  {
+    group: 'Associated File Format', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats',
+  },
+
 ];
 
 

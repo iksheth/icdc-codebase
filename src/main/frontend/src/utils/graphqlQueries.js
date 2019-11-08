@@ -15,7 +15,10 @@ export const DASHBOARD_QUERY = gql`{
     numberOfSamples
     numberOfFiles
     numberOfAliquots
-  
+  caseCountByFileFormat{
+    file_format
+     cases
+  }
     caseCountByBreed {
       cases
       breed
@@ -76,6 +79,7 @@ export const DASHBOARD_QUERY = gql`{
         disease_site
         samples
         files
+        file_formats
      }
   }`;
 
