@@ -184,9 +184,8 @@ const StudyDetailView = ({ classes, data }) => {
           <div className={classes.headerButton}>
             <Link className={classes.headerButtonLink} to={`/study_cases/${studyData.clinical_study_designation}`}>
               <Button className={classes.button}>
-                {studyData.clinical_study_designation}
-                {' '}
-CASES
+                FILTER CASES
+                FOR THIS STUDY
               </Button>
             </Link>
           </div>
@@ -308,7 +307,9 @@ CASES
 
           <div className={classes.tableDiv}>
             <div className={classes.tableTitle}>
-              <Typography><span className={classes.warning}>COHORT AND DOSING</span></Typography>
+              <Typography>
+                <span className={classes.tableHeader}>COHORT AND DOSING</span>
+              </Typography>
             </div>
             <Grid item xs={12}>
               <Grid container spacing={8}>
@@ -382,7 +383,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilySans,
     fontWeight: 'bold',
     letterSpacing: '0.017em',
-    color: '#ff8a00',
+    color: '#0296c9',
     fontSize: '19pt',
   },
   headerSubTitleCate: {
@@ -446,7 +447,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilySans,
     fontSize: '17pt',
     letterSpacing: '0.017em',
-    color: '#ff8a00',
+    color: '#0296c9',
   },
   detailContainerBottom: {
     borderTop: '#81a6b9 1px solid',
@@ -472,6 +473,9 @@ const styles = (theme) => ({
   tableContainer: {
     background: '#f3f3f3',
   },
+  tableHeader: {
+    color: '#0296c9',
+  },
   tableDiv: {
     padding: '60px',
     maxWidth: theme.custom.maxContentWidth,
@@ -481,10 +485,11 @@ const styles = (theme) => ({
     textDecoration: 'none',
   },
   button: {
-    borderRadius: '10px',
-    width: '178px',
-    height: '27px',
-    lineHeight: '18px',
+    borderRadius: '22px',
+    padding: '0 30px 0 30px',
+    width: '170px',
+    height: '35px',
+    lineHeight: '14px',
     fontSize: '10pt',
     color: '#ffffff',
     textTransform: 'uppercase',
