@@ -10,6 +10,28 @@ import TablePagination from '@material-ui/core/TablePagination';
 import { Link } from 'react-router-dom';
 import StatsView from '../../../components/Stats/StatsView';
 import { Typography, Button } from '../../../components/Wrappers/Wrappers';
+import { customSorting } from '../../../utils/dashboardUtilFunctions';
+
+function studyDetailSorting(a, b) {
+  if (b && !a) {
+    return -1;
+  }
+  if (!b && a) {
+    return 1;
+  }
+  const aNumber = a.match(/(\d+)/) ? a.match(/(\d+)/)[0] : undefined;
+  const bNumber = b.match(/(\d+)/) ? b.match(/(\d+)/)[0] : undefined;
+  if (aNumber && bNumber) {
+    if (parseInt(bNumber, 10) > parseInt(aNumber, 10)) {
+      return -1;
+    }
+    if (parseInt(bNumber, 10) < parseInt(aNumber, 10)) {
+      return 1;
+    }
+  }
+
+  return customSorting(a, b, 'alphabetical', 0);
+}
 
 const columns = [
   { name: 'arm', label: 'Arms' },
@@ -78,14 +100,32 @@ const StudyDetailView = ({ classes, data }) => {
       arm: arm.arm || arm.arm === '' ? arm.arm : 'This study is not divided into arms',
       description: arm.description ? arm.description : '',
       does: '',
+      cohortDescription: '',
     };
+    let arrayDoes = [];
+    const arrayCohortDes = [];
     arm.cohorts.forEach((cohort) => {
-      if (cohort.cohort_dose !== '' && cohort.cohort_dose !== null) {
-        cohortAndDosing.does += `${cohort.cohort_dose}#`;
+      if (cohort.cohort_dose
+            && cohort.cohort_dose !== ''
+            && cohort.cohort_dose !== null) {
+        arrayDoes.push(cohort.cohort_dose);
+      }
+      if (cohort.cohort_description
+            && cohort.cohort_description !== ''
+              && cohort.cohort_description !== null) {
+        arrayCohortDes.push(cohort.cohort_description);
       }
     });
-    if (cohortAndDosing.does === '') {
-      cohortAndDosing.does = 'This study is not divided into cohorts';
+
+    if (arrayDoes.length === 0) {
+      if (arrayCohortDes.length === 0) {
+        cohortAndDosing.does = 'This study is not divided into cohorts';
+      } else {
+        arrayDoes = arrayCohortDes;
+        cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
+      }
+    } else {
+      cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
     }
 
     cohortAndDosingTableData.push(cohortAndDosing);

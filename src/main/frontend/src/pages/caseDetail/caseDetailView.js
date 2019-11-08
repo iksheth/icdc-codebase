@@ -204,7 +204,7 @@ Case :
                     <Grid container spacing={8}>
                       <Grid item xs={4}>
                         <Typography>
-                          <span className={classes.title}>Age At Enrollment</span>
+                          <span className={classes.title}>Age at Enrollment</span>
                         </Typography>
                       </Grid>
                       <Grid item xs={8}>

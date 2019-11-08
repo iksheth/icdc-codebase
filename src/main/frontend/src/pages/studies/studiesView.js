@@ -27,7 +27,19 @@ const columns = [
   { name: 'program_id', label: 'Program' },
   { name: 'clinical_study_name', label: 'Study Name' },
   { name: 'clinical_study_type', label: 'Study Type' },
-  { name: 'numberOfCases', label: 'Cases' },
+  {
+    name: 'numberOfCases',
+    label: 'Cases',
+    options: {
+      customBodyRender: (value, tableMeta) => (
+        <div className="mui_td">
+          {' '}
+          <Link to={`/study_cases/${tableMeta.rowData[0]}`}>{value}</Link>
+          {' '}
+        </div>
+      ),
+    },
+  },
 ];
 
 const options = (classes) => ({
