@@ -38,7 +38,7 @@ export const mappingCheckBoxToDataTable = [
     group: 'Gender', field: 'gender', api: 'caseCountByGender', datafield: 'sex',
   },
   {
-    group: 'Associated Files', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types',
+    group: 'Associated File Type', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types',
   },
 ];
 
@@ -197,24 +197,24 @@ export function getFilters(orginFilter, newCheckBoxs) {
   return ogFilter;
 }
 
-function sortCheckBox(a, b, flag, i = 0) {
+export function customSorting(a, b, flag, i = 0) {
   if (flag === 'alphabetical') {
-    if (b.name[i] > a.name[i]) { return -1; }
-    if (b.name[i] < a.name[i]) { return 1; }
-    if (b.name[i] === a.name[i]) {
-      if (b.name[i] && !a.name[i]) {
-        return -1;
-      }
-      if (!b.name[i] && a.name[i]) {
-        return 1;
-      }
-      if (b.name[i] && a.name[i]) {
-        return sortCheckBox(a, b, flag, i + 1);
+    if (b[i] && !a[i]) {
+      return -1;
+    }
+    if (!b[i] && a[i]) {
+      return 1;
+    }
+    if (b[i] > a[i]) { return -1; }
+    if (b[i] < a[i]) { return 1; }
+    if (b[i] === a[i]) {
+      if (b[i] && a[i]) {
+        return customSorting(a, b, flag, i + 1);
       }
       return 0;
     }
   }
-  return b.cases - a.cases;
+  return -1;
 }
 
 
@@ -227,7 +227,7 @@ export function updateCheckBoxData(data, field) {
     isChecked: false,
     cases: el.cases,
   }))
-    .sort((a, b) => sortCheckBox(a, b, 'alphabetical'))
+    .sort((a, b) => customSorting(a.name, b.name, 'alphabetical'))
     .forEach((el) => {
       // reduce the duplication
       if (result[parseInt(preElementIndex, 10)] && result[parseInt(preElementIndex, 10)].name) {
@@ -294,7 +294,7 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
           }
         });
         return item;
-      }).sort((a, b) => sortCheckBox(a, b, 'alphabetical'));
+      }).sort((a, b) => customSorting(a.name, b.name, 'alphabetical'));
     }
 
     return checkbox;
