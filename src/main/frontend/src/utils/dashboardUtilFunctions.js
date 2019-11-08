@@ -197,11 +197,22 @@ export function getFilters(orginFilter, newCheckBoxs) {
   return ogFilter;
 }
 
-function sortCheckBox(a, b, flag) {
+function sortCheckBox(a, b, flag, i = 0) {
   if (flag === 'alphabetical') {
-    if (b.name[0] > a.name[0]) { return -1; }
-    if (b.name[0] === a.name[0]) { return b.name - a.name; }
-    if (b.name[0] < a.name[0]) { return 1; }
+    if (b.name[i] > a.name[i]) { return -1; }
+    if (b.name[i] < a.name[i]) { return 1; }
+    if (b.name[i] === a.name[i]) {
+      if (b.name[i] && !a.name[i]) {
+        return -1;
+      }
+      if (!b.name[i] && a.name[i]) {
+        return 1;
+      }
+      if (b.name[i] && a.name[i]) {
+        return sortCheckBox(a, b, flag, i + 1);
+      }
+      return 0;
+    }
   }
   return b.cases - a.cases;
 }
