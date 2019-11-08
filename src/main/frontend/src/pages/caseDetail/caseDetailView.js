@@ -459,7 +459,7 @@ Case :
           <div className={classes.tableDiv}>
             <div className={classes.tableTitle}>
               <Typography variant="h4">
-                <span className={classes.warning}>AVAILABLE DATA</span>
+                <span className={classes.tableHeader}>AVAILABLE DATA</span>
               </Typography>
             </div>
             <Grid item xs={12}>
@@ -619,6 +619,9 @@ const styles = (theme) => ({
   },
   tableContainer: {
     background: '#f3f3f3',
+  },
+  tableHeader: {
+    color: '#ff8a00',
   },
   tableDiv: {
     padding: '60px',

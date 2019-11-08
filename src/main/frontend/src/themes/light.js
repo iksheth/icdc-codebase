@@ -17,7 +17,7 @@ const lightenRate = 7.5;
 const darkenRate = 15;
 const tableHeaderBorder = '#004c73 3px solid';
 const tableHeaderFontColor = '#194563';
-const tableFontFamily = 'Raleway, sans-serif';
+const tableFontFamily = "'Raleway', sans-serif";
 
 export default {
   custom: {
@@ -27,7 +27,7 @@ export default {
     cardBackGround: '#f0f6f8',
     footorBackground: '#a6d3eb',
     fontFamilySans: '"Open Sans", sans-serif',
-    fontFamilyRaleway: 'Raleway, sans-serif',
+    fontFamilyRaleway: "'Raleway', sans-serif",
     drawerWidth: '240px',
   },
   palette: {
