@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -11,6 +12,8 @@ import { Link } from 'react-router-dom';
 import StatsView from '../../../components/Stats/StatsView';
 import { Typography, Button } from '../../../components/Wrappers/Wrappers';
 import { customSorting } from '../../../utils/dashboardUtilFunctions';
+import cn from '../../../utils/classNameConcat';
+import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
 
 function studyDetailSorting(a, b) {
   if (b && !a) {
@@ -137,8 +140,8 @@ const StudyDetailView = ({ classes, data }) => {
       <div className={classes.container}>
         <div className={classes.header}>
           <div className={classes.logo}>
-            <img
-              src="https://img.icons8.com/dusk/64/000000/4-circle.png"
+             <img
+              src={icon}
               alt="ICDC case detail header logo"
             />
 
@@ -146,23 +149,18 @@ const StudyDetailView = ({ classes, data }) => {
           <div className={classes.headerTitle}>
             <div className={classes.headerMainTitle}>
               <span>
-                <Typography variant="h3">
                   {' '}
-                  <span className={classes.warning}>
+                  <span>
                     {' '}
-                    {studyData.clinical_study_designation}
+                    Study : {studyData.clinical_study_designation}
                   </span>
-                </Typography>
               </span>
             </div>
-            <div className={classes.headerMSubTitle}>
-              <Typography>
+            <div className={cn(classes.headerMSubTitle,classes.headerSubTitleCate)}>
                 <span>
                   {' '}
                   {studyData.clinical_study_name}
                 </span>
-              </Typography>
-
 
             </div>
             <div className={classes.headerNav}>
@@ -196,68 +194,47 @@ const StudyDetailView = ({ classes, data }) => {
 
           <Grid container spacing={8}>
             <Grid item lg={6} md={6} sm={6} xs={12}>
-              <Grid container spacing={32} direction="column" className={classes.detailContainerLeft}>
-                <Grid item xs={12} pt={100}>
+              <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
+                <Grid item xs={12} >
                   <Typography>
                     <span className={classes.detailContainerHeader}>SUMMARY</span>
                   </Typography>
                 </Grid>
-                <Grid item xs={12} pt={100}>
+                <Grid item xs={12} >
                   <Typography>
                     {studyData.clinical_study_description}
-                    <br />
                   </Typography>
                 </Grid>
-
-                <Grid container spacing={8} className={classes.detailContainerItems}>
-                  <Grid item xs={12}>
-                    <Grid item xs={12} pt={100}>
-                      <Typography>
-                       Study Type:
-                      </Typography>
+                 <Grid container spacing={8} className={classes.detailContainerItems}>
+                    <Grid item xs={12} className={classes.detailContainerItem}>
+                       <span className={classes.title}> Study Type:</span>
                     </Grid>
-                    <Grid item xs={12}>
-                      <Typography>
+                    <Grid item xs={12} spacing={0} >
                         {studyData.clinical_study_type}
-                        <br />
-                      </Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                      <br />
-                      <Typography weight="bold">Principal Investigators:</Typography>
-                      <br />
+                    <Grid item xs={12} className={classes.detailContainerItem}>
+                        <span className={classes.title}>Principal Investigators:</span>
                     </Grid>
-                    <Grid item xs={12}>
-                      <Typography>
+                    <Grid item xs={12} >
                         {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => <li>{principalInvestigator}</li>) : ''}
-                      </Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                      <Typography weight="bold">IACUC Approval:</Typography>
-                      <br />
+                    <Grid item xs={12} className={classes.detailContainerItem}>
+                        <span className={classes.title}>IACUC Approval:</span>
                     </Grid>
-                    <Grid item xs={12}>
-                      <Typography>
+                    <Grid item xs={12} >
                         {studyData.date_of_iacuc_approval}
-                      </Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                      <br />
-                      <Typography weight="bold">Study Date:</Typography>
-                      <br />
+                    <Grid item xs={12} className={classes.detailContainerItem}>
+                        <span className={classes.title}>Study Date:</span>
                     </Grid>
-                    <Grid item xs={12}>
-                      <Typography>
+                    <Grid item xs={12} >
                         {studyData.dates_of_conduct}
-                      </Typography>
                     </Grid>
-
-                  </Grid>
-                </Grid>
               </Grid>
             </Grid>
+           </Grid>
             <Grid item lg={6} md={6} sm={6} xs={12}>
-              <Grid container spacing={32} direction="column" className={classes.detailContainerRight}>
+              <Grid container spacing={32} direction="row" className={classes.detailContainerRight}>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
                   <Grid container spacing={32} direction="column">
                     <Grid item xs={12}>
@@ -314,7 +291,7 @@ const StudyDetailView = ({ classes, data }) => {
             <Grid item xs={12}>
               <Grid container spacing={8}>
                 <Grid item xs={12}>
-                  <Typography weight="bold">
+                  <Typography >
                     <MUIDataTable
                       data={cohortAndDosingTableData}
                       columns={columns}
@@ -376,8 +353,7 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
-    marginLeft: '90px',
-
+    marginLeft: '120px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
@@ -426,10 +402,11 @@ const styles = (theme) => ({
     float: 'right',
     paddingTop: '50px',
   },
-  logo: {
+    logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '39px',
+    marginTop: '-5px',
+    width: '113px',
   },
   detailContainer: {
     maxWidth: theme.custom.maxContentWidth,
@@ -500,15 +477,19 @@ const styles = (theme) => ({
     },
   },
   detailContainerItems: {
-    paddingTop: '5px',
-    paddingLeft: '17px',
+    paddingTop: '55px',
+    paddingLeft: '7px',
+  },
+  detailContainerItem:{
+    paddingTop: '15px !important',
   },
   title: {
-    color: '#9d9d9c',
+    color: '#0296c9',
     fontFamily: theme.custom.fontFamilySans,
     fontSize: '12pt',
     letterSpacing: '0.017em',
     fontWeight: '600',
+     textTransform: 'uppercase',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
