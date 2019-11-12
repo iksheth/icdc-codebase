@@ -144,26 +144,26 @@ const styles = (theme) => ({
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontWeight: 'bold',
+    fontWeight: '500',
     letterSpacing: '0.017em',
     color: '#606061',
-    fontSize: '25pt',
+    fontSize: '25px',
      position: 'absolute',
-    marginTop: '10px',
+    marginTop: '14px',
+    lineHeight: '25px',
   },
 
   headerTitle: {
     maxWidth: '1440px',
     margin: 'auto',
     float: 'left',
-    marginLeft: '120px',
+    marginLeft: '90px',
   },
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-15px',
     marginLeft:'-13px',
-    width: '113px',
+    width: '83px',
     zIndex: '999',
   },
   tableContainer: {
