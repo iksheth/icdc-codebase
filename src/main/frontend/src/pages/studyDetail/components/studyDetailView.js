@@ -170,8 +170,7 @@ const StudyDetailView = ({ classes, data }) => {
               <span>
                   {' '}
                   <span>
-                    {' '}
-                    Study : {studyData.clinical_study_designation}
+                    Study : {' '}{studyData.clinical_study_designation}
                   </span>
               </span>
             </div>
@@ -359,8 +358,8 @@ const styles = (theme) => ({
     background: '#f3f3f3',
   },
   header: {
-    paddingLeft: '85px',
-    paddingRight: '50px',
+    paddingLeft: '16px',
+    paddingRight: '16px',
     borderBottom: '#81a6b9 4px solid',
     height: '70px',
     maxWidth: theme.custom.maxContentWidth,
@@ -398,7 +397,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '12pt',
+    fontSize: '12px',
   },
   headerMSubTitle: {
     paddingTop: '5px',
@@ -407,6 +406,7 @@ const styles = (theme) => ({
     paddingTop: '5px',
     color: '#5e8ca5',
     paddingBottom: '8px',
+    paddingLeft:'3px',
 
   },
   headerNavLink: {
@@ -424,15 +424,15 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-5px',
+    marginTop: '-8px',
     width: '85px',
   },
   detailContainer: {
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
-    paddingTop: '35px',
-    paddingLeft: '70px',
-    paddingRight: '50px',
+    paddingTop: '25px',
+    paddingLeft: '31px',
+    paddingRight: '31px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
@@ -454,14 +454,14 @@ const styles = (theme) => ({
   },
   detailContainerLeft: {
     display:'block',
-    padding: '0px 20px 0 50px !important',
+    padding: '5px 20px 0 50px !important',
     minHeight: '510px',
     maxHeight: '510px',
     overflowY: 'auto',
     overflowX: 'hidden',
   },
   detailContainerRight: {
-    padding: '0 0 0 80px !important',
+    padding: '5px 0 0 80px !important',
     borderLeft: '#81a6b9 1px solid',
     minHeight: '510px',
     maxHeight: '510px',
@@ -476,7 +476,7 @@ const styles = (theme) => ({
     color: '#0296c9',
   },
   tableDiv: {
-    padding: '60px',
+    padding: '31px',
     maxWidth: theme.custom.maxContentWidth,
     margin: '20px auto auto auto',
   },
@@ -515,7 +515,7 @@ const styles = (theme) => ({
     fontSize: '12px',
     letterSpacing: '0.017em',
     fontWeight: '600',
-     textTransform: 'uppercase',
+    textTransform: 'uppercase',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,

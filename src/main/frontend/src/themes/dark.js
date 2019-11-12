@@ -247,7 +247,7 @@ export default {
     },
     MuiTableRow: {
       root: {
-        height: 56,
+        height: 17,
       },
     },
     MuiTableCell: {

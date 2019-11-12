@@ -23,7 +23,7 @@ export default {
   custom: {
     maxContentWidth: '1440px',
     maxContent: 'white',
-    bodyBackGround: '#f0f6f8',
+    bodyBackGround: 'white',
     cardBackGround: '#f0f6f8',
     footorBackground: '#a6d3eb',
     fontFamilySans: '"Open Sans", sans-serif',
@@ -248,7 +248,7 @@ export default {
     },
     MuiTableRow: {
       root: {
-        height: 56,
+        height: 17,
       },
     },
     MuiTableCell: {
