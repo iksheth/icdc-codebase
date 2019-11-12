@@ -14,7 +14,6 @@ import { Typography, Button } from '../../../components/Wrappers/Wrappers';
 import { customSorting } from '../../../utils/dashboardUtilFunctions';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
-
 function studyDetailSorting(a, b) {
   if (b && !a) {
     return -1;
@@ -196,38 +195,35 @@ const StudyDetailView = ({ classes, data }) => {
             <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12} >
-                  <Typography>
-                    <span className={classes.detailContainerHeader}>SUMMARY</span>
-                  </Typography>
+                    <span className={classes.detailContainerHeader}>Description</span>
                 </Grid>
                 <Grid item xs={12} >
-                  <Typography>
-                    {studyData.clinical_study_description}
-                  </Typography>
+                     <span className={classes.content}>{studyData.clinical_study_description}</span>
                 </Grid>
+
                  <Grid container spacing={8} className={classes.detailContainerItems}>
                     <Grid item xs={12} className={classes.detailContainerItem}>
                        <span className={classes.title}> Study Type:</span>
                     </Grid>
-                    <Grid item xs={12} spacing={0} >
+                    <Grid item xs={12} spacing={0} className={classes.content}>
                         {studyData.clinical_study_type}
                     </Grid>
                     <Grid item xs={12} className={classes.detailContainerItem}>
                         <span className={classes.title}>Principal Investigators:</span>
                     </Grid>
-                    <Grid item xs={12} >
+                    <Grid item xs={12} className={classes.content}>
                         {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => <li>{principalInvestigator}</li>) : ''}
                     </Grid>
                     <Grid item xs={12} className={classes.detailContainerItem}>
-                        <span className={classes.title}>IACUC Approval:</span>
+                        <span className={classes.title}>Date of IACUC Approval:</span>
                     </Grid>
-                    <Grid item xs={12} >
+                    <Grid item xs={12} className={classes.content}>
                         {studyData.date_of_iacuc_approval}
                     </Grid>
                     <Grid item xs={12} className={classes.detailContainerItem}>
-                        <span className={classes.title}>Study Date:</span>
+                        <span className={classes.title}>Conducted:</span>
                     </Grid>
-                    <Grid item xs={12} >
+                    <Grid item xs={12} className={classes.content}>
                         {studyData.dates_of_conduct}
                     </Grid>
               </Grid>
@@ -236,44 +232,40 @@ const StudyDetailView = ({ classes, data }) => {
             <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid container spacing={32} direction="row" className={classes.detailContainerRight}>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
-                  <Grid container spacing={32} direction="column">
+                   <Grid container spacing={8}>
                     <Grid item xs={12}>
                       <Typography>
-                        <span className={classes.detailContainerHeader}>DIAGNOSIS</span>
+                        <span className={classes.detailContainerHeader}>DIAGNOSES</span>
                       </Typography>
                     </Grid>
+                    </Grid>
                     <Grid container spacing={8}>
-                      {diagnoses.map((diagnosis) => (
-                        <Grid item xs={12}>
-                          <Typography>
-                            <span>
+                      {diagnoses.sort((a, b) => customSorting(a, b, 'alphabetical')).map((diagnosis) => (
+                        <Grid item xs={12} >
+                            <span className={classes.content}>
                               {' '}
                               {diagnosis}
                             </span>
-                          </Typography>
                         </Grid>
                       ))}
                     </Grid>
-
-                  </Grid>
                 </Grid>
 
                 <Grid item lg={6} md={6} sm={6} xs={12}>
-                  <Grid container spacing={32} direction="column">
+                  <Grid container spacing={8} >
                     <Grid item xs={12}>
                       <Typography>
-                        <span className={classes.detailContainerHeader}>FILE TYPE</span>
+                        <span className={classes.detailContainerHeader}>[DIAGNOSIS] FILE TYPE</span>
                       </Typography>
                     </Grid>
+                  </Grid>
                     <Grid container spacing={8}>
-                      {fileTypes.map((fileType) => (
+                      {fileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
                         <Grid item xs={12}>
-                          <Typography><span>{fileType}</span></Typography>
+                          <span className={classes.content}>{fileType}</span>
                         </Grid>
                       ))}
                     </Grid>
-
-                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -324,6 +316,10 @@ const styles = (theme) => ({
     fontFamily: 'Raleway, sans-serif',
 
   },
+  content:{
+    fontSize: '12px',
+    lineHeight: '14px',
+  },
   warning: {
     color: theme.palette.warning.main,
   },
@@ -342,10 +338,10 @@ const styles = (theme) => ({
     background: '#f3f3f3',
   },
   header: {
-    paddingLeft: '50px',
+    paddingLeft: '85px',
     paddingRight: '50px',
     borderBottom: '#81a6b9 4px solid',
-    height: '100px',
+    height: '70px',
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
   },
@@ -353,14 +349,16 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
-    marginLeft: '120px',
+    marginLeft: '95px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
     fontWeight: 'bold',
     letterSpacing: '0.017em',
     color: '#0296c9',
-    fontSize: '19pt',
+    fontSize: '19px',
+    height:'12px',
+    lineHeight:'17px',
   },
   headerSubTitleCate: {
     color: '#606061',
@@ -382,7 +380,7 @@ const styles = (theme) => ({
     paddingTop: '5px',
   },
   headerNav: {
-    paddingTop: '17px',
+    paddingTop: '5px',
     color: '#5e8ca5',
     paddingBottom: '8px',
 
@@ -394,19 +392,16 @@ const styles = (theme) => ({
     color: '#5e8ca5',
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '9pt',
+    fontSize: '9px',
     letterSpacing: '0.025em',
 
   },
-  headerButton: {
-    float: 'right',
-    paddingTop: '50px',
-  },
-    logo: {
+ 
+  logo: {
     position: 'absolute',
     float: 'left',
     marginTop: '-5px',
-    width: '113px',
+    width: '85px',
   },
   detailContainer: {
     maxWidth: theme.custom.maxContentWidth,
@@ -417,12 +412,14 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
+    size:'12px',
+    lineHeight: '23px',
 
   },
   detailContainerHeader: {
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17pt',
+    fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#0296c9',
   },
@@ -432,18 +429,19 @@ const styles = (theme) => ({
     padding: ' 35px 0 63px 0px !important',
   },
   detailContainerLeft: {
-    padding: '0px 20px 0 50px',
-    minHeight: '600px',
-    maxHeight: '580px',
-    overflowY: 'scroll',
+    display:'block',
+    padding: '0px 20px 0 50px !important',
+    minHeight: '510px',
+    maxHeight: '510px',
+    overflowY: 'auto',
     overflowX: 'hidden',
   },
   detailContainerRight: {
     padding: '0 0 0 80px !important',
     borderLeft: '#81a6b9 1px solid',
-    minHeight: '600px',
-    maxHeight: '580px',
-    overflowY: 'scroll',
+    minHeight: '510px',
+    maxHeight: '510px',
+    overflowY: 'auto',
     overflowX: 'hidden',
   },
 
@@ -456,18 +454,22 @@ const styles = (theme) => ({
   tableDiv: {
     padding: '60px',
     maxWidth: theme.custom.maxContentWidth,
-    margin: '35px auto auto auto',
+    margin: '20px auto auto auto',
+  },
+   headerButton: {
+    float: 'right',
+    paddingTop: '15px',
   },
   headerButtonLink: {
     textDecoration: 'none',
   },
   button: {
     borderRadius: '22px',
-    padding: '0 30px 0 30px',
-    width: '170px',
+    padding: '0 22px',
+    width: '125px',
     height: '35px',
-    lineHeight: '14px',
-    fontSize: '10pt',
+    lineHeight: '10px',
+    fontSize: '10px',
     color: '#ffffff',
     textTransform: 'uppercase',
     backgroundColor: '#ff8a00',
@@ -477,7 +479,7 @@ const styles = (theme) => ({
     },
   },
   detailContainerItems: {
-    paddingTop: '55px',
+    paddingTop: '35px',
     paddingLeft: '7px',
   },
   detailContainerItem:{
@@ -486,14 +488,14 @@ const styles = (theme) => ({
   title: {
     color: '#0296c9',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '12pt',
+    fontSize: '12px',
     letterSpacing: '0.017em',
     fontWeight: '600',
      textTransform: 'uppercase',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17pt',
+    fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#ff17f15',
     paddingBottom: '20px',
