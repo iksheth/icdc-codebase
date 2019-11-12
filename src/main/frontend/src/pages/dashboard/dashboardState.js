@@ -40,11 +40,17 @@ export const RECEIVE_DASHBOARD = 'RECEIVE_DASHBOARD';
 export const DASHBOARD_QUERY_ERR = 'DASHBOARD_QUERY_ERR';
 export const READY_DASHBOARD = 'READY_DASHBOARD';
 export const REQUEST_DASHBOARD = 'REQUEST_DASHBOARD';
-
+export const SINGLE_CHECKBOX = 'SINGLE_CHECKBOX';
 // Actions
 
 export const toggleCheckBox = (payload) => ({
   type: TOGGLE_CHECKBOX,
+  payload,
+});
+
+
+export const singleCheckBox = (payload) => ({
+  type: SINGLE_CHECKBOX,
   payload,
 });
 
@@ -113,6 +119,44 @@ export function fetchDataForDashboardDataTable() {
 
 export default function dashboardReducer(state = initialState, action) {
   switch (action.type) {
+    case SINGLE_CHECKBOX: {
+      const dataTableFilters = action.payload;
+      const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
+      const updatedCheckboxData = dataTableFilters && dataTableFilters.length !== 0
+        ? getCheckBoxData(
+          state.caseOverview.data,
+          state.checkboxForAll.data,
+          state.checkbox.data.filter((d) => action.payload[0].groupName === d.groupName)[0],
+          dataTableFilters,
+        )
+        : state.checkboxForAll.data;
+      return {
+        ...state,
+        stats: {
+          numberOfStudies: getStatDataFromDashboardData(tableData, 'study'),
+          numberOfCases: getStatDataFromDashboardData(tableData, 'case'),
+          numberOfSamples: getStatDataFromDashboardData(tableData, 'sample'),
+          numberOfFiles: getStatDataFromDashboardData(tableData, 'file'),
+          numberOfAliquots: getStatDataFromDashboardData(tableData, 'aliquot'),
+        },
+        checkbox: {
+          data: updatedCheckboxData,
+        },
+        datatable: {
+          ...state.datatable,
+          data: tableData,
+          filters: dataTableFilters,
+        },
+        widgets: {
+          studiesByProgram: getSunburstDataFromDashboardData(tableData),
+          caseCountByBreed: getDonutDataFromDashboardData(tableData, 'breed'),
+          caseCountByDiagnosis: getDonutDataFromDashboardData(tableData, 'diagnosis'),
+          caseCountByDiseaseSite: getDonutDataFromDashboardData(tableData, 'disease_site'),
+          caseCountByGender: getDonutDataFromDashboardData(tableData, 'sex'),
+          caseCountByStageOfDisease: getDonutDataFromDashboardData(tableData, 'stage_of_disease'),
+        },
+      };
+    }
     // if checkbox status has been changed, dashboard data table need to be update as well.
     case TOGGLE_CHECKBOX: {
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);

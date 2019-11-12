@@ -15,7 +15,7 @@ import { customSorting } from '../../../utils/dashboardUtilFunctions';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
 import {  useDispatch } from 'react-redux';
-import { toggleCheckBox,fetchDataForDashboardDataTable } from '../../../pages/dashboard/dashboardState';
+import { singleCheckBox,fetchDataForDashboardDataTable } from '../../../pages/dashboard/dashboardState';
 function studyDetailSorting(a, b) {
   if (b && !a) {
     return -1;
@@ -105,19 +105,15 @@ const StudyDetailView = ({ classes, data }) => {
     }}
 
    const dispatch = useDispatch();
-   const redirectTo=(location)=>{
-
-
+   const redirectTo=()=>{
     dispatch(initDashboardStatus()).then((result) => {
-       dispatch(toggleCheckBox([{
+       dispatch(singleCheckBox([{
         groupName: "Study",
         name: studyData.clinical_study_designation,
         datafield: "study_code",
         isChecked: true,
       }]));
     });
- 
-    return { ...location, pathname:"/"};
    }
 
   const cohortAndDosingTableData = [];
@@ -204,9 +200,7 @@ const StudyDetailView = ({ classes, data }) => {
           </div>
           <div className={classes.headerButton}>
             <Link className={classes.headerButtonLink} 
-            to={location =>{
-                 return redirectTo(location);
-            }}>
+            to ={(location) => ({ ...location, pathname:"/"})} onClick={()=>redirectTo()}>
               <Button className={classes.button}>
                 FILTER CASES
                 FOR THIS STUDY
