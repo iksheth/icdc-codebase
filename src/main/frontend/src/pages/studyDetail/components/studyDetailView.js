@@ -14,6 +14,8 @@ import { Typography, Button } from '../../../components/Wrappers/Wrappers';
 import { customSorting } from '../../../utils/dashboardUtilFunctions';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
+import {  useDispatch } from 'react-redux';
+import { toggleCheckBox,fetchDataForDashboardDataTable } from '../../../pages/dashboard/dashboardState';
 function studyDetailSorting(a, b) {
   if (b && !a) {
     return -1;
@@ -85,6 +87,7 @@ const options = (classes) => ({
 
 
 const StudyDetailView = ({ classes, data }) => {
+
   const studyData = data.study[0];
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const fileTypes = [...new Set(data.filesOfStudy.map((fileOfStudy) => (fileOfStudy.file_type)))];
@@ -95,6 +98,27 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfFiles: data.fileCountOfStudy,
     numberOfBiospecimenAliquots: data.aliguotCountOfStudy,
   };
+
+   const initDashboardStatus =() => {
+    return (dispatch, getState) => {
+       return Promise.resolve(dispatch(fetchDataForDashboardDataTable()));
+    }}
+
+   const dispatch = useDispatch();
+   const redirectTo=(location)=>{
+
+
+    dispatch(initDashboardStatus()).then((result) => {
+       dispatch(toggleCheckBox([{
+        groupName: "Study",
+        name: studyData.clinical_study_designation,
+        datafield: "study_code",
+        isChecked: true,
+      }]));
+    });
+ 
+    return { ...location, pathname:"/"};
+   }
 
   const cohortAndDosingTableData = [];
   studyData.study_arms.forEach((arm) => {
@@ -179,7 +203,10 @@ const StudyDetailView = ({ classes, data }) => {
             </div>
           </div>
           <div className={classes.headerButton}>
-            <Link className={classes.headerButtonLink} to={`/study_cases/${studyData.clinical_study_designation}`}>
+            <Link className={classes.headerButtonLink} 
+            to={location =>{
+                 return redirectTo(location);
+            }}>
               <Button className={classes.button}>
                 FILTER CASES
                 FOR THIS STUDY
