@@ -350,6 +350,7 @@ const styles = (theme) => ({
     margin: 'auto',
     float: 'left',
     marginLeft: '95px',
+    width: 'calc(100% - 250px)',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
@@ -367,6 +368,8 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
     fontSize: '12pt',
+    maxHeight: '25px',
+    overflow: 'hidden',
   },
   headerSubTitleContent: {
     color: '#000000',
