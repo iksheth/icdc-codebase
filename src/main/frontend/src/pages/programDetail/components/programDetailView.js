@@ -69,7 +69,7 @@ const ProgramDetailView = ({ classes, data }) => {
       <div className={classes.programDetailContainer}>
         <div className={classes.programDetailHeader}>
           <Typography variant="headline" size="sm">
-            {`${programDetail.program_acronym}(${programDetail.program_name})`}
+            {`${programDetail.program_name} (${programDetail.program_acronym})`}
           </Typography>
         </div>
         <Grid container spacing={32}>
@@ -77,7 +77,7 @@ const ProgramDetailView = ({ classes, data }) => {
             <Grid container spacing={32} direction="column">
               <Grid item xs={12}>
                 <Widget
-                  title={`${programDetail.program_name}(${programDetail.program_acronym})`}
+                  title="Program Summary"
                   upperTitle
                   bodyClass={classes.fullHeightBody}
                   className={classes.card}
@@ -92,7 +92,7 @@ const ProgramDetailView = ({ classes, data }) => {
                   <Grid item>
                     <Typography>
                       {programDetail.program_external_url
-                        ? <a href={`https://${programDetail.program_external_url}`} target="icdc">{programDetail.program_external_url}</a> : null}
+                        ? <a href={`${programDetail.program_external_url}`} target="icdc">{programDetail.program_external_url}</a> : null}
                     </Typography>
                   </Grid>
                 </Widget>
