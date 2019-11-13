@@ -1,7 +1,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import icdcLogo from '../../assets/logo.png';
-import dctdLogo from '../../assets/icdc_logo.png';
+import nihLogo from '../../assets/nih_logo.png';
+import icdcLogo from '../../assets/header/icdc_logo_white.svg';
+import cancergraphic from '../../assets/header/cancer-cell-graphic.png';
+
 
 // import classes from '*.module.sass';
 
@@ -10,60 +12,65 @@ import dctdLogo from '../../assets/icdc_logo.png';
  */
 
 const Header = ({ classes }) => (
-  <div className={classes.root}>
-    <div className={classes.headerBar}>
-      <nav className={classes.headerBarNavLeft}>
-        <div role="button" tabIndex="0" className={classes.headerBarHomeButton}><img src={dctdLogo} alt="dctd_logo" /></div>
-        <div className={classes.grow} />
-        <div className={classes.headerBarNavLogo}>
-          <img
-            className={classes.headerBarNavLogoImg}
-            src={icdcLogo}
-            alt="icdc_logo"
-          />
-        </div>
-      </nav>
+  <div className={classes.headerBar}>
+    <div className={classes.nihLogoContainer}>
+      <img
+        className={classes.nihLogoImg}
+        src={nihLogo}
+        alt="nih_logo"
+      />
+    </div>
+    <div className={classes.icdcLogoContainer}>
+      <div className={classes.grow} />
+      <img
+        className={classes.icdcLogoImg}
+        src={icdcLogo}
+        alt="icdc_logo"
+      />
     </div>
   </div>
 );
 
-const styles = (theme) => ({
-  headerBar: {
-    position: 'fixed',
-    width: '100vw',
-    backgroundColor: 'white',
-    top: '0px',
-  },
-
-  headerBarNavLeft: {
-    float: 'left',
-    display: 'inline-flex',
-    width: '100vw',
-  },
-  headerBarNavLogo: {
-    padding: '8px 0',
-    display: 'inline-block',
-    paddingRight: theme.spacing.unit * 2,
-  },
-  headerBarNavLogoImg: {
-    height: '64px',
-    display: 'block',
-    paddingRight: '8px',
-  },
-  headerBarHomeButton: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    paddingLeft: '22px',
-    height: '64px',
-    margin: 'auto',
-    borderLeft: '1px solid #d1d1d1',
-  },
+const styles = () => ({
   grow: {
     flexGrow: 3,
   },
-
-
+  headerBar: {
+    color: '#8A95A7',
+    width: '100%',
+    height: '79px',
+    margin: '0 auto',
+    display: 'flex',
+    position: 'fixed',
+    minHeight: '79px',
+    justifyContent: 'space-between',
+    top: '0px',
+    zIndex: '1201',
+    background: '#ffffff',
+  },
+  nihLogoContainer: {
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  icdcLogoContainer: {
+    cursor: 'pointer',
+    display: 'flex',
+    width: '100%',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 100%',
+    paddingLeft: '24px',
+    backgroundImage: `url(${cancergraphic})`,
+  },
+  nihLogoImg: {
+    height: '39px',
+    width: '269px',
+    margin: '25px auto auto 35px',
+  },
+  icdcLogoImg: {
+    margin: '22px 35px auto',
+    height: '39px',
+  },
 });
 
 

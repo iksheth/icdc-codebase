@@ -62,7 +62,7 @@ const ProgramCard = ({
     <CardContent>
       <Typography component="p">{data.program_short_description}</Typography>
       <Typography>
-        <a href={`https://${data.program_external_url}`} target="icdc">{data.program_external_url}</a>
+        <a href={`${data.program_external_url}`} target="icdc">{data.program_external_url}</a>
       </Typography>
     </CardContent>
     <CardActions disableSpacing>
