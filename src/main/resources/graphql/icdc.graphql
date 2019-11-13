@@ -519,6 +519,11 @@ type ProgramCaseCount {
   cases: Int
 }
 
+type FileFormatCaseCount {
+  file_format: String
+  cases: Int
+}
+
 type StudyOfProgram {
   program_id: String
   clinical_study_id: String
