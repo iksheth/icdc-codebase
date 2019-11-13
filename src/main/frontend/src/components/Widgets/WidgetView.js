@@ -73,7 +73,7 @@ const styles = (theme) => ({
     flexGrow: 1,
     overflow: 'hidden',
     boxShadow: 'none',
-    background: 'black',
+    background: theme.palette.black.main,
   },
 });
 

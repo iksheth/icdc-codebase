@@ -12,6 +12,7 @@ const warning = '#ff7f0b';
 const success = '#3CD4A0';
 const info = '#3f2b2f';
 const tableHeader = '#f5f5f5';
+const black = 'black';
 
 const lightenRate = 7.5;
 const darkenRate = 15;
@@ -108,6 +109,16 @@ export default {
         .lighten(lightenRate)
         .toHexString(),
       dark: tinycolor(cobolt)
+        .darken(darkenRate)
+        .toHexString(),
+      contrastText: '#FFFFFF',
+    },
+    black: {
+      main: black,
+      light: tinycolor(black)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(black)
         .darken(darkenRate)
         .toHexString(),
       contrastText: '#FFFFFF',

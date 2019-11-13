@@ -152,7 +152,7 @@ const styles = (theme) => ({
     padding: theme.spacing.unit * 3,
   },
   widgetsContainer: {
-    background: 'black',
+    background: theme.palette.black.main,
   },
   contentShift: {
     width: 'calc(100% - theme.custom.drawerWidth)',
