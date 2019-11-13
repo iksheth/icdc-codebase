@@ -72,7 +72,8 @@ const styles = (theme) => ({
     flexDirection: 'column',
     flexGrow: 1,
     overflow: 'hidden',
-    background: theme.custom.cardBackGround,
+    boxShadow: 'none',
+    background: 'black',
   },
 });
 

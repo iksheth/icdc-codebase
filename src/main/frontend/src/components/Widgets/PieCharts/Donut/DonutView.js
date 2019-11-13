@@ -15,11 +15,11 @@ const COLORS = [
 export default class GenderDonut extends PureComponent {
   render() {
     const {
-      data: genderDataObj, width, height, innerRadius, outerRadius, cx, cy,
+      data: DataObj, width, height, innerRadius, outerRadius, cx, cy,
     } = this.props;
 
     // Ajay Need to replace this with a utility function
-    const data = genderDataObj.map((obj) => ({
+    const data = DataObj.map((obj) => ({
       name: obj.item,
       value: obj.cases,
     }));
