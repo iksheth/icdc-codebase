@@ -17,7 +17,7 @@ const darkenRate = 15;
 const tableHeaderBorder = '#004c73 3px solid';
 const tableHeaderFontColor = '#194563';
 const tableFontFamily = "'Raleway', sans-serif";
-
+const black = 'black';
 
 export default {
   custom: {
@@ -138,6 +138,16 @@ export default {
       dark: tinycolor(info)
         .darken(darkenRate)
         .toHexString(),
+    },
+    black: {
+      main: black,
+      light: tinycolor(black)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(black)
+        .darken(darkenRate)
+        .toHexString(),
+      contrastText: '#FFFFFF',
     },
     info: {
       main: info,
