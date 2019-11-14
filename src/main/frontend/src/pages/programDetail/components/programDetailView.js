@@ -63,7 +63,6 @@ const ProgramDetailView = ({ classes, data }) => {
     numberOfFiles: data.fileCountOfProgram,
     numberOfBiospecimenAliquots: data.aliguotCountOfProgram,
   };
-  // let newText = text.split ('\n').map ((item, i) => <p key={i}>{item}</p>);
   return (
     <>
       <StatsView data={stat} />
