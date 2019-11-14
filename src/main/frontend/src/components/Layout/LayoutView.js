@@ -55,8 +55,8 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/table" component={table} />
             <Route path="/steeringCommittee" component={SteeringCommittee} />
             <Route path="/bpsc" component={BPSC} />
-            <Route path="/selectedcases" component={SelectedCases} />
-            <Route path="/selectedfiles" component={SelectedFiles} />
+            <Route path="/myCases" component={SelectedCases} />
+            <Route path="/myCasesFiles" component={SelectedFiles} />
 
             <Route
               path="/dgab"

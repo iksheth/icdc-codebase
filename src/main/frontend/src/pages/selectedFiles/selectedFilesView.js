@@ -4,6 +4,17 @@ import MUIDataTable from 'mui-datatables';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import CustomFooter from './customFooter';
 
+function formatBytes(bytes, decimals = 2) {
+  if (bytes === 0) return '0 Bytes';
+
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+
+  return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
+}
+
 const columns = [
 
   { name: 'case_id', label: 'CaseID', sortDirection: 'asc' },
@@ -11,11 +22,23 @@ const columns = [
   { name: 'file_type', label: 'File Type' },
   { name: 'file_description', label: 'Description' },
   { name: 'file_format', label: 'Format' },
-  { name: 'file_size', label: 'Size' },
-  { name: 'md5sum', label: 'Md5Sum' },
+  {
+    name: 'file_size',
+    label: 'Size',
+    options: {
+      customBodyRender: (bytes) => (formatBytes(bytes)),
+    },
+  },
   {
     name: 'uuid',
     label: 'UUID',
+    options: {
+      display: false,
+    },
+  },
+  {
+    name: 'md5sum',
+    label: 'Md5Sum',
     options: {
       display: false,
     },
@@ -73,15 +96,16 @@ const options = {
     Object.keys(selectedRows.data).map((keyVlaue) => (
       selectedRows.data[keyVlaue].index
     ));
-    const keysToInclude = [0, 6, 7];
+    const keysToInclude = [0, 1, 6, 7];
     const selectedFiles = Object.keys(selectedRows.data).map((keyVlaue) => (
       keysToInclude.map((value) => (displayData[keyVlaue].data[value]))
     ));
 
     globalData = selectedFiles.map((obj) => ({
-      UUID: obj[2],
-      Md5Sum: obj[1],
-      CaseName: obj[0],
+      caseId: obj[0],
+      fileName: obj[1],
+      uuid: obj[2],
+      md5Sum: obj[3],
     }));
     return (
       <></>);
