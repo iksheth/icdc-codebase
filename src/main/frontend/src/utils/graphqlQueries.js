@@ -289,3 +289,32 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
   }
   
  }`;
+
+export const GET_MY_CASES_DATA_QUERY = gql`
+query casesInList($caseIds: [String!]!) {
+
+  casesInList(case_ids: $caseIds) {
+    case_id
+    study_code
+    study_type
+    breed
+    diagnosis
+    stage_of_disease
+    age
+    sex
+    neutered_status
+}
+ filesOfCases(case_ids: $caseIds) {
+     case_id
+  file_description
+  file_format
+  file_locations
+  file_name
+  file_size
+  file_status
+  file_type
+  md5sum
+  uuid
+}
+
+}`;

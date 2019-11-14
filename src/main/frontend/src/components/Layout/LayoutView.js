@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import About from '../../pages/about/aboutView';
-import MyCases from '../../pages/myCases/myCasesView';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
@@ -24,8 +23,8 @@ import DGAB from '../../pages/dgabPage/dgbaRoute';
 import BPSC from '../../pages/bpsc/bpscRoute';
 import StudyDetail from '../../pages/studyDetail/studyDetailController';
 import ProgramDetail from '../../pages/programDetail/programDetailController';
-import SelectedCases from '../../pages/selectedCases/selectedCasesRoute';
-import SelectedFiles from '../../pages/selectedFiles/selectedFilesRoute';
+import SelectedCases from '../../pages/selectedCases/selectedCasesController';
+import SelectedFiles from '../../pages/selectedFiles/selectedFilesController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -65,7 +64,6 @@ const Layout = ({ classes, isSidebarOpened }) => (
             />
 
             <Route path="/about" component={About} />
-            <Route path="/mycases" component={MyCases} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/case/:id" component={CaseDetail} />

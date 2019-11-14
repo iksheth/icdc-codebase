@@ -121,15 +121,6 @@ const NavBar = ({
           <NavLink
             className={classes.link}
             activeStyle={{ borderBottom: '4px solid white' }}
-            to="/mycases"
-          >
-            <Button variant="h6" weight="medium" className={classes.logotype}>
-              My Cases
-            </Button>
-          </NavLink>
-          <NavLink
-            className={classes.link}
-            activeStyle={{ borderBottom: '4px solid white' }}
             to="/about"
           >
             <Button variant="h6" weight="medium" className={classes.logotype}>

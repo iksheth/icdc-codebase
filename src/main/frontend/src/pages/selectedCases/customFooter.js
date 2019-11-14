@@ -4,6 +4,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -19,14 +20,15 @@ const CustomFooter = ({
   onChangePage,
   onChangeRowsPerPage,
   text,
-  onClick,
 }) => (
   <TableFooter>
     <TableRow>
       <TableCell>
-        <Button onClick={onClick} variant="contained" color="primary" className={classes.button}>
-          {text}
-        </Button>
+        <Link to="selectedfiles">
+          <Button variant="contained" color="primary" className={classes.button}>
+            {text}
+          </Button>
+        </Link>
       </TableCell>
       <TablePagination
         className={classes.root}

@@ -159,6 +159,12 @@ const columns = [
   },
 ];
 
+let globalData = [];
+
+function exportCases() {
+  const userSelectedCases = globalData;
+  localStorage.setItem('userSelectedCases', JSON.stringify(userSelectedCases));
+}
 
 const options = (classes) => ({
   selectableRows: true,
@@ -169,9 +175,21 @@ const options = (classes) => ({
   download: false,
   viewColumns: false,
   pagination: true,
+  customToolbarSelect: (selectedRows, displayData) => {
+    const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
+      selectedRows.data[keyVlaue].index
+    ));
+    const selectedCaseId = selectedKeys.map((keyVlaue) => (
+      displayData[keyVlaue].data[0].props.children[1].props.children
+    ));
+    globalData = selectedCaseId;
+    return (
+      <></>);
+  },
   customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
     <CustomFooter
       text="SAVE TO MY CASES"
+      onClick={exportCases}
       classes={classes}
       count={count}
       page={page}
@@ -183,7 +201,6 @@ const options = (classes) => ({
   ),
 
 });
-
 
 const Cases = ({ classes, data }) => {
   const dispatch = useDispatch();
