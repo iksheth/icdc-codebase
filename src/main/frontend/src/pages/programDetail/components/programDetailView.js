@@ -63,6 +63,7 @@ const ProgramDetailView = ({ classes, data }) => {
     numberOfFiles: data.fileCountOfProgram,
     numberOfBiospecimenAliquots: data.aliguotCountOfProgram,
   };
+  // let newText = text.split ('\n').map ((item, i) => <p key={i}>{item}</p>);
   return (
     <>
       <StatsView data={stat} />
@@ -86,7 +87,7 @@ const ProgramDetailView = ({ classes, data }) => {
                   <Grid item>
                     <Typography>
                       {programDetail.program_full_description
-                        ? programDetail.program_full_description : null}
+                        ? programDetail.program_full_description.split('**').map((item, i) => <p key={i}>{item}</p>) : null}
                     </Typography>
                   </Grid>
                   <Grid item>
