@@ -27,6 +27,7 @@ const Dashboard = ({
               bodyClass={classes.fullHeightBody}
               className={classes.card}
               color="textWhite"
+              customBackGround
             >
               <ProgramSunburst
                 data={data.studiesByProgram}
@@ -46,6 +47,7 @@ const Dashboard = ({
               bodyClass={classes.fullHeightBody}
               className={classes.card}
               color="textWhite"
+              customBackGround
             >
               <CustomActiveDonut
                 data={data.caseCountByBreed}
@@ -65,6 +67,7 @@ const Dashboard = ({
               bodyClass={classes.fullHeightBody}
               className={classes.card}
               color="textWhite"
+              customBackGround
             >
               <CustomActiveDonut
                 data={data.caseCountByDiagnosis}
@@ -87,6 +90,7 @@ const Dashboard = ({
               bodyClass={classes.fullHeightBody}
               className={classes.card}
               color="textWhite"
+              customBackGround
             >
               <CustomActiveDonut
                 data={data.caseCountByDiseaseSite}
@@ -106,6 +110,7 @@ const Dashboard = ({
               bodyClass={classes.fullHeightBody}
               className={classes.card}
               color="textWhite"
+              customBackGround
             >
               <CustomActiveDonut
                 data={data.caseCountByGender}
@@ -125,6 +130,7 @@ const Dashboard = ({
               bodyClass={classes.fullHeightBody}
               className={classes.card}
               color="textWhite"
+              customBackGround
             >
               <CustomActiveDonut
                 data={data.caseCountByStageOfDisease}

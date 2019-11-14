@@ -86,7 +86,7 @@ const ProgramDetailView = ({ classes, data }) => {
                   <Grid item>
                     <Typography>
                       {programDetail.program_full_description
-                        ? programDetail.program_full_description : null}
+                        ? programDetail.program_full_description.split('**').map((item, i) => <p key={i}>{item}</p>) : null}
                     </Typography>
                   </Grid>
                   <Grid item>
