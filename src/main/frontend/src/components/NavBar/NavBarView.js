@@ -12,18 +12,18 @@ import {
   withStyles,
 } from '@material-ui/core';
 import {
-  ChevronLeft as ChevronLeftIcon,
   ColorLens as ColorLensIcon,
 } from '@material-ui/icons';
 import classnames from 'classnames';
-
-import ProfileMenu from '../ProfileMenu/ProfileMenuView';
+import caseIcon from '../../assets/icons/Icon-MyCases.svg';
+import funnelIcon from '../../assets/icons/CasesDashboard.Filter-icon.svg';
+// import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
 import { useTheme } from '../ThemeContext';
 
 const drawerWidth = 240;
 // const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
-const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
+// const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 
 const NavBar = ({
@@ -75,8 +75,11 @@ const NavBar = ({
         })}
         color="primary"
       >
-        <Toolbar>
-          { ((location.pathname === '/dashboard')
+        <Toolbar className={classes.toolbar}>
+
+          {/* Sidebar button */}
+          <div>
+            { ((location.pathname === '/dashboard')
         || (location.pathname === '/')) && (
         <Button
           variant="h6"
@@ -87,48 +90,65 @@ const NavBar = ({
           className={classnames(classes.menuButton, classes.logotype, {
             [classes.hide]: isSidebarOpened,
           })}
+          classes={{ root: classes.iconButtonRoot }}
         >
-            &lt;&lt;&nbsp;FILTERS
+          <img
+            className={classes.cartLogoImg}
+            src={funnelIcon}
+            alt="cart_logo"
+          />
         </Button>
-          )}
-          <NavLink
-            className={classes.link}
-            activeStyle={{ borderBottom: '4px solid white' }}
-            to="/dashboard"
-          >
-            <Button variant="h6" weight="medium" className={classes.logotype}>
-              Dashboard
-            </Button>
-          </NavLink>
-          <NavLink
-            className={classes.link}
-            activeStyle={{ borderBottom: '4px solid white' }}
-            to="/programs"
-          >
-            <Button variant="h6" weight="medium" className={classes.logotype}>
-              All Programs
-            </Button>
-          </NavLink>
-          <NavLink
-            className={classes.link}
-            activeStyle={{ borderBottom: '4px solid white' }}
-            to="/studies"
-          >
-            <Button variant="h6" weight="medium" className={classes.logotype}>
-              All Studies
-            </Button>
-          </NavLink>
-          <NavLink
-            className={classes.link}
-            activeStyle={{ borderBottom: '4px solid white' }}
-            to="/about"
-          >
-            <Button variant="h6" weight="medium" className={classes.logotype}>
+            )}
+          </div>
+          {/* End Sidebar button */}
+          <div className={classes.buttonContainer}>
+            <NavLink
+              className={classes.link}
+              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
+              to="/home"
+            >
+              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+              home
+              </Button>
+            </NavLink>
+            <NavLink
+              className={classes.link}
+              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
+              to="/dashboard"
+            >
+              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+              Cases
+              </Button>
+            </NavLink>
+            <NavLink
+              className={classes.link}
+              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
+              to="/programs"
+            >
+              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+                Programs
+              </Button>
+            </NavLink>
+            <NavLink
+              className={classes.link}
+              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
+              to="/studies"
+            >
+              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+               Studies
+              </Button>
+            </NavLink>
+            <NavLink
+              className={classes.link}
+              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
+              to="/about"
+            >
+              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               About
-            </Button>
-          </NavLink>
-
-          <div className={classes.grow} />
+              </Button>
+            </NavLink>
+          </div>
+          {/* <div className={classes.grow} /> */}
           <IconButton
             color="inherit"
             aria-haspopup="true"
@@ -137,18 +157,38 @@ const NavBar = ({
               theme.toggleTheme();
             }}
             className={classes.headerMenuButton}
+            classes={{ root: classes.iconButtonRoot }}
           >
             <Tooltip title="Light/Dark Theme" placement="bottom-end">
               <ColorLensIcon classes={{ root: classes.headerIcon }} />
             </Tooltip>
           </IconButton>
-          {authState.isAuthorized ? (
+          <IconButton
+            color="inherit"
+            aria-haspopup="true"
+            aria-controls="mail-menu"
+            className={classes.headerMenuButton}
+            classes={{ root: classes.iconButtonRoot }}
+          >
+            <Tooltip title="Cases" placement="bottom-end">
+              <img
+                className={classes.cartLogoImg}
+                src={caseIcon}
+                alt="cart_logo"
+              />
+            </Tooltip>
+          </IconButton>
+          {/* Login button functionality on Navigation bar */}
+
+          {/* {authState.isAuthorized ? (
             <ProfileMenu />
           ) : (
             <Button href={FENCE_LOGIN_URL} color="inherit">
               LOGIN
             </Button>
-          )}
+          )} */}
+          {/* End Login button functionality on Navigation bar */}
+
         </Toolbar>
       </AppBar>
       { ((location.pathname === '/dashboard')
@@ -163,8 +203,12 @@ const NavBar = ({
           }}
         >
           <div className={classes.drawerHeader} onClick={toggleSidebar}>
-            <IconButton>
-              <ChevronLeftIcon />
+            <IconButton classes={{ root: classes.iconCartButtonRoot }}>
+              <img
+                className={classes.cartLogoImg}
+                src={funnelIcon}
+                alt="cart_logo"
+              />
             </IconButton>
           </div>
           <Divider />
@@ -178,16 +222,17 @@ const NavBar = ({
 
 const styles = (theme) => ({
   logotype: {
-    color: 'white',
-    marginLeft: theme.spacing.unit * 2.5,
-    marginRight: theme.spacing.unit * 2.5,
-    fontWeight: 500,
-    fontSize: 18,
     whiteSpace: 'nowrap',
-    minHeight: '60px',
+    color: '#FFFFFF',
+    fontFamily: 'Raleway',
+    fontSize: '11px',
+    fontWeight: '600',
     [theme.breakpoints.down('xs')]: {
       display: 'none',
     },
+  },
+  buttonContainer: {
+    margin: '0 auto',
   },
   appBar: {
     marginTop: '80px',
@@ -198,9 +243,9 @@ const styles = (theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  toolbar: {
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
+  cartLogoImg: {
+    width: '20px',
+    height: '20px',
   },
   hide: {
     display: 'none',
@@ -233,7 +278,7 @@ const styles = (theme) => ({
     marginRight: theme.spacing.unit * 2,
   },
   headerIcon: {
-    fontSize: 28,
+    fontSize: 20,
   },
   headerIconCollapse: {
     color: 'white',
@@ -307,7 +352,18 @@ const styles = (theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    marginTop: '150px',
+    marginTop: '79px',
+    zIndex: '1201',
+  },
+  toolbar: {
+    minHeight: 39,
+    alignItems: 'flex-start',
+  },
+  buttonRoot: {
+    padding: '11px 10px',
+  },
+  iconButtonRoot: {
+    paddingTop: '11px',
   },
 });
 

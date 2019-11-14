@@ -155,7 +155,7 @@ const Dashboard = ({
 
 const styles = (theme) => ({
   content: {
-    padding: theme.spacing.unit * 3,
+    // padding: theme.spacing.unit * 3,
   },
   widgetsContainer: {
     background: theme.palette.black.main,
