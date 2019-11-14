@@ -211,9 +211,8 @@ const Cases = ({ classes, data }) => {
       ? state.dashboard.datatable.filters : []));
 
 
-
-  // The bubble below will shows in the dashboard and work as 
-  // When user select and filters 
+  // The bubble below will shows in the dashboard and work as
+  // When user select and filters
   // they will float above the case table on the dashboard .
   // Due to the design issue, disable bubble function for now
 
@@ -235,7 +234,7 @@ const Cases = ({ classes, data }) => {
       }}
     />
   )));
-  
+
   bubbles = '';
 
   return (
