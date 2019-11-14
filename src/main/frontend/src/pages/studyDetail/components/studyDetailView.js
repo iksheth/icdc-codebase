@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -9,13 +8,15 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import StatsView from '../../../components/Stats/StatsView';
 import { Typography, Button } from '../../../components/Wrappers/Wrappers';
 import { customSorting } from '../../../utils/dashboardUtilFunctions';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
-import {  useDispatch } from 'react-redux';
-import { singleCheckBox,fetchDataForDashboardDataTable } from '../../../pages/dashboard/dashboardState';
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
+import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
+
 function studyDetailSorting(a, b) {
   if (b && !a) {
     return -1;
@@ -87,7 +88,6 @@ const options = (classes) => ({
 
 
 const StudyDetailView = ({ classes, data }) => {
-
   const studyData = data.study[0];
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
   const fileTypes = [...new Set(data.filesOfStudy.map((fileOfStudy) => (fileOfStudy.file_type)))];
@@ -99,22 +99,21 @@ const StudyDetailView = ({ classes, data }) => {
     numberOfBiospecimenAliquots: data.aliguotCountOfStudy,
   };
 
-   const initDashboardStatus =() => {
-    return (dispatch, getState) => {
-       return Promise.resolve(dispatch(fetchDataForDashboardDataTable()));
-    }}
+  const initDashboardStatus = () => (dispatch) => Promise.resolve(
+    dispatch(fetchDataForDashboardDataTable()),
+  );
 
-   const dispatch = useDispatch();
-   const redirectTo=()=>{
-    dispatch(initDashboardStatus()).then((result) => {
-       dispatch(singleCheckBox([{
-        groupName: "Study",
+  const dispatch = useDispatch();
+  const redirectTo = () => {
+    dispatch(initDashboardStatus()).then(() => {
+      dispatch(singleCheckBox([{
+        groupName: 'Study',
         name: studyData.clinical_study_designation,
-        datafield: "study_code",
+        datafield: 'study_code',
         isChecked: true,
       }]));
     });
-   }
+  };
 
   const cohortAndDosingTableData = [];
   studyData.study_arms.forEach((arm) => {
@@ -153,13 +152,23 @@ const StudyDetailView = ({ classes, data }) => {
     cohortAndDosingTableData.push(cohortAndDosing);
   });
 
+
+  const breadCrumbJson = [{
+    name: 'ALL PROGRAMS',
+    to: '/programs',
+  }, {
+    name: studyData.program.program_acronym,
+    to: '',
+  }];
+
+
   return (
     <>
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>
           <div className={classes.logo}>
-             <img
+            <img
               src={icon}
               alt="ICDC case detail header logo"
             />
@@ -168,34 +177,30 @@ const StudyDetailView = ({ classes, data }) => {
           <div className={classes.headerTitle}>
             <div className={classes.headerMainTitle}>
               <span>
+                {' '}
+                <span>
+                    Study :
                   {' '}
-                  <span>
-                    Study : {' '}{studyData.clinical_study_designation}
-                  </span>
+                  {' '}
+                  {studyData.clinical_study_designation}
+                </span>
               </span>
             </div>
-            <div className={cn(classes.headerMSubTitle,classes.headerSubTitleCate)}>
-                <span>
-                  {' '}
-                  {studyData.clinical_study_name}
-                </span>
+            <div className={cn(classes.headerMSubTitle, classes.headerSubTitleCate)}>
+              <span>
+                {' '}
+                {studyData.clinical_study_name}
+              </span>
 
             </div>
-            <div className={classes.headerNav}>
-              <Link className={classes.headerNavLink} to="/programs">
-                    ALL PROGRAMS
-              </Link>
-    /
-              <Link className={classes.headerNavLink} to={"/program/"+studyData.program.program_acronym}>
-                    {studyData.program.program_acronym}  STUDIES
-              </Link>
-
-
-            </div>
+            <CustomBreadcrumb data={breadCrumbJson} />
           </div>
           <div className={classes.headerButton}>
-            <Link className={classes.headerButtonLink} 
-            to ={(location) => ({ ...location, pathname:"/"})} onClick={()=>redirectTo()}>
+            <Link
+              className={classes.headerButtonLink}
+              to={(location) => ({ ...location, pathname: '/' })}
+              onClick={() => redirectTo()}
+            >
               <Button className={classes.button}>
                 FILTER CASES
                 FOR THIS STUDY
@@ -210,78 +215,78 @@ const StudyDetailView = ({ classes, data }) => {
           <Grid container spacing={8}>
             <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
-                <Grid item xs={12} >
-                    <span className={classes.detailContainerHeader}>Description</span>
+                <Grid item xs={12}>
+                  <span className={classes.detailContainerHeader}>Description</span>
                 </Grid>
-                <Grid item xs={12} >
-                     <span className={classes.content}>{studyData.clinical_study_description}</span>
+                <Grid item xs={12}>
+                  <span className={classes.content}>{studyData.clinical_study_description}</span>
                 </Grid>
 
-                 <Grid container spacing={8} className={classes.detailContainerItems}>
-                    <Grid item xs={12} className={classes.detailContainerItem}>
-                       <span className={classes.title}> Study Type:</span>
-                    </Grid>
-                    <Grid item xs={12} spacing={0} className={classes.content}>
-                        {studyData.clinical_study_type}
-                    </Grid>
-                    <Grid item xs={12} className={classes.detailContainerItem}>
-                        <span className={classes.title}>Principal Investigators:</span>
-                    </Grid>
-                    <Grid item xs={12} className={classes.content}>
-                        {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => <li>{principalInvestigator}</li>) : ''}
-                    </Grid>
-                    <Grid item xs={12} className={classes.detailContainerItem}>
-                        <span className={classes.title}>Date of IACUC Approval:</span>
-                    </Grid>
-                    <Grid item xs={12} className={classes.content}>
-                        {studyData.date_of_iacuc_approval}
-                    </Grid>
-                    <Grid item xs={12} className={classes.detailContainerItem}>
-                        <span className={classes.title}>Conducted:</span>
-                    </Grid>
-                    <Grid item xs={12} className={classes.content}>
-                        {studyData.dates_of_conduct}
-                    </Grid>
+                <Grid container spacing={8} className={classes.detailContainerItems}>
+                  <Grid item xs={12} className={classes.detailContainerItem}>
+                    <span className={classes.title}> Study Type:</span>
+                  </Grid>
+                  <Grid item xs={12} spacing={0} className={classes.content}>
+                    {studyData.clinical_study_type}
+                  </Grid>
+                  <Grid item xs={12} className={classes.detailContainerItem}>
+                    <span className={classes.title}>Principal Investigators:</span>
+                  </Grid>
+                  <Grid item xs={12} className={classes.content}>
+                    {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => <li>{principalInvestigator}</li>) : ''}
+                  </Grid>
+                  <Grid item xs={12} className={classes.detailContainerItem}>
+                    <span className={classes.title}>Date of IACUC Approval:</span>
+                  </Grid>
+                  <Grid item xs={12} className={classes.content}>
+                    {studyData.date_of_iacuc_approval}
+                  </Grid>
+                  <Grid item xs={12} className={classes.detailContainerItem}>
+                    <span className={classes.title}>Conducted:</span>
+                  </Grid>
+                  <Grid item xs={12} className={classes.content}>
+                    {studyData.dates_of_conduct}
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
-           </Grid>
             <Grid item lg={6} md={6} sm={6} xs={12}>
               <Grid container spacing={32} direction="row" className={classes.detailContainerRight}>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
-                   <Grid container spacing={8}>
+                  <Grid container spacing={8}>
                     <Grid item xs={12}>
                       <Typography>
                         <span className={classes.detailContainerHeader}>DIAGNOSES</span>
                       </Typography>
                     </Grid>
-                    </Grid>
-                    <Grid container spacing={8}>
-                      {diagnoses.sort((a, b) => customSorting(a, b, 'alphabetical')).map((diagnosis) => (
-                        <Grid item xs={12} >
-                            <span className={classes.content}>
-                              {' '}
-                              {diagnosis}
-                            </span>
-                        </Grid>
-                      ))}
-                    </Grid>
+                  </Grid>
+                  <Grid container spacing={8}>
+                    {diagnoses.sort((a, b) => customSorting(a, b, 'alphabetical')).map((diagnosis) => (
+                      <Grid item xs={12}>
+                        <span className={classes.content}>
+                          {' '}
+                          {diagnosis}
+                        </span>
+                      </Grid>
+                    ))}
+                  </Grid>
                 </Grid>
 
                 <Grid item lg={6} md={6} sm={6} xs={12}>
-                  <Grid container spacing={8} >
+                  <Grid container spacing={8}>
                     <Grid item xs={12}>
                       <Typography>
                         <span className={classes.detailContainerHeader}>[DIAGNOSIS] FILE TYPE</span>
                       </Typography>
                     </Grid>
                   </Grid>
-                    <Grid container spacing={8}>
-                      {fileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
-                        <Grid item xs={12}>
-                          <span className={classes.content}>{fileType}</span>
-                        </Grid>
-                      ))}
-                    </Grid>
+                  <Grid container spacing={8}>
+                    {fileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
+                      <Grid item xs={12}>
+                        <span className={classes.content}>{fileType}</span>
+                      </Grid>
+                    ))}
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
@@ -299,9 +304,11 @@ const StudyDetailView = ({ classes, data }) => {
             <Grid item xs={12}>
               <Grid container spacing={8}>
                 <Grid item xs={12}>
-                  <Typography >
+                  <Typography>
                     <MUIDataTable
-                      data={cohortAndDosingTableData.sort((a,b)=>studyDetailSorting(a.arm, b.arm))}
+                      data={cohortAndDosingTableData.sort(
+                        (a, b) => studyDetailSorting(a.arm, b.arm),
+                      )}
                       columns={columns}
                       options={options(classes)}
                     />
@@ -332,8 +339,8 @@ const styles = (theme) => ({
     fontFamily: 'Raleway, sans-serif',
 
   },
-  content:{
-    fontSize: '12px',
+  content: {
+    fontSize: '12pt',
     lineHeight: '14px',
   },
   warning: {
@@ -357,7 +364,7 @@ const styles = (theme) => ({
     paddingLeft: '16px',
     paddingRight: '16px',
     borderBottom: '#81a6b9 4px solid',
-    height: '75px',
+    height: '85px',
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
   },
@@ -365,17 +372,17 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
-    marginLeft: '95px',
-    width: 'calc(100% - 250px)',
+    marginLeft: '110px',
+    width: 'calc(100% - 265px)',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
     fontWeight: 'bold',
     letterSpacing: '0.017em',
     color: '#0296c9',
-    fontSize: '19px',
-    height:'12px',
-    lineHeight:'17px',
+    fontSize: '19pt',
+    height: '12px',
+    lineHeight: '17px',
     paddingLeft: '3px',
   },
   headerSubTitleCate: {
@@ -385,7 +392,7 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
     fontSize: '12pt',
-    maxHeight: '25px',
+    maxHeight: '35px',
     overflow: 'hidden',
     paddingLeft: '3px',
   },
@@ -395,13 +402,13 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '12px',
+    fontSize: '12pt',
   },
   headerMSubTitle: {
-    paddingTop: '9px',
+    paddingTop: '12px',
   },
   headerNav: {
-    paddingTop: '8px',
+    paddingTop: '12px',
     color: '#5e8ca5',
     paddingBottom: '12px',
   },
@@ -412,16 +419,16 @@ const styles = (theme) => ({
     color: '#5e8ca5',
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '9px',
+    fontSize: '9pt',
     letterSpacing: '0.025em',
 
   },
- 
+
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-4px',
-    width: '85px',
+    marginTop: '-8px',
+    width: '100px',
   },
   detailContainer: {
     maxWidth: theme.custom.maxContentWidth,
@@ -432,14 +439,14 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
-    size:'12px',
+    size: '12px',
     lineHeight: '23px',
 
   },
   detailContainerHeader: {
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17px',
+    fontSize: '17pt',
     letterSpacing: '0.017em',
     color: '#0296c9',
   },
@@ -449,18 +456,18 @@ const styles = (theme) => ({
     padding: ' 35px 0 63px 2px !important',
   },
   detailContainerLeft: {
-    display:'block',
+    display: 'block',
     padding: '5px  20px 5px 2px !important',
-    minHeight: '510px',
-    maxHeight: '510px',
+    minHeight: '550px',
+    maxHeight: '550px',
     overflowY: 'auto',
     overflowX: 'hidden',
   },
   detailContainerRight: {
     padding: '5px 0 5px 20px !important',
     borderLeft: '#81a6b9 1px solid',
-    minHeight: '510px',
-    maxHeight: '510px',
+    minHeight: '550px',
+    maxHeight: '550px',
     overflowY: 'auto',
     overflowX: 'hidden',
   },
@@ -476,7 +483,7 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: '8px auto auto auto',
   },
-   headerButton: {
+  headerButton: {
     float: 'right',
     paddingTop: '15px',
   },
@@ -486,10 +493,10 @@ const styles = (theme) => ({
   button: {
     borderRadius: '22px',
     padding: '0 22px',
-    width: '125px',
+    width: '150px',
     height: '35px',
-    lineHeight: '10px',
-    fontSize: '10px',
+    lineHeight: '14px',
+    fontSize: '10pt',
     color: '#ffffff',
     textTransform: 'uppercase',
     backgroundColor: '#ff8a00',
@@ -502,20 +509,20 @@ const styles = (theme) => ({
     paddingTop: '35px',
     paddingLeft: '7px',
   },
-  detailContainerItem:{
+  detailContainerItem: {
     paddingTop: '15px !important',
   },
   title: {
     color: '#0296c9',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '12px',
+    fontSize: '12pt',
     letterSpacing: '0.017em',
     fontWeight: '600',
     textTransform: 'uppercase',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17px',
+    fontSize: '17pt',
     letterSpacing: '0.017em',
     color: '#ff17f15',
     paddingBottom: '20px',

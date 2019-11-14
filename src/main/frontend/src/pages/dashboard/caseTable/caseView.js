@@ -210,28 +210,38 @@ const Cases = ({ classes, data }) => {
     && state.dashboard.datatable.filters
       ? state.dashboard.datatable.filters : []));
 
+
+
+  // The bubble below will shows in the dashboard and work as 
+  // When user select and filters 
+  // they will float above the case table on the dashboard .
+  // Due to the design issue, disable bubble function for now
+
+  let bubbles = (chipData.map((ckdata) => (
+    <Chip
+      key={ckdata.datafield + ckdata.name}
+      label={ckdata.name}
+      onDelete={() => {
+        dispatch(toggleCheckBox([{
+          groupName: ckdata.groupName,
+          name: ckdata.name,
+          datafield: ckdata.datafield,
+          isChecked: false,
+        }]));
+      }}
+      classes={{
+        root: classes.chipRoot,
+        deleteIcon: classes.chipDeleteIcon,
+      }}
+    />
+  )));
+  
+  bubbles = '';
+
   return (
     <>
       <div className={classes.chips}>
-        {chipData.map((ckdata) => (
-          <Chip
-            key={ckdata.datafield + ckdata.name}
-            label={ckdata.name}
-            onDelete={() => {
-              dispatch(toggleCheckBox([{
-                groupName: ckdata.groupName,
-                name: ckdata.name,
-                datafield: ckdata.datafield,
-                isChecked: false,
-              }]));
-            }}
-            classes={{
-              root: classes.chipRoot,
-              deleteIcon: classes.chipDeleteIcon,
-            }}
-          />
-        ))}
-
+        {bubbles}
       </div>
       <Grid container spacing={32}>
         <Grid item xs={12}>

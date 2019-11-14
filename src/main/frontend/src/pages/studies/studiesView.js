@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -10,128 +9,126 @@ import { Link } from 'react-router-dom';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
+import { useDispatch } from 'react-redux';
 import Stats from '../../components/Stats/AllStatsController';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-StudiesDetail.svg';
-import {  useDispatch } from 'react-redux';
-import { singleCheckBox,fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 
 
 const Studies = ({ classes, data }) => {
+  const initDashboardStatus = () => (dispatch) => Promise.resolve(
+    dispatch(fetchDataForDashboardDataTable()),
+  );
 
-    const columns = [
-      {
-        name: 'clinical_study_designation',
-        label: 'Study Code',
-        options: {
-          filter: false,
-          customBodyRender: (value) => (
-            <Link to={`/study/${value}`}>{value}</Link>
-          ),
-        },
-      },
-      { name: 'program_id', label: 'Program' },
-      { name: 'clinical_study_name', label: 'Study Name' },
-      { name: 'clinical_study_type', label: 'Study Type' },
-      {
-        name: 'numberOfCases',
-        label: 'Cases',
-        options: {
-          customBodyRender: (value, tableMeta) => (
-            <div className="mui_td">
-              {' '}
-              <Link  to ={(location) => ({ ...location, pathname:"/"})} onClick={()=>redirectTo(tableMeta.rowData[0])}>{value}</Link>
-              {' '}
-            </div>
-          ),
-        },
-      },
-    ];
-
-    const options = (classes) => ({
-      selectableRows: false,
-      search: false,
-      filter: false,
-      searchable: false,
-      print: false,
-      download: false,
-      viewColumns: false,
-      pagination: true,
-      rowsPerPageOptions: [10, 25, 50, 100],
-      customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              className={classes.root}
-              count={count}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-              // eslint-disable-next-line no-shadow
-              onChangePage={(_, page) => changePage(page)}
-            />
-          </TableRow>
-        </TableFooter>
-      ),
-    });
-
-
-    const initDashboardStatus =() => {
-      return (dispatch, getState) => {
-         return Promise.resolve(dispatch(fetchDataForDashboardDataTable()));
-      }}
-
-    const dispatch = useDispatch();
-    const redirectTo=(study)=>{
-    dispatch(initDashboardStatus()).then((result) => {
-       dispatch(singleCheckBox([{
-        groupName: "Study",
+  const dispatch = useDispatch();
+  const redirectTo = (study) => {
+    dispatch(initDashboardStatus()).then(() => {
+      dispatch(singleCheckBox([{
+        groupName: 'Study',
         name: study,
-        datafield: "study_code",
+        datafield: 'study_code',
         isChecked: true,
       }]));
     });
-   }
+  };
 
-return (
-  <>
-    <Stats />
-    <div className={classes.tableContainer}>
-      <div className={classes.header}>
-       <div className={classes.logo}>
+  const columns = [
+    {
+      name: 'clinical_study_designation',
+      label: 'Study Code',
+      options: {
+        filter: false,
+        customBodyRender: (value) => (
+          <Link to={`/study/${value}`}>{value}</Link>
+        ),
+      },
+    },
+    { name: 'program_id', label: 'Program' },
+    { name: 'clinical_study_name', label: 'Study Name' },
+    { name: 'clinical_study_type', label: 'Study Type' },
+    {
+      name: 'numberOfCases',
+      label: 'Cases',
+      options: {
+        customBodyRender: (value, tableMeta) => (
+          <div className="mui_td">
+            {' '}
+            <Link to={(location) => ({ ...location, pathname: '/' })} onClick={() => redirectTo(tableMeta.rowData[0])}>{value}</Link>
+            {' '}
+          </div>
+        ),
+      },
+    },
+  ];
+
+  const options = () => ({
+    selectableRows: false,
+    search: false,
+    filter: false,
+    searchable: false,
+    print: false,
+    download: false,
+    viewColumns: false,
+    pagination: true,
+    rowsPerPageOptions: [10, 25, 50, 100],
+    customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
+      <TableFooter>
+        <TableRow>
+          <TablePagination
+            className={classes.root}
+            count={count}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
+              // eslint-disable-next-line no-shadow
+            onChangePage={(_, page) => changePage(page)}
+          />
+        </TableRow>
+      </TableFooter>
+    ),
+  });
+
+
+  return (
+    <>
+      <Stats />
+      <div className={classes.tableContainer}>
+        <div className={classes.header}>
+          <div className={classes.logo}>
             <img
               src={icon}
               alt="ICDC case detail header logo"
             />
 
           </div>
-        <div className={classes.headerTitle}>
-          <div className={classes.headerMainTitle}>
-            <span>
-              <Typography >
-                <span className={classes.headerMainTitle}>Studies</span>
-              </Typography>
-            </span>
+          <div className={classes.headerTitle}>
+            <div className={classes.headerMainTitle}>
+              <span>
+                <Typography>
+                  <span className={classes.headerMainTitle}>Studies</span>
+                </Typography>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
 
-      <div className={classes.tableDiv}>
-        <Grid container spacing={32}>
-          <Grid item xs={12}>
-            <MUIDataTable
-              data={data.studiesByProgram}
-              columns={columns}
-              options={options(classes)}
-            />
+        <div className={classes.tableDiv}>
+          <Grid container spacing={32}>
+            <Grid item xs={12}>
+              <MUIDataTable
+                data={data.studiesByProgram}
+                columns={columns}
+                options={options(classes)}
+              />
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
       </div>
-    </div>
-  </>
-)
-}
+    </>
+  );
+};
 
 const styles = (theme) => ({
   card: {
@@ -164,7 +161,7 @@ const styles = (theme) => ({
     height: '120px',
     maxWidth: '1440px',
     margin: 'auto',
-    paddingTop:'35px',
+    paddingTop: '35px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
@@ -172,7 +169,7 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     color: '#606061',
     fontSize: '25px',
-     position: 'absolute',
+    position: 'absolute',
     marginTop: '14px',
     lineHeight: '25px',
   },
@@ -186,7 +183,7 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginLeft:'-13px',
+    marginLeft: '-13px',
     width: '83px',
     zIndex: '999',
   },
