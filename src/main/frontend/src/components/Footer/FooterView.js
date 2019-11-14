@@ -125,7 +125,7 @@ const Footer = ({ classes, data }) => {
             <li>
               <Typography className={classes.footerText}>
                 <a target="icdc-external" href="https://www.cancer.gov/policies/accessibility">
-              accessibility
+              Accessibility
                 </a>
               </Typography>
             </li>

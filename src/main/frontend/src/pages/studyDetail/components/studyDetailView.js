@@ -182,16 +182,12 @@ const StudyDetailView = ({ classes, data }) => {
 
             </div>
             <div className={classes.headerNav}>
-              <Link className={classes.headerNavLink} to="/">
-                    ALL PROGRAM
+              <Link className={classes.headerNavLink} to="/programs">
+                    ALL PROGRAMS
               </Link>
     /
-              <Link className={classes.headerNavLink} to="/">
-                    STUDIES
-              </Link>
-    /
-              <Link className={classes.headerNavLink} to="/">
-                    CASES
+              <Link className={classes.headerNavLink} to={"/program/"+studyData.program.program_acronym}>
+                    {studyData.program.program_acronym}  STUDIES
               </Link>
 
 
@@ -305,7 +301,7 @@ const StudyDetailView = ({ classes, data }) => {
                 <Grid item xs={12}>
                   <Typography >
                     <MUIDataTable
-                      data={cohortAndDosingTableData}
+                      data={cohortAndDosingTableData.sort((a,b)=>studyDetailSorting(a.arm, b.arm))}
                       columns={columns}
                       options={options(classes)}
                     />
@@ -361,7 +357,7 @@ const styles = (theme) => ({
     paddingLeft: '16px',
     paddingRight: '16px',
     borderBottom: '#81a6b9 4px solid',
-    height: '70px',
+    height: '75px',
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
   },
@@ -380,6 +376,7 @@ const styles = (theme) => ({
     fontSize: '19px',
     height:'12px',
     lineHeight:'17px',
+    paddingLeft: '3px',
   },
   headerSubTitleCate: {
     color: '#606061',
@@ -390,6 +387,7 @@ const styles = (theme) => ({
     fontSize: '12pt',
     maxHeight: '25px',
     overflow: 'hidden',
+    paddingLeft: '3px',
   },
   headerSubTitleContent: {
     color: '#000000',
@@ -400,14 +398,12 @@ const styles = (theme) => ({
     fontSize: '12px',
   },
   headerMSubTitle: {
-    paddingTop: '5px',
+    paddingTop: '9px',
   },
   headerNav: {
-    paddingTop: '5px',
+    paddingTop: '8px',
     color: '#5e8ca5',
-    paddingBottom: '8px',
-    paddingLeft:'3px',
-
+    paddingBottom: '12px',
   },
   headerNavLink: {
     paddingLeft: '6px',
@@ -424,13 +420,13 @@ const styles = (theme) => ({
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-8px',
+    marginTop: '-4px',
     width: '85px',
   },
   detailContainer: {
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
-    paddingTop: '25px',
+    paddingTop: '30px',
     paddingLeft: '31px',
     paddingRight: '31px',
     fontFamily: theme.custom.fontFamilySans,
@@ -450,18 +446,18 @@ const styles = (theme) => ({
   detailContainerBottom: {
     borderTop: '#81a6b9 1px solid',
     marginTop: '13px',
-    padding: ' 35px 0 63px 0px !important',
+    padding: ' 35px 0 63px 2px !important',
   },
   detailContainerLeft: {
     display:'block',
-    padding: '5px 20px 0 50px !important',
+    padding: '5px  20px 5px 2px !important',
     minHeight: '510px',
     maxHeight: '510px',
     overflowY: 'auto',
     overflowX: 'hidden',
   },
   detailContainerRight: {
-    padding: '5px 0 0 80px !important',
+    padding: '5px 0 5px 20px !important',
     borderLeft: '#81a6b9 1px solid',
     minHeight: '510px',
     maxHeight: '510px',
@@ -478,7 +474,7 @@ const styles = (theme) => ({
   tableDiv: {
     padding: '31px',
     maxWidth: theme.custom.maxContentWidth,
-    margin: '20px auto auto auto',
+    margin: '8px auto auto auto',
   },
    headerButton: {
     float: 'right',

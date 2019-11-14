@@ -13,64 +13,87 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Stats from '../../components/Stats/AllStatsController';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-StudiesDetail.svg';
+import {  useDispatch } from 'react-redux';
+import { singleCheckBox,fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 
-const columns = [
-  {
-    name: 'clinical_study_designation',
-    label: 'Study Code',
-    options: {
+
+const Studies = ({ classes, data }) => {
+
+    const columns = [
+      {
+        name: 'clinical_study_designation',
+        label: 'Study Code',
+        options: {
+          filter: false,
+          customBodyRender: (value) => (
+            <Link to={`/study/${value}`}>{value}</Link>
+          ),
+        },
+      },
+      { name: 'program_id', label: 'Program' },
+      { name: 'clinical_study_name', label: 'Study Name' },
+      { name: 'clinical_study_type', label: 'Study Type' },
+      {
+        name: 'numberOfCases',
+        label: 'Cases',
+        options: {
+          customBodyRender: (value, tableMeta) => (
+            <div className="mui_td">
+              {' '}
+              <Link  to ={(location) => ({ ...location, pathname:"/"})} onClick={()=>redirectTo(tableMeta.rowData[0])}>{value}</Link>
+              {' '}
+            </div>
+          ),
+        },
+      },
+    ];
+
+    const options = (classes) => ({
+      selectableRows: false,
+      search: false,
       filter: false,
-      customBodyRender: (value) => (
-        <Link to={`/study/${value}`}>{value}</Link>
+      searchable: false,
+      print: false,
+      download: false,
+      viewColumns: false,
+      pagination: true,
+      rowsPerPageOptions: [10, 25, 50, 100],
+      customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              className={classes.root}
+              count={count}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
+              // eslint-disable-next-line no-shadow
+              onChangePage={(_, page) => changePage(page)}
+            />
+          </TableRow>
+        </TableFooter>
       ),
-    },
-  },
-  { name: 'program_id', label: 'Program' },
-  { name: 'clinical_study_name', label: 'Study Name' },
-  { name: 'clinical_study_type', label: 'Study Type' },
-  {
-    name: 'numberOfCases',
-    label: 'Cases',
-    options: {
-      customBodyRender: (value, tableMeta) => (
-        <div className="mui_td">
-          {' '}
-          <Link to={`/study_cases/${tableMeta.rowData[0]}`}>{value}</Link>
-          {' '}
-        </div>
-      ),
-    },
-  },
-];
+    });
 
-const options = (classes) => ({
-  selectableRows: false,
-  search: false,
-  filter: false,
-  searchable: false,
-  print: false,
-  download: false,
-  viewColumns: false,
-  pagination: true,
-  rowsPerPageOptions: [10, 25, 50, 100],
-  customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
-    <TableFooter>
-      <TableRow>
-        <TablePagination
-          className={classes.root}
-          count={count}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-          // eslint-disable-next-line no-shadow
-          onChangePage={(_, page) => changePage(page)}
-        />
-      </TableRow>
-    </TableFooter>
-  ),
-});
 
-const Studies = ({ classes, data }) => (
+    const initDashboardStatus =() => {
+      return (dispatch, getState) => {
+         return Promise.resolve(dispatch(fetchDataForDashboardDataTable()));
+      }}
+
+    const dispatch = useDispatch();
+    const redirectTo=(study)=>{
+    dispatch(initDashboardStatus()).then((result) => {
+       dispatch(singleCheckBox([{
+        groupName: "Study",
+        name: study,
+        datafield: "study_code",
+        isChecked: true,
+      }]));
+    });
+   }
+
+return (
   <>
     <Stats />
     <div className={classes.tableContainer}>
@@ -107,7 +130,8 @@ const Studies = ({ classes, data }) => (
       </div>
     </div>
   </>
-);
+)
+}
 
 const styles = (theme) => ({
   card: {

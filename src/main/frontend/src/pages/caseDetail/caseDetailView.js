@@ -13,7 +13,8 @@ import StatsView from '../../components/Stats/StatsView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
-
+import {  useDispatch } from 'react-redux';
+import { singleCheckBox,fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 
 const columns = [
 
@@ -55,6 +56,25 @@ const options = (classes) => ({
 
 
 const CaseDetail = ({ classes, data }) => {
+
+
+  const initDashboardStatus =() => {
+      return (dispatch, getState) => {
+         return Promise.resolve(dispatch(fetchDataForDashboardDataTable()));
+      }}
+
+    const dispatch = useDispatch();
+    const redirectTo=(study)=>{
+    dispatch(initDashboardStatus()).then((result) => {
+       dispatch(singleCheckBox([{
+        groupName: "Study",
+        name: study,
+        datafield: "study_code",
+        isChecked: true,
+      }]));
+    });
+   }
+
   const stat = {
     numberOfStudies: 1,
     numberOfCases: 1,
@@ -65,6 +85,29 @@ const CaseDetail = ({ classes, data }) => {
   const caseDetail = data.case[0];
 
   const notProvided = '';
+
+  const breadCrumb = (       <div className={classes.headerNav}>
+              <Link className={classes.headerNavLink} to="/programs">
+                    ALL PROGRAMS
+              </Link>
+    /
+              <Link className={classes.headerNavLink} to={"/study/"+caseDetail.study.clinical_study_designation}>
+                    {caseDetail.study.clinical_study_designation} Detail
+              </Link>
+    /
+              <Link className={classes.headerNavLink} to="/" onClick={()=>redirectTo(caseDetail.study.clinical_study_designation)}>
+                    {caseDetail.study.clinical_study_designation} CASES
+              </Link>   
+    /
+              <Link className={classes.headerNavLink} >
+                    {caseDetail.case_id} 
+              </Link>
+            </div>
+            )
+
+
+
+
   return (
     <>
       <StatsView data={stat} />
@@ -83,26 +126,14 @@ const CaseDetail = ({ classes, data }) => {
              !(caseDetail.enrollment && caseDetail.enrollment.initials !== '' && caseDetail.enrollment.initials !== null)
               ? (
             <div className={classes.headerTitle}>
-            <div className={cn(classes.headerMainTitle,classes.marginTop30)}>
+            <div className={cn(classes.headerMainTitle,classes.marginTop23)}>
               <span>
                 <span> Case :{' '} {caseDetail.case_id}
                 </span>
               </span>
             </div>
 
-            <div className={classes.headerNav}>
-              <Link className={classes.headerNavLink} to="/">
-                    ALL PROGRAM
-              </Link>
-    /
-              <Link className={classes.headerNavLink} to="/">
-                    STUDIES
-              </Link>
-    /
-              <Link className={classes.headerNavLink} to="/">
-                    CASES
-              </Link>
-            </div>
+            {breadCrumb}
           </div>
           )
 
@@ -149,19 +180,7 @@ const CaseDetail = ({ classes, data }) => {
 
             </div>
 
-            <div className={classes.headerNav}>
-              <Link className={classes.headerNavLink} to="/">
-                    ALL PROGRAM
-              </Link>
-    /
-              <Link className={classes.headerNavLink} to="/">
-                    STUDIES
-              </Link>
-    /
-              <Link className={classes.headerNavLink} to="/">
-                    CASES
-              </Link>
-            </div>
+             {breadCrumb}
           </div>
                 )}
 
@@ -465,8 +484,8 @@ const styles = (theme) => ({
     fontSize: '12px',
     lineHeight: '14px',
   },
-  marginTop30:{
-    marginTop:'30px',
+  marginTop23:{
+    marginTop:'23px',
   },
   warning: {
     color: theme.palette.warning.main,
@@ -489,7 +508,7 @@ const styles = (theme) => ({
     paddingLeft: '16px',
     paddingRight: '16px',
     borderBottom: '#81a6b9 4px solid',
-    height: '70px',
+    height: '75px',
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
   },
@@ -499,6 +518,7 @@ const styles = (theme) => ({
     margin: 'auto',
     float: 'left',
     marginLeft: '95px',
+    paddingLeft: '3px',
   },
   headerMainTitle: {
     fontFamily: theme.custom.fontFamilySans,
@@ -508,9 +528,10 @@ const styles = (theme) => ({
     fontSize: '19px',
     height:'12px',
     lineHeight:'17px',
+    paddingLeft: '5px',
   },
   headerMSubTitle: {
-    paddingTop: '8px',
+    paddingTop: '11px',
   },
   headerSubTitleCate: {
     color: '#606061',
@@ -521,6 +542,7 @@ const styles = (theme) => ({
     fontSize: '12px',
     maxHeight: '25px',
     overflow: 'hidden',
+    paddingLeft: '3px',
   },
   headerSubTitleContent: {
     color: '#000000',
@@ -529,14 +551,13 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
     fontSize: '12px',
+    paddingLeft: '3px',
   },
 
   headerNav: {
-    paddingTop: '5px',
+    paddingTop: '8px',
     color: '#5e8ca5',
-    paddingBottom: '8px',
-    paddingLeft:'3px',
-
+    paddingBottom: '12px',
   },
   headerNavLink: {
     paddingLeft: '6px',
@@ -556,7 +577,7 @@ const styles = (theme) => ({
  logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-8px',
+    marginTop: '-3px',
     width: '85px',
   },
   detailContainer: {
@@ -584,10 +605,11 @@ const styles = (theme) => ({
     padding: ' 35px 0 63px 0px !important',
   },
   detailContainerLeft: {
-    padding: '35px 0px 0 50px !important',
+    padding: '35px 0px 0 0px !important',
     minHeight: '300px',
   },
   detailContainerRight: {
+    padding: '5px 0 5px 20px !important',
     padding: '35px 0 40px 80px !important',
     minHeight: '300px',
     borderLeft: '#81a6b9 1px solid',

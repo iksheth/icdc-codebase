@@ -110,8 +110,11 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
             study_sites{
                 site_short_name
             }
+            clinical_study_name
             clinical_study_designation
-      
+            program{
+            program_acronym
+          }
         }
         demographic{
             breed
@@ -253,6 +256,9 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
    }
 
   study(clinical_study_designation: $csd){
+    program{
+      program_acronym
+    }
     clinical_study_id
     clinical_study_name
     clinical_study_designation
