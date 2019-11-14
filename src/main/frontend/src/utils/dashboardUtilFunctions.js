@@ -291,7 +291,7 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
         });
         item.isChecked = false;
         filters.forEach((filter) => {
-          if (item.name === filter.name) {
+          if (checkbox.groupName === filter.groupName && item.name === filter.name) {
             item.isChecked = filter.isChecked;
           }
         });
