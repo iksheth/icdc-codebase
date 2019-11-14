@@ -24,7 +24,7 @@ const CustomFooter = ({
   <TableFooter>
     <TableRow>
       <TableCell>
-        <Link to="selectedfiles">
+        <Link to="mycasesfiles">
           <Button variant="contained" color="primary" className={classes.button}>
             {text}
           </Button>
