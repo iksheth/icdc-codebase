@@ -163,21 +163,26 @@ const NavBar = ({
               <ColorLensIcon classes={{ root: classes.headerIcon }} />
             </Tooltip>
           </IconButton>
-          <IconButton
-            color="inherit"
-            aria-haspopup="true"
-            aria-controls="mail-menu"
-            className={classes.headerMenuButton}
-            classes={{ root: classes.iconButtonRoot }}
+          <NavLink
+            className={classes.link}
+            to="/myCases"
           >
-            <Tooltip title="Cases" placement="bottom-end">
-              <img
-                className={classes.cartLogoImg}
-                src={caseIcon}
-                alt="cart_logo"
-              />
-            </Tooltip>
-          </IconButton>
+            <IconButton
+              color="inherit"
+              aria-haspopup="true"
+              aria-controls="mail-menu"
+              className={classes.headerMenuButton}
+              classes={{ root: classes.iconButtonRoot }}
+            >
+              <Tooltip title="Cases" placement="bottom-end">
+                <img
+                  className={classes.cartLogoImg}
+                  src={caseIcon}
+                  alt="cart_logo"
+                />
+              </Tooltip>
+            </IconButton>
+          </NavLink>
           {/* Login button functionality on Navigation bar */}
 
           {/* {authState.isAuthorized ? (
