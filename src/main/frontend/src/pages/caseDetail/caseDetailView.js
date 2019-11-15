@@ -418,13 +418,15 @@ Case :
                         <span className={classes.title}>Study Site</span>
                       </Grid>
                       <Grid item xs={6} className={classes.content}>
-                        {caseDetail.study ? caseDetail.study.study_sites.map((site) => (
-                          <li>
-                            {' '}
-                            {site.site_short_name}
-                            {' '}
-                          </li>
-                        )) : notProvided}
+                        {caseDetail.enrollment
+                            && caseDetail.enrollment.site_short_name
+                              && caseDetail.enrollment.site_short_name !== null ? (
+                                <li>
+                                  {' '}
+                                  {caseDetail.enrollment.site_short_name}
+                                  {' '}
+                                </li>
+                          ) : notProvided}
                       </Grid>
                     </Grid>
                   </Grid>

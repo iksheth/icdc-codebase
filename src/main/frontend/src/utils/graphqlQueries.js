@@ -107,9 +107,6 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
         patient_id
         patient_first_name
         study{
-            study_sites{
-                site_short_name
-            }
             clinical_study_name
             clinical_study_designation
             program{
@@ -130,6 +127,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
             }
         }
         enrollment{
+            site_short_name
             date_of_registration
             patient_subgroup
             date_of_informed_consent
