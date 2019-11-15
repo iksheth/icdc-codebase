@@ -414,6 +414,7 @@ Case :
                   </Grid>
                   <Grid item xs={12}>
                     <Grid container spacing={8}>
+                    
                       <Grid item xs={6}>
                         <span className={classes.title}>Study Site</span>
                       </Grid>
