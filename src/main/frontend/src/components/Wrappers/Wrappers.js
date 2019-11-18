@@ -32,20 +32,23 @@ const getFontSize = (size, variant = '', theme) => {
   let multiplier;
 
   switch (size) {
+    case 'xs':
+      multiplier = 0.5;
+      break;
     case 'sm':
       multiplier = 0.8;
       break;
     case 'md':
-      multiplier = 1.5;
+      multiplier = 1.2;
       break;
     case 'l':
-      multiplier = 1.7;
+      multiplier = 1.5;
       break;
     case 'xl':
-      multiplier = 2;
+      multiplier = 1.7;
       break;
     case 'xxl':
-      multiplier = 3;
+      multiplier = 2;
       break;
     default:
       multiplier = 1;

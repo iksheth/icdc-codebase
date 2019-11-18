@@ -42,7 +42,6 @@ export default {
         .toHexString(),
       contrastText: '#FFFFFF',
     },
-
     curiousBlue: {
       main: curiousBlue,
       light: tinycolor(curiousBlue)
