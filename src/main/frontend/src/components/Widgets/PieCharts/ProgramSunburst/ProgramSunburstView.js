@@ -3,8 +3,10 @@ import { Sunburst, LabelSeries } from 'react-vis';
 
 
 const LABEL_STYLE = {
-  fontSize: '15px',
+  fontSize: '10px',
   textAnchor: 'middle',
+  fill: 'white',
+  fontFamily: '"Open Sans", sans-serif',
 };
 
 function getKeyPath(node) {

@@ -29,15 +29,17 @@ const Dashboard = ({
               color="textWhite"
               customBackGround
             >
-              <ProgramSunburst
-                data={data.studiesByProgram}
-                width={400}
-                height={225}
-                innerRadius={50}
-                outerRadius={75}
-                cx="50%"
-                cy="50%"
-              />
+              <div className={classes.marginTop32}>
+                <ProgramSunburst
+                  data={data.studiesByProgram}
+                  width={350}
+                  height={175}
+                  innerRadius={50}
+                  outerRadius={75}
+                  cx="50%"
+                  cy="50%"
+                />
+              </div>
             </Widget>
           </Grid>
           <Grid item lg={4} md={4} sm={6} xs={12}>
@@ -181,6 +183,9 @@ const styles = (theme) => ({
   },
   sunburst: {
     textAlign: 'center',
+  },
+  marginTop32: {
+    marginTop: '32px',
   },
 });
 

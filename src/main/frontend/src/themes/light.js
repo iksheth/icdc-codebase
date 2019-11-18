@@ -42,7 +42,6 @@ export default {
         .toHexString(),
       contrastText: '#FFFFFF',
     },
-
     curiousBlue: {
       main: curiousBlue,
       light: tinycolor(curiousBlue)
@@ -114,7 +113,7 @@ export default {
       contrastText: '#FFFFFF',
     },
     black: {
-      main: black,
+      main: '#292e34',
       light: tinycolor(black)
         .lighten(lightenRate)
         .toHexString(),

@@ -4,12 +4,18 @@ import {
 } from 'recharts';
 
 const COLORS = [
-  '#523175',
-  '#6e7ff5',
-  '#fc4b5b',
-  '#2b69a3',
-  '#287d6d',
-  '#af66ff',
+  '#39C0F0',
+  '#004CF3',
+  '#FF7F15',
+  '#4C3112',
+  '#8DE260',
+  '#437200',
+  '#FBB35D',
+  '#965200',
+  '#69CBED',
+  '#113801',
+  '#4BC41E',
+  '#434C4F',
 ];
 
 const renderActiveShape = (props) => {
@@ -29,7 +35,7 @@ const renderActiveShape = (props) => {
   const textAnchor = cos >= 0 ? 'start' : 'end';
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill="white" fontSize="12px">{payload.name}</text>
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill="white" fontSize="10px" fontFamily='"Open Sans", sans-serif'>{payload.name}</text>
       <Sector
         cx={cx}
         cy={cy}
@@ -45,21 +51,18 @@ const renderActiveShape = (props) => {
         startAngle={startAngle}
         endAngle={endAngle}
         innerRadius={outerRadius + 6}
-        outerRadius={outerRadius + 10}
+        outerRadius={outerRadius + 8}
         fill={fill}
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="white" fontSize="14px">{`${value} Cases`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="white" fontSize="10px" fontFamily='"Open Sans", sans-serif'>{`${value} Cases`}</text>
     </g>
   );
 };
 
 
 export default class CustomActiveDonut extends PureComponent {
-  // state = {
-  //   activeIndex: 0,
-  // };
   constructor(props) {
     super(props);
     this.state = { activeIndex: 0 };
@@ -96,6 +99,7 @@ export default class CustomActiveDonut extends PureComponent {
           fill="#8884d8"
           dataKey="value"
           onMouseEnter={this.onPieEnter}
+          blendStroke
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
