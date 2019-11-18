@@ -11,15 +11,17 @@ import {
   Tooltip,
   withStyles,
 } from '@material-ui/core';
-import {
-  ColorLens as ColorLensIcon,
-} from '@material-ui/icons';
+// import {
+//   ColorLens as ColorLensIcon,
+// } from '@material-ui/icons';
 import classnames from 'classnames';
 import caseIcon from '../../assets/icons/Icon-MyCases.svg';
-import funnelIcon from '../../assets/icons/CasesDashboard.Filter-icon.svg';
+import funnelIconBlue from '../../assets/icons/Icon-funnel-blue.svg';
+import funnelIconWhite from '../../assets/icons/Icon-funnel-white.svg';
+
 // import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
-import { useTheme } from '../ThemeContext';
+// import { useTheme } from '../ThemeContext';
 
 const drawerWidth = 240;
 // const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
@@ -29,7 +31,7 @@ const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 const NavBar = ({
   classes, isSidebarOpened, toggleSidebar, location,
 }) => {
-  const theme = useTheme();
+  // const theme = useTheme();
   const [authState, setAuthState] = React.useState({
     isAuthorized: localStorage.getItem('isAuthorized') === 'true',
   });
@@ -94,7 +96,7 @@ const NavBar = ({
         >
           <img
             className={classes.cartLogoImg}
-            src={funnelIcon}
+            src={funnelIconWhite}
             alt="cart_logo"
           />
         </Button>
@@ -149,7 +151,8 @@ const NavBar = ({
             </NavLink>
           </div>
           {/* <div className={classes.grow} /> */}
-          <IconButton
+          {/* Start of Theme Switching Icon and logic */}
+          {/* <IconButton
             color="inherit"
             aria-haspopup="true"
             aria-controls="mail-menu"
@@ -162,7 +165,9 @@ const NavBar = ({
             <Tooltip title="Light/Dark Theme" placement="bottom-end">
               <ColorLensIcon classes={{ root: classes.headerIcon }} />
             </Tooltip>
-          </IconButton>
+          </IconButton> */}
+          {/* Start of Theme Switching Icon and logic */}
+
           <NavLink
             className={classes.link}
             to="/myCases"
@@ -211,7 +216,7 @@ const NavBar = ({
             <IconButton classes={{ root: classes.iconCartButtonRoot }}>
               <img
                 className={classes.cartLogoImg}
-                src={funnelIcon}
+                src={funnelIconBlue}
                 alt="cart_logo"
               />
             </IconButton>

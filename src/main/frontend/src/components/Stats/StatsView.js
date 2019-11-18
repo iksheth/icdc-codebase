@@ -23,7 +23,7 @@ const StatsView = ({ classes, data }) => (
               <div className={classes.statsIcon}>
                 <img
                   src={StudyIcon}
-                  alt="ICDC case detail header logo"
+                  alt="Studies Stats Bar Icon"
                 />
 
               </div>
@@ -43,7 +43,7 @@ const StatsView = ({ classes, data }) => (
               <div className={classes.statsIcon}>
                 <img
                   src={CasesIcon}
-                  alt="ICDC case detail header logo"
+                  alt="Cases Stats Bar Icon"
                 />
 
               </div>
@@ -62,7 +62,7 @@ const StatsView = ({ classes, data }) => (
               <div className={classes.statsIcon}>
                 <img
                   src={SamplesIcon}
-                  alt="ICDC case detail header logo"
+                  alt="Cases Samples Bar Icon"
                 />
 
               </div>
@@ -81,7 +81,7 @@ const StatsView = ({ classes, data }) => (
               <div className={classes.statsIcon}>
                 <img
                   src={FilesIcon}
-                  alt="ICDC case detail header logo"
+                  alt="Files Stats Bar Icon"
                 />
 
               </div>
@@ -100,7 +100,7 @@ const StatsView = ({ classes, data }) => (
               <div className={classes.statsIcon}>
                 <img
                   src={AliquotsIcon}
-                  alt="ICDC case detail header logo"
+                  alt="Aliquots Stats Bar Icon"
                 />
 
               </div>
