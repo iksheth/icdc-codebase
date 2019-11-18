@@ -26,7 +26,7 @@ export default {
     maxContent: 'white',
     bodyBackGround: 'white',
     cardBackGround: '#f0f6f8',
-    footorBackground: '#a6d3eb',
+    footorBackground: '#325068',
     fontFamilySans: '"Open Sans", sans-serif',
     fontFamilyRaleway: "'Raleway', sans-serif",
     drawerWidth: '240px',
@@ -164,7 +164,7 @@ export default {
       secondary: '#6E6E6E',
       hint: '#B9B9B9',
       link: '#1669aa',
-      footerText: '#25282a',
+      footerText: 'white',
     },
     background: {
       default: '#fafafa',
