@@ -10,7 +10,7 @@ import CustomActiveDonut from '../../components/Widgets/PieCharts/CustomActiveDo
 
 
 const Dashboard = ({
-  classes, data, isSidebarOpened,
+  classes, data, isSidebarOpened, theme,
 }) => (
   <>
     <div className={classnames({
@@ -26,7 +26,7 @@ const Dashboard = ({
               upperTitle
               bodyClass={classes.fullHeightBody}
               className={classes.card}
-              color="textWhite"
+              color="textWithBackground"
               customBackGround
             >
               <div className={classes.marginTop32}>
@@ -38,6 +38,7 @@ const Dashboard = ({
                   outerRadius={75}
                   cx="50%"
                   cy="50%"
+                  textColor={theme.palette.widgetBackground.contrastText}
                 />
               </div>
             </Widget>
@@ -48,7 +49,7 @@ const Dashboard = ({
               upperTitle
               bodyClass={classes.fullHeightBody}
               className={classes.card}
-              color="textWhite"
+              color="textWithBackground"
               customBackGround
             >
               <CustomActiveDonut
@@ -59,6 +60,7 @@ const Dashboard = ({
                 outerRadius={75}
                 cx="50%"
                 cy="50%"
+                textColor={theme.palette.widgetBackground.contrastText}
               />
             </Widget>
           </Grid>
@@ -68,7 +70,7 @@ const Dashboard = ({
               upperTitle
               bodyClass={classes.fullHeightBody}
               className={classes.card}
-              color="textWhite"
+              color="textWithBackground"
               customBackGround
             >
               <CustomActiveDonut
@@ -79,6 +81,7 @@ const Dashboard = ({
                 outerRadius={75}
                 cx="50%"
                 cy="50%"
+                textColor={theme.palette.widgetBackground.contrastText}
               />
             </Widget>
           </Grid>
@@ -91,7 +94,7 @@ const Dashboard = ({
               upperTitle
               bodyClass={classes.fullHeightBody}
               className={classes.card}
-              color="textWhite"
+              color="textWithBackground"
               customBackGround
             >
               <CustomActiveDonut
@@ -102,6 +105,7 @@ const Dashboard = ({
                 outerRadius={75}
                 cx="50%"
                 cy="50%"
+                textColor={theme.palette.widgetBackground.contrastText}
               />
             </Widget>
           </Grid>
@@ -111,7 +115,7 @@ const Dashboard = ({
               upperTitle
               bodyClass={classes.fullHeightBody}
               className={classes.card}
-              color="textWhite"
+              color="textWithBackground"
               customBackGround
             >
               <CustomActiveDonut
@@ -122,6 +126,7 @@ const Dashboard = ({
                 outerRadius={75}
                 cx="50%"
                 cy="50%"
+                textColor={theme.palette.widgetBackground.contrastText}
               />
             </Widget>
           </Grid>
@@ -131,7 +136,7 @@ const Dashboard = ({
               upperTitle
               bodyClass={classes.fullHeightBody}
               className={classes.card}
-              color="textWhite"
+              color="textWithBackground"
               customBackGround
             >
               <CustomActiveDonut
@@ -142,6 +147,7 @@ const Dashboard = ({
                 outerRadius={75}
                 cx="50%"
                 cy="50%"
+                textColor={theme.palette.widgetBackground.contrastText}
               />
             </Widget>
           </Grid>
@@ -160,7 +166,7 @@ const styles = (theme) => ({
     // padding: theme.spacing.unit * 3,
   },
   widgetsContainer: {
-    background: theme.palette.black.main,
+    background: theme.palette.widgetBackground.main,
   },
   contentShift: {
     width: 'calc(100% - theme.custom.drawerWidth)',

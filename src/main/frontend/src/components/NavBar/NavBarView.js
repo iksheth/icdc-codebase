@@ -12,16 +12,18 @@ import {
   Tooltip,
   withStyles,
 } from '@material-ui/core';
-// import {
-//   ColorLens as ColorLensIcon,
-// } from '@material-ui/icons';
+import {
+  ColorLens as ColorLensIcon,
+} from '@material-ui/icons';
 import classnames from 'classnames';
+import { useTheme } from '../ThemeContext';
 import caseIcon from '../../assets/icons/Icon-MyCases.svg';
 import funnelIconBlue from '../../assets/icons/Icon-funnel-blue.svg';
 import funnelIconWhite from '../../assets/icons/Icon-funnel-white.svg';
 // import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
 import { initCart } from '../../pages/selectedCases/selectedCasesState';
+import { Badge } from '../Wrappers/Wrappers';
 
 const drawerWidth = 240;
 // const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
@@ -31,7 +33,7 @@ const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 const NavBar = ({
   classes, isSidebarOpened, toggleSidebar, location,
 }) => {
-  // const theme = useTheme();
+  const theme = useTheme();
   const [authState, setAuthState] = React.useState({
     isAuthorized: localStorage.getItem('isAuthorized') === 'true',
   });
@@ -161,7 +163,7 @@ const NavBar = ({
           </div>
           {/* <div className={classes.grow} /> */}
           {/* Start of Theme Switching Icon and logic */}
-          {/* <IconButton
+          <IconButton
             color="inherit"
             aria-haspopup="true"
             aria-controls="mail-menu"
@@ -174,7 +176,7 @@ const NavBar = ({
             <Tooltip title="Light/Dark Theme" placement="bottom-end">
               <ColorLensIcon classes={{ root: classes.headerIcon }} />
             </Tooltip>
-          </IconButton> */}
+          </IconButton>
           {/* Start of Theme Switching Icon and logic */}
 
           <NavLink
@@ -189,15 +191,18 @@ const NavBar = ({
               classes={{ root: classes.iconButtonRoot }}
             >
               <Tooltip title="Cases" placement="bottom-end">
-                <img
-                  className={classes.cartLogoImg}
-                  src={caseIcon}
-                  alt="cart_logo"
-                />
+                <Badge color="primary" badgeContent={numberOfCases}>
+
+                  <img
+                    className={classes.cartLogoImg}
+                    src={caseIcon}
+                    alt="cart_logo"
+                  />
+                </Badge>
+
               </Tooltip>
             </IconButton>
           </NavLink>
-          <span styles={{ color: 'white' }}>{numberOfCases}</span>
           {/* Login button functionality on Navigation bar */}
 
           {/* {authState.isAuthorized ? (

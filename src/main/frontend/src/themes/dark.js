@@ -130,7 +130,7 @@ export default {
         .darken(darkenRate)
         .toHexString(),
     },
-    textWhite: {
+    textWithBackground: {
       main: 'white',
       light: tinycolor(info)
         .lighten(lightenRate)
@@ -139,15 +139,15 @@ export default {
         .darken(darkenRate)
         .toHexString(),
     },
-    black: {
-      main: black,
+    widgetBackground: {
+      main: '#2C3038',
       light: tinycolor(black)
         .lighten(lightenRate)
         .toHexString(),
       dark: tinycolor(black)
         .darken(darkenRate)
         .toHexString(),
-      contrastText: '#FFFFFF',
+      contrastText: 'white',
     },
     info: {
       main: info,
