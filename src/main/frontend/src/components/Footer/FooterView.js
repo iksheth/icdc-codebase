@@ -17,12 +17,34 @@ const Footer = ({ classes, data }) => {
     }, classes.footerComponent)}
     >
       <div className={classes.footerRow}>
+        <div className={
+          cn(classes.footerRowSection, classes.footerNciColumn, classes.marginRight40)
+}
+        >
+          <ul>
+            <li>
+              <Typography
+                size="xxl"
+                className={cn(classes.footerText)}
+              >
+              National Cancer Institute
+              </Typography>
+            </li>
+            <li>
+              <Typography
+                size="l"
+                className={cn(classes.footerText)}
+              >
+                at the National Institutes of Health
+              </Typography>
+            </li>
+          </ul>
+        </div>
         <div className={classes.footerRowSection}>
           <ul>
             <li>
               <Typography
-                variant="h6"
-                weight="medium"
+                weight="bold"
                 className={cn(classes.footerText, classes.listHeader)}
               >
               About ICDC
@@ -52,8 +74,7 @@ const Footer = ({ classes, data }) => {
           <ul>
             <li>
               <Typography
-                variant="h6"
-                weight="medium"
+                weight="bold"
                 className={cn(classes.footerText, classes.listHeader)}
               >
               About the Data
@@ -78,8 +99,7 @@ const Footer = ({ classes, data }) => {
           <ul>
             <li>
               <Typography
-                variant="h6"
-                weight="medium"
+                weight="bold"
                 className={cn(classes.footerText, classes.listHeader)}
               >
               About Data Submission
@@ -108,8 +128,7 @@ const Footer = ({ classes, data }) => {
           <ul>
             <li>
               <Typography
-                variant="h6"
-                weight="medium"
+                weight="bold"
                 className={cn(classes.footerText, classes.listHeader)}
               >
               NIH Policies
@@ -138,13 +157,10 @@ const Footer = ({ classes, data }) => {
             </li>
           </ul>
         </div>
-        {/* <div className={cn(classes.footerRowSection, classes.footerNciColumn)}>
-                <a target="icdc-external" target="icdc-external" href="https://www.cancer.gov/" target="icdc-nci" rel="nofollow">
-                    <img className="nciBadge" src={nciLogo} alt="National Cancer Insistitute" />
-                </a>
-            </div> */}
       </div>
-
+      <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
+        <div className={classes.horizontalLine} />
+      </div>
       <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
         <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
           <Typography>
@@ -176,29 +192,6 @@ const Footer = ({ classes, data }) => {
           </Typography>
         </div>
       </div>
-      <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
-        <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
-          <Typography>
-            <a
-              target="icdc-external"
-              title="link to  Division of Cancer Treatment and Diagnosis"
-              href="https://dctd.cancer.gov/"
-            >
-            Division of Cancer Treatment and Diagnosis
-            </a>
-            <span className={classes.ext}>&nbsp;|&nbsp;</span>
-          </Typography>
-          <Typography>
-            <a
-              target="icdc-external"
-              title="link to Center for Biomedical Informatics and Information Technology"
-              href="https://datascience.cancer.gov/"
-            >
-            Center for Biomedical Informatics and Information Technology
-            </a>
-          </Typography>
-        </div>
-      </div>
       <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
         <div
           className={cn(
@@ -225,7 +218,7 @@ const Footer = ({ classes, data }) => {
           )}
         >
           <Typography>
-            <span className={classes.turningNIH}>
+            <span className={classes.footorVersiontext}>
             Version 0.2 /&nbsp;
               {VERSION}
             </span>
@@ -253,7 +246,7 @@ const styles = (theme) => ({
     },
   },
   extraPadding: {
-    marginTop: '20px',
+    marginTop: '10px',
     '@media (max-width: 600px)': {
       marginTop: '0px',
     },
@@ -263,6 +256,7 @@ const styles = (theme) => ({
     marginLeft: theme.spacing.unit * 2.5,
     marginRight: theme.spacing.unit * 2.5,
     fontWeight: 500,
+    fontSize: 9,
     lineHeight: '1.71',
     whiteSpace: 'nowrap',
     [theme.breakpoints.down('xs')]: {
@@ -277,7 +271,7 @@ const styles = (theme) => ({
     },
   },
   listHeader: {
-    paddingBottom: '8px',
+    paddingBottom: '4px',
   },
   footerComponent: {
     lineHeight: '1.42857143',
@@ -331,7 +325,12 @@ const styles = (theme) => ({
     marginTop: '16px',
   },
   turningNIH: {
-    fontSize: '16px',
+    fontSize: '14px',
+    color: theme.palette.text.footerText,
+    textDecoration: 'none',
+  },
+  footorVersiontext: {
+    fontSize: '8px',
     color: theme.palette.text.footerText,
     textDecoration: 'none',
   },
@@ -375,6 +374,14 @@ const styles = (theme) => ({
   },
   contentJustifyLeft: {
     justifyContent: 'left',
+  },
+  horizontalLine: {
+    width: '80%',
+    margin: '32px auto 16px auto',
+    borderTop: '1px solid #1E394D',
+  },
+  marginRight40: {
+    marginRight: '40px',
   },
 });
 
