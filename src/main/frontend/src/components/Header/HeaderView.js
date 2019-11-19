@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import nihLogo from '../../assets/nih_logo.png';
+import nihLogo from '../../assets/header/icdc_nih_logo.svg';
 import icdcLogo from '../../assets/header/icdc_logo_white.svg';
 import cancergraphic from '../../assets/header/cancer-cell-graphic.png';
 
@@ -63,7 +63,7 @@ const styles = () => ({
     backgroundImage: `url(${cancergraphic})`,
   },
   nihLogoImg: {
-    height: '39px',
+    height: '33px',
     width: '269px',
     margin: '25px auto auto 35px',
   },
