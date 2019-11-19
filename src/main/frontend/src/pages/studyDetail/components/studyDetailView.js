@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -116,41 +117,43 @@ const StudyDetailView = ({ classes, data }) => {
   };
 
   const cohortAndDosingTableData = [];
-  studyData.study_arms.forEach((arm) => {
-    const cohortAndDosing = {
-      arm: arm.arm || arm.arm === '' ? arm.arm : 'This study is not divided into arms',
-      description: arm.description ? arm.description : '',
-      does: '',
-      cohortDescription: '',
-    };
-    let arrayDoes = [];
-    const arrayCohortDes = [];
-    arm.cohorts.forEach((cohort) => {
-      if (cohort.cohort_dose
+  if (studyData.cohorts) {
+    studyData.study_arms.forEach((arm) => {
+      const cohortAndDosing = {
+        arm: arm.arm || arm.arm === '' ? arm.arm : 'This study is not divided into arms',
+        description: arm.description ? arm.description : '',
+        does: '',
+        cohortDescription: '',
+      };
+      let arrayDoes = [];
+      const arrayCohortDes = [];
+      arm.cohorts.forEach((cohort) => {
+        if (cohort.cohort_dose
             && cohort.cohort_dose !== ''
             && cohort.cohort_dose !== null) {
-        arrayDoes.push(cohort.cohort_dose);
-      }
-      if (cohort.cohort_description
+          arrayDoes.push(cohort.cohort_dose);
+        }
+        if (cohort.cohort_description
             && cohort.cohort_description !== ''
               && cohort.cohort_description !== null) {
-        arrayCohortDes.push(cohort.cohort_description);
-      }
-    });
+          arrayCohortDes.push(cohort.cohort_description);
+        }
+      });
 
-    if (arrayDoes.length === 0) {
-      if (arrayCohortDes.length === 0) {
-        cohortAndDosing.does = 'This study is not divided into cohorts';
+      if (arrayDoes.length === 0) {
+        if (arrayCohortDes.length === 0) {
+          cohortAndDosing.does = 'This study is not divided into cohorts';
+        } else {
+          arrayDoes = arrayCohortDes;
+          cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
+        }
       } else {
-        arrayDoes = arrayCohortDes;
         cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
       }
-    } else {
-      cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
-    }
 
-    cohortAndDosingTableData.push(cohortAndDosing);
-  });
+      cohortAndDosingTableData.push(cohortAndDosing);
+    });
+  }
 
 
   const breadCrumbJson = [{
@@ -233,7 +236,9 @@ const StudyDetailView = ({ classes, data }) => {
                     <span className={classes.title}>Principal Investigators:</span>
                   </Grid>
                   <Grid item xs={12} className={classes.content}>
-                    {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => <li>{principalInvestigator}</li>) : ''}
+                    {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => {
+                     return( principalInvestigator.pi_first_name+" "+principalInvestigator.pi_middle_initial+" "+principalInvestigator.pi_last_name +",  ") 
+                     }): ''}
                   </Grid>
                   <Grid item xs={12} className={classes.detailContainerItem}>
                     <span className={classes.title}>Date of IACUC Approval:</span>
@@ -276,7 +281,7 @@ const StudyDetailView = ({ classes, data }) => {
                   <Grid container spacing={8}>
                     <Grid item xs={12}>
                       <Typography>
-                        <span className={classes.detailContainerHeader}>[DIAGNOSIS] FILE TYPE</span>
+                        <span className={classes.detailContainerHeader}>FILE TYPE</span>
                       </Typography>
                     </Grid>
                   </Grid>
@@ -297,9 +302,7 @@ const StudyDetailView = ({ classes, data }) => {
 
           <div className={classes.tableDiv}>
             <div className={classes.tableTitle}>
-              <Typography>
-                <span className={classes.tableHeader}>COHORT AND DOSING</span>
-              </Typography>
+              <span className={classes.tableHeader}>COHORT AND DOSING</span>
             </div>
             <Grid item xs={12}>
               <Grid container spacing={8}>
@@ -340,7 +343,7 @@ const styles = (theme) => ({
 
   },
   content: {
-    fontSize: '12pt',
+    fontSize: '12px',
     lineHeight: '14px',
   },
   warning: {
@@ -355,16 +358,16 @@ const styles = (theme) => ({
   root: {
     textTransform: 'uppercase',
     fontFamily: '"Open Sans", sans-serif',
-    fontSize: '9pt',
+    fontSize: '9px',
     letterSpacing: '0.025em',
     color: '#000',
     background: '#f3f3f3',
   },
   header: {
-    paddingLeft: '16px',
-    paddingRight: '16px',
+    paddingLeft: '32px',
+    paddingRight: '32px',
     borderBottom: '#81a6b9 4px solid',
-    height: '85px',
+    height: '80px',
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
   },
@@ -380,7 +383,7 @@ const styles = (theme) => ({
     fontWeight: 'bold',
     letterSpacing: '0.017em',
     color: '#0296c9',
-    fontSize: '19pt',
+    fontSize: '19px',
     height: '12px',
     lineHeight: '17px',
     paddingLeft: '3px',
@@ -391,7 +394,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '12pt',
+    fontSize: '12px',
     maxHeight: '35px',
     overflow: 'hidden',
     paddingLeft: '3px',
@@ -402,40 +405,25 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '12pt',
+    fontSize: '12px',
   },
   headerMSubTitle: {
     paddingTop: '12px',
   },
-  headerNav: {
-    paddingTop: '12px',
-    color: '#5e8ca5',
-    paddingBottom: '12px',
-  },
-  headerNavLink: {
-    paddingLeft: '6px',
-    paddingRight: '6px',
-    textDecoration: 'none',
-    color: '#5e8ca5',
-    textTransform: 'uppercase',
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '9pt',
-    letterSpacing: '0.025em',
 
-  },
 
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-8px',
+    marginTop: '-13px',
     width: '100px',
   },
   detailContainer: {
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     paddingTop: '30px',
-    paddingLeft: '31px',
-    paddingRight: '31px',
+    paddingLeft: '32px',
+    paddingRight: '32px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
@@ -446,7 +434,7 @@ const styles = (theme) => ({
   detailContainerHeader: {
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17pt',
+    fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#0296c9',
   },
@@ -476,10 +464,11 @@ const styles = (theme) => ({
     background: '#f3f3f3',
   },
   tableHeader: {
+    paddingLeft: '32px',
     color: '#0296c9',
   },
   tableDiv: {
-    padding: '31px',
+    paddingTop: '31px',
     maxWidth: theme.custom.maxContentWidth,
     margin: '8px auto auto auto',
   },
@@ -496,7 +485,7 @@ const styles = (theme) => ({
     width: '150px',
     height: '35px',
     lineHeight: '14px',
-    fontSize: '10pt',
+    fontSize: '10px',
     color: '#ffffff',
     textTransform: 'uppercase',
     backgroundColor: '#ff8a00',
@@ -515,14 +504,14 @@ const styles = (theme) => ({
   title: {
     color: '#0296c9',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '12pt',
+    fontSize: '12px',
     letterSpacing: '0.017em',
     fontWeight: '600',
     textTransform: 'uppercase',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17pt',
+    fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#ff17f15',
     paddingBottom: '20px',

@@ -421,13 +421,8 @@ Case :
                       <Grid item xs={6} className={classes.content}>
                         {caseDetail.enrollment
                             && caseDetail.enrollment.site_short_name
-                              && caseDetail.enrollment.site_short_name !== null ? (
-                                <li>
-                                  {' '}
-                                  {caseDetail.enrollment.site_short_name}
-                                  {' '}
-                                </li>
-                          ) : notProvided}
+                              && caseDetail.enrollment.site_short_name !== null
+                          ? caseDetail.enrollment.site_short_name : notProvided}
                       </Grid>
                     </Grid>
                   </Grid>
@@ -478,7 +473,7 @@ const styles = (theme) => ({
 
   },
   content: {
-    fontSize: '12pt',
+    fontSize: '12px',
     lineHeight: '17px',
   },
   marginTop23: {
@@ -496,16 +491,16 @@ const styles = (theme) => ({
   root: {
     textTransform: 'uppercase',
     fontFamily: '"Open Sans", sans-serif',
-    fontSize: '9pt',
+    fontSize: '9px',
     letterSpacing: '0.025em',
     color: '#000',
     background: '#f3f3f3',
   },
   header: {
-    paddingLeft: '16px',
-    paddingRight: '16px',
+    paddingLeft: '32px',
+    paddingRight: '32px',
     borderBottom: '#81a6b9 4px solid',
-    height: '85px',
+    height: '80px',
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
   },
@@ -522,8 +517,8 @@ const styles = (theme) => ({
     fontWeight: 'bold',
     letterSpacing: '0.017em',
     color: '#ff8a00',
-    fontSize: '19pt',
-    lineHeight: '17px',
+    fontSize: '19px',
+    lineHeight: '18px',
     paddingLeft: '5px',
   },
   headerMSubTitle: {
@@ -535,7 +530,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '12pt',
+    fontSize: '12px',
     maxHeight: '30px',
     overflow: 'hidden',
     paddingLeft: '3px',
@@ -546,42 +541,23 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '12pt',
+    fontSize: '12px',
     paddingLeft: '3px',
   },
 
-  headerNav: {
-    paddingTop: '12px',
-    color: '#5e8ca5',
-    paddingBottom: '12px',
-  },
-  headerNavLink: {
-    paddingLeft: '6px',
-    paddingRight: '6px',
-    textDecoration: 'none',
-    color: '#5e8ca5',
-    textTransform: 'uppercase',
-    fontFamily: theme.custom.fontFamilySans,
-    fontSize: '9pt',
-    letterSpacing: '0.025em',
 
-  },
-  headerButton: {
-    float: 'right',
-    paddingTop: '50px',
-  },
   logo: {
     position: 'absolute',
     float: 'left',
-    marginTop: '-8px',
+    marginTop: '-14px',
     width: '100px',
   },
   detailContainer: {
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     paddingTop: '12px',
-    paddingLeft: '16px',
-    paddingRight: '16px',
+    paddingLeft: '32px',
+    paddingRight: '32px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
@@ -591,7 +567,7 @@ const styles = (theme) => ({
   detailContainerHeader: {
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17pt',
+    fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#ff8a00',
   },
@@ -602,21 +578,22 @@ const styles = (theme) => ({
   },
   detailContainerLeft: {
     padding: '35px 0px 0 2px !important',
-    minHeight: '380px',
+    minHeight: '330px',
   },
   detailContainerRight: {
     padding: '35px 20px 0px 20px !important',
-    minHeight: '380px',
+    minHeight: '330px',
     borderLeft: '#81a6b9 1px solid',
   },
   tableContainer: {
     background: '#f3f3f3',
   },
   tableHeader: {
+    paddingLeft: '32px',
     color: '#ff8a00',
   },
   tableDiv: {
-    padding: '31px 16px',
+    padding: '31px 0px',
     maxWidth: theme.custom.maxContentWidth,
     margin: '10px auto',
   },
@@ -628,7 +605,7 @@ const styles = (theme) => ({
     width: '178px',
     height: '27px',
     lineHeight: '18px',
-    fontSize: '10pt',
+    fontSize: '10px',
     color: '#ffffff',
     textTransform: 'uppercase',
     backgroundColor: '#ff8a00',
@@ -644,14 +621,14 @@ const styles = (theme) => ({
   title: {
     color: '#9d9d9c',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '12pt',
+    fontSize: '12px',
     letterSpacing: '0.017em',
     fontWeight: '600',
     textTransform: 'uppercase',
   },
   tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '17pt',
+    fontSize: '17px',
     letterSpacing: '0.017em',
     color: '#ff17f15',
     paddingBottom: '20px',
