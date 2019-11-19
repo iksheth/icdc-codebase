@@ -20,11 +20,12 @@ const CustomFooter = ({
   onChangeRowsPerPage,
   text,
   onClick,
+  selected,
 }) => (
   <TableFooter>
     <TableRow>
       <TableCell>
-        <Button onClick={onClick} variant="contained" color="primary" className={classes.button}>
+        <Button onClick={onClick} variant="contained" color="primary" disabled={!selected} className={classes.button}>
           {text}
         </Button>
       </TableCell>

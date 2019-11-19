@@ -1,19 +1,21 @@
-import React from 'react';
-import { Query } from 'react-apollo';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SelectedFilesView from './selectedFilesView';
+import { initCart } from '../selectedCases/selectedCasesState';
 import { Typography } from '../../components/Wrappers/Wrappers';
-import { GET_MY_CASES_DATA_QUERY } from '../../utils/graphqlQueries';
 
-const userSelectedCases = JSON.parse(localStorage.getItem('userSelectedCases'));
+const selectedFilesController = () => {
+  const dispatch = useDispatch();
 
-const SelectedFiles = () => (
-  <Query query={GET_MY_CASES_DATA_QUERY} variables={{ caseIds: userSelectedCases }}>
-    {({ data, loading, error }) => (loading ? <CircularProgress /> : (error ? <Typography variant="headline" color="warning" size="sm">{error && `An error has occurred in loading stats component: ${error}`}</Typography>
-      : <SelectedFilesView data={data} />
-    ))}
-  </Query>
-);
+  useEffect(() => {
+    dispatch(initCart());
+  }, []);
+
+  const cart = useSelector((state) => state.cart);
+  return (cart.isError
+    ? <Typography variant="headline" color="warning" size="sm">{cart.error && `An error has occurred in loading CART : ${cart.error}`}</Typography>
+    : <SelectedFilesView data={cart.files === null || cart.files === '' ? [] : cart.files} />);
+};
 
 
-export default SelectedFiles;
+export default selectedFilesController;

@@ -9,7 +9,7 @@ import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
 import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
-
+import { fetchCasesAndFiles } from '../../selectedCases/selectedCasesState';
 
 const link = {
   color: 'inherit',
@@ -159,14 +159,14 @@ const columns = [
   },
 ];
 
-let globalData = [];
+let selectedCaseIds = [];
 
-function exportCases() {
-  const userSelectedCases = globalData;
-  localStorage.setItem('userSelectedCases', JSON.stringify(userSelectedCases));
+function exportCases(dispatch) {
+  dispatch(fetchCasesAndFiles(selectedCaseIds));
 }
 
-const options = (classes) => ({
+
+const options = (classes, dispatch) => ({
   selectableRows: true,
   search: false,
   filter: false,
@@ -182,14 +182,14 @@ const options = (classes) => ({
     const selectedCaseId = selectedKeys.map((keyVlaue) => (
       displayData[keyVlaue].data[0].props.children[1].props.children
     ));
-    globalData = selectedCaseId;
+    selectedCaseIds = selectedCaseId;
     return (
       <></>);
   },
   customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
     <CustomFooter
       text="SAVE TO MY CASES"
-      onClick={exportCases}
+      onClick={() => exportCases(dispatch)}
       classes={classes}
       count={count}
       page={page}
@@ -248,7 +248,7 @@ const Cases = ({ classes, data }) => {
             title={data.title ? data.title : 'All Cases'}
             data={data}
             columns={columns}
-            options={options(classes)}
+            options={options(classes, dispatch)}
           />
         </Grid>
       </Grid>

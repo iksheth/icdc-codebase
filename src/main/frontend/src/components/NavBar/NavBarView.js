@@ -1,6 +1,7 @@
 import React from 'react';
 import queryString from 'query-string';
 import { withRouter, NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   AppBar,
   Button,
@@ -18,10 +19,9 @@ import classnames from 'classnames';
 import caseIcon from '../../assets/icons/Icon-MyCases.svg';
 import funnelIconBlue from '../../assets/icons/Icon-funnel-blue.svg';
 import funnelIconWhite from '../../assets/icons/Icon-funnel-white.svg';
-
 // import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
-// import { useTheme } from '../ThemeContext';
+import { initCart } from '../../pages/selectedCases/selectedCasesState';
 
 const drawerWidth = 240;
 // const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
@@ -39,7 +39,9 @@ const NavBar = ({
   // Similar to componentDidMount and componentDidUpdate:
   // Empty second argument of react useEffect will avoid the infinte loop that
   // caused due to component update
+  const dispatch = useDispatch();
   React.useEffect(() => {
+    dispatch(initCart());
     const values = queryString.parse(window.location.search);
 
     if (values.code) {
@@ -67,6 +69,13 @@ const NavBar = ({
         });
     }
   }, []);
+
+  const numberOfCases = useSelector((state) => {
+    if (state.cart.cases) {
+      return state.cart.cases.length;
+    }
+    return 0;
+  });
 
   return (
     <>
@@ -188,6 +197,7 @@ const NavBar = ({
               </Tooltip>
             </IconButton>
           </NavLink>
+          <span styles={{ color: 'white' }}>{numberOfCases}</span>
           {/* Login button functionality on Navigation bar */}
 
           {/* {authState.isAuthorized ? (

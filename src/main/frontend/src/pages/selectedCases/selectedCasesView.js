@@ -2,8 +2,10 @@ import React from 'react';
 import { withStyles } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import CustomFooter from './customFooter';
+import { deleteCasesAction } from './selectedCasesState';
 
 const columns = [
 
@@ -47,7 +49,7 @@ const columns = [
   { name: 'neutered_status', label: 'Neutered Status' },
 ];
 
-const options = {
+const options = (dispatch, cases) => ({
   selectableRows: true,
   search: false,
   filter: false,
@@ -61,6 +63,16 @@ const options = {
     delete: 'Delete',
     deleteAria: 'Delete Selected Rows',
   },
+
+  onRowsDelete: (rowsDeleted) => {
+    // dispatch(rowsDeleted.map(e=>(cases.)))
+    if (rowsDeleted.data.length > 0) {
+      return dispatch(deleteCasesAction(
+        rowsDeleted.data.map((row) => cases[row.dataIndex].case_id),
+      ));
+    }
+    return true;
+  },
   customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
     <CustomFooter
       text="GO TO FILES"
@@ -68,19 +80,19 @@ const options = {
       page={page}
       rowsPerPage={rowsPerPage}
       onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-      // eslint-disable-next-line no-shadow
+        // eslint-disable-next-line no-shadow
       onChangePage={(_, page) => changePage(page)}
     />
   ),
-};
+});
 
 const SelectedCasesView = (data) => (
   <Typography>
     <MUIDataTable
       title="My Cases"
-      data={data.data.casesInList}
+      data={data.data}
       columns={columns}
-      options={options}
+      options={options(useDispatch(), data.data)}
     />
   </Typography>
 );
