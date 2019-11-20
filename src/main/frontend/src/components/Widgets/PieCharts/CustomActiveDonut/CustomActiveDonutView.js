@@ -22,7 +22,7 @@ const renderActiveShape = (props) => {
   const RADIAN = Math.PI / 180;
   const {
     cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-    fill, payload, value,
+    fill, payload, value, textColor,
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -35,7 +35,7 @@ const renderActiveShape = (props) => {
   const textAnchor = cos >= 0 ? 'start' : 'end';
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill="white" fontSize="10px" fontFamily='"Open Sans", sans-serif'>{payload.name}</text>
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={textColor} fontSize="10px" fontFamily='"Open Sans", sans-serif'>{payload.name}</text>
       <Sector
         cx={cx}
         cy={cy}
@@ -56,7 +56,7 @@ const renderActiveShape = (props) => {
       />
       <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
       <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="white" fontSize="10px" fontFamily='"Open Sans", sans-serif'>{`${value} Cases`}</text>
+      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill={textColor} fontSize="10px" fontFamily='"Open Sans", sans-serif'>{`${value} Cases`}</text>
     </g>
   );
 };
@@ -76,9 +76,8 @@ export default class CustomActiveDonut extends PureComponent {
 
   render() {
     const {
-      data: DataObj, width, height, innerRadius, outerRadius, cx, cy,
+      data: DataObj, width, height, innerRadius, outerRadius, cx, cy, textColor,
     } = this.props;
-
     const data = DataObj.map((obj) => ({
       name: obj.item,
       value: obj.cases,
@@ -87,22 +86,22 @@ export default class CustomActiveDonut extends PureComponent {
     const { activeIndex } = this.state;
 
     return (
-      <PieChart width={width} height={height}>
+      <PieChart width={width} height={height} textColor={textColor}>
         <Pie
           activeIndex={activeIndex}
           activeShape={renderActiveShape}
           data={data}
           cx={cx}
           cy={cy}
+          textColor={textColor}
           innerRadius={innerRadius}
           outerRadius={outerRadius}
-          fill="#8884d8"
           dataKey="value"
           onMouseEnter={this.onPieEnter}
           blendStroke
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} textColor={textColor} />
           ))}
         </Pie>
       </PieChart>

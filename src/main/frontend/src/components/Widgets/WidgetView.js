@@ -76,7 +76,7 @@ const styles = (theme) => ({
     boxShadow: 'none',
   },
   customBackGround : {
-    background: theme.palette.black.main,
+    background: theme.palette.widgetBackground.main,
   }
 });
 

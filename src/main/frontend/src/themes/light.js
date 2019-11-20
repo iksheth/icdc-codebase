@@ -112,15 +112,15 @@ export default {
         .toHexString(),
       contrastText: '#FFFFFF',
     },
-    black: {
-      main: '#292e34',
+    widgetBackground: {
+      main: '#F3F8FB',
       light: tinycolor(black)
         .lighten(lightenRate)
         .toHexString(),
       dark: tinycolor(black)
         .darken(darkenRate)
         .toHexString(),
-      contrastText: '#FFFFFF',
+      contrastText: 'black',
     },
     warning: {
       main: warning,
@@ -149,8 +149,8 @@ export default {
         .darken(darkenRate)
         .toHexString(),
     },
-    textWhite: {
-      main: 'white',
+    textWithBackground: {
+      main: 'black',
       light: tinycolor(info)
         .lighten(lightenRate)
         .toHexString(),

@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import { Sunburst, LabelSeries } from 'react-vis';
 
 
-const LABEL_STYLE = {
-  fontSize: '10px',
-  textAnchor: 'middle',
-  fill: 'white',
-  fontFamily: '"Open Sans", sans-serif',
-};
+// const LABEL_STYLE = {
+//   fontSize: '10px',
+//   textAnchor: 'middle',
+//   fill: 'white',
+//   fontFamily: '"Open Sans", sans-serif',
+// };
 
 function getKeyPath(node) {
   if (!node.parent) {
@@ -47,7 +47,9 @@ export default class ProgramSunburst extends PureComponent {
 
   render() {
     const { finalValue, widgetData } = this.state;
-    const { width, height, data } = this.props;
+    const {
+      width, height, data, textColor,
+    } = this.props;
     if (data.key !== widgetData.key) {
       this.setState({
         widgetData: data,
@@ -90,7 +92,15 @@ export default class ProgramSunburst extends PureComponent {
       >
         {finalValue && (
         <LabelSeries data={[{
-          x: 0, y: 0, label: finalValue, style: LABEL_STYLE,
+          x: 0,
+          y: 0,
+          label: finalValue,
+          style: {
+            fontSize: '10px',
+            textAnchor: 'middle',
+            fill: textColor,
+            fontFamily: '"Open Sans", sans-serif',
+          },
         }]}
         />
         )}

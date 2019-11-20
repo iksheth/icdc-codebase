@@ -245,7 +245,7 @@ const Cases = ({ classes, data }) => {
       <Grid container spacing={32}>
         <Grid item xs={12}>
           <MUIDataTable
-            title={data.title ? data.title : 'All Cases'}
+            title={data.title ? data.title : 'Cases'}
             data={data}
             columns={columns}
             options={options(classes, dispatch)}
