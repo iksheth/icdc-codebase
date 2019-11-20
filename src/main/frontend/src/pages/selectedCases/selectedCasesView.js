@@ -27,7 +27,7 @@ const columns = [
   },
   {
     name: 'study_code',
-    label: 'Clinical Study Designation',
+    label: 'Study Code',
     options: {
       filter: false,
       sortDirection: 'asc',
@@ -40,13 +40,12 @@ const columns = [
       ),
     },
   },
-  { name: 'study_type', label: 'Clinical Study Type' },
+  { name: 'study_type', label: 'Study Type' },
   { name: 'breed', label: 'Breed' },
-  { name: 'diagnosis', label: 'Disease Term' },
-  { name: 'stage_of_disease', label: 'Disease Stage' },
-  { name: 'age', label: 'Enrollment Age' },
+  { name: 'diagnosis', label: 'Diagnosis' },
+  { name: 'stage_of_disease', label: 'Stage of Disease' },
+  { name: 'age', label: 'Age' },
   { name: 'sex', label: 'Sex' },
-  { name: 'neutered_status', label: 'Neutered Status' },
 ];
 
 const options = (dispatch, cases) => ({
