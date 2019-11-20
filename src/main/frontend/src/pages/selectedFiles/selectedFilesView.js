@@ -63,7 +63,7 @@ class selectedFilesView extends Component {
 
       if (seconds < 10) { seconds = `0${seconds}`; }
 
-      return `${'File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}`;
+      return `${'ICDC File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}`;
     }
 
 
@@ -96,6 +96,7 @@ class selectedFilesView extends Component {
       { name: 'case_id', label: 'CaseID', sortDirection: 'asc' },
       { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
       { name: 'file_type', label: 'File Type' },
+      { name: 'parent', label: 'Association' },
       { name: 'file_description', label: 'Description' },
       { name: 'file_format', label: 'Format' },
       {

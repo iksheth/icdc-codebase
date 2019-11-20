@@ -310,6 +310,7 @@ query casesInList($caseIds: [String!]!) {
 }
  filesOfCases(case_ids: $caseIds) {
      case_id
+  parent
   file_description
   file_format
   file_locations
