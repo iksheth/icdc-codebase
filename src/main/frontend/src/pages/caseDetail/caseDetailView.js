@@ -15,6 +15,18 @@ import cn from '../../utils/classNameConcat';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 
+function formatBytes(bytes, decimals = 2) {
+  if (bytes === 0) return '0 Bytes';
+
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+
+  return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
+}
+
+
 const columns = [
 
   { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
@@ -22,8 +34,13 @@ const columns = [
   { name: 'parent', label: 'Association' },
   { name: 'file_description', label: 'Description' },
   { name: 'file_format', label: 'Format' },
-  { name: 'file_size', label: 'Size' },
-  { name: 'md5sum', label: 'MD5' },
+  {
+    name: 'file_size',
+    label: 'Size',
+    options: {
+      customBodyRender: (bytes) => (formatBytes(bytes)),
+    },
+  },
 ];
 
 
@@ -95,6 +112,7 @@ const CaseDetail = ({ classes, data }) => {
   }, {
     name: caseDetail.case_id,
   }];
+
 
   return (
     <>
@@ -187,7 +205,7 @@ Case :
 
         <div className={classes.detailContainer}>
 
-          <Grid container spacing={8}>
+          <Grid container spacing={4}>
 
             <Grid item lg={3} md={3} sm={12} xs={12} className={classes.detailContainerLeft}>
               <Grid container spacing={32} direction="column">
@@ -195,50 +213,44 @@ Case :
                   <span className={classes.detailContainerHeader}>DEMOGRAPHICS</span>
                 </Grid>
 
-                <Grid container spacing={8} className={classes.detailContainerItems}>
+                <Grid container spacing={4} className={classes.detailContainerItems}>
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={4}>
-                        {' '}
                         <span className={classes.title}>BREED</span>
                       </Grid>
                       <Grid item xs={8} className={classes.content}>
                         {caseDetail.demographic ? caseDetail.demographic.breed : notProvided}
-                        {' '}
                       </Grid>
                     </Grid>
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={4}>
                         <span className={classes.title}>Sex</span>
                       </Grid>
                       <Grid item xs={8} className={classes.content}>
-                        {' '}
                         {caseDetail.demographic ? caseDetail.demographic.sex : notProvided}
-                        {' '}
                       </Grid>
                     </Grid>
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={4}>
                         <span className={classes.title}>Neutered Status</span>
                       </Grid>
                       <Grid item xs={8} className={classes.content}>
-                        {' '}
                         {caseDetail.demographic
                           ? caseDetail.demographic.neutered_indicator : notProvided}
-                        {' '}
                       </Grid>
                     </Grid>
                   </Grid>
 
 
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={4}>
                         <span className={classes.title}>Age at Enrollment</span>
                       </Grid>
@@ -261,9 +273,9 @@ Case :
                 </Grid>
 
                 { caseDetail.diagnoses.map((diagnosis) => (
-                  <Grid container spacing={8} className={classes.detailContainerItems}>
+                  <Grid container spacing={4} className={classes.detailContainerItems}>
                     <Grid item xs={12}>
-                      <Grid container spacing={8}>
+                      <Grid container spacing={4}>
                         <Grid item xs={6}>
                           <span className={classes.title}>Disease</span>
                         </Grid>
@@ -275,7 +287,7 @@ Case :
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
-                      <Grid container spacing={8}>
+                      <Grid container spacing={4}>
                         <Grid item xs={6}>
                           <span className={classes.title}>Stage of Disease</span>
                         </Grid>
@@ -286,7 +298,7 @@ Case :
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
-                      <Grid container spacing={8}>
+                      <Grid container spacing={4}>
                         <Grid item xs={6}>
                           <span className={classes.title}>Date of Diagnosis</span>
                         </Grid>
@@ -297,7 +309,7 @@ Case :
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
-                      <Grid container spacing={8}>
+                      <Grid container spacing={4}>
                         <Grid item xs={6}>
                           <span className={classes.title}>Primary Site</span>
                         </Grid>
@@ -308,7 +320,7 @@ Case :
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
-                      <Grid container spacing={8}>
+                      <Grid container spacing={4}>
                         <Grid item xs={6}>
                           <span className={classes.title}>Histology/Cytology</span>
                         </Grid>
@@ -319,7 +331,7 @@ Case :
                       </Grid>
                     </Grid>
                     <Grid item xs={12}>
-                      <Grid container spacing={8}>
+                      <Grid container spacing={4}>
                         <Grid item xs={6}>
                           <span className={classes.title}>Histological Grade</span>
                         </Grid>
@@ -342,9 +354,9 @@ Case :
                   <span className={classes.detailContainerHeader}>STUDY</span>
                 </Grid>
 
-                <Grid container spacing={8} className={classes.detailContainerItems}>
+                <Grid container spacing={4} className={classes.detailContainerItems}>
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={6}>
                         <span className={classes.title}>Assigned to Study</span>
                       </Grid>
@@ -355,7 +367,7 @@ Case :
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={6}>
                         <span className={classes.title}>Assigned to Arm</span>
                       </Grid>
@@ -367,7 +379,7 @@ Case :
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={6}>
                         <span className={classes.title}>Assigned to Cohort</span>
                       </Grid>
@@ -380,7 +392,7 @@ Case :
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={6}>
                         <span className={classes.title}>Patient Subgroup</span>
                       </Grid>
@@ -391,7 +403,7 @@ Case :
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={6}>
                         <span className={classes.title}>Date of Informed Consent</span>
                       </Grid>
@@ -402,9 +414,9 @@ Case :
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
                       <Grid item xs={6}>
-                        <span className={classes.title}>Date of Enrollment</span>
+                        <span className={classes.title}>Date of registration</span>
                       </Grid>
                       <Grid item xs={6} className={classes.content}>
                         {caseDetail.enrollment
@@ -413,7 +425,7 @@ Case :
                     </Grid>
                   </Grid>
                   <Grid item xs={12}>
-                    <Grid container spacing={8}>
+                    <Grid container spacing={4}>
 
                       <Grid item xs={6}>
                         <span className={classes.title}>Study Site</span>
@@ -431,30 +443,30 @@ Case :
             </Grid>
           </Grid>
         </div>
+      </div>
+      <div className={classes.tableContainer}>
 
-        <div className={classes.tableContainer}>
-
-          <div className={classes.tableDiv}>
-            <div className={classes.tableTitle}>
-              <span className={classes.tableHeader}>AVAILABLE DATA</span>
-            </div>
-            <Grid item xs={12}>
-              <Grid container spacing={8}>
-                <Grid item xs={12}>
-                  <MUIDataTable
-                    data={data.filesOfCase}
-                    columns={columns}
-                    options={options(classes)}
-                  />
-                </Grid>
-                <Grid item xs={8}>
-                  <Typography />
-                </Grid>
+        <div className={classes.tableDiv}>
+          <div className={classes.tableTitle}>
+            <span className={classes.tableHeader}>AVAILABLE DATA</span>
+          </div>
+          <Grid item xs={12}>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <MUIDataTable
+                  data={data.filesOfCase}
+                  columns={columns}
+                  options={options(classes)}
+                />
+              </Grid>
+              <Grid item xs={8}>
+                <Typography />
               </Grid>
             </Grid>
-          </div>
+          </Grid>
         </div>
       </div>
+
     </>
   );
 };
@@ -470,11 +482,11 @@ const styles = (theme) => ({
   container: {
     paddingTop: '50px',
     fontFamily: 'Raleway, sans-serif',
-
+    paddingLeft: '32px',
+    paddingRight: '32px',
   },
   content: {
     fontSize: '12px',
-    lineHeight: '17px',
   },
   marginTop23: {
     marginTop: '24px',
@@ -556,7 +568,7 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     paddingTop: '12px',
-    paddingLeft: '32px',
+    paddingLeft: '60px',
     paddingRight: '32px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
@@ -578,11 +590,11 @@ const styles = (theme) => ({
   },
   detailContainerLeft: {
     padding: '35px 0px 0 2px !important',
-    minHeight: '330px',
+    minHeight: '290px',
   },
   detailContainerRight: {
     padding: '35px 20px 0px 20px !important',
-    minHeight: '330px',
+    minHeight: '290px',
     borderLeft: '#81a6b9 1px solid',
   },
   tableContainer: {
@@ -622,6 +634,7 @@ const styles = (theme) => ({
     color: '#9d9d9c',
     fontFamily: theme.custom.fontFamilySans,
     fontSize: '12px',
+    lineHeight: '12px',
     letterSpacing: '0.017em',
     fontWeight: '600',
     textTransform: 'uppercase',

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -116,45 +115,89 @@ const StudyDetailView = ({ classes, data }) => {
     });
   };
 
+  function fromArmTOCohorDoes(cohorts, cohortDosing) {
+    const cohortAndDosing = cohortDosing;
+    let arrayDoes = [];
+    const arrayCohortDes = [];
+    // get cohort_does and cohort_description
+    cohorts.forEach((cohort) => {
+      // get cohort_does
+      if (cohort.cohort_dose
+              && cohort.cohort_dose !== ''
+              && cohort.cohort_dose !== null) {
+        arrayDoes.push(cohort.cohort_dose);
+      }
+      // get cohort_description
+      if (cohort.cohort_description
+              && cohort.cohort_description !== ''
+                && cohort.cohort_description !== null) {
+        arrayCohortDes.push(cohort.cohort_description);
+      }
+    });
+    if (arrayDoes.length === 0) {
+      if (arrayCohortDes.length === 0) {
+        cohortAndDosing.does = '';
+      } else {
+        // replace cohort does with cohort desc
+        arrayDoes = arrayCohortDes;
+        cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
+      }
+    } else {
+      cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
+    }
+    return cohortAndDosing;
+  }
+
+
   const cohortAndDosingTableData = [];
-  if (studyData.cohorts) {
+  const noArmMessage = 'This study is not divided into arms';
+  const noCohortMessage = 'This study is not divided into cohorts';
+  if (!studyData.cohorts || studyData.cohorts.length === 0) {
+  // no cohort under studyData
+    if (studyData.study_arms && studyData.study_arms.length !== 0) {
+    // no cohort under studyData , has arms
+      studyData.study_arms.forEach((arm) => {
+      // decide arm
+        let cohortAndDosing = {
+          arm: arm.arm || arm.arm === '' ? arm.arm : '',
+          description: arm.description ? arm.description : '',
+          does: '',
+          cohortDescription: '',
+        };
+        cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
+        cohortAndDosingTableData.push(cohortAndDosing);
+      });
+    } else { // no cohort under studyData no arms
+      cohortAndDosingTableData.push({
+        arm: noArmMessage,
+        description: '',
+        does: noCohortMessage,
+        cohortDescription: '',
+      });
+    }
+  } else if (studyData.study_arms && studyData.study_arms.length !== 0) {
+    // has cohort under studyData and arms
     studyData.study_arms.forEach((arm) => {
-      const cohortAndDosing = {
-        arm: arm.arm || arm.arm === '' ? arm.arm : 'This study is not divided into arms',
+      // decide arm
+      let cohortAndDosing = {
+        arm: arm.arm || arm.arm === '' ? arm.arm : '',
         description: arm.description ? arm.description : '',
         does: '',
         cohortDescription: '',
       };
-      let arrayDoes = [];
-      const arrayCohortDes = [];
-      arm.cohorts.forEach((cohort) => {
-        if (cohort.cohort_dose
-            && cohort.cohort_dose !== ''
-            && cohort.cohort_dose !== null) {
-          arrayDoes.push(cohort.cohort_dose);
-        }
-        if (cohort.cohort_description
-            && cohort.cohort_description !== ''
-              && cohort.cohort_description !== null) {
-          arrayCohortDes.push(cohort.cohort_description);
-        }
-      });
-
-      if (arrayDoes.length === 0) {
-        if (arrayCohortDes.length === 0) {
-          cohortAndDosing.does = 'This study is not divided into cohorts';
-        } else {
-          arrayDoes = arrayCohortDes;
-          cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
-        }
-      } else {
-        cohortAndDosing.does = arrayDoes.sort((a, b) => studyDetailSorting(a, b)).join('#');
-      }
-
+      cohortAndDosing = fromArmTOCohorDoes(arm.cohorts, cohortAndDosing);
       cohortAndDosingTableData.push(cohortAndDosing);
     });
+  } else { // has cohort under studyData , no arms
+    let cohortAndDosing = {
+      arm: noArmMessage,
+      description: '',
+      does: '',
+      cohortDescription: '',
+    };
+    cohortAndDosing = fromArmTOCohorDoes(studyData.cohorts, cohortAndDosing);
+    cohortAndDosingTableData.push(cohortAndDosing);
   }
-
 
   const breadCrumbJson = [{
     name: 'ALL PROGRAMS',
@@ -236,9 +279,7 @@ const StudyDetailView = ({ classes, data }) => {
                     <span className={classes.title}>Principal Investigators:</span>
                   </Grid>
                   <Grid item xs={12} className={classes.content}>
-                    {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => {
-                     return( principalInvestigator.pi_first_name+" "+principalInvestigator.pi_middle_initial+" "+principalInvestigator.pi_last_name +",  ") 
-                     }): ''}
+                    {studyData.principal_investigators ? studyData.principal_investigators.map((principalInvestigator) => (`${principalInvestigator.pi_first_name} ${principalInvestigator.pi_middle_initial} ${principalInvestigator.pi_last_name},  `)) : ''}
                   </Grid>
                   <Grid item xs={12} className={classes.detailContainerItem}>
                     <span className={classes.title}>Date of IACUC Approval:</span>
@@ -256,16 +297,14 @@ const StudyDetailView = ({ classes, data }) => {
               </Grid>
             </Grid>
             <Grid item lg={6} md={6} sm={6} xs={12}>
-              <Grid container spacing={32} direction="row" className={classes.detailContainerRight}>
+              <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
-                  <Grid container spacing={8}>
+                  <Grid container spacing={16}>
                     <Grid item xs={12}>
-                      <Typography>
-                        <span className={classes.detailContainerHeader}>DIAGNOSES</span>
-                      </Typography>
+                      <span className={classes.detailContainerHeader}>DIAGNOSES</span>
                     </Grid>
                   </Grid>
-                  <Grid container spacing={8}>
+                  <Grid container spacing={8} className={classes.paddingTop12}>
                     {diagnoses.sort((a, b) => customSorting(a, b, 'alphabetical')).map((diagnosis) => (
                       <Grid item xs={12}>
                         <span className={classes.content}>
@@ -278,14 +317,12 @@ const StudyDetailView = ({ classes, data }) => {
                 </Grid>
 
                 <Grid item lg={6} md={6} sm={6} xs={12}>
-                  <Grid container spacing={8}>
+                  <Grid container spacing={16}>
                     <Grid item xs={12}>
-                      <Typography>
-                        <span className={classes.detailContainerHeader}>FILE TYPE</span>
-                      </Typography>
+                      <span className={classes.detailContainerHeader}>FILE TYPE</span>
                     </Grid>
                   </Grid>
-                  <Grid container spacing={8}>
+                  <Grid container spacing={8} className={classes.paddingTop12}>
                     {fileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
                       <Grid item xs={12}>
                         <span className={classes.content}>{fileType}</span>
@@ -297,32 +334,31 @@ const StudyDetailView = ({ classes, data }) => {
             </Grid>
           </Grid>
         </div>
+      </div>
+      <div className={classes.tableContainer}>
 
-        <div className={classes.tableContainer}>
-
-          <div className={classes.tableDiv}>
-            <div className={classes.tableTitle}>
-              <span className={classes.tableHeader}>COHORT AND DOSING</span>
-            </div>
-            <Grid item xs={12}>
-              <Grid container spacing={8}>
-                <Grid item xs={12}>
-                  <Typography>
-                    <MUIDataTable
-                      data={cohortAndDosingTableData.sort(
-                        (a, b) => studyDetailSorting(a.arm, b.arm),
-                      )}
-                      columns={columns}
-                      options={options(classes)}
-                    />
-                  </Typography>
-                </Grid>
-                <Grid item xs={8}>
-                  <Typography />
-                </Grid>
+        <div className={classes.tableDiv}>
+          <div className={classes.tableTitle}>
+            <span className={classes.tableHeader}>COHORT AND DOSING</span>
+          </div>
+          <Grid item xs={12}>
+            <Grid container spacing={8}>
+              <Grid item xs={12}>
+                <Typography>
+                  <MUIDataTable
+                    data={cohortAndDosingTableData.sort(
+                      (a, b) => studyDetailSorting(a.arm, b.arm),
+                    )}
+                    columns={columns}
+                    options={options(classes)}
+                  />
+                </Typography>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography />
               </Grid>
             </Grid>
-          </div>
+          </Grid>
         </div>
       </div>
     </>
@@ -340,7 +376,8 @@ const styles = (theme) => ({
   container: {
     paddingTop: '50px',
     fontFamily: 'Raleway, sans-serif',
-
+    paddingLeft: '32px',
+    paddingRight: '32px',
   },
   content: {
     fontSize: '12px',
@@ -422,8 +459,8 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     paddingTop: '30px',
-    paddingLeft: '32px',
-    paddingRight: '32px',
+    paddingLeft: '60px',
+    paddingRight: '60px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
@@ -466,6 +503,9 @@ const styles = (theme) => ({
   tableHeader: {
     paddingLeft: '32px',
     color: '#0296c9',
+  },
+  paddingTop12: {
+    paddingTop: '12px',
   },
   tableDiv: {
     paddingTop: '31px',
