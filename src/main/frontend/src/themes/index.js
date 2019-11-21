@@ -26,6 +26,6 @@ export const overrides = {
     h6: {
       fontSize: '1.142rem',
     },
-    fontSize: 10,
+    fontSize: 14,
   },
 };

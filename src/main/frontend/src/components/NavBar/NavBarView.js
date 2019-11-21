@@ -226,14 +226,16 @@ const NavBar = ({
             paper: classes.drawerPaper,
           }}
         >
-          <div className={classes.drawerHeader} onClick={toggleSidebar}>
-            <IconButton classes={{ root: classes.iconCartButtonRoot }}>
-              <img
-                className={classes.cartLogoImg}
-                src={funnelIconBlue}
-                alt="cart_logo"
-              />
-            </IconButton>
+          <div onClick={toggleSidebar}>
+            <div className={classes.drawerHeader}>
+              <IconButton classes={{ root: classes.iconCartButtonRoot }}>
+                <img
+                  className={classes.cartLogoImg}
+                  src={funnelIconBlue}
+                  alt="cart_logo"
+                />
+              </IconButton>
+            </div>
           </div>
           <Divider />
           <SideBarContent />
@@ -259,7 +261,7 @@ const styles = (theme) => ({
     margin: '0 auto',
   },
   appBar: {
-    marginTop: '80px',
+    marginTop: '79px',
     width: '100vw',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['margin'], {
@@ -268,7 +270,7 @@ const styles = (theme) => ({
     }),
   },
   cartLogoImg: {
-    width: '20px',
+    width: '25px',
     height: '20px',
   },
   hide: {
@@ -388,6 +390,9 @@ const styles = (theme) => ({
   },
   iconButtonRoot: {
     paddingTop: '11px',
+  },
+  drawerHeader: {
+    float: 'right',
   },
 });
 

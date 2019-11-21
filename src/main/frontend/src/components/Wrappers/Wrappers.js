@@ -108,13 +108,14 @@ export const Badge = withStyles(
 )(BadgeExtended);
 
 const TypographyExtended = ({
-  theme, children, weight, size, colorBrightness, ...props
+  theme, children, weight, size, family, colorBrightness, ...props
 }) => (
   <TypographyBase
     style={{
       color: getColor(props.color, theme, colorBrightness),
       fontWeight: getFontWeight(weight),
       fontSize: getFontSize(size, props.variant, theme),
+      fontFamily: family
     }}
     {...props}
   >

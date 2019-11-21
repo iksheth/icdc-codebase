@@ -49,12 +49,10 @@ const styles = () => ({
     background: '#ffffff',
   },
   nihLogoContainer: {
-    cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
   },
   icdcLogoContainer: {
-    cursor: 'pointer',
     display: 'flex',
     width: '100%',
     backgroundRepeat: 'no-repeat',

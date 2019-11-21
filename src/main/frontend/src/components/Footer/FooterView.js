@@ -232,7 +232,7 @@ const Footer = ({ classes, data }) => {
 
 const styles = (theme) => ({
   contentShift: {
-    width: `calc(100% - ${theme.custom.drawerWidth})`,
+    width: `calc(100vw - ${theme.custom.drawerWidth})`,
     marginLeft: `${theme.custom.drawerWidth} !important`,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,

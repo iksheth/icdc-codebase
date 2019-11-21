@@ -28,11 +28,11 @@ const StatsView = ({ classes, data }) => (
 
               </div>
               <div className={classes.statsText}>
-                <Typography weight="bold" size="md">
+                <Typography weight="bold" size="l">
                   {' '}
                   {data.numberOfStudies ? data.numberOfStudies : 0}
                 </Typography>
-                <Typography color="primary" weight="bold" size="sm">
+                <Typography color="primary" weight="bold" size="md">
                                             Studies
                 </Typography>
               </div>
@@ -48,10 +48,10 @@ const StatsView = ({ classes, data }) => (
 
               </div>
               <div className={classes.statsText}>
-                <Typography weight="bold" size="md">
+                <Typography weight="bold" size="l">
                   {data.numberOfCases ? data.numberOfCases : 0}
                 </Typography>
-                <Typography color="primary" weight="bold" size="sm">
+                <Typography color="primary" weight="bold" size="md">
                                             Cases
                 </Typography>
               </div>
@@ -67,10 +67,10 @@ const StatsView = ({ classes, data }) => (
 
               </div>
               <div className={classes.statsText}>
-                <Typography weight="bold" size="md">
+                <Typography weight="bold" size="l">
                   {data.numberOfSamples ? data.numberOfSamples : 0}
                 </Typography>
-                <Typography color="primary" weight="bold" size="sm">
+                <Typography color="primary" weight="bold" size="md">
                                             Samples
                 </Typography>
               </div>
@@ -86,10 +86,10 @@ const StatsView = ({ classes, data }) => (
 
               </div>
               <div className={classes.statsText}>
-                <Typography weight="bold" size="md">
+                <Typography weight="bold" size="l">
                   {data.numberOfFiles ? data.numberOfFiles : 0}
                 </Typography>
-                <Typography color="primary" weight="bold" size="sm">
+                <Typography color="primary" weight="bold" size="md">
                                             Files
                 </Typography>
               </div>
@@ -105,10 +105,10 @@ const StatsView = ({ classes, data }) => (
 
               </div>
               <div className={classes.statsText}>
-                <Typography weight="bold" size="md">
+                <Typography weight="bold" size="l">
                   {data.numberOfBiospecimenAliquots ? data.numberOfBiospecimenAliquots : 0}
                 </Typography>
-                <Typography color="primary" weight="bold" size="sm">
+                <Typography color="primary" weight="bold" size="md">
                                             Biospecimen Aliquots
                 </Typography>
               </div>
@@ -142,13 +142,14 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
-    marginLeft: '32px',
+    marginLeft: '48px',
+    marginBottom: '8px',
   },
   statsIcon: {
     position: 'absolute',
     float: 'left',
-    width: '25px',
-    height: '25px',
+    width: '45px',
+    height: '45px',
   },
 });
 

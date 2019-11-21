@@ -55,7 +55,7 @@ const Dashboard = ({
           </div>
           <Collapse in={checked}>
             <Grid container spacing={32}>
-              <Grid item lg={4} md={4} sm={6} xs={12}>
+              <Grid item lg={4} md={6} sm={12} xs={12}>
                 <Widget
                   title="Programs and Studies"
                   upperTitle
@@ -64,13 +64,13 @@ const Dashboard = ({
                   color="textWithBackground"
                   customBackGround
                 >
-                  <div className={classes.marginTop32}>
+                  <div className={classes.marginTop18}>
                     <ProgramSunburst
                       data={data.studiesByProgram}
-                      width={350}
-                      height={175}
-                      innerRadius={50}
-                      outerRadius={75}
+                      width={250}
+                      height={180}
+                      innerRadius={40}
+                      outerRadius={65}
                       cx="50%"
                       cy="50%"
                       textColor={theme.palette.widgetBackground.contrastText}
@@ -78,7 +78,7 @@ const Dashboard = ({
                   </div>
                 </Widget>
               </Grid>
-              <Grid item lg={4} md={4} sm={6} xs={12}>
+              <Grid item lg={4} md={6} sm={12} xs={12}>
                 <Widget
                   title="Breed"
                   upperTitle
@@ -99,7 +99,7 @@ const Dashboard = ({
                   />
                 </Widget>
               </Grid>
-              <Grid item lg={4} md={4} sm={6} xs={12}>
+              <Grid item lg={4} md={6} sm={12} xs={12}>
                 <Widget
                   title="Diagnosis"
                   upperTitle
@@ -120,10 +120,10 @@ const Dashboard = ({
                   />
                 </Widget>
               </Grid>
-            </Grid>
-            {/* second row Grids */}
-            <Grid container spacing={32}>
-              <Grid item lg={4} md={4} sm={6} xs={12}>
+              {/* </Grid> */}
+              {/* second row Grids */}
+              {/* <Grid container spacing={32}> */}
+              <Grid item lg={4} md={6} sm={12} xs={12}>
                 <Widget
                   title="Disease Site"
                   upperTitle
@@ -144,9 +144,9 @@ const Dashboard = ({
                   />
                 </Widget>
               </Grid>
-              <Grid item lg={4} md={4} sm={6} xs={12}>
+              <Grid item lg={4} md={6} sm={12} xs={12}>
                 <Widget
-                  title="Sex"
+                  title="Gender"
                   upperTitle
                   bodyClass={classes.fullHeightBody}
                   className={classes.card}
@@ -165,7 +165,7 @@ const Dashboard = ({
                   />
                 </Widget>
               </Grid>
-              <Grid item lg={4} md={4} sm={6} xs={12}>
+              <Grid item lg={4} md={6} sm={12} xs={12}>
                 <Widget
                   title="Stage of Disease"
                   upperTitle
@@ -205,7 +205,7 @@ const styles = (theme) => ({
     background: theme.palette.widgetBackground.main,
   },
   contentShift: {
-    width: 'calc(100% - theme.custom.drawerWidth)',
+    width: `calc(100vw - ${theme.custom.drawerWidth})`,
     marginLeft: theme.custom.drawerWidth,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
@@ -226,8 +226,8 @@ const styles = (theme) => ({
   sunburst: {
     textAlign: 'center',
   },
-  marginTop32: {
-    marginTop: '32px',
+  marginTop18: {
+    marginTop: '18px',
   },
   widgetsCollapse: {
     background: theme.palette.widgetBackground.main,
