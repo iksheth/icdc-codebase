@@ -14,31 +14,34 @@ const NOT_PROVIDED = 'Not Specified';
 
 export const mappingCheckBoxToDataTable = [
   {
-    group: 'Study', field: 'study_code', api: 'caseCountByStudyCode', datafield: 'study_code',
+    group: 'Program', field: 'program', api: 'caseCountByProgram', datafield: 'program', show: false,
   },
   {
-    group: 'Study Type', field: 'study_type', api: 'caseCountByStudyType', datafield: 'study_type',
+    group: 'Study', field: 'study_code', api: 'caseCountByStudyCode', datafield: 'study_code', show: true,
   },
   {
-    group: 'Breed', field: 'breed', api: 'caseCountByBreed', datafield: 'breed',
+    group: 'Study Type', field: 'study_type', api: 'caseCountByStudyType', datafield: 'study_type', show: true,
   },
   {
-    group: 'Diagnosis', field: 'diagnosis', api: 'caseCountByDiagnosis', datafield: 'diagnosis',
+    group: 'Breed', field: 'breed', api: 'caseCountByBreed', datafield: 'breed', show: true,
   },
   {
-    group: 'Primary Disease Site', field: 'disease_site', api: 'caseCountByDiseaseSite', datafield: 'disease_site',
+    group: 'Diagnosis', field: 'diagnosis', api: 'caseCountByDiagnosis', datafield: 'diagnosis', show: true,
   },
   {
-    group: 'Stage of Disease', field: 'stage_of_disease', api: 'caseCountByStageOfDisease', datafield: 'stage_of_disease',
+    group: 'Primary Disease Site', field: 'disease_site', api: 'caseCountByDiseaseSite', datafield: 'disease_site', show: true,
   },
   {
-    group: 'Gender', field: 'gender', api: 'caseCountByGender', datafield: 'sex',
+    group: 'Stage of Disease', field: 'stage_of_disease', api: 'caseCountByStageOfDisease', datafield: 'stage_of_disease', show: true,
   },
   {
-    group: 'Associated File Type', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types',
+    group: 'Gender', field: 'gender', api: 'caseCountByGender', datafield: 'sex', show: true,
   },
   {
-    group: 'Associated File Format', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats',
+    group: 'Associated File Type', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types', show: true,
+  },
+  {
+    group: 'Associated File Format', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
   },
 
 
@@ -310,6 +313,7 @@ export function customCheckBox(data) {
       groupName: mapping.group,
       checkboxItems: updateCheckBoxData(data[mapping.api], mapping.field),
       datafield: mapping.datafield,
+      show: mapping.show,
     }))
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -42,7 +43,9 @@ const FacetPanel = (classes) => {
 
   return (
     <>
-      {sideBarContent.map((sideBarItem) => (
+      {sideBarContent.map((sideBarItem) => {
+        if(sideBarItem.show){
+            return (
         <>
           <ExpansionPanel
             expanded={expanded === sideBarItem.groupName}
@@ -75,7 +78,11 @@ const FacetPanel = (classes) => {
             </ExpansionPanelDetails>
           </ExpansionPanel>
         </>
-      ))}
+      )
+        }
+        return "";  
+        }
+      )}
     </>
   );
 };

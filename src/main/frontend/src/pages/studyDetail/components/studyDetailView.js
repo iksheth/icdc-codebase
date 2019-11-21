@@ -202,9 +202,11 @@ const StudyDetailView = ({ classes, data }) => {
   const breadCrumbJson = [{
     name: 'ALL PROGRAMS',
     to: '/programs',
+    isALink: true,
   }, {
     name: studyData.program.program_acronym,
     to: '',
+    isALink: false,
   }];
 
 

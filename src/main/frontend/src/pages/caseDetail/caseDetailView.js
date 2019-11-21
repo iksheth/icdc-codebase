@@ -102,13 +102,16 @@ const CaseDetail = ({ classes, data }) => {
   const breadCrumbJson = [{
     name: 'ALL PROGRAMS',
     to: '/programs',
+    isALink: true,
   }, {
     name: `${caseDetail.study.clinical_study_designation} Detail`,
     to: `/study/${caseDetail.study.clinical_study_designation}`,
+    isALink: true,
   }, {
     name: `${caseDetail.study.clinical_study_designation} CASES`,
     to: '/',
     onClick: () => redirectTo(caseDetail.study.clinical_study_designation),
+    isALink: true,
   }, {
     name: caseDetail.case_id,
   }];

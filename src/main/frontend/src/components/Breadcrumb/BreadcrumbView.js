@@ -6,15 +6,17 @@ const CustomBreadcrumb = ({ classes, data }) => (
   <div className={classes.headerNav}>
     {
       data.reduce((acc, current, index) => {
-        if (index < data.length - 1) {
+        if (current.isALink) {
           acc.push(
             <Link className={classes.headerNavLink} to={current.to} onClick={current.onClick}>
               {current.name}
             </Link>,
           );
-          acc.push('/');
         } else {
           acc.push(<span className={classes.headerNavLink}>{current.name}</span>);
+        }
+        if (index < data.length - 1) {
+          acc.push('/');
         }
         return acc;
       }, []).map((item) => (item))
