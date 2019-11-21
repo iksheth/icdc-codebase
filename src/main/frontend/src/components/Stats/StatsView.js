@@ -109,7 +109,7 @@ const StatsView = ({ classes, data }) => (
                   {data.numberOfBiospecimenAliquots ? data.numberOfBiospecimenAliquots : 0}
                 </Typography>
                 <Typography color="primary" weight="bold" size="md">
-                                            Biospecimen Aliquots
+                                            Aliquots
                 </Typography>
               </div>
             </div>
@@ -142,7 +142,7 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     float: 'left',
-    marginLeft: '48px',
+    marginLeft: '52px',
     marginBottom: '8px',
   },
   statsIcon: {

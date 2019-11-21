@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core';
 import nihLogo from '../../assets/header/icdc_nih_logo.svg';
 import icdcLogo from '../../assets/header/icdc_logo_white.svg';
-import cancergraphic from '../../assets/header/cancer-cell-graphic.png';
+import cancergraphic from '../../assets/header/Canine.png';
 
 
 // import classes from '*.module.sass';
@@ -18,6 +18,10 @@ const Header = ({ classes }) => (
         className={classes.nihLogoImg}
         src={nihLogo}
         alt="nih_logo"
+      />
+      <img
+        src={cancergraphic}
+        alt="cancer_graphic"
       />
     </div>
     <div className={classes.icdcLogoContainer}>
@@ -58,7 +62,7 @@ const styles = () => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
     paddingLeft: '24px',
-    backgroundImage: `url(${cancergraphic})`,
+    background: '#577C90',
   },
   nihLogoImg: {
     height: '33px',

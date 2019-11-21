@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import { Typography } from '../Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
+import nciLogo from '../../assets/footer/NCI-footer.logo.svg';
 
 const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
 
@@ -21,24 +22,10 @@ const Footer = ({ classes, data }) => {
           cn(classes.footerRowSection, classes.footerNciColumn, classes.marginRight40)
 }
         >
-          <ul>
-            <li>
-              <Typography
-                size="xxl"
-                className={cn(classes.footerText)}
-              >
-              National Cancer Institute
-              </Typography>
-            </li>
-            <li>
-              <Typography
-                size="l"
-                className={cn(classes.footerText)}
-              >
-                at the National Institutes of Health
-              </Typography>
-            </li>
-          </ul>
+          <img
+            src={nciLogo}
+            alt="nciLogo"
+          />
         </div>
         <div className={classes.footerRowSection}>
           <ul>
@@ -158,7 +145,7 @@ const Footer = ({ classes, data }) => {
           </ul>
         </div>
       </div>
-      <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
+      <div>
         <div className={classes.horizontalLine} />
       </div>
       <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
@@ -313,7 +300,7 @@ const styles = (theme) => ({
   footerRow: {
     display: 'flex',
     flexDirection: 'column',
-    width: '1440px',
+    width: '1200px',
     margin: '0 auto',
 
     '@media (min-width: 600px)': {
