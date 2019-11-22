@@ -25,6 +25,7 @@ import StudyDetail from '../../pages/studyDetail/studyDetailController';
 import ProgramDetail from '../../pages/programDetail/programDetailController';
 import SelectedCases from '../../pages/selectedCases/selectedCasesController';
 import SelectedFiles from '../../pages/selectedFiles/selectedFilesController';
+import Home from '../../pages/landing/landingController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -47,6 +48,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
           <Switch>
             <Route exact path="/ICDC/" component={Dashboard} />
             <Route exact path="/" component={Dashboard} />
+            <Route exact path="/home" component={Home} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/cases" component={Cases} />
             <Route path="/programs" component={Programs} />
