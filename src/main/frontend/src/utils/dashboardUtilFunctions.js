@@ -47,6 +47,12 @@ export const mappingCheckBoxToDataTable = [
 
 ];
 
+export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) => ({
+  groupName: filterElement.groupName,
+  name: filterElement.name,
+  datafield: filterElement.datafield,
+  isChecked: false,
+}));
 
 export function getStatDataFromDashboardData(data, statName) {
   switch (statName) {

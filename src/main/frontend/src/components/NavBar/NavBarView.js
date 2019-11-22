@@ -23,6 +23,9 @@ import funnelIconWhite from '../../assets/icons/Icon-funnel-white.svg';
 // import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
 import { initCart } from '../../pages/selectedCases/selectedCasesState';
+import { toggleCheckBox } from '../../pages/dashboard/dashboardState';
+import { unselectFilters } from '../../utils/dashboardUtilFunctions';
+
 import { Badge } from '../Wrappers/Wrappers';
 
 const drawerWidth = 240;
@@ -79,6 +82,10 @@ const NavBar = ({
     return 0;
   });
 
+  const activeFilters = useSelector((state) => (
+    state.dashboard.datatable
+      && state.dashboard.datatable.filters
+      ? state.dashboard.datatable.filters : []));
   return (
     <>
       <AppBar
@@ -226,13 +233,24 @@ const NavBar = ({
             paper: classes.drawerPaper,
           }}
         >
-          <div onClick={toggleSidebar}>
-            <div className={classes.drawerHeader}>
+          <div>
+            <div className={classes.floatLeft}>
+              <Button
+                variant="outlined"
+                disabled={activeFilters.length === 0}
+                onCl
+                className={classes.customButton}
+                onClick={() => dispatch(toggleCheckBox(unselectFilters(activeFilters)))}
+              >
+              Clear All
+              </Button>
+            </div>
+            <div className={classes.floatRight} onClick={toggleSidebar}>
               <IconButton classes={{ root: classes.iconCartButtonRoot }}>
                 <img
                   className={classes.cartLogoImg}
                   src={funnelIconBlue}
-                  alt="cart_logo"
+                  alt="funnel_image"
                 />
               </IconButton>
             </div>
@@ -391,8 +409,25 @@ const styles = (theme) => ({
   iconButtonRoot: {
     paddingTop: '11px',
   },
-  drawerHeader: {
+  floatRight: {
     float: 'right',
+  },
+  floatLeft: {
+    float: 'left',
+  },
+  customButton: {
+    borderRadius: '100px',
+    minHeight: '20px',
+    fontSize: 9,
+    textTransform: 'none',
+    color: 'black',
+    marginTop: '10px',
+    marginLeft: '16px',
+    fontFamily: theme.custom.fontFamilySans,
+    '&:hover': {
+      backgroundColor: '#566672',
+      color: 'white',
+    },
   },
 });
 
