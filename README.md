@@ -1,7 +1,5 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/92419cae03cf4d769485c065b34efafb)](https://www.codacy.com/manual/FNLCR_2/icdc-codebase?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CBIIT/icdc-codebase&amp;utm_campaign=Badge_Grade) 
 
-** We are actively working on this **
-
 #  ![ Image 1](doc/logo.png)
 
 Integrated Canine Data Commons (ICDC) project is a joint project between FNL's ADRD and BIDS Directorates to develop the ICDC for NCI's DCTD group.
