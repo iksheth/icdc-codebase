@@ -322,12 +322,12 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>npm install mui-databases</id>
+						<id>npm install mui-datatables</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>install mui-custom-datatables</arguments>
+							<arguments>install mui-custom-datatables --save</arguments>
 						</configuration>
 					</execution>
 					<execution>
