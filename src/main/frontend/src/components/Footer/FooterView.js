@@ -111,42 +111,32 @@ const Footer = ({ classes, data }) => {
             </li>
           </ul>
         </div>
-        <div className={classes.footerRowSection}>
-          <ul>
-            <li>
-              <Typography
-                weight="bold"
-                className={cn(classes.footerText, classes.listHeader)}
-              >
-              NIH Policies
-              </Typography>
-            </li>
-            <li>
-              <Typography className={classes.footerText}>
-                <a target="icdc-external" href="https://www.cancer.gov/policies/disclaimer">
-              Disclaimer Policies
-                </a>
-              </Typography>
-            </li>
-            <li>
-              <Typography className={classes.footerText}>
-                <a target="icdc-external" href="https://www.cancer.gov/policies/accessibility">
-              Accessibility
-                </a>
-              </Typography>
-            </li>
-            <li>
-              <Typography className={classes.footerText}>
-                <a target="icdc-external" href="https://www.cancer.gov/policies/foia">
-              FOIA
-                </a>
-              </Typography>
-            </li>
-          </ul>
-        </div>
       </div>
       <div>
         <div className={classes.horizontalLine} />
+      </div>
+      <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
+        <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
+          <Typography>
+            <a target="icdc-external" href="https://www.cancer.gov/policies/disclaimer">
+              Disclaimer
+            </a>
+            <span className={classes.ext}>&nbsp;|&nbsp;</span>
+          </Typography>
+          <Typography>
+            <a title="link to NCI Policies" href="http://www.cancer.gov/global/web/policies" target="icdc-nci">
+Policies
+            </a>
+            <span className={classes.ext}>&nbsp;|&nbsp;</span>
+          </Typography>
+          <Typography>
+            <a title="link to NCI Accessibility Policies" href="http://www.cancer.gov/global/web/policies/accessibility" target="icdc-nci">
+Accessibility
+            </a>
+            <span className={classes.ext}>&nbsp;|&nbsp;</span>
+          </Typography>
+          <Typography><a title="link to FOIA" href="http://www.cancer.gov/global/web/policies/foia" target="icdc-nci">FOIA</a></Typography>
+        </div>
       </div>
       <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
         <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
@@ -363,7 +353,7 @@ const styles = (theme) => ({
     justifyContent: 'left',
   },
   horizontalLine: {
-    width: '80%',
+    width: '85%',
     margin: '32px auto 16px auto',
     borderTop: '1px solid #1E394D',
   },
