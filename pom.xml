@@ -327,10 +327,7 @@
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>
-								<argument>install</argument>
-								<argument>mui-custom-datatables</argument>
-							</arguments>
+							<arguments>install mui-custom-datatables</arguments>
 						</configuration>
 					</execution>
 					<execution>
