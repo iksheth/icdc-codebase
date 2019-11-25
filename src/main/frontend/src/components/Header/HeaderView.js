@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import nihLogo from '../../assets/header/icdc_nih_logo.svg';
 import icdcLogo from '../../assets/header/icdc_logo_white.svg';
@@ -14,11 +15,13 @@ import cancergraphic from '../../assets/header/Canine.png';
 const Header = ({ classes }) => (
   <div className={classes.headerBar}>
     <div className={classes.nihLogoContainer}>
-      <img
-        className={classes.nihLogoImg}
-        src={nihLogo}
-        alt="nih_logo"
-      />
+      <Link to="/home">
+        <img
+          className={classes.nihLogoImg}
+          src={nihLogo}
+          alt="nih_logo"
+        />
+      </Link>
       <img
         src={cancergraphic}
         alt="cancer_graphic"
@@ -26,11 +29,13 @@ const Header = ({ classes }) => (
     </div>
     <div className={classes.icdcLogoContainer}>
       <div className={classes.grow} />
-      <img
-        className={classes.icdcLogoImg}
-        src={icdcLogo}
-        alt="icdc_logo"
-      />
+      <Link to="/dashboard">
+        <img
+          className={classes.icdcLogoImg}
+          src={icdcLogo}
+          alt="icdc_logo"
+        />
+      </Link>
     </div>
   </div>
 );
@@ -67,11 +72,13 @@ const styles = () => ({
   nihLogoImg: {
     height: '33px',
     width: '269px',
-    margin: '25px auto auto 35px',
+    marginLeft: '35px',
+    cursor: 'pointer',
   },
   icdcLogoImg: {
     margin: '22px 35px auto',
     height: '39px',
+    cursor: 'pointer',
   },
 });
 
