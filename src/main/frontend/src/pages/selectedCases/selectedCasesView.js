@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import MUIDataTable from 'mui-datatables';
+import MUIDataTable from 'mui-custom-datatables';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Typography } from '../../components/Wrappers/Wrappers';
