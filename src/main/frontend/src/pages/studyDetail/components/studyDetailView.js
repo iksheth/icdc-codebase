@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -10,7 +11,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import StatsView from '../../../components/Stats/StatsView';
-import { Typography, Button } from '../../../components/Wrappers/Wrappers';
+import { Typography } from '../../../components/Wrappers/Wrappers';
 import { customSorting } from '../../../utils/dashboardUtilFunctions';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
@@ -248,11 +249,9 @@ const StudyDetailView = ({ classes, data }) => {
               className={classes.headerButtonLink}
               to={(location) => ({ ...location, pathname: '/' })}
               onClick={() => redirectTo()}
-            >
-              <Button className={classes.button}>
-                FILTER CASES
-                FOR THIS STUDY
-              </Button>
+            >   FILTER BY 
+             {' '}{data.caseCountOfStudy} {' '}
+             CASES
             </Link>
           </div>
         </div>
@@ -516,10 +515,17 @@ const styles = (theme) => ({
   },
   headerButton: {
     float: 'right',
-    paddingTop: '15px',
+    paddingTop: '50px',
   },
   headerButtonLink: {
     textDecoration: 'none',
+    lineHeight: '14px',
+    fontSize: '12px',
+    fontWeight :'bold',
+    color: '#ff8a00',
+     '&:hover': {
+      color: '#ff8a00',
+    },
   },
   button: {
     borderRadius: '22px',
