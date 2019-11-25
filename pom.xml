@@ -322,6 +322,18 @@
 						</configuration>
 					</execution>
 					<execution>
+						<id>npm install mui-databases</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>
+								<argument>install</argument>
+								<argument>mui-custom-datatables</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
 						<id>npm run build</id>
 						<goals>
 							<goal>npm</goal>
