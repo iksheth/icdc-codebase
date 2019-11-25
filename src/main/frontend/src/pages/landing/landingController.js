@@ -1,17 +1,19 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import imgDogHuman from '../../assets/landing/l1.png';
-import imgAbout from '../../assets/landing/l2.png';
-import imgProgram from '../../assets/landing/l3.png';
-import imgStudy from '../../assets/landing/l4.png';
-import imgSubmit from '../../assets/landing/l5.png';
-import icon from '../../assets/landing/l8.png';
+import imgDogHuman from '../../assets/landing/LP-transparent-bkgd.png';
+import imgAbout from '../../assets/landing/LP_About.png';
+import imgProgram from '../../assets/landing/LP_Program.png';
+import imgStudy from '../../assets/landing/LP_Studies.png';
+import imgSubmit from '../../assets/landing/LP_Submit.png';
+import icon from '../../assets/landing/LP_ReadMore.svg';
+import iconAbout from '../../assets/landing/LP_About_Fullarticle.Arrow.svg';
 import lbg from '../../assets/landing/lbg.jpg';
-import l9dg from '../../assets/landing/l9dg.jpg';
+import l9dg from '../../assets/landing/LP_Cases.png';
 import { Button } from '../../components/Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
 
@@ -20,7 +22,7 @@ const LandingController = ({ classes }) => (
   <div className={classes.page}>
     <div className={classes.container}>
       <Grid container spacing={16} direction="row" className={cn(classes.paddingTop50, classes.paddingBottom50)}>
-        <Grid item lg={4} md={4} sm={12} xs={12}>
+        <Grid item lg={3} md={3} sm={12} xs={12}>
           <div className={classes.headerTitle}>Integrated Canine Data Commons</div>
           <div className={classes.headerContent}>
 Exploring. analyzing and understanding the biological relationships
@@ -33,7 +35,7 @@ between human and canine cancer.
             </Button>
           </div>
         </Grid>
-        <Grid item lg={8} md={8} sm={12} xs={12}>
+        <Grid item lg={9} md={9} sm={12} xs={12}>
           <div>
             <img className={classes.imgDogHuman} src={imgDogHuman} alt="ICDC Human and dog " />
           </div>
@@ -42,9 +44,12 @@ between human and canine cancer.
       <Grid container spacing={16} direction="row">
         <div className={classes.contentLeft}>
           <div className={classes.about}>
-            <div className={classes.image}>
+            <div className={classes.aboutImageSection}>
               <img src={imgAbout} className={classes.aboutImage} alt="ICDC about" />
             </div>
+             <div className={classes.icdcWords}>
+                About the Integrated Canine Data Commons (ICDC)
+             </div>
             <div className={classes.aboutContent}>
   NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged
   the Frederick National laboratory for Cancer Research
@@ -56,7 +61,9 @@ The data in the ICDC is sourced form multiple different
 programs snad projects; all focused on the canine subjects.
             </div>
             <div className={classes.aboutButtonSection}>
-              <div className={classes.aboutButtonLeft} />
+              <div className={classes.aboutButtonLeft} >
+                 <img src={iconAbout} className={classes.iconAbout} alt="ICDC about icon" />
+              </div>
               <div className={classes.aboutButtonRight}>
                 <Link to="/" className={classes.aboutButton}>FULL ARTICLE</Link>
               </div>
@@ -158,11 +165,11 @@ then be analyzed in the Cloud Resources.
 const styles = (theme) => ({
   page: {
     background: '#5E8CA5',
-  },
-  container: {
     backgroundImage: `url(${lbg})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+  },
+  container: {
     paddingTop: '10px',
     fontFamily: 'Raleway, sans-serif',
     paddingRight: '32px',
@@ -184,7 +191,7 @@ const styles = (theme) => ({
   headerContent: {
     height: '98px',
     width: '194px',
-    color: '#F5A313',
+    color: '#CB8311',
     fontFamily: 'Raleway',
     fontSize: '16px',
     fontWeight: '500',
@@ -193,6 +200,12 @@ const styles = (theme) => ({
   },
   headerButtonSection: {
 
+  },
+  iconAbout:{
+    height: '17px',
+    width: '9px',
+    marginTop: '20px',
+    marginLeft: '12px',
   },
   icon: {
     width: '20px',
@@ -208,12 +221,12 @@ const styles = (theme) => ({
     fontWeight: 'bolder',
     color: '#ffffff',
     textTransform: 'uppercase',
-    backgroundColor: '#ff8a00',
+    backgroundColor: '#CB8311',
     fontFamily: theme.custom.fontFamilySans,
     textDecoration: 'none',
     boxShadow: 'none !important',
     '&:hover': {
-      backgroundColor: '#ff8a00',
+      backgroundColor: '#CB8311',
       color: '#ffffff',
 
     },
@@ -224,18 +237,31 @@ const styles = (theme) => ({
     color: '#ffffff',
     textDecoration: 'none',
     '&:hover': {
-      backgroundColor: '#ff8a00',
+      backgroundColor: '#CB8311',
       textDecoration: 'none',
     },
   },
   imgDogHuman: {
-    width: '350px',
+    width: '627px',
   },
 
   aboutImage: {
-    height: '423px',
-    width: '300px',
+   width: '300px',
+   height:'240px',
   },
+  aboutImageSection:{
+   height:'240px',
+  },
+  icdcWords:{
+     height:'193px',
+     background:'#39C0F0',
+     color: '#FFFFFF',  
+     fontSize: '24px',  
+     fontWeight: 'bold',
+     lineHeight: '27px',
+     padding:'35px',
+     opacity:'0.3',
+   },
   contentLeft: {
     float: 'left',
     paddingRight: '15px',
@@ -246,6 +272,7 @@ const styles = (theme) => ({
   },
   image: {
     width: '197px',
+    height:'244px',
   },
   aboutContent: {
     background: '#fff',
@@ -289,7 +316,7 @@ const styles = (theme) => ({
   },
   aboutButtonLeft: {
     float: 'left',
-    background: '#F5A313',
+    background: '#CB8311',
     height: '45px',
     width: '48px',
   },
@@ -332,7 +359,7 @@ const styles = (theme) => ({
   },
   contentRightBottom: {
     float: 'left',
-    width: '605px',
+    width: '610px',
     background: '#fff',
     backgroundImage: `url(${l9dg})`,
     backgroundRepeat: 'no-repeat',
