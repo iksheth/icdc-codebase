@@ -245,14 +245,16 @@ const StudyDetailView = ({ classes, data }) => {
             <CustomBreadcrumb data={breadCrumbJson} />
           </div>
           <div className={classes.headerButton}>
+            <span className={classes.headerButtonLinkSpan}>
             <Link
               className={classes.headerButtonLink}
               to={(location) => ({ ...location, pathname: '/' })}
               onClick={() => redirectTo()}
-            >   FILTER BY 
-             {' '}{data.caseCountOfStudy} {' '}
-             CASES
+            >   <span className={classes.headerButtonLinkText}> FILTER BY </span>
+                <span className={classes.headerButtonLinkNumber}> {' '}{data.caseCountOfStudy} {' '}</span>
+                <span className={classes.headerButtonLinkText}>CASES</span>
             </Link>
+            </span>
           </div>
         </div>
 
@@ -448,8 +450,29 @@ const styles = (theme) => ({
   headerMSubTitle: {
     paddingTop: '12px',
   },
-
-
+headerButton: {
+    float: 'right',
+    marginTop: '15px',
+    width: '135px',
+    height: '33px',
+    background: '#F3F3f3',
+    paddingLeft:'10px',
+    paddingRight:'10px',
+  
+  },
+headerButtonLinkSpan:{
+    height: '50px',
+    background: '#F5F3EE',
+    width: '200px',
+},
+headerButtonLinkText:{
+    color: '#0B3556',
+},
+headerButtonLinkNumber:{
+   borderBottom: 'solid',
+    lineHeight: '30px',
+    paddingBottom: '3px',
+},
   logo: {
     position: 'absolute',
     float: 'left',
@@ -513,10 +536,7 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: '8px auto auto auto',
   },
-  headerButton: {
-    float: 'right',
-    paddingTop: '50px',
-  },
+
   headerButtonLink: {
     textDecoration: 'none',
     lineHeight: '14px',
