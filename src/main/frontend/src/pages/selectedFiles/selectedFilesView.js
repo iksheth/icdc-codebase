@@ -63,13 +63,37 @@ class selectedFilesView extends Component {
 
       if (seconds < 10) { seconds = `0${seconds}`; }
 
-      return `${'ICDC File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}`;
+      return `${'ICDC File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
     }
 
 
+    function convertToCSV(jsonse) {
+      const objArray = jsonse;
+      const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
+      let str = '';
+      array.map((entry, index) => {
+        let line = '';
+        Object.keys(entry).map((keyName) => {
+          if (line !== '') line += ',';
+          line += entry[keyName];
+          return line;
+        });
+
+        if (index === 0) {
+          str = ['caseId', 'fileName', 'uuid', 'md5sum'].join(',');
+          str += '\r\n';
+        }
+        str += `${line}\r\n`;
+        return str;
+      });
+
+      return str;
+    }
+
     function downloadJson() {
       const jsonse = JSON.stringify(globalData);
-      const data = new Blob([jsonse], { type: 'application/json' });
+      const csv = convertToCSV(jsonse);
+      const data = new Blob([csv], { type: 'text/csv' });
       const JsonURL = window.URL.createObjectURL(data);
       let tempLink = '';
       tempLink = document.createElement('a');
