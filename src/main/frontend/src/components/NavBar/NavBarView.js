@@ -25,7 +25,7 @@ import SideBarContent from '../SideBar/SideBarView';
 import { initCart } from '../../pages/selectedCases/selectedCasesState';
 import { toggleCheckBox } from '../../pages/dashboard/dashboardState';
 import { unselectFilters } from '../../utils/dashboardUtilFunctions';
-
+import AboutMenu from './components/AboutMenu';
 import { Badge } from '../Wrappers/Wrappers';
 
 const drawerWidth = 240;
@@ -122,51 +122,46 @@ const NavBar = ({
           </div>
           {/* End Sidebar button */}
           <div className={classes.buttonContainer}>
-            <NavLink
-              className={classes.link}
-              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
-              to="/home"
-            >
-              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+              <NavLink
+                className={classes.link}
+                activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
+                to="/home"
+              >
               home
-              </Button>
-            </NavLink>
-            <NavLink
-              className={classes.link}
-              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
-              to="/dashboard"
-            >
-              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+              </NavLink>
+            </Button>
+            <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+              <NavLink
+                className={classes.link}
+                activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
+                to="/dashboard"
+              >
               Cases
-              </Button>
-            </NavLink>
-            <NavLink
-              className={classes.link}
-              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
-              to="/programs"
-            >
-              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+              </NavLink>
+
+            </Button>
+
+            <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+              <NavLink
+                className={classes.link}
+                activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
+                to="/programs"
+              >
                 Programs
-              </Button>
-            </NavLink>
-            <NavLink
-              className={classes.link}
-              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
-              to="/studies"
-            >
-              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+              </NavLink>
+            </Button>
+
+            <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+              <NavLink
+                className={classes.link}
+                activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
+                to="/studies"
+              >
                Studies
-              </Button>
-            </NavLink>
-            <NavLink
-              className={classes.link}
-              activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
-              to="/about"
-            >
-              <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
-              About
-              </Button>
-            </NavLink>
+              </NavLink>
+            </Button>
+            <AboutMenu />
           </div>
           {/* <div className={classes.grow} /> */}
           {/* Start of Theme Switching Icon and logic */}
@@ -185,18 +180,19 @@ const NavBar = ({
             </Tooltip>
           </IconButton> */}
           {/* Start of Theme Switching Icon and logic */}
-
-          <NavLink
-            className={classes.link}
-            to="/myCases"
-          >
-            <IconButton
-              color="inherit"
-              aria-haspopup="true"
-              aria-controls="mail-menu"
-              className={classes.headerMenuButton}
-              classes={{ root: classes.iconButtonRoot }}
+          <Button variant="h6" weight="medium" className={classes.logotype}>
+            <NavLink
+              className={classes.link}
+              to="/myCases"
             >
+            My Cases
+              {/* <IconButton
+                color="inherit"
+                aria-haspopup="true"
+                aria-controls="mail-menu"
+                className={classes.headerMenuButton}
+                classes={{ root: classes.iconButtonRoot }}
+              > */}
               <Badge color="primary" badgeContent={numberOfCases}>
                 <Tooltip title="Cases" placement="bottom-end">
                   <img
@@ -207,8 +203,9 @@ const NavBar = ({
                 </Tooltip>
 
               </Badge>
-            </IconButton>
-          </NavLink>
+              {/* </IconButton> */}
+            </NavLink>
+          </Button>
           {/* Login button functionality on Navigation bar */}
 
           {/* {authState.isAuthorized ? (
@@ -288,8 +285,9 @@ const styles = (theme) => ({
     }),
   },
   cartLogoImg: {
-    width: '25px',
-    height: '20px',
+    width: '30px',
+    height: '30px',
+    marginLeft: '6px',
   },
   hide: {
     display: 'none',
@@ -315,7 +313,7 @@ const styles = (theme) => ({
     },
   },
   headerMenuButton: {
-    marginLeft: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit,
     padding: theme.spacing.unit / 2,
   },
   headerMenuButtonCollapse: {
@@ -378,6 +376,7 @@ const styles = (theme) => ({
   },
   link: {
     textDecoration: 'none',
+    color: 'white',
   },
   menuButton: {
     marginRight: theme.spacing.unit * 2,
@@ -407,7 +406,7 @@ const styles = (theme) => ({
     padding: '11px 10px',
   },
   iconButtonRoot: {
-    paddingTop: '11px',
+    // paddingTop: '11px',
   },
   floatRight: {
     float: 'right',

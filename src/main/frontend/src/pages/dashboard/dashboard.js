@@ -241,7 +241,7 @@ const styles = (theme) => ({
     float: 'left',
   },
   customButton: {
-    borderRadius: '100px',
+    borderRadius: '0 0 18px 18px',
     minHeight: '20px',
     fontSize: 7,
     color: '#ffffff',
