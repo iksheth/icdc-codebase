@@ -134,11 +134,13 @@ class selectedFilesView extends Component {
       rowsSelected: state.rowsSelected,
       onRowsSelect: (curr, allRowsSelected) => this.onRowsSelect(curr, allRowsSelected),
       customToolbarSelect: (selectedRows, displayData) => {
-        Object.keys(selectedRows.data).map((keyVlaue) => (
+        const dataIndex = Object.keys(selectedRows.data).map((keyVlaue) => (
           selectedRows.data[keyVlaue].index
         ));
-        const keysToInclude = [0, 1, 6, 7];
-        const selectedFiles = Object.keys(selectedRows.data).map((keyVlaue) => (
+
+        const keysToInclude = [0, 1, 7, 8];
+
+        const selectedFiles = dataIndex.map((keyVlaue) => (
           keysToInclude.map((value) => (displayData[keyVlaue].data[value]))
         ));
 
