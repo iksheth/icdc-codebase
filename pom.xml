@@ -318,7 +318,7 @@
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>install</arguments>
+							<arguments> node --max_old_space_size=8000 $(which npm) install</arguments>
 						</configuration>
 					</execution>
 					<execution>
