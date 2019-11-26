@@ -12,7 +12,7 @@ import imgStudy from '../../assets/landing/LP_Studies.png';
 import imgSubmit from '../../assets/landing/LP_Submit.png';
 import icon from '../../assets/landing/LP_ReadMore.svg';
 import iconAbout from '../../assets/landing/LP_About_Fullarticle.Arrow.svg';
-import lbg from '../../assets/landing/lbg.jpg';
+import lbg from '../../assets/landing/LP-Background.1400x1600.jpg';
 import l9dg from '../../assets/landing/LP_Cases.png';
 import { Button } from '../../components/Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
