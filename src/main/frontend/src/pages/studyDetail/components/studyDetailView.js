@@ -266,9 +266,12 @@ const StudyDetailView = ({ classes, data }) => {
               <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
                   <span className={classes.detailContainerHeader}>Description</span>
+                  
                 </Grid>
+               
                 <Grid item xs={12}>
-                  <span className={classes.content}>{studyData.clinical_study_description}</span>
+                  <div ><span className={classes.content}> {studyData.clinical_study_description} </span></div>
+                  <div ><hr className={classes.hrLine}/></div>
                 </Grid>
 
                 <Grid container spacing={8} className={classes.detailContainerItems}>
@@ -370,6 +373,12 @@ const StudyDetailView = ({ classes, data }) => {
 
 
 const styles = (theme) => ({
+  hrLine:{
+    width: '50px',
+    float: 'left',
+    marginTop: '30px',
+    border: '#81a6b9 2px solid',
+  },
   paddingLeft8: {
     paddingLeft: '8px',
   },
