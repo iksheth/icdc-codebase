@@ -336,15 +336,6 @@
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>install node_modules/mui-custom-datatables</arguments>
-						</configuration>
-					</execution>
-					<execution>
-						<id>npm install mui-custom-datatables package</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<configuration>
 							<workingDirectory>src/main/frontend/node_modules/mui-custom-datatables</workingDirectory>
 							<arguments>install </arguments>
 						</configuration>
