@@ -127,7 +127,7 @@ const styles = (theme) => ({
     whiteSpace: 'nowrap',
     color: '#FFFFFF',
     fontFamily: 'Raleway',
-    fontSize: '11px',
+    fontSize: '13px',
     fontWeight: '600',
     [theme.breakpoints.down('xs')]: {
       display: 'none',
@@ -147,7 +147,7 @@ const styles = (theme) => ({
     textDecoration: 'none',
     color: 'black',
     fontFamily: 'Raleway',
-    fontSize: '10px',
+    fontSize: '13px',
     fontWeight: '600',
     lineHeight: '10px',
     display: 'block',

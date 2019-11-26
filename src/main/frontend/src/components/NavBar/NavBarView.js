@@ -193,7 +193,7 @@ const NavBar = ({
                 className={classes.headerMenuButton}
                 classes={{ root: classes.iconButtonRoot }}
               > */}
-              <Badge color="primary" badgeContent={numberOfCases}>
+              <Badge color="secondary" badgeContent={numberOfCases}>
                 <Tooltip title="Cases" placement="bottom-end">
                   <img
                     className={classes.cartLogoImg}

@@ -37,9 +37,9 @@ const renderActiveShape = (props) => {
   // const textAnchor = cos >= 0 ? 'start' : 'end';
   return (
     <g>
-      <text y={10} fill={textColor} fontSize="12px" fontWeight="600" fontFamily="Raleway">{String(payload.name).length > 30 ? `${String(payload.name).substr(0, 30)}....` : payload.name}</text>
-      <text x={cx} y={cy} dy={0} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="600" fontFamily="Raleway">{`${value}`}</text>
-      <text x={cx} y={cy} dy={12} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="600" fontFamily="Raleway">Cases</text>
+      <text y={20} fill={textColor} fontSize="12px" fontWeight="500" fontFamily="Open Sans">{payload.name}</text>
+      <text x={cx} y={cy} dy={0} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="500" fontFamily="Open Sans">{`${value}`}</text>
+      <text x={cx} y={cy} dy={12} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="500" fontFamily="Open Sans">Cases</text>
       <Sector
         cx={cx}
         cy={cy}
