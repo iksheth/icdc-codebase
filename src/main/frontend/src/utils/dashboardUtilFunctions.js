@@ -55,7 +55,7 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
   isChecked: false,
 }));
 
-export function getStatDataFromDashboardData(data, statName,filters) {
+export function getStatDataFromDashboardData(data, statName) {
   switch (statName) {
     case 'case':
       return data.length;
@@ -67,11 +67,9 @@ export function getStatDataFromDashboardData(data, statName,filters) {
       return [...new Set(data.reduce((output, d) => output.concat(d.samples
         ? d.samples : []), []))].length;
     case 'file':
-    //const filtersOfFile =filters.filter(d=>d.groupName==="Associated File Type"||d.groupName==="Associated File Format").map((f)=>);
-    // [...new Set(data.reduce((output, d) => output.concat(d.files
-    //     ? d.files : []), []))].length;
+
       return [...new Set(data.reduce((output, d) => output.concat(d.files
-    ? d.files : []), []))].length;
+    ? d.files : []), []).map((f)=>f.uuid))].length;
     default:
       return 0;
   }
