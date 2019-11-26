@@ -37,7 +37,7 @@ const styles = (theme) => ({
     color: '#5e8ca5',
     textTransform: 'uppercase',
     fontFamily: theme.custom.fontFamilySans,
-    fontSize: '9pt',
+    fontSize: '8pt',
     letterSpacing: '0.025em',
 
   },

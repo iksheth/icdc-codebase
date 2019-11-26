@@ -445,7 +445,10 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '12px',
+    fontSize: '14pt',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    paddingRight: '200px',
   },
   headerMSubTitle: {
     paddingTop: '12px',
