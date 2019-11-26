@@ -481,7 +481,7 @@ headerButtonLinkNumber:{
   fontFamily: theme.custom.fontFamilySans,
    borderBottom: 'solid',
     lineHeight: '30px',
-    paddingBottom: '4px',
+    paddingBottom: '3px',
     margin:'0 4px',
     fontSize: '8pt',
 },
