@@ -31,7 +31,7 @@ between human and canine cancer.
           <div className={classes.headerButtonSection}>
             <Button className={classes.headerButton}>
               {' '}
-              <Link to="/" className={classes.headerLink}>explore</Link>
+              <Link to="/dashboard" className={classes.headerLink}>explore</Link>
             </Button>
           </div>
         </Grid>
@@ -87,7 +87,7 @@ programs snad projects; all focused on the canine subjects.
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to="/" className={classes.blueButton}>READ MORE</Link>
+                  <Link to="/programs" className={classes.blueButton}>READ MORE</Link>
                 </div>
               </div>
             </div>
@@ -106,7 +106,7 @@ programs snad projects; all focused on the canine subjects.
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to="/" className={classes.blueButton}>READ MORE</Link>
+                  <Link to="/studies" className={classes.blueButton}>READ MORE</Link>
                 </div>
               </div>
             </div>
@@ -148,7 +148,7 @@ then be analyzed in the Cloud Resources.
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to="/" className={classes.greybutton}>READ MORE</Link>
+                  <Link to="/dashboard" className={classes.greybutton}>READ MORE</Link>
                 </div>
               </div>
             </div>
@@ -168,6 +168,7 @@ const styles = (theme) => ({
     backgroundImage: `url(${lbg})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
   },
   container: {
     paddingTop: '10px',
@@ -254,13 +255,12 @@ const styles = (theme) => ({
   },
   icdcWords:{
      height:'193px',
-     background:'#39C0F0',
+     background:'rgb(57,192,240,0.3)',
      color: '#FFFFFF',  
      fontSize: '24px',  
      fontWeight: 'bold',
      lineHeight: '27px',
      padding:'35px',
-     opacity:'0.3',
    },
   contentLeft: {
     float: 'left',

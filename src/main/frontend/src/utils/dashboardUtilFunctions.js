@@ -1,3 +1,4 @@
+/* eslint-disable */
 import uuid from 'uuid';
 
 export const COLORS = [
@@ -54,7 +55,7 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
   isChecked: false,
 }));
 
-export function getStatDataFromDashboardData(data, statName) {
+export function getStatDataFromDashboardData(data, statName,filters) {
   switch (statName) {
     case 'case':
       return data.length;
@@ -66,8 +67,11 @@ export function getStatDataFromDashboardData(data, statName) {
       return [...new Set(data.reduce((output, d) => output.concat(d.samples
         ? d.samples : []), []))].length;
     case 'file':
+    //const filtersOfFile =filters.filter(d=>d.groupName==="Associated File Type"||d.groupName==="Associated File Format").map((f)=>);
+    // [...new Set(data.reduce((output, d) => output.concat(d.files
+    //     ? d.files : []), []))].length;
       return [...new Set(data.reduce((output, d) => output.concat(d.files
-        ? d.files : []), []))].length;
+    ? d.files : []), []))].length;
     default:
       return 0;
   }

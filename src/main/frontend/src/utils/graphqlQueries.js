@@ -80,7 +80,11 @@ export const DASHBOARD_QUERY = gql`{
         data_types
         disease_site
         samples
-        files
+        files{
+          uuid
+          file_format
+          file_type
+        }
         file_formats
      }
   }`;
