@@ -29,10 +29,14 @@ Exploring. analyzing and understanding the biological relationships
 between human and canine cancer.
           </div>
           <div className={classes.headerButtonSection}>
-            <Button className={classes.headerButton}>
-              {' '}
-              <Link to="/dashboard" className={classes.headerLink}>explore</Link>
-            </Button>
+           
+              <Link to="/dashboard" className={classes.headerLink}>
+                 <Button className={classes.headerButton}>
+                    {' '}
+                    explore
+                 </Button>
+              </Link>
+            
           </div>
         </Grid>
         <Grid item lg={9} md={9} sm={12} xs={12}>
