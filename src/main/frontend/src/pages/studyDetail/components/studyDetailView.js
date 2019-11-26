@@ -438,6 +438,9 @@ const styles = (theme) => ({
     maxHeight: '35px',
     overflow: 'hidden',
     paddingLeft: '3px',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    paddingRight: '200px',
   },
   headerSubTitleContent: {
     color: '#000000',
@@ -446,35 +449,41 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
     fontSize: '14pt',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    paddingRight: '200px',
+
   },
   headerMSubTitle: {
     paddingTop: '12px',
   },
 headerButton: {
+    fontFamily: theme.custom.fontFamilySans,
     float: 'right',
     marginTop: '15px',
     width: '135px',
     height: '33px',
-    background: '#F3F3f3',
+    background: '#F6F4F4',
     paddingLeft:'10px',
     paddingRight:'10px',
   
   },
 headerButtonLinkSpan:{
+  fontFamily: theme.custom.fontFamilySans,
     height: '50px',
     background: '#F5F3EE',
     width: '200px',
+    fontSize: '8pt',
 },
 headerButtonLinkText:{
+  fontFamily: theme.custom.fontFamilySans,
     color: '#0B3556',
+    fontSize: '8pt',
 },
 headerButtonLinkNumber:{
+  fontFamily: theme.custom.fontFamilySans,
    borderBottom: 'solid',
     lineHeight: '30px',
-    paddingBottom: '3px',
+    paddingBottom: '4px',
+    margin:'0 4px',
+    fontSize: '8pt',
 },
   logo: {
     position: 'absolute',
@@ -487,12 +496,13 @@ headerButtonLinkNumber:{
     margin: 'auto',
     paddingTop: '30px',
     paddingLeft: '60px',
-    paddingRight: '60px',
+    paddingRight: '37px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
+    height: '525px',
 
   },
   detailContainerHeader: {
@@ -510,18 +520,20 @@ headerButtonLinkNumber:{
   detailContainerLeft: {
     display: 'block',
     padding: '5px  20px 5px 2px !important',
-    minHeight: '550px',
-    maxHeight: '550px',
+    minHeight: '500px',
+    maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
+    
   },
   detailContainerRight: {
     padding: '5px 0 5px 20px !important',
     borderLeft: '#81a6b9 1px solid',
-    minHeight: '550px',
-    maxHeight: '550px',
+    minHeight: '500px',
+    maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
+    height: '500px',
   },
 
   tableContainer: {
