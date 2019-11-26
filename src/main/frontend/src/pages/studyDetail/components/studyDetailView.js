@@ -262,7 +262,7 @@ const StudyDetailView = ({ classes, data }) => {
         <div className={classes.detailContainer}>
 
           <Grid container spacing={8}>
-            <Grid item lg={6} md={6} sm={6} xs={12}>
+            <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
                   <span className={classes.detailContainerHeader}>Description</span>
@@ -299,7 +299,7 @@ const StudyDetailView = ({ classes, data }) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item lg={6} md={6} sm={6} xs={12}>
+            <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
                   <Grid container spacing={16}>
@@ -404,8 +404,8 @@ const styles = (theme) => ({
     background: '#f3f3f3',
   },
   header: {
-    paddingLeft: '32px',
-    paddingRight: '32px',
+    paddingLeft: '21px',
+    paddingRight: '21px',
     borderBottom: '#81a6b9 4px solid',
     height: '80px',
     maxWidth: theme.custom.maxContentWidth,
@@ -495,8 +495,8 @@ headerButtonLinkNumber:{
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     paddingTop: '30px',
-    paddingLeft: '60px',
-    paddingRight: '37px',
+    paddingLeft: '36px',
+    paddingRight: '36px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
@@ -524,16 +524,20 @@ headerButtonLinkNumber:{
     maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
+    width:'calc(100% + 8px)',
     
   },
+  borderRight:{
+     borderRight: '#81a6b9 1px solid',
+   },
   detailContainerRight: {
     padding: '5px 0 5px 20px !important',
-    borderLeft: '#81a6b9 1px solid',
     minHeight: '500px',
     maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
     height: '500px',
+    width:'calc(100% + 8px)',
   },
 
   tableContainer: {
@@ -599,6 +603,20 @@ headerButtonLinkNumber:{
     color: '#ff17f15',
     paddingBottom: '20px',
   },
+   '@global': {
+    '*::-webkit-scrollbar': {
+      width: '0.6em',
+    },
+    '*::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px #ccc',
+      borderRadius: '10px',
+    },
+    '*::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(94,140,165)',
+      outline: '1px solid slategrey',
+      borderRadius: '10px',
+    }
+  }
 });
 
 export default withStyles(styles, { withTheme: true })(StudyDetailView);
