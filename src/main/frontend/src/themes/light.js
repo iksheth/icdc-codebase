@@ -1,3 +1,4 @@
+/* eslint-disable */
 import tinycolor from 'tinycolor2';
 
 const navyBlue = '#0B3556';
@@ -183,6 +184,7 @@ export default {
     MUIDataTableSelectCell: {
       fixedHeader: {
         position: 'relative',
+
       },
       headerCell: {
         borderTop: tableHeaderBorder,
@@ -229,6 +231,7 @@ export default {
         fontStyle: 'normal',
         fontSize: '11pt',
         fontWeight: 'bold',
+        padding: '0 33px',
       },
       sortActive: {
         color: tableHeaderFontColor,
@@ -248,7 +251,6 @@ export default {
     MUIDataTableBodyRow: {
       root: {
         '&:nth-child(even)': {
-          backgroundColor: '#f5f5f5',
           color: '#5e8ca5',
         },
         '&:nth-child(odd)': {
@@ -257,6 +259,9 @@ export default {
       },
     },
     MuiTableRow: {
+      head:{
+        height: 17,
+      },
       root: {
         height: 17,
       },
@@ -264,6 +269,10 @@ export default {
     MuiTableCell: {
       root: {
         borderBottom: '0px',
+        padding: '5px',
+      },
+      paddingCheckbox:{
+        padding: '0px 5px',
       },
       body: {
         color: 'inherit',
@@ -272,6 +281,7 @@ export default {
         fontStyle: 'normal',
         fontSize: '10pt',
         fontWeight: 'bold',
+        padding: '0 33px',
       },
       head: {
         fontSize: '0.95rem',
@@ -302,5 +312,10 @@ export default {
         fontStyle: 'normal',
       },
     },
+    MuiIconButton:{
+      root:{
+        padding:'5px',
+      }
+    }
   },
 };

@@ -263,6 +263,7 @@ export default {
     MuiTableCell: {
       root: {
         borderBottom: '0px',
+        padding: '0px',
       },
       body: {
         color: 'inherit',
