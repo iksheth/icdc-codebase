@@ -94,37 +94,41 @@ const Studies = ({ classes, data }) => {
     <>
       <Stats />
       <div className={classes.tableContainer}>
-        <div className={classes.header}>
-          <div className={classes.logo}>
-            <img
-              src={icon}
-              alt="ICDC case detail header logo"
-            />
+        <div className={classes.container}>
+          <div className={classes.header}>
+            <div className={classes.logo}>
+              <img
+                src={icon}
+                alt="ICDC case detail header logo"
+              />
 
-          </div>
-          <div className={classes.headerTitle}>
-            <div className={classes.headerMainTitle}>
-              <span>
-                <Typography>
-                  <span className={classes.headerMainTitle}>Studies</span>
-                </Typography>
-              </span>
+            </div>
+            <div className={classes.headerTitle}>
+              <div className={classes.headerMainTitle}>
+                <span>
+                  <Typography>
+                    <span className={classes.headerMainTitle}>Studies</span>
+                  </Typography>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
 
-        <div className={classes.tableDiv}>
-          <Grid container spacing={32}>
-            <Grid item xs={12}>
-              <MUIDataTable
-                data={data.studiesByProgram}
-                columns={columns}
-                options={options(classes)}
-              />
+          <div className={classes.tableDiv}>
+            <Grid container spacing={32}>
+              <Grid item xs={12}>
+                <MUIDataTable
+                  data={data.studiesByProgram}
+                  columns={columns}
+                  options={options(classes)}
+                />
+              </Grid>
             </Grid>
-          </Grid>
+          </div>
         </div>
+
+
       </div>
     </>
   );
@@ -136,8 +140,11 @@ const styles = (theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  caseCardContainer: {
-    marginTop: '32px',
+  container: {
+    margin: 'auto',
+    maxWidth: '1440px',
+    paddingLeft: '36px',
+    paddingRight: '36px',
   },
   paper: {
     textAlign: 'center',
@@ -159,8 +166,6 @@ const styles = (theme) => ({
     paddingRight: '50px',
     borderBottom: '#004c73 10px solid',
     height: '120px',
-    maxWidth: '1440px',
-    margin: 'auto',
     paddingTop: '35px',
   },
   headerMainTitle: {
@@ -192,7 +197,6 @@ const styles = (theme) => ({
     paddingBottom: '50px',
   },
   tableDiv: {
-    maxWidth: '1440px',
     margin: 'auto',
   },
 });
