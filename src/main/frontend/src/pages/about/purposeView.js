@@ -2,28 +2,21 @@
 import React from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import SteeringCommittee from '../steeringCommittee/steeringCommitteeView';
-import DGAB from '../dgabPage/dgabPageView';
-import BPSC from '../bpsc/bpscView';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
-import l9dg from '../../assets/landing/LP_Cases.png';
+import l9dg from '../../assets/about/purpose.png';
 import Body from '../../components/About/BodyView'; 
-const About = ({ classes }) => {
+const PurposeView = ({ classes }) => {
   return (
     <>
       <Stats />
-       <Header title="Steering Committee"/>
+       <Header title="Purpose"/>
       <div className={classes.container}>
         <Body data={{
           img:l9dg,
-          body:(<div> The ICDC is community driven so is being built with input and collaboration from many groups to foster a diversity of ideas and to ensure needs are identified across the broad research community. To achieve this, the ICDC Steering Committee was formed to advise the NCI and FNLCR on the ICDC. The Steering Committee is composed of 11 members from the non-NIH research community, 7 from NCI, 1 from NHGRI and 1 from NCATS. There is also 1 observer from the NCI and 4 ex-officio members who are FNLCR staff. The chairperson is from the non-NIH research community. 
-
-The Steering Committee has two sub-committees; Data Governance Advisory Board (DGAB) and the Best Practices Sub-Committee (BPSC). 
-
-The DGAB consists of 4 external members (all from ICDC Steering Committee), 2 NIH members (1 of which is from CBIIT) and is supported by FNLCR staff. When researchers request their data is added to the ICDC to be shared with the community, the role of the DGAB is to advise the NCI on the suitability of request. The NCI makes the final decision on the request. The DGAB is chaired by a non-NIH member of ICDC Steering Committee. The DGAB meets at least quarterly to review and prioritize all open and complete requests.  
-
-The BPSC consists of 7 external members (all from ICDC Steering Committee), 3 NCI staff, 1 NHGRI staff and is supported by FNLCR staff. The overall goal of the BPSC is to streamline and standardize data collection and management for canine studies. The BPSC will examine past and planned studies and will recommend prospective standards for data collection and management in four main areas; imaging, clinical/pathology, Immunology and genomic/sequencing data.
+          body:(<div> NCI’s Division of Cancer Treatment and Diagnosis (DCTD) contracted the Frederick National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine Data Commons (ICDC), a cloud-based repository of canine cancer data and was established to further research on human cancers by enabling comparative analysis with canine cancer.  The data in the ICDC is sourced from multiple different programs and projects; all focused on canine subjects. The data is harmonized into an integrated data model and then made available to the research community. The ICDC is part of the Cancer Research Data Commons (CRDC), an initiative from NCI’s Center for Biomedical Informatics and Information Technology (CBIIT). Bioinformatic analysis of the ICDC data is accomplished using the CRDC’s Cloud Resources.
+<br/><br/>
+Within the FNLCR, the Biomedical Informatics and Data Science (BIDS) Directorate is focused on software engineering and data handling.  The Applied and Developmental Research Directorate (ADRD) is managing the ICDC Steering Committee and providing one of the data sources for the ICDC. Finally, there is also an ICDC Steering Committee (composed of external members, FNLCR and NCI staff) that provides advice to DCTD on the ICDC.  
 
 </div>),
         }}
@@ -42,8 +35,5 @@ const styles = () => ({
   },
 });
 
-About.defaultProps = {
-  currentTab: 0,
-};
 
-export default withStyles(styles, { withTheme: true })(About);
+export default withStyles(styles, { withTheme: true })(PurposeView);

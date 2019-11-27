@@ -1,7 +1,6 @@
 import React from 'react';
 import { withStyles, CssBaseline } from '@material-ui/core';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import About from '../../pages/about/aboutView';
 import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
@@ -18,14 +17,20 @@ import Studies from '../../pages/studies/studiesController';
 import Programs from '../../pages/programs/programController';
 import modelPage from '../../pages/modelPage/modelPageView';
 import table from '../../pages/table/tableView';
-import SteeringCommittee from '../../pages/steeringCommittee/steeringCommitteeRoute';
-import DGAB from '../../pages/dgabPage/dgbaRoute';
-import BPSC from '../../pages/bpsc/bpscRoute';
 import StudyDetail from '../../pages/studyDetail/studyDetailController';
 import ProgramDetail from '../../pages/programDetail/programDetailController';
 import SelectedCases from '../../pages/selectedCases/selectedCasesController';
 import SelectedFiles from '../../pages/selectedFiles/selectedFilesController';
 import Home from '../../pages/landing/landingController';
+import analyzingDataView from '../../pages/about/analyzingDataView';
+import CRDCView from '../../pages/about/CRDCView';
+import developerView from '../../pages/about/developerView';
+import ICDCDataView from '../../pages/about/ICDCDataView';
+import purposeView from '../../pages/about/purposeView';
+import steeringCommiteeView from '../../pages/about/steeringCommitteeView';
+import supportView from '../../pages/about/supportView';
+import submitingData from '../../pages/about/submitDataView';
+
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -55,21 +60,22 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/studies" component={Studies} />
             <Route path="/modelPage" component={modelPage} />
             <Route path="/table" component={table} />
-            <Route path="/steeringCommittee" component={SteeringCommittee} />
-            <Route path="/bpsc" component={BPSC} />
             <Route path="/myCases" component={SelectedCases} />
             <Route path="/myCasesFiles" component={SelectedFiles} />
 
-            <Route
-              path="/dgab"
-              component={DGAB}
-            />
-
-            <Route path="/about" component={About} />
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/case/:id" component={CaseDetail} />
             <Route path="/study_cases/:id" component={Cases} />
+            <Route path="/purpose" component={purposeView} />
+            <Route path="/steeringCommittee" component={steeringCommiteeView} />
+            <Route path="/cdrd" component={CRDCView} />
+            <Route path="/icdcData" component={ICDCDataView} />
+            <Route path="/analyzingData" component={analyzingDataView} />
+            <Route path="/developers" component={developerView} />
+            <Route path="/support" component={supportView} />
+            <Route path="/submit" component={submitingData} />
+
 
             <Route component={Error} />
           </Switch>

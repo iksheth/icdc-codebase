@@ -115,6 +115,13 @@ const AboutMenu = ({ classes }) => {
             >
                Support
             </NavLink>
+            <NavLink
+              className={classes.link}
+              activeStyle={{ color: 'white' }}
+              to="/submit"
+            >
+               Submitting Data
+            </NavLink>
           </div>
         </Paper>
       </Menu>

@@ -2,14 +2,11 @@
 import React from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import SteeringCommittee from '../steeringCommittee/steeringCommitteeView';
-import DGAB from '../dgabPage/dgabPageView';
-import BPSC from '../bpsc/bpscView';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
-import l9dg from '../../assets/landing/LP_Cases.png';
+import l9dg from '../../assets/about/icdc_data.png';
 import Body from '../../components/About/BodyView'; 
-const About = ({ classes }) => {
+const ICDCData = ({ classes }) => {
   return (
     <>
       <Stats />
@@ -42,8 +39,7 @@ const styles = () => ({
   },
 });
 
-About.defaultProps = {
-  currentTab: 0,
-};
 
-export default withStyles(styles, { withTheme: true })(About);
+
+export default withStyles(styles, { withTheme: true })(ICDCData);
+
