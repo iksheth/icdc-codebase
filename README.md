@@ -84,7 +84,7 @@ Use Maven to build the whole project into War file. Details can be found in POM 
 After deploy to the tomcat, should able to see the page like this. 
 
 
- -<img src="doc/front-end.png" width="80%">
+ -<img src="doc/frontEnd.png" width="80%">
  
 
 ## GraphQL Endpoint

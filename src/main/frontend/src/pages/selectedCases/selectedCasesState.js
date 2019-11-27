@@ -131,7 +131,7 @@ export default function CARTReducer(state = initialState, action) {
               .map((c) => c.case_id),
           ),
         ).map((id) => previousStatCases.concat(action.payload.cases)
-          .find((c) => c.case_id === id)) : [];
+          .find((c) => c.case_id === id)) : previousStatCases;
       const uniqueFiles = action.payload.files.length > 0
         ? Array.from(
           new Set(
@@ -139,7 +139,7 @@ export default function CARTReducer(state = initialState, action) {
               .map((c) => c.uuid),
           ),
         ).map((id) => previousStatFiles.concat(action.payload.files)
-          .find((c) => c.uuid === id)) : [];
+          .find((c) => c.uuid === id)) : previousStatFiles;
 
       localStorage.setItem('userSelectedCases', JSON.stringify(uniqueCases));
       localStorage.setItem('userSelectedFiles', JSON.stringify(uniqueFiles));

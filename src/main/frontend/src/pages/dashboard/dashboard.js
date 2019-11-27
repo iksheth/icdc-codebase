@@ -35,7 +35,7 @@ const Dashboard = ({
               <FormControlLabel
                 control={(
                   <Button className={classes.customButton} onClick={handleChange}>
-              COLLAPSE VIEW
+                    {checked ? 'Close View' : 'Open View' }
                   </Button>
 )}
               />
@@ -235,17 +235,16 @@ const styles = (theme) => ({
   floatRight: {
     float: 'right',
     marginRight: '80px',
-    marginTop: '8px',
   },
   floatLeft: {
     float: 'left',
   },
   customButton: {
-    borderRadius: '100px',
+    borderRadius: '0 0 18px 18px',
     minHeight: '20px',
-    fontSize: 7,
+    fontSize: 8,
     color: '#ffffff',
-    textTransform: 'uppercase',
+    textTransform: 'none',
     backgroundColor: '#566672',
     marginRight: '4px',
     fontFamily: theme.custom.fontFamilySans,

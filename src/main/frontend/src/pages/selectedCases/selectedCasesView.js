@@ -46,6 +46,7 @@ const columns = [
   { name: 'stage_of_disease', label: 'Stage of Disease' },
   { name: 'age', label: 'Age' },
   { name: 'sex', label: 'Sex' },
+  { name: 'neutered_status', label: 'Neutered Status' },
 ];
 
 const options = (dispatch, cases) => ({
