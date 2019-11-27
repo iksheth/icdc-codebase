@@ -37,7 +37,7 @@ const renderActiveShape = (props) => {
   // const textAnchor = cos >= 0 ? 'start' : 'end';
   return (
     <g>
-      <text y={20} fill={textColor} fontSize="12px" fontWeight="500" fontFamily="Open Sans">{payload.name}</text>
+      <text y={9} fill={textColor} fontSize="12px" fontWeight="600" fontFamily="Raleway">{String(payload.name).length > 30 ? `${String(payload.name).substr(0, 30)}....` : payload.name}</text>
       <text x={cx} y={cy} dy={0} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="500" fontFamily="Open Sans">{`${value}`}</text>
       <text x={cx} y={cy} dy={12} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="500" fontFamily="Open Sans">Cases</text>
       <Sector
@@ -88,7 +88,7 @@ export default class CustomActiveDonut extends PureComponent {
     const { activeIndex } = this.state;
 
     return (
-      <ResponsiveContainer width={250} height={230}>
+      <ResponsiveContainer width={250} height={250}>
         <PieChart textColor={textColor}>
           <Pie
             activeIndex={activeIndex}

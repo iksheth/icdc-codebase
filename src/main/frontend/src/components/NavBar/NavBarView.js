@@ -113,7 +113,7 @@ const NavBar = ({
           classes={{ root: classes.iconButtonRoot }}
         >
           <img
-            className={classes.cartLogoImg}
+            className={classes.funnelLogoImg}
             src={funnelIconWhite}
             alt="cart_logo"
           />
@@ -180,7 +180,7 @@ const NavBar = ({
             </Tooltip>
           </IconButton> */}
           {/* Start of Theme Switching Icon and logic */}
-          <Button variant="h6" weight="medium" className={classes.logotype}>
+          <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
             <NavLink
               className={classes.link}
               to="/myCases"
@@ -193,7 +193,7 @@ const NavBar = ({
                 className={classes.headerMenuButton}
                 classes={{ root: classes.iconButtonRoot }}
               > */}
-              <Badge color="secondary" badgeContent={numberOfCases}>
+              <Badge badgeContent={numberOfCases}>
                 <Tooltip title="Cases" placement="bottom-end">
                   <img
                     className={classes.cartLogoImg}
@@ -245,7 +245,7 @@ const NavBar = ({
             <div className={classes.floatRight} onClick={toggleSidebar}>
               <IconButton classes={{ root: classes.iconCartButtonRoot }}>
                 <img
-                  className={classes.cartLogoImg}
+                  className={classes.funnelLogoImg}
                   src={funnelIconBlue}
                   alt="funnel_image"
                 />
@@ -267,6 +267,7 @@ const styles = (theme) => ({
     color: '#FFFFFF',
     fontFamily: 'Raleway',
     fontSize: '11px',
+    letterSpacing: '1px',
     fontWeight: '600',
     [theme.breakpoints.down('xs')]: {
       display: 'none',
@@ -285,8 +286,8 @@ const styles = (theme) => ({
     }),
   },
   cartLogoImg: {
-    width: '30px',
-    height: '30px',
+    width: '22px',
+    height: '22px',
     marginLeft: '6px',
   },
   hide: {
@@ -400,22 +401,32 @@ const styles = (theme) => ({
   },
   toolbar: {
     minHeight: 39,
+    paddingRight: '35px',
+    paddingLeft: '35px',
     alignItems: 'flex-start',
   },
   buttonRoot: {
-    padding: '11px 10px',
+    paddingTop: '9px',
+    paddingLeft: '20px',
+    paddingRight: '20px',
   },
   iconButtonRoot: {
-    // paddingTop: '11px',
+    paddingTop: '9px',
   },
   floatRight: {
     float: 'right',
   },
   floatLeft: {
     float: 'left',
+    marginLeft: '19px',
+  },
+  funnelLogoImg: {
+    width: '20px',
+    height: '20px',
   },
   customButton: {
     borderRadius: '100px',
+    borderLeft: '0px',
     minHeight: '20px',
     fontSize: 9,
     textTransform: 'none',
