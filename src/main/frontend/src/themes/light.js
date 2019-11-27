@@ -286,7 +286,7 @@ export default {
         fontStyle: 'normal',
         fontSize: '10pt',
         fontWeight: 'bold',
-        padding: '0 33px',
+        padding: '8px 33px',
       },
       head: {
         fontSize: '0.95rem',
