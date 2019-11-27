@@ -9,6 +9,7 @@ import {
   ExpansionPanel,
   ExpansionPanelDetails,
   ExpansionPanelSummary,
+  withStyles,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { toggleCheckBox } from '../../../pages/dashboard/dashboardState';
@@ -55,6 +56,7 @@ const FacetPanel = (classes) => {
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1bh-content"
               id="panel1bh-header"
+              classes={{ root: classes.expansionPanelSummaryRoot }}
             >
               <ListItemText primary={sideBarItem.groupName} />
             </ExpansionPanelSummary>
@@ -87,4 +89,11 @@ const FacetPanel = (classes) => {
   );
 };
 
-export default FacetPanel;
+
+const styles = () => ({
+  expansionPanelSummaryRoot: {
+    padding: '0 24px 0 35px',
+  }
+});
+
+export default withStyles(styles)(FacetPanel);

@@ -102,6 +102,7 @@ export const Badge = withStyles(
       fontWeight: 600,
       height: 16,
       minWidth: 16,
+      backgroundColor: '#39C0F0',
     },
   }),
   { withTheme: true },

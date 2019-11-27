@@ -127,14 +127,16 @@ const styles = (theme) => ({
     whiteSpace: 'nowrap',
     color: '#FFFFFF',
     fontFamily: 'Raleway',
-    fontSize: '13px',
+    fontSize: '11px',
     fontWeight: '600',
     [theme.breakpoints.down('xs')]: {
       display: 'none',
     },
   },
   buttonRoot: {
-    padding: '11px 10px',
+    paddingTop: '9px',
+    paddingLeft: '20px',
+    paddingRight: '20px',
   },
   icon: {
     fontSize: '18px',
@@ -149,16 +151,16 @@ const styles = (theme) => ({
     fontFamily: 'Raleway',
     fontSize: '13px',
     fontWeight: '600',
-    lineHeight: '10px',
+    lineSpacing: '1px',
     display: 'block',
-    marginTop: '10px',
+    marginTop: '13px',
     '&:hover': {
       cursor: 'pointer',
       color: 'white',
     },
   },
   aboutItemsWrapper: {
-    maxWidth: '80px',
+    maxWidth: '150px',
   },
 });
 
