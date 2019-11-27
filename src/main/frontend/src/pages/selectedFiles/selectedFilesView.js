@@ -80,7 +80,7 @@ class selectedFilesView extends Component {
         });
 
         if (index === 0) {
-          str = ['caseId', 'fileName', 'uuid', 'md5sum'].join(',');
+          str = ['Case ID', 'File Name', 'File ID', 'Md5sum'].join(',');
           str += '\r\n';
         }
         str += `${line}\r\n`;
