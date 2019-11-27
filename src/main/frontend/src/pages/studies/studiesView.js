@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -40,7 +41,9 @@ const Studies = ({ classes, data }) => {
       options: {
         filter: false,
         customBodyRender: (value) => (
-          <Link to={`/study/${value}`}>{value}</Link>
+            <div className="mui_td" style={{width:'100px'}}>
+              <Link  className={classes.link} to={`/study/${value}`}>{value}</Link>
+           </div>
         ),
       },
     },
@@ -54,7 +57,7 @@ const Studies = ({ classes, data }) => {
         customBodyRender: (value, tableMeta) => (
           <div className="mui_td">
             {' '}
-            <Link to={(location) => ({ ...location, pathname: '/' })} onClick={() => redirectTo(tableMeta.rowData[0])}>{value}</Link>
+            <Link className={classes.link} to={(location) => ({ ...location, pathname: '/' })} onClick={() => redirectTo(tableMeta.rowData[0])}>{value}</Link>
             {' '}
           </div>
         ),
@@ -135,6 +138,10 @@ const Studies = ({ classes, data }) => {
 };
 
 const styles = (theme) => ({
+  link:{
+     textDecoration: 'none',
+     color: 'inherit',
+  },
   card: {
     minHeight: '100%',
     display: 'flex',
@@ -169,11 +176,11 @@ const styles = (theme) => ({
     paddingTop: '35px',
   },
   headerMainTitle: {
-    fontFamily: theme.custom.fontFamilySans,
+    fontFamily: theme.custom.fontFamilyRaleway,
     fontWeight: '500',
-    letterSpacing: '0.017em',
-    color: '#606061',
-    fontSize: '25px',
+    letterSpacing: '0.025em',
+    color: '#0296c9',
+    fontSize: '28px',
     position: 'absolute',
     marginTop: '14px',
     lineHeight: '25px',

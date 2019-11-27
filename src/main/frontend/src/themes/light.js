@@ -181,6 +181,11 @@ export default {
       '0px 12px 33px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A',
   },
   overrides: {
+    MuiPaper:{
+      elevation4:{
+        boxShadow:'none',
+      }
+   },
     MUIDataTableSelectCell: {
       fixedHeader: {
         position: 'relative',
@@ -251,19 +256,19 @@ export default {
     MUIDataTableBodyRow: {
       root: {
         '&:nth-child(even)': {
-          color: '#5e8ca5',
+          color: '#223d4c',
         },
         '&:nth-child(odd)': {
-          color: '#1c2023',
+          color: '#223d4c',
         },
       },
     },
     MuiTableRow: {
       head:{
-        height: 17,
+        height: 40,
       },
       root: {
-        height: 17,
+        height: 40,
       },
     },
     MuiTableCell: {
@@ -316,6 +321,7 @@ export default {
       root:{
         padding:'5px',
       }
-    }
+    },
+  
   },
 };
