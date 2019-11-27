@@ -257,9 +257,11 @@ export default {
       root: {
         '&:nth-child(even)': {
           color: '#223d4c',
+           background:'#eee',
         },
         '&:nth-child(odd)': {
           color: '#223d4c',
+
         },
       },
     },
