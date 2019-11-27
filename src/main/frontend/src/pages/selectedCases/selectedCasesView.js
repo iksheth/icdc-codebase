@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
-import MUIDataTable from 'mui-datatables';
+import MUIDataTable from 'mui-custom-datatables';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Typography } from '../../components/Wrappers/Wrappers';
@@ -46,6 +46,7 @@ const columns = [
   { name: 'stage_of_disease', label: 'Stage of Disease' },
   { name: 'age', label: 'Age' },
   { name: 'sex', label: 'Sex' },
+  { name: 'neutered_status', label: 'Neutered Status' },
 ];
 
 const options = (dispatch, cases) => ({

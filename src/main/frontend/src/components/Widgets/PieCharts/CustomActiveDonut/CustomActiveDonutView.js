@@ -3,13 +3,21 @@ import {
   PieChart, Pie, Sector, Cell, ResponsiveContainer,
 } from 'recharts';
 
-const COLORS = [
+const COLORS_EVEN = [
   '#39C0F0',
   '#004CF3',
   '#FF7F15',
   '#4C3112',
   '#8DE260',
   '#437200',
+];
+
+const COLORS_ODD = [
+  '#39C0F0',
+  '#004CF3',
+  '#FF7F15',
+  '#4C3112',
+  '#8DE260',
 ];
 
 const renderActiveShape = (props) => {
@@ -29,9 +37,9 @@ const renderActiveShape = (props) => {
   // const textAnchor = cos >= 0 ? 'start' : 'end';
   return (
     <g>
-      <text y={20} fill={textColor} fontSize="12px" fontWeight="600" fontFamily="Raleway">{payload.name}</text>
-      <text x={cx} y={cy} dy={0} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="600" fontFamily="Raleway">{`${value}`}</text>
-      <text x={cx} y={cy} dy={12} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="600" fontFamily="Raleway">Cases</text>
+      <text y={20} fill={textColor} fontSize="12px" fontWeight="500" fontFamily="Open Sans">{payload.name}</text>
+      <text x={cx} y={cy} dy={0} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="500" fontFamily="Open Sans">{`${value}`}</text>
+      <text x={cx} y={cy} dy={12} textAnchor="middle" fill={textColor} fontSize="12px" fontWeight="500" fontFamily="Open Sans">Cases</text>
       <Sector
         cx={cx}
         cy={cy}
@@ -80,7 +88,7 @@ export default class CustomActiveDonut extends PureComponent {
     const { activeIndex } = this.state;
 
     return (
-      <ResponsiveContainer width={250} height={220}>
+      <ResponsiveContainer width={250} height={230}>
         <PieChart textColor={textColor}>
           <Pie
             activeIndex={activeIndex}
@@ -96,7 +104,7 @@ export default class CustomActiveDonut extends PureComponent {
             blendStroke
           >
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} textColor={textColor} />
+              <Cell key={`cell-${index}`} fill={data.length % 2 === 0 ? COLORS_EVEN[index % COLORS_EVEN.length] : COLORS_ODD[index % COLORS_ODD.length]} textColor={textColor} />
             ))}
           </Pie>
         </PieChart>
