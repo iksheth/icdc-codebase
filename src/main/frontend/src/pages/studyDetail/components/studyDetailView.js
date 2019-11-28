@@ -250,7 +250,7 @@ const StudyDetailView = ({ classes, data }) => {
               className={classes.headerButtonLink}
               to={(location) => ({ ...location, pathname: '/' })}
               onClick={() => redirectTo()}
-            >   <span className={classes.headerButtonLinkText}> FILTER BY </span>
+            >   <span className={classes.headerButtonLinkText}> View </span>
                 <span className={classes.headerButtonLinkNumber}> {' '}{data.caseCountOfStudy} {' '}</span>
                 <span className={classes.headerButtonLinkText}>CASES</span>
             </Link>
@@ -562,7 +562,7 @@ headerButtonLinkNumber:{
   tableDiv: {
     paddingTop: '31px',
     maxWidth: theme.custom.maxContentWidth,
-    margin: '8px auto auto auto',
+    margin: '20px auto auto auto',
   },
 
   headerButtonLink: {
@@ -591,7 +591,7 @@ headerButtonLinkNumber:{
     },
   },
   detailContainerItems: {
-    paddingTop: '35px',
+    paddingTop: '7px',
     paddingLeft: '7px',
   },
   detailContainerItem: {

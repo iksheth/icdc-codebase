@@ -5,7 +5,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import imgDogHuman from '../../assets/landing/LP-transparent-bkgd.png';
+import imgDogHuman from '../../assets/lp_concept06_HTML5 Canvas_atlas_.png';
 import imgAbout from '../../assets/landing/LP_About.png';
 import imgProgram from '../../assets/landing/LP_Program.png';
 import imgStudy from '../../assets/landing/LP_Studies.png';
@@ -16,52 +16,63 @@ import lbg from '../../assets/landing/LP-Background.1400x1600.jpg';
 import l9dg from '../../assets/landing/LP_Cases.png';
 import { Button } from '../../components/Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
-
-
-var canvas, stage, exportRoot, anim_container, dom_overlay_container, fnStartAnimation;
-function init() {
-  canvas = document.getElementById("canvas");
-  anim_container = document.getElementById("animation_container");
-  dom_overlay_container = document.getElementById("dom_overlay_container");
-  var comp=AdobeAn.getComposition("7F7A7D9B4761418AA26921BF57800755");
-  var lib=comp.getLibrary();
-  var loader = new createjs.LoadQueue(false);
-  loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
-  loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
-  var lib=comp.getLibrary();
-  loader.loadManifest(lib.properties.manifest);
-}
-function handleFileLoad(evt, comp) {
-  var images=comp.getImages();  
-  if (evt && (evt.item.type == "image")) { images[evt.item.id] = evt.result; }  
-}
-function handleComplete(evt,comp) {
-  //This function is always called, irrespective of the content. You can use the variable "stage" after it is created in token create_stage.
-  var lib=comp.getLibrary();
-  var ss=comp.getSpriteSheet();
-  var queue = evt.target;
-  var ssMetadata = lib.ssMetadata;
-  for(i=0; i<ssMetadata.length; i++) {
-    ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+import  styled,{ keyframes } from 'styled-components'
+const slideDown = keyframes`
+  from {
+    top: 0;
+    left:0px;
   }
-  exportRoot = new lib.lp_concept06_HTML5Canvas();
-  stage = new lib.Stage(canvas);  
-  //Registers the "tick" event listener.
-  fnStartAnimation = function() {
-    stage.addChild(exportRoot);
-    createjs.Ticker.setFPS(lib.properties.fps);
-    createjs.Ticker.addEventListener("tick", stage);
-  }     
-  //Code to support hidpi screens and responsive scaling.
-  AdobeAn.makeResponsive(false,'both',false,1,[canvas,anim_container,dom_overlay_container]); 
-  AdobeAn.compositionLoaded(lib.properties.id);
-  fnStartAnimation();
-}
 
-const LandingController = ({ classes }) => (
+  to {
+    top: 350px;
+    left: 30px;
+  }
+`;
+
+const slideUp = keyframes`
+  from {
+    top: -60px;
+    left:0px;
+  }
+
+  to {
+    top:-390px;
+    left:0px;
+  }
+`;
+
+const star = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  62%{
+    opacity: 1;
+  }
+  75%{
+    opacity: 0;
+  }
+
+`;
+
+const SlideDown = styled.div`
+  animation: ${slideDown} 5s  0s infinite;
+`
+
+const SlideUp = styled.div`
+  animation: ${slideUp} 5s  0s infinite;
+`
+
+const Star = styled.div`
+  animation: ${star} 5s  0s infinite;
+`
+
+const LandingController = ({ classes }) => { 
+
+return (
   <div className={classes.page}>
     <div className={classes.container}>
-      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop50, classes.paddingBottom50)}>
+      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop50)}>
         <Grid item lg={3} md={3} sm={12} xs={12}>
           <div className={classes.headerTitle}>Integrated Canine Data Commons</div>
           <div className={classes.headerContent}>
@@ -81,7 +92,17 @@ between human and canine cancer.
         </Grid>
         <Grid item lg={9} md={9} sm={12} xs={12}>
           <div>
-            <img className={classes.imgDogHuman} src={imgDogHuman} alt="ICDC Human and dog " />
+          <div className={classes.animationContainer} >
+              <SlideDown className={classes.dog}>
+                <img className={classes.dogImg} src={imgDogHuman} />
+              </SlideDown>
+              <SlideUp className={classes.human} >
+                <img className={classes.humanImg} src={imgDogHuman} />
+              </SlideUp>
+              <Star className={classes.star} >
+                <img className={classes.starImg} src={imgDogHuman} />
+              </Star>
+              </div>
           </div>
         </Grid>
       </Grid>
@@ -198,15 +219,35 @@ then be analyzed in the Cloud Resources.
             </div>
           </div>
         </div>
-
-
       </Grid>
     </div>
   </div>
 );
-
-
+}
 const styles = (theme) => ({
+  canvas:{
+  position: 'absolute',
+  display: 'block',
+  backgroundColor:'rgba(255, 255, 255, 1.00)',
+  width:'1200px',
+  height:'700px',
+},
+animationContainer:{
+  backgroundColor:'rgba(255, 255, 255, 1.00)',
+  width:'1200px',
+  height:'720px',
+},
+domOverlayContainer:{
+  pointerEvents:'none', 
+  overflow:'hidden', 
+  width:'1200px',
+  height:'720px',
+  position: 'absolute',
+  left: '0px',
+  top: '0px',
+  display: 'block',
+
+},
   page: {
     background: '#5E8CA5',
     backgroundImage: `url(${lbg})`,
@@ -483,5 +524,49 @@ const styles = (theme) => ({
   paddingTop50: {
     paddingTop: '70px',
   },
+animationContainer:{ 
+  position: 'relative', 
+  width: '100%',
+  height: '1200px',
+  maxHeight: '750px',
+  overflow: 'hidden',
+},
+
+dogImg:{
+  position: 'absolute',
+  top: '0px',
+  left: '-1200px',
+  clip: 'rect(0,1585px,383px,1201px)',
+},
+humanImg:{
+  position: 'absolute',
+  top: '-1180px',
+  left: '-880px',
+  clip: 'rect(385px,1585px,764px,1201px)',
+},
+starImg:{
+  position: 'absolute',
+  top: '-2828px',
+  left: '-883px',
+  clip: 'rect(764px,1585px,864px,1201px)',
+},
+
+
+dog:{
+  position: 'relative',
+    height: '1200px',
+},
+human:{
+  position: 'relative',
+    height: '1200px',
+
+},
+star:{
+  position: 'relative',
+    height: '1200px',
+  opacity: '0',
+},
+
+
 });
 export default withStyles(styles, { withTheme: true })(LandingController);
