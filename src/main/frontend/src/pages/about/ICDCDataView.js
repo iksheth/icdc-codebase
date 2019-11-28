@@ -36,6 +36,7 @@ const styles = () => ({
     margin: '16px auto',
     maxWidth: '1400px',
     minHeight:'800px',
+    margin:'auto 30px',
   },
 });
 

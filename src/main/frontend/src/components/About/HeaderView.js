@@ -27,19 +27,19 @@ const styles = (theme) => ({
   },
   slope:{
    background: '#087CA5',
-    width: '20%',
+    width: '18%',
     height: '65px',
     '&:after':{
           content: '""',
           position: 'absolute',
-          left: '20%',
+          left: '18%',
           borderTop: '65px solid #087CA5',
           borderRight: '65px solid transparent',
     }
   },
   slope2:{
     background: '#E5E7E8',
-    width: 'calc(80% - 54px)',
+    width: 'calc(82% - 54px)',
     height: '65px',
     float: 'right',
     position: 'absolute',
