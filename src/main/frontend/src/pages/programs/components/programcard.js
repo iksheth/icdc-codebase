@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -6,8 +7,8 @@ import {
 import Badge from '@material-ui/core/Badge';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components/Wrappers/Wrappers';
-import linkIcon from '../../../assets/icons/MyCases-Instructions.1_Checkbox.svg';
-import dogForProgramDetail from '../../../assets/picForProgramList.png';
+import linkIcon from '../../../assets/icons/Program-ExternalLink.svg';
+import dogForProgramDetail from '../../../assets/programCards/Program_Image.png';
 
 
 const ProgramCard = ({
@@ -47,6 +48,8 @@ const ProgramCard = ({
               alt="dog  for program detail"
               className={classes.linkIcon}
             />
+          </span>
+          <span className={classes.paddingLeft5}>
             <a href={`${data.program_external_url}`} target="icdc" className={classes.outLink}>
               {data.program_external_url}
             </a>
@@ -67,11 +70,16 @@ const ProgramCard = ({
 
 
 const styles = (theme) => ({
+  paddingLeft5:{
+    paddingLeft:'5px',
+  },
   dogImage: {
     width: '100%',
+    paddingRight: '4px',
   },
   linkIcon: {
     width: '25px',
+    verticalAlign: 'middle',
   },
   outLink: {
     color: '#1db634',

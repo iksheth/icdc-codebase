@@ -4,46 +4,114 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import imgDogHuman from '../../assets/landing/l1.png';
-import imgAbout from '../../assets/landing/l2.png';
-import imgProgram from '../../assets/landing/l3.png';
-import imgStudy from '../../assets/landing/l4.png';
-import imgSubmit from '../../assets/landing/l5.png';
-import icon from '../../assets/landing/l8.png';
-import lbg from '../../assets/landing/lbg.jpg';
-import l9dg from '../../assets/landing/l9dg.jpg';
+import styled, { keyframes } from 'styled-components';
+import imgDogHuman from '../../assets/lp_concept06_HTML5 Canvas_atlas_.png';
+import imgAbout from '../../assets/landing/LP_About.png';
+import imgProgram from '../../assets/landing/LP_Program.png';
+import imgStudy from '../../assets/landing/LP_Studies.png';
+import imgSubmit from '../../assets/landing/LP_Submit.png';
+import icon from '../../assets/landing/LP_ReadMore.svg';
+import iconAbout from '../../assets/landing/LP_About_Fullarticle.Arrow.svg';
+import lbg from '../../assets/landing/LP-Background.1400x1600.jpg';
+import l9dg from '../../assets/landing/LP_Cases.png';
 import { Button } from '../../components/Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
 
+const slideDown = keyframes`
+  from {
+    top: 0;
+    left:0px;
+  }
+
+  to {
+    top: 350px;
+    left: 30px;
+  }
+`;
+
+const slideUp = keyframes`
+  from {
+    top: -60px;
+    left:0px;
+  }
+
+  to {
+    top:-390px;
+    left:0px;
+  }
+`;
+
+const star = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  62%{
+    opacity: 1;
+  }
+  75%{
+    opacity: 0;
+  }
+
+`;
+
+const SlideDown = styled.div`
+  animation: ${slideDown} 5s  0s infinite;
+`;
+
+const SlideUp = styled.div`
+  animation: ${slideUp} 5s  0s infinite;
+`;
+
+const Star = styled.div`
+  animation: ${star} 5s  0s infinite;
+`;
 
 const LandingController = ({ classes }) => (
   <div className={classes.page}>
     <div className={classes.container}>
-      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop50, classes.paddingBottom50)}>
-        <Grid item lg={4} md={4} sm={12} xs={12}>
+      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop50)}>
+        <Grid item lg={3} md={3} sm={12} xs={12}>
           <div className={classes.headerTitle}>Integrated Canine Data Commons</div>
           <div className={classes.headerContent}>
 Exploring. analyzing and understanding the biological relationships
 between human and canine cancer.
           </div>
           <div className={classes.headerButtonSection}>
-            <Button className={classes.headerButton}>
-              {' '}
-              <Link to="/" className={classes.headerLink}>explore</Link>
-            </Button>
+
+            <Link to="/dashboard" className={classes.headerLink}>
+              <Button className={classes.headerButton}>
+                {' '}
+                    explore
+              </Button>
+            </Link>
+
           </div>
         </Grid>
-        <Grid item lg={8} md={8} sm={12} xs={12}>
+        <Grid item lg={9} md={9} sm={12} xs={12}>
           <div>
-            <img className={classes.imgDogHuman} src={imgDogHuman} alt="ICDC Human and dog " />
+            <div className={classes.animationContainer}>
+              <SlideDown className={classes.dog}>
+                <img className={classes.dogImg} src={imgDogHuman} alt="Dog" />
+              </SlideDown>
+              <SlideUp className={classes.human}>
+                <img className={classes.humanImg} src={imgDogHuman} alt="human" />
+              </SlideUp>
+              <Star className={classes.star}>
+                <img className={classes.starImg} src={imgDogHuman} alt="star" />
+              </Star>
+            </div>
           </div>
         </Grid>
       </Grid>
       <Grid container spacing={16} direction="row">
         <div className={classes.contentLeft}>
           <div className={classes.about}>
-            <div className={classes.image}>
+            <div className={classes.aboutImageSection}>
               <img src={imgAbout} className={classes.aboutImage} alt="ICDC about" />
+            </div>
+            <div className={classes.icdcWords}>
+                About the Integrated Canine Data Commons (ICDC)
             </div>
             <div className={classes.aboutContent}>
   NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged
@@ -56,7 +124,9 @@ The data in the ICDC is sourced form multiple different
 programs snad projects; all focused on the canine subjects.
             </div>
             <div className={classes.aboutButtonSection}>
-              <div className={classes.aboutButtonLeft} />
+              <div className={classes.aboutButtonLeft}>
+                <img src={iconAbout} className={classes.iconAbout} alt="ICDC about icon" />
+              </div>
               <div className={classes.aboutButtonRight}>
                 <Link to="/" className={classes.aboutButton}>FULL ARTICLE</Link>
               </div>
@@ -80,7 +150,7 @@ programs snad projects; all focused on the canine subjects.
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to="/" className={classes.blueButton}>READ MORE</Link>
+                  <Link to="/programs" className={classes.blueButton}>READ MORE</Link>
                 </div>
               </div>
             </div>
@@ -99,7 +169,7 @@ programs snad projects; all focused on the canine subjects.
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to="/" className={classes.blueButton}>READ MORE</Link>
+                  <Link to="/studies" className={classes.blueButton}>READ MORE</Link>
                 </div>
               </div>
             </div>
@@ -141,28 +211,25 @@ then be analyzed in the Cloud Resources.
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to="/" className={classes.greybutton}>READ MORE</Link>
+                  <Link to="/dashboard" className={classes.greybutton}>READ MORE</Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-
       </Grid>
     </div>
   </div>
 );
-
-
 const styles = (theme) => ({
   page: {
     background: '#5E8CA5',
-  },
-  container: {
     backgroundImage: `url(${lbg})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
+  },
+  container: {
     paddingTop: '10px',
     fontFamily: 'Raleway, sans-serif',
     paddingRight: '32px',
@@ -184,7 +251,7 @@ const styles = (theme) => ({
   headerContent: {
     height: '98px',
     width: '194px',
-    color: '#F5A313',
+    color: '#CB8311',
     fontFamily: 'Raleway',
     fontSize: '16px',
     fontWeight: '500',
@@ -193,6 +260,12 @@ const styles = (theme) => ({
   },
   headerButtonSection: {
 
+  },
+  iconAbout: {
+    height: '17px',
+    width: '9px',
+    marginTop: '20px',
+    marginLeft: '12px',
   },
   icon: {
     width: '20px',
@@ -208,12 +281,12 @@ const styles = (theme) => ({
     fontWeight: 'bolder',
     color: '#ffffff',
     textTransform: 'uppercase',
-    backgroundColor: '#ff8a00',
+    backgroundColor: '#CB8311',
     fontFamily: theme.custom.fontFamilySans,
     textDecoration: 'none',
     boxShadow: 'none !important',
     '&:hover': {
-      backgroundColor: '#ff8a00',
+      backgroundColor: '#CB8311',
       color: '#ffffff',
 
     },
@@ -224,17 +297,29 @@ const styles = (theme) => ({
     color: '#ffffff',
     textDecoration: 'none',
     '&:hover': {
-      backgroundColor: '#ff8a00',
+      backgroundColor: '#CB8311',
       textDecoration: 'none',
     },
   },
   imgDogHuman: {
-    width: '350px',
+    width: '627px',
   },
 
   aboutImage: {
-    height: '423px',
     width: '300px',
+    height: '240px',
+  },
+  aboutImageSection: {
+    height: '240px',
+  },
+  icdcWords: {
+    height: '193px',
+    background: 'rgb(57,192,240,0.3)',
+    color: '#FFFFFF',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    lineHeight: '27px',
+    padding: '35px',
   },
   contentLeft: {
     float: 'left',
@@ -246,6 +331,7 @@ const styles = (theme) => ({
   },
   image: {
     width: '197px',
+    height: '244px',
   },
   aboutContent: {
     background: '#fff',
@@ -289,7 +375,7 @@ const styles = (theme) => ({
   },
   aboutButtonLeft: {
     float: 'left',
-    background: '#F5A313',
+    background: '#CB8311',
     height: '45px',
     width: '48px',
   },
@@ -332,7 +418,7 @@ const styles = (theme) => ({
   },
   contentRightBottom: {
     float: 'left',
-    width: '605px',
+    width: '610px',
     background: '#fff',
     backgroundImage: `url(${l9dg})`,
     backgroundRepeat: 'no-repeat',
@@ -412,5 +498,49 @@ const styles = (theme) => ({
   paddingTop50: {
     paddingTop: '70px',
   },
+  animationContainer: {
+    position: 'relative',
+    width: '100%',
+    height: '1200px',
+    maxHeight: '750px',
+    overflow: 'hidden',
+  },
+
+  dogImg: {
+    position: 'absolute',
+    top: '0px',
+    left: '-1200px',
+    clip: 'rect(0,1585px,383px,1201px)',
+  },
+  humanImg: {
+    position: 'absolute',
+    top: '-1180px',
+    left: '-880px',
+    clip: 'rect(385px,1585px,764px,1201px)',
+  },
+  starImg: {
+    position: 'absolute',
+    top: '-2828px',
+    left: '-883px',
+    clip: 'rect(764px,1585px,864px,1201px)',
+  },
+
+
+  dog: {
+    position: 'relative',
+    height: '1200px',
+  },
+  human: {
+    position: 'relative',
+    height: '1200px',
+
+  },
+  star: {
+    position: 'relative',
+    height: '1200px',
+    opacity: '0',
+  },
+
+
 });
 export default withStyles(styles, { withTheme: true })(LandingController);
