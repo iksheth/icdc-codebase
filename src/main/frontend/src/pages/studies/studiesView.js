@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -41,9 +40,9 @@ const Studies = ({ classes, data }) => {
       options: {
         filter: false,
         customBodyRender: (value) => (
-            <div className="mui_td" style={{width:'100px'}}>
-              <Link  className={classes.link} to={`/study/${value}`}>{value}</Link>
-           </div>
+          <div className="mui_td" style={{ width: '100px' }}>
+            <Link className={classes.link} to={`/study/${value}`}>{value}</Link>
+          </div>
         ),
       },
     },
@@ -138,9 +137,9 @@ const Studies = ({ classes, data }) => {
 };
 
 const styles = (theme) => ({
-  link:{
-     textDecoration: 'none',
-     color: 'inherit',
+  link: {
+    textDecoration: 'none',
+    color: 'inherit',
   },
   card: {
     minHeight: '100%',

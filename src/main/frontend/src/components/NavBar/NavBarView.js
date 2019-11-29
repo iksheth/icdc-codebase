@@ -382,6 +382,7 @@ const styles = (theme) => ({
     marginRight: theme.spacing.unit * 2,
   },
   appBarShift: {
+    paddingRight: '0px !important',
     width: '100%',
     marginLeft: drawerWidth,
     transition: theme.transitions.create(['margin', 'width'], {

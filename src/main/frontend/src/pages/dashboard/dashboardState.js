@@ -1,4 +1,3 @@
-/* eslint-disable */
 import client from '../../utils/graphqlClient';
 import { DASHBOARD_QUERY } from '../../utils/graphqlQueries';
 import {

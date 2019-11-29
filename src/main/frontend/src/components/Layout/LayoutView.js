@@ -95,9 +95,23 @@ const styles = (theme) => ({
   content: {
     flexGrow: 1,
     // width: `calc(100vw - 240px)`,   // Ajay need to add this on addung side bar
-    width: 'calc(100vw)', // Remove this on adding sidebar
+    width: 'calc(100%)', // Remove this on adding sidebar
     background: theme.custom.bodyBackGround,
     marginTop: '118px',
+  },
+  '@global': {
+    '*::-webkit-scrollbar': {
+      width: '0.6em',
+    },
+    '*::-webkit-scrollbar-track': {
+      '-webkit-box-shadow': 'inset 0 0 6px #ccc',
+      borderRadius: '10px',
+    },
+    '*::-webkit-scrollbar-thumb': {
+      backgroundColor: 'rgba(94,140,165)',
+      outline: '1px solid slategrey',
+      borderRadius: '10px',
+    },
   },
 });
 

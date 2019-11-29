@@ -1,4 +1,3 @@
-/* eslint-disable */
 import tinycolor from 'tinycolor2';
 
 const navyBlue = '#0B3556';
@@ -181,11 +180,11 @@ export default {
       '0px 12px 33px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A',
   },
   overrides: {
-    MuiPaper:{
-      elevation4:{
-        boxShadow:'none',
-      }
-   },
+    MuiPaper: {
+      elevation4: {
+        boxShadow: 'none',
+      },
+    },
     MUIDataTableSelectCell: {
       fixedHeader: {
         position: 'relative',
@@ -257,7 +256,7 @@ export default {
       root: {
         '&:nth-child(even)': {
           color: '#223d4c',
-           background:'#eee',
+          background: '#eee',
         },
         '&:nth-child(odd)': {
           color: '#223d4c',
@@ -266,7 +265,7 @@ export default {
       },
     },
     MuiTableRow: {
-      head:{
+      head: {
         height: 40,
       },
       root: {
@@ -278,7 +277,7 @@ export default {
         borderBottom: '0px',
         padding: '5px',
       },
-      paddingCheckbox:{
+      paddingCheckbox: {
         padding: '0px 5px',
       },
       body: {
@@ -319,11 +318,17 @@ export default {
         fontStyle: 'normal',
       },
     },
-    MuiIconButton:{
-      root:{
-        padding:'5px',
-      }
+    MuiIconButton: {
+      root: {
+        padding: '5px',
+      },
     },
-  
+    MuiGrid: {
+      container: {
+        width: '100% !important',
+
+      },
+    },
+
   },
 };

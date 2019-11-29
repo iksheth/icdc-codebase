@@ -1,10 +1,10 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
   withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
 import imgDogHuman from '../../assets/lp_concept06_HTML5 Canvas_atlas_.png';
 import imgAbout from '../../assets/landing/LP_About.png';
 import imgProgram from '../../assets/landing/LP_Program.png';
@@ -16,7 +16,7 @@ import lbg from '../../assets/landing/LP-Background.1400x1600.jpg';
 import l9dg from '../../assets/landing/LP_Cases.png';
 import { Button } from '../../components/Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
-import  styled,{ keyframes } from 'styled-components'
+
 const slideDown = keyframes`
   from {
     top: 0;
@@ -57,19 +57,17 @@ const star = keyframes`
 
 const SlideDown = styled.div`
   animation: ${slideDown} 5s  0s infinite;
-`
+`;
 
 const SlideUp = styled.div`
   animation: ${slideUp} 5s  0s infinite;
-`
+`;
 
 const Star = styled.div`
   animation: ${star} 5s  0s infinite;
-`
+`;
 
-const LandingController = ({ classes }) => { 
-
-return (
+const LandingController = ({ classes }) => (
   <div className={classes.page}>
     <div className={classes.container}>
       <Grid container spacing={16} direction="row" className={cn(classes.paddingTop50)}>
@@ -80,29 +78,29 @@ Exploring. analyzing and understanding the biological relationships
 between human and canine cancer.
           </div>
           <div className={classes.headerButtonSection}>
-           
-              <Link to="/dashboard" className={classes.headerLink}>
-                 <Button className={classes.headerButton}>
-                    {' '}
+
+            <Link to="/dashboard" className={classes.headerLink}>
+              <Button className={classes.headerButton}>
+                {' '}
                     explore
-                 </Button>
-              </Link>
-            
+              </Button>
+            </Link>
+
           </div>
         </Grid>
         <Grid item lg={9} md={9} sm={12} xs={12}>
           <div>
-          <div className={classes.animationContainer} >
+            <div className={classes.animationContainer}>
               <SlideDown className={classes.dog}>
-                <img className={classes.dogImg} src={imgDogHuman} />
+                <img className={classes.dogImg} src={imgDogHuman} alt="Dog" />
               </SlideDown>
-              <SlideUp className={classes.human} >
-                <img className={classes.humanImg} src={imgDogHuman} />
+              <SlideUp className={classes.human}>
+                <img className={classes.humanImg} src={imgDogHuman} alt="human" />
               </SlideUp>
-              <Star className={classes.star} >
-                <img className={classes.starImg} src={imgDogHuman} />
+              <Star className={classes.star}>
+                <img className={classes.starImg} src={imgDogHuman} alt="star" />
               </Star>
-              </div>
+            </div>
           </div>
         </Grid>
       </Grid>
@@ -112,9 +110,9 @@ between human and canine cancer.
             <div className={classes.aboutImageSection}>
               <img src={imgAbout} className={classes.aboutImage} alt="ICDC about" />
             </div>
-             <div className={classes.icdcWords}>
+            <div className={classes.icdcWords}>
                 About the Integrated Canine Data Commons (ICDC)
-             </div>
+            </div>
             <div className={classes.aboutContent}>
   NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged
   the Frederick National laboratory for Cancer Research
@@ -126,8 +124,8 @@ The data in the ICDC is sourced form multiple different
 programs snad projects; all focused on the canine subjects.
             </div>
             <div className={classes.aboutButtonSection}>
-              <div className={classes.aboutButtonLeft} >
-                 <img src={iconAbout} className={classes.iconAbout} alt="ICDC about icon" />
+              <div className={classes.aboutButtonLeft}>
+                <img src={iconAbout} className={classes.iconAbout} alt="ICDC about icon" />
               </div>
               <div className={classes.aboutButtonRight}>
                 <Link to="/" className={classes.aboutButton}>FULL ARTICLE</Link>
@@ -223,31 +221,7 @@ then be analyzed in the Cloud Resources.
     </div>
   </div>
 );
-}
 const styles = (theme) => ({
-  canvas:{
-  position: 'absolute',
-  display: 'block',
-  backgroundColor:'rgba(255, 255, 255, 1.00)',
-  width:'1200px',
-  height:'700px',
-},
-animationContainer:{
-  backgroundColor:'rgba(255, 255, 255, 1.00)',
-  width:'1200px',
-  height:'720px',
-},
-domOverlayContainer:{
-  pointerEvents:'none', 
-  overflow:'hidden', 
-  width:'1200px',
-  height:'720px',
-  position: 'absolute',
-  left: '0px',
-  top: '0px',
-  display: 'block',
-
-},
   page: {
     background: '#5E8CA5',
     backgroundImage: `url(${lbg})`,
@@ -287,7 +261,7 @@ domOverlayContainer:{
   headerButtonSection: {
 
   },
-  iconAbout:{
+  iconAbout: {
     height: '17px',
     width: '9px',
     marginTop: '20px',
@@ -332,21 +306,21 @@ domOverlayContainer:{
   },
 
   aboutImage: {
-   width: '300px',
-   height:'240px',
+    width: '300px',
+    height: '240px',
   },
-  aboutImageSection:{
-   height:'240px',
+  aboutImageSection: {
+    height: '240px',
   },
-  icdcWords:{
-     height:'193px',
-     background:'rgb(57,192,240,0.3)',
-     color: '#FFFFFF',  
-     fontSize: '24px',  
-     fontWeight: 'bold',
-     lineHeight: '27px',
-     padding:'35px',
-   },
+  icdcWords: {
+    height: '193px',
+    background: 'rgb(57,192,240,0.3)',
+    color: '#FFFFFF',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    lineHeight: '27px',
+    padding: '35px',
+  },
   contentLeft: {
     float: 'left',
     paddingRight: '15px',
@@ -357,7 +331,7 @@ domOverlayContainer:{
   },
   image: {
     width: '197px',
-    height:'244px',
+    height: '244px',
   },
   aboutContent: {
     background: '#fff',
@@ -524,48 +498,48 @@ domOverlayContainer:{
   paddingTop50: {
     paddingTop: '70px',
   },
-animationContainer:{ 
-  position: 'relative', 
-  width: '100%',
-  height: '1200px',
-  maxHeight: '750px',
-  overflow: 'hidden',
-},
-
-dogImg:{
-  position: 'absolute',
-  top: '0px',
-  left: '-1200px',
-  clip: 'rect(0,1585px,383px,1201px)',
-},
-humanImg:{
-  position: 'absolute',
-  top: '-1180px',
-  left: '-880px',
-  clip: 'rect(385px,1585px,764px,1201px)',
-},
-starImg:{
-  position: 'absolute',
-  top: '-2828px',
-  left: '-883px',
-  clip: 'rect(764px,1585px,864px,1201px)',
-},
-
-
-dog:{
-  position: 'relative',
+  animationContainer: {
+    position: 'relative',
+    width: '100%',
     height: '1200px',
-},
-human:{
-  position: 'relative',
+    maxHeight: '750px',
+    overflow: 'hidden',
+  },
+
+  dogImg: {
+    position: 'absolute',
+    top: '0px',
+    left: '-1200px',
+    clip: 'rect(0,1585px,383px,1201px)',
+  },
+  humanImg: {
+    position: 'absolute',
+    top: '-1180px',
+    left: '-880px',
+    clip: 'rect(385px,1585px,764px,1201px)',
+  },
+  starImg: {
+    position: 'absolute',
+    top: '-2828px',
+    left: '-883px',
+    clip: 'rect(764px,1585px,864px,1201px)',
+  },
+
+
+  dog: {
+    position: 'relative',
+    height: '1200px',
+  },
+  human: {
+    position: 'relative',
     height: '1200px',
 
-},
-star:{
-  position: 'relative',
+  },
+  star: {
+    position: 'relative',
     height: '1200px',
-  opacity: '0',
-},
+    opacity: '0',
+  },
 
 
 });

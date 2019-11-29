@@ -1,4 +1,3 @@
-/* eslint-disable */
 import uuid from 'uuid';
 
 export const COLORS = [
@@ -69,7 +68,7 @@ export function getStatDataFromDashboardData(data, statName) {
     case 'file':
 
       return [...new Set(data.reduce((output, d) => output.concat(d.files
-    ? d.files : []), []).map((f)=>f.uuid))].length;
+        ? d.files : []), []).map((f) => f.uuid))].length;
     default:
       return 0;
   }

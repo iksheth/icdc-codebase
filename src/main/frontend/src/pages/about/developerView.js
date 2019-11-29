@@ -1,43 +1,63 @@
-/* eslint-disable */
 import React from 'react';
-import { Grid, withStyles } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
-import l9dg from '../../assets/about/support.png';
-import Body from '../../components/About/BodyView'; 
-const Developers = ({ classes }) => {
-  return (
-    <>
-      <Stats />
-       <Header title="Developers"/>
-      <div className={classes.container}>
-        <Body data={{
-          img:l9dg,
-          body:(<div> The ICDC System is architected to provide data both on a web front end as well as via two API’s:  GraphQL and and REST:<br/><br/>
+import l9dg from '../../assets/about/steeringCommittee.png';
+import Body from '../../components/About/BodyView';
 
-<br/><br/>http://DOMAIN/v1/graphql/<br/><br/>
-http://DOMAIN/v1/REST<br/><br/>
+const Developers = ({ classes }) => (
+  <>
+    <Stats />
+    <Header title="Developers" />
+    <div className={classes.container}>
+      <Body data={{
+        img: l9dg,
+        body: (
+          <div>
+            {' '}
+The ICDC System is architected to provide data both on a web front end as well as
+via two API’s:  GraphQL and and REST:
+            <br />
+            <br />
 
-<br/><br/>Access is read-only as the system is immutable.  At this point, users do not require authentication to the system as the data is public.   Our GitHub repository features backend documentation about how to access the system, including endpoints and recommendations for tools and example queries.<br/><br/>
-GitHub:<br/><br/>
-ICDC is based on a Graph database, and features a GraphQL API (Java), a REST API (Java) and a React front-end (JavaScript). We have provided all our code on our ICDC GitHub Repository and encourage others to use and improve it.<br/><br/>
+            <br />
+            <br />
+http://DOMAIN/v1/graphql/
+            <br />
+            <br />
+http://DOMAIN/v1/REST
+            <br />
+            <br />
 
-</div>),
-        }}
-        />
-      </div>
-    </>
-  );
-};
+            <br />
+            <br />
+Access is read-only as the system is immutable.  At this point, users do not
+require authentication to the system as the data is public.   Our GitHub repository
+eatures backend documentation about how to access the system, including endpoints
+ and recommendations for tools and example queries.
+            <br />
+            <br />
+GitHub:
+            <br />
+            <br />
+ICDC is based on a Graph database, and features a GraphQL API (Java), a REST API
+(Java) and a React front-end (JavaScript). We have provided all our code on our
+ICDC GitHub Repository and encourage others to use and improve it.
+            <br />
+            <br />
+          </div>),
+      }}
+      />
+    </div>
+  </>
+);
 
 const styles = () => ({
-  
+
   container: {
-    margin: '16px auto',
     maxWidth: '1400px',
-    minHeight:'800px',
-    margin:'auto 30px',
+    minHeight: '800px',
+    margin: '16px 30px',
   },
 });
 

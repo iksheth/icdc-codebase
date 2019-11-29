@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -246,14 +245,22 @@ const StudyDetailView = ({ classes, data }) => {
           </div>
           <div className={classes.headerButton}>
             <span className={classes.headerButtonLinkSpan}>
-            <Link
-              className={classes.headerButtonLink}
-              to={(location) => ({ ...location, pathname: '/' })}
-              onClick={() => redirectTo()}
-            >   <span className={classes.headerButtonLinkText}> View </span>
-                <span className={classes.headerButtonLinkNumber}> {' '}{data.caseCountOfStudy} {' '}</span>
+              <Link
+                className={classes.headerButtonLink}
+                to={(location) => ({ ...location, pathname: '/' })}
+                onClick={() => redirectTo()}
+              >
+                {' '}
+                <span className={classes.headerButtonLinkText}> View </span>
+                <span className={classes.headerButtonLinkNumber}>
+                  {' '}
+                  {' '}
+                  {data.caseCountOfStudy}
+                  {' '}
+                  {' '}
+                </span>
                 <span className={classes.headerButtonLinkText}>CASES</span>
-            </Link>
+              </Link>
             </span>
           </div>
         </div>
@@ -266,12 +273,18 @@ const StudyDetailView = ({ classes, data }) => {
               <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
                   <span className={classes.detailContainerHeader}>Description</span>
-                  
+
                 </Grid>
-               
+
                 <Grid item xs={12}>
-                  <div ><span className={classes.content}> {studyData.clinical_study_description} </span></div>
-                  <div ><hr className={classes.hrLine}/></div>
+                  <div>
+                    <span className={classes.content}>
+                      {' '}
+                      {studyData.clinical_study_description}
+                      {' '}
+                    </span>
+                  </div>
+                  <div><hr className={classes.hrLine} /></div>
                 </Grid>
 
                 <Grid container spacing={8} className={classes.detailContainerItems}>
@@ -373,7 +386,7 @@ const StudyDetailView = ({ classes, data }) => {
 
 
 const styles = (theme) => ({
-  hrLine:{
+  hrLine: {
     width: '50px',
     float: 'left',
     marginTop: '30px',
@@ -463,37 +476,37 @@ const styles = (theme) => ({
   headerMSubTitle: {
     paddingTop: '12px',
   },
-headerButton: {
+  headerButton: {
     fontFamily: theme.custom.fontFamilySans,
     float: 'right',
     marginTop: '15px',
     width: '135px',
     height: '33px',
     background: '#F6F4F4',
-    paddingLeft:'10px',
-    paddingRight:'10px',
-  
+    paddingLeft: '10px',
+    paddingRight: '10px',
+
   },
-headerButtonLinkSpan:{
-  fontFamily: theme.custom.fontFamilySans,
+  headerButtonLinkSpan: {
+    fontFamily: theme.custom.fontFamilySans,
     height: '50px',
     background: '#F5F3EE',
     width: '200px',
     fontSize: '8pt',
-},
-headerButtonLinkText:{
-  fontFamily: theme.custom.fontFamilySans,
+  },
+  headerButtonLinkText: {
+    fontFamily: theme.custom.fontFamilySans,
     color: '#0B3556',
     fontSize: '8pt',
-},
-headerButtonLinkNumber:{
-  fontFamily: theme.custom.fontFamilySans,
-   borderBottom: 'solid',
+  },
+  headerButtonLinkNumber: {
+    fontFamily: theme.custom.fontFamilySans,
+    borderBottom: 'solid',
     lineHeight: '30px',
     paddingBottom: '3px',
-    margin:'0 4px',
+    margin: '0 4px',
     fontSize: '8pt',
-},
+  },
   logo: {
     position: 'absolute',
     float: 'left',
@@ -533,12 +546,12 @@ headerButtonLinkNumber:{
     maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
-    width:'calc(100% + 8px)',
-    
+    width: 'calc(100% + 8px)',
+
   },
-  borderRight:{
-     borderRight: '#81a6b9 1px solid',
-   },
+  borderRight: {
+    borderRight: '#81a6b9 1px solid',
+  },
   detailContainerRight: {
     padding: '5px 0 5px 20px !important',
     minHeight: '500px',
@@ -546,7 +559,7 @@ headerButtonLinkNumber:{
     overflowY: 'auto',
     overflowX: 'hidden',
     height: '500px',
-    width:'calc(100% + 8px)',
+    width: 'calc(100% + 8px)',
   },
 
   tableContainer: {
@@ -569,9 +582,9 @@ headerButtonLinkNumber:{
     textDecoration: 'none',
     lineHeight: '14px',
     fontSize: '12px',
-    fontWeight :'bold',
+    fontWeight: 'bold',
     color: '#ff8a00',
-     '&:hover': {
+    '&:hover': {
       color: '#ff8a00',
     },
   },
@@ -612,20 +625,7 @@ headerButtonLinkNumber:{
     color: '#ff17f15',
     paddingBottom: '20px',
   },
-   '@global': {
-    '*::-webkit-scrollbar': {
-      width: '0.6em',
-    },
-    '*::-webkit-scrollbar-track': {
-      '-webkit-box-shadow': 'inset 0 0 6px #ccc',
-      borderRadius: '10px',
-    },
-    '*::-webkit-scrollbar-thumb': {
-      backgroundColor: 'rgba(94,140,165)',
-      outline: '1px solid slategrey',
-      borderRadius: '10px',
-    }
-  }
+
 });
 
 export default withStyles(styles, { withTheme: true })(StudyDetailView);
