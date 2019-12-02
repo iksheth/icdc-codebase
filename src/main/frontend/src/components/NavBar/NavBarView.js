@@ -26,7 +26,6 @@ import { initCart } from '../../pages/selectedCases/selectedCasesState';
 import { toggleCheckBox } from '../../pages/dashboard/dashboardState';
 import { unselectFilters } from '../../utils/dashboardUtilFunctions';
 import AboutMenu from './components/AboutMenu';
-import { Badge } from '../Wrappers/Wrappers';
 
 const drawerWidth = 240;
 // const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
@@ -122,7 +121,7 @@ const NavBar = ({
           </div>
           {/* End Sidebar button */}
           <div className={classes.buttonContainer}>
-            <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -131,7 +130,7 @@ const NavBar = ({
               home
               </NavLink>
             </Button>
-            <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -142,7 +141,7 @@ const NavBar = ({
 
             </Button>
 
-            <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -152,7 +151,7 @@ const NavBar = ({
               </NavLink>
             </Button>
 
-            <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -180,7 +179,7 @@ const NavBar = ({
             </Tooltip>
           </IconButton> */}
           {/* Start of Theme Switching Icon and logic */}
-          <Button variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+          <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
             <NavLink
               className={classes.link}
               to="/myCases"
@@ -193,16 +192,22 @@ const NavBar = ({
                 className={classes.headerMenuButton}
                 classes={{ root: classes.iconButtonRoot }}
               > */}
-              <Badge badgeContent={numberOfCases}>
-                <Tooltip title="Cases" placement="bottom-end">
+              {/* <Badge badgeContent={numberOfCases} max={99999}> */}
+
+              <Tooltip title="Cases" placement="bottom-end">
+                <span className={classes.badge}>
                   <img
                     className={classes.cartLogoImg}
                     src={caseIcon}
                     alt="cart_logo"
                   />
-                </Tooltip>
+                  <span className={classes.badgeText}>
+                    {numberOfCases}
+                  </span>
+                </span>
+              </Tooltip>
 
-              </Badge>
+              {/* </Badge> */}
               {/* </IconButton> */}
             </NavLink>
           </Button>
@@ -230,14 +235,16 @@ const NavBar = ({
             paper: classes.drawerPaper,
           }}
         >
-          <div>
+          <div className={classes.drawerAppBar}>
             <div className={classes.floatLeft}>
               <Button
                 variant="outlined"
                 disabled={activeFilters.length === 0}
                 onCl
                 className={classes.customButton}
+                classes={{ root: classes.clearAllButtonRoot }}
                 onClick={() => dispatch(toggleCheckBox(unselectFilters(activeFilters)))}
+                disableRipple
               >
               Clear All
               </Button>
@@ -399,6 +406,7 @@ const styles = (theme) => ({
     width: drawerWidth,
     marginTop: '79px',
     zIndex: '1201',
+    minHeight: '39px',
   },
   toolbar: {
     minHeight: 39,
@@ -420,10 +428,14 @@ const styles = (theme) => ({
   floatLeft: {
     float: 'left',
     marginLeft: '19px',
+    marginTop: '6px',
   },
   funnelLogoImg: {
     width: '20px',
     height: '20px',
+  },
+  clearAllButtonRoot: {
+    margin: 'auto',
   },
   customButton: {
     borderRadius: '100px',
@@ -432,13 +444,26 @@ const styles = (theme) => ({
     fontSize: 9,
     textTransform: 'none',
     color: 'black',
-    marginTop: '10px',
     marginLeft: '16px',
     fontFamily: theme.custom.fontFamilySans,
     '&:hover': {
       backgroundColor: '#566672',
       color: 'white',
     },
+  },
+  drawerAppBar: {
+    height: '39px',
+  },
+  badge: {
+    display: 'inline-flex',
+    position: 'relative',
+    verticalAlign: 'middle',
+  },
+  badgeText: {
+    height: '16px',
+    minWidth: '16px',
+    fontWeight: '600',
+    transform: 'scale(1) translate(0%, -50%)',
   },
 });
 

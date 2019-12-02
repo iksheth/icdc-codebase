@@ -26,6 +26,7 @@ const AboutMenu = ({ classes }) => {
         onClick={handleClick}
         className={classes.logotype}
         classes={{ root: classes.buttonRoot }}
+        disableRipple
       >
         About
         <ExpandMoreRoundedIcon className={classes.icon} />
@@ -81,9 +82,9 @@ const AboutMenu = ({ classes }) => {
             <NavLink
               className={classes.link}
               activeStyle={{ color: 'white' }}
-              to="/cdrd"
+              to="/crdc"
             >
-               Cancer Research Data Commons
+               CRDC
             </NavLink>
             <NavLink
               className={classes.link}

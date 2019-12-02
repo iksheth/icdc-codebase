@@ -6,6 +6,8 @@ import { useLocation } from 'react-router';
 import { Typography } from '../Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
 import nciLogo from '../../assets/footer/NCI-footer.logo.svg';
+import submissionGuide from '../../assets/footer/ICDC_DGAB_Guidelines.pdf';
+
 
 const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
 
@@ -39,16 +41,24 @@ const Footer = ({ classes, data }) => {
             </li>
             <li>
               <Typography className={classes.footerText}>
+                <Link className={classes.link} to="/purpose">
+                Purpose
+                </Link>
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/steeringCommittee">
               Steering Committee
                 </Link>
               </Typography>
             </li>
             <li>
-              <Typography className={classes.footerText}>Policies</Typography>
-            </li>
-            <li>
-              <Typography className={classes.footerText}>FAQs</Typography>
+              <Typography className={classes.footerText}>
+                <Link className={classes.link} to="/crdc">
+             CRDC
+                </Link>
+              </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
@@ -69,16 +79,31 @@ const Footer = ({ classes, data }) => {
             </li>
             <li>
               <Typography className={classes.footerText}>
-              Data Access Policies
+                <Link className={classes.link} to="/icdcData">
+              ICDC Data
+                </Link>
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
-              Data Analysis
+                <Link className={classes.link} to="/model">
+              Data Model
+                </Link>
               </Typography>
             </li>
             <li>
-              <Typography className={classes.footerText}>REST APIs</Typography>
+              <Typography className={classes.footerText}>
+                <Link className={classes.link} to="/analyzingData">
+              Analyzing Data
+                </Link>
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+                <Link className={classes.link} to="/developers">
+              Developers (REST APIs)
+                </Link>
+              </Typography>
             </li>
           </ul>
         </div>
@@ -93,20 +118,10 @@ const Footer = ({ classes, data }) => {
               </Typography>
             </li>
             <li>
-              <Link className={classes.link} to="/dgab">
-                <Typography className={classes.footerText}>
-              Data Governance Advisory Board
-                </Typography>
-              </Link>
-            </li>
-            <li>
               <Typography className={classes.footerText}>
-              Process and Tools
-              </Typography>
-            </li>
-            <li>
-              <Typography className={classes.footerText}>
-              Submission Guide
+                <a href={submissionGuide} download>
+              Submission Guide [PDF]
+                </a>
               </Typography>
             </li>
           </ul>
