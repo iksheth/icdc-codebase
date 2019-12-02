@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -26,7 +25,7 @@ const ProgramCard = ({
           {data.program_short_description}
           {' '}
         </Grid>
-        <Grid item lg={12} md={12} sm={12} xs={12} className={classes.marginTop23}>
+        <Grid item lg={12} md={12} sm={12} xs={12}>
 
           <span>
 
@@ -70,8 +69,8 @@ const ProgramCard = ({
 
 
 const styles = (theme) => ({
-  paddingLeft5:{
-    paddingLeft:'5px',
+  paddingLeft5: {
+    paddingLeft: '5px',
   },
   dogImage: {
     width: '100%',
@@ -103,9 +102,7 @@ const styles = (theme) => ({
     lineHeight: '17px',
     minHeight: '50px',
   },
-  marginTop23: {
-    marginTop: '14px',
-  },
+
   paddingLeft15: {
     paddingLeft: '15px',
   },

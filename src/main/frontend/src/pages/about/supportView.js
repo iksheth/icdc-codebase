@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Link } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/steeringCommittee.png';
@@ -9,27 +9,39 @@ const SupportView = ({ classes }) => (
   <>
     <Stats />
     <Header title="Support" />
-    <div className={classes.container}>
-      <Body data={{
-        img: l9dg,
-        body: (
-          <div>
-            {' '}
+    <Body data={{
+      img: l9dg,
+      body: (
+        <div>
+          {' '}
 If you have any questions,
-        please contact us at ICDCHelpDesk@mail.nih.gov.
-          </div>),
-      }}
-      />
-    </div>
+        please contact us at
+          <Link href="mailto: ICDCHelpDesk@mail.nih.gov" color="inherit" className={classes.link}>
+            {' '}
+            ICDCHelpDesk@mail.nih.gov
+            {' '}
+          </Link>
+          .
+        </div>),
+    }}
+    />
   </>
 );
 
 const styles = () => ({
-
-  container: {
-    maxWidth: '1400px',
-    minHeight: '800px',
-    margin: '16px 30px',
+  link: {
+    color: '#0296C9',
+    fontWeight: 'bolder',
+    '&:hover': {
+      color: '#0296C9',
+      fontWeight: 'bolder',
+      textDecoration: 'none',
+    },
+  },
+  title: {
+    color: '#0B3556',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
 });
 

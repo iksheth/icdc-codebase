@@ -391,6 +391,7 @@ const styles = (theme) => ({
     float: 'left',
     marginTop: '30px',
     border: '#81a6b9 2px solid',
+    background: '#81a6b9',
   },
   paddingLeft8: {
     paddingLeft: '8px',
@@ -480,7 +481,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilySans,
     float: 'right',
     marginTop: '15px',
-    width: '135px',
+    width: '104px',
     height: '33px',
     background: '#F6F4F4',
     paddingLeft: '10px',
@@ -546,7 +547,8 @@ const styles = (theme) => ({
     maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
-    width: 'calc(100% + 8px)',
+    width: 'calc(100% + 8px) !important',
+    margin: '0px -8px',
 
   },
   borderRight: {
@@ -575,7 +577,7 @@ const styles = (theme) => ({
   tableDiv: {
     paddingTop: '31px',
     maxWidth: theme.custom.maxContentWidth,
-    margin: '20px auto auto auto',
+    margin: '40px auto auto auto',
   },
 
   headerButtonLink: {

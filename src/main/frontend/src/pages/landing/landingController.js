@@ -128,7 +128,7 @@ programs snad projects; all focused on the canine subjects.
                 <img src={iconAbout} className={classes.iconAbout} alt="ICDC about icon" />
               </div>
               <div className={classes.aboutButtonRight}>
-                <Link to="/" className={classes.aboutButton}>FULL ARTICLE</Link>
+                <Link to="/purpose" className={classes.aboutButton}>FULL ARTICLE</Link>
               </div>
             </div>
           </div>
@@ -191,7 +191,7 @@ Interested in contributing data to ICDC
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to="/" className={classes.blueButton}>READ MORE</Link>
+                  <Link to="/submit" className={classes.blueButton}>READ MORE</Link>
                 </div>
               </div>
             </div>
@@ -264,13 +264,13 @@ const styles = (theme) => ({
   iconAbout: {
     height: '17px',
     width: '9px',
-    marginTop: '20px',
-    marginLeft: '12px',
+    marginTop: '15px',
+    marginLeft: '20px',
   },
   icon: {
     width: '20px',
-    marginTop: '15px',
-    marginLeft: '14px',
+    marginTop: '13px',
+    marginLeft: '36px',
   },
   headerButton: {
     borderRadius: '10px',
@@ -356,6 +356,7 @@ const styles = (theme) => ({
     lineHeight: '18px',
     margin: 'auto',
     padding: '15px 0',
+    textAlign: 'center',
   },
   contentMessage: {
     height: '33px',
@@ -364,11 +365,11 @@ const styles = (theme) => ({
     fontFamily: '"Open Sans"',
     fontSize: '14px',
     lineHeight: '20px',
-    marginLeft: '27px',
+    margin: 'auto',
   },
   aboutButtonSection: {
     background: '#fff',
-    height: '70px',
+    height: '67px',
   },
   imgIconAbout: {
     width: '49px',
@@ -453,7 +454,7 @@ const styles = (theme) => ({
   },
   blueButtonRight: {
     float: 'left',
-    lineHeight: '50px',
+    lineHeight: '47px',
     color: '#fff',
   },
   greyContentHeader: {
@@ -475,7 +476,7 @@ const styles = (theme) => ({
   greyIcon: {
     width: '20px',
     marginTop: '15px',
-    marginLeft: '15px',
+    marginLeft: '33px',
   },
   greybutton: {
     padding: '15px 5px 0 0',

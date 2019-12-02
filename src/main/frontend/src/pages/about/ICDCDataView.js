@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Link } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/steeringCommittee.png';
@@ -9,51 +9,82 @@ const ICDCData = ({ classes }) => (
   <>
     <Stats />
     <Header title="Steering Committee" />
-    <div className={classes.container}>
-      <Body data={{
-        img: l9dg,
-        body: (
-          <div>
+    <Body data={{
+      img: l9dg,
+      body: (
+        <div>
+          <p className={classes.title}>Harmonization/Integration:</p>
+          {' '}
+The ICDC functions best for the research community when the
+data is integrated. Once a project is accepted into the ICDC,
+ the ICDC data team will work with the submitter to review the
+  data looking at data structure, data values, data quality as
+  well as identifying any standards that were utilized. Based
+   on that review, a plan for how to submit the data will be
+   agreed upon between ICDC and the submitter.
+          <p className={classes.title}>Data Model:</p>
+
+The ICDC data model is a representation of how all the
+constituent data are arranged relative to each other.
+The current data model is available for viewing on CBIIT’s
+ Github repository (
+          <Link href="https://cbiit.github.io/icdc-model-tool/" color="inherit" className={classes.link}>
             {' '}
-The ICDC is community driven so is being built with input and collaboration
-from many groups to foster a diversity of ideas and to ensure needs are
-identified across the broad research community. To achieve this, the ICDC
-Steering Committee was formed to advise the NCI and FNLCR on the ICDC.
-The Steering Committee is composed of 11 members from the non-NIH research
-community, 7 from NCI, 1 from NHGRI and 1 from NCATS. There is also 1
-observer from the NCI and 4 ex-officio members who are FNLCR staff. The
-chairperson is from the non-NIH research community.
+https://cbiit.github.io/icdc-model-tool/
+            {' '}
+          </Link>
+).
+  Given the number of studies, the range of study types and
+  the multiple data types that the ICDC needs to support, the
+  data model will need to adapt to the needs of the science.
+  The data model is not static and is expected to change as
+  new needs are identified.
 
-The Steering Committee has two sub-committees; Data Governance Advisory
-Board (DGAB) and the Best Practices Sub-Committee (BPSC).
 
-The DGAB consists of 4 external members (all from ICDC Steering Committee),
-2 NIH members (1 of which is from CBIIT) and is supported by FNLCR staff.
-When researchers request their data is added to the ICDC to be shared with
-the community, the role of the DGAB is to advise the NCI on the suitability
-of request. The NCI makes the final decision on the request. The DGAB is
-chaired by a non-NIH member of ICDC Steering Committee. The DGAB meets at
-least quarterly to review and prioritize all open and complete requests.
+          <p className={classes.title}>FAIR and citing:</p>
+The ICDC will adhere to
 
-The BPSC consists of 7 external members (all from ICDC Steering Committee),
-3 NCI staff, 1 NHGRI staff and is supported by FNLCR staff. The overall goal
-of the BPSC is to streamline and standardize data collection and management
-for canine studies. The BPSC will examine past and planned studies and will
-  recommend prospective standards for data collection and management in four
-   main areas; imaging, clinical/pathology, Immunology and genomic/sequencing data.
-          </div>),
-      }}
-      />
-    </div>
+          <Link href="https://www.go-fair.org/fair-principles/" color="inherit" className={classes.link}>
+            {' '}
+FAIR
+            {' '}
+          </Link>
+
+ principles of data stewardship:
+ Findable, Accessible, Interoperable, and Reusable.
+Please credit the ICDC in your manuscript. When citing
+individual projects, please refer to the attribution policies
+of the project when available.
+
+
+          <p className={classes.title}>License:</p>
+
+Data made available through the ICDC is for research purposes only.
+The ICDC provides researchers with access to data from canine cancer
+ studies to enable exploratory analysis that cannot be considered
+ definitive for outcomes.
+All data is publicly available.
+
+        </div>),
+    }}
+    />
   </>
 );
 
 const styles = () => ({
-
-  container: {
-    maxWidth: '1400px',
-    minHeight: '800px',
-    margin: '16px 30px',
+  link: {
+    color: '#0296C9',
+    fontWeight: 'bolder',
+    '&:hover': {
+      color: '#0296C9',
+      fontWeight: 'bolder',
+      textDecoration: 'none',
+    },
+  },
+  title: {
+    color: '#0B3556',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
 });
 

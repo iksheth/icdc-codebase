@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Link } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/steeringCommittee.png';
@@ -9,12 +9,11 @@ const PurposeView = ({ classes }) => (
   <>
     <Stats />
     <Header title="Purpose" />
-    <div className={classes.container}>
-      <Body data={{
-        img: l9dg,
-        body: (
-          <div>
-            {' '}
+    <Body data={{
+      img: l9dg,
+      body: (
+        <div>
+          {' '}
 NCI’s Division of Cancer Treatment and Diagnosis (DCTD) contracted the Frederick
  National Laboratory for Cancer Research (FNLCR) to build the Integrated Canine
  Data Commons (ICDC), a cloud-based repository of canine cancer data and was
@@ -24,29 +23,40 @@ NCI’s Division of Cancer Treatment and Diagnosis (DCTD) contracted the Frederi
   into an integrated data model and then made available to the research community.
    The ICDC is part of the Cancer Research Data Commons (CRDC), an initiative
    from NCI’s Center for Biomedical Informatics and Information Technology (CBIIT).
-   Bioinformatic analysis of the ICDC data is accomplished using the CRDC’s Cloud
+   Bioinformatic analysis of the ICDC data is accomplished using the CRDC’s
+          <Link href="https://datascience.cancer.gov/data-commons/cloud-resources" color="inherit" className={classes.link}>
+            {' '}
+Cloud
    Resources.
-            <br />
-            <br />
+          </Link>
+          <br />
+          <br />
 Within the FNLCR, the Biomedical Informatics and Data Science (BIDS) Directorate is
 focused on software engineering and data handling.  The Applied and Developmental
 Research Directorate (ADRD) is managing the ICDC Steering Committee and providing
  one of the data sources for the ICDC. Finally, there is also an ICDC Steering
  Committee (composed of external members, FNLCR and NCI staff) that provides advice
   to DCTD on the ICDC.
-          </div>),
-      }}
-      />
-    </div>
+        </div>),
+    }}
+    />
   </>
 );
 
 const styles = () => ({
-
-  container: {
-    maxWidth: '1400px',
-    minHeight: '800px',
-    margin: '16px 30px',
+  link: {
+    color: '#0296C9',
+    fontWeight: 'bolder',
+    '&:hover': {
+      color: '#0296C9',
+      fontWeight: 'bolder',
+      textDecoration: 'none',
+    },
+  },
+  title: {
+    color: '#0B3556',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
 });
 

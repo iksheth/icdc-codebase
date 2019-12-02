@@ -118,7 +118,7 @@ const Studies = ({ classes, data }) => {
 
 
           <div className={classes.tableDiv}>
-            <Grid container spacing={32}>
+            <Grid container>
               <Grid item xs={12}>
                 <MUIDataTable
                   data={data.studiesByProgram}

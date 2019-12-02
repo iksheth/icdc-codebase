@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Link } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/steeringCommittee.png';
@@ -9,63 +9,87 @@ const SubmitingData = ({ classes }) => (
   <>
     <Stats />
     <Header title="Submitting Data" />
-    <div className={classes.container}>
-      <Body data={{
-        img: l9dg,
-        body: (
-          <div>
-Harmonization/Integration:
-            <br />
-The ICDC functions best for the research community when the data is integrated.
-Once a project is accepted into the ICDC, the ICDC data team will work with the
- submitter to review the data looking at data structure, data values, data quality
-  as well as identifying any standards that were utilized. Based on that review,
-  a plan for how to submit the data will be agreed upon between ICDC and the
-  submitter.
+    <Body data={{
+      img: l9dg,
+      body: (
+        <div>
+          <br />
+The ICDC was established to further research on human cancers by enabling
+comparative analysis with canine cancer. If a researcher has data that will
+ help this mission and they are willing to share that data in the ICDC, they
+  will make a request through our submission request process. Please email
+          <Link href="mailto: ICDCHelpDesk@mail.nih.gov" color="inherit" className={classes.link}>
             {' '}
-            <br />
-Data Model:
-            <br />
-The ICDC data model is a representation of how all the constituent data are
-arranged relative to each other. The current data model is available for viewing
-on CBIIT’s Github repository (https://cbiit.github.io/icdc-model-tool/). Given the
- number of studies, the range of study types and the multiple data types that the
- ICDC needs to support, the data model will need to adapt to the needs of the
- science. The data model is not static and is expected to change as new needs
- are identified.
+              ICDCHelpDesk@mail.nih.gov
             {' '}
-            <br />
-FAIR and citing:
-            <br />
-The ICDC will adhere to FAIR principles of data stewardship: Findable, Accessible,
-Interoperable, and Reusable.
-            <br />
-Please credit the ICDC in your manuscript. When citing individual projects,
-please refer to the attribution policies of the project when available.
-            <br />
-License:
-            <br />
-Data made available through the ICDC is for research purposes only.
-The ICDC provides researchers with access to data from canine cancer studies
-to enable exploratory analysis that cannot be considered definitive for outcomes.
-            <br />
-All data is publicly available.
-            <br />
-          </div>),
-      }}
-      />
-    </div>
+          </Link>
+
+        for instructions. All data in the ICDC will be
+   made publicly available.
+
+          {' '}
+          <br />
+          <br />
+Projects need not be complete to start the request. Indeed, working with the
+ ICDC before defining your data collection processes can be beneficial, as the
+ ICDC can help advise on best practices that will enable more efficient and
+ effective submission of the data.
+          <br />
+          <br />
+
+
+          <p className={classes.title}> Expectations of data:</p>
+
+
+ Once a project is accepted into the ICDC, the ICDC Data Team will work with the
+submitter to review the data (i.e., by looking at data structure, data values, and
+data quality, as well as identifying any standards).  The review in turn leads to a
+submission plan between ICDC and the submitter.
+          <br />
+          {' '}
+          <br />
+
+ In developing the submission plan, a primary consideration is that consumers of the
+data will not be as familiar with the data as the project owners.   For example,
+submitters may find “lymphoma” implicit as a diagnosis in a given data set and thus
+not have use for such a field.  However, this field would need to be explicit for
+the research community as a whole.
+
+          <br />
+          {' '}
+          <br />
+
+General guidelines have been established to leverage available community standards
+where possible for both field name and acceptable values. Common data quality issues
+ are: inconsistent spelling (haemotology versus hematology), inconsistent formatting
+  (“Male” versus “male”), concatenated values which should be separate (“neutered
+  male” should be values in two separate fields), gaps in data (Null data versus
+  empty data versus data not collected) and format (Excel or other database
+  compatible formats versus PDF).  The ICDC data team will work with the submitter
+  to identify and resolve these issues.
+
+        </div>),
+    }}
+    />
   </>
 );
 
-const styles = () => ({
 
-  container: {
-    maxWidth: '1400px',
-    minHeight: '800px',
-    margin: '16px 30px',
+const styles = () => ({
+  link: {
+    color: '#0296C9',
+    fontWeight: 'bolder',
+    '&:hover': {
+      color: '#0296C9',
+      fontWeight: 'bolder',
+      textDecoration: 'none',
+    },
+  },
+  title: {
+    color: '#0B3556',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
 });
-
 
 export default withStyles(styles, { withTheme: true })(SubmitingData);

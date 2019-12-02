@@ -58,7 +58,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/cases" component={Cases} />
             <Route path="/programs" component={Programs} />
             <Route path="/studies" component={Studies} />
-            <Route path="/modelPage" component={modelPage} />
+            <Route path="/model" component={modelPage} />
             <Route path="/table" component={table} />
             <Route path="/myCases" component={SelectedCases} />
             <Route path="/myCasesFiles" component={SelectedFiles} />

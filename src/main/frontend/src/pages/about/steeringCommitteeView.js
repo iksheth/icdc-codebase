@@ -9,10 +9,10 @@ const SteeringCommitteeView = ({ classes }) => (
   <>
     <Stats />
     <Header title="Steering Committee" />
-    <div className={classes.container}>
-      <Body data={{
-        img: l9dg,
-        body: (
+    <Body data={{
+      img: l9dg,
+      body: (
+        <div>
           <div>
             {' '}
 The ICDC is community driven so is being built with input and collaboration from
@@ -45,20 +45,252 @@ for canine studies. The BPSC examines past and planned studies and  recommends
 imaging, clinical/pathology, Immunology and genomic/sequencing data.
             <br />
             <br />
-          </div>),
-      }}
-      />
-    </div>
+          </div>
+          <div className={classes.tableDiv}>
+            <table className={classes.table}>
+              <thead className={classes.tableHeader}>
+                <tr className={classes.tableBodyRow}>
+                  <th className={classes.headerCell} aria-label="Index" />
+                  <th className={classes.headerCell}>Name</th>
+                  <th className={classes.headerCell}>Institution</th>
+                  <th className={classes.headerCell}>Affiliation</th>
+                  <th className={classes.headerCell}>SubCommitee(s)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>1</td>
+                  <td className={classes.tableCell}>Matthew Breen</td>
+                  <td className={classes.tableCell}>North Carolina State University</td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>DGAB</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>2</td>
+                  <td className={classes.tableCell}>M.R. Chambers</td>
+                  <td className={classes.tableCell}>University of Alabama at Birmingham</td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>3</td>
+                  <td className={classes.tableCell}>Dawn Duval</td>
+                  <td className={classes.tableCell}>Colorado State University</td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>4</td>
+                  <td className={classes.tableCell}>Allison Heath</td>
+                  <td className={classes.tableCell}>Children’s Hospital of Phildelphia</td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>5</td>
+                  <td className={classes.tableCell}>Will Hendricks</td>
+                  <td className={classes.tableCell}>
+                      Translational Genomics Research Institute (TGen)
+                  </td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>DGAB</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>6</td>
+                  <td className={classes.tableCell}>Warren Kibbe</td>
+                  <td className={classes.tableCell}>Duke University</td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>DGAB</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>7</td>
+                  <td className={classes.tableCell}>Deborah Knapp</td>
+                  <td className={classes.tableCell}>Purdue University</td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>8</td>
+                  <td className={classes.tableCell}>Cheryl London</td>
+                  <td className={classes.tableCell}>Tufts University</td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>9</td>
+                  <td className={classes.tableCell}>Roel Verhaak</td>
+                  <td className={classes.tableCell}>The Jackson Laboratory</td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>DGAB</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>10</td>
+                  <td className={classes.tableCell}>Jeff Trent</td>
+                  <td className={classes.tableCell}>
+                      Translational Genomics Research Institute (TGen)
+                  </td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>11</td>
+                  <td className={classes.tableCell}>Shaying Zhao</td>
+                  <td className={classes.tableCell}>University of Georgia</td>
+                  <td className={classes.tableCell}>External</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>12</td>
+                  <td className={classes.tableCell}>Toby Hecht</td>
+                  <td className={classes.tableCell}>DCTD</td>
+                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>13</td>
+                  <td className={classes.tableCell}>Paula Jacobs</td>
+                  <td className={classes.tableCell}>CIP/DCTD</td>
+                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>14</td>
+                  <td className={classes.tableCell}>Tony Kerlavage</td>
+                  <td className={classes.tableCell}>CBIIT</td>
+                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>-</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>15</td>
+                  <td className={classes.tableCell}>Erika Kim</td>
+                  <td className={classes.tableCell}>CBIIT</td>
+                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>DGAB, BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>16</td>
+                  <td className={classes.tableCell}>Amy LeBlanc</td>
+                  <td className={classes.tableCell}>COP/CCR</td>
+                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>DGAB</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>17</td>
+                  <td className={classes.tableCell}>Christina Mazcko</td>
+                  <td className={classes.tableCell}>COP/CCR</td>
+                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>-</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>18</td>
+                  <td className={classes.tableCell}>Elaine Ostrander</td>
+                  <td className={classes.tableCell}>CGCGB/NHGRI</td>
+                  <td className={classes.tableCell}>NIH</td>
+                  <td className={classes.tableCell}>BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>19</td>
+                  <td className={classes.tableCell}>Connie Sommers</td>
+                  <td className={classes.tableCell}>IOB/DTP/DCTD</td>
+                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>DGAB, BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>20</td>
+                  <td className={classes.tableCell}>Greg Tawa</td>
+                  <td className={classes.tableCell}>TRNDP/NCATS</td>
+                  <td className={classes.tableCell}>NIH</td>
+                  <td className={classes.tableCell}>DGAB</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>21</td>
+                  <td className={classes.tableCell}>Allen Dearry</td>
+                  <td className={classes.tableCell}>CBIIT</td>
+                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>-</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>22</td>
+                  <td className={classes.tableCell}>Matthew Beyers</td>
+                  <td className={classes.tableCell}>FNLCR</td>
+                  <td className={classes.tableCell}>FNL</td>
+                  <td className={classes.tableCell}>DGAB, BPSC</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>23</td>
+                  <td className={classes.tableCell}>Philip Musk</td>
+                  <td className={classes.tableCell}>FNLCR</td>
+                  <td className={classes.tableCell}>FNL</td>
+                  <td className={classes.tableCell}>DGAB</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>24</td>
+                  <td className={classes.tableCell}>John Otridge</td>
+                  <td className={classes.tableCell}>FNLCR</td>
+                  <td className={classes.tableCell}>FNL</td>
+                  <td className={classes.tableCell}>-</td>
+                </tr>
+                <tr className={classes.tableBodyRow}>
+                  <td className={classes.tableCell}>25</td>
+                  <td className={classes.tableCell}>Ralph Parchment</td>
+                  <td className={classes.tableCell}>FNLCR</td>
+                  <td className={classes.tableCell}>FNL</td>
+                  <td className={classes.tableCell}>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>),
+    }}
+    />
   </>
 );
 
 const styles = () => ({
 
-  container: {
-    maxWidth: '1400px',
-    minHeight: '800px',
-    margin: '16px 30px',
+
+  tableDiv: {
+    marginTop: '45px',
   },
+  table: {
+    borderSpacing: '0',
+    borderCollapse: 'collapse',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    letterSpacing: '0.025em',
+    lineHeight: '30px',
+    textAlign: 'left',
+    width: '100%',
+  },
+  tableHeader: {
+    fontFamily: 'Raleway',
+    color: '#194563',
+    textTransform: 'uppercase',
+
+  },
+  tableBodyRow: {
+    borderSpacing: '0',
+    borderCollapse: 'collapse',
+    '&:nth-child(even)': {
+      color: '#5A97C6',
+    },
+    '&:nth-child(odd)': {
+      color: '#0B3556',
+    },
+  },
+  tableCell: {
+    fontFamily: '"Open Sans"',
+    fontSize: '14px',
+    padding: '8px 15px 8px 0px',
+    borderBottom: '0.66px solid #087CA5',
+  },
+  headerCell: {
+    borderBottom: '4px solid #087CA5',
+    borderSpacing: '0',
+    borderCollapse: 'collapse',
+    fontWeight: 'bolder',
+  },
+
 });
 
 

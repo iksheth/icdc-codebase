@@ -242,7 +242,7 @@ const Cases = ({ classes, data }) => {
       <div className={classes.chips}>
         {bubbles}
       </div>
-      <Grid container spacing={32}>
+      <Grid container>
         <Grid item xs={12}>
           <MUIDataTable
             title={data.title ? data.title : 'Cases'}

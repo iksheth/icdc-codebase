@@ -13,7 +13,7 @@ import AliquotsIcon from '../../assets/icons/Icon-aliquots-stats.svg';
 
 
 const StatsView = ({ classes, data }) => (
-  <Grid container spacing={32} class={classes.statsContainer}>
+  <Grid container class={classes.statsContainer}>
     <Grid item xs={12}>
       <Paper className={classes.paper}>
         <Grid container class={classes.statsMaxWidth}>

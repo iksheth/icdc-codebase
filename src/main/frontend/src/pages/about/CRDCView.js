@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Link } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/steeringCommittee.png';
@@ -9,16 +9,28 @@ const CRDC = ({ classes }) => (
   <>
     <Stats />
     <Header title="Cancer Research Data Commons(CRDC)" />
-    <div className={classes.container}>
-      <Body data={{
-        img: l9dg,
-        body: (
-          <div>
-            {' '}
+    <Body data={{
+      img: l9dg,
+      body: (
+        <div>
+          {' '}
 The Cancer Research Data Commons
-is an initiative from NCI’s CBIIT.
-The vision for the Cancer Research Data
-Commons (CRDC) is a virtual, expandable
+is an initiative from NCI’s
+          <Link href="https://datascience.cancer.gov/" color="inherit" className={classes.link}>
+            {' '}
+            {' '}
+CBIIT
+            {' '}
+          </Link>
+    .
+    https://datascience.cancer.gov/data-commons
+The vision for the
+          <Link href="https://datascience.cancer.gov/data-commons" color="inherit" className={classes.link}>
+            {' '}
+Cancer Research Data
+Commons
+          </Link>
+ (CRDC) is a virtual, expandable
 infrastructure that provides secure access
 to many different data types across scientific
 domains, allowing users to analyze, share, and
@@ -29,14 +41,20 @@ store results, leveraging the storage and elastic
  can lead to new discoveries in cancer prevention, treatment
  and diagnosis, and supports the goals of precision medicine and
   the Cancer Moonshot℠.
-            <br />
-            <br />
-The CRDC has three Cloud Resources options (Seven Bridges Genomics, the Broad,
+          <br />
+          <br />
+The CRDC has three
+          <Link href="https://datascience.cancer.gov/data-commons/cloud-resources" color="inherit" className={classes.link}>
+            {' '}
+Cloud Resources
+          </Link>
+          {' '}
+options (Seven Bridges Genomics, the Broad,
  and the Institute for Systems Biology), each providing analysis platforms for
 the community to use when working with Data Commons data. Initially, the ICDC
 works with the Seven Bridge Genomics Cloud Resource.
-            <br />
-            <br />
+          <br />
+          <br />
 These cloud-based platforms eliminate the need for researchers to download and
 store extremely large data sets by allowing them to bring analysis tools to the
  data in the cloud, instead of the traditional process of bringing the data to
@@ -44,29 +62,42 @@ store extremely large data sets by allowing them to bring analysis tools to the
   computational capacity to analyze these data. The Cloud Resources allow users to
   run best practice tools and pipelines already implemented or upload their own
   data or analysis methods to workspaces.
-            <br />
-            <br />
+          <br />
+          <br />
 All three Cloud Resources provide support for data access through a web-based
 user interface in addition to programmatic access to analytic tools and workflows,
  and the capability of sharing results with collaborators. Each Cloud Resource is
  continually developing new functionality to improve the user experience and add
  new tools for researchers.
-            <br />
-            <br />
-More details can be found here (https://datascience.cancer.gov/data-commons).
-          </div>),
-      }}
-      />
-    </div>
+          <br />
+          <br />
+More details can be found here (
+          <Link href="https://datascience.cancer.gov/data-commons" color="inherit" className={classes.link}>
+            {' '}
+https://datascience.cancer.gov/data-commons
+            {''}
+          </Link>
+).
+        </div>),
+    }}
+    />
   </>
 );
 
 const styles = () => ({
-
-  container: {
-    maxWidth: '1400px',
-    minHeight: '800px',
-    margin: '16px 30px',
+  link: {
+    color: '#0296C9',
+    fontWeight: 'bolder',
+    '&:hover': {
+      color: '#0296C9',
+      fontWeight: 'bolder',
+      textDecoration: 'none',
+    },
+  },
+  title: {
+    color: '#0B3556',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
 });
 

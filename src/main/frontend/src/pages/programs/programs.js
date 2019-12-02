@@ -32,7 +32,7 @@ const Programs = ({ classes, data }) => (
 
       <div className={classes.detailContainer}>
 
-        <Grid container spacing={8}>
+        <Grid container className={classes.gridContainer}>
           {data.program.map((programCardData) => (
             <Grid item lg={12} md={12} sm={12} xs={12}>
               <ProgramCard data={programCardData} />
@@ -55,15 +55,19 @@ const styles = (theme) => ({
   paddingBottm17: {
     paddingBottm: '17px',
   },
+  gridContainer: {
+    width: 'calc(100% + 8px) !important',
+  },
   container: {
     paddingTop: '50px',
     fontFamily: 'Raleway, sans-serif',
     paddingLeft: '32px',
     paddingRight: '32px',
     background: '#f3f3f3',
+
   },
   marginTop23: {
-    marginTop: '14px',
+    marginTop: '23px',
   },
   warning: {
     color: theme.palette.warning.main,
