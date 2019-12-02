@@ -66,8 +66,9 @@ export function getStatDataFromDashboardData(data, statName) {
       return [...new Set(data.reduce((output, d) => output.concat(d.samples
         ? d.samples : []), []))].length;
     case 'file':
+
       return [...new Set(data.reduce((output, d) => output.concat(d.files
-        ? d.files : []), []))].length;
+        ? d.files : []), []).map((f) => f.uuid))].length;
     default:
       return 0;
   }

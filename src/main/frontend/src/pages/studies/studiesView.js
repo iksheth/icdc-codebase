@@ -40,7 +40,9 @@ const Studies = ({ classes, data }) => {
       options: {
         filter: false,
         customBodyRender: (value) => (
-          <Link to={`/study/${value}`}>{value}</Link>
+          <div className="mui_td" style={{ width: '100px' }}>
+            <Link className={classes.link} to={`/study/${value}`}>{value}</Link>
+          </div>
         ),
       },
     },
@@ -54,7 +56,7 @@ const Studies = ({ classes, data }) => {
         customBodyRender: (value, tableMeta) => (
           <div className="mui_td">
             {' '}
-            <Link to={(location) => ({ ...location, pathname: '/' })} onClick={() => redirectTo(tableMeta.rowData[0])}>{value}</Link>
+            <Link className={classes.link} to={(location) => ({ ...location, pathname: '/' })} onClick={() => redirectTo(tableMeta.rowData[0])}>{value}</Link>
             {' '}
           </div>
         ),
@@ -94,50 +96,61 @@ const Studies = ({ classes, data }) => {
     <>
       <Stats />
       <div className={classes.tableContainer}>
-        <div className={classes.header}>
-          <div className={classes.logo}>
-            <img
-              src={icon}
-              alt="ICDC case detail header logo"
-            />
+        <div className={classes.container}>
+          <div className={classes.header}>
+            <div className={classes.logo}>
+              <img
+                src={icon}
+                alt="ICDC case detail header logo"
+              />
 
-          </div>
-          <div className={classes.headerTitle}>
-            <div className={classes.headerMainTitle}>
-              <span>
-                <Typography>
-                  <span className={classes.headerMainTitle}>Studies</span>
-                </Typography>
-              </span>
+            </div>
+            <div className={classes.headerTitle}>
+              <div className={classes.headerMainTitle}>
+                <span>
+                  <Typography>
+                    <span className={classes.headerMainTitle}>Studies</span>
+                  </Typography>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
 
-        <div className={classes.tableDiv}>
-          <Grid container spacing={32}>
-            <Grid item xs={12}>
-              <MUIDataTable
-                data={data.studiesByProgram}
-                columns={columns}
-                options={options(classes)}
-              />
+          <div className={classes.tableDiv}>
+            <Grid container spacing={32}>
+              <Grid item xs={12}>
+                <MUIDataTable
+                  data={data.studiesByProgram}
+                  columns={columns}
+                  options={options(classes)}
+                />
+              </Grid>
             </Grid>
-          </Grid>
+          </div>
         </div>
+
+
       </div>
     </>
   );
 };
 
 const styles = (theme) => ({
+  link: {
+    textDecoration: 'none',
+    color: 'inherit',
+  },
   card: {
     minHeight: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
-  caseCardContainer: {
-    marginTop: '32px',
+  container: {
+    margin: 'auto',
+    maxWidth: '1440px',
+    paddingLeft: '36px',
+    paddingRight: '36px',
   },
   paper: {
     textAlign: 'center',
@@ -159,16 +172,14 @@ const styles = (theme) => ({
     paddingRight: '50px',
     borderBottom: '#004c73 10px solid',
     height: '120px',
-    maxWidth: '1440px',
-    margin: 'auto',
     paddingTop: '35px',
   },
   headerMainTitle: {
-    fontFamily: theme.custom.fontFamilySans,
+    fontFamily: theme.custom.fontFamilyRaleway,
     fontWeight: '500',
-    letterSpacing: '0.017em',
-    color: '#606061',
-    fontSize: '25px',
+    letterSpacing: '0.025em',
+    color: '#0296c9',
+    fontSize: '28px',
     position: 'absolute',
     marginTop: '14px',
     lineHeight: '25px',
@@ -192,7 +203,6 @@ const styles = (theme) => ({
     paddingBottom: '50px',
   },
   tableDiv: {
-    maxWidth: '1440px',
     margin: 'auto',
   },
 });

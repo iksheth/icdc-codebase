@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import StatsView from '../../../components/Stats/StatsView';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-Programs.svg';
-import dogForProgramDetail from '../../../assets/dogForProgramDetail.png';
+import dogForProgramDetail from '../../../assets/programCards/ProgramDetail_Image.jpg';
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
 
@@ -133,9 +133,6 @@ const ProgramDetailView = ({ classes, data }) => {
                 {programDetail.program_full_description
                   ? programDetail.program_full_description.split('**').map((item, i) => <p key={i}>{item}</p>) : null}
               </span>
-
-              {programDetail.program_external_url
-                ? <a href={`${programDetail.program_external_url}`} target="icdc">{programDetail.program_external_url}</a> : null}
             </Grid>
             <Grid item lg={4} md={4} sm={4} xs={12} className={classes.detailContainerRight}>
               <img

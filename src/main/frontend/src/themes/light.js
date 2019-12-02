@@ -180,9 +180,15 @@ export default {
       '0px 12px 33px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A',
   },
   overrides: {
+    MuiPaper: {
+      elevation4: {
+        boxShadow: 'none',
+      },
+    },
     MUIDataTableSelectCell: {
       fixedHeader: {
         position: 'relative',
+
       },
       headerCell: {
         borderTop: tableHeaderBorder,
@@ -229,6 +235,7 @@ export default {
         fontStyle: 'normal',
         fontSize: '11pt',
         fontWeight: 'bold',
+        padding: '0 33px',
       },
       sortActive: {
         color: tableHeaderFontColor,
@@ -248,22 +255,30 @@ export default {
     MUIDataTableBodyRow: {
       root: {
         '&:nth-child(even)': {
-          backgroundColor: '#f5f5f5',
-          color: '#5e8ca5',
+          color: '#223d4c',
+          background: '#eee',
         },
         '&:nth-child(odd)': {
-          color: '#1c2023',
+          color: '#223d4c',
+
         },
       },
     },
     MuiTableRow: {
+      head: {
+        height: 40,
+      },
       root: {
-        height: 17,
+        height: 40,
       },
     },
     MuiTableCell: {
       root: {
         borderBottom: '0px',
+        padding: '5px',
+      },
+      paddingCheckbox: {
+        padding: '0px 5px',
       },
       body: {
         color: 'inherit',
@@ -272,6 +287,7 @@ export default {
         fontStyle: 'normal',
         fontSize: '10pt',
         fontWeight: 'bold',
+        padding: '8px 33px',
       },
       head: {
         fontSize: '0.95rem',
@@ -302,5 +318,17 @@ export default {
         fontStyle: 'normal',
       },
     },
+    MuiIconButton: {
+      root: {
+        padding: '5px',
+      },
+    },
+    MuiGrid: {
+      container: {
+        width: '100% !important',
+
+      },
+    },
+
   },
 };

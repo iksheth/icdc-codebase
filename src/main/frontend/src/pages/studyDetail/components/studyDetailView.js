@@ -10,7 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import StatsView from '../../../components/Stats/StatsView';
-import { Typography, Button } from '../../../components/Wrappers/Wrappers';
+import { Typography } from '../../../components/Wrappers/Wrappers';
 import { customSorting } from '../../../utils/dashboardUtilFunctions';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
@@ -244,16 +244,24 @@ const StudyDetailView = ({ classes, data }) => {
             <CustomBreadcrumb data={breadCrumbJson} />
           </div>
           <div className={classes.headerButton}>
-            <Link
-              className={classes.headerButtonLink}
-              to={(location) => ({ ...location, pathname: '/' })}
-              onClick={() => redirectTo()}
-            >
-              <Button className={classes.button}>
-                FILTER CASES
-                FOR THIS STUDY
-              </Button>
-            </Link>
+            <span className={classes.headerButtonLinkSpan}>
+              <Link
+                className={classes.headerButtonLink}
+                to={(location) => ({ ...location, pathname: '/' })}
+                onClick={() => redirectTo()}
+              >
+                {' '}
+                <span className={classes.headerButtonLinkText}> View </span>
+                <span className={classes.headerButtonLinkNumber}>
+                  {' '}
+                  {' '}
+                  {data.caseCountOfStudy}
+                  {' '}
+                  {' '}
+                </span>
+                <span className={classes.headerButtonLinkText}>CASES</span>
+              </Link>
+            </span>
           </div>
         </div>
 
@@ -261,13 +269,22 @@ const StudyDetailView = ({ classes, data }) => {
         <div className={classes.detailContainer}>
 
           <Grid container spacing={8}>
-            <Grid item lg={6} md={6} sm={6} xs={12}>
+            <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerLeft}>
                 <Grid item xs={12}>
                   <span className={classes.detailContainerHeader}>Description</span>
+
                 </Grid>
+
                 <Grid item xs={12}>
-                  <span className={classes.content}>{studyData.clinical_study_description}</span>
+                  <div>
+                    <span className={classes.content}>
+                      {' '}
+                      {studyData.clinical_study_description}
+                      {' '}
+                    </span>
+                  </div>
+                  <div><hr className={classes.hrLine} /></div>
                 </Grid>
 
                 <Grid container spacing={8} className={classes.detailContainerItems}>
@@ -298,7 +315,7 @@ const StudyDetailView = ({ classes, data }) => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item lg={6} md={6} sm={6} xs={12}>
+            <Grid item lg={6} md={6} sm={6} xs={12} className={classes.borderRight}>
               <Grid container spacing={16} direction="row" className={classes.detailContainerRight}>
                 <Grid item lg={6} md={6} sm={6} xs={12}>
                   <Grid container spacing={16}>
@@ -369,6 +386,12 @@ const StudyDetailView = ({ classes, data }) => {
 
 
 const styles = (theme) => ({
+  hrLine: {
+    width: '50px',
+    float: 'left',
+    marginTop: '30px',
+    border: '#81a6b9 2px solid',
+  },
   paddingLeft8: {
     paddingLeft: '8px',
   },
@@ -403,8 +426,8 @@ const styles = (theme) => ({
     background: '#f3f3f3',
   },
   header: {
-    paddingLeft: '32px',
-    paddingRight: '32px',
+    paddingLeft: '21px',
+    paddingRight: '21px',
     borderBottom: '#81a6b9 4px solid',
     height: '80px',
     maxWidth: theme.custom.maxContentWidth,
@@ -437,6 +460,9 @@ const styles = (theme) => ({
     maxHeight: '35px',
     overflow: 'hidden',
     paddingLeft: '3px',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    paddingRight: '200px',
   },
   headerSubTitleContent: {
     color: '#000000',
@@ -444,13 +470,43 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilyRaleway,
     textTransform: 'uppercase',
     letterSpacing: '0.023em',
-    fontSize: '12px',
+    fontSize: '14pt',
+
   },
   headerMSubTitle: {
     paddingTop: '12px',
   },
+  headerButton: {
+    fontFamily: theme.custom.fontFamilySans,
+    float: 'right',
+    marginTop: '15px',
+    width: '135px',
+    height: '33px',
+    background: '#F6F4F4',
+    paddingLeft: '10px',
+    paddingRight: '10px',
 
-
+  },
+  headerButtonLinkSpan: {
+    fontFamily: theme.custom.fontFamilySans,
+    height: '50px',
+    background: '#F5F3EE',
+    width: '200px',
+    fontSize: '8pt',
+  },
+  headerButtonLinkText: {
+    fontFamily: theme.custom.fontFamilySans,
+    color: '#0B3556',
+    fontSize: '8pt',
+  },
+  headerButtonLinkNumber: {
+    fontFamily: theme.custom.fontFamilySans,
+    borderBottom: 'solid',
+    lineHeight: '30px',
+    paddingBottom: '3px',
+    margin: '0 4px',
+    fontSize: '8pt',
+  },
   logo: {
     position: 'absolute',
     float: 'left',
@@ -461,13 +517,14 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
     paddingTop: '30px',
-    paddingLeft: '60px',
-    paddingRight: '60px',
+    paddingLeft: '36px',
+    paddingRight: '36px',
     fontFamily: theme.custom.fontFamilySans,
     letterSpacing: '0.014em',
     color: '#000000',
     size: '12px',
     lineHeight: '23px',
+    height: '525px',
 
   },
   detailContainerHeader: {
@@ -485,18 +542,24 @@ const styles = (theme) => ({
   detailContainerLeft: {
     display: 'block',
     padding: '5px  20px 5px 2px !important',
-    minHeight: '550px',
-    maxHeight: '550px',
+    minHeight: '500px',
+    maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
+    width: 'calc(100% + 8px)',
+
+  },
+  borderRight: {
+    borderRight: '#81a6b9 1px solid',
   },
   detailContainerRight: {
     padding: '5px 0 5px 20px !important',
-    borderLeft: '#81a6b9 1px solid',
-    minHeight: '550px',
-    maxHeight: '550px',
+    minHeight: '500px',
+    maxHeight: '500px',
     overflowY: 'auto',
     overflowX: 'hidden',
+    height: '500px',
+    width: 'calc(100% + 8px)',
   },
 
   tableContainer: {
@@ -512,14 +575,18 @@ const styles = (theme) => ({
   tableDiv: {
     paddingTop: '31px',
     maxWidth: theme.custom.maxContentWidth,
-    margin: '8px auto auto auto',
+    margin: '20px auto auto auto',
   },
-  headerButton: {
-    float: 'right',
-    paddingTop: '15px',
-  },
+
   headerButtonLink: {
     textDecoration: 'none',
+    lineHeight: '14px',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    color: '#ff8a00',
+    '&:hover': {
+      color: '#ff8a00',
+    },
   },
   button: {
     borderRadius: '22px',
@@ -537,7 +604,7 @@ const styles = (theme) => ({
     },
   },
   detailContainerItems: {
-    paddingTop: '35px',
+    paddingTop: '7px',
     paddingLeft: '7px',
   },
   detailContainerItem: {
@@ -558,6 +625,7 @@ const styles = (theme) => ({
     color: '#ff17f15',
     paddingBottom: '20px',
   },
+
 });
 
 export default withStyles(styles, { withTheme: true })(StudyDetailView);

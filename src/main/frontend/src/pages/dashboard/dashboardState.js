@@ -133,11 +133,11 @@ export default function dashboardReducer(state = initialState, action) {
       return {
         ...state,
         stats: {
-          numberOfStudies: getStatDataFromDashboardData(tableData, 'study'),
-          numberOfCases: getStatDataFromDashboardData(tableData, 'case'),
-          numberOfSamples: getStatDataFromDashboardData(tableData, 'sample'),
-          numberOfFiles: getStatDataFromDashboardData(tableData, 'file'),
-          numberOfAliquots: getStatDataFromDashboardData(tableData, 'aliquot'),
+          numberOfStudies: getStatDataFromDashboardData(tableData, 'study', dataTableFilters),
+          numberOfCases: getStatDataFromDashboardData(tableData, 'case', dataTableFilters),
+          numberOfSamples: getStatDataFromDashboardData(tableData, 'sample', dataTableFilters),
+          numberOfFiles: getStatDataFromDashboardData(tableData, 'file', dataTableFilters),
+          numberOfAliquots: getStatDataFromDashboardData(tableData, 'aliquot', dataTableFilters),
         },
         checkbox: {
           data: updatedCheckboxData,
@@ -172,11 +172,11 @@ export default function dashboardReducer(state = initialState, action) {
       return {
         ...state,
         stats: {
-          numberOfStudies: getStatDataFromDashboardData(tableData, 'study'),
-          numberOfCases: getStatDataFromDashboardData(tableData, 'case'),
-          numberOfSamples: getStatDataFromDashboardData(tableData, 'sample'),
-          numberOfFiles: getStatDataFromDashboardData(tableData, 'file'),
-          numberOfAliquots: getStatDataFromDashboardData(tableData, 'aliquot'),
+          numberOfStudies: getStatDataFromDashboardData(tableData, 'study', dataTableFilters),
+          numberOfCases: getStatDataFromDashboardData(tableData, 'case', dataTableFilters),
+          numberOfSamples: getStatDataFromDashboardData(tableData, 'sample', dataTableFilters),
+          numberOfFiles: getStatDataFromDashboardData(tableData, 'file', dataTableFilters),
+          numberOfAliquots: getStatDataFromDashboardData(tableData, 'aliquot', dataTableFilters),
         },
         checkbox: {
           data: updatedCheckboxData,
