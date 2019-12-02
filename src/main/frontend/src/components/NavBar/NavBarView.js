@@ -26,7 +26,6 @@ import { initCart } from '../../pages/selectedCases/selectedCasesState';
 import { toggleCheckBox } from '../../pages/dashboard/dashboardState';
 import { unselectFilters } from '../../utils/dashboardUtilFunctions';
 import AboutMenu from './components/AboutMenu';
-import { Badge } from '../Wrappers/Wrappers';
 
 const drawerWidth = 240;
 // const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
@@ -193,16 +192,22 @@ const NavBar = ({
                 className={classes.headerMenuButton}
                 classes={{ root: classes.iconButtonRoot }}
               > */}
-              <Badge badgeContent={numberOfCases} max={99999}>
-                <Tooltip title="Cases" placement="bottom-end">
+              {/* <Badge badgeContent={numberOfCases} max={99999}> */}
+
+              <Tooltip title="Cases" placement="bottom-end">
+                <span className={classes.badge}>
                   <img
                     className={classes.cartLogoImg}
                     src={caseIcon}
                     alt="cart_logo"
                   />
-                </Tooltip>
+                  <span className={classes.badgeText}>
+                    {numberOfCases}
+                  </span>
+                </span>
+              </Tooltip>
 
-              </Badge>
+              {/* </Badge> */}
               {/* </IconButton> */}
             </NavLink>
           </Button>
@@ -448,6 +453,17 @@ const styles = (theme) => ({
   },
   drawerAppBar: {
     height: '39px',
+  },
+  badge: {
+    display: 'inline-flex',
+    position: 'relative',
+    verticalAlign: 'middle',
+  },
+  badgeText: {
+    height: '16px',
+    minWidth: '16px',
+    fontWeight: '600',
+    transform: 'scale(1) translate(0%, -50%)',
   },
 });
 
