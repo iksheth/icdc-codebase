@@ -69,7 +69,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/study_cases/:id" component={Cases} />
             <Route path="/purpose" component={purposeView} />
             <Route path="/steeringCommittee" component={steeringCommiteeView} />
-            <Route path="/cdrd" component={CRDCView} />
+            <Route path="/crdc" component={CRDCView} />
             <Route path="/icdcData" component={ICDCDataView} />
             <Route path="/analyzingData" component={analyzingDataView} />
             <Route path="/developers" component={developerView} />

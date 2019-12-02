@@ -179,6 +179,33 @@ export default {
       '0px 12px 33px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A',
   },
   overrides: {
+    MuiExpansionPanelDetails: {
+      root: {
+        padding: '0px',
+      },
+    },
+    MuiListItemText: {
+      root: {
+        padding: '0 8px',
+      },
+    },
+    MuiListItem: {
+      gutters: {
+        paddingTop: '4px',
+        paddingRight: '8px',
+        paddingBottom: '4px',
+        paddingLeft: '35px',
+      },
+    },
+    MuiExpansionPanelSummary: {
+      root: {
+        minHeight: '38px',
+        padding: '0 12px 0 32px',
+      },
+      content: {
+        margin: '4px 0',
+      },
+    },
     MUIDataTableSelectCell: {
       fixedHeader: {
         position: 'relative',
