@@ -86,7 +86,7 @@ const Footer = ({ classes, data }) => {
             </li>
             <li>
               <Typography className={classes.footerText}>
-                <Link className={classes.link} to="/modelPage">
+                <Link className={classes.link} to="/model">
               Data Model
                 </Link>
               </Typography>
