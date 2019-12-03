@@ -148,6 +148,7 @@ export default {
         .darken(darkenRate)
         .toHexString(),
       contrastText: 'white',
+      lattice: '#24292f',
     },
     info: {
       main: info,

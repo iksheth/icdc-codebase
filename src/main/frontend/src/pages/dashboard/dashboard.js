@@ -54,8 +54,8 @@ const Dashboard = ({
               />
             </div>
           </div>
-          <Collapse in={checked}>
-            <Grid container spacing={32}>
+          <Collapse in={checked} className={classes.backgroundShawdowWidgets}>
+            <Grid container spacing={8}>
               <Grid item lg={4} md={6} sm={12} xs={12}>
                 <Widget
                   title="Programs and Studies"
@@ -252,6 +252,9 @@ const styles = (theme) => ({
     '&:hover': {
       backgroundColor: '#566672',
     },
+  },
+  backgroundShawdowWidgets: {
+    background: theme.palette.widgetBackground.lattice,
   },
   switchBase: {
     height: '20px',
