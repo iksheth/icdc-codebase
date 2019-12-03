@@ -19,7 +19,7 @@ const Header = ({ classes }) => (
         <img
           className={classes.nihLogoImg}
           src={nihLogo}
-          alt="nih_logo"
+          alt="NCI ICDC Logo - Integrated Canine Data Commons"
         />
       </Link>
       <img
