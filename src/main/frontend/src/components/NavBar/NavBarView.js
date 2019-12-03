@@ -406,7 +406,7 @@ const styles = (theme) => ({
     width: drawerWidth,
     marginTop: '79px',
     zIndex: '1201',
-    minHeight: '39px',
+    height: 'calc(100% - 79px)',
   },
   toolbar: {
     minHeight: 39,
@@ -463,6 +463,7 @@ const styles = (theme) => ({
     height: '16px',
     minWidth: '16px',
     fontWeight: '600',
+    letterSpacing: '0.8px',
     transform: 'scale(1) translate(0%, -50%)',
   },
 });
