@@ -356,6 +356,10 @@ export default {
 
       },
     },
-
+    MuiSwitch: {
+      bar: {
+        backgroundColor: '#ABADB0',
+      },
+    },
   },
 };

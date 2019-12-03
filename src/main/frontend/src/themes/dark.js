@@ -326,5 +326,10 @@ export default {
         fontStyle: 'normal',
       },
     },
+    MuiSwitch: {
+      bar: {
+        backgroundColor: '#ABADB0',
+      },
+    },
   },
 };

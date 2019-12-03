@@ -40,6 +40,8 @@ const Widget = ({
       >
         {children}
       </div>
+      <div className={classes.horizontalLine} />
+
     </Paper>
   </div>
 );
@@ -50,7 +52,9 @@ const styles = (theme) => ({
     minHeight: '100%',
   },
   widgetHeader: {
-    padding: theme.spacing.unit * 3,
+    // padding: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing.unit * 4,
+    paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit,
     display: 'flex',
     justifyContent: 'space-between',
@@ -61,7 +65,7 @@ const styles = (theme) => ({
   },
   widgetBody: {
     margin:'0px auto',
-    paddingBottom: theme.spacing.unit * 3,
+    paddingBottom: theme.spacing.unit,
     paddingRight: theme.spacing.unit * 3,
     paddingLeft: theme.spacing.unit * 3,
   },

@@ -47,6 +47,7 @@ const Dashboard = ({
                   track: classes.track,
                   checked: classes.checked,
                 }}
+                disableRipple
                 onChange={() => {
                   themeChanger.toggleTheme();
                 }}
