@@ -4,6 +4,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TablePagination from '@material-ui/core/TablePagination';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -21,8 +22,19 @@ const CustomFooter = ({
   text,
   onClick,
   selected,
+  label,
 }) => (
   <TableFooter>
+    <TableRow>
+      <TextField
+        id="multiline-user-coments"
+        label={label}
+        multiline
+        className={classes.textField}
+        margin="normal"
+        variant="filled"
+      />
+    </TableRow>
     <TableRow>
       <TableCell>
         <Button onClick={onClick} variant="contained" color="primary" disabled={!selected} className={classes.button}>

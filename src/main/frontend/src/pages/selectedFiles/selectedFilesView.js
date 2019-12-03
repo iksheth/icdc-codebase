@@ -80,10 +80,11 @@ class selectedFilesView extends Component {
         });
 
         if (index === 0) {
-          str = ['Case ID', 'File Name', 'File ID', 'Md5sum'].join(',');
-          str += '\r\n';
+          str = ['Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
+          str += `\r\n${line},${document.getElementById('multiline-user-coments').value}\r\n`;
+        } else {
+          str += `${line}\r\n`;
         }
-        str += `${line}\r\n`;
         return str;
       });
 
@@ -102,7 +103,6 @@ class selectedFilesView extends Component {
       tempLink.click();
     }
 
-
     function formatBytes(bytes, decimals = 2) {
       if (bytes === 0) return '0 Bytes';
 
@@ -117,7 +117,7 @@ class selectedFilesView extends Component {
 
     const columns = [
 
-      { name: 'case_id', label: 'CaseID', sortDirection: 'asc' },
+      { name: 'case_id', label: 'Case ID', sortDirection: 'asc' },
       { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
       { name: 'file_type', label: 'File Type' },
       { name: 'parent', label: 'Association' },
@@ -180,6 +180,7 @@ class selectedFilesView extends Component {
       customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
         <CustomFooter
           text="DOWNLOAD MANIFEST"
+          label="User Comments"
           onClick={downloadJson}
           count={count}
           page={page}
