@@ -6,7 +6,6 @@ import { useLocation } from 'react-router';
 import { Typography } from '../Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
 import nciLogo from '../../assets/footer/NCI-footer.logo.svg';
-import submissionGuide from '../../assets/footer/ICDC_DGAB_Guidelines.pdf';
 
 
 const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
@@ -119,9 +118,9 @@ const Footer = ({ classes, data }) => {
             </li>
             <li>
               <Typography className={classes.footerText}>
-                <a href={submissionGuide} download>
-              Submission Guide [PDF]
-                </a>
+                <Link className={classes.link} to="/submit">
+              Submission Guide
+                </Link>
               </Typography>
             </li>
           </ul>

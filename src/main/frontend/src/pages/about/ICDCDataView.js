@@ -8,7 +8,7 @@ import Body from '../../components/About/BodyView';
 const ICDCData = ({ classes }) => (
   <>
     <Stats />
-    <Header title="Steering Committee" />
+    <Header title="ICDC Data" />
     <Body data={{
       img: l9dg,
       body: (
