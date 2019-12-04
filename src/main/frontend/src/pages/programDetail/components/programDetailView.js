@@ -53,7 +53,7 @@ const ProgramDetailView = ({ classes, data }) => {
         customBodyRender: (value) => (
           <div className="mui_td">
             {' '}
-            <Link to={`/study/${value}`}>{value}</Link>
+            <Link className={classes.link} to={`/study/${value}`}>{value}</Link>
             {' '}
           </div>
         ),
@@ -69,6 +69,7 @@ const ProgramDetailView = ({ classes, data }) => {
           <div className="mui_td">
             {' '}
             <Link
+              className={classes.link}
               to={(location) => ({ ...location, pathname: '/' })}
               onClick={() => redirectTo(tableMeta.rowData[1])}
             >
@@ -170,6 +171,14 @@ const ProgramDetailView = ({ classes, data }) => {
 
 
 const styles = (theme) => ({
+  link: {
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    color: '#DC762F',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
   dogImage: {
     width: '100%',
     paddingTop: '15px',

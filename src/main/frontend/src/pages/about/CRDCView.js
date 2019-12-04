@@ -132,15 +132,16 @@ options
             className={classes.linkIcon}
           />
           <Link
-            title="FireCloud"
+            title="Terra"
             target="_blank"
             rel="noreferrer"
-            href="https://software.broadinstitute.org/firecloud/"
+            href="https://terra.bio/"
             color="inherit"
             className={classes.link}
           >
             {' '}
- FireCloud
+ Terra
+
           </Link>
           ), each providing analysis platforms for
 the community to use when working with Data Commons data.
@@ -185,9 +186,11 @@ user interface that allows researchers to find data of interest and combine it w
  data available in the Google Cloud Storage.
           <br />
           <br />
-          <span className={classes.title}>Broad Institute FireCloud </span>
+
+          <span className={classes.title}>Broad Institute Terra </span>
 is an open, standards-based platform for performing production-scale data
- analysis in the cloud. Built on the Google Cloud Platform, FireCloud empowers
+ analysis in the cloud. Built on the Google Cloud Platform, Terra empowers
+
  analysts, tool developers, and production managers to run large-scale analysis and
   to share results with collaborators. Users can upload their own analysis methods
   and data to workspaces or run the Broad’s best practice tools and pipelines.

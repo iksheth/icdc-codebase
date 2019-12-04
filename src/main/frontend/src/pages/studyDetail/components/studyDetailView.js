@@ -585,9 +585,9 @@ const styles = (theme) => ({
     lineHeight: '14px',
     fontSize: '12px',
     fontWeight: 'bold',
-    color: '#ff8a00',
+    color: '#DC762F',
     '&:hover': {
-      color: '#ff8a00',
+      textDecoration: 'underline',
     },
   },
   button: {

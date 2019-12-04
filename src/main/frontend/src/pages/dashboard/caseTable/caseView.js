@@ -11,13 +11,7 @@ import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
 import { fetchCasesAndFiles } from '../../selectedCases/selectedCasesState';
 
-const link = {
-  color: '#DC762F',
-  textDecoration: 'none',
-  ':hover': {
-    textDecoration: 'underline',
-  },
-};
+
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
   overflow: 'hidden',
@@ -28,7 +22,7 @@ const tableStyle = (ratio = 1) => ({
 );
 
 
-const columns = [
+const columns = (classes) => [
   {
     name: 'case_id',
     label: 'Case ID',
@@ -38,7 +32,7 @@ const columns = [
       customBodyRender: (value) => (
         <div className="mui_td" style={tableStyle(0.8)}>
           {' '}
-          <Link to={`/case/${value}`} style={link}>{value}</Link>
+          <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
           {' '}
         </div>
       ),
@@ -51,7 +45,9 @@ const columns = [
       filter: false,
       customBodyRender: (value) => (
         <div className="mui_td" style={tableStyle(0.6)}>
-          <Link to={`/study/${value}`} style={link}>{value}</Link>
+
+          <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
+
         </div>
       ),
     },
@@ -163,6 +159,7 @@ const columns = [
   },
 ];
 
+
 let selectedCaseIds = [];
 
 function exportCases(dispatch) {
@@ -253,7 +250,7 @@ const Cases = ({ classes, data }) => {
         <Grid item xs={12}>
           <MUIDataTable
             data={data}
-            columns={columns}
+            columns={columns(classes)}
             options={options(classes, dispatch)}
           />
         </Grid>
@@ -264,6 +261,15 @@ const Cases = ({ classes, data }) => {
 };
 
 const styles = () => ({
+
+  link: {
+    color: '#DC762F',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+
   caseTitle: {
     color: '#194563',
     fontSize: '25.2pt',

@@ -94,7 +94,7 @@ const Footer = ({ classes, data }) => {
             <li>
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/developers">
-              Developers (REST APIs)
+              Developers (APIs)
                 </Link>
               </Typography>
             </li>

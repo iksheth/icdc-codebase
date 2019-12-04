@@ -139,7 +139,11 @@ const Studies = ({ classes, data }) => {
 const styles = (theme) => ({
   link: {
     textDecoration: 'none',
-    color: 'inherit',
+    fontWeight: 'bold',
+    color: '#DC762F',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
   card: {
     minHeight: '100%',

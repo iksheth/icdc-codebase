@@ -116,7 +116,7 @@ between human and canine cancers.
             <div className={classes.aboutContent}>
   NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged
   the Frederick National laboratory for Cancer Research
-(FNLCR) to build the integrated Canine Data Commons(ICDC)
+(FNLCR) to build the integrated Canine Data Commons (ICDC)
 which is a cloud-based repository of canine cancer data and
 was established to further research on human cancers by
 enabling comparative analysis with canine cancer.

@@ -19,43 +19,11 @@ The ICDC System features two read-only API’s that are available
  for public consumption:  GraphQL and REST:
           <br />
           <br />
-          <img
-            src={linkIcon}
-            alt="outbounnd web site icon"
-            className={classes.linkIcon}
-          />
-          <Link
-            title="GraphQL"
-            target="_blank"
-            rel="noreferrer"
-            href="https://caninecommons.cancer.gov/v1/graphql/"
-            color="inherit"
-            className={classes.link}
-          >
-            {' '}
+
 http://caninecommons.cancer.gov/v1/graphql/
-            {' '}
-          </Link>
           <br />
           <br />
-          <img
-            src={linkIcon}
-            alt="outbounnd web site icon"
-            className={classes.linkIcon}
-          />
-          <Link
-            title="REST"
-            target="_blank"
-            rel="noreferrer"
-            href="https://caninecommons.cancer.gov/v1/REST"
-            color="inherit"
-            className={classes.link}
-          >
-            {' '}
-            {' '}
 http://caninecommons.cancer.gov/v1/REST
-            {' '}
-          </Link>
           <br />
           <br />
 Users do not require authentication to the system - the data is public.

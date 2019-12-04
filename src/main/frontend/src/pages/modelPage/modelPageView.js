@@ -96,25 +96,7 @@ All data is publicly available.
               <p className={classes.title}>Data Model:</p>
 The ICDC data model is a representation of how all the
 constituent data are arranged relative to each other.
-The current data model is available for viewing on CBIIT’s
- Github repository (
-              <img
-                src={linkIcon}
-                alt="outbounnd web site icon"
-                className={classes.linkIcon2}
-              />
-              <Link
-                title="icdc-model-tool"
-                target="_blank"
-                rel="noreferrer"
-                href="https://cbiit.github.io/icdc-model-tool/"
-                color="inherit"
-                className={classes.link}
-              >
-                {' '}
-https://cbiit.github.io/icdc-model-tool/
-              </Link>
-).
+
   Given the number of studies, the range of study types and
   the multiple data types that the ICDC needs to support, the
   data model will need to adapt to the needs of the science.
@@ -146,7 +128,8 @@ https://cbiit.github.io/icdc-model-tool/
               <br />
 The tool used to generate this visual may be sourced on Github at:
               <br />
-              <Link href="https://cbiit.github.io/icdc-model-tool/" color="inherit" className={classes.link}>
+              <Link href="https://github.com/CBIIT/icdc-model-tool" color="inherit" className={classes.link}>
+
                 {' '}
  https://github.com/CBIIT/icdc-model-tool
                 {' '}

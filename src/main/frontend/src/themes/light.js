@@ -266,7 +266,6 @@ export default {
         fontStyle: 'normal',
         fontSize: '11pt',
         fontWeight: 'bold',
-        padding: '0 33px',
       },
       sortActive: {
         color: tableHeaderFontColor,
@@ -287,7 +286,7 @@ export default {
       root: {
         '&:nth-child(even)': {
           color: '#223d4c',
-          background: '#eee',
+          background: '#f5f5f5',
         },
         '&:nth-child(odd)': {
           color: '#223d4c',
@@ -318,7 +317,6 @@ export default {
         fontStyle: 'normal',
         fontSize: '10pt',
         fontWeight: 'bold',
-        padding: '8px 33px',
       },
       head: {
         fontSize: '0.95rem',

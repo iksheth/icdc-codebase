@@ -284,14 +284,20 @@ export default {
       },
     },
     MuiTableRow: {
+      head: {
+        height: 40,
+      },
       root: {
-        height: 17,
+        height: 40,
       },
     },
     MuiTableCell: {
       root: {
         borderBottom: '0px',
-        padding: '0px',
+        padding: '5px',
+      },
+      paddingCheckbox: {
+        padding: '0px 5px',
       },
       body: {
         color: 'inherit',
@@ -306,6 +312,9 @@ export default {
       },
     },
     MUIDataTableToolbar: {
+      root: {
+        backgroundColor: tableHeader,
+      },
       titleText: {
         color: tableHeaderFontColor,
         fontSize: '25.2pt',
@@ -330,6 +339,19 @@ export default {
     MuiSwitch: {
       bar: {
         backgroundColor: '#ABADB0',
+      },
+    },
+    MuiGrid: {
+      container: {
+        width: '100% !important',
+      },
+    },
+    MuiPaper: {
+      elevation4: {
+        boxShadow: 'none',
+      },
+      elevation2: {
+        boxShadow: 'none',
       },
     },
   },
