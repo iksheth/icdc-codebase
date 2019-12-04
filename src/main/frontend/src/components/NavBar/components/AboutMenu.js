@@ -142,8 +142,9 @@ const styles = (theme) => ({
     whiteSpace: 'nowrap',
     color: '#FFFFFF',
     fontFamily: 'Raleway',
-    fontSize: '11px',
+    fontSize: '13px',
     fontWeight: '600',
+    letterSpacing: '0.9px',
     [theme.breakpoints.down('xs')]: {
       display: 'none',
     },

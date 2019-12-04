@@ -385,6 +385,7 @@ const styles = (theme) => ({
   link: {
     textDecoration: 'none',
     color: 'white',
+    fontSize: '13px',
   },
   menuButton: {
     marginRight: theme.spacing.unit * 2,
