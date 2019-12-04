@@ -78,21 +78,15 @@ const Footer = ({ classes, data }) => {
             </li>
             <li>
               <Typography className={classes.footerText}>
-                <Link className={classes.link} to="/icdcData">
-              ICDC Data
-                </Link>
-              </Typography>
-            </li>
-            <li>
-              <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/model">
-              Data Model
+              ICDC Data & Model
                 </Link>
               </Typography>
             </li>
+
             <li>
               <Typography className={classes.footerText}>
-                <Link className={classes.link} to="/analyzingData">
+                <Link className={classes.link} to="/crdc">
               Analyzing Data
                 </Link>
               </Typography>

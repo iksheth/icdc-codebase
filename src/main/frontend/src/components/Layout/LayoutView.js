@@ -22,7 +22,6 @@ import ProgramDetail from '../../pages/programDetail/programDetailController';
 import SelectedCases from '../../pages/selectedCases/selectedCasesController';
 import SelectedFiles from '../../pages/selectedFiles/selectedFilesController';
 import Home from '../../pages/landing/landingController';
-import analyzingDataView from '../../pages/about/analyzingDataView';
 import CRDCView from '../../pages/about/CRDCView';
 import developerView from '../../pages/about/developerView';
 import ICDCDataView from '../../pages/about/ICDCDataView';
@@ -71,7 +70,6 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/steeringCommittee" component={steeringCommiteeView} />
             <Route path="/crdc" component={CRDCView} />
             <Route path="/icdcData" component={ICDCDataView} />
-            <Route path="/analyzingData" component={analyzingDataView} />
             <Route path="/developers" component={developerView} />
             <Route path="/support" component={supportView} />
             <Route path="/submit" component={submitingData} />

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -45,25 +44,25 @@ const FacetPanel = (classes) => {
   return (
     <>
       {sideBarContent.map((sideBarItem) => {
-        if(sideBarItem.show){
-            return (
-        <>
-          <ExpansionPanel
-            expanded={expanded === sideBarItem.groupName}
-            onChange={handleChange(sideBarItem.groupName)}
-          >
-            <ExpansionPanelSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
-              classes={{ root: classes.expansionPanelSummaryRoot }}
-            >
-              <ListItemText primary={sideBarItem.groupName} />
-            </ExpansionPanelSummary>
+        if (sideBarItem.show) {
+          return (
+            <>
+              <ExpansionPanel
+                expanded={expanded === sideBarItem.groupName}
+                onChange={handleChange(sideBarItem.groupName)}
+              >
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1bh-content"
+                  id="panel1bh-header"
+                  classes={{ root: classes.expansionPanelSummaryRoot }}
+                >
+                  <ListItemText primary={sideBarItem.groupName} />
+                </ExpansionPanelSummary>
 
-            <ExpansionPanelDetails>
-              <List component="div" disablePadding dense>
-                {
+                <ExpansionPanelDetails>
+                  <List component="div" disablePadding dense>
+                    {
             sideBarItem.checkboxItems.map((checkboxItem) => {
               if (checkboxItem.cases === 0 && !checkboxItem.isChecked) {
                 return '';
@@ -76,15 +75,14 @@ const FacetPanel = (classes) => {
               );
             })
           }
-              </List>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
-        </>
-      )
+                  </List>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+            </>
+          );
         }
-        return "";  
-        }
-      )}
+        return '';
+      })}
     </>
   );
 };
@@ -93,7 +91,7 @@ const FacetPanel = (classes) => {
 const styles = () => ({
   expansionPanelSummaryRoot: {
     padding: '0 24px 0 35px',
-  }
+  },
 });
 
 export default withStyles(styles)(FacetPanel);

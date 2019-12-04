@@ -19,7 +19,7 @@ const AboutBody = ({ classes, data }) => (
 const styles = () => ({
   container: {
     minHeight: '800px',
-    margin: '16px 30px 16px 50px',
+    margin: '16px auto 16px auto',
     color: '#000000',
     fontFamily: '"Open Sans"',
     fontSize: '14px',
@@ -46,9 +46,10 @@ const styles = () => ({
   },
   rightSection: {
     padding: '8px 25px !important',
+    float: 'left',
   },
   leftSection: {
-
+    float: 'left',
   },
   aboutSection: {
     margin: '60px auto',

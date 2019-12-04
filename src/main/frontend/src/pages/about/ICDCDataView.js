@@ -1,9 +1,11 @@
+/* eslint-disable */
 import React from 'react';
 import { withStyles, Link } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
-import l9dg from '../../assets/about/steeringCommittee.png';
+import l9dg from '../../assets/about/Photo-About_ICDC_model.jpg';
 import Body from '../../components/About/BodyView';
+import linkIcon from '../../assets/about/About-ExternalLink.svg';
 
 const ICDCData = ({ classes }) => (
   <>
@@ -28,7 +30,17 @@ The ICDC data model is a representation of how all the
 constituent data are arranged relative to each other.
 The current data model is available for viewing on CBIIT’s
  Github repository (
-          <Link href="https://cbiit.github.io/icdc-model-tool/" color="inherit" className={classes.link}>
+            <img
+              src={linkIcon}
+              alt="outbounnd web site icon"
+              className={classes.linkIcon}
+            />
+            <Link title="icdc-model-tool"
+                  target="_blank" 
+                  rel="noreferrer" 
+                  href="https://cbiit.github.io/icdc-model-tool/" 
+                  color="inherit" 
+                  className={classes.link}>
             {' '}
 https://cbiit.github.io/icdc-model-tool/
             {' '}
@@ -44,7 +56,18 @@ https://cbiit.github.io/icdc-model-tool/
           <p className={classes.title}>FAIR and citing:</p>
 The ICDC will adhere to
 
-          <Link href="https://www.go-fair.org/fair-principles/" color="inherit" className={classes.link}>
+           <img
+              src={linkIcon}
+              alt="outbounnd web site icon "
+              className={classes.linkIcon}
+            />
+            <Link 
+              title="FAIR"
+              arget="_blank" 
+              rel="noreferrer" 
+              href="https://www.go-fair.org/fair-principles/" 
+              color="inherit" 
+              className={classes.link}>
             {' '}
 FAIR
             {' '}
@@ -72,6 +95,11 @@ All data is publicly available.
 );
 
 const styles = () => ({
+  linkIcon: {
+    width:'20px',
+    verticalAlign:'sub',
+    margin:'0px 0px 0px 2px',
+  },
   link: {
     color: '#0296C9',
     fontWeight: 'bolder',

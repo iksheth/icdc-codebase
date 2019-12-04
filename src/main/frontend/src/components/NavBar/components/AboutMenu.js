@@ -84,23 +84,14 @@ const AboutMenu = ({ classes }) => {
               activeStyle={{ color: 'white' }}
               to="/crdc"
             >
-               CRDC
+               CRDC & Analysis
             </NavLink>
             <NavLink
               className={classes.link}
               activeStyle={{ color: 'white' }}
-              to="/icdcData"
+              to="/model"
             >
-               ICDC Data
-
-            </NavLink>
-            <NavLink
-              className={classes.link}
-              activeStyle={{ color: 'white' }}
-              to="/analyzingData"
-            >
-               Analyzing Data
-
+               ICDC Data & Model
             </NavLink>
             <NavLink
               className={classes.link}
@@ -123,13 +114,7 @@ const AboutMenu = ({ classes }) => {
             >
                Submitting Data
             </NavLink>
-            <NavLink
-              className={classes.link}
-              activeStyle={{ color: 'white' }}
-              to="/model"
-            >
-               Model Page
-            </NavLink>
+
           </div>
         </Paper>
       </Menu>

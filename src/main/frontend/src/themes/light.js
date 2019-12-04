@@ -212,6 +212,9 @@ export default {
       elevation4: {
         boxShadow: 'none',
       },
+      elevation2: {
+        boxShadow: 'none',
+      },
     },
     MUIDataTableSelectCell: {
       fixedHeader: {

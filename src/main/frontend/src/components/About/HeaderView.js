@@ -2,16 +2,18 @@ import React from 'react';
 import { withStyles } from '@material-ui/core';
 
 const AboutHeader = ({ classes, title }) => (
-  <div className={classes.header}>
-    <div className={classes.slope} />
-    <div className={classes.slope2}><span className={classes.slope2Text}>{title}</span></div>
+  <div className={classes.container}>
+    <div className={classes.header}>
+      <div className={classes.slope} />
+      <div className={classes.slope2}><span className={classes.slope2Text}>{title}</span></div>
+    </div>
   </div>
 );
 
 const styles = () => ({
   header: {
     position: 'relative',
-    marginTop: '20px',
+    margin: '20px auto',
   },
   slope2Text: {
     height: '65px',

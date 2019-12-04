@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, Link } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
-import l9dg from '../../assets/about/steeringCommittee.png';
+import l9dg from '../../assets/about/About_Support.jpg';
 import Body from '../../components/About/BodyView';
 
 const SupportView = ({ classes }) => (
@@ -29,6 +29,11 @@ If you have any questions,
 );
 
 const styles = () => ({
+  linkIcon: {
+    width: '20px',
+    verticalAlign: 'sub',
+    margin: '0px 0px 0px 2px',
+  },
   link: {
     color: '#0296C9',
     fontWeight: 'bolder',

@@ -12,7 +12,11 @@ import { toggleCheckBox } from '../dashboardState';
 import { fetchCasesAndFiles } from '../../selectedCases/selectedCasesState';
 
 const link = {
-  color: 'inherit',
+  color: '#DC762F',
+  textDecoration: 'none',
+  ':hover': {
+    textDecoration: 'underline',
+  },
 };
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -47,7 +51,7 @@ const columns = [
       filter: false,
       customBodyRender: (value) => (
         <div className="mui_td" style={tableStyle(0.6)}>
-          <Link to={`/study/${value}`}>{value}</Link>
+          <Link to={`/study/${value}`} style={link}>{value}</Link>
         </div>
       ),
     },
@@ -183,8 +187,7 @@ const options = (classes, dispatch) => ({
       displayData[keyVlaue].data[0].props.children[1].props.children
     ));
     selectedCaseIds = selectedCaseId;
-    return (
-      <></>);
+    return '';
   },
   customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
     <CustomFooter
@@ -242,10 +245,13 @@ const Cases = ({ classes, data }) => {
       <div className={classes.chips}>
         {bubbles}
       </div>
+
       <Grid container>
+        <Grid item xs={12} className={classes.caseTitle}>
+           Cases
+        </Grid>
         <Grid item xs={12}>
           <MUIDataTable
-            title={data.title ? data.title : 'Cases'}
             data={data}
             columns={columns}
             options={options(classes, dispatch)}
@@ -258,6 +264,15 @@ const Cases = ({ classes, data }) => {
 };
 
 const styles = () => ({
+  caseTitle: {
+    color: '#194563',
+    fontSize: '25.2pt',
+    fontStyle: 'normal',
+    fontFamily: 'Raleway',
+    letterSpacing: '0.025em',
+    backgroundColor: '#f5f5f5',
+    padding: '10px 32px 8px 28px',
+  },
   chips: {
     position: 'absolute',
     marginLeft: '250px',

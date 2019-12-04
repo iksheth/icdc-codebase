@@ -1,9 +1,11 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Link } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
-import l9dg from '../../assets/about/steeringCommittee.png';
+import l9dg from '../../assets/about/Photo-About_SteeringCommittee.jpg';
 import Body from '../../components/About/BodyView';
+import submissionGuide from '../../assets/footer/ICDC_DGAB_Guidelines.pdf';
+import linkIcon from '../../assets/about/About-ExternalLink.svg';
 
 const SteeringCommitteeView = ({ classes }) => (
   <>
@@ -30,7 +32,15 @@ The Steering Committee has two sub-committees; Data Governance Advisory Board
             <br />
 The DGAB consists of 4 external members (all from ICDC Steering Committee), 2
  NIH members (1 of which is from CBIIT) and is supported by FNLCR staff. When
- researchers request their data to be added to the ICDC to be  shared with the
+ researchers request their data (
+            <img
+              src={linkIcon}
+              alt="outbounnd web site icon"
+              className={classes.linkIcon}
+            />
+            {' '}
+            <Link className={classes.link} href={submissionGuide} download> submission guide</Link>
+) to be added to the ICDC to be  shared with the
  community, the role of the DGAB is to advise the NCI on the suitability of
  request. The NCI makes the final decision on the request. The DGAB is chaired
  by a non-NIH member of ICDC Steering Committee. The DGAB meets at least
@@ -247,8 +257,20 @@ imaging, clinical/pathology, Immunology and genomic/sequencing data.
 );
 
 const styles = () => ({
-
-
+  linkIcon: {
+    width: '20px',
+    verticalAlign: 'sub',
+    margin: '0px',
+  },
+  link: {
+    color: '#0296C9',
+    fontWeight: 'bolder',
+    '&:hover': {
+      color: '#0296C9',
+      fontWeight: 'bolder',
+      textDecoration: 'none',
+    },
+  },
   tableDiv: {
     marginTop: '45px',
   },

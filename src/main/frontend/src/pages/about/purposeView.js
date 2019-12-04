@@ -2,8 +2,9 @@ import React from 'react';
 import { withStyles, Link } from '@material-ui/core';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
-import l9dg from '../../assets/about/steeringCommittee.png';
+import l9dg from '../../assets/about/Photo-About_Purpose.jpg';
 import Body from '../../components/About/BodyView';
+import linkIcon from '../../assets/about/About-ExternalLink.svg';
 
 const PurposeView = ({ classes }) => (
   <>
@@ -24,7 +25,19 @@ NCI’s Division of Cancer Treatment and Diagnosis (DCTD) contracted the Frederi
    The ICDC is part of the Cancer Research Data Commons (CRDC), an initiative
    from NCI’s Center for Biomedical Informatics and Information Technology (CBIIT).
    Bioinformatic analysis of the ICDC data is accomplished using the CRDC’s
-          <Link href="https://datascience.cancer.gov/data-commons/cloud-resources" color="inherit" className={classes.link}>
+          <img
+            src={linkIcon}
+            alt="outbounnd web site icon"
+            className={classes.linkIcon}
+          />
+          <Link
+            title="Cloud Resources."
+            target="_blank"
+            rel="noreferrer"
+            href="https://datascience.cancer.gov/data-commons/cloud-resources"
+            color="inherit"
+            className={classes.link}
+          >
             {' '}
 Cloud
    Resources.
@@ -44,6 +57,11 @@ Research Directorate (ADRD) is managing the ICDC Steering Committee and providin
 );
 
 const styles = () => ({
+  linkIcon: {
+    width: '20px',
+    verticalAlign: 'sub',
+    margin: '0px 0px 0px 2px',
+  },
   link: {
     color: '#0296C9',
     fontWeight: 'bolder',
