@@ -392,7 +392,9 @@ const styles = (theme) => ({
     marginRight: '40px',
   },
   nciLogo: {
-    width: `calc((100vw - ${theme.custom.drawerWidth})/4)`,
+    '@media (min-width: 960px)': {
+      width: `calc((100vw - ${theme.custom.drawerWidth})/4)`,
+    },
   },
 });
 
