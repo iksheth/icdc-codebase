@@ -270,7 +270,7 @@ const styles = (theme) => ({
     '-webkit-font-smoothing': 'antialiased',
     background: theme.custom.footorBackground,
     color: theme.palette.text.footerText,
-    padding: '24px 16px 64px 24px',
+    padding: '24px 35px 64px 35px',
     '& ul': {
       listStyle: 'none',
       margin: '0',
@@ -329,10 +329,7 @@ const styles = (theme) => ({
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    '@media (max-width: 600px)': {
-      marginLeft: '20px',
-    },
-
+    height: '30px',
     '@media (min-width: 600px)': {
       width: '200px',
     },
@@ -367,7 +364,7 @@ const styles = (theme) => ({
     justifyContent: 'left',
   },
   horizontalLine: {
-    width: '85%',
+    width: '100%',
     margin: '32px auto 16px auto',
     borderTop: '1px solid #1E394D',
   },

@@ -148,6 +148,7 @@ export default {
         .darken(darkenRate)
         .toHexString(),
       contrastText: 'white',
+      lattice: '#24292f',
     },
     info: {
       main: info,
@@ -324,6 +325,11 @@ export default {
         fontFamily: tableFontFamily,
         letterSpacing: '0.025em',
         fontStyle: 'normal',
+      },
+    },
+    MuiSwitch: {
+      bar: {
+        backgroundColor: '#ABADB0',
       },
     },
   },
