@@ -103,6 +103,7 @@ const Footer = ({ classes, data }) => {
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/submit">
               Submission Guide
+
                 </Link>
               </Typography>
             </li>

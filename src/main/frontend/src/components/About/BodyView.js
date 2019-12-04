@@ -4,10 +4,10 @@ import { Grid, withStyles } from '@material-ui/core';
 const AboutBody = ({ classes, data }) => (
   <div className={classes.container}>
     <Grid container spacing={16} direction="row" className={classes.aboutSection}>
-      <Grid item lg={4} md={4} sm={12} xs={12} className={classes.leftSection}>
+      <Grid item lg={3} md={3} sm={12} xs={12} className={classes.leftSection}>
         <img className={classes.img} src={data.img} alt="about" />
       </Grid>
-      <Grid item lg={8} md={8} sm={12} xs={12} className={classes.rightSection}>
+      <Grid item lg={9} md={9} sm={12} xs={12} className={classes.rightSection}>
         <span className={classes.text}>
           {data.body}
         </span>
@@ -18,12 +18,12 @@ const AboutBody = ({ classes, data }) => (
 
 const styles = () => ({
   container: {
-    minHeight: '800px',
     margin: '16px auto 16px auto',
     color: '#000000',
     fontFamily: '"Open Sans"',
     fontSize: '14px',
     lineHeight: '22px',
+    maxWidth: '1440px',
   },
   text: {
     height: '476px',
@@ -52,7 +52,7 @@ const styles = () => ({
     float: 'left',
   },
   aboutSection: {
-    margin: '60px auto',
+    margin: '60px auto 10px auto',
   },
   img: {
     width: '100%',

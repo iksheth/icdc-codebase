@@ -3,18 +3,17 @@ import {
   Button,
   withStyles,
   Link,
-  Grid,
 } from '@material-ui/core';
-
-import ZoomInIcon from '@material-ui/icons/ZoomIn';
-import ZoomOutIcon from '@material-ui/icons/ZoomOut';
-import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import icdcSchema from '../../assets/icdcSchema.svg';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/Photo-About_ICDC_model.jpg';
+import CenterIcon from '../../assets/about/Model-Buttons-Center.svg';
+import ZoomInIcon from '../../assets/about/Model-Buttons-ZoomIn.svg';
+import ZoomOutIcon from '../../assets/about/Model-Buttons-ZoomOut.svg';
 import linkIcon from '../../assets/about/About-ExternalLink.svg';
+import Body from '../../components/About/BodyView';
 
 
 const limitToBounds = false;
@@ -36,17 +35,12 @@ const ModelPage = ({ classes }) => (
   <>
     <Stats />
     <Header title="ICDC Data and Model" />
-
-    <div className={classes.container}>
-      <Grid container spacing={16} direction="row" className={classes.aboutSection}>
-        <Grid item lg={2} md={2} sm={12} xs={12} className={classes.leftSection}>
-          <img className={classes.img} src={l9dg} alt="about" />
-        </Grid>
-        <Grid item lg={10} md={10} sm={12} xs={12} className={classes.rightSection}>
-          <span className={classes.text}>
-            <div className={classes.schema}>
-              <p className={classes.title}>Harmonization/Integration:</p>
-              {' '}
+    <Body data={{
+      img: l9dg,
+      body: (
+        <div className={classes.schema}>
+          <p className={classes.title}>Harmonization/Integration:</p>
+          {' '}
 The ICDC functions best for the research community when the
 data is integrated. Once a project is accepted into the ICDC,
  the ICDC data team will work with the submitter to review the
@@ -56,26 +50,26 @@ data is integrated. Once a project is accepted into the ICDC,
    agreed upon between ICDC and the submitter.
 
 
-              <p className={classes.title}>FAIR and citing:</p>
+          <p className={classes.title}>FAIR and citing:</p>
 The ICDC will adhere to
 
-              <img
-                src={linkIcon}
-                alt="outbounnd web site icon "
-                className={classes.linkIcon}
-              />
-              <Link
-                title="FAIR"
-                arget="_blank"
-                rel="noreferrer"
-                href="https://www.go-fair.org/fair-principles/"
-                color="inherit"
-                className={classes.link}
-              >
-                {' '}
+          <img
+            src={linkIcon}
+            alt="outbounnd web site icon "
+            className={classes.linkIcon}
+          />
+          <Link
+            title="FAIR"
+            arget="_blank"
+            rel="noreferrer"
+            href="https://www.go-fair.org/fair-principles/"
+            color="inherit"
+            className={classes.link}
+          >
+            {' '}
 FAIR
-                {' '}
-              </Link>
+            {' '}
+          </Link>
 
  principles of data stewardship:
  Findable, Accessible, Interoperable, and Reusable.
@@ -84,7 +78,7 @@ individual projects, please refer to the attribution policies
 of the project when available.
 
 
-              <p className={classes.title}>License:</p>
+          <p className={classes.title}>License:</p>
 
 Data made available through the ICDC is for research purposes only.
 The ICDC provides researchers with access to data from canine cancer
@@ -93,7 +87,7 @@ The ICDC provides researchers with access to data from canine cancer
 All data is publicly available.
 
 
-              <p className={classes.title}>Data Model:</p>
+          <p className={classes.title}>Data Model:</p>
 The ICDC data model is a representation of how all the
 constituent data are arranged relative to each other.
 
@@ -102,47 +96,44 @@ constituent data are arranged relative to each other.
   data model will need to adapt to the needs of the science.
   The data model is not static and is expected to change as
   new needs are identified.
-              <br />
-              <br />
+          <br />
+          <br />
 
 The SVG graphic below represents the current ICDC data model consisting of data
 nodes, node properties, and relationships (edges).   It provides a comprehensive
 mapping of the system data, part of which may be viewed in the application interface
  and UI.   In other words, additional nodes and properties are available for
  inspection and querying beyond those presented on the front-end.
-              <br />
-              <br />
+          <br />
+          <br />
 Additionally, the ICDC Data Model serves as a template for similar initiatives and
 data structures, including graph-based database schemas.  The model will continue to
  evolve as data needs are further discerned.
-              <br />
-              <br />
+          <br />
+          <br />
 The most current data model is available on Github at:
-              <br />
-              <Link href="https://cbiit.github.io/icdc-model-tool/" color="inherit" className={classes.link}>
-                {' '}
+          <br />
+          <Link href="https://cbiit.github.io/icdc-model-tool/" color="inherit" className={classes.link}>
+            {' '}
 https://cbiit.github.io/icdc-model-tool/
-                {' '}
-              </Link>
-              <br />
-              <br />
+            {' '}
+          </Link>
+          <br />
+          <br />
 The tool used to generate this visual may be sourced on Github at:
-              <br />
-              <Link href="https://github.com/CBIIT/icdc-model-tool" color="inherit" className={classes.link}>
 
-                {' '}
+          <br />
+          <Link href="https://github.com/CBIIT/icdc-model-tool" color="inherit" className={classes.link}>
+            {' '}
  https://github.com/CBIIT/icdc-model-tool
-                {' '}
-              </Link>
-              <br />
-              <br />
-              <br />
-
-            </div>
-          </span>
-        </Grid>
-      </Grid>
-    </div>
+            {' '}
+          </Link>
+          <br />
+          <br />
+        </div>
+      ),
+    }}
+    />
 
     <TransformWrapper
       defaultScale={1}
@@ -170,14 +161,14 @@ The tool used to generate this visual may be sourced on Github at:
       }) => (
         <div className={classes.modelContainer}>
           <div className={classes.tools}>
-            <Button variant="outlined" color="primary" className={classes.button} onClick={zoomIn}>
-              <ZoomInIcon />
+            <Button onClick={zoomIn} className={classes.button}>
+              <img src={ZoomInIcon} alt="Zoom In" />
             </Button>
-            <Button variant="outlined" color="primary" className={classes.button} onClick={zoomOut}>
-              <ZoomOutIcon />
+            <Button onClick={zoomOut} className={classes.button}>
+              <img src={ZoomOutIcon} alt="Zoom Out" />
             </Button>
-            <Button variant="outlined" color="primary" className={classes.button} onClick={resetTransform}>
-              <ZoomOutMapIcon />
+            <Button onClick={resetTransform} className={classes.button}>
+              <img src={CenterIcon} alt="Center " />
             </Button>
           </div>
           <div className={classes.imgSection}>
@@ -217,18 +208,15 @@ const styles = () => ({
     fontWeight: 'bold',
   },
   button: {
-    margin: '10px 2px',
-    background: '#0B3556',
+    margin: '5px 2px',
     color: 'white',
-    '&:hover': {
-      background: '#0B3556',
-      opacity: '0.8',
-      color: 'white',
+    '& img': {
+      width: '50px',
     },
   },
   container: {
-    margin: 'auto 2px',
-    maxWidth: '100%',
+    maxWidth: '1440px',
+    margin: 'auto',
   },
   tool: {
     margin: '20px auto',
@@ -246,12 +234,13 @@ const styles = () => ({
     marginBottom: '20px',
   },
   img: {
-    height: '510px',
+    width: '100%',
     padding: '20px',
   },
   modelContainer: {
-    width: '100%',
-    margin: '30px',
+    maxWidth: '1440px',
+    margin: 'auto',
+    textAlign: 'center',
   },
 });
 
