@@ -98,9 +98,11 @@ class selectedFilesView extends Component {
       const JsonURL = window.URL.createObjectURL(data);
       let tempLink = '';
       tempLink = document.createElement('a');
-      tempLink.href = JsonURL;
+      tempLink.setAttribute('href', JsonURL);
       tempLink.setAttribute('download', fileName());
+      document.body.appendChild(tempLink);
       tempLink.click();
+      document.body.removeChild(tempLink);
     }
 
     function formatBytes(bytes, decimals = 2) {
