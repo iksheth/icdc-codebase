@@ -233,7 +233,7 @@ const styles = (theme) => ({
     paddingTop: '10px',
     fontFamily: 'Raleway, sans-serif',
     paddingRight: '32px',
-    // width: '1200px',
+    width: '1200px',
     margin: 'auto',
     paddingLeft: '130px',
     paddingBottom: '90px',
