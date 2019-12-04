@@ -14,7 +14,7 @@ const Error = ({ classes }) => (
       <div className={classes.errorTextRow}>
         <Typography variant="h6" color="white" className={classes.errorText}>
 The resource you are looking for is not at this URL. Please navigate to the ICDC&nbsp;
-          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/">Dashboard</Link>
           {' '}
 to access content.
         </Typography>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import nihLogo from '../../assets/header/icdc_nih_logo.svg';
-import icdcLogo from '../../assets/header/icdc_logo_white.svg';
+// import icdcLogo from '../../assets/header/icdc_logo_white.svg';
 import cancergraphic from '../../assets/header/Canine.png';
 
 
@@ -22,20 +22,17 @@ const Header = ({ classes }) => (
           alt="NCI ICDC Logo - Integrated Canine Data Commons"
         />
       </Link>
+      {/* <img
+        src={cancergraphic}
+        alt="cancer_graphic"
+      /> */}
+    </div>
+    <div className={classes.icdcLogoContainer}>
+      <div className={classes.grow} />
       <img
         src={cancergraphic}
         alt="cancer_graphic"
       />
-    </div>
-    <div className={classes.icdcLogoContainer}>
-      <div className={classes.grow} />
-      <Link to="/dashboard">
-        <img
-          className={classes.icdcLogoImg}
-          src={icdcLogo}
-          alt="icdc_logo"
-        />
-      </Link>
     </div>
   </div>
 );
@@ -67,7 +64,7 @@ const styles = () => ({
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 100%',
     paddingLeft: '24px',
-    background: '#577C90',
+    // background: '#577C90',
   },
   nihLogoImg: {
     height: '33px',

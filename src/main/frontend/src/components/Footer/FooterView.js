@@ -12,7 +12,7 @@ const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
 
 const Footer = ({ classes, data }) => {
   const location = useLocation();
-  const sideBarStatus = location.pathname === '/' || location.pathname === '/dashboard' ? data.isSidebarOpened : false;
+  const sideBarStatus = location.pathname === '/cases' ? data.isSidebarOpened : false;
   return (
     <footer className={classnames({
       [classes.contentShift]: sideBarStatus,
@@ -26,6 +26,7 @@ const Footer = ({ classes, data }) => {
           <img
             src={nciLogo}
             alt="nciLogo"
+            className={classes.nciLogo}
           />
         </div>
         <div className={classes.footerRowSection}>
@@ -98,18 +99,6 @@ const Footer = ({ classes, data }) => {
                 </Link>
               </Typography>
             </li>
-          </ul>
-        </div>
-        <div className={classes.footerRowSection}>
-          <ul>
-            <li>
-              <Typography
-                weight="bold"
-                className={cn(classes.footerText, classes.listHeader)}
-              >
-              About Data Submission
-              </Typography>
-            </li>
             <li>
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/submit">
@@ -119,11 +108,44 @@ const Footer = ({ classes, data }) => {
             </li>
           </ul>
         </div>
+        <div className={classes.footerRowSection}>
+          <ul>
+            <li>
+              <Typography
+                weight="bold"
+                className={cn(classes.footerText, classes.listHeader)}
+              >
+              Policies
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+                <a href="https://www.cancer.gov/policies/disclaimer" rel="noopener noreferrer" target="_blank">
+              Disclaimer
+                </a>
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+                <a href="https://www.cancer.gov/policies/accessibility" rel="noopener noreferrer" target="_blank">
+              Accessibility
+                </a>
+              </Typography>
+            </li>
+            <li>
+              <Typography className={classes.footerText}>
+                <a href="https://www.cancer.gov/policies/foia" rel="noopener noreferrer" target="_blank">
+                FOIA
+                </a>
+              </Typography>
+            </li>
+          </ul>
+        </div>
       </div>
       <div>
         <div className={classes.horizontalLine} />
       </div>
-      <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
+      {/* <div className={cn(classes.contentJustifyCenter, classes.footerRow)}>
         <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
           <Typography>
             <a target="icdc-external" href="https://www.cancer.gov/policies/disclaimer">
@@ -145,7 +167,7 @@ Accessibility
           </Typography>
           <Typography><a title="link to FOIA" href="http://www.cancer.gov/global/web/policies/foia" target="icdc-nci">FOIA</a></Typography>
         </div>
-      </div>
+      </div> */}
       <div className={cn(classes.footerRow, classes.contentJustifyCenter)}>
         <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
           <Typography>
@@ -298,16 +320,19 @@ const styles = (theme) => ({
   footerRow: {
     display: 'flex',
     flexDirection: 'column',
-    width: '1200px',
+    // width: '1200px',
     margin: '0 auto',
 
-    '@media (min-width: 600px)': {
+    '@media (min-width: 900px)': {
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
   },
   footerRowSection: {
     marginTop: '16px',
+    '@media (max-width: 900px)': {
+      margin: '16px',
+    },
   },
   turningNIH: {
     fontSize: '14px',
@@ -364,6 +389,9 @@ const styles = (theme) => ({
   },
   marginRight40: {
     marginRight: '40px',
+  },
+  nciLogo: {
+    width: `calc((100vw - ${theme.custom.drawerWidth})/4)`,
   },
 });
 

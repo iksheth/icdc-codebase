@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 
 export const COLORS = [
-  '#80c9b5',
+  '#39C0F0',
   '#194563',
   '#fc4b5b',
   '#2b69a3',

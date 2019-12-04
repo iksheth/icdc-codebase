@@ -98,25 +98,24 @@ const NavBar = ({
 
           {/* Sidebar button */}
           <div>
-            { ((location.pathname === '/dashboard')
-        || (location.pathname === '/')) && (
-        <Button
-          variant="h6"
-          weight="medium"
-          aria-label="open drawer"
-          onClick={toggleSidebar}
-          edge="start"
-          className={classnames(classes.menuButton, classes.logotype, {
-            [classes.hide]: isSidebarOpened,
-          })}
-          classes={{ root: classes.iconButtonRoot }}
-        >
-          <img
-            className={classes.funnelLogoImg}
-            src={funnelIconWhite}
-            alt="cart_logo"
-          />
-        </Button>
+            { (location.pathname === '/cases') && (
+            <Button
+              variant="h6"
+              weight="medium"
+              aria-label="open drawer"
+              onClick={toggleSidebar}
+              edge="start"
+              className={classnames(classes.menuButton, classes.logotype, {
+                [classes.hide]: isSidebarOpened,
+              })}
+              classes={{ root: classes.iconButtonRoot }}
+            >
+              <img
+                className={classes.funnelLogoImg}
+                src={funnelIconWhite}
+                alt="cart_logo"
+              />
+            </Button>
             )}
           </div>
           {/* End Sidebar button */}
@@ -134,7 +133,7 @@ const NavBar = ({
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
-                to="/dashboard"
+                to="/cases"
               >
               Cases
               </NavLink>
@@ -224,8 +223,7 @@ const NavBar = ({
 
         </Toolbar>
       </AppBar>
-      { ((location.pathname === '/dashboard')
-        || (location.pathname === '/')) && (
+      { (location.pathname === '/cases') && (
         <Drawer
           className={classes.drawer}
           variant="persistent"

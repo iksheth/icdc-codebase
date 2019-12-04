@@ -88,7 +88,7 @@ export default class CustomActiveDonut extends PureComponent {
     const { activeIndex } = this.state;
 
     return (
-      <ResponsiveContainer width={180} height={180}>
+      <ResponsiveContainer width={180} height={185}>
         <PieChart textColor={textColor}>
           <Pie
             activeIndex={activeIndex}

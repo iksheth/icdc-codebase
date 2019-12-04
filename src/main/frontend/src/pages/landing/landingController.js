@@ -79,7 +79,7 @@ between human and canine cancers.
           </div>
           <div className={classes.headerButtonSection}>
 
-            <Link to="/dashboard" className={classes.headerLink}>
+            <Link to="/cases" className={classes.headerLink}>
               <Button className={classes.headerButton}>
                 {' '}
                     explore
@@ -211,7 +211,7 @@ then be analyzed in the Cloud Resources.
                   {' '}
                 </div>
                 <div className={classes.blueButtonRight}>
-                  <Link to="/dashboard" className={classes.greybutton}>READ MORE</Link>
+                  <Link to="/cases" className={classes.greybutton}>READ MORE</Link>
                 </div>
               </div>
             </div>
@@ -233,7 +233,7 @@ const styles = (theme) => ({
     paddingTop: '10px',
     fontFamily: 'Raleway, sans-serif',
     paddingRight: '32px',
-    width: '1200px',
+    // width: '1200px',
     margin: 'auto',
     paddingLeft: '130px',
     paddingBottom: '90px',
