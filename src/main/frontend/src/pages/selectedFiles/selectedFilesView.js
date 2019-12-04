@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core';
+import { Grid, withStyles } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
-import { Typography } from '../../components/Wrappers/Wrappers';
 import CustomFooter from './customFooter';
 
 class selectedFilesView extends Component {
@@ -196,14 +195,18 @@ class selectedFilesView extends Component {
     });
 
     return (
-      <Typography>
-        <MUIDataTable
-          title="My Cases: Files"
-          data={state.data}
-          columns={columns}
-          options={options()}
-        />
-      </Typography>
+      <Grid container>
+        <Grid item xs={12}>
+          <h1>My Cases: Files</h1>
+        </Grid>
+        <Grid item xs={12}>
+          <MUIDataTable
+            data={state.data}
+            columns={columns}
+            options={options()}
+          />
+        </Grid>
+      </Grid>
     );
   }
 }

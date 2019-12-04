@@ -1,9 +1,8 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { Grid, withStyles } from '@material-ui/core';
 import MUIDataTable from 'mui-custom-datatables';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Typography } from '../../components/Wrappers/Wrappers';
 import CustomFooter from './customFooter';
 import { deleteCasesAction } from './selectedCasesState';
 
@@ -87,14 +86,18 @@ const options = (dispatch, cases) => ({
 });
 
 const SelectedCasesView = (data) => (
-  <Typography>
-    <MUIDataTable
-      title="My Cases"
-      data={data.data}
-      columns={columns}
-      options={options(useDispatch(), data.data)}
-    />
-  </Typography>
+  <Grid container>
+    <Grid item xs={12}>
+      <h1>My Cases: Cases</h1>
+    </Grid>
+    <Grid item xs={12}>
+      <MUIDataTable
+        data={data.data}
+        columns={columns}
+        options={options(useDispatch(), data.data)}
+      />
+    </Grid>
+  </Grid>
 );
 
 const styles = () => ({
