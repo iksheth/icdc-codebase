@@ -5,7 +5,6 @@ import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/Photo-About_SubmittingData.jpg';
 import Body from '../../components/About/BodyView';
 import submissionGuide from '../../assets/footer/ICDC_DGAB_Guidelines.pdf';
-import linkIcon from '../../assets/about/About-ExternalLink.svg';
 
 const SubmitingData = ({ classes }) => (
   <>
@@ -20,13 +19,8 @@ The ICDC was established to further research on human cancers by enabling
 comparative analysis with canine cancer. If a researcher has data that will
  help this mission and they are willing to share that data in the ICDC, they
   will make a request through our&nbsp;
-          <img
-            src={linkIcon}
-            alt="outbounnd web site icon"
-            className={classes.linkIcon}
-          />
           <Link className={classes.link} href={submissionGuide} download>
-            submission request process
+            submission request process[PDF]
           </Link>
 .
    Please email

@@ -5,7 +5,6 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import imgDogHuman from '../../assets/lp_concept06_HTML5 Canvas_atlas_.png';
 import imgAbout from '../../assets/landing/LP_About.png';
 import imgProgram from '../../assets/landing/LP_Program.png';
 import imgStudy from '../../assets/landing/LP_Studies.png';
@@ -16,28 +15,42 @@ import lbg from '../../assets/landing/LP-Background.1400x1600.jpg';
 import l9dg from '../../assets/landing/LP_Cases.png';
 import { Button } from '../../components/Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
+import starImg from '../../assets/LP_FLARE.2.png';
+import dogImg from '../../assets/landing/dog-bubble.png';
+import humanImg from '../../assets/landing/human-bubble.png';
 
 const slideDown = keyframes`
-  from {
+  0% {
     top: 0;
-    left:0px;
+    left:0;
   }
-
-  to {
+  50% {
     top: 350px;
     left: 30px;
+  }
+
+  100% {
+    top: 0;
+    left:0;
   }
 `;
 
 const slideUp = keyframes`
-  from {
-    top: -60px;
+  0% {
+
+    top: 0;
+    left:0;
+  }
+
+  50% {
+    top:-390px;
     left:0px;
   }
 
-  to {
-    top:-390px;
-    left:0px;
+  
+  100% {
+    top: 0;
+    left:0;
   }
 `;
 
@@ -46,25 +59,42 @@ const star = keyframes`
     opacity: 0;
   }
 
-  62%{
+  8%{
+    opacity: 0;
+  }
+
+  25%{
     opacity: 1;
   }
-  75%{
+
+  32%{
+    opacity: 0;
+  }
+
+  58%{
+    opacity: 0;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  80% {
     opacity: 0;
   }
 
 `;
 
 const SlideDown = styled.div`
-  animation: ${slideDown} 5s  0s infinite;
+  animation: ${slideDown} 20s  0s 1;
 `;
 
 const SlideUp = styled.div`
-  animation: ${slideUp} 5s  0s infinite;
+  animation: ${slideUp} 20s  0s 1;
 `;
 
 const Star = styled.div`
-  animation: ${star} 5s  0s infinite;
+  animation: ${star} 20s  0s 1;
 `;
 
 const LandingController = ({ classes }) => (
@@ -96,13 +126,13 @@ between human and canine cancers.
           <div>
             <div className={classes.animationContainer}>
               <SlideDown className={classes.dog}>
-                <img className={classes.dogImg} src={imgDogHuman} alt="Dog" />
+                <img className={classes.dogImg} src={dogImg} alt="Dog" />
               </SlideDown>
               <SlideUp className={classes.human}>
-                <img className={classes.humanImg} src={imgDogHuman} alt="human" />
+                <img className={classes.humanImg} src={humanImg} alt="human" />
               </SlideUp>
               <Star className={classes.star}>
-                <img className={classes.starImg} src={imgDogHuman} alt="star" />
+                <img className={classes.starImg} src={starImg} alt="star" />
               </Star>
             </div>
           </div>
@@ -507,29 +537,23 @@ const styles = (theme) => ({
   },
   animationContainer: {
     position: 'relative',
-    width: '100%',
-    height: '1200px',
-    maxHeight: '750px',
+    height: '800px',
+    maxHeight: '800px',
     overflow: 'hidden',
   },
 
   dogImg: {
-    position: 'absolute',
-    top: '0px',
-    left: '-1200px',
-    clip: 'rect(0,1585px,383px,1201px)',
   },
   humanImg: {
     position: 'absolute',
-    top: '-1180px',
-    left: '-880px',
-    clip: 'rect(385px,1585px,764px,1201px)',
+    top: '-800px',
+    left: '350px',
   },
   starImg: {
+    width: '300px',
     position: 'absolute',
-    top: '-2828px',
-    left: '-883px',
-    clip: 'rect(764px,1585px,864px,1201px)',
+    top: '-2150px',
+    left: '220px',
   },
 
 

@@ -52,7 +52,7 @@ const styles = () => ({
     float: 'left',
   },
   aboutSection: {
-    margin: '60px auto 10px auto',
+    margin: '60px auto 60px auto',
   },
   img: {
     width: '100%',

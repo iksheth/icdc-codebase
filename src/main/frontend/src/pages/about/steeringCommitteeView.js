@@ -5,7 +5,6 @@ import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/Photo-About_SteeringCommittee.jpg';
 import Body from '../../components/About/BodyView';
 import submissionGuide from '../../assets/footer/ICDC_DGAB_Guidelines.pdf';
-import linkIcon from '../../assets/about/About-ExternalLink.svg';
 
 const SteeringCommitteeView = ({ classes }) => (
   <>
@@ -33,13 +32,10 @@ The Steering Committee has two sub-committees; Data Governance Advisory Board
 The DGAB consists of 4 external members (all from ICDC Steering Committee), 2
  NIH members (1 of which is from CBIIT) and is supported by FNLCR staff. When
  researchers request their data (
-            <img
-              src={linkIcon}
-              alt="outbounnd web site icon"
-              className={classes.linkIcon}
-            />
-            {' '}
-            <Link className={classes.link} href={submissionGuide} download> submission guide</Link>
+
+            <Link className={classes.link} href={submissionGuide} download>
+            submission guide[PDF]
+            </Link>
 ) to be added to the ICDC to be  shared with the
  community, the role of the DGAB is to advise the NCI on the suitability of
  request. The NCI makes the final decision on the request. The DGAB is chaired
@@ -294,10 +290,10 @@ const styles = () => ({
     borderSpacing: '0',
     borderCollapse: 'collapse',
     '&:nth-child(even)': {
-      color: '#5A97C6',
+      color: '#3B607D',
     },
     '&:nth-child(odd)': {
-      color: '#0B3556',
+      color: '#3E7AAA',
     },
   },
   tableCell: {

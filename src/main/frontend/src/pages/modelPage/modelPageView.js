@@ -111,15 +111,7 @@ data structures, including graph-based database schemas.  The model will continu
  evolve as data needs are further discerned.
           <br />
           <br />
-The most current data model is available on Github at:
-          <br />
-          <Link href="https://cbiit.github.io/icdc-model-tool/" color="inherit" className={classes.link} target="_blank">
-            {' '}
-https://cbiit.github.io/icdc-model-tool/
-            {' '}
-          </Link>
-          <br />
-          <br />
+
 The tool used to generate this visual may be sourced on Github at:
 
           <br />
@@ -208,7 +200,7 @@ const styles = () => ({
     fontWeight: 'bold',
   },
   button: {
-    margin: '5px 2px',
+    margin: '10px 2px',
     color: 'white',
     '& img': {
       width: '50px',
@@ -230,7 +222,8 @@ const styles = () => ({
   },
   imgSection: {
     width: '100%',
-    boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+    border: '2px solid #0296C9',
+    borderRadius: '23px',
     marginBottom: '20px',
   },
   img: {
@@ -239,7 +232,7 @@ const styles = () => ({
   },
   modelContainer: {
     maxWidth: '1440px',
-    margin: 'auto',
+    margin: '-67px auto 60px auto',
     textAlign: 'center',
   },
 });
