@@ -67,8 +67,8 @@ const styles = () => ({
     // background: '#577C90',
   },
   nihLogoImg: {
-    height: '33px',
-    width: '269px',
+    height: '54px',
+    width: '463px',
     marginLeft: '35px',
     cursor: 'pointer',
   },

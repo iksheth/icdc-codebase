@@ -72,7 +72,11 @@ const LandingController = ({ classes }) => (
     <div className={classes.container}>
       <Grid container spacing={16} direction="row" className={cn(classes.paddingTop50)}>
         <Grid item lg={3} md={3} sm={12} xs={12}>
-          <div className={classes.headerTitle}>Integrated Canine Data Commons</div>
+          <div className={classes.headerTitle}>
+            <span className={classes.paddingLeft2}>Integrated </span>
+            {' '}
+Canine Data Commons
+          </div>
           <div className={classes.headerContent}>
 Exploring. analyzing and understanding the biological relationships
 between human and canine cancers.
@@ -233,10 +237,12 @@ const styles = (theme) => ({
     paddingTop: '10px',
     fontFamily: 'Raleway, sans-serif',
     paddingRight: '32px',
-    width: '1200px',
-    margin: 'auto',
-    paddingLeft: '130px',
+    margin: '0 auto',
+    paddingLeft: '32px',
     paddingBottom: '90px',
+    '@media (min-width: 1200px)': {
+      width: '1200px',
+    },
   },
   headerTitle: {
     paddingBottom: '12px',
@@ -541,7 +547,9 @@ const styles = (theme) => ({
     height: '1200px',
     opacity: '0',
   },
-
+  paddingLeft2: {
+    paddingLeft: '2px',
+  },
 
 });
 export default withStyles(styles, { withTheme: true })(LandingController);
