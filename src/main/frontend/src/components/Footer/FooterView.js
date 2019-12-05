@@ -119,9 +119,9 @@ const Footer = ({ classes, data }) => {
                 More Information
               </Typography>
             </li>
-             <li>
+            <li>
               <Typography className={classes.footerText}>
-                 <a title="link to NCI Policies" href="http://www.cancer.gov/global/web/policies" target="icdc-nci">
+                <a title="link to NCI Policies" href="http://www.cancer.gov/global/web/policies" target="icdc-nci">
                  Policies
                 </a>
               </Typography>
