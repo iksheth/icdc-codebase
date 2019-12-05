@@ -57,7 +57,7 @@ const AboutMenu = ({ classes }) => {
           style: {
             boxShadow: 'none',
             marginTop: '-8px',
-            marginLeft: '42px',
+            marginLeft: '40px',
             borderRadius: '0px',
             background: '#309EC4',
           },
