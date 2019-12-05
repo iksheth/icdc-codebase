@@ -16,12 +16,21 @@ class selectedFilesView extends Component {
     this.onRowsSelect = this.onRowsSelect.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    const state = { ...this.state };
+    if (state.isSelected !== nextState.isSelected) {
+      return true;
+    }
+    return false;
+  }
+
   componentDidUpdate(prevProps) {
     const { data } = this.props;
     if (data !== prevProps.data) {
       this.state.data = data;
     }
   }
+
 
   onRowsSelect(curr, allRowsSelected) {
     const state = { ...this.state };
