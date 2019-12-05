@@ -60,7 +60,7 @@ The ICDC will adhere to
           />
           <Link
             title="FAIR"
-            arget="_blank"
+            target="_blank"
             rel="noreferrer"
             href="https://www.go-fair.org/fair-principles/"
             color="inherit"
@@ -113,7 +113,7 @@ data structures, including graph-based database schemas.  The model will continu
           <br />
 The most current data model is available on Github at:
           <br />
-          <Link href="https://cbiit.github.io/icdc-model-tool/" color="inherit" className={classes.link}>
+          <Link href="https://cbiit.github.io/icdc-model-tool/" color="inherit" className={classes.link} target="_blank">
             {' '}
 https://cbiit.github.io/icdc-model-tool/
             {' '}
@@ -123,7 +123,7 @@ https://cbiit.github.io/icdc-model-tool/
 The tool used to generate this visual may be sourced on Github at:
 
           <br />
-          <Link href="https://github.com/CBIIT/icdc-model-tool" color="inherit" className={classes.link}>
+          <Link href="https://github.com/CBIIT/icdc-model-tool" color="inherit" className={classes.link} target="_blank">
             {' '}
  https://github.com/CBIIT/icdc-model-tool
             {' '}

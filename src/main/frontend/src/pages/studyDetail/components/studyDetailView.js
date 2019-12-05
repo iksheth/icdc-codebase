@@ -247,7 +247,7 @@ const StudyDetailView = ({ classes, data }) => {
             <span className={classes.headerButtonLinkSpan}>
               <Link
                 className={classes.headerButtonLink}
-                to={(location) => ({ ...location, pathname: '/' })}
+                to={(location) => ({ ...location, pathname: '/cases' })}
                 onClick={() => redirectTo()}
               >
                 {' '}

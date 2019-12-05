@@ -109,7 +109,7 @@ const CaseDetail = ({ classes, data }) => {
     isALink: true,
   }, {
     name: `${caseDetail.study.clinical_study_designation} CASES`,
-    to: '/',
+    to: '/cases',
     onClick: () => redirectTo(caseDetail.study.clinical_study_designation),
     isALink: true,
   }, {

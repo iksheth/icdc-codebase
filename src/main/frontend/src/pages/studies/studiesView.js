@@ -56,7 +56,7 @@ const Studies = ({ classes, data }) => {
         customBodyRender: (value, tableMeta) => (
           <div className="mui_td">
             {' '}
-            <Link className={classes.link} to={(location) => ({ ...location, pathname: '/' })} onClick={() => redirectTo(tableMeta.rowData[0])}>{value}</Link>
+            <Link className={classes.link} to={(location) => ({ ...location, pathname: '/cases' })} onClick={() => redirectTo(tableMeta.rowData[0])}>{value}</Link>
             {' '}
           </div>
         ),

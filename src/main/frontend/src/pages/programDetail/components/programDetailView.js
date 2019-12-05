@@ -23,7 +23,7 @@ const options = {
   download: false,
   viewColumns: false,
   pagination: true,
-
+  rowsPerPageOptions: [10, 25, 50, 100],
 };
 
 const ProgramDetailView = ({ classes, data }) => {
@@ -70,7 +70,7 @@ const ProgramDetailView = ({ classes, data }) => {
             {' '}
             <Link
               className={classes.link}
-              to={(location) => ({ ...location, pathname: '/' })}
+              to={(location) => ({ ...location, pathname: '/cases' })}
               onClick={() => redirectTo(tableMeta.rowData[1])}
             >
               {value}
@@ -96,7 +96,7 @@ const ProgramDetailView = ({ classes, data }) => {
     isALink: true,
   }, {
     name: programDetail.program_acronym,
-    to: '/',
+    to: '/cases',
     isALink: true,
   }];
 

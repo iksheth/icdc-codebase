@@ -63,7 +63,7 @@ The ICDC will adhere to
             />
             <Link 
               title="FAIR"
-              arget="_blank" 
+              target="_blank" 
               rel="noreferrer" 
               href="https://www.go-fair.org/fair-principles/" 
               color="inherit" 
