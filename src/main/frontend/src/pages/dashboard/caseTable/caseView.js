@@ -164,6 +164,7 @@ let selectedCaseIds = [];
 
 function exportCases(dispatch) {
   dispatch(fetchCasesAndFiles(selectedCaseIds));
+  selectedCaseIds = [];
 }
 
 
