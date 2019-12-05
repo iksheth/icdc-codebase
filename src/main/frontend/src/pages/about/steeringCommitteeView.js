@@ -48,7 +48,7 @@ The BPSC consists of 7 external members (all from ICDC Steering Committee),
 of the BPSC is to streamline and standardize data collection and management
 for canine studies. The BPSC examines past and planned studies and  recommends
   prospective standards for data collection and management in four main areas;
-imaging, clinical/pathology, Immunology and genomic/sequencing data.
+imaging, clinical/pathology, immunology and genomic/sequencing data.
             <br />
             <br />
           </div>

@@ -176,8 +176,10 @@ user interface that allows researchers to find data of interest and combine it w
           <br />
           <span className={classes.title}>
           Institute for Systems Biology Cancer Genomics Cloud (ISB-CGC)
+            {' '}
           </span>
-  leveraging many aspects of the Google Cloud Platform,
+          {' '}
+leveraging many aspects of the Google Cloud Platform,
  allows scientists to interactively define and compare cohorts, examine underlying
  molecular data for specific genes and pathways, and share insights with
  collaborators. For computational users, Application Program Interfaces (APIs) and

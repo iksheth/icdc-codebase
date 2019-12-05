@@ -25,7 +25,7 @@ export default {
     maxContent: 'black',
     bodyBackGround: 'white',
     cardBackGround: '#D9F3F2',
-    footorBackground: '#2e2a24',
+    footorBackground: '#325068',
     fontFamilySans: '"Open Sans", sans-serif',
     fontFamilyRaleway: "'Raleway', sans-serif",
     drawerWidth: '240px',
