@@ -175,6 +175,7 @@ The tool used to generate this visual may be sourced on Github at:
 );
 
 const styles = () => ({
+
   linkIcon: {
     width: '20px',
     verticalAlign: 'sub',
@@ -225,6 +226,10 @@ const styles = () => ({
     border: '2px solid #0296C9',
     borderRadius: '23px',
     marginBottom: '20px',
+    height: '800px',
+    '& .react-transform-element': {
+      display: '-webkit-box !important',
+    },
   },
   img: {
     width: '100%',
