@@ -19,7 +19,7 @@ The ICDC was established to further research on human cancers by enabling
 comparative analysis with canine cancer. If a researcher has data that will
  help this mission and they are willing to share that data in the ICDC, they
   will make a request through our&nbsp;
-          <Link className={classes.link} href={submissionGuide} download>
+          <Link target="_blank" className={classes.link} href={submissionGuide}>
             submission request process[PDF]
           </Link>
 .
