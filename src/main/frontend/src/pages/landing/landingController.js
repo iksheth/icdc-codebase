@@ -86,15 +86,15 @@ const star = keyframes`
 `;
 
 const SlideDown = styled.div`
-  animation: ${slideDown} 20s  0s infinite;
+  animation: ${slideDown} 20s  0s 1;
 `;
 
 const SlideUp = styled.div`
-  animation: ${slideUp} 20s  0s infinite;
+  animation: ${slideUp} 20s  0s 1;
 `;
 
 const Star = styled.div`
-  animation: ${star} 20s  0s infinite;
+  animation: ${star} 20s  0s 1;
 `;
 
 const LandingController = ({ classes }) => (
@@ -148,14 +148,14 @@ between human and canine cancers.
                 About the Integrated Canine Data Commons (ICDC)
             </div>
             <div className={classes.aboutContent}>
-  NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged
-  the Frederick National laboratory for Cancer Research
-(FNLCR) to build the integrated Canine Data Commons (ICDC)
-which is a cloud-based repository of canine cancer data and
-was established to further research on human cancers by
-enabling comparative analysis with canine cancer.
-The data in the ICDC is sourced form multiple different
-programs snad projects; all focused on the canine subjects.
+                NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged
+                the Frederick National Laboratory for Cancer Research (FNLCR) to
+                build the integrated Canine Data Commons (ICDC), a cloud-based repository
+                of canine cancer data. ICDC was established to further research
+                on human cancers by enabling comparative
+                analysis with canine cancer. The data in the ICDC is sourced
+                from multiple different programs and projects; all focused on
+                the canine subjects.
             </div>
             <div className={classes.aboutButtonSection}>
               <div className={classes.aboutButtonLeft}>
@@ -215,7 +215,7 @@ programs snad projects; all focused on the canine subjects.
 
                 <div className={classes.contentHeader}> Submit Data</div>
                 <div className={classes.contentMessage}>
-Interested in contributing data to ICDC
+Interested in contributing data to ICDC ?
                 </div>
 
               </div>
@@ -234,10 +234,9 @@ Interested in contributing data to ICDC
             <div className={classes.cases}>
               <div className={classes.greyContentHeader}> Cases</div>
               <div className={classes.greyContent}>
-Search all the Cases and build cohorts
-form all the programs/Studies within the ICDC.
-The data filtes from these cohorts can
-then be analyzed in the Cloud Resources.
+Search all the Cases and build cohorts from all the
+Programs/Studies within the ICDC. The data files from
+ these cohorts can then be analyzed in the Cloud Resources.
               </div>
               <div className={classes.greybuttonSection}>
                 <div className={classes.blueButtonLeft}>

@@ -16,7 +16,7 @@ const SteeringCommitteeView = ({ classes }) => (
         <div>
           <div>
             {' '}
-The ICDC is community driven so is being built with input and collaboration from
+The ICDC is community driven and is being built with input and collaboration from
  many groups to foster a diversity of ideas and to ensure needs are identified
  across the broad research community. To achieve this, the ICDC Steering Committee
  was formed to advise the NCI and FNLCR on the ICDC. The Steering Committee is
@@ -30,7 +30,7 @@ The Steering Committee has two sub-committees; Data Governance Advisory Board
             <br />
             <br />
 The DGAB consists of 4 external members (all from ICDC Steering Committee), 2
- NIH members (1 of which is from CBIIT) and is supported by FNLCR staff. When
+ NIH members (1 of whom is from CBIIT) and is supported by FNLCR staff. When
  researchers request their data (
 
             <Link target="_blank" className={classes.link} href={submissionGuide}>
