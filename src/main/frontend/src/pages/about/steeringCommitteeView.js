@@ -33,7 +33,7 @@ The DGAB consists of 4 external members (all from ICDC Steering Committee), 2
  NIH members (1 of which is from CBIIT) and is supported by FNLCR staff. When
  researchers request their data (
 
-            <Link className={classes.link} href={submissionGuide} download>
+            <Link target="_blank" className={classes.link} href={submissionGuide}>
             submission guide[PDF]
             </Link>
 ) to be added to the ICDC to be  shared with the
@@ -148,43 +148,43 @@ imaging, clinical/pathology, immunology and genomic/sequencing data.
                 <tr className={classes.tableBodyRow}>
                   <td className={classes.tableCell}>12</td>
                   <td className={classes.tableCell}>Toby Hecht</td>
-                  <td className={classes.tableCell}>DCTD</td>
-                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>DCTD/NCI</td>
+                  <td className={classes.tableCell}>NIH</td>
                   <td className={classes.tableCell}>BPSC</td>
                 </tr>
                 <tr className={classes.tableBodyRow}>
                   <td className={classes.tableCell}>13</td>
                   <td className={classes.tableCell}>Paula Jacobs</td>
-                  <td className={classes.tableCell}>CIP/DCTD</td>
-                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>CIP/DCTD/NCI</td>
+                  <td className={classes.tableCell}>NIH</td>
                   <td className={classes.tableCell}>BPSC</td>
                 </tr>
                 <tr className={classes.tableBodyRow}>
                   <td className={classes.tableCell}>14</td>
                   <td className={classes.tableCell}>Tony Kerlavage</td>
-                  <td className={classes.tableCell}>CBIIT</td>
-                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>CBIIT/NCI</td>
+                  <td className={classes.tableCell}>NIH</td>
                   <td className={classes.tableCell}>-</td>
                 </tr>
                 <tr className={classes.tableBodyRow}>
                   <td className={classes.tableCell}>15</td>
                   <td className={classes.tableCell}>Erika Kim</td>
-                  <td className={classes.tableCell}>CBIIT</td>
-                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>CBIIT/NCI</td>
+                  <td className={classes.tableCell}>NIH</td>
                   <td className={classes.tableCell}>DGAB, BPSC</td>
                 </tr>
                 <tr className={classes.tableBodyRow}>
                   <td className={classes.tableCell}>16</td>
                   <td className={classes.tableCell}>Amy LeBlanc</td>
-                  <td className={classes.tableCell}>COP/CCR</td>
-                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>COP/CCR/NCI</td>
+                  <td className={classes.tableCell}>NIH</td>
                   <td className={classes.tableCell}>DGAB</td>
                 </tr>
                 <tr className={classes.tableBodyRow}>
                   <td className={classes.tableCell}>17</td>
                   <td className={classes.tableCell}>Christina Mazcko</td>
-                  <td className={classes.tableCell}>COP/CCR</td>
-                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>COP/CCR/NCI</td>
+                  <td className={classes.tableCell}>NIH</td>
                   <td className={classes.tableCell}>-</td>
                 </tr>
                 <tr className={classes.tableBodyRow}>
@@ -197,8 +197,8 @@ imaging, clinical/pathology, immunology and genomic/sequencing data.
                 <tr className={classes.tableBodyRow}>
                   <td className={classes.tableCell}>19</td>
                   <td className={classes.tableCell}>Connie Sommers</td>
-                  <td className={classes.tableCell}>IOB/DTP/DCTD</td>
-                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>IOB/DTP/DCTD/NCI</td>
+                  <td className={classes.tableCell}>NIH</td>
                   <td className={classes.tableCell}>DGAB, BPSC</td>
                 </tr>
                 <tr className={classes.tableBodyRow}>
@@ -211,8 +211,8 @@ imaging, clinical/pathology, immunology and genomic/sequencing data.
                 <tr className={classes.tableBodyRow}>
                   <td className={classes.tableCell}>21</td>
                   <td className={classes.tableCell}>Allen Dearry</td>
-                  <td className={classes.tableCell}>CBIIT</td>
-                  <td className={classes.tableCell}>NCI</td>
+                  <td className={classes.tableCell}>CBIIT/NCI</td>
+                  <td className={classes.tableCell}>NIH</td>
                   <td className={classes.tableCell}>-</td>
                 </tr>
                 <tr className={classes.tableBodyRow}>

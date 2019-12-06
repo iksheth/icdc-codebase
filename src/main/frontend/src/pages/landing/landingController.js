@@ -86,15 +86,15 @@ const star = keyframes`
 `;
 
 const SlideDown = styled.div`
-  animation: ${slideDown} 20s  0s 1;
+  animation: ${slideDown} 20s  0s infinite;
 `;
 
 const SlideUp = styled.div`
-  animation: ${slideUp} 20s  0s 1;
+  animation: ${slideUp} 20s  0s infinite;
 `;
 
 const Star = styled.div`
-  animation: ${star} 20s  0s 1;
+  animation: ${star} 20s  0s infinite;
 `;
 
 const LandingController = ({ classes }) => (
