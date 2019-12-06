@@ -301,7 +301,6 @@ const styles = () => ({
     },
   },
   root: {
-    textTransform: 'uppercase',
     fontFamily: '"Open Sans", sans-serif',
     fontSize: '9pt',
     letterSpacing: '0.025em',
