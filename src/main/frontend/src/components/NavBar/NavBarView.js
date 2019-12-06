@@ -282,7 +282,7 @@ const styles = (theme) => ({
     margin: '0 auto',
   },
   appBar: {
-    marginTop: '79px',
+    marginTop: '100px',
     width: '100vw',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['margin'], {
@@ -403,14 +403,14 @@ const styles = (theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    marginTop: '79px',
+    marginTop: '100px',
     zIndex: '1201',
-    height: 'calc(100% - 79px)',
+    height: 'calc(100% - 100px)',
   },
   toolbar: {
     minHeight: 39,
-    paddingRight: '35px',
-    paddingLeft: '35px',
+    paddingRight: '23px',
+    paddingLeft: '23px',
     alignItems: 'flex-start',
   },
   buttonRoot: {
@@ -426,7 +426,6 @@ const styles = (theme) => ({
   },
   floatLeft: {
     float: 'left',
-    marginLeft: '19px',
     marginTop: '6px',
   },
   funnelLogoImg: {

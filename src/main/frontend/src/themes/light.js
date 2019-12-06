@@ -196,13 +196,13 @@ export default {
         paddingTop: '4px',
         paddingRight: '8px',
         paddingBottom: '4px',
-        paddingLeft: '35px',
+        paddingLeft: '23px',
       },
     },
     MuiExpansionPanelSummary: {
       root: {
         minHeight: '38px',
-        padding: '0 12px 0 32px',
+        padding: '0 12px 0 23px',
       },
       content: {
         margin: '4px 0',
@@ -317,9 +317,11 @@ export default {
         fontStyle: 'normal',
         fontSize: '10pt',
         fontWeight: 'bold',
+        paddingLeft: '8px',
       },
       head: {
         fontSize: '0.95rem',
+        paddingLeft: '8px',
       },
     },
     MUIDataTableToolbar: {

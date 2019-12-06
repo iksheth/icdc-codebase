@@ -32,9 +32,11 @@ const StatsView = ({ classes, data }) => (
                   {' '}
                   {data.numberOfStudies ? data.numberOfStudies : 0}
                 </Typography>
-                <Typography color="primary" weight="bold">
-                                            Studies
-                </Typography>
+                <div className={classes.marginTop1}>
+                  <Typography color="primary" weight="bold">
+                                              Studies
+                  </Typography>
+                </div>
               </div>
             </div>
           </Grid>
@@ -51,9 +53,11 @@ const StatsView = ({ classes, data }) => (
                 <Typography weight="bold" size="md">
                   {data.numberOfCases ? data.numberOfCases : 0}
                 </Typography>
-                <Typography color="primary" weight="bold">
+                <div className={classes.marginTop1}>
+                  <Typography color="primary" weight="bold">
                                             Cases
-                </Typography>
+                  </Typography>
+                </div>
               </div>
             </div>
           </Grid>
@@ -70,13 +74,16 @@ const StatsView = ({ classes, data }) => (
                 <Typography weight="bold" size="md">
                   {data.numberOfSamples ? data.numberOfSamples : 0}
                 </Typography>
-                <Typography color="primary" weight="bold">
+                <div className={classes.marginTop1}>
+                  <Typography color="primary" weight="bold">
                                             Samples
-                </Typography>
+                  </Typography>
+                </div>
               </div>
             </div>
           </Grid>
           <Grid item xs={12} sm={4} md={2} lg={2}>
+
             <div className={classes.statsGroup}>
               <div className={classes.statsIcon}>
                 <img
@@ -89,13 +96,16 @@ const StatsView = ({ classes, data }) => (
                 <Typography weight="bold" size="md">
                   {data.numberOfFiles ? data.numberOfFiles : 0}
                 </Typography>
-                <Typography color="primary" weight="bold">
+                <div className={classes.marginTop1}>
+                  <Typography color="primary" weight="bold">
                                             Files
-                </Typography>
+                  </Typography>
+                </div>
               </div>
             </div>
           </Grid>
           <Grid item xs={12} sm={4} md={2} lg={2}>
+
             <div className={classes.statsGroup}>
               <div className={classes.statsIcon}>
                 <img
@@ -108,9 +118,11 @@ const StatsView = ({ classes, data }) => (
                 <Typography weight="bold" size="md">
                   {data.numberOfBiospecimenAliquots ? data.numberOfBiospecimenAliquots : 0}
                 </Typography>
-                <Typography color="primary" weight="bold">
+                <div className={classes.marginTop1}>
+                  <Typography color="primary" weight="bold">
                                             Aliquots
-                </Typography>
+                  </Typography>
+                </div>
               </div>
             </div>
           </Grid>
@@ -128,7 +140,7 @@ const styles = (theme) => ({
     flexDirection: 'column',
   },
   paper: {
-    textAlign: 'center',
+    // textAlign: 'center',
     background: theme.palette.curiousBlue.main,
     boxShadow: 'none',
   },
@@ -150,6 +162,9 @@ const styles = (theme) => ({
     float: 'left',
     width: '45px',
     height: '45px',
+  },
+  marginTop1: {
+    marginTop: '1px',
   },
 });
 

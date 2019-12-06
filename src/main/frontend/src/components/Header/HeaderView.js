@@ -44,11 +44,11 @@ const styles = () => ({
   headerBar: {
     color: '#8A95A7',
     width: '100%',
-    height: '79px',
+    height: '100px',
     margin: '0 auto',
     display: 'flex',
     position: 'fixed',
-    minHeight: '79px',
+    minHeight: '100px',
     justifyContent: 'space-between',
     top: '0px',
     zIndex: '1201',
@@ -69,11 +69,10 @@ const styles = () => ({
   nihLogoImg: {
     height: '54px',
     width: '463px',
-    marginLeft: '35px',
     cursor: 'pointer',
   },
   icdcLogoImg: {
-    margin: '22px 35px auto',
+    margin: '22px 23px auto',
     height: '39px',
     cursor: 'pointer',
   },
