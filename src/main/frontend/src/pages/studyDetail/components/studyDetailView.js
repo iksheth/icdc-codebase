@@ -419,7 +419,6 @@ const styles = (theme) => ({
     ...theme.mixins.toolbar,
   },
   root: {
-    textTransform: 'uppercase',
     fontFamily: '"Open Sans", sans-serif',
     fontSize: '9px',
     letterSpacing: '0.025em',
