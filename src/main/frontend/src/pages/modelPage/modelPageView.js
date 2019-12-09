@@ -5,7 +5,6 @@ import {
   Link,
 } from '@material-ui/core';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import icdcSchema from '../../assets/icdcSchema.svg';
 import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/Photo-About_ICDC_model.jpg';
@@ -165,7 +164,7 @@ The tool used to generate this visual may be sourced on Github at:
           </div>
           <div className={classes.imgSection}>
             <TransformComponent>
-              <img src={icdcSchema} alt="ICDC schema" className={classes.img} />
+              <img src="https://cbiit.github.io/icdc-model-tool/model-desc/icdc-model.svg" alt="ICDC schema" className={classes.img} />
             </TransformComponent>
           </div>
         </div>
@@ -227,6 +226,8 @@ const styles = () => ({
     borderRadius: '23px',
     marginBottom: '20px',
     height: '800px',
+    maxHeight: '800px',
+    overflow: 'hidden',
     '& .react-transform-element': {
       display: '-webkit-box !important',
     },
