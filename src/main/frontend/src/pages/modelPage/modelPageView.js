@@ -70,6 +70,8 @@ FAIR
             className={classes.linkIcon}
           />
 
+          {' '}
+
  principles of data stewardship:
  Findable, Accessible, Interoperable, and Reusable.
 Please credit the ICDC in your manuscript. When citing
