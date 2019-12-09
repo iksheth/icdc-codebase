@@ -21,16 +21,6 @@ const CustomFooter = ({
 }) => (
   <TableFooter>
     <TableRow>
-      <TextField
-        id="multiline-user-coments"
-        label={label}
-        multiline
-        className={classes.textField}
-        margin="normal"
-        variant="filled"
-      />
-    </TableRow>
-    <TableRow>
       <TablePagination
         className={classes.root}
         count={count}
@@ -40,6 +30,19 @@ const CustomFooter = ({
         onChangeRowsPerPage={onChangeRowsPerPage}
       />
     </TableRow>
+    <TableRow>
+      <TextField
+        id="multiline-user-coments"
+        label={label}
+        multiline
+        rows={6}
+        style={{ minWidth: '500px' }}
+        className={classes.textField}
+        margin="dense"
+        variant="filled"
+      />
+    </TableRow>
+    <TableRow />
   </TableFooter>
 );
 

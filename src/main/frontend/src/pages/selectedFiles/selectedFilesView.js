@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
+import icon from '../../assets/icons/Icon-MyCases.svg';
 import CustomFooter from './customFooter';
 
 class selectedFilesView extends Component {
@@ -30,16 +31,19 @@ class selectedFilesView extends Component {
     // Change button status based on selection status
     if (allRowsSelected.length === 0) {
       this.downloadButton.current.disabled = true;
-      this.downloadButton.current.style.color = 'rgb(0, 0, 0,0.26)';
+      this.downloadButton.current.style.color = '#FFFFFF';
+      this.downloadButton.current.style.backgroundColor = 'rgba(0, 0, 0, 0.12)';
     } else {
       this.downloadButton.current.disabled = false;
-      this.downloadButton.current.style.color = 'rgb(0, 0, 0)';
+      this.downloadButton.current.style.color = '#FFFFFF';
+      this.downloadButton.current.style.backgroundColor = '#0B3556';
     }
   }
 
 
   render() {
     let globalData = [];
+    const { classes } = this.props;
     const state = { ...this.state };
     function fileName() {
       const date = new Date();
@@ -180,6 +184,7 @@ class selectedFilesView extends Component {
       },
       customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
         <CustomFooter
+          className={classes.customFooterStyle}
           text="DOWNLOAD MANIFEST"
           label="User Comments"
           onClick={downloadJson}
@@ -211,27 +216,47 @@ class selectedFilesView extends Component {
     const divStyle = {
       position: 'absolute',
       marginTop: '-47px',
+      marginLeft: '30px',
     };
     return (
       <Grid container>
         <Grid item xs={12}>
-          <h1>My Cases: Files</h1>
+          <div className={classes.header}>
+            <div className={classes.logo}>
+              <img
+                src={icon}
+                alt="ICDC case detail header logo"
+              />
+
+            </div>
+            <div className={classes.headerTitle}>
+              <div className={classes.headerMainTitle}>
+                <span>
+                  <span>My Cases: Files</span>
+                </span>
+              </div>
+            </div>
+          </div>
         </Grid>
         <Grid item xs={12}>
-          <MUIDataTable
-            data={state.data}
-            columns={columns}
-            options={options()}
-          />
-          <div style={divStyle}>
-            <button
-              type="button"
-              style={btnStyle}
-              ref={this.downloadButton}
-              onClick={downloadJson}
-            >
+
+          <div className={classes.tableWrapper}>
+            <MUIDataTable
+              data={state.data}
+              columns={columns}
+              options={options()}
+              className={classes.tableStyle}
+            />
+            <div style={divStyle}>
+              <button
+                type="button"
+                style={btnStyle}
+                ref={this.downloadButton}
+                onClick={downloadJson}
+              >
               download manifest
-            </button>
+              </button>
+            </div>
           </div>
         </Grid>
 
@@ -240,6 +265,54 @@ class selectedFilesView extends Component {
   }
 }
 
-const styles = () => ({
+const styles = (theme) => ({
+  logo: {
+    position: 'absolute',
+    float: 'left',
+    marginTop: '14px',
+    width: '100px',
+  },
+  tableWrapper: {
+    borderBottomLeftRadius: '20px',
+    borderBottomRightRadius: '20px',
+    borderTopLeftRadius: '20px',
+    borderTopRightRadius: '20px',
+    paddingTop: '30px',
+    margin: 'auto auto 30px auto',
+    maxWidth: '1440px',
+    background: '#f3f3f4',
+    paddingBottom: '30px',
+  },
+  tableStyle: {
+    maxWidth: '1440px',
+    margin: '0 30px',
+  },
+  customFooterStyle: {
+    background: '#f3f3f4',
+  },
+  headerMainTitle: {
+    fontFamily: theme.custom.fontFamilySans,
+    fontWeight: 'bold',
+    letterSpacing: '0.017em',
+    color: '#ff8a00',
+    fontSize: '25px',
+    lineHeight: '125px',
+    paddingLeft: '5px',
+  },
+  headerTitle: {
+    maxWidth: theme.custom.maxContentWidth,
+    margin: 'auto',
+    float: 'left',
+    marginLeft: '110px',
+    paddingLeft: '3px',
+  },
+  header: {
+    paddingLeft: '32px',
+    paddingRight: '32px',
+    borderBottom: '#81a6b9 4px solid',
+    height: '100px',
+    maxWidth: theme.custom.maxContentWidth,
+    margin: 'auto',
+  },
 });
 export default withStyles(styles, { withTheme: true })(selectedFilesView);
