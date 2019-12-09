@@ -90,7 +90,7 @@ const FacetPanel = (classes) => {
 
 const styles = () => ({
   expansionPanelSummaryRoot: {
-    padding: '0 24px 0 23px',
+    padding: '0 24px 0 35px',
   },
 });
 

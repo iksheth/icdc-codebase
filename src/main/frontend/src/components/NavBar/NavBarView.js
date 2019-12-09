@@ -178,7 +178,7 @@ const NavBar = ({
             </Tooltip>
           </IconButton> */}
           {/* Start of Theme Switching Icon and logic */}
-          <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+          <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRootNoRightPadding }}>
             <NavLink
               className={classes.link}
               to="/myCases"
@@ -409,8 +409,8 @@ const styles = (theme) => ({
   },
   toolbar: {
     minHeight: 39,
-    paddingRight: '23px',
-    paddingLeft: '23px',
+    paddingRight: '35px',
+    paddingLeft: '35px',
     alignItems: 'flex-start',
   },
   buttonRoot: {
@@ -418,8 +418,14 @@ const styles = (theme) => ({
     paddingLeft: '20px',
     paddingRight: '20px',
   },
+  buttonRootNoRightPadding: {
+    paddingTop: '9px',
+    paddingLeft: '20px',
+    paddingRight: '20px',
+  },
   iconButtonRoot: {
     paddingTop: '9px',
+    paddingLeft: '0px',
   },
   floatRight: {
     float: 'right',
@@ -427,6 +433,7 @@ const styles = (theme) => ({
   floatLeft: {
     float: 'left',
     marginTop: '6px',
+    marginLeft: '10px',
   },
   funnelLogoImg: {
     width: '20px',

@@ -295,7 +295,7 @@ const styles = (theme) => ({
     '-webkit-font-smoothing': 'antialiased',
     background: theme.custom.footorBackground,
     color: theme.palette.text.footerText,
-    padding: '24px 23px 64px 23px',
+    padding: '24px 35px 64px 35px',
     '& ul': {
       listStyle: 'none',
       margin: '0',

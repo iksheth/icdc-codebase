@@ -196,13 +196,13 @@ export default {
         paddingTop: '4px',
         paddingRight: '8px',
         paddingBottom: '4px',
-        paddingLeft: '23px',
+        paddingLeft: '35px',
       },
     },
     MuiExpansionPanelSummary: {
       root: {
         minHeight: '38px',
-        padding: '0 12px 0 23px',
+        padding: '0 12px 0 35px',
       },
       content: {
         margin: '4px 0',

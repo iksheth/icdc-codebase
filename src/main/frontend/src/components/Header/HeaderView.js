@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import nihLogo from '../../assets/header/icdc_nih_logo.svg';
 // import icdcLogo from '../../assets/header/icdc_logo_white.svg';
-import cancergraphic from '../../assets/header/Canine.png';
+import cancergraphic400 from '../../assets/header/Canine400.png';
+import cancergraphic800 from '../../assets/header/Canine800.png';
+import cancergraphic1400 from '../../assets/header/Canine1400.png';
+import cancergraphic1600 from '../../assets/header/Canine1600.png';
+import cancergraphic1800 from '../../assets/header/Canine1800.png';
+import cancergraphic2000 from '../../assets/header/Canine2000.png';
 
 
 // import classes from '*.module.sass';
@@ -29,10 +34,10 @@ const Header = ({ classes }) => (
     </div>
     <div className={classes.icdcLogoContainer}>
       <div className={classes.grow} />
-      <img
+      {/* <img
         src={cancergraphic}
         alt="cancer_graphic"
-      />
+      /> */}
     </div>
   </div>
 );
@@ -61,18 +66,47 @@ const styles = () => ({
   icdcLogoContainer: {
     display: 'flex',
     width: '100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%',
     paddingLeft: '24px',
-    // background: '#577C90',
+    background: 'none',
+    '@media (min-width: 900px)': {
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100% 100%',
+      background: `url(${cancergraphic400})`,
+    },
+    '@media (min-width: 1200px)': {
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100% 100%',
+      background: `url(${cancergraphic800})`,
+    },
+    '@media (min-width: 1600px)': {
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100% 100%',
+      background: `url(${cancergraphic1400})`,
+    },
+    '@media (min-width: 2000px)': {
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100% 100%',
+      background: `url(${cancergraphic1600})`,
+    },
+    '@media (min-width: 2200px)': {
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100% 100%',
+      background: `url(${cancergraphic1800})`,
+    },
+    '@media (min-width: 2400px)': {
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: '100% 100%',
+      background: `url(${cancergraphic2000})`,
+    },
   },
   nihLogoImg: {
     height: '54px',
     width: '463px',
     cursor: 'pointer',
+    marginLeft: '9px',
   },
   icdcLogoImg: {
-    margin: '22px 23px auto',
+    margin: '22px 35px auto',
     height: '39px',
     cursor: 'pointer',
   },
