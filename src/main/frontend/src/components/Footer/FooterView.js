@@ -234,7 +234,8 @@ Accessibility
         >
           <Typography>
             <span className={classes.footorVersiontext}>
-            Version 0.2 /&nbsp;
+            Version:
+              {' '}
               {VERSION}
             </span>
           </Typography>
