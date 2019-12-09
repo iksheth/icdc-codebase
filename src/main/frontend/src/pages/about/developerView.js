@@ -4,7 +4,7 @@ import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/Photo-About_Developer.jpg';
 import Body from '../../components/About/BodyView';
-import linkIcon from '../../assets/about/About-ExternalLink.svg';
+import externalIcon from '../../assets/about/About-ExternalLink.svg';
 
 const Developers = ({ classes }) => (
   <>
@@ -39,11 +39,6 @@ or conditions arising out of usage of these services.
           <br />
           <p className={classes.title}> GitHub:</p>
 As a resource for the public and cancer research,
-          <img
-            src={linkIcon}
-            alt="outbounnd web site icon"
-            className={classes.linkIcon}
-          />
           {' '}
           <Link
             title=" ICDC GitHub Repository"
@@ -54,9 +49,15 @@ As a resource for the public and cancer research,
             className={classes.link}
           >
             {' '}
-             The ICDC GitHub repo
+
             {' '}
+             The ICDC GitHub repo
           </Link>
+          <img
+            src={externalIcon}
+            alt="outbounnd web site icon"
+            className={classes.linkIcon}
+          />
           {' '}
 is available for research,
  usage, forking, and pull requests.

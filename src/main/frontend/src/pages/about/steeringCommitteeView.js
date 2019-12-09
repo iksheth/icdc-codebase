@@ -16,9 +16,9 @@ const SteeringCommitteeView = ({ classes }) => (
         <div>
           <div>
             {' '}
-The ICDC is community driven and is being built with input and collaboration from
+The ICDC is community driven and built with input and collaboration from
  many groups to foster a diversity of ideas and to ensure needs are identified
- across the broad research community. To achieve this, the ICDC Steering Committee
+ across the broad research community. To achieve this collaboration, the ICDC Steering Committee
  was formed to advise the NCI and FNLCR on the ICDC. The Steering Committee is
  composed of 11 members from the non-NIH research community, 7 from NCI, 1 from
   NHGRI and 1 from NCATS. There is also 1 observer from the NCI and 4 ex-officio
@@ -34,7 +34,7 @@ The DGAB consists of 4 external members (all from ICDC Steering Committee), 2
  researchers request their data (
 
             <Link target="_blank" className={classes.link} href={submissionGuide}>
-            submission guide[PDF]
+            submission guide [PDF]
             </Link>
 ) to be added to the ICDC to be  shared with the
  community, the role of the DGAB is to advise the NCI on the suitability of

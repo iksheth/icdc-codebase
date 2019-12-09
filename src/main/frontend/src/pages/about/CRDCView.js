@@ -4,7 +4,7 @@ import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/Photo-About_CRDC.jpg';
 import Body from '../../components/About/BodyView';
-import linkIcon from '../../assets/about/About-ExternalLink.svg';
+import externalIcon from '../../assets/about/About-ExternalLink.svg';
 
 const CRDC = ({ classes }) => (
   <>
@@ -16,13 +16,9 @@ const CRDC = ({ classes }) => (
         <div>
           {' '}
           <p className={classes.title}>CRDC:</p>
-The
+
           {' '}
-          <img
-            src={linkIcon}
-            alt="outbounnd web site icon"
-            className={classes.linkIcon}
-          />
+
           <Link
             title="Cancer Research DataCommons"
             target="_blank"
@@ -32,16 +28,21 @@ The
             className={classes.link}
           >
             {' '}
-Cancer Research DataCommons
+
             {' '}
-            {' '}
+The Cancer Research DataCommons
           </Link>
-is an initiative from NCI’s
           <img
-            src={linkIcon}
+            src={externalIcon}
             alt="outbounnd web site icon"
             className={classes.linkIcon}
           />
+          {' '}
+is an initiative from NCI’s Center for Biomedical Informatics & Information Technology
+
+
+       (
+          {' '}
           <Link
             title="CBIIT"
             target="_blank"
@@ -51,18 +52,24 @@ is an initiative from NCI’s
             className={classes.link}
           >
             {' '}
+
             {' '}
-CBIIT
+ CBIIT
           </Link>
-,
+          <img
+            src={externalIcon}
+            alt="outbounnd web site icon"
+            className={classes.linkIcon}
+          />
+).
           {' '}
-who's vision is a virtual, expandable
-infrastructure that provides secure access
-to many different data types across scientific
-domains, allowing users to analyze, share, and
-store results, leveraging the storage and elastic
- compute, or ability to easily scale resources, of
- the cloud. The ability to combine diverse data types
+CBIIT’s vision for the project consists of a virtual,
+expandable infrastructure that provides secure access to
+many different data types across scientific domains,
+allowing users to analyze, share, and store results,
+leveraging the storage and elastic compute, or ability to
+ easily scale resources, of the cloud.
+ The ability to combine diverse data types
  and perform cross-domain analysis of large data sets
  can lead to new discoveries in cancer prevention, treatment
  and diagnosis, and supports the goals of precision medicine and
@@ -72,11 +79,7 @@ store results, leveraging the storage and elastic
 
           <p className={classes.title}> Cloud Resources:</p>
 The CRDC has three
-          <img
-            src={linkIcon}
-            alt="outbounnd web site icon"
-            className={classes.linkIcon}
-          />
+
           <Link
             title="Cloud Resources"
             target="_blank"
@@ -86,17 +89,19 @@ The CRDC has three
             className={classes.link}
           >
             {' '}
-Cloud Resources
+
             {' '}
+Cloud Resources
           </Link>
+          <img
+            src={externalIcon}
+            alt="outbounnd web site icon"
+            className={classes.linkIcon}
+          />
           {' '}
 options
 (
-          <img
-            src={linkIcon}
-            alt="outbounnd web site icon"
-            className={classes.linkIcon2}
-          />
+
           <Link
             title="Seven Bridges Cancer Genomics Cloud"
             target="_blank"
@@ -105,15 +110,17 @@ options
             color="inherit"
             className={classes.link}
           >
+            {' '}
 
            Seven Bridges Cancer Genomics Cloud
           </Link>
-,
           <img
-            src={linkIcon}
+            src={externalIcon}
             alt="outbounnd web site icon"
-            className={classes.linkIcon}
+            className={classes.linkIcon2}
           />
+,
+
           <Link
             title="ISB Cancer Genomics Cloud"
             target="_blank"
@@ -123,14 +130,17 @@ options
             className={classes.link}
           >
             {' '}
+
+            {' '}
             ISB Cancer Genomics Cloud
           </Link>
-,
           <img
-            src={linkIcon}
+            src={externalIcon}
             alt="outbounnd web site icon"
             className={classes.linkIcon}
           />
+,
+
           <Link
             title="Terra"
             target="_blank"
@@ -140,9 +150,16 @@ options
             className={classes.link}
           >
             {' '}
+
+            {' '}
  Terra
 
           </Link>
+          <img
+            src={externalIcon}
+            alt="outbounnd web site icon"
+            className={classes.linkIcon}
+          />
           ), each providing analysis platforms for
 the community to use when working with Data Commons data.
           <br />
@@ -166,7 +183,7 @@ user interface in addition to programmatic access to analytic tools and workflow
 
 
           <span className={classes.title}>Seven Bridges Cancer Genomics Cloud (SBG)  </span>
- is hosted on Amazon Web Services, has a rich
+ is hosted on Amazon Web Services and has a rich
 user interface that allows researchers to find data of interest and combine it with
  their own private data. Data can be analyzed using more than 200 preinstalled,
  curated bioinformatics tools and workflows. Researchers can also extend the

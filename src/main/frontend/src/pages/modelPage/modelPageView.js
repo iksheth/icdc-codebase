@@ -52,11 +52,7 @@ data is integrated. Once a project is accepted into the ICDC,
           <p className={classes.title}>FAIR and citing:</p>
 The ICDC will adhere to
 
-          <img
-            src={linkIcon}
-            alt="outbounnd web site icon "
-            className={classes.linkIcon}
-          />
+
           <Link
             title="FAIR"
             target="_blank"
@@ -67,8 +63,12 @@ The ICDC will adhere to
           >
             {' '}
 FAIR
-            {' '}
           </Link>
+          <img
+            src={linkIcon}
+            alt="outbounnd web site icon "
+            className={classes.linkIcon}
+          />
 
  principles of data stewardship:
  Findable, Accessible, Interoperable, and Reusable.

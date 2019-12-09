@@ -20,7 +20,7 @@ comparative analysis with canine cancer. If a researcher has data that will
  help this mission and they are willing to share that data in the ICDC, they
   will make a request through our&nbsp;
           <Link target="_blank" className={classes.link} href={submissionGuide}>
-            submission request process[PDF]
+            submission request process [PDF]
           </Link>
 .
    Please email

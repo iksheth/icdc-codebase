@@ -6,7 +6,7 @@ import {
 import Badge from '@material-ui/core/Badge';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components/Wrappers/Wrappers';
-import linkIcon from '../../../assets/icons/Program-ExternalLink.svg';
+import externalIcon from '../../../assets/icons/Program-ExternalLink.svg';
 import dogForProgramDetail from '../../../assets/programCards/Program_Image.png';
 
 
@@ -42,16 +42,16 @@ const ProgramCard = ({
           </span>
 
           <span className={classes.paddingLeft15}>
-            <img
-              src={linkIcon}
-              alt="dog  for program detail"
-              className={classes.linkIcon}
-            />
-          </span>
-          <span className={classes.paddingLeft5}>
             <a href={`${data.program_external_url}`} target="icdc" className={classes.outLink}>
               {data.program_external_url}
             </a>
+          </span>
+          <span className={classes.paddingLeft5}>
+            <img
+              src={externalIcon}
+              alt="dog  for program detail"
+              className={classes.linkIcon}
+            />
           </span>
 
         </Grid>

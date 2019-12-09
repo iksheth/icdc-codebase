@@ -4,7 +4,7 @@ import Stats from '../../components/Stats/AllStatsController';
 import Header from '../../components/About/HeaderView';
 import l9dg from '../../assets/about/Photo-About_Purpose.jpg';
 import Body from '../../components/About/BodyView';
-import linkIcon from '../../assets/about/About-ExternalLink.svg';
+import externalIcon from '../../assets/about/About-ExternalLink.svg';
 
 const PurposeView = ({ classes }) => (
   <>
@@ -30,11 +30,7 @@ the canine subjects.
    The ICDC is part of the Cancer Research Data Commons (CRDC), an initiative
    from NCI’s Center for Biomedical Informatics and Information Technology (CBIIT).
    Bioinformatic analysis of the ICDC data is accomplished using the CRDC’s
-          <img
-            src={linkIcon}
-            alt="outbounnd web site icon"
-            className={classes.linkIcon}
-          />
+
           <Link
             title="Cloud Resources."
             target="_blank"
@@ -44,9 +40,16 @@ the canine subjects.
             className={classes.link}
           >
             {' '}
+            {' '}
 Cloud
-   Resources.
+   Resources
           </Link>
+          <img
+            src={externalIcon}
+            alt="outbounnd web site icon"
+            className={classes.linkIcon}
+          />
+.
           <br />
           <br />
 Within the FNLCR, the Biomedical Informatics and Data Science (BIDS) Directorate is
