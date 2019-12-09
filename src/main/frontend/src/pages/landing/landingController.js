@@ -100,7 +100,7 @@ const Star = styled.div`
 const LandingController = ({ classes }) => (
   <div className={classes.page}>
     <div className={classes.container}>
-      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop50)}>
+      <Grid container spacing={16} direction="row" className={cn(classes.paddingTop30, classes.paddingLeft50)}>
         <Grid item lg={3} md={3} sm={12} xs={12}>
           <div className={classes.headerTitle}>
             <span className={classes.paddingLeft2}>Integrated </span>
@@ -138,7 +138,7 @@ between human and canine cancers.
           </div>
         </Grid>
       </Grid>
-      <Grid container spacing={16} direction="row">
+      <Grid container spacing={16} direction="row" className={classes.landingContainer}>
         <div className={classes.contentLeft}>
           <div className={classes.about}>
             <div className={classes.aboutImageSection}>
@@ -150,7 +150,7 @@ between human and canine cancers.
             <div className={classes.aboutContent}>
                 NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged
                 the Frederick National Laboratory for Cancer Research (FNLCR) to
-                build the integrated Canine Data Commons (ICDC), a cloud-based repository
+                build the Integrated Canine Data Commons (ICDC), a cloud-based repository
                 of canine cancer data. ICDC was established to further research
                 on human cancers by enabling comparative
                 analysis with canine cancer. The data in the ICDC is sourced
@@ -274,6 +274,7 @@ const styles = (theme) => ({
     },
   },
   headerTitle: {
+    paddingTop: '180px',
     paddingBottom: '12px',
     width: '208px',
     color: '#FFFFFF',
@@ -282,6 +283,9 @@ const styles = (theme) => ({
     fontWeight: 'bold',
     lineHeight: '40px',
 
+  },
+  paddingLeft50: {
+    paddingLeft: '50px',
   },
   headerContent: {
     height: '98px',
@@ -356,10 +360,14 @@ const styles = (theme) => ({
     lineHeight: '27px',
     padding: '35px',
   },
+  landingContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: '15px',
+  },
   contentLeft: {
     float: 'left',
-    paddingRight: '15px',
-
+    paddingRight: '10px',
   },
   about: {
     width: '300px',
@@ -381,6 +389,8 @@ const styles = (theme) => ({
     width: '197px',
     background: '#fff',
     height: '120px',
+    paddingLeft: '30px',
+    paddingTop: '6px',
   },
   contentHeader: {
     width: '144px',
@@ -389,9 +399,7 @@ const styles = (theme) => ({
     fontSize: '24px',
     fontWeight: 'bold',
     lineHeight: '18px',
-    margin: 'auto',
     padding: '15px 0',
-    textAlign: 'center',
   },
   contentMessage: {
     height: '33px',
@@ -400,7 +408,6 @@ const styles = (theme) => ({
     fontFamily: '"Open Sans"',
     fontSize: '14px',
     lineHeight: '20px',
-    margin: 'auto',
   },
   aboutButtonSection: {
     background: '#fff',
@@ -462,8 +469,8 @@ const styles = (theme) => ({
   },
   cases: {
     height: '442px',
-    paddingLeft: '350px',
-    paddingTop: '100px',
+    paddingLeft: '400px',
+    paddingTop: '40px',
   },
   greybuttonSection: {
     height: '46px',
@@ -482,7 +489,7 @@ const styles = (theme) => ({
     fontWeight: '600',
     lineHeight: '25px',
     paddingLeft: '8px',
-
+    textDecoration: 'none',
   },
   blueButtonLeft: {
     float: 'left',
@@ -531,8 +538,8 @@ const styles = (theme) => ({
   paddingBottom50: {
     paddingBottom: '50px',
   },
-  paddingTop50: {
-    paddingTop: '70px',
+  paddingTop30: {
+    paddingTop: '30px',
   },
   animationContainer: {
     position: 'relative',
