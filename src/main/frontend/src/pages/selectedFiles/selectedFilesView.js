@@ -8,40 +8,32 @@ class selectedFilesView extends Component {
     super(props);
     const { data } = this.props;
     this.state = {
-      isSelected: false,
       data,
-      rowsSelected: [],
     };
-    this.options = { onRowClick: this.onRowClick };
-    this.onRowsSelect = this.onRowsSelect.bind(this);
+
+    // React refs, return DOM node, we can change DOM node's properties.
+    // Pure HTML works well with  React refs, if refers to a react component
+    // you will get read-only issue.
+    this.downloadButton = React.createRef();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const state = { ...this.state };
-    if (state.isSelected !== nextState.isSelected) {
-      return true;
-    }
-    return false;
-  }
-
-  componentDidUpdate(prevProps) {
-    const { data } = this.props;
-    if (data !== prevProps.data) {
-      this.state.data = data;
-    }
+  componentDidMount() {
+    // Init download button status and style
+    // It may a problem that the code below always
+    // set downloadButton as grey out .
+    this.downloadButton.current.disabled = true;
+    this.downloadButton.current.style.color = 'rgb(0, 0, 0,0.26)';
   }
 
 
   onRowsSelect(curr, allRowsSelected) {
-    const state = { ...this.state };
+    // Change button status based on selection status
     if (allRowsSelected.length === 0) {
-      state.isSelected = false;
-      state.rowsSelected = [];
-      this.setState(state);
+      this.downloadButton.current.disabled = true;
+      this.downloadButton.current.style.color = 'rgb(0, 0, 0,0.26)';
     } else {
-      state.rowsSelected = allRowsSelected.map((row) => row.dataIndex);
-      state.isSelected = true;
-      this.setState(state);
+      this.downloadButton.current.disabled = false;
+      this.downloadButton.current.style.color = 'rgb(0, 0, 0)';
     }
   }
 
@@ -156,6 +148,7 @@ class selectedFilesView extends Component {
       },
     ];
 
+
     const options = () => ({
       selectableRows: true,
       search: false,
@@ -165,7 +158,6 @@ class selectedFilesView extends Component {
       download: false,
       viewColumns: false,
       pagination: true,
-      rowsSelected: state.rowsSelected,
       onRowsSelect: (curr, allRowsSelected) => this.onRowsSelect(curr, allRowsSelected),
       customToolbarSelect: (selectedRows, displayData) => {
         const dataIndex = Object.keys(selectedRows.data).map((keyVlaue) => (
@@ -184,8 +176,7 @@ class selectedFilesView extends Component {
           uuid: obj[2],
           md5Sum: obj[3],
         }));
-        return (
-          <></>);
+        return '';
       },
       customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
         <CustomFooter
@@ -194,7 +185,6 @@ class selectedFilesView extends Component {
           onClick={downloadJson}
           count={count}
           page={page}
-          selected={state.isSelected}
           rowsPerPage={rowsPerPage}
           onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
       // eslint-disable-next-line no-shadow
@@ -202,7 +192,26 @@ class selectedFilesView extends Component {
         />
       ),
     });
+    const btnStyle = {
+      color: 'rgba(0, 0, 0,0.26)',
+      boxShadow: 'none',
+      backgroundColor: 'rgba(0, 0, 0, 0.12)',
+      padding: '6px 16px',
+      fontSize: '0.875rem',
+      minWidth: '64px',
+      boxSizing: 'border-box',
+      transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+      lineHeight: '1.75',
+      fontWeight: '500',
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      borderRadius: '4px',
+      textTransform: 'uppercase',
+    };
 
+    const divStyle = {
+      position: 'absolute',
+      marginTop: '-47px',
+    };
     return (
       <Grid container>
         <Grid item xs={12}>
@@ -214,7 +223,18 @@ class selectedFilesView extends Component {
             columns={columns}
             options={options()}
           />
+          <div style={divStyle}>
+            <button
+              type="button"
+              style={btnStyle}
+              ref={this.downloadButton}
+              onClick={downloadJson}
+            >
+              download manifest
+            </button>
+          </div>
         </Grid>
+
       </Grid>
     );
   }
