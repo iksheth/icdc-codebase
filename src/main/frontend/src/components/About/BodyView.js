@@ -21,7 +21,7 @@ const styles = () => ({
     margin: '16px auto 16px auto',
     color: '#000000',
     fontFamily: '"Open Sans"',
-    fontSize: '14px',
+    fontSize: '15px',
     lineHeight: '22px',
     maxWidth: '1440px',
   },
@@ -30,7 +30,7 @@ const styles = () => ({
     width: '675px',
     color: '#000000',
     fontFamily: '"Open Sans"',
-    fontSize: '14px',
+    fontSize: '15px',
     lineHeight: '22px',
   },
   link: {

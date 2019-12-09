@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import StatsView from './StatsView';
-import { Typography } from '../Wrappers/Wrappers';
 import { fetchDataForStats } from './StatsState';
 
 const Stats = () => {
@@ -13,7 +13,7 @@ const Stats = () => {
     return state.stats.data;
   });
 
-  return (!data || data.length === 0 ? (<Typography variant="headline" color="warning" size="sm">An error has occurred in loading stats component: </Typography>) : <StatsView data={data} />);
+  return (!data || data.length === 0 ? (<CircularProgress />) : <StatsView data={data} />);
 };
 
 
