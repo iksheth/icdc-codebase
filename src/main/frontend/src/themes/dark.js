@@ -300,9 +300,11 @@ export default {
         fontStyle: 'normal',
         fontSize: '10pt',
         fontWeight: 'bold',
+        paddingLeft: '8px',
       },
       head: {
         fontSize: '0.95rem',
+        paddingLeft: '8px',
       },
     },
     MUIDataTableToolbar: {
@@ -346,6 +348,11 @@ export default {
       },
       elevation2: {
         boxShadow: 'none',
+      },
+    },
+    MuiIconButton: {
+      root: {
+        padding: '5px',
       },
     },
   },
