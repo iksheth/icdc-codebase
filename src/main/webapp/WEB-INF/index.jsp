@@ -6,8 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-  
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/CBIIT/icdc-codebase/master/src/main/frontend/public/favicon.ico" type="image/x-icon" />
 </head>
 <body>
   <%@ include file="index.html" %>
