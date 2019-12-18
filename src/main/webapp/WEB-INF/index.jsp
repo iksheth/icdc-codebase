@@ -6,9 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <!-- This need to be in frontend folder when decoupled-->
     <link rel="shortcut icon" href="https://raw.githubusercontent.com/CBIIT/icdc-codebase/master/src/main/frontend/public/favicon.ico" type="image/x-icon" />
-    <!-- Global site tag (gtag.js) - Google Analytics This need to be in frontend folder when decoupled-->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154442677-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
