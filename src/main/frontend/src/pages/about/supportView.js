@@ -1,54 +1,39 @@
-import React from 'react';
-import { withStyles, Link } from '@material-ui/core';
-import Stats from '../../components/Stats/AllStatsController';
-import Header from '../../components/About/HeaderView';
-import l9dg from '../../assets/about/About_Support.jpg';
-import Body from '../../components/About/BodyView';
+import React, { useState, useEffect } from 'react';
+import yaml from 'js-yaml';
+import axios from 'axios';
+import YAMLData from '../../content/prod/aboutPagesContent.yaml';
+import stockImg from '../../assets/about/About_Support.jpg';
+import AboutBody from '../../components/About/AbouBodyView';
 
-const SupportView = ({ classes }) => (
-  <>
-    <Stats />
-    <Header title="Support" />
-    <Body data={{
-      img: l9dg,
-      body: (
-        <div>
-          {' '}
-If you have any questions,
-        please contact us at
-          <Link href="mailto: ICDCHelpDesk@mail.nih.gov" color="inherit" className={classes.link}>
-            {' '}
-            ICDCHelpDesk@mail.nih.gov
-            {' '}
-          </Link>
-          .
-        </div>),
-    }}
-    />
-  </>
-);
-
-const styles = () => ({
-  linkIcon: {
-    width: '20px',
-    verticalAlign: 'sub',
-    margin: '0px 0px 0px 2px',
-  },
-  link: {
-    color: '#0296C9',
-    fontWeight: 'bolder',
-    '&:hover': {
-      color: '#0296C9',
-      fontWeight: 'bolder',
-      textDecoration: 'none',
-    },
-  },
-  title: {
-    color: '#0B3556',
-    textTransform: 'uppercase',
-    fontWeight: 'bold',
-  },
-});
+const ABOUT_CONTENT_URL = process.env.REACT_APP_ABOUT_CONTENT_URL;
 
 
-export default withStyles(styles, { withTheme: true })(SupportView);
+const SupportView = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(async () => {
+    let resultData = [];
+    try {
+      const result = await axios.get(ABOUT_CONTENT_URL);
+      resultData = yaml.safeLoad(result.data);
+    } catch (error) {
+      const result = await axios(YAMLData);
+      resultData = yaml.safeLoad(result.data);
+    }
+    const supportObj = resultData.find(({ page }) => page === '/support');
+    setData(supportObj);
+  }, []);
+
+  return (
+    <>
+      <AboutBody data={{
+        img: stockImg,
+        title: data.title,
+        content: data.content,
+        table: data.table,
+      }}
+      />
+    </>
+  );
+};
+export default SupportView;
