@@ -5,11 +5,6 @@ import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
-
-// import Sidebar from '../Sidebar';
-
-// pages
-
 import Dashboard from '../../pages/dashboard/dashboardController';
 import CaseDetail from '../../pages/caseDetail/caseDetailController';
 import Cases from '../../pages/cases/casesController';
@@ -23,14 +18,6 @@ import SelectedCases from '../../pages/selectedCases/selectedCasesController';
 import SelectedFiles from '../../pages/selectedFiles/selectedFilesController';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutController';
-// import CRDCView from '../../pages/about/CRDCView';
-// import developerView from '../../pages/about/developerView';
-// import ICDCDataView from '../../pages/about/ICDCDataView';
-// import purposeView from '../../pages/about/purposeView';
-// import steeringCommiteeView from '../../pages/about/steeringCommitteeView';
-// import supportView from '../../pages/about/supportView';
-// import submitingData from '../../pages/about/submitDataView';
-
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
