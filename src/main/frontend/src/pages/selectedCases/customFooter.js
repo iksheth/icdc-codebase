@@ -9,7 +9,9 @@ import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 const defaultFooterStyles = {
-
+  button: {
+    textDecoration: 'none',
+  },
 };
 
 const CustomFooter = ({
@@ -24,8 +26,8 @@ const CustomFooter = ({
   <TableFooter>
     <TableRow>
       <TableCell>
-        <Link to="mycasesfiles">
-          <Button variant="contained" color="primary" className={classes.button}>
+        <Link to={count > 0 && 'mycasesfiles'} className={classes.button}>
+          <Button disabled={count < 1} variant="contained" color="primary">
             {text}
           </Button>
         </Link>
