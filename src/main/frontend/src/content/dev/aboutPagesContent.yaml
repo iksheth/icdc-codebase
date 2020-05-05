@@ -203,7 +203,7 @@
   title: 'Support'
   content:
     - paragraph: 'If you have any questions, please contact us at $$#ICDCHelpDesk@mail.nih.gov#$$.'
-- page: '/submit-data'
+- page: '/submit'
   title: "Submitting Data"
   content:
     - paragraph: 'The ICDC was established to further research on human cancers by enabling comparative analysis with 
