@@ -147,7 +147,7 @@ const Dashboard = ({
               </Grid>
               <Grid item lg={4} md={6} sm={12} xs={12}>
                 <Widget
-                  title="Gender"
+                  title="Sex"
                   upperTitle
                   bodyClass={classes.fullHeightBody}
                   className={classes.card}

@@ -142,6 +142,3 @@ Example query:
 	https://domain/v1/rest/programs
 
 
-  
-
-
