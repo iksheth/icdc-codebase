@@ -5,11 +5,6 @@ import Header from '../Header/HeaderView';
 import NavBar from '../NavBar/NavBarContainer';
 import Footer from '../Footer/FooterView';
 import Error from '../../pages/error/Error';
-
-// import Sidebar from '../Sidebar';
-
-// pages
-
 import Dashboard from '../../pages/dashboard/dashboardController';
 import CaseDetail from '../../pages/caseDetail/caseDetailController';
 import Cases from '../../pages/cases/casesController';
@@ -22,14 +17,7 @@ import ProgramDetail from '../../pages/programDetail/programDetailController';
 import SelectedCases from '../../pages/selectedCases/selectedCasesController';
 import SelectedFiles from '../../pages/selectedFiles/selectedFilesController';
 import Home from '../../pages/landing/landingController';
-import CRDCView from '../../pages/about/CRDCView';
-import developerView from '../../pages/about/developerView';
-import ICDCDataView from '../../pages/about/ICDCDataView';
-import purposeView from '../../pages/about/purposeView';
-import steeringCommiteeView from '../../pages/about/steeringCommitteeView';
-import supportView from '../../pages/about/supportView';
-import submitingData from '../../pages/about/submitDataView';
-
+import About from '../../pages/about/aboutController';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -65,13 +53,14 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/study/:id" component={StudyDetail} />
             <Route path="/case/:id" component={CaseDetail} />
             <Route path="/study_cases/:id" component={Cases} />
-            <Route path="/purpose" component={purposeView} />
-            <Route path="/steeringCommittee" component={steeringCommiteeView} />
-            <Route path="/crdc" component={CRDCView} />
-            <Route path="/icdcData" component={ICDCDataView} />
-            <Route path="/developers" component={developerView} />
-            <Route path="/support" component={supportView} />
-            <Route path="/submit" component={submitingData} />
+
+            <Route path="/purpose" component={About} />
+            <Route path="/steeringCommittee" component={About} />
+            <Route path="/crdc" component={About} />
+            <Route path="/icdcData" component={About} />
+            <Route path="/developers" component={About} />
+            <Route path="/support" component={About} />
+            <Route path="/submit" component={About} />
 
 
             <Route component={Error} />
