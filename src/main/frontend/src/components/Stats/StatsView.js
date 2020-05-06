@@ -34,7 +34,7 @@ const StatsView = ({ classes, data }) => (
                 </Typography>
                 <div className={classes.marginTop1}>
                   <Typography color="primary" weight="bold">
-                                              Studies
+                    Studies
                   </Typography>
                 </div>
               </div>
@@ -55,7 +55,7 @@ const StatsView = ({ classes, data }) => (
                 </Typography>
                 <div className={classes.marginTop1}>
                   <Typography color="primary" weight="bold">
-                                            Cases
+                    Cases
                   </Typography>
                 </div>
               </div>
@@ -76,7 +76,7 @@ const StatsView = ({ classes, data }) => (
                 </Typography>
                 <div className={classes.marginTop1}>
                   <Typography color="primary" weight="bold">
-                                            Samples
+                    Samples
                   </Typography>
                 </div>
               </div>
@@ -98,7 +98,7 @@ const StatsView = ({ classes, data }) => (
                 </Typography>
                 <div className={classes.marginTop1}>
                   <Typography color="primary" weight="bold">
-                                            Files
+                    Files
                   </Typography>
                 </div>
               </div>
@@ -120,7 +120,7 @@ const StatsView = ({ classes, data }) => (
                 </Typography>
                 <div className={classes.marginTop1}>
                   <Typography color="primary" weight="bold">
-                                            Aliquots
+                    Aliquots
                   </Typography>
                 </div>
               </div>

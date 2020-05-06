@@ -254,7 +254,7 @@ class selectedFilesView extends Component {
                 ref={this.downloadButton}
                 onClick={downloadJson}
               >
-              download manifest
+                download manifest
               </button>
             </div>
           </div>

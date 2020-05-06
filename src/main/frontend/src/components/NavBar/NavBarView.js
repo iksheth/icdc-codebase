@@ -44,6 +44,12 @@ const NavBar = ({
   // Empty second argument of react useEffect will avoid the infinte loop that
   // caused due to component update
   const dispatch = useDispatch();
+  const [clickedEl, setClickedEl] = React.useState(null);
+
+  function handleButtonClickEvent(eventName) {
+    setClickedEl(eventName);
+  }
+
   React.useEffect(() => {
     dispatch(initCart());
     const values = queryString.parse(window.location.search);
@@ -125,8 +131,9 @@ const NavBar = ({
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/home"
+                onClick={() => handleButtonClickEvent('home')}
               >
-              home
+                home
               </NavLink>
             </Button>
             <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
@@ -134,8 +141,9 @@ const NavBar = ({
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/cases"
+                onClick={() => handleButtonClickEvent('cases')}
               >
-              Cases
+                Cases
               </NavLink>
 
             </Button>
@@ -145,6 +153,7 @@ const NavBar = ({
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/programs"
+                onClick={() => handleButtonClickEvent('programs')}
               >
                 Programs
               </NavLink>
@@ -155,11 +164,12 @@ const NavBar = ({
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/studies"
+                onClick={() => handleButtonClickEvent('studies')}
               >
-               Studies
+                Studies
               </NavLink>
             </Button>
-            <AboutMenu />
+            <AboutMenu handleButtonClickEvent={handleButtonClickEvent} clickedEl={clickedEl} />
           </div>
           {/* <div className={classes.grow} /> */}
           {/* Start of Theme Switching Icon and logic */}
@@ -183,7 +193,7 @@ const NavBar = ({
               className={classes.link}
               to="/myCases"
             >
-            My Cases
+              My Cases
               {/* <IconButton
                 color="inherit"
                 aria-haspopup="true"
@@ -244,7 +254,7 @@ const NavBar = ({
                 onClick={() => dispatch(toggleCheckBox(unselectFilters(activeFilters)))}
                 disableRipple
               >
-              Clear All
+                Clear All
               </Button>
             </div>
             <div className={classes.floatRight} onClick={toggleSidebar}>

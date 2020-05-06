@@ -105,18 +105,18 @@ const LandingController = ({ classes }) => (
           <div className={classes.headerTitle}>
             <span className={classes.paddingLeft2}>Integrated </span>
             {' '}
-Canine Data Commons
+            Canine Data Commons
           </div>
           <div className={classes.headerContent}>
-Exploring. analyzing, and understanding the biological relationships
-between human and canine cancers.
+            Exploring. analyzing, and understanding the biological relationships
+            between human and canine cancers.
           </div>
           <div className={classes.headerButtonSection}>
 
             <Link to="/cases" className={classes.headerLink}>
               <Button className={classes.headerButton}>
                 {' '}
-                    explore
+                explore
               </Button>
             </Link>
 
@@ -145,17 +145,17 @@ between human and canine cancers.
               <img src={imgAbout} className={classes.aboutImage} alt="ICDC about" />
             </div>
             <div className={classes.icdcWords}>
-                About the Integrated Canine Data Commons (ICDC)
+              About the Integrated Canine Data Commons (ICDC)
             </div>
             <div className={classes.aboutContent}>
-                NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged
-                the Frederick National Laboratory for Cancer Research (FNLCR) to
-                build the Integrated Canine Data Commons (ICDC), a cloud-based repository
-                of canine cancer data. ICDC was established to further research
-                on human cancers by enabling comparative
-                analysis with canine cancer. The data in the ICDC is sourced
-                from multiple different programs and projects; all focused on
-                the canine subjects.
+              NCI's Division of Cancer Treatment and Diagnosis (DCTD) charged
+              the Frederick National Laboratory for Cancer Research (FNLCR) to
+              build the Integrated Canine Data Commons (ICDC), a cloud-based repository
+              of canine cancer data. ICDC was established to further research
+              on human cancers by enabling comparative
+              analysis with canine cancer. The data in the ICDC is sourced
+              from multiple different programs and projects; all focused on
+              the canine subjects.
             </div>
             <div className={classes.aboutButtonSection}>
               <div className={classes.aboutButtonLeft}>
@@ -215,7 +215,7 @@ between human and canine cancers.
 
                 <div className={classes.contentHeader}> Submit Data</div>
                 <div className={classes.contentMessage}>
-Interested in contributing data to ICDC ?
+                  Interested in contributing data to ICDC ?
                 </div>
 
               </div>
@@ -234,9 +234,9 @@ Interested in contributing data to ICDC ?
             <div className={classes.cases}>
               <div className={classes.greyContentHeader}> Cases</div>
               <div className={classes.greyContent}>
-Search all the Cases and build cohorts from all the
-Programs/Studies within the ICDC. The data files from
- these cohorts can then be analyzed in the Cloud Resources.
+                Search all the Cases and build cohorts from all the
+                Programs/Studies within the ICDC. The data files from
+                these cohorts can then be analyzed in the Cloud Resources.
               </div>
               <div className={classes.greybuttonSection}>
                 <div className={classes.blueButtonLeft}>

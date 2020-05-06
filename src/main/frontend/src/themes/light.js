@@ -249,6 +249,18 @@ export default {
       },
     },
     MUIDataTableHeadCell: {
+      fixedHeaderCommon: {
+        borderTop: tableHeaderBorder,
+        borderBottom: tableHeaderBorder,
+        color: tableHeaderFontColor,
+        backgroundColor: tableHeader,
+        textDecoration: 'underline',
+        fontFamily: tableFontFamily,
+        letterSpacing: '0.025em',
+        fontStyle: 'normal',
+        fontSize: '11pt',
+        fontWeight: 'bold',
+      },
       fixedHeader: {
         borderTop: tableHeaderBorder,
         borderBottom: tableHeaderBorder,
