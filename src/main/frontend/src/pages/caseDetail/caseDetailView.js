@@ -138,7 +138,7 @@ const CaseDetail = ({ classes, data }) => {
                   <span>
                     <span>
                       {' '}
-Case :
+                      Case :
                       {' '}
                       {' '}
                       {caseDetail.case_id}
@@ -156,7 +156,7 @@ Case :
                   <span>
                     <span>
                       {' '}
-Case :
+                      Case :
                       {' '}
                       {' '}
                       {caseDetail.case_id}
@@ -168,11 +168,11 @@ Case :
                     ? '' : (
                       <span>
                         <span className={classes.headerSubTitleCate}>
-                    CASE NAME
+                          CASE NAME
                           {' '}
                           {' '}
                           {' '}
--
+                          -
                           {' '}
                         </span>
                         <span className={classes.headerSubTitleContent}>
@@ -187,7 +187,7 @@ Case :
                           classes.headerSubTitleCate, classes.paddingLeft8, classes.paddingBottm17,
                         )}
                         >
-                      INITIALS
+                          INITIALS
                           {' '}
                         </span>
                         <span className={classes.headerSubTitleContent}>

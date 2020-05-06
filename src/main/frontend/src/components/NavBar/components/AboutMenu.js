@@ -70,49 +70,49 @@ const AboutMenu = ({ classes }) => {
               activeStyle={{ color: 'white' }}
               to="/purpose"
             >
-               Purpose
+              Purpose
             </NavLink>
             <NavLink
               className={classes.link}
               activeStyle={{ color: 'white' }}
               to="/steeringCommittee"
             >
-               Steering Committee
+              Steering Committee
             </NavLink>
             <NavLink
               className={classes.link}
               activeStyle={{ color: 'white' }}
               to="/crdc"
             >
-               CRDC & Analysis
+              CRDC & Analysis
             </NavLink>
             <NavLink
               className={classes.link}
               activeStyle={{ color: 'white' }}
               to="/model"
             >
-               ICDC Data & Model
+              ICDC Data & Model
             </NavLink>
             <NavLink
               className={classes.link}
               activeStyle={{ color: 'white' }}
               to="/developers"
             >
-               Developers
+              Developers
             </NavLink>
             <NavLink
               className={classes.link}
               activeStyle={{ color: 'white' }}
               to="/support"
             >
-               Support
+              Support
             </NavLink>
             <NavLink
               className={classes.link}
               activeStyle={{ color: 'white' }}
               to="/submit"
             >
-               Submitting Data
+              Submitting Data
             </NavLink>
 
           </div>

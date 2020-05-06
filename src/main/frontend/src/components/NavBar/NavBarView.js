@@ -126,7 +126,7 @@ const NavBar = ({
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/home"
               >
-              home
+                home
               </NavLink>
             </Button>
             <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
@@ -135,7 +135,7 @@ const NavBar = ({
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/cases"
               >
-              Cases
+                Cases
               </NavLink>
 
             </Button>
@@ -156,7 +156,7 @@ const NavBar = ({
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/studies"
               >
-               Studies
+                Studies
               </NavLink>
             </Button>
             <AboutMenu />
@@ -183,7 +183,7 @@ const NavBar = ({
               className={classes.link}
               to="/myCases"
             >
-            My Cases
+              My Cases
               {/* <IconButton
                 color="inherit"
                 aria-haspopup="true"
@@ -244,7 +244,7 @@ const NavBar = ({
                 onClick={() => dispatch(toggleCheckBox(unselectFilters(activeFilters)))}
                 disableRipple
               >
-              Clear All
+                Clear All
               </Button>
             </div>
             <div className={classes.floatRight} onClick={toggleSidebar}>

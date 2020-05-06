@@ -22,7 +22,7 @@ const Programs = ({ classes, data }) => (
         <div className={classes.headerTitle}>
           <div className={cn(classes.headerMainTitle, classes.marginTop23)}>
             <span>
-                  Programs
+              Programs
             </span>
           </div>
         </div>

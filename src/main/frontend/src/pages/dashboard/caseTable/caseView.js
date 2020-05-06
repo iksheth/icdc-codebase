@@ -246,7 +246,7 @@ const Cases = ({ classes, data }) => {
 
       <Grid container>
         <Grid item xs={12} className={classes.caseTitle}>
-           Cases
+          Cases
         </Grid>
         <Grid item xs={12}>
           <MUIDataTable

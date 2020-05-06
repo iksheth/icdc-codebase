@@ -13,10 +13,10 @@ const Error = ({ classes }) => (
       <img className={classes.dogHumanHelix} src={caninHelix} alt="caninHelix 404" />
       <div className={classes.errorTextRow}>
         <Typography variant="h6" color="white" className={classes.errorText}>
-The resource you are looking for is not at this URL. Please navigate to the ICDC&nbsp;
+          The resource you are looking for is not at this URL. Please navigate to the ICDC&nbsp;
           <Link to="/">Dashboard</Link>
           {' '}
-to access content.
+          to access content.
         </Typography>
       </div>
     </Paper>
