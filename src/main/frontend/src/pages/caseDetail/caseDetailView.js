@@ -251,6 +251,18 @@ Case :
                     </Grid>
                   </Grid>
 
+                  <Grid item xs={12}>
+                    <Grid container spacing={4}>
+                      <Grid item xs={4}>
+                        <span className={classes.title}>Weight</span>
+                      </Grid>
+                      <Grid item xs={8} className={classes.content}>
+                        {caseDetail.demographic
+                          ? caseDetail.demographic.weight : notProvided}
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
 
                   <Grid item xs={12}>
                     <Grid container spacing={4}>
@@ -263,6 +275,7 @@ Case :
                       </Grid>
                     </Grid>
                   </Grid>
+
 
                 </Grid>
               </Grid>
