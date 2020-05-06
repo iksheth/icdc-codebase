@@ -44,6 +44,12 @@ const NavBar = ({
   // Empty second argument of react useEffect will avoid the infinte loop that
   // caused due to component update
   const dispatch = useDispatch();
+  const [clickedEl, setClickedEl] = React.useState(null);
+
+  function handleButtonClickEvent(eventName) {
+    setClickedEl(eventName);
+  }
+
   React.useEffect(() => {
     dispatch(initCart());
     const values = queryString.parse(window.location.search);
@@ -125,6 +131,7 @@ const NavBar = ({
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/home"
+                onClick={() => handleButtonClickEvent('home')}
               >
                 home
               </NavLink>
@@ -134,6 +141,7 @@ const NavBar = ({
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/cases"
+                onClick={() => handleButtonClickEvent('cases')}
               >
                 Cases
               </NavLink>
@@ -145,6 +153,7 @@ const NavBar = ({
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/programs"
+                onClick={() => handleButtonClickEvent('programs')}
               >
                 Programs
               </NavLink>
@@ -155,11 +164,12 @@ const NavBar = ({
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
                 to="/studies"
+                onClick={() => handleButtonClickEvent('studies')}
               >
                 Studies
               </NavLink>
             </Button>
-            <AboutMenu />
+            <AboutMenu handleButtonClickEvent={handleButtonClickEvent} clickedEl={clickedEl} />
           </div>
           {/* <div className={classes.grow} /> */}
           {/* Start of Theme Switching Icon and logic */}
