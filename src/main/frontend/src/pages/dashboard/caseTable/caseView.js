@@ -338,9 +338,6 @@ const Cases = ({ classes, data }) => {
             />
           </Grid>
 
-      <Grid container>
-        <Grid item xs={12} className={classes.caseTitle}>
-          Cases
         </Grid>
         <Grid item xs={12} className={classes.saveButtonDiv}>
           <button
