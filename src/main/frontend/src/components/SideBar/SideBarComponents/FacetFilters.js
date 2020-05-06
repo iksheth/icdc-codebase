@@ -26,9 +26,17 @@ const FacetPanel = (classes) => {
 
   const [expanded, setExpanded] = React.useState(false);
 
+
+  React.useEffect(() => {
+    if (!expanded || !(expanded === `${sideBarContent.defaultPanel}false` || expanded !== false)) {
+      setExpanded(sideBarContent.defaultPanel);
+    }
+  });
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
 
   const handleToggle = (value) => () => {
     const valueList = value.split('$$');
