@@ -36,27 +36,27 @@ const Footer = ({ classes, data }) => {
                 weight="bold"
                 className={cn(classes.footerText, classes.listHeader)}
               >
-              About ICDC
+                About ICDC
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/purpose">
-                Purpose
+                  Purpose
                 </Link>
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/steeringCommittee">
-              Steering Committee
+                  Steering Committee
                 </Link>
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/crdc">
-             CRDC
+                  CRDC
                 </Link>
               </Typography>
             </li>
@@ -74,13 +74,13 @@ const Footer = ({ classes, data }) => {
                 weight="bold"
                 className={cn(classes.footerText, classes.listHeader)}
               >
-              About the Data
+                About the Data
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/model">
-              ICDC Data & Model
+                  ICDC Data & Model
                 </Link>
               </Typography>
             </li>
@@ -88,21 +88,21 @@ const Footer = ({ classes, data }) => {
             <li>
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/crdc">
-              Analyzing Data
+                  Analyzing Data
                 </Link>
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/developers">
-              Developers (APIs)
+                  Developers (APIs)
                 </Link>
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
                 <Link className={classes.link} to="/submit">
-              Submission Guide
+                  Submission Guide
 
                 </Link>
               </Typography>
@@ -122,28 +122,28 @@ const Footer = ({ classes, data }) => {
             <li>
               <Typography className={classes.footerText}>
                 <a title="link to NCI Policies" href="http://www.cancer.gov/global/web/policies" target="icdc-nci">
-                 Policies
+                  Policies
                 </a>
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
                 <a href="https://www.cancer.gov/policies/disclaimer" rel="noopener noreferrer" target="_blank">
-              Disclaimer
+                  Disclaimer
                 </a>
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
                 <a href="https://www.cancer.gov/policies/accessibility" rel="noopener noreferrer" target="_blank">
-              Accessibility
+                  Accessibility
                 </a>
               </Typography>
             </li>
             <li>
               <Typography className={classes.footerText}>
                 <a href="https://www.cancer.gov/policies/foia" rel="noopener noreferrer" target="_blank">
-                FOIA
+                  FOIA
                 </a>
               </Typography>
             </li>
@@ -180,25 +180,25 @@ Accessibility
         <div className={cn(classes.nciLinks, classes.contentJustifyCenter)}>
           <Typography>
             <a target="icdc-external" href="https://www.hhs.gov">
-            U.S. Department of Health and Human Services
+              U.S. Department of Health and Human Services
             </a>
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </Typography>
           <Typography>
             <a target="icdc-external" href="https://www.nih.gov">
-            National Institutes of Health
+              National Institutes of Health
             </a>
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </Typography>
           <Typography>
             <a target="icdc-external" href="https://www.cancer.gov">
-            National Cancer Institute
+              National Cancer Institute
             </a>
             <span className={classes.ext}>&nbsp;|&nbsp;</span>
           </Typography>
           <Typography>
             <a target="icdc-external" href="https://www.usa.gov">
-            USA.gov
+              USA.gov
               <span
                 className={classes.ext}
                 aria-label="(link is external)"
@@ -217,7 +217,7 @@ Accessibility
         >
           <Typography>
             <span className={classes.turningNIH}>
-            NIH … Turning Discovery Into Health
+              NIH … Turning Discovery Into Health
               <sup>®</sup>
             </span>
           </Typography>
@@ -234,7 +234,7 @@ Accessibility
         >
           <Typography>
             <span className={classes.footorVersiontext}>
-            Version:
+              Version:
               {' '}
               {VERSION}
             </span>

@@ -133,7 +133,7 @@ const NavBar = ({
                 to="/home"
                 onClick={() => handleButtonClickEvent('home')}
               >
-              home
+                home
               </NavLink>
             </Button>
             <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
@@ -143,7 +143,7 @@ const NavBar = ({
                 to="/cases"
                 onClick={() => handleButtonClickEvent('cases')}
               >
-              Cases
+                Cases
               </NavLink>
 
             </Button>
@@ -166,7 +166,7 @@ const NavBar = ({
                 to="/studies"
                 onClick={() => handleButtonClickEvent('studies')}
               >
-               Studies
+                Studies
               </NavLink>
             </Button>
             <AboutMenu handleButtonClickEvent={handleButtonClickEvent} clickedEl={clickedEl} />
@@ -193,7 +193,7 @@ const NavBar = ({
               className={classes.link}
               to="/myCases"
             >
-            My Cases
+              My Cases
               {/* <IconButton
                 color="inherit"
                 aria-haspopup="true"
@@ -254,7 +254,7 @@ const NavBar = ({
                 onClick={() => dispatch(toggleCheckBox(unselectFilters(activeFilters)))}
                 disableRipple
               >
-              Clear All
+                Clear All
               </Button>
             </div>
             <div className={classes.floatRight} onClick={toggleSidebar}>

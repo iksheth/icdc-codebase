@@ -1,8 +1,8 @@
 import uuid from 'uuid';
 
 export const COLORS = [
-  '#39C0F0',
   '#194563',
+  '#39C0F0',
   '#fc4b5b',
   '#2b69a3',
   '#287d6d',
@@ -86,19 +86,24 @@ export function getSunburstDataFromDashboardData(data) {
     widgetData.map((p) => {
       if (p.title === d.program) { // program exist
         existProgram = true;
+        // eslint-disable-next-line no-param-reassign
+        p.caseSize += 1;
         p.children.map((study) => {
           const s = study;
           if (s.title === d.study_code) { // study exist
             existStudy = true;
             s.size += 1;
+            s.caseSize += 1;
           }
           return s;
         }); // end find study
         if (!existStudy) { // new study
+          colorIndex += 1;
           p.children.push({
             title: d.study_code,
             color: p.color,
             size: 1,
+            caseSize: 1,
           });
         }
       }
@@ -106,16 +111,18 @@ export function getSunburstDataFromDashboardData(data) {
     }); // end find program
 
     if (!existProgram && !existStudy) {
+      colorIndex += 1;
       widgetData.push({
         title: d.program,
         color: COLORS[parseInt(colorIndex, 10)],
+        caseSize: 1,
         children: [{
           title: d.study_code,
           color: COLORS[parseInt(colorIndex, 10)],
           size: 1,
+          caseSize: 1,
         }],
       });
-      colorIndex += 1;
     }
   }); // end foreach
 
