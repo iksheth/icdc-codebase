@@ -480,6 +480,7 @@ const styles = (theme) => ({
     fontWeight: '600',
     letterSpacing: '0.8px',
     transform: 'scale(1) translate(0%, -50%)',
+    fontFamily: theme.custom.fontFamilySans,
   },
 });
 
