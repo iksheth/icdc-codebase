@@ -29,6 +29,17 @@ function updateData(d, keyPath) {
 }
 
 
+function sortData(d) {
+  const data = d;
+  if (data.children) {
+    data.children.sort((a, b) => a.title.localeCompare(b.title));
+    data.children.map((a) => sortData(a));
+  }
+
+  return data;
+}
+
+
 // find the caseSize of a given title
 function findCaseSizeOfTitle(data, title) {
   if (title === '') {
@@ -76,7 +87,7 @@ class ProgramSunburst extends PureComponent {
     super(props);
     const { data } = this.props;
     this.state = {
-      widgetData: data,
+      widgetData: sortData(data),
       size: data.children[0].size,
       title: '',
       caseSize: data.children[0].caseSize,
@@ -95,7 +106,7 @@ class ProgramSunburst extends PureComponent {
 
 
     this.setState({
-      widgetData: data,
+      widgetData: sortData(data),
       size,
       title,
       caseSize: findCaseSizeOfTitle(data, title),
