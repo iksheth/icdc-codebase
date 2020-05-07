@@ -15,7 +15,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           to="/purpose"
           onClick={handleClick}
         >
-               Purpose
+          Purpose
         </NavLink>
         <NavLink
           className={classes.link}
@@ -23,7 +23,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           to="/steeringCommittee"
           onClick={handleClick}
         >
-               Steering Committee
+          Steering Committee
         </NavLink>
         <NavLink
           className={classes.link}
@@ -31,7 +31,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           to="/crdc"
           onClick={handleClick}
         >
-               CRDC & Analysis
+          CRDC & Analysis
         </NavLink>
         <NavLink
           className={classes.link}
@@ -39,7 +39,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           to="/model"
           onClick={handleClick}
         >
-                ICDC Data & Model
+          ICDC Data & Model
         </NavLink>
         <NavLink
           className={classes.link}
@@ -47,7 +47,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           to="/developers"
           onClick={handleClick}
         >
-               Developers
+          Developers
         </NavLink>
         <NavLink
           className={classes.link}
@@ -55,7 +55,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           to="/support"
           onClick={handleClick}
         >
-               Support
+          Support
         </NavLink>
         <NavLink
           className={classes.link}
@@ -63,7 +63,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           to="/submit"
           onClick={handleClick}
         >
-               Submitting Data
+          Submitting Data
         </NavLink>
 
       </div>

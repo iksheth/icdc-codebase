@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import { v1 as uuid } from 'uuid';
 
 export const COLORS = [
   '#194563',
@@ -127,7 +127,7 @@ export function getSunburstDataFromDashboardData(data) {
   }); // end foreach
 
   return ({
-    key: uuid.v1(),
+    key: uuid(),
     title: 'root',
     color: COLORS[parseInt(colorIndex, 10)],
     children: widgetData,
