@@ -14,6 +14,7 @@ import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import { receiveCases, deleteCasesAction } from '../selectedCases/selectedCasesState';
 
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return '0 Bytes';
@@ -71,12 +72,14 @@ const options = (classes) => ({
 });
 
 
-const CaseDetail = ({ classes, data }) => {
+const CaseDetail = ({ classes, data, selected }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(
     dispatch(fetchDataForDashboardDataTable()),
   );
 
   const dispatch = useDispatch();
+
+
   const redirectTo = (study) => {
     dispatch(initDashboardStatus()).then(() => {
       dispatch(singleCheckBox([{
@@ -87,6 +90,7 @@ const CaseDetail = ({ classes, data }) => {
       }]));
     });
   };
+
 
   const stat = {
     numberOfStudies: 1,
@@ -115,6 +119,13 @@ const CaseDetail = ({ classes, data }) => {
   }, {
     name: caseDetail.case_id,
   }];
+
+  const removeFromMyCases = () => {
+    dispatch(deleteCasesAction([caseDetail.case_id]));
+  };
+  const saveToMyCases = () => {
+    dispatch(receiveCases([caseDetail.case_id]));
+  };
 
 
   return (
@@ -200,9 +211,33 @@ const CaseDetail = ({ classes, data }) => {
 
                 <CustomBreadcrumb data={breadCrumbJson} />
               </div>
+
             )}
 
+          <div className={classes.headerButton}>
+            <span className={classes.headerButtonLinkSpan}>
+              {selected
+                ? (
+                  <button
+                    type="button"
+                    className={classes.headerButtonLink}
+                    onClick={removeFromMyCases}
+                  >
+                    <span className={classes.headerButtonLinkText}>Remove from My Cases</span>
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    className={classes.headerButtonLink}
+                    onClick={saveToMyCases}
+                  >
+                    <span className={classes.headerButtonLinkText}>Save to My Cases</span>
+                  </button>
+                )}
 
+            </span>
+          </div>
         </div>
 
 
@@ -624,9 +659,7 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: '10px auto',
   },
-  headerButtonLink: {
-    textDecoration: 'none',
-  },
+
   button: {
     borderRadius: '10px',
     width: '178px',
@@ -660,6 +693,27 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     color: '#ff17f15',
     paddingBottom: '20px',
+  },
+  headerButton: {
+    fontFamily: theme.custom.fontFamilySans,
+    float: 'right',
+    marginTop: '15px',
+    width: '125px',
+    height: '33px',
+    background: '#F6F4F4',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+
+  },
+  headerButtonLink: {
+    textDecoration: 'none',
+    lineHeight: '14px',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    color: '#DC762F',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
   },
 });
 
