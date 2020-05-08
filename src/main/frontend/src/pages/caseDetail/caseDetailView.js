@@ -8,6 +8,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import { useDispatch } from 'react-redux';
+import Snackbar from '@material-ui/core/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-CaseDetail.svg';
@@ -15,6 +16,7 @@ import cn from '../../utils/classNameConcat';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import { receiveCases, deleteCasesAction } from '../selectedCases/selectedCasesState';
+import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
 
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return '0 Bytes';
@@ -120,16 +122,55 @@ const CaseDetail = ({ classes, data, selected }) => {
     name: caseDetail.case_id,
   }];
 
+
+  const [snackbarState, setsnackbarState] = React.useState({
+    open: false,
+    value: 0,
+  });
+  function openSnack(value, action) {
+    setsnackbarState({ open: true, value, action });
+  }
+  function closeSnack() {
+    setsnackbarState({ open: false });
+  }
+
   const removeFromMyCases = () => {
+    openSnack(caseDetail.case_id, 'removed from');
     dispatch(deleteCasesAction([caseDetail.case_id]));
   };
+
   const saveToMyCases = () => {
+    openSnack(caseDetail.case_id, 'added to');
     dispatch(receiveCases([caseDetail.case_id]));
   };
 
-
   return (
     <>
+      <Snackbar
+        className={classes.snackBar}
+        open={snackbarState.open}
+        onClose={closeSnack}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        message={(
+          <div className={classes.snackBarMessage}>
+            <span>
+              <SuccessOutlinedIcon />
+              {' '}
+            </span>
+            <span className={classes.snackBarText}>
+              {snackbarState.value}
+              {' '}
+              Case(s) successfully
+              {' '}
+              {snackbarState.action}
+              {' '}
+              My Cases list
+            </span>
+          </div>
+)}
+      />
+
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>
