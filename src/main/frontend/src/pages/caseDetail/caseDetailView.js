@@ -159,9 +159,11 @@ const CaseDetail = ({ classes, data, selected }) => {
               {' '}
             </span>
             <span className={classes.snackBarText}>
-              {snackbarState.value}
+              Case :
               {' '}
-              Case(s) successfully
+              {snackbarState.value}
+              {'    '}
+              successfully
               {' '}
               {snackbarState.action}
               {' '}
