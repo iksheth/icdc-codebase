@@ -480,7 +480,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilySans,
     float: 'right',
     marginTop: '15px',
-    width: '104px',
+    width: '125px',
     height: '33px',
     background: '#F6F4F4',
     paddingLeft: '10px',
@@ -492,12 +492,12 @@ const styles = (theme) => ({
     height: '50px',
     background: '#F5F3EE',
     width: '200px',
-    fontSize: '8pt',
+    fontSize: '14px',
   },
   headerButtonLinkText: {
     fontFamily: theme.custom.fontFamilySans,
     color: '#0B3556',
-    fontSize: '8pt',
+    fontSize: '14px',
   },
   headerButtonLinkNumber: {
     fontFamily: theme.custom.fontFamilySans,
@@ -505,7 +505,7 @@ const styles = (theme) => ({
     lineHeight: '30px',
     paddingBottom: '3px',
     margin: '0 4px',
-    fontSize: '8pt',
+    fontSize: '14px',
   },
   logo: {
     position: 'absolute',
