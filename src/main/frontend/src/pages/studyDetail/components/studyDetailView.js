@@ -16,6 +16,7 @@ import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
+import SelectedFilesView from '../../../components/FileGrid';
 
 function studyDetailSorting(a, b) {
   if (b && !a) {
@@ -380,6 +381,8 @@ const StudyDetailView = ({ classes, data }) => {
           </Grid>
         </div>
       </div>
+
+      <SelectedFilesView data={data.filesOfStudy === null || data.filesOfStudy === '' ? [] : data.filesOfStudy} />
     </>
   );
 };
