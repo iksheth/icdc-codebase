@@ -50,7 +50,7 @@ const styles = (theme) => ({
   logotype: {
     whiteSpace: 'nowrap',
     color: theme.palette.primary.contrastText,
-    fontFamily: 'Lato',
+    fontFamily: theme.custom.fontFamilyRaleway,
     fontSize: '13px',
     fontWeight: '600',
     letterSpacing: '0.9px',
