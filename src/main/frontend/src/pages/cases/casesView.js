@@ -207,7 +207,7 @@ const CasesView = ({ classes, data, study }) => {
               <span>
                 <span>
                   {' '}
-Case :
+                  Case :
                   {data.title}
                 </span>
               </span>

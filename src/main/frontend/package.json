@@ -14,7 +14,7 @@
     "babel-jest": "23.6.0",
     "babel-loader": "8.0.5",
     "babel-plugin-named-asset-import": "^0.3.4",
-    "babel-preset-react-app": "^7.0.1",
+    "babel-preset-react-app": "^9.1.2",
     "bfj": "6.1.1",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "classnames": "^2.2.6",
@@ -40,8 +40,8 @@
     "line-awesome": "github:icons8/line-awesome",
     "mini-css-extract-plugin": "0.5.0",
     "mui-custom-datatables": "git+https://github.com/skiran86/mui-custom-datatables.git",
-    "mui-datatables": "^2.6.4",
-    "optimize-css-assets-webpack-plugin": "5.0.1",
+    "mui-datatables": "^2.14.0",
+    "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.2.1",
     "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "3.0.0",
@@ -64,7 +64,7 @@
     "react-zoom-pan-pinch": "^1.4.5",
     "recharts": "^1.7.1",
     "recompose": "^0.30.0",
-    "redux": "^4.0.4",
+    "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "resolve": "1.10.0",
@@ -74,10 +74,10 @@
     "terser-webpack-plugin": "1.2.2",
     "tinycolor2": "^1.4.1",
     "url-loader": "1.1.2",
-    "uuid": "^3.3.3",
-    "webpack": "4.28.3",
-    "webpack-dev-server": "3.1.14",
-    "webpack-manifest-plugin": "2.0.4",
+    "uuid": "^8.0.0",
+    "webpack": "4.43.0",
+    "webpack-dev-server": "3.10.3",
+    "webpack-manifest-plugin": "2.2.0",
     "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
@@ -149,9 +149,9 @@
   "devDependencies": {
     "eslint": "^6.2.2",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^1.7.0"
   }
 }

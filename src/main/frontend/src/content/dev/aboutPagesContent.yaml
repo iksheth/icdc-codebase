@@ -1,7 +1,7 @@
 - page: '/steeringCommittee'
   title: "Steering Committee"
   content:
-    - paragraph: 'The ICDC is community $$*driven*$$  and built with input and collaboration from many 
+    - paragraph: 'The ICDC (Integrated Canine Data Commons) is community $$*driven*$$  and built with input and collaboration from many 
         groups to foster a diversity of ideas and to ensure needs are identified across the broad 
         $${Research Community}$$ . To achieve this collaboration, the ICDC Steering Committee was formed 
         to advise the NCI and FNLCR on the ICDC. The Steering Committee is composed of 11 members 
@@ -203,13 +203,13 @@
   title: 'Support'
   content:
     - paragraph: 'If you have any questions, please contact us at $$#ICDCHelpDesk@mail.nih.gov#$$.'
-- page: '/submit-data'
+- page: '/submit'
   title: "Submitting Data"
   content:
     - paragraph: 'The ICDC was established to further research on human cancers by enabling comparative analysis with 
        canine cancer. If a researcher has data that will help this mission and they are willing to share that data in 
        the ICDC, they will make a request through our $${submission request process [PDF]}$$. 
-       Please email $$*ICDCHelpDesk@mail.nih.gov*$$ for instructions. All data in the ICDC will be made publicly available.'
+       Please email $$@ICDCHelpDesk@mail.nih.gov@$$ for instructions. All data in the ICDC will be made publicly available.'
     - paragraph: 'Projects need not be complete to start the request. Indeed, working with the ICDC before defining your data 
        collection processes can be beneficial, as the ICDC can help advise on best practices that will enable more 
        efficient and effective submission of the data.'

@@ -138,7 +138,7 @@ const CaseDetail = ({ classes, data }) => {
                   <span>
                     <span>
                       {' '}
-Case :
+                      Case :
                       {' '}
                       {' '}
                       {caseDetail.case_id}
@@ -156,7 +156,7 @@ Case :
                   <span>
                     <span>
                       {' '}
-Case :
+                      Case :
                       {' '}
                       {' '}
                       {caseDetail.case_id}
@@ -168,11 +168,11 @@ Case :
                     ? '' : (
                       <span>
                         <span className={classes.headerSubTitleCate}>
-                    CASE NAME
+                          CASE NAME
                           {' '}
                           {' '}
                           {' '}
--
+                          -
                           {' '}
                         </span>
                         <span className={classes.headerSubTitleContent}>
@@ -187,7 +187,7 @@ Case :
                           classes.headerSubTitleCate, classes.paddingLeft8, classes.paddingBottm17,
                         )}
                         >
-                      INITIALS
+                          INITIALS
                           {' '}
                         </span>
                         <span className={classes.headerSubTitleContent}>
@@ -251,6 +251,18 @@ Case :
                     </Grid>
                   </Grid>
 
+                  <Grid item xs={12}>
+                    <Grid container spacing={4}>
+                      <Grid item xs={4}>
+                        <span className={classes.title}>Weight</span>
+                      </Grid>
+                      <Grid item xs={8} className={classes.content}>
+                        {caseDetail.demographic
+                          ? caseDetail.demographic.weight : notProvided}
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
 
                   <Grid item xs={12}>
                     <Grid container spacing={4}>
@@ -263,6 +275,7 @@ Case :
                       </Grid>
                     </Grid>
                   </Grid>
+
 
                 </Grid>
               </Grid>

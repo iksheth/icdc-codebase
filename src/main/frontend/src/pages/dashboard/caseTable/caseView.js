@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   Grid,
   withStyles,
@@ -6,11 +6,12 @@ import {
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
+import Snackbar from '@material-ui/core/Snackbar';
 import { Link } from 'react-router-dom';
+import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
-import { fetchCasesAndFiles } from '../../selectedCases/selectedCasesState';
-
+import { receiveCases } from '../../selectedCases/selectedCasesState';
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -22,194 +23,29 @@ const tableStyle = (ratio = 1) => ({
 );
 
 
-const columns = (classes) => [
-  {
-    name: 'case_id',
-    label: 'Case ID',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(0.8)}>
-          {' '}
-          <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'study_code',
-    label: 'Study Code',
-    options: {
-      filter: false,
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(0.6)}>
-
-          <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
-
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'study_type',
-    label: 'Study Type',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2.3)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'breed',
-    label: 'Breed',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(1)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'diagnosis',
-    label: 'Diagnosis',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'stage_of_disease',
-    label: 'Stage of Disease',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(0.5)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'age',
-    label: 'Age',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(0.5)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'sex',
-    label: 'Sex',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(0.5)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'neutered_status',
-    label: 'Neutered Status',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(0.8)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-];
-
-
-let selectedCaseIds = [];
-
-function exportCases(dispatch) {
-  dispatch(fetchCasesAndFiles(selectedCaseIds));
-  selectedCaseIds = [];
-}
-
-
-const options = (classes, dispatch) => ({
-  selectableRows: true,
-  search: false,
-  filter: false,
-  searchable: false,
-  print: false,
-  download: false,
-  viewColumns: false,
-  pagination: true,
-  customToolbarSelect: (selectedRows, displayData) => {
-    const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
-      selectedRows.data[keyVlaue].index
-    ));
-    const selectedCaseId = selectedKeys.map((keyVlaue) => (
-      displayData[keyVlaue].data[0].props.children[1].props.children
-    ));
-    selectedCaseIds = selectedCaseId;
-    return '';
-  },
-  customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
-    <CustomFooter
-      text="SAVE TO MY CASES"
-      onClick={() => exportCases(dispatch)}
-      classes={classes}
-      count={count}
-      page={page}
-      rowsPerPage={rowsPerPage}
-      onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-      // eslint-disable-next-line no-shadow
-      onChangePage={(_, page) => changePage(page)}
-    />
-  ),
-
-});
-
 const Cases = ({ classes, data }) => {
+  const [snackbarState, setsnackbarState] = React.useState({
+    open: false,
+    value: 0,
+  });
+  function openSnack(value1) {
+    setsnackbarState({ open: true, value: value1 });
+  }
+  function closeSnack() {
+    setsnackbarState({ open: false });
+  }
+
+
   const dispatch = useDispatch();
   // data from store
   const chipData = useSelector((state) => (
     state.dashboard.datatable
     && state.dashboard.datatable.filters
       ? state.dashboard.datatable.filters : []));
+
+
+  // Get the existing caseIds from MyCases cart state
+  const caseIds = useSelector((state) => state.cart.cases);
 
 
   // The bubble below will shows in the dashboard and work as
@@ -238,28 +74,286 @@ const Cases = ({ classes, data }) => {
 
   bubbles = '';
 
+
+  const saveButton = useRef(null);
+
+
+  useEffect(() => {
+    saveButton.current.disabled = true;
+    saveButton.current.style.color = '#FFFF';
+    saveButton.current.style.backgroundColor = '#C53B27';
+    saveButton.current.style.opacity = '0.3';
+    saveButton.current.style.border = '3px solid grey';
+    saveButton.current.style.fontWeight = '600';
+    saveButton.current.style.cursor = 'auto';
+  });
+
+
+  let selectedCaseIds = [];
+
+  function exportCases() {
+    // Find the newly added cases by comparing
+    // existing caseIds and selectedCaseIds
+    const uniqueCases = caseIds !== null ? selectedCaseIds.filter(
+      (e) => !caseIds.find((a) => e === a),
+    ).length : selectedCaseIds.length;
+    if (uniqueCases > 0) {
+      openSnack(uniqueCases);
+    }
+    dispatch(receiveCases(selectedCaseIds));
+    selectedCaseIds = [];
+  }
+
+
+  function onRowsSelect(curr, allRowsSelected) {
+    if (allRowsSelected.length === 0) {
+      saveButton.current.disabled = true;
+      saveButton.current.style.color = '#FFFFFF';
+      saveButton.current.style.backgroundColor = '#C53B27';
+      saveButton.current.style.opacity = '0.3';
+      saveButton.current.style.border = '3px solid grey';
+      saveButton.current.style.fontWeight = '600';
+      saveButton.current.style.cursor = 'auto';
+    } else {
+      saveButton.current.disabled = false;
+      saveButton.current.style.color = '#FFFFFF';
+      saveButton.current.style.backgroundColor = '#C53B27';
+      saveButton.current.style.cursor = 'pointer';
+      saveButton.current.style.opacity = 'unset';
+      saveButton.current.style.border = 'unset';
+    }
+  }
+
+
+  const columns = [
+    {
+      name: 'case_id',
+      label: 'Case ID',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'study_code',
+      label: 'Study Code',
+      options: {
+        filter: false,
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.6)}>
+
+            <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
+
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'study_type',
+      label: 'Study Type',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2.3)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'breed',
+      label: 'Breed',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'diagnosis',
+      label: 'Diagnosis',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'stage_of_disease',
+      label: 'Stage of Disease',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'age',
+      label: 'Age',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'sex',
+      label: 'Sex',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'neutered_status',
+      label: 'Neutered Status',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+  ];
+
+
+  const options = () => ({
+    selectableRows: true,
+    search: false,
+    filter: false,
+    searchable: false,
+    print: false,
+    download: false,
+    viewColumns: false,
+    pagination: true,
+    onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
+    customToolbarSelect: (selectedRows, displayData) => {
+      const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
+        selectedRows.data[keyVlaue].index
+      ));
+      const selectedCaseId = selectedKeys.map((keyVlaue) => (
+        displayData[keyVlaue].data[0].props.children[1].props.children
+      ));
+      selectedCaseIds = selectedCaseId;
+      return '';
+    },
+    customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
+      <CustomFooter
+        text="SAVE TO MY CASES"
+        onClick={() => exportCases(dispatch)}
+        classes={classes}
+        count={count}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
+      // eslint-disable-next-line no-shadow
+        onChangePage={(_, page) => changePage(page)}
+      />
+    ),
+
+  });
+
   return (
     <>
-      <div className={classes.chips}>
-        {bubbles}
+      <Snackbar
+        className={classes.snackBar}
+        open={snackbarState.open}
+        onClose={closeSnack}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        message={(
+          <div className={classes.snackBarMessage}>
+            <span>
+              <SuccessOutlinedIcon />
+              {' '}
+            </span>
+            <span className={classes.snackBarText}>
+              {snackbarState.value}
+              {' '}
+              Case(s) successfully added to the My Cases list
+            </span>
+          </div>
+)}
+      />
+      <div>
+        <div className={classes.chips}>
+          {bubbles}
+        </div>
+
+        <Grid container>
+          <Grid item xs={12} className={classes.caseTitle}>
+            Cases
+          </Grid>
+          <Grid item xs={12} id="table_cases">
+            <MUIDataTable
+              data={data}
+              columns={columns}
+              options={options()}
+            />
+          </Grid>
+
+        </Grid>
+        <Grid item xs={12} className={classes.saveButtonDiv}>
+          <button
+            type="button"
+            ref={saveButton}
+            onClick={exportCases}
+            className={classes.button}
+          >
+            SAVE TO MY CASES
+          </button>
+        </Grid>
       </div>
-
-      <Grid container>
-        <Grid item xs={12} className={classes.caseTitle}>
-           Cases
-        </Grid>
-        <Grid item xs={12}>
-          <MUIDataTable
-            data={data}
-            columns={columns(classes)}
-            options={options(classes, dispatch)}
-          />
-        </Grid>
-      </Grid>
-
     </>
   );
 };
+
 
 const styles = () => ({
 
@@ -305,6 +399,11 @@ const styles = () => ({
     fontSize: '9pt',
     letterSpacing: '0.025em',
     color: '#000',
+  },
+  saveButtonDiv: {
+    position: 'absolute',
+    margin: '-50px 0 0 0',
+    paddingLeft: '25px',
   },
   button: {
     borderRadius: '10px',

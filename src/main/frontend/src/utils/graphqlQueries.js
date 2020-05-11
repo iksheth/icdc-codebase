@@ -122,6 +122,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
             sex
             patient_age_at_enrollment
             neutered_indicator
+            weight
         }
         cohort{
             cohort_description

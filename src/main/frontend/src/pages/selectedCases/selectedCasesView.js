@@ -120,6 +120,9 @@ const SelectedCasesView = ({ data, classes }) => (
 );
 
 const styles = (theme) => ({
+  button: {
+    textDecoration: 'none',
+  },
   link: {
     color: '#DC762F',
     textDecoration: 'none',
