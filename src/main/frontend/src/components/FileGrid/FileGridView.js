@@ -77,8 +77,11 @@ class FileGridView extends Component {
       array.map((entry, index) => {
         let line = '';
         Object.keys(entry).map((keyName) => {
-          if (line !== '') line += ',';
-          line += entry[keyName];
+          if (line !== '') {
+            line += ',';
+          } else {
+            line += entry[parseInt(keyName, 10)];
+          }
           return line;
         });
 
@@ -116,7 +119,7 @@ class FileGridView extends Component {
 
       const i = Math.floor(Math.log(bytes) / Math.log(1024));
 
-      return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
+      return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[parseInt(i, 10)]}`;
     }
 
 
@@ -162,13 +165,13 @@ class FileGridView extends Component {
       onRowsSelect: (curr, allRowsSelected) => this.onRowsSelect(curr, allRowsSelected),
       customToolbarSelect: (selectedRows, displayData) => {
         const dataIndex = Object.keys(selectedRows.data).map((keyVlaue) => (
-          selectedRows.data[keyVlaue].index
+          selectedRows.data[parseInt(keyVlaue, 10)].index
         ));
 
         const keysToInclude = [0, 1, 7, 8];
 
         const selectedFiles = dataIndex.map((keyVlaue) => (
-          keysToInclude.map((value) => (displayData[keyVlaue].data[value]))
+          keysToInclude.map((value) => (displayData[parseInt(keyVlaue, 10)].data[value]))
         ));
 
         globalData = selectedFiles.map((obj) => ({
