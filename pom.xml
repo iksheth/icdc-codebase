@@ -9,11 +9,11 @@
 		<version>2.1.5.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>gov.nih.nci.icdc</groupId>
-	<artifactId>ICDC</artifactId>
+	<groupId>gov.nih.nci.ctdc</groupId>
+	<artifactId>CTDC</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
-	<name>ICDC</name>
+	<name>CTDC</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -308,8 +308,8 @@
 							<goal>install-node-and-npm</goal>
 						</goals>
 						<configuration>
-							<nodeVersion>v10.16.0</nodeVersion>
-							<npmVersion>6.9.0</npmVersion>
+							<nodeVersion>v12.16.1</nodeVersion>
+							<npmVersion>6.13.4</npmVersion>
 						</configuration>
 					</execution>
 					<execution>
