@@ -382,7 +382,7 @@ const StudyDetailView = ({ classes, data }) => {
         </div>
       </div>
 
-      <SelectedFilesView data={data.filesOfStudy === null || data.filesOfStudy === '' ? [] : data.filesOfStudy.map((file) => {
+      <SelectedFilesView data={data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
         const cFile = { ...file };
         cFile.parent = 'Study';
         return cFile;

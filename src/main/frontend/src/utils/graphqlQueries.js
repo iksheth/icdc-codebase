@@ -253,14 +253,21 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
    aliguotCountOfStudy(study_code: $csd)
 
    caseCountOfStudy(study_code: $csd)
-
+   
    filesOfStudy(study_code: $csd){
-        file_name 
-        file_type 
-        file_description 
-        file_format 
-        file_size 
-        md5sum 
+    file_type
+   }
+
+   studyFiles(study_codes: [$csd]){
+         file_description
+          file_format
+          file_locations
+          file_name
+          file_size
+          file_status
+          file_type
+          md5sum
+          uuid
 
    }
 
