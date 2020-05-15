@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
 import icon from '../../assets/icons/Icon-MyCases.svg';
+import wizardIcon from '../../assets/icons/Wizard.Step3-MyFiles.svg';
 import CustomFooter from './customFooter';
 
 class selectedFilesView extends Component {
@@ -236,6 +237,12 @@ class selectedFilesView extends Component {
                 </span>
               </div>
             </div>
+            <div className={classes.tableTitleWizard}>
+              <img
+                src={wizardIcon}
+                alt="ICDC MyCases Wizard"
+              />
+            </div>
           </div>
         </Grid>
         <Grid item xs={12}>
@@ -305,6 +312,11 @@ const styles = (theme) => ({
     float: 'left',
     marginLeft: '110px',
     paddingLeft: '3px',
+  },
+  tableTitleWizard: {
+    width: '500px',
+    float: 'right',
+    paddingTop: '20px',
   },
   header: {
     paddingLeft: '32px',

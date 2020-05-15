@@ -4,6 +4,7 @@ import MUIDataTable from 'mui-custom-datatables';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import icon from '../../assets/icons/Icon-MyCases.svg';
+import wizardIcon from '../../assets/icons/Wizard.Step2-MyCases.svg';
 import CustomFooter from './customFooter';
 import { deleteCasesAction } from './selectedCasesState';
 
@@ -104,6 +105,12 @@ const SelectedCasesView = ({ data, classes }) => (
             </span>
           </div>
         </div>
+        <div className={classes.tableTitleWizard}>
+          <img
+            src={wizardIcon}
+            alt="ICDC MyCases Wizard"
+          />
+        </div>
       </div>
     </Grid>
     <Grid item xs={12}>
@@ -169,6 +176,11 @@ const styles = (theme) => ({
     float: 'left',
     marginLeft: '110px',
     paddingLeft: '3px',
+  },
+  tableTitleWizard: {
+    width: '500px',
+    float: 'right',
+    paddingTop: '20px',
   },
   header: {
     paddingLeft: '32px',
