@@ -327,7 +327,7 @@
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>install --save https://github.com/skiran86/mui-custom-datatables/tarball/master</arguments>
+							<arguments>install save https://github.com/skiran86/mui-custom-datatables/tarball/master</arguments>
 						</configuration>
 					</execution>
 					<execution>
