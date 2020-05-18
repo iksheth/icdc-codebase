@@ -150,11 +150,11 @@ const CaseDetail = ({ classes, data, selected }) => {
         className={classes.snackBar}
         open={snackbarState.open}
         onClose={closeSnack}
-        autoHideDuration={3000}
+        autoHideDuration={300000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         message={(
           <div className={classes.snackBarMessage}>
-            <span>
+            <span className={classes.snackBarMessageIcon}>
               <SuccessOutlinedIcon />
               {' '}
             </span>
@@ -762,6 +762,9 @@ const styles = (theme) => ({
     '&:hover': {
       textDecoration: 'underline',
     },
+  },
+  snackBarMessageIcon: {
+    verticalAlign: 'middle',
   },
 });
 
