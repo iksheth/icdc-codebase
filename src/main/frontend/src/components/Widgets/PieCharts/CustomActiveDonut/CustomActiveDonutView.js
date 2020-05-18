@@ -83,7 +83,7 @@ export default class CustomActiveDonut extends PureComponent {
     const data = DataObj.map((obj) => ({
       name: obj.item == null ? 'Not Specified' : obj.item,
       value: obj.cases,
-    })).sort((a, b) => a.name.localeCompare(b.name));
+    })).sort((a, b) => b.name.localeCompare(a.name));
 
     const { activeIndex } = this.state;
 
