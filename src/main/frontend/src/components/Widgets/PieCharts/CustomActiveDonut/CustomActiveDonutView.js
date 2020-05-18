@@ -23,7 +23,7 @@ const COLORS_ODD = [
 const renderActiveShape = (props) => {
   // const RADIAN = Math.PI / 180;
   const {
-    cx, cy, innerRadius, outerRadius, startAngle = 30, endAngle,
+    cx, cy, innerRadius, outerRadius, startAngle, endAngle,
     fill, payload, value, textColor,
   } = props;
   // const sin = Math.sin(-RADIAN * midAngle);
