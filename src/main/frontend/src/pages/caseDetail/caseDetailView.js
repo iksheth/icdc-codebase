@@ -150,7 +150,7 @@ const CaseDetail = ({ classes, data, selected }) => {
         className={classes.snackBar}
         open={snackbarState.open}
         onClose={closeSnack}
-        autoHideDuration={300000}
+        autoHideDuration={3000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         message={(
           <div className={classes.snackBarMessage}>
