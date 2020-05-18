@@ -4,5 +4,5 @@ update_configs:
     directory: "/src/main/frontend"
     update_schedule: "weekly"
     allowed_updates:
-    - match:
-      update_type: "security" 
+      - match:
+          update_type: "security"
