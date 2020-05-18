@@ -293,7 +293,7 @@
 				<version>1.0.1</version>
 			</plugin>
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.7.6</version>
@@ -308,8 +308,8 @@
 							<goal>install-node-and-npm</goal>
 						</goals>
 						<configuration>
-							<nodeVersion>v10.16.0</nodeVersion>
-							<npmVersion>6.9.0</npmVersion>
+							<nodeVersion>v12.16.1</nodeVersion>
+							<npmVersion>6.13.4</npmVersion>
 						</configuration>
 					</execution>
 					<execution>
@@ -327,7 +327,7 @@
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>install --save https://github.com/skiran86/mui-custom-datatables/tarball/master</arguments>
+							<arguments>install save https://github.com/skiran86/mui-custom-datatables/tarball/master</arguments>
 						</configuration>
 					</execution>
 					<execution>
@@ -360,7 +360,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 
