@@ -223,7 +223,7 @@ class FileGridView extends Component {
         <div className={classes.tableDiv}>
           <Grid item xs={12}>
             <div className={classes.tableTitle}>
-              <span className={classes.tableHeader}>My Cases: Files</span>
+              <span className={classes.tableHeader}>Associated Files</span>
             </div>
           </Grid>
           <Grid item xs={12}>
