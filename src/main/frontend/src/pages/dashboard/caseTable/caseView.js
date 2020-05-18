@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -45,7 +44,7 @@ const Cases = ({ classes, data }) => {
       ? state.dashboard.datatable.filters : []));
 
   const cart = useSelector((state) => (
-    state.cart? state.cart : []));
+    state.cart ? state.cart : []));
   // Get the existing caseIds from MyCases cart state
   const caseIds = useSelector((state) => state.cart.cases);
 
@@ -274,8 +273,8 @@ const Cases = ({ classes, data }) => {
     download: false,
     viewColumns: false,
     pagination: true,
-    isRowSelectable:(dataIndex)=>{
-      if(cart.cases.includes(data[dataIndex]["case_id"])){
+    isRowSelectable: (dataIndex) => {
+      if (cart.cases.includes(data[dataIndex].case_id)) {
         return false;
       }
       return true;
@@ -424,7 +423,7 @@ const styles = () => ({
   },
   snackBarMessageIcon: {
     verticalAlign: 'middle',
-  }
+  },
 });
 
 export default withStyles(styles, { withTheme: true })(Cases);
