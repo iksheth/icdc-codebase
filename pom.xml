@@ -293,7 +293,7 @@
 				<version>1.0.1</version>
 			</plugin>
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
 				<version>1.7.6</version>
@@ -360,7 +360,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
 
