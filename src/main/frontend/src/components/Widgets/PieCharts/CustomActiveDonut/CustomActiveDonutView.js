@@ -23,7 +23,7 @@ const COLORS_ODD = [
 const renderActiveShape = (props) => {
   // const RADIAN = Math.PI / 180;
   const {
-    cx, cy, innerRadius, outerRadius, startAngle, endAngle,
+    cx, cy, innerRadius, outerRadius, startAngle = 30, endAngle,
     fill, payload, value, textColor,
   } = props;
   // const sin = Math.sin(-RADIAN * midAngle);
@@ -83,7 +83,7 @@ export default class CustomActiveDonut extends PureComponent {
     const data = DataObj.map((obj) => ({
       name: obj.item == null ? 'Not Specified' : obj.item,
       value: obj.cases,
-    })).sort((a, b) => a.name.localeCompare(b.name));
+    })).sort((a, b) => b.name.localeCompare(a.name));
 
     const { activeIndex } = this.state;
 
