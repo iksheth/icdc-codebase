@@ -240,7 +240,7 @@ const CaseDetail = ({ classes, data, selected }) => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         message={(
           <div className={classes.snackBarMessage}>
-            <span>
+            <span className={classes.snackBarMessageIcon}>
               <SuccessOutlinedIcon />
               {' '}
             </span>
@@ -829,20 +829,28 @@ const styles = (theme) => ({
     marginTop: '15px',
     width: '125px',
     height: '33px',
-    background: '#F6F4F4',
-    paddingLeft: '10px',
-    paddingRight: '10px',
-
+    marginRight: '20px',
   },
   headerButtonLink: {
+    fontFamily: theme.custom.fontFamilySans,
+    color: 'rgb(255, 255, 255)',
+    backgroundColor: '#DC762F',
+    opacity: 'unset',
+    border: 'unset',
+    fontWeight: '600',
+    cursor: 'pointer',
+    height: '27px',
+    fontSize: '10pt',
+    lineHeight: '18px',
+    borderRadius: '10px',
+    width: '178px',
     textDecoration: 'none',
-    lineHeight: '14px',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    color: '#DC762F',
     '&:hover': {
       textDecoration: 'underline',
     },
+  },
+  snackBarMessageIcon: {
+    verticalAlign: 'middle',
   },
 });
 
