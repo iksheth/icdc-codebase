@@ -9,11 +9,11 @@
 		<version>2.1.5.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>gov.nih.nci.ctdc</groupId>
-	<artifactId>CTDC</artifactId>
+	<groupId>gov.nih.nci.icdc</groupId>
+	<artifactId>ICDC</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
-	<name>CTDC</name>
+	<name>ICDC</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
