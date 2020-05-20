@@ -6,9 +6,10 @@ import CustomFooter from './customFooter';
 class FileGridView extends Component {
   constructor(props) {
     super(props);
-    const { data } = this.props;
+    const { data, studyDesignation } = this.props;
     this.state = {
       data,
+      studyDesignation,
     };
 
     // React refs, return DOM node, we can change DOM node's properties.
@@ -77,16 +78,13 @@ class FileGridView extends Component {
       array.map((entry, index) => {
         let line = '';
         Object.keys(entry).map((keyName) => {
-          if (line !== '') {
-            line += ',';
-          } else {
-            line += entry[parseInt(keyName, 10)];
-          }
+          if (line !== '') line += ',';
+          line += entry[keyName];
           return line;
         });
 
         if (index === 0) {
-          str = ['Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
+          str = ['Study Code', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
           str += `\r\n${line},${document.getElementById('multiline-user-coments').value}\r\n`;
         } else {
           str += `${line}\r\n`;
@@ -168,17 +166,18 @@ class FileGridView extends Component {
           selectedRows.data[parseInt(keyVlaue, 10)].index
         ));
 
-        const keysToInclude = [0, 1, 7, 8];
+        const keysToInclude = [0, 6, 7];
+        const { studyDesignation } = this.state;
 
         const selectedFiles = dataIndex.map((keyVlaue) => (
           keysToInclude.map((value) => (displayData[parseInt(keyVlaue, 10)].data[value]))
         ));
 
         globalData = selectedFiles.map((obj) => ({
-          caseId: obj[0],
-          fileName: obj[1],
-          uuid: obj[2],
-          md5Sum: obj[3],
+          studyDesignation,
+          fileName: obj[0],
+          uuid: obj[1],
+          md5Sum: obj[2],
         }));
         return '';
       },
