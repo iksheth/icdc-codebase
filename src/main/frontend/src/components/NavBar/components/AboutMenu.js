@@ -79,7 +79,7 @@ const styles = (theme) => ({
   link: {
     textDecoration: 'none',
     color: 'black',
-    fontFamily: 'Lato',
+    fontFamily: theme.custom.fontFamilyRaleway,
     fontSize: '13px',
     fontWeight: '800',
     lineSpacing: '1px',
