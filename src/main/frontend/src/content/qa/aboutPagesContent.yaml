@@ -1,8 +1,8 @@
 - page: '/crdc'
-  title: "Cancer Research Data Commons (CRDC) and Analysis - qa edited"
+  title: "Cancer Research Data Commons (CRDC) and Analysis"
   content:
-    - paragraph: "$$#CRDC- this is QA edited:#$$"
-    - paragraph: "$$[QA edited The Cancer Research DataCommons](https://datascience.cancer.gov/data-commons)$$ is an initiative from NCI’s Center for Biomedical
+    - paragraph: "$$#CRDC:#$$"
+    - paragraph: "$$[The Cancer Research DataCommons](https://datascience.cancer.gov/data-commons)$$ is an initiative from NCI’s Center for Biomedical
         Informatics & Information Technology ($$[CBIIT](https://datascience.cancer.gov/)$$). CBIIT’s vision for the project consists of a 
         virtual, expandable infrastructure that provides secure access to many different data types across scientific domains, 
         allowing users to analyze, share, and store results, leveraging the storage and elastic compute, or ability to easily scale resources, of the 
@@ -43,10 +43,9 @@
         and workflows, and the capability of sharing results with collaborators. Each Cloud Resource is continually developing new functionality to improve the user 
         experience and add new tools for researchers."
     - paragraph: "Currently the CTDC supports analysis via the SBG Cloud Resource."
-- page: "/developers"
+- page: '/developers'
   title: "Developers"
   content:
-   - paragraph: "This is a new paragraph added"
     - paragraph: "The CTDC System features a GraphQL API to enable querying of the entire data model."
     - paragraph: "https://trialcommons-dev.cancer.gov/v1/graphql/"
     - paragraph: "The CTDC metadata is open to the public and will not require authentication to the system. However, some clinical data and all Data Files are not public so require permission."
