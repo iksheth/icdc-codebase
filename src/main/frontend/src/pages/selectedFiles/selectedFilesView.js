@@ -5,6 +5,15 @@ import icon from '../../assets/icons/Icon-MyCases.svg';
 import wizardIcon from '../../assets/icons/Wizard.Step3-MyFiles.svg';
 import CustomFooter from './customFooter';
 
+const tableStyle = (ratio = 1) => ({
+  width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
+  overflow: 'hidden',
+  wordBreak: 'break-word',
+  maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
+  minWidth: '80px',
+}
+);
+
 class selectedFilesView extends Component {
   constructor(props) {
     super(props);
@@ -124,17 +133,97 @@ class selectedFilesView extends Component {
 
     const columns = [
 
-      { name: 'case_id', label: 'Case ID', sortDirection: 'asc' },
-      { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
-      { name: 'file_type', label: 'File Type' },
-      { name: 'parent', label: 'Association' },
-      { name: 'file_description', label: 'Description' },
-      { name: 'file_format', label: 'Format' },
+      {
+        name: 'case_id',
+        label: 'Case ID',
+        sortDirection: 'asc',
+        options: {
+          customBodyRender: (value) => (
+            <div className="mui_td" style={tableStyle(2.5)}>
+              {' '}
+              {value}
+              {' '}
+            </div>
+          ),
+        },
+      },
+      {
+        name: 'file_name',
+        label: 'File Name',
+        sortDirection: 'asc',
+        options: {
+          customBodyRender: (value) => (
+            <div className="mui_td" style={tableStyle(2.5)}>
+              {' '}
+              {value}
+              {' '}
+            </div>
+          ),
+        },
+      },
+      {
+        name: 'file_type',
+        label: 'File Type',
+        options: {
+          customBodyRender: (value) => (
+            <div className="mui_td" style={tableStyle(1)}>
+              {' '}
+              {value}
+              {' '}
+            </div>
+          ),
+        },
+      },
+      {
+        name: 'parent',
+        label: 'Association',
+        options: {
+          customBodyRender: (value) => (
+            <div className="mui_td" style={tableStyle(1.5)}>
+              {' '}
+              {value}
+              {' '}
+            </div>
+          ),
+        },
+      },
+      {
+        name: 'file_description',
+        label: 'Description',
+        options: {
+          customBodyRender: (value) => (
+            <div className="mui_td" style={tableStyle(2.5)}>
+              {' '}
+              {value}
+              {' '}
+            </div>
+          ),
+        },
+      },
+      {
+        name: 'file_format',
+        label: 'Format',
+        options: {
+          customBodyRender: (value) => (
+            <div className="mui_td" style={tableStyle(0.5)}>
+              {' '}
+              {value}
+              {' '}
+            </div>
+          ),
+        },
+      },
       {
         name: 'file_size',
         label: 'Size',
         options: {
-          customBodyRender: (bytes) => (formatBytes(bytes)),
+          customBodyRender: (bytes) => (
+            <div className="mui_td" style={tableStyle(0.5)}>
+              {' '}
+              {formatBytes(bytes)}
+              {' '}
+            </div>
+          ),
         },
       },
       {

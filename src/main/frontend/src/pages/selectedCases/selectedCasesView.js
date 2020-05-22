@@ -8,6 +8,15 @@ import wizardIcon from '../../assets/icons/Wizard.Step2-MyCases.svg';
 import CustomFooter from './customFooter';
 import { deleteCasesAction } from './selectedCasesState';
 
+const tableStyle = (ratio = 1) => ({
+  width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
+  overflow: 'hidden',
+  wordBreak: 'break-word',
+  maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
+  minWidth: '10px',
+}
+);
+
 const columns = (classes) => [
 
   {
@@ -18,7 +27,7 @@ const columns = (classes) => [
       filter: false,
       sortDirection: 'asc',
       customBodyRender: (value) => (
-        <div>
+        <div style={tableStyle(1.5)}>
           {' '}
           <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
           {' '}
@@ -33,7 +42,7 @@ const columns = (classes) => [
       filter: false,
       sortDirection: 'asc',
       customBodyRender: (value) => (
-        <div>
+        <div style={tableStyle(1.3)}>
           {' '}
           <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
           {' '}
@@ -41,13 +50,97 @@ const columns = (classes) => [
       ),
     },
   },
-  { name: 'study_type', label: 'Study Type' },
-  { name: 'breed', label: 'Breed' },
-  { name: 'diagnosis', label: 'Diagnosis' },
-  { name: 'stage_of_disease', label: 'Stage of Disease' },
-  { name: 'age', label: 'Age' },
-  { name: 'sex', label: 'Sex' },
-  { name: 'neutered_status', label: 'Neutered Status' },
+  {
+    name: 'study_type',
+    label: 'Study Type',
+    options: {
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(1.5)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'breed',
+    label: 'Breed',
+    options: {
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(1)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'diagnosis',
+    label: 'Diagnosis',
+    options: {
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(1.5)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'stage_of_disease',
+    label: 'Stage of Disease',
+    options: {
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(2)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'age',
+    label: 'Age',
+    options: {
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(1)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'sex',
+    label: 'Sex',
+    options: {
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(1)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'neutered_status',
+    label: 'Neutered Status',
+    options: {
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(1.6)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
 ];
 
 const options = (dispatch, cases) => ({
