@@ -275,7 +275,10 @@ const Cases = ({ classes, data }) => {
     pagination: true,
     isRowSelectable: (dataIndex) => {
       if (cart.cases.includes(data[dataIndex].case_id)) {
-        return false;
+        // disabled disable selection function,
+        // return false will result in checkbox is not clickable
+        // return false;
+        return true;
       }
       return true;
     },
