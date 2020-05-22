@@ -43,8 +43,8 @@
         and workflows, and the capability of sharing results with collaborators. Each Cloud Resource is continually developing new functionality to improve the user 
         experience and add new tools for researchers."
     - paragraph: "Currently the CTDC supports analysis via the SBG Cloud Resource."
-- page: "/developers"
-  title: "Developers"
+- page: "/developers/editedurl"
+  title: "Developers-edited url"
   content:
     - paragraph: "The CTDC System features a GraphQL API to enable querying of the entire data model."
     - paragraph: "https://trialcommons-dev.cancer.gov/v1/graphql/"
