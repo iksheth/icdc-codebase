@@ -386,9 +386,9 @@ const StudyDetailView = ({ classes, data }) => {
         data={data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
           const cFile = { ...file };
           cFile.parent = 'Study';
+          cFile.studyDesignation = studyData.clinical_study_designation;
           return cFile;
         })}
-        studyDesignation={studyData.clinical_study_designation}
       />
     </>
   );

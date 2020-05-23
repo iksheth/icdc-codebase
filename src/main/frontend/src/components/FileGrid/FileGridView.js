@@ -6,10 +6,9 @@ import CustomFooter from './customFooter';
 class FileGridView extends Component {
   constructor(props) {
     super(props);
-    const { data, studyDesignation } = this.props;
+    const { data } = this.props;
     this.state = {
       data,
-      studyDesignation,
     };
 
     // React refs, return DOM node, we can change DOM node's properties.
@@ -122,6 +121,13 @@ class FileGridView extends Component {
 
 
     const columns = [
+      {
+        name: 'studyDesignation',
+        label: 'Study Designation',
+        options: {
+          display: false,
+        },
+      },
       { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
       { name: 'file_type', label: 'File Type' },
       { name: 'parent', label: 'Association' },
@@ -166,18 +172,17 @@ class FileGridView extends Component {
           selectedRows.data[parseInt(keyVlaue, 10)].index
         ));
 
-        const keysToInclude = [0, 6, 7];
-        const { studyDesignation } = this.state;
+        const keysToInclude = [0, 1, 7, 8];
 
         const selectedFiles = dataIndex.map((keyVlaue) => (
           keysToInclude.map((value) => (displayData[parseInt(keyVlaue, 10)].data[value]))
         ));
 
         globalData = selectedFiles.map((obj) => ({
-          studyDesignation,
-          fileName: obj[0],
-          uuid: obj[1],
-          md5Sum: obj[2],
+          studyDesignation: obj[0],
+          fileName: obj[1],
+          uuid: obj[2],
+          md5Sum: obj[3],
         }));
         return '';
       },
