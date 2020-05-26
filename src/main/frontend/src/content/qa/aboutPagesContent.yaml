@@ -46,8 +46,9 @@
 - page: '/developers'
   title: "Developers"
   content:
-    - paragraph: "The CTDC System features a GraphQL API to enable querying of the entire data model."
+    - paragraph: "The CTDC System features a GraphQL API to enable querying of the entire data model.-edited by QA"
     - paragraph: "https://trialcommons-dev.cancer.gov/v1/graphql/"
+    - paragraph: "This is a new paragraph added by QA"
     - paragraph: "The CTDC metadata is open to the public and will not require authentication to the system. However, some clinical data and all Data Files are not public so require permission."
     - paragraph: "Users can query the CTDC data via Graphical User Interface (GUI) or API. The GUI provides users a distilled set of parameters (faceted querying) they can use to explore a subset of the CTDC data model. The API provide access to the full collection of parameters as seen in the $$[CTDC Data Model](https://github.com/CBIIT/ctdc-codebase)$$."
     - paragraph: "The API is provided “as is”; there are no warranties or conditions arising out of usage of these services. "
