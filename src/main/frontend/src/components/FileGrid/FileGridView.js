@@ -77,16 +77,13 @@ class FileGridView extends Component {
       array.map((entry, index) => {
         let line = '';
         Object.keys(entry).map((keyName) => {
-          if (line !== '') {
-            line += ',';
-          } else {
-            line += entry[parseInt(keyName, 10)];
-          }
+          if (line !== '') line += ',';
+          line += entry[keyName];
           return line;
         });
 
         if (index === 0) {
-          str = ['Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
+          str = ['Study Code', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
           str += `\r\n${line},${document.getElementById('multiline-user-coments').value}\r\n`;
         } else {
           str += `${line}\r\n`;
@@ -124,6 +121,13 @@ class FileGridView extends Component {
 
 
     const columns = [
+      {
+        name: 'studyDesignation',
+        label: 'Study Designation',
+        options: {
+          display: false,
+        },
+      },
       { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
       { name: 'file_type', label: 'File Type' },
       { name: 'parent', label: 'Association' },
@@ -175,7 +179,7 @@ class FileGridView extends Component {
         ));
 
         globalData = selectedFiles.map((obj) => ({
-          caseId: obj[0],
+          studyDesignation: obj[0],
           fileName: obj[1],
           uuid: obj[2],
           md5Sum: obj[3],
