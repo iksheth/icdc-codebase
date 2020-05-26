@@ -269,5 +269,5 @@
         properties are available for inspection and querying beyond those presented on the front-end.'
     - paragraph: 'Additionally, the ICDC Data Model serves as a template for similar initiatives and data structures, 
         including graph-based database schemas. The model will continue to evolve as data needs are further discerned.'
-    - paragraph: 'The tool used to generate this visual may be sourced on Github at: $$(https://github.com/CBIIT/icdc-model-tool.)$$'
-    - paragraph: 'The model and associated files may be viewed here: $$(https://cbiit.github.io/icdc-model-tool/)$$.'
+    - paragraph: 'The tool used to generate this visual may be sourced on Github at: $$[https://github.com/CBIIT/icdc-model-tool](https://github.com/CBIIT/icdc-model-tool)$$.'
+    - paragraph: 'The model and associated files may be viewed here: $$[https://cbiit.github.io/icdc-model-tool/](https://cbiit.github.io/icdc-model-tool/)$$.'
