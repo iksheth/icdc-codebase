@@ -189,7 +189,6 @@
   content:
     - paragraph: 'The ICDC System features two read-only API’s that are available for public consumption: GraphQL and REST:'
     - paragraph: 'https://caninecommons.cancer.gov/v1/graphql/'
-    - paragraph: 'https://caninecommons.cancer.gov/v1/REST'
     - paragraph: 'Users do not require authentication to the system - the data is public.'
     - paragraph: 'These APIs are provided “as is”; there are no warranties or conditions arising out of usage of these services.'
     - paragraph: '$$#GITHUB:#$$'
