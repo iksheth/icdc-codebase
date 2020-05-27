@@ -29,7 +29,8 @@ const Cases = ({ classes, data }) => {
     value: 0,
   });
   function openSnack(value1) {
-    setsnackbarState({ open: true, value: value1 });
+    // disable the snack bar
+    setsnackbarState({ open: false, value: value1 });
   }
   function closeSnack() {
     setsnackbarState({ open: false });
