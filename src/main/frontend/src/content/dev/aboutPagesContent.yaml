@@ -19,127 +19,127 @@
         and is supported by FNLCR staff. The overall goal of the BPSC is to streamline and standardize data collection 
         and management for canine studies. The BPSC examines past and planned studies and recommends prospective standards 
         for data collection and management in four main areas; imaging, clinical/pathology, immunology and genomic/sequencing data.'
-  table: 
-     - row:
-       - name: 'Matthew Breen'
-       - institution: 'North Carolina State University'
-       - affliation: 'External'
-       - subcommitee: 'DGAB'
-     - row:
-       - name: 'M.R. Chambers'
-       - institution: 'University of Alabama at Birmingham'
-       - affliation: 'External'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Dawn Duval'
-       - institution: 'Colorado State University'
-       - affliation: 'External'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Allison Heath'
-       - institution: 'Children’s Hospital of Philadelphia'	
-       - affliation: 'External'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Warren Kibbe'
-       - institution: 'Duke University'
-       - affliation: 'External'
-       - subcommitee: 'DGAB'
-     - row:
-       - name: 'Deborah Knapp'
-       - institution: 'Purdue University'
-       - affliation: 'External'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Cheryl London'
-       - institution: 'Tufts University'	
-       - affliation: 'External'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Roel Verhaak'
-       - institution: 'The Jackson Laboratory'
-       - affliation: 'External'
-       - subcommitee: 'DGAB'
-     - row:
-       - name: 'Jeff Trent'
-       - institution: 'Translational Genomics Research Institute (TGen)'
-       - affliation: 'External'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Shaying Zhao'
-       - institution: 'University of Georgia'
-       - affliation: 'External'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Toby Hecht'
-       - institution: 'DCTD/NCI'
-       - affliation: 'NIH'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Paula Jacobs'
-       - institution: 'CIP/DCTD/NCI'
-       - affliation: 'NIH'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Tony Kerlavage'
-       - institution: 'CBIIT/NCI'
-       - affliation: 'NIH'
-       - subcommitee: '-'
-     - row:
-       - name: 	'Erika Kim'
-       - institution: 'CBIIT/NCI'
-       - affliation: 'NIH'
-       - subcommitee: 'DGAB, BPSC'
-     - row:
-       - name: 'Amy LeBlanc'
-       - institution: 'COP/CCR/NCI'	
-       - affliation: 'NIH'
-       - subcommitee: 'DGAB'
-     - row:
-       - name: 'Christina Mazcko'
-       - institution: 'COP/CCR/NCI'
-       - affliation: 'NIH'
-       - subcommitee: '-'
-     - row:
-       - name: 'Elaine Ostrander'
-       - institution: 'CGCGB/NHGRI'
-       - affliation: 'NIH'
-       - subcommitee: 'BPSC'
-     - row:
-       - name: 'Connie Sommers'
-       - institution: 'IOB/DTP/DCTD/NCI'
-       - affliation: 'NIH'
-       - subcommitee: 'DGAB, BPSC'
-     - row:
-       - name: 'Greg Tawa'
-       - institution: 'TRNDP/NCATS'
-       - affliation: 'NIH'
-       - subcommitee: 'DGAB'
-     - row:
-       - name: 'Allen Dearry'
-       - institution: 'CBIIT/NCI'
-       - affliation: 'NIH'
-       - subcommitee: '-'
-     - row:
-       - name: 'Matthew Beyers'
-       - institution: 'FNLCR'
-       - affliation: 'FNL'
-       - subcommitee: 'DGAB, BPSC'
-     - row:
-       - name: 'Philip Musk'
-       - institution: 'FNLCR'
-       - affliation: 'FNL'
-       - subcommitee: 'DGAB'
-     - row:
-       - name: 'John Otridge'
-       - institution: 'FNLCR'	
-       - affliation: 'FNL'
-       - subcommitee: '-'
-     - row:
-       - name: 'Ralph Parchment'
-       - institution: 'FNLCR'	
-       - affliation: 'FNL'
-       - subcommitee: '-'
+    - table: 
+       - row:
+         - name: 'Matthew Breen'
+         - institution: 'North Carolina State University'
+         - affliation: 'External'
+         - subcommitee: 'DGAB'
+       - row:
+         - name: 'M.R. Chambers'
+         - institution: 'University of Alabama at Birmingham'
+         - affliation: 'External'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Dawn Duval'
+         - institution: 'Colorado State University'
+         - affliation: 'External'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Allison Heath'
+         - institution: 'Children’s Hospital of Philadelphia'	
+         - affliation: 'External'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Warren Kibbe'
+         - institution: 'Duke University'
+         - affliation: 'External'
+         - subcommitee: 'DGAB'
+       - row:
+         - name: 'Deborah Knapp'
+         - institution: 'Purdue University'
+         - affliation: 'External'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Cheryl London'
+         - institution: 'Tufts University'	
+         - affliation: 'External'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Roel Verhaak'
+         - institution: 'The Jackson Laboratory'
+         - affliation: 'External'
+         - subcommitee: 'DGAB'
+       - row:
+         - name: 'Jeff Trent'
+         - institution: 'Translational Genomics Research Institute (TGen)'
+         - affliation: 'External'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Shaying Zhao'
+         - institution: 'University of Georgia'
+         - affliation: 'External'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Toby Hecht'
+         - institution: 'DCTD/NCI'
+         - affliation: 'NIH'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Paula Jacobs'
+         - institution: 'CIP/DCTD/NCI'
+         - affliation: 'NIH'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Tony Kerlavage'
+         - institution: 'CBIIT/NCI'
+         - affliation: 'NIH'
+         - subcommitee: '-'
+       - row:
+         - name: 	'Erika Kim'
+         - institution: 'CBIIT/NCI'
+         - affliation: 'NIH'
+         - subcommitee: 'DGAB, BPSC'
+       - row:
+         - name: 'Amy LeBlanc'
+         - institution: 'COP/CCR/NCI'	
+         - affliation: 'NIH'
+         - subcommitee: 'DGAB'
+       - row:
+         - name: 'Christina Mazcko'
+         - institution: 'COP/CCR/NCI'
+         - affliation: 'NIH'
+         - subcommitee: '-'
+       - row:
+         - name: 'Elaine Ostrander'
+         - institution: 'CGCGB/NHGRI'
+         - affliation: 'NIH'
+         - subcommitee: 'BPSC'
+       - row:
+         - name: 'Connie Sommers'
+         - institution: 'IOB/DTP/DCTD/NCI'
+         - affliation: 'NIH'
+         - subcommitee: 'DGAB, BPSC'
+       - row:
+         - name: 'Greg Tawa'
+         - institution: 'TRNDP/NCATS'
+         - affliation: 'NIH'
+         - subcommitee: 'DGAB'
+       - row:
+         - name: 'Allen Dearry'
+         - institution: 'CBIIT/NCI'
+         - affliation: 'NIH'
+         - subcommitee: '-'
+       - row:
+         - name: 'Matthew Beyers'
+         - institution: 'FNLCR'
+         - affliation: 'FNL'
+         - subcommitee: 'DGAB, BPSC'
+       - row:
+         - name: 'Philip Musk'
+         - institution: 'FNLCR'
+         - affliation: 'FNL'
+         - subcommitee: 'DGAB'
+       - row:
+         - name: 'John Otridge'
+         - institution: 'FNLCR'	
+         - affliation: 'FNL'
+         - subcommitee: '-'
+       - row:
+         - name: 'Ralph Parchment'
+         - institution: 'FNLCR'	
+         - affliation: 'FNL'
+         - subcommitee: '-'
 - page: '/crdc'
   title: "Cancer Research Data Commons (CRDC) and Analysis"
   content:
