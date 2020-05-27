@@ -168,7 +168,7 @@
        interactively define and compare cohorts, examine underlying molecular data for specific genes and pathways, and share insights with collaborators. 
        For computational users, Application Program Interfaces (APIs) and Google Cloud Platform (GCP) resources such as BigQuery and Google Pipeline service, 
        allow complex queries from R or Python scripts, or Dockerized workflows to run on data available in the Google Cloud Storage.'
-    - paragraph: '$$*IBROAD INSTITUTE FIRECLOUD*$$ is an open, standards-based platform for performing production-scale data analysis in the cloud. Built on the Google 
+    - paragraph: '$$*BROAD INSTITUTE FIRECLOUD*$$ is an open, standards-based platform for performing production-scale data analysis in the cloud. Built on the Google 
        Cloud Platform, Firecloud empowers analysts, tool developers, and production managers to run large-scale analysis and to share results with collaborators. 
        Users can upload their own analysis methods and data to workspaces or run the Broad’s best practice tools and pipelines.'
     - paragraph: '$$*FROM ICDC TO CLOUD RESOURCES:*$$'
