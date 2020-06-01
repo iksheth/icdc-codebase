@@ -151,7 +151,7 @@
   content:
     - paragraph: '$$#CRDC:#$$'
     - paragraph: '$$[The Cancer Research Data Commons](https://datacommons.cancer.gov/)$$ is an initiative from NCI’s Center for Biomedical
-        Informatics & Information Technology ( $$[CBIIT](https://datascience.cancer.gov/)$$). CBIIT’s vision for the project consists of a 
+        Informatics & Information Technology ($$[CBIIT](https://datascience.cancer.gov/)$$). CBIIT’s vision for the project consists of a 
         virtual, expandable infrastructure that provides secure access to many different data types across scientific domains, 
         allowing users to analyze, share, and store results, leveraging the storage and elastic compute, or ability to easily scale resources, of the 
         cloud. The ability to combine diverse data types and perform cross-domain analysis of large data sets can lead to new discoveries in cancer prevention, 
