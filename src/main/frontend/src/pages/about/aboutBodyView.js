@@ -67,23 +67,36 @@ const AboutBody = ({ classes, data }) => {
                       { contentObj.paragraph.split('$$').map((splitedParagraph) => {
                         // Checking for regex ()[] pattern
                         if (splitedParagraph != null && ((/\[(.+)\]\((.+)\)/g.test(splitedParagraph)) || (/\((.+)\)\[(.+)\]/g.test(splitedParagraph)))) {
+                          const title = splitedParagraph.match(/\[(.*)\]/).pop();
+                          const linkAttrs = splitedParagraph.match(/\((.*)\)/).pop().split(' ');
+                          const target = linkAttrs.find((link) => link.includes('target:'));
+                          const url = linkAttrs.find((link) => link.includes('url:'));
+                          const type = linkAttrs.find((link) => link.includes('type:')); // 0 : no img
+
+                          const link = (
+                            <Link
+                              title={title}
+                              target={target ? target.replace('target:', '') : '_blank'}
+                              rel="noreferrer"
+                              href={url ? url.replace('url:', '') : splitedParagraph.match(/\((.*)\)/).pop()}
+                              color="inherit"
+                              className={classes.link}
+                            >
+                              {title}
+                            </Link>
+                          );
+
                           return (
                             <>
-                              <Link
-                                title={splitedParagraph.match(/\[(.*)\]/).pop()}
-                                target="_blank"
-                                rel="noreferrer"
-                                href={splitedParagraph.match(/\((.*)\)/).pop()}
-                                color="inherit"
-                                className={classes.link}
-                              >
-                                {splitedParagraph.match(/\[(.*)\]/).pop()}
-                              </Link>
-                              <img
-                                src={externalIcon}
-                                alt="outbounnd web site icon"
-                                className={classes.linkIcon}
-                              />
+                              {link}
+                              {type ? '' : (
+                                <img
+                                  src={externalIcon}
+                                  alt="outbounnd web site icon"
+                                  className={classes.linkIcon}
+                                />
+                              )}
+
                             </>
                           );
                         }
