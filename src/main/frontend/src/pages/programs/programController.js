@@ -14,7 +14,7 @@ const ProgramCardController = () => {
   if (error) {
     return (
       <Typography variant="headline" color="warning" size="sm">
-        {error && `An error has occurred in loading program cards components: ${error}`}
+        {error && `An error has occurred in loading program components: ${error}`}
       </Typography>
     );
   }
