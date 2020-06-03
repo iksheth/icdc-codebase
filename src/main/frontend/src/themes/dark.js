@@ -367,5 +367,11 @@ export default {
         padding: '5px',
       },
     },
+    MUIDataTableBodyCell: {
+      stackedCommon: {
+        height: 'auto !important',
+        whiteSpace: 'normal !important',
+      },
+    },
   },
 };
