@@ -363,7 +363,7 @@ const StudyDetailView = ({ classes, data }) => {
           </div>
           <Grid item xs={12}>
             <Grid container spacing={8}>
-              <Grid item xs={12}>
+              <Grid item xs={12} id="table_cohort_dosing">
                 <Typography>
                   <MUIDataTable
                     data={cohortAndDosingTableData.sort(

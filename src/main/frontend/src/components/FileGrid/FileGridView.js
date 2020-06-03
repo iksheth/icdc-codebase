@@ -230,7 +230,7 @@ class FileGridView extends Component {
               <span className={classes.tableHeader}>ASSOCIATED FILES</span>
             </div>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} id="table_associated_files">
 
             <MUIDataTable
               data={state.data}

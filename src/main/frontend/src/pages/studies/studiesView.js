@@ -119,7 +119,7 @@ const Studies = ({ classes, data }) => {
 
           <div className={classes.tableDiv}>
             <Grid container>
-              <Grid item xs={12}>
+              <Grid item xs={12} id="table_studies">
                 <MUIDataTable
                   data={data.studiesByProgram}
                   columns={columns}

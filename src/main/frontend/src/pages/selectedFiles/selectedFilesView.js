@@ -336,7 +336,7 @@ class selectedFilesView extends Component {
         </Grid>
         <Grid item xs={12}>
 
-          <div className={classes.tableWrapper}>
+          <div className={classes.tableWrapper} id="table_selected_files">
             <MUIDataTable
               data={state.data}
               columns={columns}
