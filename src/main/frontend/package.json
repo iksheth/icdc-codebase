@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "dependencies": {
     "@babel/core": "7.2.2",
-    "@material-ui/core": "^3.9.2",
+    "@material-ui/core": "^3.9.4",
     "@material-ui/icons": "^3.0.2",
     "@svgr/webpack": "4.1.0",
     "apollo-boost": "^0.4.3",
