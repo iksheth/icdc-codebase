@@ -370,7 +370,7 @@ const CaseDetail = ({ classes, data, selected }) => {
         </div>
 
 
-        <div className={classes.detailContainer}>
+        <div id="case_detail_container" className={classes.detailContainer}>
 
           <Grid container spacing={4}>
 
@@ -624,7 +624,7 @@ const CaseDetail = ({ classes, data, selected }) => {
           </Grid>
         </div>
       </div>
-      <div className={classes.tableContainer}>
+      <div id="table_case_detail" className={classes.tableContainer}>
 
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
