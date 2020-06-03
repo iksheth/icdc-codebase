@@ -207,7 +207,7 @@ const SelectedCasesView = ({ data, classes }) => (
       </div>
     </Grid>
     <Grid item xs={12}>
-      <div className={classes.tableWrapper}>
+      <div className={classes.tableWrapper} id="table_selected_cases">
         <MUIDataTable
           data={data}
           columns={columns(classes)}

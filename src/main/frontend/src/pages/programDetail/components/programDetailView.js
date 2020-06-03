@@ -154,7 +154,7 @@ const ProgramDetailView = ({ classes, data }) => {
           </div>
           <Grid item xs={12}>
             <Grid container spacing={8}>
-              <Grid item xs={12}>
+              <Grid item xs={12} id="table_studies">
                 <MUIDataTable
                   data={data.studiesByProgramId}
                   columns={columns}
