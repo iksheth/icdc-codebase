@@ -1,2 +1,4 @@
 console.log(chalk.yellow('Compiled with warnings.\n'));
-if (line !== '') line += ',';
+let i =0;
+let line=[];
+if (line !='') line[i] +=',';
