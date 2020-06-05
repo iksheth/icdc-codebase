@@ -29,8 +29,7 @@ const Cases = ({ classes, data }) => {
     value: 0,
   });
   function openSnack(value1) {
-    // disable the snack bar
-    setsnackbarState({ open: false, value: value1 });
+    setsnackbarState({ open: true, value: value1 });
   }
   function closeSnack() {
     setsnackbarState({ open: false });
@@ -276,10 +275,7 @@ const Cases = ({ classes, data }) => {
     pagination: true,
     isRowSelectable: (dataIndex) => {
       if (cart.cases.includes(data[dataIndex].case_id)) {
-        // disabled disable selection function,
-        // return false will result in checkbox is not clickable
-        // return false;
-        return true;
+        return false;
       }
       return true;
     },
