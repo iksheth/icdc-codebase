@@ -275,7 +275,7 @@ const Cases = ({ classes, data }) => {
     pagination: true,
     isRowSelectable: (dataIndex) => {
       if (cart.cases.includes(data[dataIndex].case_id)) {
-        return false;
+        return true;
       }
       return true;
     },
