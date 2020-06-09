@@ -275,7 +275,8 @@ const Cases = ({ classes, data }) => {
     pagination: true,
     isRowSelectable: (dataIndex) => {
       if (cart.cases.includes(data[dataIndex].case_id)) {
-        return false;
+        // disable the grey out functionality , change the return to false will bring it back
+        return true;
       }
       return true;
     },
