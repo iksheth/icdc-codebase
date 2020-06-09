@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import MUIDataTable from 'mui-custom-datatables';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,8 @@ import wizardIcon from '../../assets/icons/Wizard.Step2-MyCases.svg';
 import CustomFooter from './customFooter';
 import { deleteCasesAction } from './selectedCasesState';
 import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
+import Warning from './warningView';
+
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -146,7 +148,7 @@ const columns = (classes) => [
 ];
 
 
-const SelectedCasesView = ({ data, classes }) => {
+const SelectedCasesView = ({ dataInCart, data, classes }) => {
   const dispatch = useDispatch();
 
 
@@ -173,6 +175,14 @@ const SelectedCasesView = ({ data, classes }) => {
       ));
     }
   }
+
+  useEffect(() => {
+    const caseIdDB = data.map((d) => d.case_id);
+    const caseIds = dataInCart.cases.filter((id) => !caseIdDB.includes(id));
+    if (caseIds.length > 0) {
+      dispatch(deleteCasesAction(caseIds));
+    }
+  }, []);
 
 
   const options = (cases) => ({
@@ -213,6 +223,7 @@ const SelectedCasesView = ({ data, classes }) => {
     <>
       <Grid>
         <Grid item xs={12}>
+
           <div className={classes.header}>
             <div className={classes.logo}>
               <img
@@ -237,6 +248,9 @@ const SelectedCasesView = ({ data, classes }) => {
           </div>
         </Grid>
         <Grid item xs={12}>
+          {dataInCart.deletedCases.length > 0 ? <Warning ids={dataInCart.deletedCases} /> : ''}
+        </Grid>
+        <Grid item xs={12}>
           <div className={classes.tableWrapper} id="table_selected_cases">
             <MUIDataTable
               data={data}
@@ -251,7 +265,7 @@ const SelectedCasesView = ({ data, classes }) => {
         className={classes.snackBar}
         open={snackbarState.open}
         onClose={closeSnackBar}
-        autoHideDuration={19500}
+        autoHideDuration={1500}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         message={(
           <div className={classes.snackBarMessage}>

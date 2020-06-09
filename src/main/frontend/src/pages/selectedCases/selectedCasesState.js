@@ -8,6 +8,7 @@ export const initialState = {
   files: [],
   error: '',
   isError: false,
+  deletedCases: [],
 };
 
 
@@ -76,6 +77,7 @@ export default function CARTReducer(state = initialState, action) {
       return {
         ...state,
         cases: casesAfterDeletion,
+        deletedCases: action.payload,
       };
     }
 
