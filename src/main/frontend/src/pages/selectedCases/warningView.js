@@ -7,9 +7,9 @@ const warning = ({ classes, ids = [] }) => (
       The following Cases have been updated and removed from the My Cases cart workflow:
     </Grid>
     <Grid item xs={12} className={classes.text}>
-      [
-      {ids.join(',').slice(0, -1)}
-      ]
+      <span>[</span>
+      <span>{ids.join(',').slice(0, -1)}</span>
+      <span>]</span>
     </Grid>
     <Grid item xs={12} className={classes.text}>
       The updated records can be found via search and added back into your cart as necessary
