@@ -26,7 +26,7 @@ const styles = (theme) => ({
     margin: '30px auto 30px auto',
     maxWidth: '1440px',
     background: 'rgb(240, 173, 78,0.5)',
-    padding: '15px',
+    padding: '15px 35px',
   },
   text: {
     color: '#000000',

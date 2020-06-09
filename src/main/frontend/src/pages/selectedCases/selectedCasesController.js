@@ -23,7 +23,7 @@ const selectedCasesController = () => {
           : (
             error || !data
               ? <Typography variant="headline" color="error" size="sm">{error && `An error has occurred in loading CART : ${error}`}</Typography>
-              : <SelectedCasesView data_in_cart={cart} data={data.casesInList === null || data.casesInList === '' ? [] : data.casesInList} />
+              : <SelectedCasesView dataInCart={cart} data={data.casesInList === null || data.casesInList === '' ? [] : data.casesInList} />
           )
       )}
     </Query>
