@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 
-const warning = ({ classes, ids = ['123', '12312', 'asfasdf'] }) => (
+const warning = ({ classes, ids = [] }) => (
   <div className={classes.warnWrapper} id="warning_cart">
     <Grid item xs={12} className={classes.text}>
       The following Cases have been updated and removed from the My Cases cart workflow:
