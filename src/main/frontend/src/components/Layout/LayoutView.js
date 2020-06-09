@@ -18,6 +18,7 @@ import SelectedCases from '../../pages/selectedCases/selectedCasesController';
 import SelectedFiles from '../../pages/selectedFiles/selectedFilesController';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutController';
+import test from '../../pages/selectedCases/warningView';
 
 const ScrollToTop = () => {
   window.scrollTo(0, 0);
@@ -61,6 +62,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/developers" component={About} />
             <Route path="/support" component={About} />
             <Route path="/submit" component={About} />
+            <Route path="/test" component={test} />
 
 
             <Route component={Error} />
