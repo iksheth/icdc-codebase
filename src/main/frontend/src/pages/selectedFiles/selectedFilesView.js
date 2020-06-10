@@ -260,13 +260,15 @@ class selectedFilesView extends Component {
 
         const keysToInclude = [0, 1, 7, 8];
 
+        // NOTE:  displayData[keyVlaue].data[value] is getting values in Object format
+        // instead of Value format, Due to use of "customBodyRender function"
         const selectedFiles = dataIndex.map((keyVlaue) => (
           keysToInclude.map((value) => (displayData[keyVlaue].data[value]))
         ));
 
         globalData = selectedFiles.map((obj) => ({
-          caseId: obj[0],
-          fileName: obj[1],
+          caseId: obj[0].props.children[1],
+          fileName: obj[1].props.children[1],
           uuid: obj[2],
           md5Sum: obj[3],
         }));
