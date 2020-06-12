@@ -45,6 +45,12 @@
                 - BPSC
             - 
               row: 
+                - "William Hendricks"
+                - "Translational Genomics Research Institute (TGen)"
+                - External
+                - DGAB
+            -
+              row: 
                 - "Warren Kibbe"
                 - "Duke University"
                 - External
