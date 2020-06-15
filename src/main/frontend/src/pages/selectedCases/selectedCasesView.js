@@ -46,7 +46,7 @@ const columns = (classes) => [
       filter: false,
       sortDirection: 'asc',
       customBodyRender: (value) => (
-        <div style={tableStyle(1.3)}>
+        <div style={tableStyle(1)}>
           {' '}
           <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
           {' '}
@@ -59,7 +59,7 @@ const columns = (classes) => [
     label: 'Study Type',
     options: {
       customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(1.5)}>
+        <div className="mui_td" style={tableStyle(1)}>
           {' '}
           {value}
           {' '}
@@ -85,7 +85,7 @@ const columns = (classes) => [
     label: 'Diagnosis',
     options: {
       customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(1.5)}>
+        <div className="mui_td" style={tableStyle(1.1)}>
           {' '}
           {value}
           {' '}
@@ -98,7 +98,7 @@ const columns = (classes) => [
     label: 'Stage of Disease',
     options: {
       customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2)}>
+        <div className="mui_td" style={tableStyle(1.4)}>
           {' '}
           {value}
           {' '}
@@ -111,7 +111,7 @@ const columns = (classes) => [
     label: 'Age',
     options: {
       customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(1)}>
+        <div className="mui_td" style={tableStyle(0.75)}>
           {' '}
           {value}
           {' '}
@@ -137,7 +137,7 @@ const columns = (classes) => [
     label: 'Neutered Status',
     options: {
       customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(1.6)}>
+        <div className="mui_td" style={tableStyle(1.3)}>
           {' '}
           {value}
           {' '}
