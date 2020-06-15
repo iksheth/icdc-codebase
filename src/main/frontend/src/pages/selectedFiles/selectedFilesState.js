@@ -12,20 +12,20 @@ export const initialState = {
 };
 
 
-export const TOGGLE_CHEKCBOX_IN_FILE_TABLE = 'TOGGLE_CHEKCBOX_IN_CASE_TABLE';
+export const TOGGLE_CHEKCBOX_IN_CASE_TABLE = 'TOGGLE_CHEKCBOX_IN_CASE_TABLE';
 export const INIT_CART = 'INIT_CART';
 export const CART_QUERY_ERR = 'CART_QUERY_ERR';
 export const READY_CART = 'READY_CART';
-export const DELETE_FILE = 'DELETE_CASES';
-export const DELETE_FILE_WITH_RECORD = 'DELETE_CASES_WITH_RECORD';
+export const DELETE_CASES = 'DELETE_CASES';
+export const DELETE_CASES_WITH_RECORD = 'DELETE_CASES_WITH_RECORD';
 
 export const deleteCasesAction = (payload) => ({
-  type: DELETE_FILE,
+  type: DELETE_CASES,
   payload,
 });
 
 export const deleteCasesWithRecordAction = (payload) => ({
-  type: DELETE_FILE_WITH_RECORD,
+  type: DELETE_CASES_WITH_RECORD,
   payload,
 });
 
