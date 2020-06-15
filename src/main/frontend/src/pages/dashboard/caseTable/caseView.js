@@ -293,7 +293,7 @@ const Cases = ({ classes, data }) => {
     },
     customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
       <CustomFooter
-        text="SAVE TO MY CASES"
+        text="SAVE TO MY FILES"
         onClick={() => exportCases(dispatch)}
         classes={classes}
         count={count}
@@ -351,7 +351,7 @@ const Cases = ({ classes, data }) => {
             onClick={exportCases}
             className={classes.button}
           >
-            SAVE TO MY CASES
+            ADD FILES TO MY CART
           </button>
         </Grid>
       </div>

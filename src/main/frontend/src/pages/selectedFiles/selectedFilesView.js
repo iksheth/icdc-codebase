@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
 import icon from '../../assets/icons/Icon-MyCases.svg';
-import wizardIcon from '../../assets/icons/Wizard.Step3-MyFiles.svg';
 import CustomFooter from './customFooter';
 
 const tableStyle = (ratio = 1) => ({

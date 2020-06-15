@@ -218,7 +218,7 @@ const Dashboard = ({
             indicatorColor="primary"
             textColor="primary"
         >
-          <Tab label="Classes" /> 
+          <Tab label="Cases" /> 
           <Tab label="Files" /> 
         </Tabs>
           <SwipeableViews

@@ -4,34 +4,33 @@ import {
 
 
 export const initialState = {
-  cases: [],
   files: [],
   error: '',
   isError: false,
-  deletedCases: [],
+  deleted: [],
 };
 
 
-export const TOGGLE_CHEKCBOX_IN_CASE_TABLE = 'TOGGLE_CHEKCBOX_IN_CASE_TABLE';
+export const TOGGLE_CHEKCBOX_IN_FILE_TABLE = 'TOGGLE_CHEKCBOX_IN_CASE_TABLE';
 export const INIT_CART = 'INIT_CART';
 export const CART_QUERY_ERR = 'CART_QUERY_ERR';
 export const READY_CART = 'READY_CART';
-export const DELETE_CASES = 'DELETE_CASES';
-export const DELETE_CASES_WITH_RECORD = 'DELETE_CASES_WITH_RECORD';
+export const DELETE_FILE = 'DELETE_CASES';
+export const DELETE_FILE_WITH_RECORD = 'DELETE_CASES_WITH_RECORD';
 
-export const deleteCasesAction = (payload) => ({
-  type: DELETE_CASES,
+export const deleteFilesAction = (payload) => ({
+  type: DELETE_FILE,
   payload,
 });
 
-export const deleteCasesWithRecordAction = (payload) => ({
-  type: DELETE_CASES_WITH_RECORD,
+export const deleteFilesWithRecordAction = (payload) => ({
+  type: DELETE_FILE_WITH_RECORD,
   payload,
 });
 
-const deleteCases = (selectedCases, cases) => {
-  if (!selectedCases || selectedCases.length === 0) return cases;
-  return cases.filter((caseId) => !selectedCases.includes(caseId));
+const deleteFiles = (selected, files) => {
+  if (!selected || selected.length === 0) return files;
+  return files.filter((id) => !selected.includes(id));
 };
 
 
@@ -40,7 +39,7 @@ export const getCart = () => ({
 });
 
 
-const shouldInitCart = (state) => state.cart.cases !== JSON.parse(localStorage.getItem('userSelectedCases'));
+const shouldInitCart = (state) => state.cart.files !== JSON.parse(localStorage.getItem('userSelectedFiles'));
 
 const readyCart = () => ({
   type: READY_CART,
@@ -63,12 +62,12 @@ export const toggleCheckboxInCaseTable = (payload) => ({
 });
 
 
-export function receiveCases(casesIds) {
+export function receiveFiles(ids) {
   const payload = {
-    cases: casesIds,
+    files: ids,
   };
   return ({
-    type: TOGGLE_CHEKCBOX_IN_CASE_TABLE,
+    type: TOGGLE_CHEKCBOX_IN_FILE_TABLE,
     payload,
   });
 }
@@ -76,21 +75,21 @@ export function receiveCases(casesIds) {
 
 export default function CARTReducer(state = initialState, action) {
   switch (action.type) {
-    case DELETE_CASES: {
-      const casesAfterDeletion = deleteCases(action.payload, state.cases);
-      localStorage.setItem('userSelectedCases', JSON.stringify(casesAfterDeletion));
+    case DELETE_FILE: {
+      const afterDeletion = deleteFiles(action.payload, state.files);
+      localStorage.setItem('userSelectedFiles', JSON.stringify(afterDeletion));
       return {
         ...state,
-        cases: casesAfterDeletion,
+        files: afterDeletion,
       };
     }
-    case DELETE_CASES_WITH_RECORD: {
-      const casesAfterDeletion = deleteCases(action.payload, state.cases);
-      localStorage.setItem('userSelectedCases', JSON.stringify(casesAfterDeletion));
+    case DELETE_FILE_WITH_RECORD: {
+      const afterDeletion = deleteFiles(action.payload, state.files);
+      localStorage.setItem('userSelectedFiles', JSON.stringify(afterDeletion));
       return {
         ...state,
-        cases: casesAfterDeletion,
-        deletedCases: action.payload,
+        files: afterDeletion,
+        deleted: action.payload,
       };
     }
 
@@ -98,26 +97,26 @@ export default function CARTReducer(state = initialState, action) {
       return {
         ...state,
         isError: false,
-        cases: JSON.parse(localStorage.getItem('userSelectedCases')) || [],
+        files: JSON.parse(localStorage.getItem('userSelectedFiles')) || [],
       };
     }
 
 
     case TOGGLE_CHEKCBOX_IN_CASE_TABLE: {
-      const previousStatCases = Object.assign([], state.cases);
+      const previousState = Object.assign([], state.files);
       // remove duplicates in case's ids.
-      const uniqueCases = action.payload.cases.length > 0
+      const unique = action.payload.files.length > 0
         ? Array.from(
           new Set(
-            previousStatCases.concat(action.payload.cases),
+            previousState.concat(action.payload.files),
           ),
-        ) : previousStatCases;
+        ) : previousState;
 
-      localStorage.setItem('userSelectedCases', JSON.stringify(uniqueCases) || []);
+      localStorage.setItem('userSelectedFiles', JSON.stringify(unique) || []);
       return {
         ...state,
         isError: false,
-        cases: uniqueCases,
+        cases: unique,
       };
     }
     case CART_QUERY_ERR: {
