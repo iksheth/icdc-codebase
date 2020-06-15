@@ -260,7 +260,7 @@
 - 
   content: 
     - 
-      paragraph: "If you have any questions, please contact us at $$*ICDCHelpDesk@mail.nih.gov*$$."
+      paragraph: "If you have any questions, please contact us at $$@ICDCHelpDesk@mail.nih.gov@$$."
   page: /support
   title: Support
 - 
