@@ -47,7 +47,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/model" component={modelPage} />
             <Route path="/table" component={table} />
             <Route path="/myCases" component={SelectedCases} />
-            <Route path="/myCasesFiles" component={SelectedFiles} />
+            <Route path="/myFiles" component={SelectedFiles} />
 
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/study/:id" component={StudyDetail} />

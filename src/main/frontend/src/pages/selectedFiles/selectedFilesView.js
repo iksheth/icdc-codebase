@@ -324,15 +324,9 @@ class selectedFilesView extends Component {
             <div className={classes.headerTitle}>
               <div className={classes.headerMainTitle}>
                 <span>
-                  <span>My Cases: Files</span>
+                  <span>My Files</span>
                 </span>
               </div>
-            </div>
-            <div className={classes.tableTitleWizard}>
-              <img
-                src={wizardIcon}
-                alt="ICDC MyCases Wizard"
-              />
             </div>
           </div>
         </Grid>

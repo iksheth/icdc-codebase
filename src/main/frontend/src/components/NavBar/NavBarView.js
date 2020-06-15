@@ -191,9 +191,9 @@ const NavBar = ({
           <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRootNoRightPadding }}>
             <NavLink
               className={classes.link}
-              to="/myCases"
+              to="/myFiles"
             >
-              My Cases
+              My Files
               {/* <IconButton
                 color="inherit"
                 aria-haspopup="true"

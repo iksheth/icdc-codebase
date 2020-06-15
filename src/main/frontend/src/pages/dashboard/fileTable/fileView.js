@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -12,6 +13,7 @@ import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
 import { receiveCases } from '../../selectedCases/selectedCasesState';
+import {Configuration,DefaultColumns} from './config.js'
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -22,8 +24,7 @@ const tableStyle = (ratio = 1) => ({
 }
 );
 
-
-const Cases = ({ classes, data }) => {
+const Files = ({ classes, data }) => {
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
     value: 0,
@@ -35,6 +36,31 @@ const Cases = ({ classes, data }) => {
     setsnackbarState({ open: false });
   }
 
+ function columnBuilder(data){
+  if(data.length == 0){
+    return DefaultColumns;
+  }else{
+    let columns =[];
+    for(const attr of Object.keys(data[0])){
+      const hasAttrInConfig =Configuration.hasOwnProperty(attr);
+      if(hasAttrInConfig){  // within configuration
+        if(Configuration[attr]["display"]){ // config as not to display
+           columns.push({
+          name: attr,
+          label: hasAttrInConfig?Configuration[attr]["label"]:attr,
+          options: {
+            filter: false,
+            sortDirection: 'asc',
+          },
+        })
+       }
+      }
+    }
+    return columns;
+  }
+    
+ }
+ const columns = columnBuilder(data);
 
   const dispatch = useDispatch();
   // data from store
@@ -90,19 +116,19 @@ const Cases = ({ classes, data }) => {
   });
 
 
-  let selectedCaseIds = [];
+  let selectedIds = [];
 
   function exportCases() {
     // Find the newly added cases by comparing
-    // existing caseIds and selectedCaseIds
-    const uniqueCases = caseIds !== null ? selectedCaseIds.filter(
+    // existing caseIds and selectedIds
+    const uniqueCases = caseIds !== null ? selectedIds.filter(
       (e) => !caseIds.find((a) => e === a),
-    ).length : selectedCaseIds.length;
+    ).length : selectedIds.length;
     if (uniqueCases > 0) {
       openSnack(uniqueCases);
     }
-    dispatch(receiveCases(selectedCaseIds));
-    selectedCaseIds = [];
+    dispatch(receiveCases(selectedIds));
+    selectedIds = [];
   }
 
 
@@ -126,142 +152,7 @@ const Cases = ({ classes, data }) => {
   }
 
 
-  const columns = [
-    {
-      name: 'case_id',
-      label: 'Case ID',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.8)}>
-            {' '}
-            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'study_code',
-      label: 'Study Code',
-      options: {
-        filter: false,
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.6)}>
-
-            <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
-
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'study_type',
-      label: 'Study Type',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(2.3)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'breed',
-      label: 'Breed',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(1)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'diagnosis',
-      label: 'Diagnosis',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(2)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'stage_of_disease',
-      label: 'Stage of Disease',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'age',
-      label: 'Age',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'sex',
-      label: 'Sex',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'neutered_status',
-      label: 'Neutered Status',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.8)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-  ];
+ 
 
 
   const options = () => ({
@@ -285,10 +176,10 @@ const Cases = ({ classes, data }) => {
       const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
         selectedRows.data[keyVlaue].index
       ));
-      const selectedCaseId = selectedKeys.map((keyVlaue) => (
+      const selectedId = selectedKeys.map((keyVlaue) => (
         displayData[keyVlaue].data[0].props.children[1].props.children
       ));
-      selectedCaseIds = selectedCaseId;
+      selectedIds = selectedId;
       return '';
     },
     customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
@@ -424,4 +315,4 @@ const styles = () => ({
   },
 });
 
-export default withStyles(styles, { withTheme: true })(Cases);
+export default withStyles(styles, { withTheme: true })(Files);

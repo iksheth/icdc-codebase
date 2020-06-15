@@ -81,9 +81,15 @@ export const DASHBOARD_QUERY = gql`{
         disease_site
         samples
         files{
-          uuid
+          file_description
           file_format
+          file_locations
+          file_name
+          file_size
+          file_status
           file_type
+          md5sum
+          uuid
         }
         file_formats
      }

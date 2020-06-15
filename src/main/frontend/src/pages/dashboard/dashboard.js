@@ -1,15 +1,29 @@
+/* eslint-disable */
 import React from 'react';
 import classnames from 'classnames';
 import {
-  Grid, withStyles, Button, Switch, Collapse, FormControlLabel,
+  Grid, withStyles, Button, Switch, Collapse, FormControlLabel,Paper,Tabs,Tab
 } from '@material-ui/core';
 import { useTheme } from '../../components/ThemeContext';
 import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/DashboardStatsController';
 import Cases from './caseTable/caseController';
+import Files from './fileTable/fileController';
 // import PositionedSnackbar from '../../components/Disclaimer/DisclaimerView';
 import ProgramSunburst from '../../components/Widgets/PieCharts/ProgramSunburst/ProgramSunburstController';
 import CustomActiveDonut from '../../components/Widgets/PieCharts/CustomActiveDonut/CustomActiveDonutController';
+import SwipeableViews from 'react-swipeable-views';
+import Typography from '@material-ui/core/Typography';
+
+
+function TabContainer({ children, dir }) {
+  return (
+    <Typography component="div" dir={dir} style={{ padding: "5px,5px,5px,5px" }}>
+      {children}
+    </Typography>
+  );
+}
+
 
 
 const Dashboard = ({
@@ -21,6 +35,13 @@ const Dashboard = ({
     setChecked((prev) => !prev);
   };
 
+
+  // tab settings
+  const [currentTab,setCurrentTab] = React.useState(0);
+
+  const handleTabChange =  (event, value) => {
+    setCurrentTab(value);
+  };
   return (
     <>
       <div className={classnames({
@@ -190,7 +211,24 @@ const Dashboard = ({
             </Grid>
           </Collapse>
         </div>
-        <Cases />
+
+         <Tabs
+            value={currentTab}
+            onChange={handleTabChange}
+            indicatorColor="primary"
+            textColor="primary"
+        >
+          <Tab label="Classes" /> 
+          <Tab label="Files" /> 
+        </Tabs>
+          <SwipeableViews
+          index={currentTab}
+          onChangeIndex={handleTabChange}
+        >
+          <TabContainer ><Cases/></TabContainer>
+          <TabContainer ><Files/></TabContainer>
+        </SwipeableViews>
+       
         {/* Addingg diclaimer for Dev */}
         {/* <PositionedSnackbar /> */}
       </div>
