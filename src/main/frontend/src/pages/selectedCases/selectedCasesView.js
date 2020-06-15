@@ -181,10 +181,10 @@ const SelectedCasesView = ({ dataInCart, data, classes }) => {
     const caseIds = dataInCart.cases.filter((id) => !caseIdDB.includes(id));
     if (caseIds.length > 0) {
       dispatch(deleteCasesWithRecordAction(caseIds));
+      const timer = setTimeout(() => dispatch(deleteCasesWithRecordAction([])), 8000);
+      return () => clearTimeout(timer);
     }
-
-    const timer = setTimeout(() => dispatch(deleteCasesWithRecordAction([])), 8000);
-    return () => clearTimeout(timer);
+    return null;
   }, []);
 
 
