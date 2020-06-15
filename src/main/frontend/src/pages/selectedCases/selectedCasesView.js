@@ -7,7 +7,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import icon from '../../assets/icons/Icon-MyCases.svg';
 import wizardIcon from '../../assets/icons/Wizard.Step2-MyCases.svg';
 import CustomFooter from './customFooter';
-import { deleteCasesAction } from './selectedCasesState';
+import { deleteCasesAction, deleteCasesWithRecordAction } from './selectedCasesState';
 import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
 import Warning from './warningView';
 
@@ -180,8 +180,11 @@ const SelectedCasesView = ({ dataInCart, data, classes }) => {
     const caseIdDB = data.map((d) => d.case_id);
     const caseIds = dataInCart.cases.filter((id) => !caseIdDB.includes(id));
     if (caseIds.length > 0) {
-      dispatch(deleteCasesAction(caseIds));
+      dispatch(deleteCasesWithRecordAction(caseIds));
     }
+
+    const timer = setTimeout(() => dispatch(deleteCasesWithRecordAction([])), 8000);
+    return () => clearTimeout(timer);
   }, []);
 
 

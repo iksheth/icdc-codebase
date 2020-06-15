@@ -102,7 +102,7 @@ const AboutBody = ({ classes, data }) => {
                         }
                         // For email
                         if (splitedParagraph != null && (/@(.*)@/.test(splitedParagraph))) {
-                          return (<div className={classes.email}>{splitedParagraph.match(/@(.*)@/).pop()}</div>);
+                          return (<span className={classes.email}>{splitedParagraph.match(/@(.*)@/).pop()}</span>);
                         }
                         // For sub headings
                         if (splitedParagraph != null && (/#(.*)#/.test(splitedParagraph))) {
