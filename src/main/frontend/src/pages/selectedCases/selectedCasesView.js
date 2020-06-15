@@ -184,7 +184,7 @@ const SelectedCasesView = ({ dataInCart, data, classes }) => {
       const timer = setTimeout(() => dispatch(deleteCasesWithRecordAction([])), 8000);
       return () => clearTimeout(timer);
     }
-    return null;
+    return () => null;
   }, []);
 
 
