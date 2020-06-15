@@ -33,6 +33,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilySans,
     fontSize: '15px',
     lineHeight: '22px',
+    wordBreak: 'break-word',
   },
 });
 
