@@ -14,8 +14,7 @@ import modelPage from '../../pages/modelPage/modelPageView';
 import table from '../../pages/table/tableView';
 import StudyDetail from '../../pages/studyDetail/studyDetailController';
 import ProgramDetail from '../../pages/programDetail/programDetailController';
-import SelectedCases from '../../pages/selectedCases/selectedCasesController';
-import SelectedFiles from '../../pages/selectedFiles/selectedFilesController';
+import Cart from '../../pages/cart/cartController';
 import Home from '../../pages/landing/landingController';
 import About from '../../pages/about/aboutController';
 
@@ -46,8 +45,7 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/studies" component={Studies} />
             <Route path="/model" component={modelPage} />
             <Route path="/table" component={table} />
-            <Route path="/myCases" component={SelectedCases} />
-            <Route path="/myFiles" component={SelectedFiles} />
+            <Route path="/cart" component={Cart} />
 
             <Route path="/program/:id" component={ProgramDetail} />
             <Route path="/study/:id" component={StudyDetail} />

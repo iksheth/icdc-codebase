@@ -1,30 +1,50 @@
+/* eslint-disable */
 import {
 
 } from '../../utils/dashboardUtilFunctions';
 
 
 export const initialState = {
-  files: [],
   error: '',
   isError: false,
   deleted: [],
+  fileIDs:[],
 };
 
 
-export const TOGGLE_CHEKCBOX_IN_FILE_TABLE = 'TOGGLE_CHEKCBOX_IN_CASE_TABLE';
+export const TOGGLE_CHEKCBOX_IN_TABLE = 'TOGGLE_CHEKCBOX_IN_TABLE';
 export const INIT_CART = 'INIT_CART';
 export const CART_QUERY_ERR = 'CART_QUERY_ERR';
 export const READY_CART = 'READY_CART';
-export const DELETE_FILE = 'DELETE_CASES';
-export const DELETE_FILE_WITH_RECORD = 'DELETE_CASES_WITH_RECORD';
+export const DELETE_FILES = 'DELETE_FILES';
+export const DELETE_FILES_WITH_RECORD = 'DELETE_FILES_WITH_RECORD';
 
 export const deleteFilesAction = (payload) => ({
-  type: DELETE_FILE,
+  type: DELETE_FILES,
   payload,
 });
 
+
+// TBD
+export function receiveCases(casesIds) {
+  const payload = {
+    cases: casesIds,
+  };
+  return ({
+    type: TOGGLE_CHEKCBOX_IN_TABLE,
+    payload,
+  });
+};
+
+// TBD
+export const deleteCasesAction = (payload) => ({
+  type: DELETE_FILES,
+  payload,
+});
+
+
 export const deleteFilesWithRecordAction = (payload) => ({
-  type: DELETE_FILE_WITH_RECORD,
+  type: DELETE_FILES_WITH_RECORD,
   payload,
 });
 
@@ -39,7 +59,7 @@ export const getCart = () => ({
 });
 
 
-const shouldInitCart = (state) => state.cart.files !== JSON.parse(localStorage.getItem('userSelectedFiles'));
+const shouldInitCart = (state) => state.cart.fileIDs !== JSON.parse(localStorage.getItem('userSelectedFiles'));
 
 const readyCart = () => ({
   type: READY_CART,
@@ -64,10 +84,10 @@ export const toggleCheckboxInCaseTable = (payload) => ({
 
 export function receiveFiles(ids) {
   const payload = {
-    files: ids,
+    fileIDs: ids,
   };
   return ({
-    type: TOGGLE_CHEKCBOX_IN_FILE_TABLE,
+    type: TOGGLE_CHEKCBOX_IN_TABLE,
     payload,
   });
 }
@@ -75,20 +95,20 @@ export function receiveFiles(ids) {
 
 export default function CARTReducer(state = initialState, action) {
   switch (action.type) {
-    case DELETE_FILE: {
-      const afterDeletion = deleteFiles(action.payload, state.files);
+    case DELETE_FILES: {
+      const afterDeletion = deleteFiles(action.payload, state.fileIDs);
       localStorage.setItem('userSelectedFiles', JSON.stringify(afterDeletion));
       return {
         ...state,
-        files: afterDeletion,
+        fileIDs: afterDeletion,
       };
     }
-    case DELETE_FILE_WITH_RECORD: {
-      const afterDeletion = deleteFiles(action.payload, state.files);
+    case DELETE_FILES_WITH_RECORD: {
+      const afterDeletion = deleteFiles(action.payload, state.fileIDs);
       localStorage.setItem('userSelectedFiles', JSON.stringify(afterDeletion));
       return {
         ...state,
-        files: afterDeletion,
+        fileIDs: afterDeletion,
         deleted: action.payload,
       };
     }
@@ -97,18 +117,18 @@ export default function CARTReducer(state = initialState, action) {
       return {
         ...state,
         isError: false,
-        files: JSON.parse(localStorage.getItem('userSelectedFiles')) || [],
+        fileIDs: JSON.parse(localStorage.getItem('userSelectedFiles')) || [],
       };
     }
 
 
-    case TOGGLE_CHEKCBOX_IN_CASE_TABLE: {
-      const previousState = Object.assign([], state.files);
+    case TOGGLE_CHEKCBOX_IN_TABLE: {
+      const previousState = Object.assign([], state.fileIDs);
       // remove duplicates in case's ids.
-      const unique = action.payload.files.length > 0
+      const unique = action.payload.fileIDs.length > 0
         ? Array.from(
           new Set(
-            previousState.concat(action.payload.files),
+            previousState.concat(action.payload.fileIDs),
           ),
         ) : previousState;
 
@@ -116,7 +136,7 @@ export default function CARTReducer(state = initialState, action) {
       return {
         ...state,
         isError: false,
-        cases: unique,
+        fileIDs: unique,
       };
     }
     case CART_QUERY_ERR: {

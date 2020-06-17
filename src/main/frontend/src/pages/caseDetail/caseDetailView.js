@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -15,7 +16,7 @@ import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
-import { receiveCases, deleteCasesAction } from '../selectedCases/selectedCasesState';
+import { receiveCases, deleteCasesAction } from '../cart/cartState';
 import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
 
 const tableStyle = (ratio = 1) => ({

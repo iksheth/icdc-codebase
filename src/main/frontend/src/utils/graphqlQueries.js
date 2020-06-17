@@ -1,5 +1,20 @@
 import gql from 'graphql-tag';
 
+export const FILE_QUERY = gql` query files($uuids: [String!]) {
+    file(filter:{uuid_in:$uuids}){
+          file_description
+          file_format
+          file_locations
+          file_name
+          file_size
+          file_status
+          file_type
+          md5sum
+          uuid
+    }
+  }
+  `;
+
 export const STATS_QUERY = gql`{
   numberOfStudies
   numberOfCases

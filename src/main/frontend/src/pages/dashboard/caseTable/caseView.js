@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -11,7 +12,7 @@ import { Link } from 'react-router-dom';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
-import { receiveCases } from '../../selectedCases/selectedCasesState';
+import { receiveCases } from '../../cart/cartState';
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -274,10 +275,10 @@ const Cases = ({ classes, data }) => {
     viewColumns: false,
     pagination: true,
     isRowSelectable: (dataIndex) => {
-      if (cart.cases.includes(data[dataIndex].case_id)) {
-        // disable the grey out functionality , change the return to false will bring it back
-        return true;
-      }
+      // if (cart.cases.includes(data[dataIndex].case_id)) {
+      //   // disable the grey out functionality , change the return to false will bring it back
+      //   return true;
+      // }
       return true;
     },
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),

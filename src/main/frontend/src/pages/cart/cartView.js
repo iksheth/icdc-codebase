@@ -1,8 +1,9 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
-import MUIDataTable from 'mui-datatables';
+import MUIDataTable from 'mui-custom-datatables';
 import icon from '../../assets/icons/Icon-MyCases.svg';
-import CustomFooter from './customFooter';
+import CustomFooter from './components/customFooter';
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -13,7 +14,7 @@ const tableStyle = (ratio = 1) => ({
 }
 );
 
-class selectedFilesView extends Component {
+class cartView extends Component {
   constructor(props) {
     super(props);
     const { data } = this.props;
@@ -251,28 +252,33 @@ class selectedFilesView extends Component {
       download: false,
       viewColumns: false,
       pagination: true,
-      onRowsSelect: (curr, allRowsSelected) => this.onRowsSelect(curr, allRowsSelected),
-      customToolbarSelect: (selectedRows, displayData) => {
-        const dataIndex = Object.keys(selectedRows.data).map((keyVlaue) => (
-          selectedRows.data[keyVlaue].index
-        ));
-
-        const keysToInclude = [0, 1, 7, 8];
-
-        // NOTE:  displayData[keyVlaue].data[value] is getting values in Object format
-        // instead of Value format, Due to use of "customBodyRender function"
-        const selectedFiles = dataIndex.map((keyVlaue) => (
-          keysToInclude.map((value) => (displayData[keyVlaue].data[value]))
-        ));
-
-        globalData = selectedFiles.map((obj) => ({
-          caseId: obj[0].props.children[1],
-          fileName: obj[1].props.children[1],
-          uuid: obj[2],
-          md5Sum: obj[3],
-        }));
-        return '';
+      selectedRows: {
+      text: 'row(s) selected',
+      delete: 'Delete',
+      deleteAria: 'Delete Selected Rows',
       },
+      // onRowsSelect: (curr, allRowsSelected) => this.onRowsSelect(curr, allRowsSelected),
+      // customToolbarSelect: (selectedRows, displayData) => {
+      //   const dataIndex = Object.keys(selectedRows.data).map((keyVlaue) => (
+      //     selectedRows.data[keyVlaue].index
+      //   ));
+
+      //   const keysToInclude = [0, 1, 7, 8];
+
+      //   // NOTE:  displayData[keyVlaue].data[value] is getting values in Object format
+      //   // instead of Value format, Due to use of "customBodyRender function"
+      //   const selectedFiles = dataIndex.map((keyVlaue) => (
+      //     keysToInclude.map((value) => (displayData[keyVlaue].data[value]))
+      //   ));
+
+      //   globalData = selectedFiles.map((obj) => ({
+      //     caseId: obj[0].props.children[1],
+      //     fileName: obj[1].props.children[1],
+      //     uuid: obj[2],
+      //     md5Sum: obj[3],
+      //   }));
+      //   return '';
+      // },
       customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
         <CustomFooter
           className={classes.customFooterStyle}
@@ -411,4 +417,4 @@ const styles = (theme) => ({
     margin: 'auto',
   },
 });
-export default withStyles(styles, { withTheme: true })(selectedFilesView);
+export default withStyles(styles, { withTheme: true })(cartView);

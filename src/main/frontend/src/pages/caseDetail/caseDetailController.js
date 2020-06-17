@@ -6,7 +6,7 @@ import CaseDetailView from './caseDetailView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_CASE_DETAIL_DATA_QUERY } from '../../utils/graphqlQueries';
 import Error from '../error/Error';
-import { initCart } from '../selectedCases/selectedCasesState';
+import { initCart } from '../cart/cartState';
 
 const CaseDetailContainer = ({ match }) => {
   const dispatch = useDispatch();

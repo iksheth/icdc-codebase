@@ -22,7 +22,7 @@ import funnelIconBlue from '../../assets/icons/Icon-funnel-blue.svg';
 import funnelIconWhite from '../../assets/icons/Icon-funnel-white.svg';
 // import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
-import { initCart } from '../../pages/selectedCases/selectedCasesState';
+import { initCart } from '../../pages/cart/cartState';
 import { toggleCheckBox } from '../../pages/dashboard/dashboardState';
 import { unselectFilters } from '../../utils/dashboardUtilFunctions';
 import AboutMenu from './components/AboutMenu';
@@ -191,7 +191,7 @@ const NavBar = ({
           <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRootNoRightPadding }}>
             <NavLink
               className={classes.link}
-              to="/myFiles"
+              to="/cart"
             >
               My Files
               {/* <IconButton

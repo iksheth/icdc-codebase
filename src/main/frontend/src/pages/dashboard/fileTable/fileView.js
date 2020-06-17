@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
-import { receiveCases } from '../../selectedCases/selectedCasesState';
+import { receiveCases } from '../../cart/cartState';
 import {Configuration,DefaultColumns} from './config.js'
 
 const tableStyle = (ratio = 1) => ({
@@ -40,19 +40,34 @@ const Files = ({ classes, data }) => {
   if(data.length == 0){
     return DefaultColumns;
   }else{
-    let columns =[];
+    let columns = [];
     for(const attr of Object.keys(data[0])){
       const hasAttrInConfig =Configuration.hasOwnProperty(attr);
       if(hasAttrInConfig){  // within configuration
         if(Configuration[attr]["display"]){ // config as not to display
-           columns.push({
-          name: attr,
-          label: hasAttrInConfig?Configuration[attr]["label"]:attr,
-          options: {
-            filter: false,
-            sortDirection: 'asc',
-          },
-        })
+           if(Configuration[attr]["isKey"]){
+              // get file ids at first column and then hide it. 
+               columns[0]={
+                name: attr,
+                label: hasAttrInConfig?Configuration[attr]["label"]:attr,
+                options: {
+                  filter: false,
+                  sortDirection: 'asc',
+                  display: false,
+                },
+              }
+           }
+            if(Configuration[attr]["index"]){
+               columns[Configuration[attr]["index"]]={
+                  name: attr,
+                  label: hasAttrInConfig?Configuration[attr]["label"]:attr,
+                  options: {
+                    filter: false,
+                    sortDirection: 'asc',
+                  },
+                };
+            }
+                
        }
       }
     }
@@ -72,7 +87,7 @@ const Files = ({ classes, data }) => {
   const cart = useSelector((state) => (
     state.cart ? state.cart : []));
   // Get the existing caseIds from MyCases cart state
-  const caseIds = useSelector((state) => state.cart.cases);
+  const fileIDs = useSelector((state) => state.cart.fileIDs);
 
 
   // The bubble below will shows in the dashboard and work as
@@ -121,13 +136,13 @@ const Files = ({ classes, data }) => {
   function exportCases() {
     // Find the newly added cases by comparing
     // existing caseIds and selectedIds
-    const uniqueCases = caseIds !== null ? selectedIds.filter(
-      (e) => !caseIds.find((a) => e === a),
+    const uniqueIDs = fileIDs !== null ? selectedIds.filter(
+      (e) => !fileIDs.find((a) => e === a),
     ).length : selectedIds.length;
-    if (uniqueCases > 0) {
-      openSnack(uniqueCases);
+    if (uniqueIDs > 0) {
+      openSnack(uniqueIDs);
     }
-    dispatch(receiveCases(selectedIds));
+    dispatch(receiveFiles(uniqueIDs));
     selectedIds = [];
   }
 
@@ -165,11 +180,11 @@ const Files = ({ classes, data }) => {
     viewColumns: false,
     pagination: true,
     isRowSelectable: (dataIndex) => {
-      if (cart.cases.includes(data[dataIndex].case_id)) {
-        // disable the grey out functionality , change the return to false will bring it back
-        return true;
-      }
-      return true;
+      // if (cart.cases.includes(data[dataIndex].case_id)) {
+      //   // disable the grey out functionality , change the return to false will bring it back
+      //   return true;
+      // }
+       return true;
     },
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
     customToolbarSelect: (selectedRows, displayData) => {
