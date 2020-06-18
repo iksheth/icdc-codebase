@@ -16,7 +16,7 @@ import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
-import SelectedFilesView from '../../../components/FileGrid';
+// import SelectedFilesView from '../../../components/FileGrid';
 
 function studyDetailSorting(a, b) {
   if (b && !a) {
@@ -382,14 +382,19 @@ const StudyDetailView = ({ classes, data }) => {
         </div>
       </div>
 
+      {/*
+       comment out the file view
       <SelectedFilesView
-        data={data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
+        data={
+          data.studyFiles === null ||
+          data.studyFiles === '' ?
+          [] : data.studyFiles.map((file) => {
           const cFile = { ...file };
           cFile.parent = 'Study';
           cFile.studyDesignation = studyData.clinical_study_designation;
           return cFile;
         })}
-      />
+      /> */}
     </>
   );
 };
