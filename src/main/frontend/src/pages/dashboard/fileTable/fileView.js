@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
-import { receiveCases } from '../../cart/cartState';
+import { receiveFiles } from '../../cart/cartState';
 import {Configuration,DefaultColumns} from './config.js'
 
 const tableStyle = (ratio = 1) => ({
@@ -192,7 +192,7 @@ const Files = ({ classes, data }) => {
         selectedRows.data[keyVlaue].index
       ));
       const selectedId = selectedKeys.map((keyVlaue) => (
-        displayData[keyVlaue].data[0].props.children[1].props.children
+        displayData[keyVlaue].data[0]
       ));
       selectedIds = selectedId;
       return '';
