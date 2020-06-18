@@ -90,7 +90,7 @@ export function getSunburstDataFromDashboardData(data) {
         p.caseSize += 1;
         p.children.map((study) => {
           const s = study;
-          if (s.title === d.study_code) { // study exist
+          if (s.title === `${d.program} : ${d.study_code}`) { // study exist
             existStudy = true;
             s.size += 1;
             s.caseSize += 1;
@@ -100,7 +100,7 @@ export function getSunburstDataFromDashboardData(data) {
         if (!existStudy) { // new study
           colorIndex += 1;
           p.children.push({
-            title: d.study_code,
+            title: `${d.program} : ${d.study_code}`,
             color: p.color,
             size: 1,
             caseSize: 1,
@@ -117,7 +117,7 @@ export function getSunburstDataFromDashboardData(data) {
         color: COLORS[parseInt(colorIndex, 10)],
         caseSize: 1,
         children: [{
-          title: d.study_code,
+          title: `${d.program} : ${d.study_code}`,
           color: COLORS[parseInt(colorIndex, 10)],
           size: 1,
           caseSize: 1,

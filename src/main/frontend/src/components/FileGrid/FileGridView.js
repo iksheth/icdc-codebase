@@ -66,7 +66,7 @@ class FileGridView extends Component {
 
       if (seconds < 10) { seconds = `0${seconds}`; }
 
-      return `${'ICDC File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
+      return `${'ICDC Study File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
     }
 
 
@@ -128,7 +128,13 @@ class FileGridView extends Component {
           display: false,
         },
       },
-      { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
+      {
+        name: 'file_name',
+        label: 'File Name',
+        options: {
+          sortDirection: 'asc',
+        },
+      },
       { name: 'file_type', label: 'File Type' },
       { name: 'parent', label: 'Association' },
       { name: 'file_description', label: 'Description' },

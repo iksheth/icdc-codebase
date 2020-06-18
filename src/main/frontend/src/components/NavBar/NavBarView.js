@@ -103,7 +103,7 @@ const NavBar = ({
         <Toolbar className={classes.toolbar}>
 
           {/* Sidebar button */}
-          <div>
+          <div className={classes.FilterIconPosition}>
             { (location.pathname === '/cases') && (
             <Button
               variant="h6"
@@ -188,7 +188,13 @@ const NavBar = ({
             </Tooltip>
           </IconButton> */}
           {/* Start of Theme Switching Icon and logic */}
-          <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRootNoRightPadding }}>
+          <Button
+            disableRipple
+            variant="h6"
+            weight="medium"
+            className={[classes.logotype, classes.myCasesPosition]}
+            classes={{ root: classes.buttonRootNoRightPadding }}
+          >
             <NavLink
               className={classes.link}
               to="/myCases"
@@ -277,6 +283,14 @@ const NavBar = ({
 
 
 const styles = (theme) => ({
+  myCasesPosition: {
+    position: 'absolute',
+    right: '35px',
+  },
+  FilterIconPosition: {
+    position: 'absolute',
+    left: '35px',
+  },
   logotype: {
     whiteSpace: 'nowrap',
     color: '#FFFFFF',
