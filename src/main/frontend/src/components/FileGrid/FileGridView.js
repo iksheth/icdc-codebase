@@ -66,7 +66,7 @@ class FileGridView extends Component {
 
       if (seconds < 10) { seconds = `0${seconds}`; }
 
-      return `${'ICDC File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
+      return `${'ICDC Study File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
     }
 
 
