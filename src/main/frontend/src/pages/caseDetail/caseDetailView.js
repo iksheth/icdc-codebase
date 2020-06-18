@@ -628,7 +628,7 @@ const CaseDetail = ({ classes, data, selected }) => {
 
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>AVAILABLE DATA</span>
+            <span className={classes.tableHeader}>ASSOCIATED FILES</span>
           </div>
           <Grid item xs={12}>
             <Grid container spacing={4}>
