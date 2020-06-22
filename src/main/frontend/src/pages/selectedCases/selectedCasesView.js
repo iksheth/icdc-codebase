@@ -11,7 +11,6 @@ import { deleteCasesAction, deleteCasesWithRecordAction } from './selectedCasesS
 import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
 import Warning from './warningView';
 
-
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
   overflow: 'hidden',
@@ -147,11 +146,8 @@ const columns = (classes) => [
   },
 ];
 
-
 const SelectedCasesView = ({ dataInCart, data, classes }) => {
   const dispatch = useDispatch();
-
-
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
     value: 0,
@@ -187,7 +183,6 @@ const SelectedCasesView = ({ dataInCart, data, classes }) => {
     return () => null;
   }, []);
 
-
   const options = (cases) => ({
     selectableRows: true,
     search: false,
@@ -220,7 +215,6 @@ const SelectedCasesView = ({ dataInCart, data, classes }) => {
       />
     ),
   });
-
 
   return (
     <>
@@ -287,7 +281,6 @@ const SelectedCasesView = ({ dataInCart, data, classes }) => {
     </>
   );
 };
-
 
 const styles = (theme) => ({
   button: {
@@ -363,6 +356,5 @@ const styles = (theme) => ({
     paddingLeft: '10px',
   },
 });
-
 
 export default withStyles(styles, { withTheme: true })(SelectedCasesView);

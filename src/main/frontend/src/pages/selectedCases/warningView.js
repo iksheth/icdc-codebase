@@ -37,5 +37,4 @@ const styles = (theme) => ({
   },
 });
 
-
 export default withStyles(styles, { withTheme: true })(warning);
