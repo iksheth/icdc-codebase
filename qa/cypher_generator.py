@@ -138,9 +138,9 @@ def builder(input_filters,output_schema,base_query)->str:
 def builderWithCondition(input_filters,condition,base_query):
     output = []
     #base on the input filter to find the query then replace the place holder"@@@"" with real data
-    for filter in input_filters:
-        if filter in base_query[condition] and input_filters[filter]!="":
-            output.append(base_query[condition][filter].replace("@@@",input_filters[filter]))
+    for input_filter in input_filters:
+        if input_filter in base_query[condition] and input_filters[input_filter]!="":
+            output.append(base_query[condition][input_filter].replace("@@@",input_filters[input_filter]))
             output.append(" AND")
 
     return output
@@ -161,13 +161,13 @@ def builderReturn(output_schema,base_query):
 
 
 # factory defines which query builder to use
-def QueryBuilderFactory(type,input_schema,output_schema):
+def QueryBuilderFactory(input_type,input_schema,output_schema):
 
       query={
           "icdc": icdc_query,
           "ctdc": ctdc_query
       }
-      return QueryBuilder(input_schema,output_schema,query[type])
+      return QueryBuilder(input_schema,output_schema,query[input_type])
 
 
 
