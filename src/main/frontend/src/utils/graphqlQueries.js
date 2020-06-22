@@ -95,6 +95,14 @@ export const DASHBOARD_QUERY = gql`{
         data_types
         disease_site
         samples
+        sample_list {
+          sample_id
+          sample_type
+          general_sample_pathology
+          date_of_sample_collection
+          necropsy_sample
+          percentage_stroma
+        }
         files{
           file_description
           file_format

@@ -43,8 +43,9 @@ export const mappingCheckBoxToDataTable = [
   {
     group: 'Associated File Format', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
   },
-
-
+  {
+    group: 'Associated Sample Type ', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
+  },
 ];
 
 export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) => ({

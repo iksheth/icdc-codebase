@@ -9,6 +9,7 @@ import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/DashboardStatsController';
 import Cases from './caseTable/caseController';
 import Files from './fileTable/fileController';
+import Samples from './sampleTable/sampleController';
 // import PositionedSnackbar from '../../components/Disclaimer/DisclaimerView';
 import ProgramSunburst from '../../components/Widgets/PieCharts/ProgramSunburst/ProgramSunburstController';
 import CustomActiveDonut from '../../components/Widgets/PieCharts/CustomActiveDonut/CustomActiveDonutController';
@@ -219,16 +220,15 @@ const Dashboard = ({
             textColor="primary"
         >
           <Tab label="Files" /> 
-          <Tab label="Cases" /> 
           <Tab label="Samples" /> 
+          <Tab label="Cases" /> 
         </Tabs>
           <SwipeableViews
           index={currentTab}
           onChangeIndex={handleTabChange}
         >
-          
           <TabContainer ><Files/></TabContainer>
-          <TabContainer ><Cases/></TabContainer>
+          <TabContainer ><Samples/></TabContainer>
           <TabContainer ><Cases/></TabContainer>
         </SwipeableViews>
        
