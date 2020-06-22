@@ -208,7 +208,6 @@ def main():
     ctdc_output_schema=["case_id", "clinical_trial_code", "arm_id", "arm_drug", "pubmed_id", "disease", "gender", "race",
                    "ethnicity", "clinical_trial_id", "trial_arm", "file_types", "file_formats", "files","number_of_files","number_of_cases","number_of_trial"]
     ctdc_output_schema=["number_of_files","number_of_cases","number_of_trial"]
-  
 
     return  " ".join(["icdc query: ",QueryBuilderFactory("icdc",icdc_filter,icdc_output_schema),"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ ctdc query: ", QueryBuilderFactory("ctdc", ctdc_filter, ctdc_output_schema)])
     
