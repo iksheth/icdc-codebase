@@ -210,7 +210,6 @@ def main():
     ctdc_output_schema=["number_of_files","number_of_cases","number_of_trial"]
 
     return  " ".join(["icdc query: ",QueryBuilderFactory("icdc",icdc_filter,icdc_output_schema),"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ ctdc query: ", QueryBuilderFactory("ctdc", ctdc_filter, ctdc_output_schema)])
-    
   
 
 app.run(host='0.0.0.0', port=8080)
