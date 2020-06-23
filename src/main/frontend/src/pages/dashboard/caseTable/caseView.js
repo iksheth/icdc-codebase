@@ -413,7 +413,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '178px',
+    width: '330px',
     height: '27px',
     lineHeight: '18px',
     fontSize: '10pt',
