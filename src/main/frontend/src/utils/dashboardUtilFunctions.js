@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { v1 as uuid } from 'uuid';
 
 export const COLORS = [
@@ -45,6 +46,9 @@ export const mappingCheckBoxToDataTable = [
   },
   {
     group: 'Associated Sample Type ', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
+  },
+  {
+    group: 'Neutered Status ', field: 'neutered_status', api: 'caseOverview', datafield: 'neutered_status', show: true, source:'datatable',
   },
 ];
 
@@ -238,10 +242,34 @@ export function customSorting(a, b, flag, i = 0) {
 }
 
 
-export function updateCheckBoxData(data, field) {
+export function updateCheckBoxData(data, field,source) {
   const result = [];
   let preElementIndex = 0;
-  data.map((el) => ({
+  if(source){
+      // source -- datatable . Get init stats from data table
+   
+       
+     let output  =data.reduce((accumulator, currentValue, currentIndex, array) => {
+      let name = currentValue[field.toString()]
+      if(accumulator.hasOwnProperty(name)){
+         accumulator[name]["cases"] +=1;
+      }else{
+         accumulator[name] = {
+          name: name === '' || !name
+            ? NOT_PROVIDED : name,
+          isChecked: false,
+          cases: 1,
+        }
+
+      }
+      return accumulator
+      }, {})
+     
+     return Object.values(output).sort((a, b) => customSorting(a.name, b.name, 'alphabetical'))
+
+  }else{
+      // source ---  API 
+     data.map((el) => ({
     name: el[field.toString()] === '' || !el[field.toString()]
       ? NOT_PROVIDED : el[field.toString()],
     isChecked: false,
@@ -261,6 +289,8 @@ export function updateCheckBoxData(data, field) {
         result.push(el);
       }
     });
+  }
+ 
 
   return result;
 }
@@ -326,7 +356,7 @@ export function customCheckBox(data) {
   return (
     mappingCheckBoxToDataTable.map((mapping) => ({
       groupName: mapping.group,
-      checkboxItems: updateCheckBoxData(data[mapping.api], mapping.field),
+      checkboxItems: updateCheckBoxData(data[mapping.api], mapping.field,mapping.source),
       datafield: mapping.datafield,
       show: mapping.show,
     }))
