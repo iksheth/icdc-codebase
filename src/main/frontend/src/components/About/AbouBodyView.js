@@ -139,6 +139,7 @@ const styles = () => ({
   },
   link: {
     color: '#0296C9',
+    fontWeight: 'bolder',
     '&:hover': {
       color: '#0296C9',
     },

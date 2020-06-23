@@ -371,5 +371,11 @@ export default {
         backgroundColor: '#ABADB0',
       },
     },
+    MUIDataTableBodyCell: {
+      stackedCommon: {
+        height: 'auto !important',
+        whiteSpace: 'normal !important',
+      },
+    },
   },
 };

@@ -8,13 +8,18 @@ import submissionGuide from '../../assets/footer/ICDC_DGAB_Guidelines.pdf';
 
 const AboutBody = ({ classes, data }) => {
   function boldText(text) {
-    const boldedText = text.split('$$').map((splitedText) => {
-      if (splitedText != null && (/\*(.*)\*/.test(splitedText))) {
-        return (<span className={classes.title}>{splitedText.match(/\*(.*)\*/).pop()}</span>);
-      }
-      return splitedText;
-    });
-    return boldedText;
+    if (text !== '') {
+      const boldedText = text.split('$$').map((splitedText) => {
+        if (splitedText != null && (/\*(.*)\*/.test(splitedText))) {
+          const extractedText = splitedText.match(/\*(.*)\*/).pop();
+          return extractedText.includes('@') ? (<span className={classes.email}>{extractedText}</span>)
+            : (<span className={classes.title}>{extractedText}</span>);
+        }
+        return splitedText;
+      });
+      return boldedText;
+    }
+    return text;
   }
   return (
     <>
@@ -62,25 +67,42 @@ const AboutBody = ({ classes, data }) => {
                       { contentObj.paragraph.split('$$').map((splitedParagraph) => {
                         // Checking for regex ()[] pattern
                         if (splitedParagraph != null && ((/\[(.+)\]\((.+)\)/g.test(splitedParagraph)) || (/\((.+)\)\[(.+)\]/g.test(splitedParagraph)))) {
+                          const title = splitedParagraph.match(/\[(.*)\]/).pop();
+                          const linkAttrs = splitedParagraph.match(/\((.*)\)/).pop().split(' ');
+                          const target = linkAttrs.find((link) => link.includes('target:'));
+                          const url = linkAttrs.find((link) => link.includes('url:'));
+                          const type = linkAttrs.find((link) => link.includes('type:')); // 0 : no img
+
+                          const link = (
+                            <Link
+                              title={title}
+                              target={target ? target.replace('target:', '') : '_blank'}
+                              rel="noreferrer"
+                              href={url ? url.replace('url:', '') : splitedParagraph.match(/\((.*)\)/).pop()}
+                              color="inherit"
+                              className={classes.link}
+                            >
+                              {title}
+                            </Link>
+                          );
+
                           return (
                             <>
-                              <Link
-                                title={splitedParagraph.match(/\[(.*)\]/).pop()}
-                                target="_blank"
-                                rel="noreferrer"
-                                href={splitedParagraph.match(/\((.*)\)/).pop()}
-                                color="inherit"
-                                className={classes.link}
-                              >
-                                {splitedParagraph.match(/\[(.*)\]/).pop()}
-                              </Link>
-                              <img
-                                src={externalIcon}
-                                alt="outbounnd web site icon"
-                                className={classes.linkIcon}
-                              />
+                              {link}
+                              {type ? '' : (
+                                <img
+                                  src={externalIcon}
+                                  alt="outbounnd web site icon"
+                                  className={classes.linkIcon}
+                                />
+                              )}
+
                             </>
                           );
+                        }
+                        // For email
+                        if (splitedParagraph != null && (/@(.*)@/.test(splitedParagraph))) {
+                          return (<span className={classes.email}>{splitedParagraph.match(/@(.*)@/).pop()}</span>);
                         }
                         // For sub headings
                         if (splitedParagraph != null && (/#(.*)#/.test(splitedParagraph))) {
@@ -148,7 +170,7 @@ const styles = (theme) => ({
   container: {
     margin: '16px auto 16px auto',
     color: '#000000',
-    fontFamily: theme.custom.fontFamily,
+    fontFamily: theme.custom.fontFamilySans,
     fontSize: '15px',
     lineHeight: '22px',
     maxWidth: '1440px',
@@ -157,12 +179,16 @@ const styles = (theme) => ({
     // height: '476px',
     // width: '675px',
     color: '#000000',
-    fontFamily: theme.custom.fontFamily,
+    fontFamily: theme.custom.fontFamilySans,
     fontSize: '15px',
     lineHeight: '22px',
   },
   title: {
     color: '#0B3556',
+    fontWeight: 'bold',
+  },
+  email: {
+    color: '#0296C9',
     fontWeight: 'bold',
   },
   rightSection: {
@@ -185,6 +211,7 @@ const styles = (theme) => ({
   },
   link: {
     color: '#0296C9',
+    fontWeight: 'bolder',
     '&:hover': {
       color: '#0296C9',
     },
@@ -203,7 +230,7 @@ const styles = (theme) => ({
     width: '100%',
   },
   tableHeader: {
-    fontFamily: theme.custom.fontFamily,
+    fontFamily: theme.custom.fontFamilySans,
     color: '#194563',
     textTransform: 'uppercase',
 
@@ -214,7 +241,7 @@ const styles = (theme) => ({
     color: '#3E7AAA',
   },
   tableCell: {
-    fontFamily: theme.custom.fontFamily,
+    fontFamily: theme.custom.fontFamilySans,
     fontSize: '14px',
     padding: '8px 15px 8px 0px',
     borderBottom: '0.66px solid #087CA5',

@@ -8,12 +8,24 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import { useDispatch } from 'react-redux';
+import Snackbar from '@material-ui/core/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
+import { receiveCases, deleteCasesAction } from '../selectedCases/selectedCasesState';
+import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
+
+const tableStyle = (ratio = 1) => ({
+  width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
+  overflow: 'hidden',
+  wordBreak: 'break-word',
+  maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
+  minWidth: '160px',
+}
+);
 
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return '0 Bytes';
@@ -29,16 +41,93 @@ function formatBytes(bytes, decimals = 2) {
 
 const columns = [
 
-  { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
-  { name: 'file_type', label: 'File Type' },
-  { name: 'parent', label: 'Association' },
-  { name: 'file_description', label: 'Description' },
-  { name: 'file_format', label: 'Format' },
+  {
+    name: 'file_name',
+    label: 'File Name',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(2.5)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'file_type',
+    label: 'File Type',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(2)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'parent',
+    label: 'Association',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(2)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'file_description',
+    label: 'Description',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(4)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
+  {
+    name: 'file_format',
+    label: 'Format',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+      customBodyRender: (value) => (
+        <div className="mui_td" style={tableStyle(2.3)}>
+          {' '}
+          {value}
+          {' '}
+        </div>
+      ),
+    },
+  },
   {
     name: 'file_size',
     label: 'Size',
     options: {
-      customBodyRender: (bytes) => (formatBytes(bytes)),
+      customBodyRender: (bytes) => (
+        <div className="mui_td" style={tableStyle(1)}>
+          {' '}
+          {formatBytes(bytes)}
+          {' '}
+        </div>
+      ),
     },
   },
 ];
@@ -71,12 +160,14 @@ const options = (classes) => ({
 });
 
 
-const CaseDetail = ({ classes, data }) => {
+const CaseDetail = ({ classes, data, selected }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(
     dispatch(fetchDataForDashboardDataTable()),
   );
 
   const dispatch = useDispatch();
+
+
   const redirectTo = (study) => {
     dispatch(initDashboardStatus()).then(() => {
       dispatch(singleCheckBox([{
@@ -87,6 +178,7 @@ const CaseDetail = ({ classes, data }) => {
       }]));
     });
   };
+
 
   const stat = {
     numberOfStudies: 1,
@@ -117,8 +209,56 @@ const CaseDetail = ({ classes, data }) => {
   }];
 
 
+  const [snackbarState, setsnackbarState] = React.useState({
+    open: false,
+    value: 0,
+  });
+  function openSnack(value, action) {
+    setsnackbarState({ open: true, value, action });
+  }
+  function closeSnack() {
+    setsnackbarState({ open: false });
+  }
+
+  const removeFromMyCases = () => {
+    openSnack(caseDetail.case_id, 'removed from');
+    dispatch(deleteCasesAction([caseDetail.case_id]));
+  };
+
+  const saveToMyCases = () => {
+    openSnack(caseDetail.case_id, 'added to');
+    dispatch(receiveCases([caseDetail.case_id]));
+  };
+
   return (
     <>
+      <Snackbar
+        className={classes.snackBar}
+        open={snackbarState.open}
+        onClose={closeSnack}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        message={(
+          <div className={classes.snackBarMessage}>
+            <span className={classes.snackBarMessageIcon}>
+              <SuccessOutlinedIcon />
+              {' '}
+            </span>
+            <span className={classes.snackBarText}>
+              Case :
+              {' '}
+              {snackbarState.value}
+              {'    '}
+              successfully
+              {' '}
+              {snackbarState.action}
+              {' '}
+              My Cases list
+            </span>
+          </div>
+)}
+      />
+
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>
@@ -200,13 +340,37 @@ const CaseDetail = ({ classes, data }) => {
 
                 <CustomBreadcrumb data={breadCrumbJson} />
               </div>
+
             )}
 
+          <div className={classes.headerButton}>
+            <span className={classes.headerButtonLinkSpan}>
+              {selected
+                ? (
+                  <button
+                    type="button"
+                    className={classes.headerButtonLink}
+                    onClick={removeFromMyCases}
+                  >
+                    <span className={classes.headerButtonLinkText}>Remove from My Cases</span>
+                  </button>
+                )
+                : (
+                  <button
+                    type="button"
+                    className={classes.headerButtonLink}
+                    onClick={saveToMyCases}
+                  >
+                    <span className={classes.headerButtonLinkText}>Save to My Cases</span>
+                  </button>
+                )}
 
+            </span>
+          </div>
         </div>
 
 
-        <div className={classes.detailContainer}>
+        <div id="case_detail_container" className={classes.detailContainer}>
 
           <Grid container spacing={4}>
 
@@ -460,11 +624,11 @@ const CaseDetail = ({ classes, data }) => {
           </Grid>
         </div>
       </div>
-      <div className={classes.tableContainer}>
+      <div id="table_case_detail" className={classes.tableContainer}>
 
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>AVAILABLE DATA</span>
+            <span className={classes.tableHeader}>ASSOCIATED FILES</span>
           </div>
           <Grid item xs={12}>
             <Grid container spacing={4}>
@@ -624,9 +788,7 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: '10px auto',
   },
-  headerButtonLink: {
-    textDecoration: 'none',
-  },
+
   button: {
     borderRadius: '10px',
     width: '178px',
@@ -660,6 +822,35 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     color: '#ff17f15',
     paddingBottom: '20px',
+  },
+  headerButton: {
+    fontFamily: theme.custom.fontFamilySans,
+    float: 'right',
+    marginTop: '15px',
+    width: '125px',
+    height: '33px',
+    marginRight: '20px',
+  },
+  headerButtonLink: {
+    fontFamily: theme.custom.fontFamilySans,
+    color: 'rgb(255, 255, 255)',
+    backgroundColor: '#DC762F',
+    opacity: 'unset',
+    border: 'unset',
+    fontWeight: '600',
+    cursor: 'pointer',
+    height: '27px',
+    fontSize: '10pt',
+    lineHeight: '18px',
+    borderRadius: '10px',
+    width: '178px',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  snackBarMessageIcon: {
+    verticalAlign: 'middle',
   },
 });
 

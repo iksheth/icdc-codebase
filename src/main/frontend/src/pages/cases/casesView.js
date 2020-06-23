@@ -218,7 +218,7 @@ const CasesView = ({ classes, data, study }) => {
 
         <div className={classes.tableDiv}>
           <Grid container spacing={32}>
-            <Grid item xs={12}>
+            <Grid item xs={12} id="table_cases">
               <MUIDataTable
                 data={data.caseOverview}
                 columns={columns}

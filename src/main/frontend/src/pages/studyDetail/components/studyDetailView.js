@@ -16,6 +16,7 @@ import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
+import SelectedFilesView from '../../../components/FileGrid';
 
 function studyDetailSorting(a, b) {
   if (b && !a) {
@@ -362,7 +363,7 @@ const StudyDetailView = ({ classes, data }) => {
           </div>
           <Grid item xs={12}>
             <Grid container spacing={8}>
-              <Grid item xs={12}>
+              <Grid item xs={12} id="table_cohort_dosing">
                 <Typography>
                   <MUIDataTable
                     data={cohortAndDosingTableData.sort(
@@ -380,6 +381,15 @@ const StudyDetailView = ({ classes, data }) => {
           </Grid>
         </div>
       </div>
+
+      <SelectedFilesView
+        data={data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
+          const cFile = { ...file };
+          cFile.parent = 'Study';
+          cFile.studyDesignation = studyData.clinical_study_designation;
+          return cFile;
+        })}
+      />
     </>
   );
 };
@@ -480,7 +490,7 @@ const styles = (theme) => ({
     fontFamily: theme.custom.fontFamilySans,
     float: 'right',
     marginTop: '15px',
-    width: '104px',
+    width: '125px',
     height: '33px',
     background: '#F6F4F4',
     paddingLeft: '10px',
@@ -492,12 +502,12 @@ const styles = (theme) => ({
     height: '50px',
     background: '#F5F3EE',
     width: '200px',
-    fontSize: '8pt',
+    fontSize: '14px',
   },
   headerButtonLinkText: {
     fontFamily: theme.custom.fontFamilySans,
     color: '#0B3556',
-    fontSize: '8pt',
+    fontSize: '14px',
   },
   headerButtonLinkNumber: {
     fontFamily: theme.custom.fontFamilySans,
@@ -505,7 +515,7 @@ const styles = (theme) => ({
     lineHeight: '30px',
     paddingBottom: '3px',
     margin: '0 4px',
-    fontSize: '8pt',
+    fontSize: '14px',
   },
   logo: {
     position: 'absolute',

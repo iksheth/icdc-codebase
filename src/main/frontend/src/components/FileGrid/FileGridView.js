@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, withStyles } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
-import icon from '../../assets/icons/Icon-MyCases.svg';
-import wizardIcon from '../../assets/icons/Wizard.Step3-MyFiles.svg';
 import CustomFooter from './customFooter';
 
-const tableStyle = (ratio = 1) => ({
-  width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  overflow: 'hidden',
-  wordBreak: 'break-word',
-  maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  minWidth: '80px',
-}
-);
-
-class selectedFilesView extends Component {
+class FileGridView extends Component {
   constructor(props) {
     super(props);
     const { data } = this.props;
@@ -77,7 +66,7 @@ class selectedFilesView extends Component {
 
       if (seconds < 10) { seconds = `0${seconds}`; }
 
-      return `${'ICDC File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
+      return `${'ICDC Study File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
     }
 
 
@@ -94,7 +83,7 @@ class selectedFilesView extends Component {
         });
 
         if (index === 0) {
-          str = ['Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
+          str = ['Study Code', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
           str += `\r\n${line},${document.getElementById('multiline-user-coments').value}\r\n`;
         } else {
           str += `${line}\r\n`;
@@ -127,103 +116,34 @@ class selectedFilesView extends Component {
 
       const i = Math.floor(Math.log(bytes) / Math.log(1024));
 
-      return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
+      return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[parseInt(i, 10)]}`;
     }
 
 
     const columns = [
-
       {
-        name: 'case_id',
-        label: 'Case ID',
-        sortDirection: 'asc',
+        name: 'studyDesignation',
+        label: 'Study Designation',
         options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(1.5)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
+          display: false,
         },
       },
       {
         name: 'file_name',
         label: 'File Name',
-        sortDirection: 'asc',
         options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(2)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
+          sortDirection: 'asc',
         },
       },
-      {
-        name: 'file_type',
-        label: 'File Type',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(1)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
-      },
-      {
-        name: 'parent',
-        label: 'Association',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(1)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
-      },
-      {
-        name: 'file_description',
-        label: 'Description',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(2.5)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
-      },
-      {
-        name: 'file_format',
-        label: 'Format',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(0.5)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
-      },
+      { name: 'file_type', label: 'File Type' },
+      { name: 'parent', label: 'Association' },
+      { name: 'file_description', label: 'Description' },
+      { name: 'file_format', label: 'Format' },
       {
         name: 'file_size',
         label: 'Size',
         options: {
-          customBodyRender: (bytes) => (
-            <div className="mui_td" style={tableStyle(0.5)}>
-              {' '}
-              {formatBytes(bytes)}
-              {' '}
-            </div>
-          ),
+          customBodyRender: (bytes) => (formatBytes(bytes)),
         },
       },
       {
@@ -255,20 +175,18 @@ class selectedFilesView extends Component {
       onRowsSelect: (curr, allRowsSelected) => this.onRowsSelect(curr, allRowsSelected),
       customToolbarSelect: (selectedRows, displayData) => {
         const dataIndex = Object.keys(selectedRows.data).map((keyVlaue) => (
-          selectedRows.data[keyVlaue].index
+          selectedRows.data[parseInt(keyVlaue, 10)].index
         ));
 
         const keysToInclude = [0, 1, 7, 8];
 
-        // NOTE:  displayData[keyVlaue].data[value] is getting values in Object format
-        // instead of Value format, Due to use of "customBodyRender function"
         const selectedFiles = dataIndex.map((keyVlaue) => (
-          keysToInclude.map((value) => (displayData[keyVlaue].data[value]))
+          keysToInclude.map((value) => (displayData[parseInt(keyVlaue, 10)].data[value]))
         ));
 
         globalData = selectedFiles.map((obj) => ({
-          caseId: obj[0].props.children[1],
-          fileName: obj[1].props.children[1],
+          studyDesignation: obj[0],
+          fileName: obj[1],
           uuid: obj[2],
           md5Sum: obj[3],
         }));
@@ -311,34 +229,15 @@ class selectedFilesView extends Component {
       marginLeft: '30px',
     };
     return (
-      <Grid container>
-        <Grid item xs={12}>
-          <div className={classes.header}>
-            <div className={classes.logo}>
-              <img
-                src={icon}
-                alt="ICDC case detail header logo"
-              />
+      <div className={classes.tableContainer}>
+        <div className={classes.tableDiv}>
+          <Grid item xs={12}>
+            <div className={classes.tableTitle}>
+              <span className={classes.tableHeader}>ASSOCIATED FILES</span>
+            </div>
+          </Grid>
+          <Grid item xs={12} id="table_associated_files">
 
-            </div>
-            <div className={classes.headerTitle}>
-              <div className={classes.headerMainTitle}>
-                <span>
-                  <span>My Cases: Files</span>
-                </span>
-              </div>
-            </div>
-            <div className={classes.tableTitleWizard}>
-              <img
-                src={wizardIcon}
-                alt="ICDC MyCases Wizard"
-              />
-            </div>
-          </div>
-        </Grid>
-        <Grid item xs={12}>
-
-          <div className={classes.tableWrapper} id="table_selected_files">
             <MUIDataTable
               data={state.data}
               columns={columns}
@@ -355,21 +254,15 @@ class selectedFilesView extends Component {
                 download manifest
               </button>
             </div>
-          </div>
-        </Grid>
-
-      </Grid>
+          </Grid>
+        </div>
+      </div>
     );
   }
 }
 
 const styles = (theme) => ({
-  logo: {
-    position: 'absolute',
-    float: 'left',
-    marginTop: '14px',
-    width: '100px',
-  },
+
   tableWrapper: {
     borderBottomLeftRadius: '20px',
     borderBottomRightRadius: '20px',
@@ -383,19 +276,24 @@ const styles = (theme) => ({
   },
   tableStyle: {
     maxWidth: '1440px',
-    margin: '0 30px',
   },
   customFooterStyle: {
     background: '#f3f3f4',
   },
-  headerMainTitle: {
+  tableTitle: {
     fontFamily: theme.custom.fontFamilySans,
-    fontWeight: 'bold',
+    fontSize: '17px',
     letterSpacing: '0.017em',
-    color: '#ff8a00',
-    fontSize: '25px',
-    lineHeight: '125px',
-    paddingLeft: '5px',
+    color: '#ff17f15',
+    paddingBottom: '20px',
+  },
+  tableHeader: {
+    paddingLeft: '32px',
+    color: '#0296c9',
+  },
+  tableDiv: {
+    maxWidth: theme.custom.maxContentWidth,
+    margin: '40px auto auto auto',
   },
   headerTitle: {
     maxWidth: theme.custom.maxContentWidth,
@@ -403,11 +301,6 @@ const styles = (theme) => ({
     float: 'left',
     marginLeft: '110px',
     paddingLeft: '3px',
-  },
-  tableTitleWizard: {
-    width: '500px',
-    float: 'right',
-    paddingTop: '20px',
   },
   header: {
     paddingLeft: '32px',
@@ -418,4 +311,4 @@ const styles = (theme) => ({
     margin: 'auto',
   },
 });
-export default withStyles(styles, { withTheme: true })(selectedFilesView);
+export default withStyles(styles, { withTheme: true })(FileGridView);

@@ -8,6 +8,7 @@ export const initialState = {
   files: [],
   error: '',
   isError: false,
+  deletedCases: [],
 };
 
 
@@ -16,10 +17,15 @@ export const INIT_CART = 'INIT_CART';
 export const CART_QUERY_ERR = 'CART_QUERY_ERR';
 export const READY_CART = 'READY_CART';
 export const DELETE_CASES = 'DELETE_CASES';
-
+export const DELETE_CASES_WITH_RECORD = 'DELETE_CASES_WITH_RECORD';
 
 export const deleteCasesAction = (payload) => ({
   type: DELETE_CASES,
+  payload,
+});
+
+export const deleteCasesWithRecordAction = (payload) => ({
+  type: DELETE_CASES_WITH_RECORD,
   payload,
 });
 
@@ -76,6 +82,15 @@ export default function CARTReducer(state = initialState, action) {
       return {
         ...state,
         cases: casesAfterDeletion,
+      };
+    }
+    case DELETE_CASES_WITH_RECORD: {
+      const casesAfterDeletion = deleteCases(action.payload, state.cases);
+      localStorage.setItem('userSelectedCases', JSON.stringify(casesAfterDeletion));
+      return {
+        ...state,
+        cases: casesAfterDeletion,
+        deletedCases: action.payload,
       };
     }
 

@@ -43,7 +43,8 @@ const Cases = ({ classes, data }) => {
     && state.dashboard.datatable.filters
       ? state.dashboard.datatable.filters : []));
 
-
+  const cart = useSelector((state) => (
+    state.cart ? state.cart : []));
   // Get the existing caseIds from MyCases cart state
   const caseIds = useSelector((state) => state.cart.cases);
 
@@ -272,6 +273,13 @@ const Cases = ({ classes, data }) => {
     download: false,
     viewColumns: false,
     pagination: true,
+    isRowSelectable: (dataIndex) => {
+      if (cart.cases.includes(data[dataIndex].case_id)) {
+        // disable the grey out functionality , change the return to false will bring it back
+        return true;
+      }
+      return true;
+    },
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
     customToolbarSelect: (selectedRows, displayData) => {
       const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
@@ -309,7 +317,7 @@ const Cases = ({ classes, data }) => {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         message={(
           <div className={classes.snackBarMessage}>
-            <span>
+            <span className={classes.snackBarMessageIcon}>
               <SuccessOutlinedIcon />
               {' '}
             </span>
@@ -414,7 +422,9 @@ const styles = () => ({
     color: '#fff',
     backgroundColor: '#ff7f15',
   },
-
+  snackBarMessageIcon: {
+    verticalAlign: 'middle',
+  },
 });
 
 export default withStyles(styles, { withTheme: true })(Cases);

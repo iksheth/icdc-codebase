@@ -9,13 +9,13 @@ export const STATS_QUERY = gql`{
   }
   `;
 
+
 export const DASHBOARD_QUERY = gql`{
     numberOfStudies
     numberOfCases
     numberOfSamples
     numberOfFiles
     numberOfAliquots
-
     
     caseCountByFileFormat{
       file_format
@@ -253,9 +253,22 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
    aliguotCountOfStudy(study_code: $csd)
 
    caseCountOfStudy(study_code: $csd)
-
+   
    filesOfStudy(study_code: $csd){
     file_type
+   }
+
+   studyFiles(study_codes: [$csd]){
+         file_description
+          file_format
+          file_locations
+          file_name
+          file_size
+          file_status
+          file_type
+          md5sum
+          uuid
+
    }
 
   study(clinical_study_designation: $csd){
