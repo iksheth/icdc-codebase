@@ -19,9 +19,9 @@ type adverse_event {
   dose_limiting_toxicity: String
   unexpected_adverse_event: String
   crf_id: String
+  case: case @relation(name:"of_case", direction:OUT)
   agent: agent @relation(name:"of_agent", direction:OUT)
   cases: [case] @relation(name:"had_adverse_event", direction:IN)
-  visit: visit @relation(name:"on_visit", direction:OUT)
   next_adverse_event: adverse_event @relation(name:"next", direction:OUT)
   prior_adverse_event: adverse_event @relation(name:"next", direction:IN)
 }
@@ -92,6 +92,7 @@ type case {
   follow_ups: [follow_up] @relation(name:"of_case", direction:IN)
   samples: [sample] @relation(name:"of_case", direction:IN)
   visits: [visit] @relation(name:"of_case", direction:IN)
+  adverse_events: [adverse_event] @relation(name:"of_case", direction:IN)
   adverse_event: adverse_event @relation(name:"had_adverse_event", direction:OUT)
   off_study: off_study @relation(name:"went_off_study", direction:OUT)
   off_treatment: off_treatment @relation(name:"went_off_treatment", direction:OUT)
@@ -121,7 +122,10 @@ type demographic {
   patient_age_at_enrollment_original_unit: String
   date_of_birth: String
   sex: String
-  weight: String
+  weight: Float
+  weight_unit: String
+  weight_original: Float
+  weight_original_unit: String
   neutered_indicator: String
   crf_id: String
   case: case @relation(name:"of_case", direction:OUT)
@@ -135,10 +139,11 @@ type diagnosis {
   histology_cytopathology: String
   date_of_histology_confirmation: String
   histological_grade: String
-  pathology_report: Boolean
-  treatment_data: Boolean
-  follow_up_data: Boolean
-  concurrent_disease: Boolean
+  best_response: String
+  pathology_report: String
+  treatment_data: String
+  follow_up_data: String
+  concurrent_disease: String
   concurrent_disease_type: String
   crf_id: String
   case: case @relation(name:"of_case", direction:OUT)
@@ -188,7 +193,7 @@ type file {
   file_status: String
   uuid: String
   file_locations: String
-  studies: [study] @relation(name:"of_study", direction:OUT)
+  study: study @relation(name:"of_study", direction:OUT)
   sample: sample @relation(name:"of_sample", direction:OUT)
   assay: assay @relation(name:"of_assay", direction:OUT)
   diagnosis: diagnosis @relation(name:"from_diagnosis", direction:OUT)
@@ -320,10 +325,17 @@ type program {
 
 type sample {
   sample_id: String
-  sample_type: String
+  sample_site: String
+  physical_sample_type: String
   general_sample_pathology: String
+  tumor_sample_origin: String
+  summarized_sample_type: String
+  molecular_subtype: String
+  specific_sample_pathology: String
   date_of_sample_collection: String
-  necropsy_sample: Boolean
+  sample_chronology: String
+  necropsy_sample: String
+  tumor_grade: String
   length_of_tumor: Float
   length_of_tumor_unit: String
   length_of_tumor_original: Float
@@ -332,6 +344,10 @@ type sample {
   width_of_tumor_unit: String
   width_of_tumor_original: Float
   width_of_tumor_original_unit: String
+  volume_of_tumor: Float
+  volume_of_tumor_unit: String
+  volume_of_tumor_original: Float
+  volume_of_tumor_original_unit: String
   analysis_area: Float
   analysis_area_unit: String
   analysis_area_original: Float
@@ -352,8 +368,9 @@ type sample {
   non_tumor_tissue_area_unit: String
   non_tumor_tissue_area_original: Float
   non_tumor_tissue_area_original_unit: String
-  percentage_tumor: Float
+  percentage_tumor: String
   percentage_stroma: Float
+  sample_preservation: String
   comment: String
   case: case @relation(name:"of_case", direction:OUT)
   visit: visit @relation(name:"on_visit", direction:OUT)
@@ -383,6 +400,7 @@ type study {
 type study_arm {
   arm: String
   ctep_treatment_assignment_code: String
+  arm_description: String
   cohorts: [cohort] @relation(name:"member_of", direction:IN)
   study: study @relation(name:"member_of", direction:OUT)
   agents: [agent] @relation(name:"of_study_arm", direction:IN)
@@ -404,7 +422,6 @@ type visit {
   samples: [sample] @relation(name:"on_visit", direction:IN)
   physical_exams: [physical_exam] @relation(name:"on_visit", direction:IN)
   lab_exams: [lab_exam] @relation(name:"on_visit", direction:IN)
-  adverse_events: [adverse_event] @relation(name:"on_visit", direction:IN)
   disease_extents: [disease_extent] @relation(name:"on_visit", direction:IN)
   vital_signs: [vital_signs] @relation(name:"on_visit", direction:IN)
   next_visit: visit @relation(name:"next", direction:OUT)
