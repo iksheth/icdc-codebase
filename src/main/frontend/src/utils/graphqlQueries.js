@@ -102,6 +102,9 @@ export const DASHBOARD_QUERY = gql`{
           date_of_sample_collection
           necropsy_sample
           percentage_stroma
+          files{
+            uuid
+          }
         }
         files{
           file_description

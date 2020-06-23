@@ -187,7 +187,7 @@ export const filterData = (row, filters) => {
           let flag =false; 
           if (row[fields[0]]){
             row[fields[0]].forEach(item=>{
-               if (item[fields[1]].toString() !==fName) {
+               if (item[fields[1]].toString() ===fName) {
                     flag = true;
                   }
             })
@@ -264,6 +264,7 @@ export function customSorting(a, b, flag, i = 0) {
 }
 
 
+
 export function updateCheckBoxData(data, field,source) {
   const result = [];
   let preElementIndex = 0;
@@ -278,13 +279,16 @@ export function updateCheckBoxData(data, field,source) {
         items.forEach((item)=>{
           let key = fields[1].toString();
           if(accumulator.hasOwnProperty(item[key])){
-             accumulator[item[key]]["cases"] +=1;
+             accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(currentValue["files"]);
+             accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.uuid))].length;
+
           }else{
              accumulator[item[key]] = {
               name: item[key] === '' || !item[key]
                 ? NOT_PROVIDED : item[key],
               isChecked: false,
-              cases: 1,
+              cases: [... new Set(currentValue["files"].map(f=>f.uuid))].length,
+              files:currentValue["files"],
             }
 
           }
@@ -294,12 +298,16 @@ export function updateCheckBoxData(data, field,source) {
 
           if(accumulator.hasOwnProperty(name)){
              accumulator[name]["cases"] +=1;
+               accumulator[name]["files"]=accumulator[name]["files"].concat(currentValue["files"]);
+             accumulator[name]["cases"] = [... new Set(accumulator[name]["files"].map(f=>f.uuid))].length;
+
           }else{
              accumulator[name] = {
               name: name === '' || !name
                 ? NOT_PROVIDED : name,
               isChecked: false,
-              cases: 1,
+              cases: [... new Set(currentValue["files"].map(f=>f.uuid))].length,
+              files:currentValue["files"],
             }
 
           }
@@ -362,24 +370,36 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
         const item = el;
         item.cases = 0;
+        item.files = [];
         const filterWithOutCurrentCate = filters.filter(
           (f) => (f.groupName !== checkbox.groupName),
         );
         const subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
         subData.forEach((d) => {
           const fName = (item.name === NOT_PROVIDED ? '' : item.name);
-          if (d[checkbox.datafield]) {
-            if (Array.isArray(d[checkbox.datafield])) { // value in the array
-              if (d[checkbox.datafield].includes(fName)) {
+
+          if(checkbox.groupName=="General Sample Pathology"){
+             d["sample_list"].forEach(data=>{
+              if(data[checkbox.datafield.split("@")[1]]=== fName) { // Str compare
+                item.files = item.files.concat(d["files"]);
+                item.cases = [...new Set(item.files.map(f=>f.uuid))].length;
+              }
+             })
+          }else{
+              if (d[checkbox.datafield]) {
+              if (Array.isArray(d[checkbox.datafield])) { // value in the array
+                if (d[checkbox.datafield].includes(fName)) {
+                  item.cases += 1;
+                }
+              }
+              if (d[checkbox.datafield] === fName) { // Str compare
                 item.cases += 1;
               }
-            }
-            if (d[checkbox.datafield] === fName) { // Str compare
+            } else if (item.name === NOT_PROVIDED) { // No such attribute
               item.cases += 1;
             }
-          } else if (item.name === NOT_PROVIDED) { // No such attribute
-            item.cases += 1;
           }
+          
         });
         item.isChecked = false;
         filters.forEach((filter) => {
