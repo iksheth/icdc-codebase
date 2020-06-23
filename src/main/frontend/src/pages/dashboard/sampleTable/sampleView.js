@@ -227,7 +227,7 @@ const Samples = ({ classes, data }) => {
             onClick={exportCases}
             className={classes.button}
           >
-            ADD FILES TO MY CART
+            ADD ASSOCIATED FILES TO MY CART
           </button>
         </Grid>
       </div>
