@@ -219,17 +219,17 @@ const Dashboard = ({
             indicatorColor="primary"
             textColor="primary"
         >
-          <Tab label="Files" /> 
-          <Tab label="Samples" /> 
           <Tab label="Cases" /> 
+          <Tab label="Samples" /> 
+          <Tab label="Files" /> 
         </Tabs>
           <SwipeableViews
           index={currentTab}
           onChangeIndex={handleTabChange}
         >
-          <TabContainer ><Files/></TabContainer>
-          <TabContainer ><Samples/></TabContainer>
           <TabContainer ><Cases/></TabContainer>
+          <TabContainer ><Samples/></TabContainer>
+          <TabContainer ><Files/></TabContainer>
         </SwipeableViews>
        
         {/* Addingg diclaimer for Dev */}

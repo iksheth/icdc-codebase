@@ -50,6 +50,9 @@ export const mappingCheckBoxToDataTable = [
   {
     group: 'Neutered Status ', field: 'neutered_status', api: 'caseOverview', datafield: 'neutered_status', show: true, source:'datatable',
   },
+  {
+    group: 'General Sample Pathology', field: 'sample_list@general_sample_pathology', api: 'caseOverview', datafield: 'sample_list@general_sample_pathology', show: true, source:'datatable',
+  },
 ];
 
 export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) => ({
@@ -174,27 +177,46 @@ export const filterData = (row, filters) => {
   const groups = {};
 
   filters.forEach((filter) => {
+    const fName = (filter.name === NOT_PROVIDED ? '' : filter.name);
+
     if (groups[filter.groupName] && groups[filter.groupName] === true) {
       // do nothing
-    } else if (row[filter.datafield]) { // check if data has this attribute
-      // array includes
-      const fName = (filter.name === NOT_PROVIDED ? '' : filter.name);
-      if (Array.isArray(row[filter.datafield])) {
-        if (row[filter.datafield].includes(fName)) {
+    } else{
+      if (filter.datafield.includes("@")){
+          let fields = filter.datafield.split("@");
+          let flag =false; 
+          if (row[fields[0]]){
+            row[fields[0]].forEach(item=>{
+               if (item[fields[1]].toString() !==fName) {
+                    flag = true;
+                  }
+            })
+          }
+          groups[fields[0]] = flag;
+      }else{
+        if (row[filter.datafield]) { // check if data has this attribute
+          // array includes
+          if (Array.isArray(row[filter.datafield])) {
+            if (row[filter.datafield].includes(fName)) {
+              groups[filter.groupName] = true;
+            } else {
+              groups[filter.groupName] = false;
+            }
+          } else if (row[filter.datafield].toString() === fName) {
+            groups[filter.groupName] = true;
+          } else {
+            groups[filter.groupName] = false;
+          }
+        } else if (filter.name === NOT_PROVIDED) {
           groups[filter.groupName] = true;
         } else {
           groups[filter.groupName] = false;
         }
-      } else if (row[filter.datafield].toString() === fName) {
-        groups[filter.groupName] = true;
-      } else {
-        groups[filter.groupName] = false;
+    };
       }
-    } else if (filter.name === NOT_PROVIDED) {
-      groups[filter.groupName] = true;
-    } else {
-      groups[filter.groupName] = false;
-    }
+       
+
+
   });
   if (Object.values(groups).includes(false)) {
     return false;
@@ -247,22 +269,44 @@ export function updateCheckBoxData(data, field,source) {
   let preElementIndex = 0;
   if(source){
       // source -- datatable . Get init stats from data table
-   
-       
      let output  =data.reduce((accumulator, currentValue, currentIndex, array) => {
-      let name = currentValue[field.toString()]
-      if(accumulator.hasOwnProperty(name)){
-         accumulator[name]["cases"] +=1;
-      }else{
-         accumulator[name] = {
-          name: name === '' || !name
-            ? NOT_PROVIDED : name,
-          isChecked: false,
-          cases: 1,
-        }
+       let name = "" ;
 
-      }
-      return accumulator
+      if(field.includes("@")){
+        let fields = field.split("@");
+        let items =currentValue[fields[0].toString()]
+        items.forEach((item)=>{
+          let key = fields[1].toString();
+          if(accumulator.hasOwnProperty(item[key])){
+             accumulator[item[key]]["cases"] +=1;
+          }else{
+             accumulator[item[key]] = {
+              name: item[key] === '' || !item[key]
+                ? NOT_PROVIDED : item[key],
+              isChecked: false,
+              cases: 1,
+            }
+
+          }
+        })
+      }else{
+          name = currentValue[field.toString()]
+
+          if(accumulator.hasOwnProperty(name)){
+             accumulator[name]["cases"] +=1;
+          }else{
+             accumulator[name] = {
+              name: name === '' || !name
+                ? NOT_PROVIDED : name,
+              isChecked: false,
+              cases: 1,
+            }
+
+          }
+        
+      };
+    return accumulator
+         
       }, {})
      
      return Object.values(output).sort((a, b) => customSorting(a.name, b.name, 'alphabetical'))

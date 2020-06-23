@@ -143,7 +143,7 @@ const NavBar = ({
                 to="/cases"
                 onClick={() => handleButtonClickEvent('cases')}
               >
-                Cases
+                SEARCH
               </NavLink>
 
             </Button>
