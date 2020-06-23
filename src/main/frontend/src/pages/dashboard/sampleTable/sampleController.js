@@ -6,10 +6,9 @@ import View from './sampleView';
 
 const fileContainer = () => {
   // data from store
-  const casesData = useSelector((state) => (state.dashboard
+  const sampleData = useSelector((state) => (state.dashboard
         && state.dashboard.datatable
-        && state.dashboard.datatable.data
-    ? state.dashboard.datatable.data : {}));
+    ? state.dashboard.datatable : {}));
 
   const transform =(accumulator, currentValue, currentIndex, array) =>{
   	// use configuration file ... TBD
@@ -21,9 +20,25 @@ const fileContainer = () => {
   	}
   	return accumulator.concat(currentValue.sample_list.map(f=>Object.assign({}, f, caseAttrs)));
 	}
-  const tableData = casesData.reduce(transform,[]);
+  const tableData = sampleData.data.reduce(transform,[]);
 
-  return <View data={tableData} />;
+
+  
+  let tableDataAfterFilter = tableData.filter((row)=>{
+    let flag = true;
+    sampleData.filters.forEach(f=>{
+      if(f.datafield.includes("sample_list")){
+          let field = f.datafield.split("@")[1];
+          let value = f.name;
+          if(row[field] != value){
+            flag= false;
+          }
+       }
+    })
+    return flag;
+    
+  })
+  return <View data={tableDataAfterFilter} />;
 };
 
 export default fileContainer;

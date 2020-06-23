@@ -67,7 +67,6 @@ const Samples = ({ classes, data }) => {
                   },
                 };
             }
-                
        }
       }
     }

@@ -6,10 +6,9 @@ import FileView from './fileView';
 
 const fileContainer = () => {
   // data from store
-  const casesData = useSelector((state) => (state.dashboard
+  const fileData = useSelector((state) => (state.dashboard
         && state.dashboard.datatable
-        && state.dashboard.datatable.data
-    ? state.dashboard.datatable.data : {}));
+    ? state.dashboard.datatable : {}));
 
   const transform =(accumulator, currentValue, currentIndex, array) =>{
   	// use configuration file ... TBD
@@ -21,8 +20,10 @@ const fileContainer = () => {
   	}
   	return accumulator.concat(currentValue.files.map(f=>Object.assign({}, f, caseAttrs)));
 	}
-  const tableData = casesData.reduce(transform,[]);
+  let tableData = fileData.data.reduce(transform,[]);
   console.log(tableData);
+
+
 
   return <FileView data={tableData} />;
 };
