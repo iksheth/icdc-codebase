@@ -26,36 +26,36 @@ const fileContainer = () => {
  let tableDataAfterFilter = tableData.filter((row)=>{
     let flag = false;
     let filter1 = false;
-    let filter1_flag = false;
+    let filter1_flag = true;
     let filter2 = false;
-    let filter2_flag =false;
-    let filter3 = true;
+    let filter2_flag =true;
+    let filter3 = false;
     let filter3_flag =true;
     fileData.filters.forEach(f=>{
       if(f.groupName.includes("Associated File Type")){
           filter1 = true;
           let field = f.field;
           let value = f.name;
-          if(row["file_type"] == value){
-            filter1_flag = true;
+          if(row["file_type"] != value){
+            filter1_flag = false;
           }
        }
        if(f.groupName.includes("Associated File Format")){
           filter2 = true;
           let field = f.field;
           let value = f.name;
-          if(row["file_format"] == value){
-            filter2_flag = true;
+          if(row["file_format"] != value){
+            filter2_flag = false;
           }
        }
-       // if(f.groupName.includes("Association")){
-       //    filter3 = true;
-       //    let field = f.datafield;
-       //    let value = f.name;
-       //    if(row["parent"] == value){
-       //      filter3_flag = true;
-       //    }
-       // }
+       if(f.groupName.includes("Association")){
+          filter3 = true;
+          let field = f.datafield;
+          let value = f.name;
+          if(row["parent"] != value){
+            filter3_flag = false;
+          }
+       }
        
     })
     if(filter3){

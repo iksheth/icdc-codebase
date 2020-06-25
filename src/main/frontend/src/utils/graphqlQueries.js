@@ -107,6 +107,7 @@ export const DASHBOARD_QUERY = gql`{
           }
         }
         files{
+          parent
           file_description
           file_format
           file_locations

@@ -45,7 +45,7 @@ export const mappingCheckBoxToDataTable = [
     group: 'Associated File Format', field: 'file_format', api: 'caseOverview', datafield: 'file_format', show: true,source:'datatable',
   },
   {
-    group: 'Association ', field: 'files@file_type', api: 'caseOverview', datafield: 'files@file_type', show: true,source:'datatable',
+    group: 'Association ', field: 'parent', api: 'caseOverview', datafield: 'parent', show: true,source:'datatable',
   },
   {
     group: 'Neutered Status ', field: 'neutered_status', api: 'caseOverview', datafield: 'neutered_status', show: true, source:'datatable',
@@ -203,6 +203,16 @@ export const filterData = (row, filters) => {
               }
               groups["Associated File Format"] = flag;
 
+          }else if(filter.groupName.includes("Association")){
+              if (row["files"]){
+                row["files"].forEach(item=>{
+                   if (item["parent"].toString() ===fName) {
+                        flag = true;
+                      }
+                })
+              }
+              groups["Association"] = flag;
+
           }else if(filter.groupName.includes("Associated File Type")){
              if (row["files"]){
                 row["files"].forEach(item=>{
@@ -317,6 +327,30 @@ export function updateCheckBoxData(data, field,source,customFilter) {
         let items =currentValue["files"]
         items.forEach((item)=>{
           let key = "file_format";
+          if(accumulator.hasOwnProperty(item[key])){
+             accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(item);
+             accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.uuid))].length;
+
+          }else{
+             accumulator[item[key]] = {
+              name: item[key] === '' || !item[key]
+                ? NOT_PROVIDED : item[key],
+              isChecked: false,
+              cases: 1,
+              files:[item],
+            }
+          }
+        })
+        return accumulator
+      }, {})
+     
+
+    }
+  if(customFilter.group.includes("Association")){
+      output=  data.reduce((accumulator, currentValue, currentIndex, array) => {
+        let items =currentValue["files"]
+        items.forEach((item)=>{
+          let key = "parent";
           if(accumulator.hasOwnProperty(item[key])){
              accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(item);
              accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.uuid))].length;
@@ -484,6 +518,13 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
               }
              })
 
+          }else if(checkbox.groupName.includes("Association")){
+              d["files"].forEach(data=>{
+              if(data["parent"]===fName) { 
+                item.files = item.files.concat(data);
+                item.cases = [...new Set(item.files.map(f=>f.uuid))].length;
+              }
+             })
           }else if(checkbox.groupName.includes("Associated File Type")){
              d["files"].forEach(data=>{
               if(data["file_type"]===fName) { 
