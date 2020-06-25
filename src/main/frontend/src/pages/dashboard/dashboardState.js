@@ -207,11 +207,11 @@ export default function dashboardReducer(state = initialState, action) {
           hasError: false,
           error: '',
           stats: {
-            numberOfStudies: action.payload.data.numberOfStudies,
-            numberOfCases: action.payload.data.numberOfCases,
-            numberOfSamples: action.payload.data.numberOfSamples,
-            numberOfFiles: action.payload.data.numberOfFiles,
-            numberOfAliquots: action.payload.data.numberOfAliquots,
+            numberOfStudies: getStatDataFromDashboardData(action.payload.data.caseOverview, 'study', []),
+            numberOfCases: getStatDataFromDashboardData(action.payload.data.caseOverview, 'case', []),
+            numberOfSamples: getStatDataFromDashboardData(action.payload.data.caseOverview, 'sample', []),
+            numberOfFiles: getStatDataFromDashboardData(action.payload.data.caseOverview, 'file', []),
+            numberOfAliquots: getStatDataFromDashboardData(action.payload.data.caseOverview, 'aliquot', []),
           },
           caseOverview: {
             data: action.payload.data.caseOverview,
