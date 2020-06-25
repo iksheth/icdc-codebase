@@ -39,13 +39,13 @@ export const mappingCheckBoxToDataTable = [
     group: 'Sex', field: 'gender', api: 'caseCountByGender', datafield: 'sex', show: true,
   },
   {
-    group: 'Associated File Type', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types', show: true,
+    group: 'Associated File Type', field: 'file_type', api: 'caseOverview', datafield: 'file_type', show: true,source:'datatable',
   },
   {
-    group: 'Associated File Format', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
+    group: 'Associated File Format', field: 'file_format', api: 'caseOverview', datafield: 'file_format', show: true,source:'datatable',
   },
   {
-    group: 'Associated Sample Type ', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
+    group: 'Association ', field: 'files@file_type', api: 'caseOverview', datafield: 'files@file_type', show: true,source:'datatable',
   },
   {
     group: 'Neutered Status ', field: 'neutered_status', api: 'caseOverview', datafield: 'neutered_status', show: true, source:'datatable',
@@ -182,18 +182,37 @@ export const filterData = (row, filters) => {
     if (groups[filter.groupName] && groups[filter.groupName] === true) {
       // do nothing
     } else{
-      if (filter.datafield.includes("@")){
-          let fields = filter.datafield.split("@");
-          let flag =false; 
-          if (row[fields[0]]){
-            row[fields[0]].forEach(item=>{
-               if (item[fields[1]].toString() ===fName) {
-                    flag = true;
-                  }
-            })
-          }
-          groups[fields[0]] = flag;
-      }else{
+      let flag =false; 
+      if(filter.groupName.includes("General Sample Pathology")){
+              let fields = filter.datafield.split("@");
+              if (row[fields[0]]){
+                row[fields[0]].forEach(item=>{
+                   if (item[fields[1]].toString() ===fName) {
+                        flag = true;
+                      }
+                })
+              }
+              groups[fields[0]] = flag;
+          }else if(filter.groupName.includes("Associated File Format")){
+              if (row["files"]){
+                row["files"].forEach(item=>{
+                   if (item["file_format"].toString() ===fName) {
+                        flag = true;
+                      }
+                })
+              }
+              groups["Associated File Format"] = flag;
+
+          }else if(filter.groupName.includes("Associated File Type")){
+             if (row["files"]){
+                row["files"].forEach(item=>{
+                   if (item["file_type"].toString() ===fName) {
+                        flag = true;
+                      }
+                })
+              }
+              groups["Associated File Type"] = flag;
+          }else{
         if (row[filter.datafield]) { // check if data has this attribute
           // array includes
           if (Array.isArray(row[filter.datafield])) {
@@ -265,21 +284,18 @@ export function customSorting(a, b, flag, i = 0) {
 
 
 
-export function updateCheckBoxData(data, field,source) {
+export function updateCheckBoxData(data, field,source,customFilter) {
   const result = [];
   let preElementIndex = 0;
   if(source){
-      // source -- datatable . Get init stats from data table
-     let output  =data.reduce((accumulator, currentValue, currentIndex, array) => {
-       let name = "" ;
-
-      if(field.includes("@")){
-        let fields = field.split("@");
-        let items =currentValue[fields[0].toString()]
+    let output= [];
+    if(customFilter.group.includes("Association")){
+       output=  data.reduce((accumulator, currentValue, currentIndex, array) => {
+        let items =currentValue["files"]
         items.forEach((item)=>{
-          let key = fields[1].toString();
+          let key = field.toString();
           if(accumulator.hasOwnProperty(item[key])){
-             accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(currentValue["files"]);
+             accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(item);
              accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.uuid))].length;
 
           }else{
@@ -287,35 +303,110 @@ export function updateCheckBoxData(data, field,source) {
               name: item[key] === '' || !item[key]
                 ? NOT_PROVIDED : item[key],
               isChecked: false,
-              cases: [... new Set(currentValue["files"].map(f=>f.uuid))].length,
-              files:currentValue["files"],
+              cases: 1,
+              files:[item],
             }
 
           }
         })
-      }else{
-          name = currentValue[field.toString()]
+        return accumulator
+      }, {})
+    }
+    if(customFilter.group.includes("Associated File Format")){
+      output=  data.reduce((accumulator, currentValue, currentIndex, array) => {
+        let items =currentValue["files"]
+        items.forEach((item)=>{
+          let key = "file_format";
+          if(accumulator.hasOwnProperty(item[key])){
+             accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(item);
+             accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.uuid))].length;
 
+          }else{
+             accumulator[item[key]] = {
+              name: item[key] === '' || !item[key]
+                ? NOT_PROVIDED : item[key],
+              isChecked: false,
+              cases: 1,
+              files:[item],
+            }
+          }
+        })
+        return accumulator
+      }, {})
+     
+
+    }
+
+    if(customFilter.group.includes("Associated File Type")){
+      output=  data.reduce((accumulator, currentValue, currentIndex, array) => {
+        let items =currentValue["files"]
+        items.forEach((item)=>{
+          let key = "file_type";
+          if(accumulator.hasOwnProperty(item[key])){
+             accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(item);
+             accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.uuid))].length;
+
+          }else{
+             accumulator[item[key]] = {
+              name: item[key] === '' || !item[key]
+                ? NOT_PROVIDED : item[key],
+              isChecked: false,
+              cases: 1,
+              files:[item],
+            }
+          }
+        })
+        return accumulator
+      }, {})
+     
+
+    }
+
+    if(customFilter.group.includes("Neutered Status ")){
+       output=  data.reduce((accumulator, currentValue, currentIndex, array) => {
+        let name = currentValue[field.toString()]
           if(accumulator.hasOwnProperty(name)){
              accumulator[name]["cases"] +=1;
-               accumulator[name]["files"]=accumulator[name]["files"].concat(currentValue["files"]);
-             accumulator[name]["cases"] = [... new Set(accumulator[name]["files"].map(f=>f.uuid))].length;
-
           }else{
              accumulator[name] = {
               name: name === '' || !name
                 ? NOT_PROVIDED : name,
               isChecked: false,
-              cases: [... new Set(currentValue["files"].map(f=>f.uuid))].length,
-              files:currentValue["files"],
+              cases: 1,
+            }
+          }
+          return accumulator
+      }, {})
+
+    }
+
+    if(customFilter.group.includes("General Sample Pathology")){
+     output=  data.reduce((accumulator, currentValue, currentIndex, array) => {
+        let fields = field.split("@");
+        let items =currentValue[fields[0].toString()]
+        items.forEach((item)=>{
+          let key = fields[1].toString();
+          if(accumulator.hasOwnProperty(item[key])){
+             accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(item);
+             accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.sample_id))].length;
+
+          }else{
+             accumulator[item[key]] = {
+              name: item[key] === '' || !item[key]
+                ? NOT_PROVIDED : item[key],
+              isChecked: false,
+              cases: 1,
+              files:[item],
             }
 
           }
-        
-      };
-    return accumulator
-         
+        })
+        return accumulator
       }, {})
+     
+    }
+   
+
      
      return Object.values(output).sort((a, b) => customSorting(a.name, b.name, 'alphabetical'))
 
@@ -381,10 +472,25 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
           if(checkbox.groupName=="General Sample Pathology"){
              d["sample_list"].forEach(data=>{
               if(data[checkbox.datafield.split("@")[1]]=== fName) { // Str compare
-                item.files = item.files.concat(d["files"]);
+                item.files = item.files.concat(data);
+                item.cases = [...new Set(item.files.map(f=>f.sample_id))].length;
+              }
+             })
+          }else if(checkbox.groupName.includes("Associated File Format")){
+              d["files"].forEach(data=>{
+              if(data["file_format"]===fName) { 
+                item.files = item.files.concat(data);
                 item.cases = [...new Set(item.files.map(f=>f.uuid))].length;
               }
              })
+
+          }else if(checkbox.groupName.includes("Associated File Type")){
+             d["files"].forEach(data=>{
+              if(data["file_type"]===fName) { 
+                item.files = item.files.concat(data);
+                item.cases = [...new Set(item.files.map(f=>f.uuid))].length;
+              }
+             }) 
           }else{
               if (d[checkbox.datafield]) {
               if (Array.isArray(d[checkbox.datafield])) { // value in the array
@@ -420,7 +526,7 @@ export function customCheckBox(data) {
   return (
     mappingCheckBoxToDataTable.map((mapping) => ({
       groupName: mapping.group,
-      checkboxItems: updateCheckBoxData(data[mapping.api], mapping.field,mapping.source),
+      checkboxItems: updateCheckBoxData(data[mapping.api], mapping.field,mapping.source,mapping),
       datafield: mapping.datafield,
       show: mapping.show,
     }))
