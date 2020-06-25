@@ -62,7 +62,7 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
   isChecked: false,
 }));
 
-export function getStatDataFromDashboardData(data, statName) {
+export function getStatDataFromDashboardData(data, statName, filters) {
   switch (statName) {
     case 'case':
       return data.length;
@@ -71,12 +71,86 @@ export function getStatDataFromDashboardData(data, statName) {
     case 'aliquot':
       return 0;
     case 'sample':
-      return [...new Set(data.reduce((output, d) => output.concat(d.samples
-        ? d.samples : []), []))].length;
+        let tableDataAfterFilter = [...new Set(data.reduce((output, d) => output.concat(d.sample_list
+        ? d.sample_list : []), []))].filter((row)=>{
+        let flag = true;
+        filters.forEach(f=>{
+          if(f.datafield.includes("sample_list")){
+              let field = f.datafield.split("@")[1];
+              let value = f.name;
+              if(row[field] != value){
+                flag = false;
+              }
+           }
+        })
+        return flag;
+      })
+      return tableDataAfterFilter.length;
     case 'file':
-
-      return [...new Set(data.reduce((output, d) => output.concat(d.files
-        ? d.files : []), []).map((f) => f.uuid))].length;
+      let tableDataAfterFilter2= [...new Set(data.reduce((output, d) => output.concat(d.files
+        ? d.files : []), []))].filter((row)=>{
+    let flag = false;
+    let filter1 = false;
+    let filter1_flag = true;
+    let filter2 = false;
+    let filter2_flag =true;
+    let filter3 = false;
+    let filter3_flag =true;
+    filters.forEach(f=>{
+      if(f.groupName.includes("Associated File Type")){
+          filter1 = true;
+          let field = f.field;
+          let value = f.name;
+          if(row["file_type"] != value){
+            filter1_flag = false;
+          }
+       }
+       if(f.groupName.includes("Associated File Format")){
+          filter2 = true;
+          let field = f.field;
+          let value = f.name;
+          if(row["file_format"] != value){
+            filter2_flag = false;
+          }
+       }
+       if(f.groupName.includes("Association")){
+          filter3 = true;
+          let field = f.datafield;
+          let value = f.name;
+          if(row["parent"] != value){
+            filter3_flag = false;
+          }
+       }
+       
+    })
+    if(filter3){
+          filter3 = filter3_flag;
+       }else{
+          filter3 = true;
+       }
+      
+      if(filter2){
+          filter2 = filter2_flag;
+       }else{
+          filter2 = true;
+       }
+      
+      if(filter1){
+          filter1 = filter1_flag;
+       }else{
+          filter1 = true;
+       }
+      
+      if(filter3&filter2&filter1){
+        flag=true;
+      }
+    if(filters.length==0){
+      flag=true;
+    }
+    return flag;
+    
+  })
+      return tableDataAfterFilter2.length;
     default:
       return 0;
   }
