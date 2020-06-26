@@ -128,6 +128,7 @@ export default function dashboardReducer(state = initialState, action) {
           state.checkboxForAll.data,
           state.checkbox.data.filter((d) => action.payload[0].groupName === d.groupName)[0],
           dataTableFilters,
+          tableData,
         )
         : state.checkboxForAll.data;
       return {
@@ -167,6 +168,7 @@ export default function dashboardReducer(state = initialState, action) {
           state.checkboxForAll.data,
           state.checkbox.data.filter((d) => action.payload[0].groupName === d.groupName)[0],
           dataTableFilters,
+          tableData,
         )
         : state.checkboxForAll.data;
       return {

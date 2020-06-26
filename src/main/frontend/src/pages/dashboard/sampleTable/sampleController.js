@@ -25,16 +25,24 @@ const fileContainer = () => {
 
   
   let tableDataAfterFilter = tableData.filter((row)=>{
-    let flag = true;
+    let flag = false;
+    let hasSampleFilter = false;
     sampleData.filters.forEach(f=>{
+      // find record match the search
       if(f.datafield.includes("sample_list")){
+          hasSampleFilter= true;
           let field = f.datafield.split("@")[1];
           let value = f.name;
-          if(row[field] != value){
-            flag = false;
+          if(row[field] == value){
+            flag = true;
           }
        }
     })
+
+    // if not sample filter
+    if(!hasSampleFilter){
+      flag =  true;
+    }
     return flag;
     
   })

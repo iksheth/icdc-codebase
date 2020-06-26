@@ -45,10 +45,10 @@ export const mappingCheckBoxToDataTable = [
     group: 'Associated File Format', field: 'file_format', api: 'caseOverview', datafield: 'file_format', show: true,source:'datatable',
   },
   {
-    group: 'Association ', field: 'parent', api: 'caseOverview', datafield: 'parent', show: true,source:'datatable',
+    group: 'Association', field: 'parent', api: 'caseOverview', datafield: 'parent', show: true,source:'datatable',
   },
   {
-    group: 'Neutered Status ', field: 'neutered_status', api: 'caseOverview', datafield: 'neutered_status', show: true, source:'datatable',
+    group: 'Neutered Status', field: 'neutered_status', api: 'caseOverview', datafield: 'neutered_status', show: true, source:'datatable',
   },
   {
     group: 'General Sample Pathology', field: 'sample_list@general_sample_pathology', api: 'caseOverview', datafield: 'sample_list@general_sample_pathology', show: true, source:'datatable',
@@ -91,34 +91,34 @@ export function getStatDataFromDashboardData(data, statName, filters) {
         ? d.files : []), []))].filter((row)=>{
     let flag = false;
     let filter1 = false;
-    let filter1_flag = true;
+    let filter1_flag = false;
     let filter2 = false;
-    let filter2_flag =true;
+    let filter2_flag =false;
     let filter3 = false;
-    let filter3_flag =true;
+    let filter3_flag =false;
     filters.forEach(f=>{
       if(f.groupName.includes("Associated File Type")){
           filter1 = true;
           let field = f.field;
           let value = f.name;
-          if(row["file_type"] != value){
-            filter1_flag = false;
+          if(row["file_type"] == value){
+            filter1_flag =true;
           }
        }
        if(f.groupName.includes("Associated File Format")){
           filter2 = true;
           let field = f.field;
           let value = f.name;
-          if(row["file_format"] != value){
-            filter2_flag = false;
+          if(row["file_format"] == value){
+            filter2_flag = true;
           }
        }
        if(f.groupName.includes("Association")){
           filter3 = true;
           let field = f.datafield;
           let value = f.name;
-          if(row["parent"] != value){
-            filter3_flag = false;
+          if(row["parent"] == value){
+            filter3_flag = true;
           }
        }
        
@@ -142,6 +142,10 @@ export function getStatDataFromDashboardData(data, statName, filters) {
        }
       
       if(filter3&filter2&filter1){
+        flag=true;
+      }
+
+      if(!filter3&!filter2&!filter1){
         flag=true;
       }
     if(filters.length==0){
@@ -258,15 +262,14 @@ export const filterData = (row, filters) => {
     } else{
       let flag =false; 
       if(filter.groupName.includes("General Sample Pathology")){
-              let fields = filter.datafield.split("@");
-              if (row[fields[0]]){
-                row[fields[0]].forEach(item=>{
-                   if (item[fields[1]].toString() ===fName) {
+              if (row["sample_list"]){
+                row["sample_list"].forEach(item=>{
+                   if (item["general_sample_pathology"].toString() ===fName) {
                         flag = true;
                       }
                 })
               }
-              groups[fields[0]] = flag;
+              groups["General Sample Pathology"] = flag;
           }else if(filter.groupName.includes("Associated File Format")){
               if (row["files"]){
                 row["files"].forEach(item=>{
@@ -279,8 +282,8 @@ export const filterData = (row, filters) => {
 
           }else if(filter.groupName.includes("Association")){
               if (row["files"]){
-                row["files"].forEach(item=>{
-                   if (item["parent"].toString() ===fName) {
+                  row["files"].forEach(item=>{
+                   if (item["parent"].toString() == fName) {
                         flag = true;
                       }
                 })
@@ -377,7 +380,7 @@ export function updateCheckBoxData(data, field,source,customFilter) {
        output=  data.reduce((accumulator, currentValue, currentIndex, array) => {
         let items =currentValue["files"]
         items.forEach((item)=>{
-          let key = field.toString();
+          let key = 'parent';
           if(accumulator.hasOwnProperty(item[key])){
              accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(item);
              accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.uuid))].length;
@@ -401,30 +404,6 @@ export function updateCheckBoxData(data, field,source,customFilter) {
         let items =currentValue["files"]
         items.forEach((item)=>{
           let key = "file_format";
-          if(accumulator.hasOwnProperty(item[key])){
-             accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(item);
-             accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.uuid))].length;
-
-          }else{
-             accumulator[item[key]] = {
-              name: item[key] === '' || !item[key]
-                ? NOT_PROVIDED : item[key],
-              isChecked: false,
-              cases: 1,
-              files:[item],
-            }
-          }
-        })
-        return accumulator
-      }, {})
-     
-
-    }
-  if(customFilter.group.includes("Association")){
-      output=  data.reduce((accumulator, currentValue, currentIndex, array) => {
-        let items =currentValue["files"]
-        items.forEach((item)=>{
-          let key = "parent";
           if(accumulator.hasOwnProperty(item[key])){
              accumulator[item[key]]["files"]=accumulator[item[key]]["files"].concat(item);
              accumulator[item[key]]["cases"] = [... new Set(accumulator[item[key]]["files"].map(f=>f.uuid))].length;
@@ -547,7 +526,7 @@ export function updateCheckBoxData(data, field,source,customFilter) {
 }
 
 
-export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) => (
+export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters,dataAfterFilter) => (
   // deep copy array
   JSON.parse(JSON.stringify(allCheckBoxs)).map((ck) => {
     const checkbox = ck;
@@ -585,6 +564,7 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
               }
              })
           }else if(checkbox.groupName.includes("Associated File Format")){
+            
               d["files"].forEach(data=>{
               if(data["file_format"]===fName) { 
                 item.files = item.files.concat(data);
