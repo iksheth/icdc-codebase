@@ -88,8 +88,17 @@ export function getStatDataFromDashboardData(data, statName, filters) {
       return tableDataAfterFilter.length;
     case 'file':
       let tableDataAfterFilter2= [...new Set(data.reduce((output, d) => output.concat(d.files
-        ? d.files : []), []))].filter((row)=>{
-    let flag = false;
+        ? d.files : []), []))]
+      const result = [];
+      const map = new Map();
+      for (const item of tableDataAfterFilter2) {
+          if(!map.has(item.uuid)){
+              map.set(item.uuid, true);    // set any value to Map
+              result.push(item);
+          }
+      }
+      let tableDataAfterFilter3 =result.filter((row)=>{
+      let flag = false;
     let filter1 = false;
     let filter1_flag = false;
     let filter2 = false;
@@ -102,7 +111,7 @@ export function getStatDataFromDashboardData(data, statName, filters) {
           let field = f.field;
           let value = f.name;
           if(row["file_type"] == value){
-            filter1_flag =true;
+            filter1_flag = true;
           }
        }
        if(f.groupName.includes("Associated File Format")){
@@ -144,17 +153,13 @@ export function getStatDataFromDashboardData(data, statName, filters) {
       if(filter3&filter2&filter1){
         flag=true;
       }
-
-      if(!filter3&!filter2&!filter1){
-        flag=true;
-      }
-    if(filters.length==0){
+    if(!filter3&!filter2&!filter1){
       flag=true;
     }
     return flag;
     
   })
-      return tableDataAfterFilter2.length;
+      return tableDataAfterFilter3.length;
     default:
       return 0;
   }

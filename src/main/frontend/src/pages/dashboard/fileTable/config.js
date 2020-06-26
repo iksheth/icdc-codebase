@@ -18,7 +18,7 @@ export const Configuration={
 "program":{ "label": "Program", "display":false,"index":-1 },
 "sex":{ "label": "Sex", "display":false,"index":-1 },
 "stage_of_disease":{ "label": "Stage of Disease", "display":false,"index":-1 },
-"study_code":{ "label":"Study Code", "display":true,"index":10 },
+"study_code":{ "label":"Study Code", "display":false,"index":-1 },
 "study_type":{ "label":"Study Type", "display":false,"index":-1 },
 "uuid":{ "label":"File UUID", "display":true, "isKey":true, "index": 8 },
 };

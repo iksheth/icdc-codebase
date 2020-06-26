@@ -20,10 +20,20 @@ const fileContainer = () => {
   	}
   	return accumulator.concat(currentValue.files.map(f=>Object.assign({}, f, caseAttrs)));
 	}
-  let tableData = fileData.data.reduce(transform,[]);
-  console.log(tableData);
 
- let tableDataAfterFilter = tableData.filter((row)=>{
+  let tableData = fileData.data.reduce(transform,[]);
+
+const result = [];
+const map = new Map();
+for (const item of tableData) {
+    if(!map.has(item.uuid)){
+        map.set(item.uuid, true);    // set any value to Map
+        result.push(item);
+    }
+}
+
+
+ let tableDataAfterFilter = result.filter((row)=>{
     let flag = false;
     let filter1 = false;
     let filter1_flag = false;
