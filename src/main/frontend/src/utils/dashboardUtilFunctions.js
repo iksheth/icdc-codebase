@@ -270,82 +270,16 @@ export const filterData = (row, filters) => {
                 })
               }
               groups["General Sample Pathology"] = flag;
-          }else if(filter.groupName.includes("Associated File Format")){
-            let flag = false;
-    let filter1 = false;
-    let filter1_flag = false;
-    let filter2 = false;
-    let filter2_flag =false;
-    let filter3 = false;
-    let filter3_flag =false;
-    filters.forEach(f=>{
-      if(f.groupName.includes("Associated File Type")){
-          filter1 = true;
-          let field = f.field;
-          let value = f.name;
-          if(row["file_type"] == value){
-            filter1_flag =true;
-          }
-       }
-       if(f.groupName.includes("Associated File Format")){
-          filter2 = true;
-          let field = f.field;
-          let value = f.name;
-          if(row["file_format"] == value){
-            filter2_flag = true;
-          }
-       }
-       if(f.groupName.includes("Association")){
-          filter3 = true;
-          let field = f.datafield;
-          let value = f.name;
-          if(row["parent"] == value){
-            filter3_flag = true;
-          }
-       }
-       
-    })
-    if(filter3){
-          filter3 = filter3_flag;
-       }else{
-          filter3 = true;
-       }
-      
-      if(filter2){
-          filter2 = filter2_flag;
-       }else{
-          filter2 = true;
-       }
-      
-      if(filter1){
-          filter1 = filter1_flag;
-       }else{
-          filter1 = true;
-       }
-      
-      if(filter3&filter2&filter1){
-        flag=true;
-      }
-
-      if(!filter3&!filter2&!filter1){
-        flag=true;
-      }
-    if(filters.length==0){
-      flag=true;
-    }
-              if (row["files"]&&flag){
-                row["files"].forEach(item=>{
-                   if (item["file_format"].toString() ===fName) {
+      }else if(filter.groupName.includes("Associated File Format")){
+              if (row["files"]){
+                  row["files"].forEach(item=>{
+                   if (item["file_format"].toString() == fName) {
                         flag = true;
                       }
-                       groups["Associated File Format"] = flag;
-
                 })
-              }else{
-                 groups["Associated File Format"] = false;
               }
-             
-          }else if(filter.groupName.includes("Association")){
+              groups["Associated File Format"] = flag;
+            }else if(filter.groupName.includes("Association")){
               if (row["files"]){
                   row["files"].forEach(item=>{
                    if (item["parent"].toString() == fName) {
@@ -590,6 +524,71 @@ export function updateCheckBoxData(data, field,source,customFilter) {
   return result;
 }
 
+function filterfiles(filters,row){
+    let flag = false;
+    let filter1 = false;
+    let filter1_flag = false;
+    let filter2 = false;
+    let filter2_flag =false;
+    let filter3 = false;
+    let filter3_flag =false;
+    filters.forEach(f=>{
+      if(f.groupName.includes("Associated File Type")){
+          filter1 = true;
+          let field = f.field;
+          let value = f.name;
+          if(row["file_type"] == value){
+            filter1_flag =true;
+          }
+       }
+       if(f.groupName.includes("Associated File Format")){
+          filter2 = true;
+          let field = f.field;
+          let value = f.name;
+          if(row["file_format"] == value){
+            filter2_flag = true;
+          }
+       }
+       if(f.groupName.includes("Association")){
+          filter3 = true;
+          let field = f.datafield;
+          let value = f.name;
+          if(row["parent"] == value){
+            filter3_flag = true;
+          }
+       }
+       
+    })
+    if(filter3){
+          filter3 = filter3_flag;
+       }else{
+          filter3 = true;
+       }
+      
+      if(filter2){
+          filter2 = filter2_flag;
+       }else{
+          filter2 = true;
+       }
+      
+      if(filter1){
+          filter1 = filter1_flag;
+       }else{
+          filter1 = true;
+       }
+      
+      if(filter3&filter2&filter1){
+        flag=true;
+      }
+
+      if(!filter3&!filter2&!filter1){
+        flag=true;
+      }
+    if(filters.length==0){
+      flag=true;
+    }
+    return flag;
+}
 
 export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters,dataAfterFilter) => (
   // deep copy array
@@ -618,7 +617,11 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters,dat
           (f) => (f.groupName !== checkbox.groupName),
         );
         const subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
-        filesFilters = 
+        let filesFilters = filters.filter(f=>{
+            return f.groupName.includes("Associated File Format")
+                    || f.groupName.includes("Association")
+                      || f.groupName.includes("Associated File Type")
+        })
         subData.forEach((d) => {
           const fName = (item.name === NOT_PROVIDED ? '' : item.name);
 
@@ -632,7 +635,8 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters,dat
           }else if(checkbox.groupName.includes("Associated File Format")){
 
               d["files"].forEach(data=>{
-              if(data["file_format"]===fName) { 
+              if(data["file_format"]===fName && filterfiles(filesFilters,data)) { 
+                // filter with filters
                 item.files = item.files.concat(data);
                 item.cases = [...new Set(item.files.map(f=>f.uuid))].length;
               }
@@ -640,14 +644,14 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters,dat
 
           }else if(checkbox.groupName.includes("Association")){
               d["files"].forEach(data=>{
-              if(data["parent"]===fName) { 
+              if(data["parent"]===fName&& filterfiles(filesFilters,data)) { 
                 item.files = item.files.concat(data);
                 item.cases = [...new Set(item.files.map(f=>f.uuid))].length;
               }
              })
           }else if(checkbox.groupName.includes("Associated File Type")){
              d["files"].forEach(data=>{
-              if(data["file_type"]===fName) { 
+              if(data["file_type"]===fName&& filterfiles(filesFilters,data)) { 
                 item.files = item.files.concat(data);
                 item.cases = [...new Set(item.files.map(f=>f.uuid))].length;
               }
