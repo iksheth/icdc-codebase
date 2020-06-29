@@ -4,7 +4,7 @@ export const FILE_QUERY = gql` query files($uuids: [String!]) {
     file(filter:{uuid_in:$uuids}){
           file_description
           file_format
-          file_locations
+          file_location
           file_name
           file_size
           file_status
@@ -110,7 +110,7 @@ export const DASHBOARD_QUERY = gql`{
           parent
           file_description
           file_format
-          file_locations
+          file_location
           file_name
           file_size
           file_status
