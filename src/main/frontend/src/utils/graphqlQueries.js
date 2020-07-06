@@ -11,7 +11,7 @@ export const STATS_QUERY = gql`{
 
 
 export const DASHBOARD_QUERY = gql`{
-    numberOfStudies
+     numberOfStudies
     numberOfCases
     numberOfSamples
     numberOfFiles
@@ -41,22 +41,18 @@ export const DASHBOARD_QUERY = gql`{
       cases
       stage_of_disease 
     }
-
     caseCountByStudyCode{
       study_code
      cases
     }
-
    caseCountByStudyType {
      study_type
      cases
     }
-
     caseCountByAge {
      age
      cases
     }
-
     caseCountByDataType {
      data_type
      cases
@@ -65,7 +61,6 @@ export const DASHBOARD_QUERY = gql`{
      program
      cases
     }
-
    caseOverview{   
         case_id  
         program
@@ -80,10 +75,30 @@ export const DASHBOARD_QUERY = gql`{
         data_types
         disease_site
         samples
+        sample_list {
+          sample_id
+          sample_site
+          summarized_sample_type
+          specific_sample_pathology
+          tumor_grade
+          sample_chronology
+          sample_preservation
+          percentage_tumor
+          files{
+            uuid
+          }
+        }
         files{
-          uuid
+          parent
+          file_description
           file_format
+          file_location
+          file_name
+          file_size
+          file_status
           file_type
+          md5sum
+          uuid
         }
         file_formats
      }

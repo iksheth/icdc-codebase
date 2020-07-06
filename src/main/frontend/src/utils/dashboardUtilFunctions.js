@@ -43,6 +43,15 @@ export const mappingCheckBoxToDataTable = [
   {
     group: 'Associated File Format', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
   },
+  {
+    group: 'Neutered Status', field: 'neutered_status', api: 'caseCountByFileFormat', datafield: 'neutered_status', show: true,
+  },
+  {
+    group: 'Response to Treatment', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
+  },
+  {
+    group: 'Associated Sample Type', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
+  },
 
 
 ];
