@@ -158,6 +158,16 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
         md5sum 
 
     }
+    samplesByCaseId(case_id:$case_id){
+      sample_id
+      sample_site
+      summarized_sample_type
+      specific_sample_pathology
+      tumor_grade
+      sample_chronology
+      percentage_tumor
+      sample_preservation
+    }
  }`;
 
 
