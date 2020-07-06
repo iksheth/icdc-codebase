@@ -38,8 +38,74 @@ function formatBytes(bytes, decimals = 2) {
   return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
 }
 
+const columnsOfSamples = [
+  {
+    name: 'sample_id',
+    label: 'Sample ID',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'sample_site',
+    label: 'Topography',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'summarized_sample_type',
+    label: 'Sample Type',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'specific_sample_pathology',
+    label: 'Sample Pathology',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'tumor_grade',
+    label: 'Tumor Grade',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'sample_chronology',
+    label: 'WHAT',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'sample_preservation',
+    label: 'Sample Preservation',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+];
 
-const columns = [
+
+const columnsOfFiles = [
 
   {
     name: 'file_name',
@@ -635,7 +701,26 @@ const CaseDetail = ({ classes, data, selected }) => {
               <Grid item xs={12}>
                 <MUIDataTable
                   data={data.filesOfCase}
-                  columns={columns}
+                  columns={columnsOfFiles}
+                  options={options(classes)}
+                />
+              </Grid>
+              <Grid item xs={8}>
+                <Typography />
+              </Grid>
+            </Grid>
+          </Grid>
+        </div>
+        <div className={classes.tableDiv}>
+          <div className={classes.tableTitle}>
+            <span className={classes.tableHeader}>ASSOCIATED SAMPLES</span>
+          </div>
+          <Grid item xs={12}>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <MUIDataTable
+                  data={data.samplesByCaseId}
+                  columns={columnsOfSamples}
                   options={options(classes)}
                 />
               </Grid>
