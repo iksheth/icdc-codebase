@@ -691,17 +691,16 @@ const CaseDetail = ({ classes, data, selected }) => {
         </div>
       </div>
       <div id="table_case_detail" className={classes.tableContainer}>
-
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>ASSOCIATED FILES</span>
+            <span className={classes.tableHeader}>ASSOCIATED SAMPLES</span>
           </div>
           <Grid item xs={12}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
                 <MUIDataTable
-                  data={data.filesOfCase}
-                  columns={columnsOfFiles}
+                  data={data.samplesByCaseId}
+                  columns={columnsOfSamples}
                   options={options(classes)}
                 />
               </Grid>
@@ -713,14 +712,14 @@ const CaseDetail = ({ classes, data, selected }) => {
         </div>
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>ASSOCIATED SAMPLES</span>
+            <span className={classes.tableHeader}>ASSOCIATED FILES</span>
           </div>
           <Grid item xs={12}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
                 <MUIDataTable
-                  data={data.samplesByCaseId}
-                  columns={columnsOfSamples}
+                  data={data.filesOfCase}
+                  columns={columnsOfFiles}
                   options={options(classes)}
                 />
               </Grid>
