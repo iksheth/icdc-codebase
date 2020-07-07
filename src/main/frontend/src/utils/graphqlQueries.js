@@ -4,7 +4,7 @@ export const FILE_QUERY = gql` query files($uuids: [String!]) {
     file(filter:{uuid_in:$uuids}){
           file_description
           file_format
-          file_locations
+          file_location
           file_name
           file_size
           file_status
@@ -109,7 +109,7 @@ export const DASHBOARD_QUERY = gql`{
           parent
           file_description
           file_format
-          file_locations
+          file_location
           file_name
           file_size
           file_status
@@ -293,7 +293,7 @@ export const GET_STUDY_DETAIL_DATA_QUERY = gql`
    studyFiles(study_codes: [$csd]){
          file_description
           file_format
-          file_locations
+          file_location
           file_name
           file_size
           file_status
@@ -363,7 +363,7 @@ query casesInList($caseIds: [String!]!) {
   parent
   file_description
   file_format
-  file_locations
+  file_location
   file_name
   file_size
   file_status
