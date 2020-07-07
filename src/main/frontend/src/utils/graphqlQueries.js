@@ -97,7 +97,6 @@ export const DASHBOARD_QUERY = gql`{
         samples
         sample_list {
           sample_id
-          sample_type
           general_sample_pathology
           date_of_sample_collection
           necropsy_sample
