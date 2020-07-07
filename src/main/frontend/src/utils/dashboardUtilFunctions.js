@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { v1 as uuid } from 'uuid';
 
 export const COLORS = [
@@ -35,24 +36,23 @@ export const mappingCheckBoxToDataTable = [
     group: 'Stage of Disease', field: 'stage_of_disease', api: 'caseCountByStageOfDisease', datafield: 'stage_of_disease', show: true,
   },
   {
+    group: 'Response to Treatment', field: 'files@file_type', api: 'caseOverview', datafield: 'data_types', show: true,type: 2, key: 'uuid',
+  },
+  {
     group: 'Sex', field: 'gender', api: 'caseCountByGender', datafield: 'sex', show: true,
   },
   {
-    group: 'Associated File Type', field: 'data_type', api: 'caseCountByDataType', datafield: 'data_types', show: true,
+    group: 'Neutered Status', field:'neutered_status', api: 'caseOverview', datafield: 'file_formats', show: true, type: 2, key: 'case_id',
   },
   {
-    group: 'Associated File Format', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
+    group: 'Associated File Type', field: 'files@file_type', api: 'caseOverview', datafield: 'data_types', show: true,type: 2, key: 'uuid',
   },
   {
-    group: 'Neutered Status', field: 'neutered_status', api: 'caseCountByFileFormat', datafield: 'neutered_status', show: true,
+    group: 'Associated File Format', field: 'files@file_format', api: 'caseOverview', datafield: 'file_formats', show: true,type: 2, key: 'uuid',
   },
   {
-    group: 'Response to Treatment', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
+    group: 'Associated Sample Type', field: 'sample_list@summarized_sample_type', api: 'caseOverview', datafield: 'file_formats', show: true, type: 2, key: 'sample_id',
   },
-  {
-    group: 'Associated Sample Type', field: 'file_format', api: 'caseCountByFileFormat', datafield: 'file_formats', show: true,
-  },
-
 
 ];
 
@@ -62,6 +62,7 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
   datafield: filterElement.datafield,
   isChecked: false,
 }));
+
 
 export function getStatDataFromDashboardData(data, statName) {
   switch (statName) {
@@ -75,7 +76,6 @@ export function getStatDataFromDashboardData(data, statName) {
       return [...new Set(data.reduce((output, d) => output.concat(d.samples
         ? d.samples : []), []))].length;
     case 'file':
-
       return [...new Set(data.reduce((output, d) => output.concat(d.files
         ? d.files : []), []).map((f) => f.uuid))].length;
     default:
@@ -245,8 +245,80 @@ export function customSorting(a, b, flag, i = 0) {
   return -1;
 }
 
+// DFS search to get all the data for Checkbox
+function DFSOfCheckBoxDataType2Input(data, fields) {
+  const targetField = fields.shift();
 
-export function updateCheckBoxData(data, field) {
+  // leaf
+  if (fields.length === 0) {
+    return data;
+  }
+  // branches
+  if (Array.isArray(data[targetField])) {
+    // it is an array of object
+    return data[targetField].reduce(
+      (accumulator, currentValue) => {
+        return accumulator.concat(DFSOfCheckBoxDataType2Input(currentValue, [...fields]))
+      },
+      [],
+    );
+  }
+  // if it is an Object
+  return DFSOfCheckBoxDataType2Input(data[targetField], [...fields]);
+}
+
+
+/* Init check box stats data with Type2 input.
+   This is not based on the cases but the data instead.
+
+    @param  data  from API caseOverView, which is source of the data table in cases page
+    @param  field : field for source2 will contain hierarchy info, such as samples@sample_type.
+                  sample_type is under sample
+    @output
+          [{
+                name: field,
+                isChecked: false,
+                cases: 123,
+          }]
+*/
+
+function initCheckBoxDataWithType2Input(data, field, key) {
+  const hierarchy = field.split('@');
+  // DFS get a single array
+  const rawTargetObjs = data.reduce(
+    (accumulator, currentValue) => {
+      return accumulator.concat(DFSOfCheckBoxDataType2Input(currentValue, [...hierarchy]))
+    },
+    [],
+  );
+  const tmpKeys = []; // Use for filter out duplicated records
+  const dicResult = {};
+  // count number;
+  const targetField = hierarchy.pop();
+  rawTargetObjs.forEach((currentValue) => {
+    // return result in a single array
+    if (!tmpKeys.includes(currentValue[key])) {
+      tmpKeys.push(currentValue[key]);
+      // count the number
+      if (currentValue[targetField] in dicResult) {
+        dicResult[currentValue[targetField]] += 1;
+      } else {
+        dicResult[currentValue[targetField]] = 1;
+      }
+    }
+  });
+
+  return Object.keys(dicResult).map((key) => ({
+    name: key === '' || !key
+      ? NOT_PROVIDED : key,
+    isChecked: false,
+    cases: dicResult[key],
+  }));
+}
+
+
+
+function initCheckBoxDataWithType1Input(data, field) {
   const result = [];
   let preElementIndex = 0;
   data.map((el) => ({
@@ -272,6 +344,41 @@ export function updateCheckBoxData(data, field) {
 
   return result;
 }
+
+
+/* Init check box stats data.
+
+    @param  data : two data sources with differen data structures
+            source1 from API numberOfThings, data structures like:
+                     {
+                        cases:1
+                        [field]:
+                     }
+            source2 from API caseOverView, which is source of the data table in cases page.
+            Requirement : index_key should place at 1st order. (sample id comes first)
+    @param  field : this is paramter to find target data
+                  field for source2 will contain hierarchy info, such as samples@sample_type.
+                  sample_type is under sample
+    @param  type: to distinguish the input.
+                  default[undefined]: source1
+                  1-> source1
+                  2-> source2
+    @output
+          [{
+                name: field,
+                isChecked: false,
+                cases: 123,
+          }]
+
+*/
+export function initCheckBoxData(data, field, type, key) {
+  if (type && type === 2) {
+    return initCheckBoxDataWithType2Input(data, field, key);
+  }
+  return initCheckBoxDataWithType1Input(data, field);
+}
+
+
 
 
 export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) => (
@@ -334,7 +441,7 @@ export function customCheckBox(data) {
   return (
     mappingCheckBoxToDataTable.map((mapping) => ({
       groupName: mapping.group,
-      checkboxItems: updateCheckBoxData(data[mapping.api], mapping.field),
+      checkboxItems: initCheckBoxData(data[mapping.api], mapping.field, mapping.type, mapping.key),
       datafield: mapping.datafield,
       show: mapping.show,
     }))
