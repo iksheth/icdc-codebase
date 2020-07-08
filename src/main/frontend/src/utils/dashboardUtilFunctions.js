@@ -42,16 +42,16 @@ export const mappingCheckBoxToDataTable = [
     group: 'Sex', field: 'gender', api: 'caseCountByGender', datafield: 'sex', show: true,
   },
   {
-    group: 'Neutered Status', field:'neutered_status', api: 'caseOverview', datafield: 'file_formats', show: true, type: 2, key: 'case_id',
+    group: 'Neutered Status', field:'neutered_status', api: 'caseOverview', datafield: 'neutered_status', show: true, type: 2, key: 'case_id',
   },
   {
-    group: 'Associated File Type', field: 'files@file_type', api: 'caseOverview', datafield: 'data_types', show: true,type: 2, key: 'uuid',
+    group: 'Associated File Type', field: 'files@file_type', api: 'caseOverview', datafield: 'files@file_type', show: true,type: 2, key: 'uuid',
   },
   {
-    group: 'Associated File Format', field: 'files@file_format', api: 'caseOverview', datafield: 'file_formats', show: true,type: 2, key: 'uuid',
+    group: 'Associated File Format', field: 'files@file_format', api: 'caseOverview', datafield: 'files@file_format', show: true,type: 2, key: 'uuid',
   },
   {
-    group: 'Associated Sample Type', field: 'sample_list@summarized_sample_type', api: 'caseOverview', datafield: 'file_formats', show: true, type: 2, key: 'sample_id',
+    group: 'Associated Sample Type', field: 'sample_list@summarized_sample_type', api: 'caseOverview', datafield: 'sample_list@summarized_sample_type', show: true, type: 2, key: 'sample_id',
   },
 
 ];
@@ -161,6 +161,31 @@ export function getDonutDataFromDashboardData(data, widgetName) {
 }
 
 
+// DFS search to get all the data for Checkbox
+function DFSOfCheckBoxDataType2Input(data, fields) {
+  const targetField = fields.shift();
+
+  // leaf
+  if (fields.length === 0) {
+    return data;
+  }
+  // branches
+  if (Array.isArray(data[targetField])) {
+    // it is an array of object
+    return data[targetField].reduce(
+      (accumulator, currentValue) => {
+        return accumulator.concat(DFSOfCheckBoxDataType2Input(currentValue, [...fields]))
+      },
+      [],
+    );
+  }
+  // if it is an Object
+  return DFSOfCheckBoxDataType2Input(data[targetField], [...fields]);
+}
+
+
+
+
 /* filterData function evaluates a row of data with filters,
       to check if this row will be showed in the data table.
 
@@ -168,38 +193,54 @@ export function getDonutDataFromDashboardData(data, widgetName) {
      If has filters and for each group of filters, at least has one filter option
      is related to the data.
      Otherwise:  Hide this row.
+
+     @param row : a row of caseOverview, it contains all the data retrieved from backend
+     @param filters : array of filter 
+              {
+                datafield: "diagnosis"
+                groupName: "Diagnosis"
+                isChecked: true
+                name: "B Cell Lymphoma"
+              }
+
+              datafield may contains hierarchy info. eg. files@file_type
+
+     @output : true -> display this row
+               false-> hide 
   */
 export const filterData = (row, filters) => {
   // No filter
   if (filters.length === 0) {
     return true;
   }
-  // has filters
+  //  filters groups
   const groups = {};
 
   filters.forEach((filter) => {
-    if (groups[filter.groupName] && groups[filter.groupName] === true) {
-      // do nothing
-    } else if (row[filter.datafield]) { // check if data has this attribute
-      // array includes
+      // skip if filter group has already satisfied. 
+      if (groups[filter.groupName] && groups[filter.groupName] === true)  return
+
+      // check if data has this attribute
+
+      // convert name
       const fName = (filter.name === NOT_PROVIDED ? '' : filter.name);
-      if (Array.isArray(row[filter.datafield])) {
-        if (row[filter.datafield].includes(fName)) {
-          groups[filter.groupName] = true;
-        } else {
-          groups[filter.groupName] = false;
-        }
-      } else if (row[filter.datafield].toString() === fName) {
-        groups[filter.groupName] = true;
-      } else {
-        groups[filter.groupName] = false;
-      }
-    } else if (filter.name === NOT_PROVIDED) {
-      groups[filter.groupName] = true;
-    } else {
+      // DFS get a single array
+      const filterOpts = filter.datafield.includes("@")?filter.datafield.split("@"):[].concat(filter.datafield);
+         
+      const rawTargetObjs = [].concat(DFSOfCheckBoxDataType2Input(row,[...filterOpts]));
+
+      const targetField = filterOpts.pop();
+
       groups[filter.groupName] = false;
-    }
+
+
+      rawTargetObjs.forEach(function(r){
+          if (r[targetField]===fName) {
+              groups[filter.groupName] = true;
+          }
+      })
   });
+
   if (Object.values(groups).includes(false)) {
     return false;
   }
@@ -244,29 +285,6 @@ export function customSorting(a, b, flag, i = 0) {
   }
   return -1;
 }
-
-// DFS search to get all the data for Checkbox
-function DFSOfCheckBoxDataType2Input(data, fields) {
-  const targetField = fields.shift();
-
-  // leaf
-  if (fields.length === 0) {
-    return data;
-  }
-  // branches
-  if (Array.isArray(data[targetField])) {
-    // it is an array of object
-    return data[targetField].reduce(
-      (accumulator, currentValue) => {
-        return accumulator.concat(DFSOfCheckBoxDataType2Input(currentValue, [...fields]))
-      },
-      [],
-    );
-  }
-  // if it is an Object
-  return DFSOfCheckBoxDataType2Input(data[targetField], [...fields]);
-}
-
 
 /* Init check box stats data with Type2 input.
    This is not based on the cases but the data instead.
@@ -317,6 +335,22 @@ function initCheckBoxDataWithType2Input(data, field, key) {
 }
 
 
+/* Init check box stats data.
+
+    @param  data : from API numberOfThings, data structures like:
+                     {
+                        cases:1
+                        [field]:
+                     }
+    @param  field : this is paramter to find target data
+    @output
+          [{
+                name: field,
+                isChecked: false,
+                cases: 123,
+          }]
+
+*/
 
 function initCheckBoxDataWithType1Input(data, field) {
   const result = [];
@@ -380,14 +414,20 @@ export function initCheckBoxData(data, field, type, key) {
 
 
 
+// after the filtering, updateCheckBox stats
+// @param data :  filtered caseOverview
+// @param allCheckBoxes : All stated checkbox 
+// @param activeCheckBoxes:  filter Groups that has at least one filtering option is checked.
+// @param filters : checked filtering options
 
-export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) => (
+export const updateCheckBoxData = (data, allCheckBoxes, activeCheckBoxes, filters) => (
   // deep copy array
-  JSON.parse(JSON.stringify(allCheckBoxs)).map((ck) => {
+  JSON.parse(JSON.stringify(allCheckBoxes)).map((ck) => {
     const checkbox = ck;
-    if (checkbox.groupName === activeCheckBoxs.groupName) {
+    if (checkbox.groupName === activeCheckBoxes.groupName) {  
+      // current group is active group, we just update the filter options' status , if it has been checked. 
       // overwrite with old checkbox
-      checkbox.checkboxItems = JSON.parse(JSON.stringify(activeCheckBoxs.checkboxItems));
+      checkbox.checkboxItems = JSON.parse(JSON.stringify(activeCheckBoxes.checkboxItems));
       // update the checkbox items' status
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
         const item = el;
@@ -400,29 +440,44 @@ export const getCheckBoxData = (data, allCheckBoxs, activeCheckBoxs, filters) =>
         return item;
       });
     } else {
-      checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
-        const item = el;
-        item.cases = 0;
+
+      // get active filters without ones in the current filter group
         const filterWithOutCurrentCate = filters.filter(
           (f) => (f.groupName !== checkbox.groupName),
         );
-        const subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
+
+      // filter data
+      const subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
+
+
+      // for the other groups
+      checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
+        const item = el;
+        item.cases = 0;
+        
         subData.forEach((d) => {
           const fName = (item.name === NOT_PROVIDED ? '' : item.name);
-          if (d[checkbox.datafield]) {
-            if (Array.isArray(d[checkbox.datafield])) { // value in the array
-              if (d[checkbox.datafield].includes(fName)) {
+
+           // DFS get a single array
+          const filterOpts = checkbox.datafield.includes("@")?checkbox.datafield.split("@"):[].concat(checkbox.datafield);
+             
+          const rawTargetObjs = [].concat(DFSOfCheckBoxDataType2Input(d,[...filterOpts]));
+
+          const targetField = filterOpts.pop();
+
+
+          rawTargetObjs.forEach(function(r){
+            if (r[targetField]) {
+              if (r[targetField] === fName) { // Str compare
                 item.cases += 1;
               }
-            }
-            if (d[checkbox.datafield] === fName) { // Str compare
+            } else if (item.name === NOT_PROVIDED) { // No such attribute
               item.cases += 1;
             }
-          } else if (item.name === NOT_PROVIDED) { // No such attribute
-            item.cases += 1;
-          }
+          })
         });
         item.isChecked = false;
+        // update the check status
         filters.forEach((filter) => {
           if (checkbox.groupName === filter.groupName && item.name === filter.name) {
             item.isChecked = filter.isChecked;
