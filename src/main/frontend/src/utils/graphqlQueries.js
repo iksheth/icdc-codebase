@@ -75,6 +75,9 @@ export const DASHBOARD_QUERY = gql`{
         data_types
         disease_site
         samples
+        diagnosis_obj{
+          best_response
+        }
         sample_list {
           sample_id
           sample_site

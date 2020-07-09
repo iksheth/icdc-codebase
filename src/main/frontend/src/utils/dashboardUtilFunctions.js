@@ -79,12 +79,12 @@ export const mappingCheckBoxToDataTable = [
   },
   {
     group: 'Response to Treatment',
-     field: 'files@file_type',
+     field: 'diagnosis_obj@best_response',
      api: 'caseOverview',
      datafield: 'data_types',
      show: true,
      type: 2,
-     key: 'uuid',
+     key: 'case_id',
      cata: 'case',
     
   },
@@ -109,6 +109,39 @@ export const mappingCheckBoxToDataTable = [
     
   },
   {
+    group: 'Sample Type',
+     field: 'sample_list@summarized_sample_type',
+     api: 'caseOverview',
+     datafield: 'sample_list@summarized_sample_type',
+     show: true,
+     type: 2,
+     key: 'sample_id',
+     cata: 'sample',
+    
+  },
+   {
+    group: 'Sample Pathology',
+     field: 'sample_list@specific_sample_pathology',
+     api: 'caseOverview',
+     datafield: 'sample_list@specific_sample_pathology',
+     show: true,
+     type: 2,
+     key: 'sample_id',
+     cata: 'sample',
+    
+  },
+  {
+    group: 'File Association',
+     field: 'files@parent',
+     api: 'caseOverview',
+     datafield: 'files@file_format',
+     show: true,
+     type: 2,
+     key: 'uuid',
+     cata: 'file',
+    
+  },
+  {
     group: 'Associated File Type',
      field: 'files@file_type',
      api: 'caseOverview',
@@ -130,18 +163,6 @@ export const mappingCheckBoxToDataTable = [
      cata: 'file',
     
   },
-  {
-    group: 'Associated Sample Type',
-     field: 'sample_list@summarized_sample_type',
-     api: 'caseOverview',
-     datafield: 'sample_list@summarized_sample_type',
-     show: true,
-     type: 2,
-     key: 'sample_id',
-     cata: 'sample',
-    
-  },
-  
 
 ];
 
