@@ -46,6 +46,8 @@ const FacetPanel = (classes) => {
       name: valueList[0],
       datafield: valueList[2],
       isChecked: !(valueList[3] === 'true'),
+      cata: valueList[4],
+      key: valueList[5],
     }]));
   };
 
@@ -76,7 +78,7 @@ const FacetPanel = (classes) => {
                 return '';
               }
               return (
-                <ListItem button onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}`)} className={classes.nested}>
+                <ListItem button onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}$$${sideBarItem.cata}$$${sideBarItem.key}`)} className={classes.nested}>
                   <Checkbox checked={checkboxItem.isChecked} tabIndex={-1} disableRipple color="primary" />
                   <ListItemText primary={`${checkboxItem.name}  (${checkboxItem.cases})`} />
                 </ListItem>

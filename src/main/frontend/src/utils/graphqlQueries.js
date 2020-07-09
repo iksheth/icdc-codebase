@@ -82,8 +82,9 @@ export const DASHBOARD_QUERY = gql`{
           specific_sample_pathology
           tumor_grade
           sample_chronology
-          sample_preservation
           percentage_tumor
+          necropsy_sample
+          sample_preservation
           files{
             uuid
           }

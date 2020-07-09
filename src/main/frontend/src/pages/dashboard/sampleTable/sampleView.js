@@ -3,26 +3,13 @@ import React, { useRef, useEffect } from 'react';
 import {
   Grid,
   withStyles,
-  Chip,
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import Snackbar from '@material-ui/core/Snackbar';
-import { Link } from 'react-router-dom';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
-import { toggleCheckBox } from '../dashboardState';
-import { receiveFiles } from '../../cart/cartState';
-import {Configuration,DefaultColumns} from './config.js'
-
-const tableStyle = (ratio = 1) => ({
-  width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  overflow: 'hidden',
-  wordBreak: 'break-word',
-  maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  minWidth: '160px',
-}
-);
+import { Configuration, DefaultColumns } from './config';
 
 const Samples = ({ classes, data }) => {
   const [snackbarState, setsnackbarState] = React.useState({
@@ -36,45 +23,43 @@ const Samples = ({ classes, data }) => {
     setsnackbarState({ open: false });
   }
 
- function columnBuilder(data){
-  if(data.length == 0){
-    return DefaultColumns;
-  }else{
-    let columns = [];
-    for(const attr of Object.keys(data[0])){
-      const hasAttrInConfig =Configuration.hasOwnProperty(attr);
-      if(hasAttrInConfig){  // within configuration
-        if(Configuration[attr]["display"]){ // config as not to display
-           if(Configuration[attr]["isKey"]){
-              // get file ids at first column and then hide it. 
-               columns[0]={
-                name: attr,
-                label: hasAttrInConfig?Configuration[attr]["label"]:attr,
-                options: {
-                  filter: false,
-                  sortDirection: 'asc',
-                  display: false,
-                },
-              }
-           }
-            if(Configuration[attr]["index"]){
-               columns[Configuration[attr]["index"]]={
-                  name: attr,
-                  label: hasAttrInConfig?Configuration[attr]["label"]:attr,
-                  options: {
-                    filter: false,
-                    sortDirection: 'asc',
-                  },
-                };
-            }
-       }
+  function columnBuilder(data) {
+    if (data.length === 0) {
+      return DefaultColumns;
+    }
+    const columns = [];
+    for (const attr of Object.keys(data[0])) {
+      const hasAttrInConfig = Configuration.hasOwnProperty(attr);
+      if (hasAttrInConfig) { // within configuration
+        if (Configuration[attr].display) { // config as not to display
+          if (Configuration[attr].isKey) {
+            // get file ids at first column and then hide it.
+            columns[0] = {
+              name: attr,
+              label: hasAttrInConfig ? Configuration[attr].label : attr,
+              options: {
+                filter: false,
+                sortDirection: 'asc',
+                display: false,
+              },
+            };
+          }
+          if (Configuration[attr].index) {
+            columns[Configuration[attr].index] = {
+              name: attr,
+              label: hasAttrInConfig ? Configuration[attr].label : attr,
+              options: {
+                filter: false,
+                sortDirection: 'asc',
+              },
+            };
+          }
+        }
       }
     }
     return columns;
   }
-    
- }
- const columns = columnBuilder(data);
+  const columns = columnBuilder(data);
 
   const dispatch = useDispatch();
   // data from store
@@ -87,7 +72,6 @@ const Samples = ({ classes, data }) => {
     state.cart ? state.cart : []));
   // Get the existing caseIds from MyCases cart state
   const fileIDs = useSelector((state) => state.cart.fileIDs);
-
 
 
   const saveButton = useRef(null);
@@ -140,9 +124,6 @@ const Samples = ({ classes, data }) => {
   }
 
 
- 
-
-
   const options = () => ({
     selectableRows: true,
     search: false,
@@ -152,13 +133,12 @@ const Samples = ({ classes, data }) => {
     download: false,
     viewColumns: false,
     pagination: true,
-    isRowSelectable: (dataIndex) => {
+    isRowSelectable: (dataIndex) =>
       // if (cart.cases.includes(data[dataIndex].case_id)) {
       //   // disable the grey out functionality , change the return to false will bring it back
       //   return true;
       // }
-       return true;
-    },
+      true,
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
     customToolbarSelect: (selectedRows, displayData) => {
       const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (

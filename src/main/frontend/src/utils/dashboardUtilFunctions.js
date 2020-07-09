@@ -15,44 +15,133 @@ const NOT_PROVIDED = 'Not Specified';
 
 export const mappingCheckBoxToDataTable = [
   {
-    group: 'Program', field: 'program', api: 'caseCountByProgram', datafield: 'program', show: false,
+    group: 'Program',
+     field: 'program',
+     api: 'caseCountByProgram',
+     datafield: 'program',
+     show: false,
+     cata: 'case',
+     
   },
   {
-    group: 'Study', field: 'study_code', api: 'caseCountByStudyCode', datafield: 'study_code', show: true,
+    group: 'Study',
+     field: 'study_code',
+     api: 'caseCountByStudyCode',
+     datafield: 'study_code',
+     show: true,
+     cata: 'case',
+    
   },
   {
-    group: 'Study Type', field: 'study_type', api: 'caseCountByStudyType', datafield: 'study_type', show: true,
+    group: 'Study Type',
+     field: 'study_type',
+     api: 'caseCountByStudyType',
+     datafield: 'study_type',
+     show: true,
+     cata: 'case',
+    
   },
   {
-    group: 'Breed', field: 'breed', api: 'caseCountByBreed', datafield: 'breed', show: true,
+    group: 'Breed',
+     field: 'breed',
+     api: 'caseCountByBreed',
+     datafield: 'breed',
+     show: true,
+     cata: 'case',
+    
   },
   {
-    group: 'Diagnosis', field: 'diagnosis', api: 'caseCountByDiagnosis', datafield: 'diagnosis', show: true,
+    group: 'Diagnosis',
+     field: 'diagnosis',
+     api: 'caseCountByDiagnosis',
+     datafield: 'diagnosis',
+     show: true,
+     cata: 'case',
+    
   },
   {
-    group: 'Primary Disease Site', field: 'disease_site', api: 'caseCountByDiseaseSite', datafield: 'disease_site', show: true,
+    group: 'Primary Disease Site',
+     field: 'disease_site',
+     api: 'caseCountByDiseaseSite',
+     datafield: 'disease_site',
+     show: true,
+     cata: 'case',
+    
   },
   {
-    group: 'Stage of Disease', field: 'stage_of_disease', api: 'caseCountByStageOfDisease', datafield: 'stage_of_disease', show: true,
+    group: 'Stage of Disease',
+     field: 'stage_of_disease',
+     api: 'caseCountByStageOfDisease',
+     datafield: 'stage_of_disease',
+     show: true,
+     cata: 'case',
+    
   },
   {
-    group: 'Response to Treatment', field: 'files@file_type', api: 'caseOverview', datafield: 'data_types', show: true,type: 2, key: 'uuid',
+    group: 'Response to Treatment',
+     field: 'files@file_type',
+     api: 'caseOverview',
+     datafield: 'data_types',
+     show: true,
+     type: 2,
+     key: 'uuid',
+     cata: 'case',
+    
   },
   {
-    group: 'Sex', field: 'gender', api: 'caseCountByGender', datafield: 'sex', show: true,
+    group: 'Sex',
+     field: 'gender',
+     api: 'caseCountByGender',
+     datafield: 'sex',
+     show: true,
+     cata: 'case',
+     
   },
   {
-    group: 'Neutered Status', field:'neutered_status', api: 'caseOverview', datafield: 'neutered_status', show: true, type: 2, key: 'case_id',
+    group: 'Neutered Status',
+     field:'neutered_status',
+     api: 'caseOverview',
+     datafield: 'neutered_status',
+     show: true,
+     type: 2,
+     key: 'case_id',
+     cata: 'case',
+    
   },
   {
-    group: 'Associated File Type', field: 'files@file_type', api: 'caseOverview', datafield: 'files@file_type', show: true,type: 2, key: 'uuid',
+    group: 'Associated File Type',
+     field: 'files@file_type',
+     api: 'caseOverview',
+     datafield: 'files@file_type',
+     show: true,
+     type: 2,
+     key: 'uuid',
+     cata: 'file',
+    
   },
   {
-    group: 'Associated File Format', field: 'files@file_format', api: 'caseOverview', datafield: 'files@file_format', show: true,type: 2, key: 'uuid',
+    group: 'Associated File Format',
+     field: 'files@file_format',
+     api: 'caseOverview',
+     datafield: 'files@file_format',
+     show: true,
+     type: 2,
+     key: 'uuid',
+     cata: 'file',
+    
   },
   {
-    group: 'Associated Sample Type', field: 'sample_list@summarized_sample_type', api: 'caseOverview', datafield: 'sample_list@summarized_sample_type', show: true, type: 2, key: 'sample_id',
+    group: 'Associated Sample Type',
+     field: 'sample_list@summarized_sample_type',
+     api: 'caseOverview',
+     datafield: 'sample_list@summarized_sample_type',
+     show: true,
+     type: 2,
+     key: 'sample_id',
+     cata: 'sample',
+    
   },
+  
 
 ];
 
@@ -60,6 +149,7 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
   groupName: filterElement.groupName,
   name: filterElement.name,
   datafield: filterElement.datafield,
+  cata:filterElement.cata,
   isChecked: false,
 }));
 
@@ -200,6 +290,7 @@ function DFSOfCheckBoxDataType2Input(data, fields) {
                 datafield: "diagnosis"
                 groupName: "Diagnosis"
                 isChecked: true
+                cata:"cata"
                 name: "B Cell Lymphoma"
               }
 
@@ -219,8 +310,6 @@ export const filterData = (row, filters) => {
   filters.forEach((filter) => {
       // skip if filter group has already satisfied. 
       if (groups[filter.groupName] && groups[filter.groupName] === true)  return
-
-      // check if data has this attribute
 
       // convert name
       const fName = (filter.name === NOT_PROVIDED ? '' : filter.name);
@@ -465,15 +554,31 @@ export const updateCheckBoxData = (data, allCheckBoxes, activeCheckBoxes, filter
 
           const targetField = filterOpts.pop();
 
+          let tmpKeys =[];
 
+          let key =targetField.key;
+          // Yizhen Need to improve the code below. 
           rawTargetObjs.forEach(function(r){
-            if (r[targetField]) {
-              if (r[targetField] === fName) { // Str compare
-                item.cases += 1;
-              }
-            } else if (item.name === NOT_PROVIDED) { // No such attribute
-              item.cases += 1;
-            }
+            if(key){
+              if (!tmpKeys.includes(r[key])) {
+                 tmpKeys.push(r[key]);
+                if (r[targetField]) {
+                  if (r[targetField] === fName) { // Str compare
+                    item.cases += 1;
+                  }
+                  } else if (item.name === NOT_PROVIDED) { // No such attribute
+                    item.cases += 1;
+                  }
+             }
+           }else{
+               if (r[targetField]) {
+                  if (r[targetField] === fName) { // Str compare
+                    item.cases += 1;
+                  }
+                 } else if (item.name === NOT_PROVIDED) { // No such attribute
+                    item.cases += 1;
+                  }
+           }
           })
         });
         item.isChecked = false;
@@ -499,6 +604,8 @@ export function customCheckBox(data) {
       checkboxItems: initCheckBoxData(data[mapping.api], mapping.field, mapping.type, mapping.key),
       datafield: mapping.datafield,
       show: mapping.show,
+      cata: mapping.cata,
+      key:mapping.key,
     }))
   );
 }

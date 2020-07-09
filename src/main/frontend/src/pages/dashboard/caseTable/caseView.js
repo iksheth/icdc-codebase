@@ -335,9 +335,6 @@ const Cases = ({ classes, data }) => {
         </div>
 
         <Grid container>
-          <Grid item xs={12} className={classes.caseTitle}>
-            Cases
-          </Grid>
           <Grid item xs={12} id="table_cases">
             <MUIDataTable
               data={data}
@@ -354,7 +351,7 @@ const Cases = ({ classes, data }) => {
             onClick={exportCases}
             className={classes.button}
           >
-            SAVE TO MY CASES
+            ADD ASSOCIATED FILES TO MY CART
           </button>
         </Grid>
       </div>
@@ -415,7 +412,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '178px',
+    width: '330px',
     height: '27px',
     lineHeight: '18px',
     fontSize: '10pt',

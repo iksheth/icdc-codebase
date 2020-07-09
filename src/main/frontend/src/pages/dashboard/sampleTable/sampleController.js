@@ -2,50 +2,34 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import View from './sampleView';
+import { filterData } from '../../../utils/dashboardUtilFunctions';
 
 
 const fileContainer = () => {
-  // data from store
+// data from store
   const sampleData = useSelector((state) => (state.dashboard
-        && state.dashboard.datatable
+&& state.dashboard.datatable
     ? state.dashboard.datatable : {}));
 
-  const transform =(accumulator, currentValue, currentIndex, array) =>{
-  	// use configuration file ... TBD
-  	var caseAttrs  =  {};
-  	for (const key of Object.keys(currentValue) ){
-  		if(!Array.isArray(currentValue[key])){
-  			caseAttrs[key] = currentValue[key];
-  		};
-  	}
-  	return accumulator.concat(currentValue.sample_list.map(f=>Object.assign({}, f, caseAttrs)));
-	}
-  const tableData = sampleData.data.reduce(transform,[]);
-
-
-  
-  let tableDataAfterFilter = tableData.filter((row)=>{
-    let flag = false;
-    let hasSampleFilter = false;
-    sampleData.filters.forEach(f=>{
-      // find record match the search
-      if(f.datafield.includes("sample_list")){
-          hasSampleFilter= true;
-          let field = f.datafield.split("@")[1];
-          let value = f.name;
-          if(row[field] == value){
-            flag = true;
-          }
-       }
-    })
-
-    // if not sample filter
-    if(!hasSampleFilter){
-      flag =  true;
+  const transform = (accumulator, currentValue) => {
+    const caseAttrs = {};
+    const keys = Object.keys(currentValue);
+    for (const key of keys) {
+      if (!Array.isArray(currentValue[key])) {
+        caseAttrs[key] = currentValue[key];
+      }
     }
-    return flag;
-    
-  })
+    return accumulator.concat(currentValue.sample_list.map((f) => ({ ...f, ...caseAttrs })));
+  };
+  const tableData = sampleData.data.reduce(transform, []);
+
+  const sampleFilters = JSON.parse(JSON.stringify(sampleData)).filters.filter((f) => f.cata === 'sample').map((f) => {
+    f.datafield = f.datafield.includes('@') ? f.datafield.split('@').pop() : f.datafield;
+    return f;
+  });
+
+  const tableDataAfterFilter = tableData.filter((row) => filterData(row, sampleFilters));
+
   return <View data={tableDataAfterFilter} />;
 };
 

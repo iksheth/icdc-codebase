@@ -3,7 +3,6 @@ import React, { useRef, useEffect } from 'react';
 import {
   Grid,
   withStyles,
-  Chip,
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
@@ -12,8 +11,9 @@ import { Link } from 'react-router-dom';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
-import { receiveFiles } from '../../cart/cartState';
-import {Configuration,DefaultColumns} from './config.js'
+import { receiveCases } from '../../selectedCases/selectedCasesState';
+import { Configuration, DefaultColumns } from './config.js';
+
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -23,6 +23,7 @@ const tableStyle = (ratio = 1) => ({
   minWidth: '160px',
 }
 );
+
 
 const Files = ({ classes, data }) => {
   const [snackbarState, setsnackbarState] = React.useState({
@@ -36,46 +37,6 @@ const Files = ({ classes, data }) => {
     setsnackbarState({ open: false });
   }
 
- function columnBuilder(data){
-  if(data.length == 0){
-    return DefaultColumns;
-  }else{
-    let columns = [];
-    for(const attr of Object.keys(data[0])){
-      const hasAttrInConfig =Configuration.hasOwnProperty(attr);
-      if(hasAttrInConfig){  // within configuration
-        if(Configuration[attr]["display"]){ // config as not to display
-           if(Configuration[attr]["isKey"]){
-              // get file ids at first column and then hide it. 
-               columns[0]={
-                name: attr,
-                label: hasAttrInConfig?Configuration[attr]["label"]:attr,
-                options: {
-                  filter: false,
-                  sortDirection: 'asc',
-                  display: false,
-                },
-              }
-           }
-            if(Configuration[attr]["index"]){
-               columns[Configuration[attr]["index"]]={
-                  name: attr,
-                  label: hasAttrInConfig?Configuration[attr]["label"]:attr,
-                  options: {
-                    filter: false,
-                    sortDirection: 'asc',
-                  },
-                };
-            }
-                
-       }
-      }
-    }
-    return columns;
-  }
-    
- }
- const columns = columnBuilder(data);
 
   const dispatch = useDispatch();
   // data from store
@@ -87,34 +48,7 @@ const Files = ({ classes, data }) => {
   const cart = useSelector((state) => (
     state.cart ? state.cart : []));
   // Get the existing caseIds from MyCases cart state
-  const fileIDs = useSelector((state) => state.cart.fileIDs);
-
-
-  // The bubble below will shows in the dashboard and work as
-  // When user select and filters
-  // they will float above the case table on the dashboard .
-  // Due to the design issue, disable bubble function for now
-
-  let bubbles = (chipData.map((ckdata) => (
-    <Chip
-      key={ckdata.datafield + ckdata.name}
-      label={ckdata.name}
-      onDelete={() => {
-        dispatch(toggleCheckBox([{
-          groupName: ckdata.groupName,
-          name: ckdata.name,
-          datafield: ckdata.datafield,
-          isChecked: false,
-        }]));
-      }}
-      classes={{
-        root: classes.chipRoot,
-        deleteIcon: classes.chipDeleteIcon,
-      }}
-    />
-  )));
-
-  bubbles = '';
+  const caseIds = useSelector((state) => state.cart.cases);
 
 
   const saveButton = useRef(null);
@@ -131,19 +65,19 @@ const Files = ({ classes, data }) => {
   });
 
 
-  let selectedIds = [];
+  let selectedCaseIds = [];
 
   function exportCases() {
     // Find the newly added cases by comparing
-    // existing caseIds and selectedIds
-    const uniqueIDs = fileIDs !== null ? selectedIds.filter(
-      (e) => !fileIDs.find((a) => e === a),
-    ).length : selectedIds.length;
-    if (uniqueIDs > 0) {
-      openSnack(uniqueIDs);
+    // existing caseIds and selectedCaseIds
+    const uniqueCases = caseIds !== null ? selectedCaseIds.filter(
+      (e) => !caseIds.find((a) => e === a),
+    ).length : selectedCaseIds.length;
+    if (uniqueCases > 0) {
+      openSnack(uniqueCases);
     }
-    dispatch(receiveFiles(uniqueIDs));
-    selectedIds = [];
+    dispatch(receiveCases(selectedCaseIds));
+    selectedCaseIds = [];
   }
 
 
@@ -167,7 +101,45 @@ const Files = ({ classes, data }) => {
   }
 
 
- 
+  function columnBuilder(data) {
+    if (data.length == 0) {
+      return DefaultColumns;
+    }
+    const columns = [];
+    for (const attr of Object.keys(data[0])) {
+      const hasAttrInConfig = Configuration.hasOwnProperty(attr);
+      if (hasAttrInConfig) { // within configuration
+        if (Configuration[attr].display) { // config as not to display
+          if (Configuration[attr].isKey) {
+            // get file ids at first column and then hide it.
+            columns[0] = {
+              name: attr,
+              label: hasAttrInConfig ? Configuration[attr].label : attr,
+              options: {
+                filter: false,
+                sortDirection: 'asc',
+                display: false,
+              },
+            };
+          }
+          if (Configuration[attr].index) {
+            columns[Configuration[attr].index] = {
+              name: attr,
+              label: hasAttrInConfig ? Configuration[attr].label : attr,
+              options: {
+                filter: false,
+                sortDirection: 'asc',
+              },
+            };
+          }
+        }
+      }
+    }
+    return columns;
+  }
+
+
+  const columns = columnBuilder(data);
 
 
   const options = () => ({
@@ -180,26 +152,26 @@ const Files = ({ classes, data }) => {
     viewColumns: false,
     pagination: true,
     isRowSelectable: (dataIndex) => {
-      // if (cart.cases.includes(data[dataIndex].case_id)) {
-      //   // disable the grey out functionality , change the return to false will bring it back
-      //   return true;
-      // }
-       return true;
+      if (cart.cases.includes(data[dataIndex].case_id)) {
+        // disable the grey out functionality , change the return to false will bring it back
+        return true;
+      }
+      return true;
     },
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
     customToolbarSelect: (selectedRows, displayData) => {
       const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
         selectedRows.data[keyVlaue].index
       ));
-      const selectedId = selectedKeys.map((keyVlaue) => (
-        displayData[keyVlaue].data[0]
+      const selectedCaseId = selectedKeys.map((keyVlaue) => (
+        displayData[keyVlaue].data[0].props.children[1].props.children
       ));
-      selectedIds = selectedId;
+      selectedCaseIds = selectedCaseId;
       return '';
     },
     customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
       <CustomFooter
-        text="SAVE TO MY FILES"
+        text="SAVE TO MY CASES"
         onClick={() => exportCases(dispatch)}
         classes={classes}
         count={count}
@@ -236,9 +208,6 @@ const Files = ({ classes, data }) => {
 )}
       />
       <div>
-        <div className={classes.chips}>
-          {bubbles}
-        </div>
 
         <Grid container>
           <Grid item xs={12} id="table_cases">
@@ -257,7 +226,7 @@ const Files = ({ classes, data }) => {
             onClick={exportCases}
             className={classes.button}
           >
-            ADD FILES TO MY CART
+             ADD ASSOCIATED FILES TO MY CART
           </button>
         </Grid>
       </div>
