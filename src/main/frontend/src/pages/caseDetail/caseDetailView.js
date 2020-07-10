@@ -122,7 +122,6 @@ const columnsOfSamples = [
   },
 ];
 
-
 const columnsOfFiles = [
   {
     name: 'file_name',
