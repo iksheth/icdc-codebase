@@ -126,12 +126,12 @@ const Samples = ({ classes, data }) => {
 
   const options = () => ({
     selectableRows: true,
-    search: false,
-    filter: false,
-    searchable: false,
-    print: false,
-    download: false,
-    viewColumns: false,
+    search: true,
+    filter: true,
+    searchable: true,
+    print: true,
+    download: true,
+    viewColumns: true,
     pagination: true,
     isRowSelectable: (dataIndex) =>
       // if (cart.cases.includes(data[dataIndex].case_id)) {
