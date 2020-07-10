@@ -5,7 +5,6 @@ import { Typography } from '../../components/Wrappers/Wrappers';
 import Programs from './programs';
 import { GET_PROGRAM_DATA_QUERY } from '../../utils/graphqlQueries';
 
-
 const ProgramCardController = () => {
   const { data, loading, error } = useQuery(GET_PROGRAM_DATA_QUERY);
   if (loading) {

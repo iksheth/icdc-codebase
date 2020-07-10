@@ -13,7 +13,6 @@ import dogForProgramDetail from '../../../assets/programCards/ProgramDetail_Imag
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
 
-
 const options = {
   selectableRows: false,
   search: false,
@@ -42,7 +41,6 @@ const ProgramDetailView = ({ classes, data }) => {
       }]));
     });
   };
-
 
   const columns = [
     { name: 'program_id', label: 'Program' },
@@ -100,7 +98,6 @@ const ProgramDetailView = ({ classes, data }) => {
     isALink: true,
   }];
 
-
   return (
     <>
       <StatsView data={stat} />
@@ -124,7 +121,6 @@ const ProgramDetailView = ({ classes, data }) => {
           </div>
 
         </div>
-
 
         <div className={classes.detailContainer}>
 
@@ -168,7 +164,6 @@ const ProgramDetailView = ({ classes, data }) => {
     </>
   );
 };
-
 
 const styles = (theme) => ({
   link: {
@@ -268,7 +263,6 @@ const styles = (theme) => ({
     paddingLeft: '3px',
   },
 
-
   logo: {
     position: 'absolute',
     float: 'left',
@@ -355,6 +349,5 @@ const styles = (theme) => ({
     paddingBottom: '20px',
   },
 });
-
 
 export default withStyles(styles, { withTheme: true })(ProgramDetailView);

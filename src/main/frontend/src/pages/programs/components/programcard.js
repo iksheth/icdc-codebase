@@ -9,7 +9,6 @@ import { Button } from '../../../components/Wrappers/Wrappers';
 import externalIcon from '../../../assets/icons/Program-ExternalLink.svg';
 import dogForProgramDetail from '../../../assets/programCards/Program_Image.png';
 
-
 const ProgramCard = ({
   classes, data,
 }) => (
@@ -38,7 +37,6 @@ const ProgramCard = ({
               </Link>
             </Button>
 
-
           </span>
 
           <span className={classes.paddingLeft15}>
@@ -66,7 +64,6 @@ const ProgramCard = ({
     </Grid>
   </div>
 );
-
 
 const styles = (theme) => ({
   paddingLeft5: {
@@ -157,7 +154,6 @@ const styles = (theme) => ({
     width: '100px',
   },
 
-
   detailContainerLeft: {
     padding: '20px 2px 30px 32px !important',
     minHeight: '230px',
@@ -218,6 +214,5 @@ const styles = (theme) => ({
     paddingBottom: '20px',
   },
 });
-
 
 export default withStyles(styles, { withTheme: true })(ProgramCard);

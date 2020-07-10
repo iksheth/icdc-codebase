@@ -14,7 +14,6 @@ import Samples from './sampleTable/sampleController';
 import ProgramSunburst from '../../components/Widgets/PieCharts/ProgramSunburst/ProgramSunburstController';
 import CustomActiveDonut from '../../components/Widgets/PieCharts/CustomActiveDonut/CustomActiveDonutController';
 
-
 function TabContainer({ children, dir }) {
   return (
     <Typography component="div" dir={dir} style={{ padding: '5px,5px,5px,5px' }}>
@@ -22,7 +21,6 @@ function TabContainer({ children, dir }) {
     </Typography>
   );
 }
-
 
 const Dashboard = ({
   classes, data, isSidebarOpened, theme,
@@ -32,7 +30,6 @@ const Dashboard = ({
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
-
 
   // tab settings
   const [currentTab, setCurrentTab] = React.useState(0);

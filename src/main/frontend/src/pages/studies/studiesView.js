@@ -15,7 +15,6 @@ import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-StudiesDetail.svg';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
 
-
 const Studies = ({ classes, data }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(
     dispatch(fetchDataForDashboardDataTable()),
@@ -91,7 +90,6 @@ const Studies = ({ classes, data }) => {
     ),
   });
 
-
   return (
     <>
       <Stats />
@@ -116,7 +114,6 @@ const Studies = ({ classes, data }) => {
             </div>
           </div>
 
-
           <div className={classes.tableDiv}>
             <Grid container>
               <Grid item xs={12} id="table_studies">
@@ -129,7 +126,6 @@ const Studies = ({ classes, data }) => {
             </Grid>
           </div>
         </div>
-
 
       </div>
     </>

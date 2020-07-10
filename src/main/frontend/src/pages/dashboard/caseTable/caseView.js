@@ -22,7 +22,6 @@ const tableStyle = (ratio = 1) => ({
 }
 );
 
-
 const Cases = ({ classes, data }) => {
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
@@ -35,7 +34,6 @@ const Cases = ({ classes, data }) => {
     setsnackbarState({ open: false });
   }
 
-
   const dispatch = useDispatch();
   // data from store
   const chipData = useSelector((state) => (
@@ -47,7 +45,6 @@ const Cases = ({ classes, data }) => {
     state.cart ? state.cart : []));
   // Get the existing caseIds from MyCases cart state
   const caseIds = useSelector((state) => state.cart.cases);
-
 
   // The bubble below will shows in the dashboard and work as
   // When user select and filters
@@ -75,9 +72,7 @@ const Cases = ({ classes, data }) => {
 
   bubbles = '';
 
-
   const saveButton = useRef(null);
-
 
   useEffect(() => {
     saveButton.current.disabled = true;
@@ -88,7 +83,6 @@ const Cases = ({ classes, data }) => {
     saveButton.current.style.fontWeight = '600';
     saveButton.current.style.cursor = 'auto';
   });
-
 
   let selectedCaseIds = [];
 
@@ -104,7 +98,6 @@ const Cases = ({ classes, data }) => {
     dispatch(receiveCases(selectedCaseIds));
     selectedCaseIds = [];
   }
-
 
   function onRowsSelect(curr, allRowsSelected) {
     if (allRowsSelected.length === 0) {
@@ -124,7 +117,6 @@ const Cases = ({ classes, data }) => {
       saveButton.current.style.border = 'unset';
     }
   }
-
 
   const columns = [
     {
@@ -263,7 +255,6 @@ const Cases = ({ classes, data }) => {
     },
   ];
 
-
   const options = () => ({
     selectableRows: true,
     search: false,
@@ -358,7 +349,6 @@ const Cases = ({ classes, data }) => {
     </>
   );
 };
-
 
 const styles = () => ({
 

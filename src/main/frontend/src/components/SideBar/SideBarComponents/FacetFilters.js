@@ -13,7 +13,6 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { toggleCheckBox } from '../../../pages/dashboard/dashboardState';
 
-
 const FacetPanel = (classes) => {
   // data from store
   const sideBarContent = useSelector((state) => (
@@ -26,7 +25,6 @@ const FacetPanel = (classes) => {
 
   const [expanded, setExpanded] = React.useState(false);
 
-
   React.useEffect(() => {
     if (!expanded || !(expanded === `${sideBarContent.defaultPanel}false` || expanded !== false)) {
       setExpanded(sideBarContent.defaultPanel);
@@ -36,7 +34,6 @@ const FacetPanel = (classes) => {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
 
   const handleToggle = (value) => () => {
     const valueList = value.split('$$');
@@ -96,7 +93,6 @@ const FacetPanel = (classes) => {
     </>
   );
 };
-
 
 const styles = () => ({
   expansionPanelSummaryRoot: {

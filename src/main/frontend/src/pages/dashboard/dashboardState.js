@@ -8,8 +8,8 @@ import {
   getFilters,
   updateCheckBoxData,
   customCheckBox,
+  formatFileSize,
 } from '../../utils/dashboardUtilFunctions';
-
 
 export const initialState = {
   dashboard: {
@@ -48,12 +48,10 @@ export const toggleCheckBox = (payload) => ({
   payload,
 });
 
-
 export const singleCheckBox = (payload) => ({
   type: SINGLE_CHECKBOX,
   payload,
 });
-
 
 function shouldFetchDataForDashboardDataTable(state) {
   return !(state.dashboard.isFetched);
@@ -75,7 +73,6 @@ function receiveDashboard(json) {
   };
 }
 
-
 function errorhandler(error, type) {
   return {
     type,
@@ -83,13 +80,11 @@ function errorhandler(error, type) {
   };
 }
 
-
 function readyDashboard() {
   return {
     type: READY_DASHBOARD,
   };
 }
-
 
 // This need to go to dashboard controller
 
@@ -104,7 +99,6 @@ function fetchDashboard() {
       .catch((error) => dispatch(errorhandler(error, DASHBOARD_QUERY_ERR)));
   };
 }
-
 
 export function fetchDataForDashboardDataTable() {
   return (dispatch, getState) => {
@@ -198,7 +192,30 @@ export default function dashboardReducer(state = initialState, action) {
     }
     case RECEIVE_DASHBOARD: {
       // get action data
+      const rawData = action.payload.data.caseOverview;
+
+      // transform data
+      // eslint-disable-next-line no-param-reassign
+      action.payload.data.caseOverview = rawData.map((rowData) => {
+        // deep copy obj
+        const d = JSON.parse(JSON.stringify(rowData));
+        // 1. transform file size's format
+        if (d.files) {
+          d.files.map((f) => {
+            const customFile = f;
+            customFile.file_size = formatFileSize(customFile.file_size);
+            return customFile;
+          });
+        }
+        // 2. add cases id into diagnosis_obj
+        if (d.diagnosis_obj) {
+          d.best_response = d.diagnosis_obj.best_response;
+        }
+        return d;
+      });
+
       const checkboxData = customCheckBox(action.payload.data);
+
       return action.payload.data
         ? {
           ...state.dashboard,

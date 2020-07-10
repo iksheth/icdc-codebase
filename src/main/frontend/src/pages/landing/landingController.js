@@ -562,7 +562,6 @@ const styles = (theme) => ({
     left: '220px',
   },
 
-
   dog: {
     position: 'relative',
     height: '1200px',

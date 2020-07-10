@@ -9,7 +9,6 @@ export const STATS_QUERY = gql`{
   }
   `;
 
-
 export const DASHBOARD_QUERY = gql`{
      numberOfStudies
     numberOfCases
@@ -179,7 +178,6 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
     }
  }`;
 
-
 export const GET_CASES_QUERY = gql`
    query Case($study_id: String!) {
 
@@ -204,7 +202,6 @@ export const GET_CASES_QUERY = gql`
      }
   }
   `;
-
 
 export const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
 query program($programTitle: String!) {
@@ -242,7 +239,6 @@ query program($programTitle: String!) {
 
 }`;
 
-
 export const GET_PROGRAM_DATA_QUERY = gql`
 {
   program(orderBy: program_sort_order_asc)
@@ -260,7 +256,6 @@ export const GET_PROGRAM_DATA_QUERY = gql`
   }
 }
 `;
-
 
 export const GET_STUDY_DETAIL_DATA_QUERY = gql`
   query Study($csd: String!) {
