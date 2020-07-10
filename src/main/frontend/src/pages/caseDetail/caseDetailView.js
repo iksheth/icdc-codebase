@@ -38,8 +38,92 @@ function formatBytes(bytes, decimals = 2) {
   return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
 }
 
-const columns = [
+const columnsOfSamples = [
+  {
+    name: 'sample_id',
+    label: 'Sample ID',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'sample_site',
+    label: 'Sample Site',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'summarized_sample_type',
+    label: 'Sample Type',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'specific_sample_pathology',
+    label: 'Pathology/Morphology',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'tumor_grade',
+    label: 'Tumor Grade',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'sample_chronology',
+    label: 'Sample Chronology',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'percentage_tumor',
+    label: 'Percentage Tumor',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'necropsy_sample',
+    label: 'Necropsy Sample',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'sample_preservation',
+    label: 'Sample Preservation',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+];
 
+
+const columnsOfFiles = [
   {
     name: 'file_name',
     label: 'File Name',
@@ -614,7 +698,25 @@ const CaseDetail = ({ classes, data, selected }) => {
         </div>
       </div>
       <div id="table_case_detail" className={classes.tableContainer}>
-
+        <div className={classes.tableDiv}>
+          <div className={classes.tableTitle}>
+            <span className={classes.tableHeader}>ASSOCIATED SAMPLES</span>
+          </div>
+          <Grid item xs={12}>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <MUIDataTable
+                  data={data.samplesByCaseId}
+                  columns={columnsOfSamples}
+                  options={options(classes)}
+                />
+              </Grid>
+              <Grid item xs={8}>
+                <Typography />
+              </Grid>
+            </Grid>
+          </Grid>
+        </div>
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
             <span className={classes.tableHeader}>ASSOCIATED FILES</span>
@@ -624,7 +726,7 @@ const CaseDetail = ({ classes, data, selected }) => {
               <Grid item xs={12}>
                 <MUIDataTable
                   data={data.filesOfCase}
-                  columns={columns}
+                  columns={columnsOfFiles}
                   options={options(classes)}
                 />
               </Grid>
