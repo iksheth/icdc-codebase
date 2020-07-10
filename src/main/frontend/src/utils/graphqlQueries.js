@@ -166,6 +166,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
       tumor_grade
       sample_chronology
       percentage_tumor
+      necropsy_sample
       sample_preservation
     }
  }`;

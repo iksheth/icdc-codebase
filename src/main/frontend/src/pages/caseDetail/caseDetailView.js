@@ -50,7 +50,7 @@ const columnsOfSamples = [
   },
   {
     name: 'sample_site',
-    label: 'Topography',
+    label: 'Sample Site',
     sortDirection: 'asc',
     options: {
       filter: false,
@@ -68,7 +68,7 @@ const columnsOfSamples = [
   },
   {
     name: 'specific_sample_pathology',
-    label: 'Sample Pathology',
+    label: 'Pathology/Morphology',
     sortDirection: 'asc',
     options: {
       filter: false,
@@ -86,7 +86,25 @@ const columnsOfSamples = [
   },
   {
     name: 'sample_chronology',
-    label: 'WHAT',
+    label: 'Sample Chronology',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'percentage_tumor',
+    label: 'Percentage Tumor',
+    sortDirection: 'asc',
+    options: {
+      filter: false,
+      sortDirection: 'asc',
+    },
+  },
+  {
+    name: 'necropsy_sample',
+    label: 'Necropsy Sample',
     sortDirection: 'asc',
     options: {
       filter: false,
