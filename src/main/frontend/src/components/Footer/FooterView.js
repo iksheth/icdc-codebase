@@ -7,7 +7,6 @@ import { Typography } from '../Wrappers/Wrappers';
 import cn from '../../utils/classNameConcat';
 import nciLogo from '../../assets/footer/NCI-footer.logo.svg';
 
-
 const VERSION = process.env.REACT_APP_APPLICATION_VERSION;
 
 const Footer = ({ classes, data }) => {

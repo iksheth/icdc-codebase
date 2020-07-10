@@ -281,7 +281,6 @@ const NavBar = ({
   );
 };
 
-
 const styles = (theme) => ({
   myCasesPosition: {
     position: 'absolute',

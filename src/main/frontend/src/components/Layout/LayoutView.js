@@ -62,7 +62,6 @@ const Layout = ({ classes, isSidebarOpened }) => (
             <Route path="/support" component={About} />
             <Route path="/submit" component={About} />
 
-
             <Route component={Error} />
           </Switch>
           <Footer data={{ isSidebarOpened }} />

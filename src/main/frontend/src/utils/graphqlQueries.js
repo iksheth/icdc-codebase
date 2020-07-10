@@ -9,9 +9,8 @@ export const STATS_QUERY = gql`{
   }
   `;
 
-
 export const DASHBOARD_QUERY = gql`{
-    numberOfStudies
+     numberOfStudies
     numberOfCases
     numberOfSamples
     numberOfFiles
@@ -41,22 +40,18 @@ export const DASHBOARD_QUERY = gql`{
       cases
       stage_of_disease 
     }
-
     caseCountByStudyCode{
       study_code
      cases
     }
-
    caseCountByStudyType {
      study_type
      cases
     }
-
     caseCountByAge {
      age
      cases
     }
-
     caseCountByDataType {
      data_type
      cases
@@ -65,7 +60,6 @@ export const DASHBOARD_QUERY = gql`{
      program
      cases
     }
-
    caseOverview{   
         case_id  
         program
@@ -80,10 +74,34 @@ export const DASHBOARD_QUERY = gql`{
         data_types
         disease_site
         samples
+        diagnosis_obj{
+          best_response
+        }
+        sample_list {
+          sample_id
+          sample_site
+          summarized_sample_type
+          specific_sample_pathology
+          tumor_grade
+          sample_chronology
+          percentage_tumor
+          necropsy_sample
+          sample_preservation
+          files{
+            uuid
+          }
+        }
         files{
-          uuid
+          parent
+          file_description
           file_format
+          file_location
+          file_name
+          file_size
+          file_status
           file_type
+          md5sum
+          uuid
         }
         file_formats
      }
@@ -160,7 +178,6 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
     }
  }`;
 
-
 export const GET_CASES_QUERY = gql`
    query Case($study_id: String!) {
 
@@ -185,7 +202,6 @@ export const GET_CASES_QUERY = gql`
      }
   }
   `;
-
 
 export const GET_PROGRAM_DETAIL_DATA_QUERY = gql`
 query program($programTitle: String!) {
@@ -223,7 +239,6 @@ query program($programTitle: String!) {
 
 }`;
 
-
 export const GET_PROGRAM_DATA_QUERY = gql`
 {
   program(orderBy: program_sort_order_asc)
@@ -241,7 +256,6 @@ export const GET_PROGRAM_DATA_QUERY = gql`
   }
 }
 `;
-
 
 export const GET_STUDY_DETAIL_DATA_QUERY = gql`
   query Study($csd: String!) {

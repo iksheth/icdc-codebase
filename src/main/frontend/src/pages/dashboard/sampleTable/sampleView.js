@@ -1,28 +1,17 @@
+/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
   withStyles,
-  Chip,
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import Snackbar from '@material-ui/core/Snackbar';
-import { Link } from 'react-router-dom';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
-import { toggleCheckBox } from '../dashboardState';
-import { receiveCases } from '../../selectedCases/selectedCasesState';
+import { Configuration, DefaultColumns } from './config';
 
-const tableStyle = (ratio = 1) => ({
-  width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  overflow: 'hidden',
-  wordBreak: 'break-word',
-  maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  minWidth: '160px',
-}
-);
-
-const Cases = ({ classes, data }) => {
+const Samples = ({ classes, data }) => {
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
     value: 0,
@@ -34,6 +23,44 @@ const Cases = ({ classes, data }) => {
     setsnackbarState({ open: false });
   }
 
+  function columnBuilder(data) {
+    if (data.length === 0) {
+      return DefaultColumns;
+    }
+    const columns = [];
+    for (const attr of Object.keys(data[0])) {
+      const hasAttrInConfig = Configuration.hasOwnProperty(attr);
+      if (hasAttrInConfig) { // within configuration
+        if (Configuration[attr].display) { // config as not to display
+          if (Configuration[attr].isKey) {
+            // get file ids at first column and then hide it.
+            columns[0] = {
+              name: attr,
+              label: hasAttrInConfig ? Configuration[attr].label : attr,
+              options: {
+                filter: false,
+                sortDirection: 'asc',
+                display: false,
+              },
+            };
+          }
+          if (Configuration[attr].index) {
+            columns[Configuration[attr].index] = {
+              name: attr,
+              label: hasAttrInConfig ? Configuration[attr].label : attr,
+              options: {
+                filter: false,
+                sortDirection: 'asc',
+              },
+            };
+          }
+        }
+      }
+    }
+    return columns;
+  }
+  const columns = columnBuilder(data);
+
   const dispatch = useDispatch();
   // data from store
   const chipData = useSelector((state) => (
@@ -44,35 +71,11 @@ const Cases = ({ classes, data }) => {
   const cart = useSelector((state) => (
     state.cart ? state.cart : []));
   // Get the existing caseIds from MyCases cart state
-  const caseIds = useSelector((state) => state.cart.cases);
+  const fileIDs = useSelector((state) => state.cart.fileIDs);
 
-  // The bubble below will shows in the dashboard and work as
-  // When user select and filters
-  // they will float above the case table on the dashboard .
-  // Due to the design issue, disable bubble function for now
-
-  let bubbles = (chipData.map((ckdata) => (
-    <Chip
-      key={ckdata.datafield + ckdata.name}
-      label={ckdata.name}
-      onDelete={() => {
-        dispatch(toggleCheckBox([{
-          groupName: ckdata.groupName,
-          name: ckdata.name,
-          datafield: ckdata.datafield,
-          isChecked: false,
-        }]));
-      }}
-      classes={{
-        root: classes.chipRoot,
-        deleteIcon: classes.chipDeleteIcon,
-      }}
-    />
-  )));
-
-  bubbles = '';
 
   const saveButton = useRef(null);
+
 
   useEffect(() => {
     saveButton.current.disabled = true;
@@ -84,20 +87,22 @@ const Cases = ({ classes, data }) => {
     saveButton.current.style.cursor = 'auto';
   });
 
-  let selectedCaseIds = [];
+
+  let selectedIds = [];
 
   function exportCases() {
     // Find the newly added cases by comparing
-    // existing caseIds and selectedCaseIds
-    const uniqueCases = caseIds !== null ? selectedCaseIds.filter(
-      (e) => !caseIds.find((a) => e === a),
-    ).length : selectedCaseIds.length;
-    if (uniqueCases > 0) {
-      openSnack(uniqueCases);
+    // existing caseIds and selectedIds
+    const uniqueIDs = fileIDs !== null ? selectedIds.filter(
+      (e) => !fileIDs.find((a) => e === a),
+    ).length : selectedIds.length;
+    if (uniqueIDs > 0) {
+      openSnack(uniqueIDs);
     }
-    dispatch(receiveCases(selectedCaseIds));
-    selectedCaseIds = [];
+    dispatch(receiveFiles(uniqueIDs));
+    selectedIds = [];
   }
+
 
   function onRowsSelect(curr, allRowsSelected) {
     if (allRowsSelected.length === 0) {
@@ -118,142 +123,6 @@ const Cases = ({ classes, data }) => {
     }
   }
 
-  const columns = [
-    {
-      name: 'case_id',
-      label: 'Case ID',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.8)}>
-            {' '}
-            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'study_code',
-      label: 'Study Code',
-      options: {
-        filter: false,
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.6)}>
-
-            <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
-
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'study_type',
-      label: 'Study Type',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(2.3)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'breed',
-      label: 'Breed',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(1)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'diagnosis',
-      label: 'Diagnosis',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(2)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'stage_of_disease',
-      label: 'Stage of Disease',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'age',
-      label: 'Age',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'sex',
-      label: 'Sex',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'neutered_status',
-      label: 'Neutered Status',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.8)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-  ];
 
   const options = () => ({
     selectableRows: true,
@@ -264,27 +133,26 @@ const Cases = ({ classes, data }) => {
     download: false,
     viewColumns: false,
     pagination: true,
-    isRowSelectable: (dataIndex) => {
-      if (cart.cases.includes(data[dataIndex].case_id)) {
-        // disable the grey out functionality , change the return to false will bring it back
-        return true;
-      }
-      return true;
-    },
+    isRowSelectable: (dataIndex) =>
+      // if (cart.cases.includes(data[dataIndex].case_id)) {
+      //   // disable the grey out functionality , change the return to false will bring it back
+      //   return true;
+      // }
+      true,
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
     customToolbarSelect: (selectedRows, displayData) => {
       const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
         selectedRows.data[keyVlaue].index
       ));
-      const selectedCaseId = selectedKeys.map((keyVlaue) => (
-        displayData[keyVlaue].data[0].props.children[1].props.children
+      const selectedId = selectedKeys.map((keyVlaue) => (
+        displayData[keyVlaue].data[0]
       ));
-      selectedCaseIds = selectedCaseId;
+      selectedIds = selectedId;
       return '';
     },
     customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
       <CustomFooter
-        text="SAVE TO MY CASES"
+        text="SAVE TO MY FILES"
         onClick={() => exportCases(dispatch)}
         classes={classes}
         count={count}
@@ -321,10 +189,6 @@ const Cases = ({ classes, data }) => {
 )}
       />
       <div>
-        <div className={classes.chips}>
-          {bubbles}
-        </div>
-
         <Grid container>
           <Grid item xs={12} id="table_cases">
             <MUIDataTable
@@ -349,6 +213,7 @@ const Cases = ({ classes, data }) => {
     </>
   );
 };
+
 
 const styles = () => ({
 
@@ -414,4 +279,4 @@ const styles = () => ({
   },
 });
 
-export default withStyles(styles, { withTheme: true })(Cases);
+export default withStyles(styles, { withTheme: true })(Samples);

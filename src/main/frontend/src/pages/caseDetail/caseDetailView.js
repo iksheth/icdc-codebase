@@ -38,7 +38,6 @@ function formatBytes(bytes, decimals = 2) {
   return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
 }
 
-
 const columns = [
 
   {
@@ -132,7 +131,6 @@ const columns = [
   },
 ];
 
-
 const options = (classes) => ({
   selectableRows: false,
   search: false,
@@ -159,14 +157,12 @@ const options = (classes) => ({
   ),
 });
 
-
 const CaseDetail = ({ classes, data, selected }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(
     dispatch(fetchDataForDashboardDataTable()),
   );
 
   const dispatch = useDispatch();
-
 
   const redirectTo = (study) => {
     dispatch(initDashboardStatus()).then(() => {
@@ -178,7 +174,6 @@ const CaseDetail = ({ classes, data, selected }) => {
       }]));
     });
   };
-
 
   const stat = {
     numberOfStudies: 1,
@@ -207,7 +202,6 @@ const CaseDetail = ({ classes, data, selected }) => {
   }, {
     name: caseDetail.case_id,
   }];
-
 
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
@@ -369,7 +363,6 @@ const CaseDetail = ({ classes, data, selected }) => {
           </div>
         </div>
 
-
         <div id="case_detail_container" className={classes.detailContainer}>
 
           <Grid container spacing={4}>
@@ -427,7 +420,6 @@ const CaseDetail = ({ classes, data, selected }) => {
                     </Grid>
                   </Grid>
 
-
                   <Grid item xs={12}>
                     <Grid container spacing={4}>
                       <Grid item xs={4}>
@@ -440,11 +432,9 @@ const CaseDetail = ({ classes, data, selected }) => {
                     </Grid>
                   </Grid>
 
-
                 </Grid>
               </Grid>
             </Grid>
-
 
             <Grid item lg={4} md={4} sm={12} xs={12} className={classes.detailContainerRight}>
               <Grid container spacing={32} direction="column">
@@ -526,7 +516,6 @@ const CaseDetail = ({ classes, data, selected }) => {
 
               </Grid>
             </Grid>
-
 
             <Grid item lg={5} md={5} sm={12} xs={12} className={classes.detailContainerRight}>
               <Grid container spacing={32} direction="column">
@@ -651,7 +640,6 @@ const CaseDetail = ({ classes, data, selected }) => {
   );
 };
 
-
 const styles = (theme) => ({
   paddingLeft8: {
     paddingLeft: '12px',
@@ -735,7 +723,6 @@ const styles = (theme) => ({
     fontSize: '12px',
     paddingLeft: '3px',
   },
-
 
   logo: {
     position: 'absolute',

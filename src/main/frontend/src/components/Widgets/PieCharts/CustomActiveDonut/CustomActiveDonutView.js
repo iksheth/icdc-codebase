@@ -63,7 +63,6 @@ const renderActiveShape = (props) => {
   );
 };
 
-
 export default class CustomActiveDonut extends PureComponent {
   constructor(props) {
     super(props);
