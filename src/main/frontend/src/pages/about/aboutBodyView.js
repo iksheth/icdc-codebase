@@ -5,7 +5,6 @@ import Stats from '../../components/Stats/AllStatsController';
 import externalIcon from '../../assets/about/About-ExternalLink.svg';
 import submissionGuide from '../../assets/footer/ICDC_DGAB_Guidelines.pdf';
 
-
 const AboutBody = ({ classes, data }) => {
   function boldText(text) {
     if (text !== '') {
@@ -161,7 +160,6 @@ const AboutBody = ({ classes, data }) => {
         </Grid>
       </div>
     </>
-
 
   );
 };

@@ -5,7 +5,6 @@ import CasesView from './casesView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_CASES_QUERY } from '../../utils/graphqlQueries';
 
-
 const studyCaseContainer = ({ match }) => (
   <Query query={GET_CASES_QUERY} variables={{ study_id: match.params.id }}>
     {({ data, loading, error }) => (

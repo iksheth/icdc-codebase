@@ -377,5 +377,11 @@ export default {
         whiteSpace: 'normal !important',
       },
     },
+    MuiPrivateTabIndicator: {
+      root: {
+        top: 0,
+        bottom: 'auto',
+      },
+    },
   },
 };

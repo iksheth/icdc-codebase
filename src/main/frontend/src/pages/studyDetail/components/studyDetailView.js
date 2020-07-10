@@ -87,7 +87,6 @@ const options = (classes) => ({
   ),
 });
 
-
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
@@ -149,7 +148,6 @@ const StudyDetailView = ({ classes, data }) => {
     return cohortAndDosing;
   }
 
-
   const cohortAndDosingTableData = [];
   const noArmMessage = 'This study is not divided into arms';
   const noCohortMessage = 'This study is not divided into cohorts';
@@ -210,7 +208,6 @@ const StudyDetailView = ({ classes, data }) => {
     isALink: false,
   }];
 
-
   return (
     <>
       <StatsView data={stat} />
@@ -265,7 +262,6 @@ const StudyDetailView = ({ classes, data }) => {
             </span>
           </div>
         </div>
-
 
         <div className={classes.detailContainer}>
 
@@ -393,7 +389,6 @@ const StudyDetailView = ({ classes, data }) => {
     </>
   );
 };
-
 
 const styles = (theme) => ({
   hrLine: {

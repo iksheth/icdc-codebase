@@ -1,8 +1,8 @@
+/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
   withStyles,
-  Chip,
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
@@ -12,6 +12,8 @@ import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
 import { receiveCases } from '../../selectedCases/selectedCasesState';
+import { Configuration, DefaultColumns } from './config.js';
+
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -22,7 +24,8 @@ const tableStyle = (ratio = 1) => ({
 }
 );
 
-const Cases = ({ classes, data }) => {
+
+const Files = ({ classes, data }) => {
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
     value: 0,
@@ -33,6 +36,7 @@ const Cases = ({ classes, data }) => {
   function closeSnack() {
     setsnackbarState({ open: false });
   }
+
 
   const dispatch = useDispatch();
   // data from store
@@ -46,33 +50,9 @@ const Cases = ({ classes, data }) => {
   // Get the existing caseIds from MyCases cart state
   const caseIds = useSelector((state) => state.cart.cases);
 
-  // The bubble below will shows in the dashboard and work as
-  // When user select and filters
-  // they will float above the case table on the dashboard .
-  // Due to the design issue, disable bubble function for now
-
-  let bubbles = (chipData.map((ckdata) => (
-    <Chip
-      key={ckdata.datafield + ckdata.name}
-      label={ckdata.name}
-      onDelete={() => {
-        dispatch(toggleCheckBox([{
-          groupName: ckdata.groupName,
-          name: ckdata.name,
-          datafield: ckdata.datafield,
-          isChecked: false,
-        }]));
-      }}
-      classes={{
-        root: classes.chipRoot,
-        deleteIcon: classes.chipDeleteIcon,
-      }}
-    />
-  )));
-
-  bubbles = '';
 
   const saveButton = useRef(null);
+
 
   useEffect(() => {
     saveButton.current.disabled = true;
@@ -83,6 +63,7 @@ const Cases = ({ classes, data }) => {
     saveButton.current.style.fontWeight = '600';
     saveButton.current.style.cursor = 'auto';
   });
+
 
   let selectedCaseIds = [];
 
@@ -98,6 +79,7 @@ const Cases = ({ classes, data }) => {
     dispatch(receiveCases(selectedCaseIds));
     selectedCaseIds = [];
   }
+
 
   function onRowsSelect(curr, allRowsSelected) {
     if (allRowsSelected.length === 0) {
@@ -118,142 +100,47 @@ const Cases = ({ classes, data }) => {
     }
   }
 
-  const columns = [
-    {
-      name: 'case_id',
-      label: 'Case ID',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.8)}>
-            {' '}
-            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'study_code',
-      label: 'Study Code',
-      options: {
-        filter: false,
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.6)}>
 
-            <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
+  function columnBuilder(data) {
+    if (data.length == 0) {
+      return DefaultColumns;
+    }
+    const columns = [];
+    for (const attr of Object.keys(data[0])) {
+      const hasAttrInConfig = Configuration.hasOwnProperty(attr);
+      if (hasAttrInConfig) { // within configuration
+        if (Configuration[attr].display) { // config as not to display
+          if (Configuration[attr].isKey) {
+            // get file ids at first column and then hide it.
+            columns[0] = {
+              name: attr,
+              label: hasAttrInConfig ? Configuration[attr].label : attr,
+              options: {
+                filter: false,
+                sortDirection: 'asc',
+                display: false,
+              },
+            };
+          }
+          if (Configuration[attr].index) {
+            columns[Configuration[attr].index] = {
+              name: attr,
+              label: hasAttrInConfig ? Configuration[attr].label : attr,
+              options: {
+                filter: false,
+                sortDirection: 'asc',
+              },
+            };
+          }
+        }
+      }
+    }
+    return columns;
+  }
 
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'study_type',
-      label: 'Study Type',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(2.3)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'breed',
-      label: 'Breed',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(1)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'diagnosis',
-      label: 'Diagnosis',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(2)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'stage_of_disease',
-      label: 'Stage of Disease',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'age',
-      label: 'Age',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'sex',
-      label: 'Sex',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'neutered_status',
-      label: 'Neutered Status',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.8)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-  ];
+
+  const columns = columnBuilder(data);
+
 
   const options = () => ({
     selectableRows: true,
@@ -321,9 +208,6 @@ const Cases = ({ classes, data }) => {
 )}
       />
       <div>
-        <div className={classes.chips}>
-          {bubbles}
-        </div>
 
         <Grid container>
           <Grid item xs={12} id="table_cases">
@@ -342,13 +226,14 @@ const Cases = ({ classes, data }) => {
             onClick={exportCases}
             className={classes.button}
           >
-            ADD ASSOCIATED FILES TO MY CART
+             ADD ASSOCIATED FILES TO MY CART
           </button>
         </Grid>
       </div>
     </>
   );
 };
+
 
 const styles = () => ({
 
@@ -402,7 +287,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '330px',
+    width: '178px',
     height: '27px',
     lineHeight: '18px',
     fontSize: '10pt',
@@ -414,4 +299,4 @@ const styles = () => ({
   },
 });
 
-export default withStyles(styles, { withTheme: true })(Cases);
+export default withStyles(styles, { withTheme: true })(Files);

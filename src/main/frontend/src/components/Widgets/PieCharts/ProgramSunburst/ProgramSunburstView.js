@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Sunburst, LabelSeries } from 'react-vis';
 import { withStyles } from '@material-ui/core';
 
-
 function getKeyPath(node) {
   if (!node.parent) {
     return ['root'];
@@ -12,7 +11,6 @@ function getKeyPath(node) {
     getKeyPath(node.parent),
   );
 }
-
 
 function updateData(d, keyPath) {
   const data = d;
@@ -28,7 +26,6 @@ function updateData(d, keyPath) {
   return data;
 }
 
-
 function sortData(d) {
   const data = d;
   if (data.children) {
@@ -38,7 +35,6 @@ function sortData(d) {
 
   return data;
 }
-
 
 // find the caseSize of a given title
 function findCaseSizeOfTitle(data, title) {
@@ -61,7 +57,6 @@ function findCaseSizeOfTitle(data, title) {
   return data.caseSize;
 }
 
-
 const styles = (theme) => ({
   title: {
     fontSize: '12px',
@@ -81,7 +76,6 @@ const styles = (theme) => ({
 
 });
 
-
 class ProgramSunburst extends PureComponent {
   constructor(props) {
     super(props);
@@ -94,7 +88,6 @@ class ProgramSunburst extends PureComponent {
     };
   }
 
-
   render() {
     const {
       caseSize, size, widgetData, title,
@@ -103,7 +96,6 @@ class ProgramSunburst extends PureComponent {
       width, height, data, textColor, classes,
     } = this.props;
     // update the caseSize  associated with title
-
 
     this.setState({
       widgetData: sortData(data),
@@ -178,6 +170,5 @@ class ProgramSunburst extends PureComponent {
     );
   }
 }
-
 
 export default withStyles(styles)(ProgramSunburst);

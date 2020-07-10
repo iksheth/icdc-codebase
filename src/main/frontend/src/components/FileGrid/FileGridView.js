@@ -25,7 +25,6 @@ class FileGridView extends Component {
     this.downloadButton.current.style.color = 'rgb(0, 0, 0,0.26)';
   }
 
-
   onRowsSelect(curr, allRowsSelected) {
     // Change button status based on selection status
     if (allRowsSelected.length === 0) {
@@ -38,7 +37,6 @@ class FileGridView extends Component {
       this.downloadButton.current.style.backgroundColor = '#0B3556';
     }
   }
-
 
   render() {
     let globalData = [];
@@ -68,7 +66,6 @@ class FileGridView extends Component {
 
       return `${'ICDC Study File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
     }
-
 
     function convertToCSV(jsonse) {
       const objArray = jsonse;
@@ -119,7 +116,6 @@ class FileGridView extends Component {
       return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[parseInt(i, 10)]}`;
     }
 
-
     const columns = [
       {
         name: 'studyDesignation',
@@ -161,7 +157,6 @@ class FileGridView extends Component {
         },
       },
     ];
-
 
     const options = () => ({
       selectableRows: true,

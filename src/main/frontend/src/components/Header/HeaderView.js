@@ -5,7 +5,6 @@ import nihLogo from '../../assets/header/icdc_nih_logo.svg';
 // import icdcLogo from '../../assets/header/icdc_logo_white.svg';
 import cancergraphic2000 from '../../assets/header/Canine2000.png';
 
-
 // import classes from '*.module.sass';
 
 /**
@@ -81,7 +80,6 @@ const styles = () => ({
     cursor: 'pointer',
   },
 });
-
 
 Header.defaultProps = {
   classes: {},

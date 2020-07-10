@@ -11,7 +11,6 @@ import SamplesIcon from '../../assets/icons/Icon-samples-stats.svg';
 import FilesIcon from '../../assets/icons/Icon-files-stats.svg';
 import AliquotsIcon from '../../assets/icons/Icon-aliquots-stats.svg';
 
-
 const StatsView = ({ classes, data }) => (
   <Grid container class={classes.statsContainer}>
     <Grid item xs={12}>
