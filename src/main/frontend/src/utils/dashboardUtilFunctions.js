@@ -132,7 +132,7 @@ export const mappingCheckBoxToDataTable = [
     group: 'File Association',
     field: 'files@parent',
     api: 'caseOverview',
-    datafield: 'files@file_format',
+    datafield: 'files@parent',
     show: true,
     type: 2,
     key: 'uuid',
