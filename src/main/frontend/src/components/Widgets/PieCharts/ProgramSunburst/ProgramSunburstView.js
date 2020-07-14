@@ -84,7 +84,7 @@ class ProgramSunburst extends PureComponent {
       widgetData: sortData(data),
       size: data.children[0].size,
       title: '',
-      caseSize: data.children[0].caseSize,
+      caseSize: findCaseSizeOfTitle(data, ''),
     };
   }
 
@@ -139,7 +139,7 @@ class ProgramSunburst extends PureComponent {
                 });
               }}
             >
-              {caseSize && (
+              {caseSize > 0 && (
               <LabelSeries data={[{
                 x: 0,
                 y: 0,
