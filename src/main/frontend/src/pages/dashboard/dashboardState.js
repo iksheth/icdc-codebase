@@ -217,11 +217,13 @@ export default function dashboardReducer(state = initialState, action) {
       action.payload.data.study.forEach((d) => {
         if (d.files.length > 0) {
           action.payload.data.caseOverview.push({
+            program: d.program.program_acronym,
             study_type: d.clinical_study_type,
             study_code: d.clinical_study_designation,
             files: d.files.map((f) => {
               const tmpF = f;
               tmpF.parent = 'study';
+              tmpF.file_size = formatFileSize(tmpF.file_size);
               return tmpF;
             }),
           });

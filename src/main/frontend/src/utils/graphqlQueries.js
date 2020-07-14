@@ -11,10 +11,11 @@ export const STATS_QUERY = gql`{
 
 export const DASHBOARD_QUERY = gql`{
    study{
-    clinical_study_id
     clinical_study_type
     clinical_study_designation
-    clinical_study_name
+    program{
+      program_acronym
+    }
     files{
           file_description
           file_format

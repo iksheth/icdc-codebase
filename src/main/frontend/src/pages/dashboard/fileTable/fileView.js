@@ -12,7 +12,6 @@ import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
 import { toggleCheckBox } from '../dashboardState';
 import { receiveCases } from '../../selectedCases/selectedCasesState';
-import { Configuration, DefaultColumns } from './config.js';
 
 
 const tableStyle = (ratio = 1) => ({
@@ -101,45 +100,144 @@ const Files = ({ classes, data }) => {
   }
 
 
-  function columnBuilder(data) {
-    if (data.length == 0) {
-      return DefaultColumns;
-    }
-    const columns = [];
-    for (const attr of Object.keys(data[0])) {
-      const hasAttrInConfig = Configuration.hasOwnProperty(attr);
-      if (hasAttrInConfig) { // within configuration
-        if (Configuration[attr].display) { // config as not to display
-          if (Configuration[attr].isKey) {
-            // get file ids at first column and then hide it.
-            columns[0] = {
-              name: attr,
-              label: hasAttrInConfig ? Configuration[attr].label : attr,
-              options: {
-                filter: false,
-                sortDirection: 'asc',
-                display: false,
-              },
-            };
-          }
-          if (Configuration[attr].index) {
-            columns[Configuration[attr].index] = {
-              name: attr,
-              label: hasAttrInConfig ? Configuration[attr].label : attr,
-              options: {
-                filter: false,
-                sortDirection: 'asc',
-              },
-            };
-          }
-        }
-      }
-    }
-    return columns;
-  }
 
+  const columns = [
+    {
+      name: 'case_id',
+      label: 'Case ID',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'breed',
+      label: 'Breed',
+      options: {
+        filter: false,
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.6)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'diagnosis',
+      label: 'Diagnosis',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2.3)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_name',
+      label: 'File Name',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_type',
+      label: 'File Type',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'parent',
+      label: 'Association',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_description',
+      label: 'Description',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_format',
+      label: 'Format',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_size',
+      label: 'Size',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+  ];
 
-  const columns = columnBuilder(data);
 
 
   const options = () => ({
