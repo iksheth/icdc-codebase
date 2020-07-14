@@ -90,7 +90,9 @@ const options = (classes) => ({
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
-  const fileTypes = [...new Set(data.filesOfStudy.map((fileOfStudy) => (fileOfStudy.file_type)))];
+  const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
+  const caseFileTypes = [...new Set(data.filesOfStudy.map((f) => (f.file_type))
+    .filter((f) => !studyFileTypes.includes(f)))];
   const stat = {
     numberOfStudies: 1,
     numberOfCases: data.caseCountOfStudy,
@@ -339,7 +341,7 @@ const StudyDetailView = ({ classes, data }) => {
                     </Grid>
                   </Grid>
                   <Grid container spacing={8} className={classes.paddingTop12}>
-                    {fileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
+                    {caseFileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
                       <Grid item xs={12}>
                         <span className={classes.content}>{fileType}</span>
                       </Grid>
