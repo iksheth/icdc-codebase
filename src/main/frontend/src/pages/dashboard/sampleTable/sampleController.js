@@ -19,7 +19,11 @@ const fileContainer = () => {
         caseAttrs[key] = currentValue[key];
       }
     }
-    return accumulator.concat(currentValue.sample_list.map((f) => ({ ...f, ...caseAttrs })));
+    if(currentValue.sample_list){
+       return accumulator.concat(currentValue.sample_list.map((f) => ({ ...f, ...caseAttrs })));
+    }else{
+      return accumulator;
+    }
   };
   const tableData = sampleData.data.reduce(transform, []);
 
@@ -30,7 +34,12 @@ const fileContainer = () => {
 
   const tableDataAfterFilter = tableData.filter((row) => filterData(row, sampleFilters));
 
-  return <View data={tableDataAfterFilter} />;
+  return <View data={tableDataAfterFilter.filter((d)=>{
+      if(d.case_id){
+        return true;
+      }
+      return false;
+    })} />;
 };
 
 export default fileContainer;

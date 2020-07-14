@@ -214,6 +214,20 @@ export default function dashboardReducer(state = initialState, action) {
         return d;
       });
 
+      action.payload.data.study.forEach((d) => {
+        if (d.files.length > 0) {
+          action.payload.data.caseOverview.push({
+            study_type: d.clinical_study_type,
+            study_code: d.clinical_study_designation,
+            files: d.files.map((f) => {
+              const tmpF = f;
+              tmpF.parent = 'study';
+              return tmpF;
+            }),
+          });
+        }
+      });
+
       const checkboxData = customCheckBox(action.payload.data);
 
       return action.payload.data
@@ -224,11 +238,11 @@ export default function dashboardReducer(state = initialState, action) {
           hasError: false,
           error: '',
           stats: {
-            numberOfStudies: action.payload.data.numberOfStudies,
-            numberOfCases: action.payload.data.numberOfCases,
-            numberOfSamples: action.payload.data.numberOfSamples,
-            numberOfFiles: action.payload.data.numberOfFiles,
-            numberOfAliquots: action.payload.data.numberOfAliquots,
+            numberOfStudies: getStatDataFromDashboardData(action.payload.data.caseOverview, 'study', []),
+            numberOfCases: getStatDataFromDashboardData(action.payload.data.caseOverview, 'case', []),
+            numberOfSamples: getStatDataFromDashboardData(action.payload.data.caseOverview, 'sample', []),
+            numberOfFiles: getStatDataFromDashboardData(action.payload.data.caseOverview, 'file', []),
+            numberOfAliquots: getStatDataFromDashboardData(action.payload.data.caseOverview, 'aliquot', []),
           },
           caseOverview: {
             data: action.payload.data.caseOverview,

@@ -19,7 +19,11 @@ const fileController = () => {
         caseAttrs[key] = currentValue[key];
       }
     }
-    return accumulator.concat(currentValue.files.map((f) => ({ ...f, ...caseAttrs })));
+    if(currentValue.files){
+        return accumulator.concat(currentValue.files.map((f) => ({ ...f, ...caseAttrs })));
+      }else{
+        return accumulator;
+      }
   };
 
   const tableData = fileData.data.reduce(transform, []);
