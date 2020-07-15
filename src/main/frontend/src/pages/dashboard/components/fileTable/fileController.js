@@ -1,8 +1,5 @@
-/* eslint-disable */
-import React from 'react';
 import { useSelector } from 'react-redux';
-import FileView from './fileView';
-import { filterData } from '../../../utils/dashboardUtilFunctions';
+import { filterData } from '../../../../utils/dashboardUtilFunctions';
 
 const fileController = () => {
   // data from store
@@ -13,17 +10,15 @@ const fileController = () => {
   // combine case properties with files.
   const transform = (accumulator, currentValue) => {
     const caseAttrs = {};
-    const keys = Object.keys(currentValue);
-    for (const key of keys) {
-      if (!Array.isArray(currentValue[key])) {
+    Object.keys(currentValue).forEach((key) => {
+      if (key && !Array.isArray(currentValue[key])) {
         caseAttrs[key] = currentValue[key];
       }
+    });
+    if (currentValue.files) {
+      return accumulator.concat(currentValue.files.map((f) => ({ ...f, ...caseAttrs })));
     }
-    if(currentValue.files){
-        return accumulator.concat(currentValue.files.map((f) => ({ ...f, ...caseAttrs })));
-      }else{
-        return accumulator;
-      }
+    return accumulator;
   };
 
   const tableData = fileData.data.reduce(transform, []);
@@ -31,23 +26,24 @@ const fileController = () => {
   // reduce duplicated records
   const result = [];
   const map = new Map();
-  for (const item of tableData) {
+  tableData.forEach((item) => {
     if (!map.has(item.uuid)) {
       map.set(item.uuid, true); // set any value to Map
       result.push(item);
     }
-  }
-
-  const filesFilters = JSON.parse(JSON.stringify(fileData)).filters.filter((f) => f.cata === 'file').map((f) => {
-    f.datafield = f.datafield.includes('@') ? f.datafield.split('@').pop() : f.datafield;
-    return f;
   });
 
+  const filesFilters = JSON.parse(JSON.stringify(fileData)).filters
+    .filter((f) => f.cata === 'file')
+    .map((f) => {
+      const tmpF = f;
+      tmpF.datafield = tmpF.datafield.includes('@') ? tmpF.datafield.split('@').pop() : tmpF.datafield;
+      return tmpF;
+    });
 
   const tableDataAfterFilter = result.filter((row) => filterData(row, filesFilters));
 
-
-  return <FileView data={tableDataAfterFilter} />;
+  return tableDataAfterFilter;
 };
 
 export default fileController;

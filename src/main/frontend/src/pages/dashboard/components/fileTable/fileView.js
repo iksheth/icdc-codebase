@@ -6,11 +6,21 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import Snackbar from '@material-ui/core/Snackbar';
-import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
+import { Link } from 'react-router-dom';
+import SuccessOutlinedIcon from '../../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
-import COLUMNS from './config';
+import { receiveCases } from '../../../selectedCases/selectedCasesState';
 
-const Samples = ({ classes, data }) => {
+const tableStyle = (ratio = 1) => ({
+  width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
+  overflow: 'hidden',
+  wordBreak: 'break-word',
+  maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
+  minWidth: '160px',
+}
+);
+
+const Files = ({ classes, data }) => {
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
     value: 0,
@@ -22,11 +32,13 @@ const Samples = ({ classes, data }) => {
     setsnackbarState({ open: false });
   }
 
-  const columns = COLUMNS(classes);
-
   const dispatch = useDispatch();
+  // data from store
 
-  const fileIDs = useSelector((state) => state.cart.fileIDs);
+  const cart = useSelector((state) => (
+    state.cart ? state.cart : []));
+  // Get the existing caseIds from MyCases cart state
+  const caseIds = useSelector((state) => state.cart.cases);
 
   const saveButton = useRef(null);
 
@@ -40,19 +52,19 @@ const Samples = ({ classes, data }) => {
     saveButton.current.style.cursor = 'auto';
   });
 
-  let selectedIds = [];
+  let selectedCaseIds = [];
 
   function exportCases() {
     // Find the newly added cases by comparing
-    // existing caseIds and selectedIds
-    const uniqueIDs = fileIDs !== null ? selectedIds.filter(
-      (e) => !fileIDs.find((a) => e === a),
-    ).length : selectedIds.length;
-    if (uniqueIDs > 0) {
-      openSnack(uniqueIDs);
+    // existing caseIds and selectedCaseIds
+    const uniqueCases = caseIds !== null ? selectedCaseIds.filter(
+      (e) => !caseIds.find((a) => e === a),
+    ).length : selectedCaseIds.length;
+    if (uniqueCases > 0) {
+      openSnack(uniqueCases);
     }
-    // dispatch(receiveFiles(uniqueIDs));
-    selectedIds = [];
+    dispatch(receiveCases(selectedCaseIds));
+    selectedCaseIds = [];
   }
 
   function onRowsSelect(curr, allRowsSelected) {
@@ -74,6 +86,143 @@ const Samples = ({ classes, data }) => {
     }
   }
 
+  const columns = [
+    {
+      name: 'case_id',
+      label: 'Case ID',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'breed',
+      label: 'Breed',
+      options: {
+        filter: false,
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.6)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'diagnosis',
+      label: 'Diagnosis',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2.3)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_name',
+      label: 'File Name',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_type',
+      label: 'File Type',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'parent',
+      label: 'Association',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_description',
+      label: 'Description',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_format',
+      label: 'Format',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_size',
+      label: 'Size',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+  ];
+
   const options = () => ({
     selectableRows: true,
     search: false,
@@ -84,7 +233,7 @@ const Samples = ({ classes, data }) => {
     viewColumns: false,
     pagination: true,
     isRowSelectable: (dataIndex) => {
-      if (data[dataIndex]) {
+      if (cart.cases.includes(data[dataIndex].case_id)) {
         // disable the grey out functionality , change the return to false will bring it back
         return true;
       }
@@ -95,15 +244,15 @@ const Samples = ({ classes, data }) => {
       const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
         selectedRows.data[keyVlaue].index
       ));
-      const selectedId = selectedKeys.map((keyVlaue) => (
-        displayData[keyVlaue].data[0]
+      const selectedCaseId = selectedKeys.map((keyVlaue) => (
+        displayData[keyVlaue].data[0].props.children[1].props.children
       ));
-      selectedIds = selectedId;
+      selectedCaseIds = selectedCaseId;
       return '';
     },
     customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
       <CustomFooter
-        text="SAVE TO MY FILES"
+        text="SAVE TO MY CASES"
         onClick={() => exportCases(dispatch)}
         classes={classes}
         count={count}
@@ -140,6 +289,7 @@ const Samples = ({ classes, data }) => {
 )}
       />
       <div>
+
         <Grid container>
           <Grid item xs={12} id="table_cases">
             <MUIDataTable
@@ -217,7 +367,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '330px',
+    width: '178px',
     height: '27px',
     lineHeight: '18px',
     fontSize: '10pt',
@@ -229,4 +379,4 @@ const styles = () => ({
   },
 });
 
-export default withStyles(styles, { withTheme: true })(Samples);
+export default withStyles(styles, { withTheme: true })(Files);

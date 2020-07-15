@@ -437,9 +437,6 @@ function initCheckBoxDataWithType2Input(data, field, key) {
   const targetField = hierarchy.pop();
   rawTargetObjs.forEach((currentValue) => {
     if (key) {
-      if (currentValue[targetField] == null) {
-        console.log(1);
-      }
       if (currentValue[key] && !tmpKeys.includes(currentValue[key])) {
         tmpKeys.push(currentValue[key]);
         // count the number

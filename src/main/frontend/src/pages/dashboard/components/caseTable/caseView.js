@@ -8,10 +8,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import Snackbar from '@material-ui/core/Snackbar';
 import { Link } from 'react-router-dom';
-import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
+import SuccessOutlinedIcon from '../../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
-import { toggleCheckBox } from '../dashboardState';
-import { receiveCases } from '../../selectedCases/selectedCasesState';
+import { toggleCheckBox } from '../../dashboardState';
+import { receiveCases } from '../../../selectedCases/selectedCasesState';
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
