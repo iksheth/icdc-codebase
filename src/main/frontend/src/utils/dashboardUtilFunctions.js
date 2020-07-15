@@ -1,12 +1,12 @@
 import { v1 as uuid } from 'uuid';
 
-export const COLORS = [
-  '#194563',
+const COLORS = [
   '#39C0F0',
-  '#fc4b5b',
-  '#2b69a3',
-  '#287d6d',
-  '#af66ff',
+  '#004CF3',
+  '#FF7F15',
+  '#4C3112',
+  '#8DE260',
+  '#437200',
 ];
 
 const NOT_PROVIDED = 'Not Specified';
@@ -243,7 +243,6 @@ export function getSunburstDataFromDashboardData(data) {
       }); // end find program
 
       if (!existProgram && !existStudy) {
-        colorIndex += 1;
         widgetData.push({
           title: d.program,
           color: COLORS[parseInt(colorIndex, 10)],
@@ -255,6 +254,7 @@ export function getSunburstDataFromDashboardData(data) {
             caseSize: 1,
           }],
         });
+        colorIndex += 1;
       }
     }
   }); // end foreach
