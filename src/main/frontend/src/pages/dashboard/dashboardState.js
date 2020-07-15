@@ -110,7 +110,6 @@ export function fetchDataForDashboardDataTable() {
 }
 
 // End of actions
-
 export default function dashboardReducer(state = initialState, action) {
   switch (action.type) {
     case SINGLE_CHECKBOX: {

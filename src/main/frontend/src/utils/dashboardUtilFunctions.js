@@ -189,7 +189,7 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
 export function getStatDataFromDashboardData(data, statName) {
   switch (statName) {
     case 'case':
-      return data.length;
+      return [...new Set(data.map((d) => d.case_id))].length;
     case 'study':
       return [...new Set(data.map((d) => d.study_code))].length;
     case 'aliquot':
@@ -271,13 +271,15 @@ export function getSunburstDataFromDashboardData(data) {
 export function getDonutDataFromDashboardData(data, widgetName) {
   const output = [];
   data.reduce((accumulator, currentValue) => {
-    if (accumulator.has(currentValue[widgetName.toString()])) {
-      accumulator.set(
-        currentValue[widgetName.toString()],
-        accumulator.get(currentValue[widgetName.toString()]) + 1,
-      );
-    } else {
-      accumulator.set(currentValue[widgetName.toString()], 1);
+    if (currentValue[widgetName.toString()]) {
+      if (accumulator.has(currentValue[widgetName.toString()])) {
+        accumulator.set(
+          currentValue[widgetName.toString()],
+          accumulator.get(currentValue[widgetName.toString()]) + 1,
+        );
+      } else {
+        accumulator.set(currentValue[widgetName.toString()], 1);
+      }
     }
     return accumulator;
   }, new Map()).forEach((value, key) => { output.push({ item: key, cases: value }); });
