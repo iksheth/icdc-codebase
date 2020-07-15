@@ -10,56 +10,24 @@ export const STATS_QUERY = gql`{
   `;
 
 export const DASHBOARD_QUERY = gql`{
-     numberOfStudies
-    numberOfCases
-    numberOfSamples
-    numberOfFiles
-    numberOfAliquots
-    
-    caseCountByFileFormat{
-      file_format
-       cases
+   study{
+    clinical_study_type
+    clinical_study_designation
+    program{
+      program_acronym
     }
-    caseCountByBreed {
-      cases
-      breed
-    }
-    caseCountByGender {
-      cases
-      gender
-    }
-    caseCountByDiagnosis {
-      cases
-      diagnosis
-    }
-    caseCountByDiseaseSite { 
-      cases
-      disease_site 
-    }
-    caseCountByStageOfDisease { 
-      cases
-      stage_of_disease 
-    }
-    caseCountByStudyCode{
-      study_code
-     cases
-    }
-   caseCountByStudyType {
-     study_type
-     cases
-    }
-    caseCountByAge {
-     age
-     cases
-    }
-    caseCountByDataType {
-     data_type
-     cases
-    }
-    caseCountByProgram {
-     program
-     cases
-    }
+    files{
+          file_description
+          file_format
+          file_location
+          file_name
+          file_size
+          file_status
+          file_type
+          md5sum
+          uuid
+        }
+   }
    caseOverview{   
         case_id  
         program

@@ -1,21 +1,21 @@
 import { v1 as uuid } from 'uuid';
 
-export const COLORS = [
-  '#194563',
+const COLORS = [
   '#39C0F0',
-  '#fc4b5b',
-  '#2b69a3',
-  '#287d6d',
-  '#af66ff',
+  '#004CF3',
+  '#FF7F15',
+  '#4C3112',
+  '#8DE260',
+  '#437200',
 ];
 
-const NOT_PROVIDED = 'Not Specified';
+export const NOT_PROVIDED = 'Not Specified';
 
 export const mappingCheckBoxToDataTable = [
   {
     group: 'Program',
     field: 'program',
-    api: 'caseCountByProgram',
+    api: 'caseOverview',
     datafield: 'program',
     show: false,
     cata: 'case',
@@ -24,54 +24,66 @@ export const mappingCheckBoxToDataTable = [
   {
     group: 'Study',
     field: 'study_code',
-    api: 'caseCountByStudyCode',
+    api: 'caseOverview',
     datafield: 'study_code',
     show: true,
+    type: 2,
+    key: 'case_id',
     cata: 'case',
 
   },
   {
     group: 'Study Type',
     field: 'study_type',
-    api: 'caseCountByStudyType',
+    api: 'caseOverview',
     datafield: 'study_type',
     show: true,
+    type: 2,
+    key: 'case_id',
     cata: 'case',
 
   },
   {
     group: 'Breed',
     field: 'breed',
-    api: 'caseCountByBreed',
+    api: 'caseOverview',
     datafield: 'breed',
     show: true,
+    type: 2,
+    key: 'case_id',
     cata: 'case',
 
   },
   {
     group: 'Diagnosis',
     field: 'diagnosis',
-    api: 'caseCountByDiagnosis',
+    api: 'caseOverview',
     datafield: 'diagnosis',
     show: true,
+    type: 2,
+    key: 'case_id',
     cata: 'case',
 
   },
   {
     group: 'Primary Disease Site',
     field: 'disease_site',
-    api: 'caseCountByDiseaseSite',
+    api: 'caseOverview',
     datafield: 'disease_site',
     show: true,
+    type: 2,
+    key: 'case_id',
     cata: 'case',
 
   },
   {
     group: 'Stage of Disease',
     field: 'stage_of_disease',
-    api: 'caseCountByStageOfDisease',
+    api: 'caseOverview',
     datafield: 'stage_of_disease',
     show: true,
+    type: 2,
+    key: 'case_id',
     cata: 'case',
 
   },
@@ -89,9 +101,11 @@ export const mappingCheckBoxToDataTable = [
   {
     group: 'Sex',
     field: 'gender',
-    api: 'caseCountByGender',
+    api: 'caseOverview',
     datafield: 'sex',
     show: true,
+    type: 2,
+    key: 'case_id',
     cata: 'case',
 
   },
@@ -175,7 +189,7 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
 export function getStatDataFromDashboardData(data, statName) {
   switch (statName) {
     case 'case':
-      return data.length;
+      return [...new Set(data.filter((d) => d.case_id).map((d) => d.case_id))].length;
     case 'study':
       return [...new Set(data.map((d) => d.study_code))].length;
     case 'aliquot':
@@ -200,46 +214,48 @@ export function getSunburstDataFromDashboardData(data) {
   data.forEach((d) => {
     let existProgram = false;
     let existStudy = false;
-    widgetData.map((p) => {
-      if (p.title === d.program) { // program exist
-        existProgram = true;
-        // eslint-disable-next-line no-param-reassign
-        p.caseSize += 1;
-        p.children.map((study) => {
-          const s = study;
-          if (s.title === `${d.program} : ${d.study_code}`) { // study exist
-            existStudy = true;
-            s.size += 1;
-            s.caseSize += 1;
+    if (d.program && d.study_code) {
+      widgetData.map((p) => {
+        if (p.title === d.program) { // program exist
+          existProgram = true;
+          // eslint-disable-next-line no-param-reassign
+          p.caseSize += 1;
+          p.children.map((study) => {
+            const s = study;
+            if (s.title === `${d.program} : ${d.study_code}`) { // study exist
+              existStudy = true;
+              s.size += 1;
+              s.caseSize += 1;
+            }
+            return s;
+          }); // end find study
+          if (!existStudy) { // new study
+            colorIndex += 1;
+            p.children.push({
+              title: `${d.program} : ${d.study_code}`,
+              color: p.color,
+              size: 1,
+              caseSize: 1,
+            });
           }
-          return s;
-        }); // end find study
-        if (!existStudy) { // new study
-          colorIndex += 1;
-          p.children.push({
+        }
+        return p;
+      }); // end find program
+
+      if (!existProgram && !existStudy) {
+        widgetData.push({
+          title: d.program,
+          color: COLORS[parseInt(colorIndex, 10)],
+          caseSize: 1,
+          children: [{
             title: `${d.program} : ${d.study_code}`,
-            color: p.color,
+            color: COLORS[parseInt(colorIndex, 10)],
             size: 1,
             caseSize: 1,
-          });
-        }
+          }],
+        });
+        colorIndex += 1;
       }
-      return p;
-    }); // end find program
-
-    if (!existProgram && !existStudy) {
-      colorIndex += 1;
-      widgetData.push({
-        title: d.program,
-        color: COLORS[parseInt(colorIndex, 10)],
-        caseSize: 1,
-        children: [{
-          title: `${d.program} : ${d.study_code}`,
-          color: COLORS[parseInt(colorIndex, 10)],
-          size: 1,
-          caseSize: 1,
-        }],
-      });
     }
   }); // end foreach
 
@@ -255,13 +271,15 @@ export function getSunburstDataFromDashboardData(data) {
 export function getDonutDataFromDashboardData(data, widgetName) {
   const output = [];
   data.reduce((accumulator, currentValue) => {
-    if (accumulator.has(currentValue[widgetName.toString()])) {
-      accumulator.set(
-        currentValue[widgetName.toString()],
-        accumulator.get(currentValue[widgetName.toString()]) + 1,
-      );
-    } else {
-      accumulator.set(currentValue[widgetName.toString()], 1);
+    if (currentValue[widgetName.toString()]) {
+      if (accumulator.has(currentValue[widgetName.toString()])) {
+        accumulator.set(
+          currentValue[widgetName.toString()],
+          accumulator.get(currentValue[widgetName.toString()]) + 1,
+        );
+      } else {
+        accumulator.set(currentValue[widgetName.toString()], 1);
+      }
     }
     return accumulator;
   }, new Map()).forEach((value, key) => { output.push({ item: key, cases: value }); });
@@ -277,17 +295,20 @@ function DFSOfCheckBoxDataType2Input(data, fields) {
     return data;
   }
   // branches
-  if (Array.isArray(data[targetField])) {
-    // it is an array of object
-    return data[targetField].reduce(
-      (accumulator, currentValue) => accumulator.concat(
-        DFSOfCheckBoxDataType2Input(currentValue, [...fields]),
-      ),
-      [],
-    );
+  if (data[targetField]) {
+    if (Array.isArray(data[targetField])) {
+      // it is an array of object
+      return data[targetField].reduce(
+        (accumulator, currentValue) => accumulator.concat(
+          DFSOfCheckBoxDataType2Input(currentValue, [...fields]),
+        ),
+        [],
+      );
+    }
+    // if it is an Object
+    return DFSOfCheckBoxDataType2Input(data[targetField], [...fields]);
   }
-  // if it is an Object
-  return DFSOfCheckBoxDataType2Input(data[targetField], [...fields]);
+  return [];
 }
 
 /* filterData function evaluates a row of data with filters,
@@ -337,7 +358,7 @@ export const filterData = (row, filters) => {
     groups[filter.groupName] = false;
 
     rawTargetObjs.forEach((r) => {
-      if (r[targetField] === fName) {
+      if (r[targetField] && r[targetField] === fName) {
         groups[filter.groupName] = true;
       }
     });
@@ -416,18 +437,18 @@ function initCheckBoxDataWithType2Input(data, field, key) {
   const targetField = hierarchy.pop();
   rawTargetObjs.forEach((currentValue) => {
     if (key) {
-      if (!tmpKeys.includes(currentValue[key])) {
+      if (currentValue[key] && !tmpKeys.includes(currentValue[key])) {
         tmpKeys.push(currentValue[key]);
         // count the number
-        if (currentValue[targetField] in dicResult) {
+        if (currentValue[targetField] && currentValue[targetField] in dicResult) {
           dicResult[currentValue[targetField]] += 1;
         } else {
           dicResult[currentValue[targetField]] = 1;
         }
       }
-    } else if (currentValue[targetField] in dicResult) {
+    } else if (currentValue[targetField] && currentValue[targetField] in dicResult) {
       dicResult[currentValue[targetField]] += 1;
-    } else {
+    } else if (currentValue[targetField]) {
       dicResult[currentValue[targetField]] = 1;
     }
   });

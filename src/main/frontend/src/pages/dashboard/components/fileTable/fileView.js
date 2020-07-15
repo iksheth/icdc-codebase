@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -8,12 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import Snackbar from '@material-ui/core/Snackbar';
 import { Link } from 'react-router-dom';
-import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
+import SuccessOutlinedIcon from '../../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
-import { toggleCheckBox } from '../dashboardState';
-import { receiveCases } from '../../selectedCases/selectedCasesState';
-import { Configuration, DefaultColumns } from './config.js';
-
+import { receiveCases } from '../../../selectedCases/selectedCasesState';
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -23,7 +19,6 @@ const tableStyle = (ratio = 1) => ({
   minWidth: '160px',
 }
 );
-
 
 const Files = ({ classes, data }) => {
   const [snackbarState, setsnackbarState] = React.useState({
@@ -37,22 +32,15 @@ const Files = ({ classes, data }) => {
     setsnackbarState({ open: false });
   }
 
-
   const dispatch = useDispatch();
   // data from store
-  const chipData = useSelector((state) => (
-    state.dashboard.datatable
-    && state.dashboard.datatable.filters
-      ? state.dashboard.datatable.filters : []));
 
   const cart = useSelector((state) => (
     state.cart ? state.cart : []));
   // Get the existing caseIds from MyCases cart state
   const caseIds = useSelector((state) => state.cart.cases);
 
-
   const saveButton = useRef(null);
-
 
   useEffect(() => {
     saveButton.current.disabled = true;
@@ -63,7 +51,6 @@ const Files = ({ classes, data }) => {
     saveButton.current.style.fontWeight = '600';
     saveButton.current.style.cursor = 'auto';
   });
-
 
   let selectedCaseIds = [];
 
@@ -79,7 +66,6 @@ const Files = ({ classes, data }) => {
     dispatch(receiveCases(selectedCaseIds));
     selectedCaseIds = [];
   }
-
 
   function onRowsSelect(curr, allRowsSelected) {
     if (allRowsSelected.length === 0) {
@@ -100,56 +86,151 @@ const Files = ({ classes, data }) => {
     }
   }
 
-
-  function columnBuilder(data) {
-    if (data.length == 0) {
-      return DefaultColumns;
-    }
-    const columns = [];
-    for (const attr of Object.keys(data[0])) {
-      const hasAttrInConfig = Configuration.hasOwnProperty(attr);
-      if (hasAttrInConfig) { // within configuration
-        if (Configuration[attr].display) { // config as not to display
-          if (Configuration[attr].isKey) {
-            // get file ids at first column and then hide it.
-            columns[0] = {
-              name: attr,
-              label: hasAttrInConfig ? Configuration[attr].label : attr,
-              options: {
-                filter: false,
-                sortDirection: 'asc',
-                display: false,
-              },
-            };
-          }
-          if (Configuration[attr].index) {
-            columns[Configuration[attr].index] = {
-              name: attr,
-              label: hasAttrInConfig ? Configuration[attr].label : attr,
-              options: {
-                filter: false,
-                sortDirection: 'asc',
-              },
-            };
-          }
-        }
-      }
-    }
-    return columns;
-  }
-
-
-  const columns = columnBuilder(data);
-
+  const columns = [
+    {
+      name: 'case_id',
+      label: 'Case ID',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'breed',
+      label: 'Breed',
+      options: {
+        filter: false,
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.6)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'diagnosis',
+      label: 'Diagnosis',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2.3)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_name',
+      label: 'File Name',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_type',
+      label: 'File Type',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'parent',
+      label: 'Association',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_description',
+      label: 'Description',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_format',
+      label: 'Format',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'file_size',
+      label: 'Size',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+  ];
 
   const options = () => ({
     selectableRows: true,
-    search: true,
-    filter: true,
-    searchable: true,
-    print: true,
-    download: true,
-    viewColumns: true,
+    search: false,
+    filter: false,
+    searchable: false,
+    print: false,
+    download: false,
+    viewColumns: false,
     pagination: true,
     isRowSelectable: (dataIndex) => {
       if (cart.cases.includes(data[dataIndex].case_id)) {
@@ -226,14 +307,13 @@ const Files = ({ classes, data }) => {
             onClick={exportCases}
             className={classes.button}
           >
-             ADD ASSOCIATED FILES TO MY CART
+            ADD ASSOCIATED FILES TO MY CART
           </button>
         </Grid>
       </div>
     </>
   );
 };
-
 
 const styles = () => ({
 
@@ -287,7 +367,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '178px',
+    width: '330px',
     height: '27px',
     lineHeight: '18px',
     fontSize: '10pt',

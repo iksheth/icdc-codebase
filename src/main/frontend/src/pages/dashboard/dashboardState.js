@@ -9,6 +9,7 @@ import {
   updateCheckBoxData,
   customCheckBox,
   formatFileSize,
+  NOT_PROVIDED,
 } from '../../utils/dashboardUtilFunctions';
 
 export const initialState = {
@@ -110,7 +111,6 @@ export function fetchDataForDashboardDataTable() {
 }
 
 // End of actions
-
 export default function dashboardReducer(state = initialState, action) {
   switch (action.type) {
     case SINGLE_CHECKBOX: {
@@ -209,9 +209,29 @@ export default function dashboardReducer(state = initialState, action) {
         }
         // 2. add cases id into diagnosis_obj
         if (d.diagnosis_obj) {
-          d.best_response = d.diagnosis_obj.best_response;
+          if (d.diagnosis_obj.best_response) {
+            d.best_response = d.diagnosis_obj.best_response;
+          } else {
+            d.best_response = NOT_PROVIDED;
+          }
         }
         return d;
+      });
+
+      action.payload.data.study.forEach((d) => {
+        if (d.files.length > 0) {
+          action.payload.data.caseOverview.push({
+            program: d.program.program_acronym,
+            study_type: d.clinical_study_type,
+            study_code: d.clinical_study_designation,
+            files: d.files.map((f) => {
+              const tmpF = f;
+              tmpF.parent = 'study';
+              tmpF.file_size = formatFileSize(tmpF.file_size);
+              return tmpF;
+            }),
+          });
+        }
       });
 
       const checkboxData = customCheckBox(action.payload.data);
@@ -224,11 +244,11 @@ export default function dashboardReducer(state = initialState, action) {
           hasError: false,
           error: '',
           stats: {
-            numberOfStudies: action.payload.data.numberOfStudies,
-            numberOfCases: action.payload.data.numberOfCases,
-            numberOfSamples: action.payload.data.numberOfSamples,
-            numberOfFiles: action.payload.data.numberOfFiles,
-            numberOfAliquots: action.payload.data.numberOfAliquots,
+            numberOfStudies: getStatDataFromDashboardData(action.payload.data.caseOverview, 'study', []),
+            numberOfCases: getStatDataFromDashboardData(action.payload.data.caseOverview, 'case', []),
+            numberOfSamples: getStatDataFromDashboardData(action.payload.data.caseOverview, 'sample', []),
+            numberOfFiles: getStatDataFromDashboardData(action.payload.data.caseOverview, 'file', []),
+            numberOfAliquots: getStatDataFromDashboardData(action.payload.data.caseOverview, 'aliquot', []),
           },
           caseOverview: {
             data: action.payload.data.caseOverview,
