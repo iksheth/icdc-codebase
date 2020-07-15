@@ -242,12 +242,12 @@ const Files = ({ classes, data }) => {
 
   const options = () => ({
     selectableRows: true,
-    search: true,
-    filter: true,
-    searchable: true,
-    print: true,
-    download: true,
-    viewColumns: true,
+    search: false,
+    filter: false,
+    searchable: false,
+    print: false,
+    download: false,
+    viewColumns: false,
     pagination: true,
     isRowSelectable: (dataIndex) => {
       if (cart.cases.includes(data[dataIndex].case_id)) {
