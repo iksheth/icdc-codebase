@@ -45,6 +45,7 @@ const tabController = () => {
       <SwipeableViews
         index={currentTab}
         onChangeIndex={handleTabChange}
+        animateTransitions={false}
       >
         <TabContainer><CaseView data={caseData} /></TabContainer>
         <TabContainer><SampleView data={sampleData} /></TabContainer>
