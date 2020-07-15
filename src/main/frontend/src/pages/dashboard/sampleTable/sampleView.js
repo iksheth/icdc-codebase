@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -9,7 +8,7 @@ import MUIDataTable from 'mui-datatables';
 import Snackbar from '@material-ui/core/Snackbar';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './customFooter';
-import { Configuration, DefaultColumns } from './config';
+import COLUMNS from './config';
 
 const Samples = ({ classes, data }) => {
   const [snackbarState, setsnackbarState] = React.useState({
@@ -23,59 +22,13 @@ const Samples = ({ classes, data }) => {
     setsnackbarState({ open: false });
   }
 
-  function columnBuilder(data) {
-    if (data.length === 0) {
-      return DefaultColumns;
-    }
-    const columns = [];
-    for (const attr of Object.keys(data[0])) {
-      const hasAttrInConfig = Configuration.hasOwnProperty(attr);
-      if (hasAttrInConfig) { // within configuration
-        if (Configuration[attr].display) { // config as not to display
-          if (Configuration[attr].isKey) {
-            // get file ids at first column and then hide it.
-            columns[0] = {
-              name: attr,
-              label: hasAttrInConfig ? Configuration[attr].label : attr,
-              options: {
-                filter: false,
-                sortDirection: 'asc',
-                display: false,
-              },
-            };
-          }
-          if (Configuration[attr].index) {
-            columns[Configuration[attr].index] = {
-              name: attr,
-              label: hasAttrInConfig ? Configuration[attr].label : attr,
-              options: {
-                filter: false,
-                sortDirection: 'asc',
-              },
-            };
-          }
-        }
-      }
-    }
-    return columns;
-  }
-  const columns = columnBuilder(data);
+  const columns = COLUMNS(classes);
 
   const dispatch = useDispatch();
-  // data from store
-  const chipData = useSelector((state) => (
-    state.dashboard.datatable
-    && state.dashboard.datatable.filters
-      ? state.dashboard.datatable.filters : []));
 
-  const cart = useSelector((state) => (
-    state.cart ? state.cart : []));
-  // Get the existing caseIds from MyCases cart state
   const fileIDs = useSelector((state) => state.cart.fileIDs);
 
-
   const saveButton = useRef(null);
-
 
   useEffect(() => {
     saveButton.current.disabled = true;
@@ -86,7 +39,6 @@ const Samples = ({ classes, data }) => {
     saveButton.current.style.fontWeight = '600';
     saveButton.current.style.cursor = 'auto';
   });
-
 
   let selectedIds = [];
 
@@ -99,10 +51,9 @@ const Samples = ({ classes, data }) => {
     if (uniqueIDs > 0) {
       openSnack(uniqueIDs);
     }
-    dispatch(receiveFiles(uniqueIDs));
+    // dispatch(receiveFiles(uniqueIDs));
     selectedIds = [];
   }
-
 
   function onRowsSelect(curr, allRowsSelected) {
     if (allRowsSelected.length === 0) {
@@ -123,7 +74,6 @@ const Samples = ({ classes, data }) => {
     }
   }
 
-
   const options = () => ({
     selectableRows: true,
     search: false,
@@ -133,12 +83,13 @@ const Samples = ({ classes, data }) => {
     download: false,
     viewColumns: false,
     pagination: true,
-    isRowSelectable: (dataIndex) =>
-      // if (cart.cases.includes(data[dataIndex].case_id)) {
-      //   // disable the grey out functionality , change the return to false will bring it back
-      //   return true;
-      // }
-      true,
+    isRowSelectable: (dataIndex) => {
+      if (data[dataIndex]) {
+        // disable the grey out functionality , change the return to false will bring it back
+        return true;
+      }
+      return true;
+    },
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
     customToolbarSelect: (selectedRows, displayData) => {
       const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
@@ -213,7 +164,6 @@ const Samples = ({ classes, data }) => {
     </>
   );
 };
-
 
 const styles = () => ({
 

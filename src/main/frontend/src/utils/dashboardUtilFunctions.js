@@ -9,7 +9,7 @@ const COLORS = [
   '#437200',
 ];
 
-const NOT_PROVIDED = 'Not Specified';
+export const NOT_PROVIDED = 'Not Specified';
 
 export const mappingCheckBoxToDataTable = [
   {
@@ -189,7 +189,7 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
 export function getStatDataFromDashboardData(data, statName) {
   switch (statName) {
     case 'case':
-      return [...new Set(data.map((d) => d.case_id))].length;
+      return [...new Set(data.filter((d) => d.case_id).map((d) => d.case_id))].length;
     case 'study':
       return [...new Set(data.map((d) => d.study_code))].length;
     case 'aliquot':
@@ -437,6 +437,9 @@ function initCheckBoxDataWithType2Input(data, field, key) {
   const targetField = hierarchy.pop();
   rawTargetObjs.forEach((currentValue) => {
     if (key) {
+      if (currentValue[targetField] == null) {
+        console.log(1);
+      }
       if (currentValue[key] && !tmpKeys.includes(currentValue[key])) {
         tmpKeys.push(currentValue[key]);
         // count the number

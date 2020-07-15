@@ -9,6 +9,7 @@ import {
   updateCheckBoxData,
   customCheckBox,
   formatFileSize,
+  NOT_PROVIDED,
 } from '../../utils/dashboardUtilFunctions';
 
 export const initialState = {
@@ -208,7 +209,11 @@ export default function dashboardReducer(state = initialState, action) {
         }
         // 2. add cases id into diagnosis_obj
         if (d.diagnosis_obj) {
-          d.best_response = d.diagnosis_obj.best_response;
+          if (d.diagnosis_obj.best_response) {
+            d.best_response = d.diagnosis_obj.best_response;
+          } else {
+            d.best_response = NOT_PROVIDED;
+          }
         }
         return d;
       });
