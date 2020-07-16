@@ -69,6 +69,7 @@ const styles = (theme) => ({
     fontWeight: '600',
     paddingLeft: '28px',
     height: '20px',
+    color: theme.palette.widgetBackground.contrastText,
   },
   customWidget: {
     marginTop: '-21px',
