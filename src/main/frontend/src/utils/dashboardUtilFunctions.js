@@ -339,9 +339,6 @@ export const filterData = (row, filters) => {
   if (filters.length === 0) {
     return true;
   }
-  if (row.case_id === 'COTC007B-0101') {
-    console.log(1);
-  }
   //  filters groups
   const groups = {};
 
