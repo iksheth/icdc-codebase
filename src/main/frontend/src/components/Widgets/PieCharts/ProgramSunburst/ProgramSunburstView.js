@@ -112,7 +112,7 @@ class ProgramSunburst extends PureComponent {
       <>
         <div className={classes.customWidget}>
           <div className={classes.title}>
-            {title}
+            {caseSize > 0 ? title : ''}
           </div>
           <div className={classes.sunburst}>
             <Sunburst
