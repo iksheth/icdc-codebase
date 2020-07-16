@@ -132,6 +132,21 @@ const Files = ({ classes, data }) => {
       },
     },
     {
+      name: 'study_code',
+      label: 'Study Code',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1.8)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
       name: 'file_name',
       label: 'File Name',
       options: {

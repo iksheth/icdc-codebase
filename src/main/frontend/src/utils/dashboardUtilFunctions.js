@@ -100,7 +100,7 @@ export const mappingCheckBoxToDataTable = [
   },
   {
     group: 'Sex',
-    field: 'gender',
+    field: 'sex',
     api: 'caseOverview',
     datafield: 'sex',
     show: true,
@@ -339,6 +339,9 @@ export const filterData = (row, filters) => {
   if (filters.length === 0) {
     return true;
   }
+  if (row.case_id === 'COTC007B-0101') {
+    console.log(1);
+  }
   //  filters groups
   const groups = {};
 
@@ -358,7 +361,7 @@ export const filterData = (row, filters) => {
     groups[filter.groupName] = false;
 
     rawTargetObjs.forEach((r) => {
-      if (r[targetField] && r[targetField] === fName) {
+      if (r[targetField] === fName) {
         groups[filter.groupName] = true;
       }
     });
@@ -436,26 +439,28 @@ function initCheckBoxDataWithType2Input(data, field, key) {
   // count number;
   const targetField = hierarchy.pop();
   rawTargetObjs.forEach((currentValue) => {
+    const fieldData = currentValue[targetField] === '' || !currentValue[targetField]
+      ? NOT_PROVIDED : currentValue[targetField];
     if (key) {
       if (currentValue[key] && !tmpKeys.includes(currentValue[key])) {
         tmpKeys.push(currentValue[key]);
+
         // count the number
-        if (currentValue[targetField] && currentValue[targetField] in dicResult) {
-          dicResult[currentValue[targetField]] += 1;
+        if (fieldData in dicResult) {
+          dicResult[fieldData] += 1;
         } else {
-          dicResult[currentValue[targetField]] = 1;
+          dicResult[fieldData] = 1;
         }
       }
-    } else if (currentValue[targetField] && currentValue[targetField] in dicResult) {
-      dicResult[currentValue[targetField]] += 1;
-    } else if (currentValue[targetField]) {
-      dicResult[currentValue[targetField]] = 1;
+    } else if (fieldData in dicResult) {
+      dicResult[fieldData] += 1;
+    } else if (fieldData) {
+      dicResult[fieldData] = 1;
     }
   });
 
   return Object.keys(dicResult).map((dicResultKey) => ({
-    name: dicResultKey === '' || !dicResultKey
-      ? NOT_PROVIDED : dicResultKey,
+    name: dicResultKey,
     isChecked: false,
     cases: dicResult[dicResultKey],
   }));
@@ -592,25 +597,25 @@ export const updateCheckBoxData = (data, allCheckBoxes, activeCheckBoxes, filter
           const tmpKeys = [];
 
           const { key } = targetField;
-          // Yizhen Need to improve the code below.
+
           rawTargetObjs.forEach((r) => {
             if (key) {
               if (!tmpKeys.includes(r[key])) {
                 tmpKeys.push(r[key]);
                 // count
                 if (r[targetField]) {
-                  if (r[targetField] === fName) { // Str compare
+                  if (checkbox.key in r && r[targetField] === fName) { // Str compare
                     item.cases += 1;
                   }
-                } else if (item.name === NOT_PROVIDED) { // No such attribute
+                } else if (checkbox.key in r && item.name === NOT_PROVIDED) { // No such attribute
                   item.cases += 1;
                 }
               }
-            } else if (r[targetField]) {
+            } else if (checkbox.key in r && r[targetField]) {
               if (r[targetField] === fName) { // Str compare
                 item.cases += 1;
               }
-            } else if (item.name === NOT_PROVIDED) { // No such attribute
+            } else if (checkbox.key in r && item.name === NOT_PROVIDED) { // No such attribute
               item.cases += 1;
             }
           });

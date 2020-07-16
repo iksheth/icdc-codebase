@@ -9,7 +9,6 @@ import {
   updateCheckBoxData,
   customCheckBox,
   formatFileSize,
-  NOT_PROVIDED,
 } from '../../utils/dashboardUtilFunctions';
 
 export const initialState = {
@@ -212,7 +211,7 @@ export default function dashboardReducer(state = initialState, action) {
           if (d.diagnosis_obj.best_response) {
             d.best_response = d.diagnosis_obj.best_response;
           } else {
-            d.best_response = NOT_PROVIDED;
+            d.best_response = '';
           }
         }
         return d;
