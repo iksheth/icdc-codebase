@@ -357,7 +357,7 @@ const StudyDetailView = ({ classes, data }) => {
 
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>COHORT AND DOSING</span>
+            <span className={classes.tableHeader}>ARMS AND COHORTS</span>
           </div>
           <Grid item xs={12}>
             <Grid container spacing={8}>
