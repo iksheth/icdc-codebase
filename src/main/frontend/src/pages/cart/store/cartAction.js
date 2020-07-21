@@ -10,7 +10,7 @@ export const addFiles = (payload) => ({
   payload,
 });
 
-export const deleteFilesAction = (payload) => ({
+export const deleteFiles = (payload) => ({
   type: DELETE_FILES,
   payload,
 });

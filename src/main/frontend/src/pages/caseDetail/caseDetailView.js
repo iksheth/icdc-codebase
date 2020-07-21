@@ -15,7 +15,7 @@ import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/store/dashboardAction';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
-import { receiveCases, deleteCasesAction } from '../selectedCases/selectedCasesState';
+import { addFiles, deleteFiles } from '../cart/store/cartAction';
 import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
 
 const tableStyle = (ratio = 1) => ({
@@ -299,12 +299,12 @@ const CaseDetail = ({ classes, data, selected }) => {
 
   const removeFromMyCases = () => {
     openSnack(caseDetail.case_id, 'removed from');
-    dispatch(deleteCasesAction([caseDetail.case_id]));
+    dispatch(deleteFiles([caseDetail.case_id]));
   };
 
   const saveToMyCases = () => {
     openSnack(caseDetail.case_id, 'added to');
-    dispatch(receiveCases([caseDetail.case_id]));
+    dispatch(addFiles([caseDetail.case_id]));
   };
 
   return (

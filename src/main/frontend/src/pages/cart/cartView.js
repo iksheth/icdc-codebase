@@ -6,7 +6,7 @@ import MUIDataTable from 'mui-datatables';
 import icon from '../../assets/icons/Icon-MyCases.svg';
 import CustomFooter from './customFooter';
 import SkeletonTable from './components/skeletonTable';
-import { deleteFilesAction } from './store/cartAction';
+import { deleteFiles } from './store/cartAction';
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -106,9 +106,9 @@ const cartView = ({ classes, data, isLoading }) => {
     document.body.removeChild(tempLink);
   }
 
-  function deleteFiles() {
+  function removeFiles() {
     selectedFileIDs = [...new Set(selectedFileIDs)];
-    dispatch(deleteFilesAction({ files: selectedFileIDs }));
+    dispatch(deleteFiles({ files: selectedFileIDs }));
   }
 
   function onRowsSelect(curr, allRowsSelected) {
@@ -400,7 +400,7 @@ const cartView = ({ classes, data, isLoading }) => {
               type="button"
               style={btnStyle}
               ref={deleteButton}
-              onClick={deleteFiles}
+              onClick={removeFiles}
             >
               Remove From Cart
             </button>
