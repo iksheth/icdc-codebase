@@ -5,25 +5,12 @@ import {
 } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
-import Snackbar from '@material-ui/core/Snackbar';
-import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import CustomFooter from './tabFooter';
 import { addFiles } from '../../cart/store/cartAction';
 
 const TabView = ({
-  classes, data, Columns, customOnRowsSelect,
+  classes, data, Columns, customOnRowsSelect, openSnack,
 }) => {
-  const [snackbarState, setsnackbarState] = React.useState({
-    open: true,
-    value: 0,
-  });
-  function openSnack(value1) {
-    setsnackbarState({ open: true, value: value1 });
-  }
-  function closeSnack() {
-    setsnackbarState({ open: false });
-  }
-
   const dispatch = useDispatch();
   // Get the existing files ids from  cart state
   const fileIDs = useSelector((state) => state.cart.files);
@@ -106,51 +93,28 @@ const TabView = ({
   });
 
   return (
-    <>
-      <Snackbar
-        className={classes.snackBar}
-        open={snackbarState.open}
-        onClose={closeSnack}
-        autoHideDuration={30000}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        message={(
-          <div className={classes.snackBarMessage}>
-            <span className={classes.snackBarMessageIcon}>
-              <SuccessOutlinedIcon />
-              {' '}
-            </span>
-            <span className={classes.snackBarText}>
-              {snackbarState.value}
-              {' '}
-              File(s) successfully added to the My Cart
-            </span>
-          </div>
-)}
-      />
-      <div>
-
-        <Grid container>
-          <Grid item xs={12} id="table_cases">
-            <MUIDataTable
-              data={data}
-              columns={columns}
-              options={options()}
-            />
-          </Grid>
-
+    <div>
+      <Grid container>
+        <Grid item xs={12} id="table_cases">
+          <MUIDataTable
+            data={data}
+            columns={columns}
+            options={options()}
+          />
         </Grid>
-        <Grid item xs={12} className={classes.saveButtonDiv}>
-          <button
-            type="button"
-            ref={saveButton}
-            onClick={exportFiles}
-            className={classes.button}
-          >
-            ADD ASSOCIATED FILES TO MY CART
-          </button>
-        </Grid>
-      </div>
-    </>
+
+      </Grid>
+      <Grid item xs={12} className={classes.saveButtonDiv}>
+        <button
+          type="button"
+          ref={saveButton}
+          onClick={exportFiles}
+          className={classes.button}
+        >
+          ADD ASSOCIATED FILES TO MY CART
+        </button>
+      </Grid>
+    </div>
   );
 };
 
