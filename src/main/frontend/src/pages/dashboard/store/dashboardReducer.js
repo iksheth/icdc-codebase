@@ -1,5 +1,5 @@
-import client from '../../utils/graphqlClient';
-import { DASHBOARD_QUERY } from '../../utils/graphqlQueries';
+import * as Actions from './dashboardAction';
+
 import {
   getStatDataFromDashboardData,
   getSunburstDataFromDashboardData,
@@ -9,12 +9,12 @@ import {
   updateCheckBoxData,
   customCheckBox,
   formatFileSize,
-} from '../../utils/dashboardUtilFunctions';
+} from '../../../utils/dashboardUtilFunctions';
 
 export const initialState = {
   dashboard: {
     isFetched: false,
-    isLoading: false,
+    isLoading: true,
     error: '',
     hasError: false,
     stats: {},
@@ -35,84 +35,10 @@ export const initialState = {
   },
 };
 
-export const TOGGLE_CHECKBOX = 'TOGGLE_CHECKBOX';
-export const RECEIVE_DASHBOARD = 'RECEIVE_DASHBOARD';
-export const DASHBOARD_QUERY_ERR = 'DASHBOARD_QUERY_ERR';
-export const READY_DASHBOARD = 'READY_DASHBOARD';
-export const REQUEST_DASHBOARD = 'REQUEST_DASHBOARD';
-export const SINGLE_CHECKBOX = 'SINGLE_CHECKBOX';
-// Actions
-
-export const toggleCheckBox = (payload) => ({
-  type: TOGGLE_CHECKBOX,
-  payload,
-});
-
-export const singleCheckBox = (payload) => ({
-  type: SINGLE_CHECKBOX,
-  payload,
-});
-
-function shouldFetchDataForDashboardDataTable(state) {
-  return !(state.dashboard.isFetched);
-}
-
-function postRequestFetchDataDashboard() {
-  return {
-    type: REQUEST_DASHBOARD,
-  };
-}
-
-function receiveDashboard(json) {
-  return {
-    type: RECEIVE_DASHBOARD,
-    payload:
-    {
-      data: json.data,
-    },
-  };
-}
-
-function errorhandler(error, type) {
-  return {
-    type,
-    error,
-  };
-}
-
-function readyDashboard() {
-  return {
-    type: READY_DASHBOARD,
-  };
-}
-
-// This need to go to dashboard controller
-
-function fetchDashboard() {
-  return (dispatch) => {
-    dispatch(postRequestFetchDataDashboard());
-    return client
-      .query({
-        query: DASHBOARD_QUERY,
-      })
-      .then((result) => dispatch(receiveDashboard(result)))
-      .catch((error) => dispatch(errorhandler(error, DASHBOARD_QUERY_ERR)));
-  };
-}
-
-export function fetchDataForDashboardDataTable() {
-  return (dispatch, getState) => {
-    if (shouldFetchDataForDashboardDataTable(getState())) {
-      return dispatch(fetchDashboard());
-    }
-    return dispatch(readyDashboard());
-  };
-}
-
 // End of actions
 export default function dashboardReducer(state = initialState, action) {
   switch (action.type) {
-    case SINGLE_CHECKBOX: {
+    case Actions.SINGLE_CHECKBOX: {
       const dataTableFilters = action.payload;
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
       const updatedCheckboxData = dataTableFilters && dataTableFilters.length !== 0
@@ -151,7 +77,7 @@ export default function dashboardReducer(state = initialState, action) {
       };
     }
     // if checkbox status has been changed, dashboard data table need to be update as well.
-    case TOGGLE_CHECKBOX: {
+    case Actions.TOGGLE_CHECKBOX: {
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
       const updatedCheckboxData = dataTableFilters && dataTableFilters.length !== 0
@@ -189,7 +115,7 @@ export default function dashboardReducer(state = initialState, action) {
         },
       };
     }
-    case RECEIVE_DASHBOARD: {
+    case Actions.RECEIVE_DASHBOARD: {
       // get action data
       const rawData = action.payload.data.caseOverview;
 
@@ -273,7 +199,7 @@ export default function dashboardReducer(state = initialState, action) {
 
         } : { ...state };
     }
-    case DASHBOARD_QUERY_ERR:
+    case Actions.DASHBOARD_QUERY_ERR:
       // get action data
       return {
         ...state,
@@ -282,13 +208,13 @@ export default function dashboardReducer(state = initialState, action) {
         isLoading: false,
         isFetched: false,
       };
-    case READY_DASHBOARD:
+    case Actions.READY_DASHBOARD:
       return {
         ...state,
         isLoading: false,
         isFetched: true,
       };
-    case REQUEST_DASHBOARD:
+    case Actions.REQUEST_DASHBOARD:
       return { ...state, isLoading: true };
     default:
       return state;
