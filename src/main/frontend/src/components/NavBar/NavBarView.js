@@ -180,7 +180,7 @@ const NavBar = ({
           >
             <NavLink
               className={classes.link}
-              to="/myCases"
+              to="/cart"
             >
               My Files
 
