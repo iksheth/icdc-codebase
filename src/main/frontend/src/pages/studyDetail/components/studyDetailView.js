@@ -14,7 +14,7 @@ import { Typography } from '../../../components/Wrappers/Wrappers';
 import { customSorting } from '../../../utils/dashboardUtilFunctions';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/store/dashboardAction';
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
 import SelectedFilesView from '../../../components/FileGrid';
 

@@ -3,7 +3,13 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 
-const CustomFooter = ({
+import { withStyles } from '@material-ui/core/styles';
+
+const defaultFooterStyles = {
+
+};
+
+const TabFooter = ({
   classes,
   count,
   page,
@@ -25,4 +31,4 @@ const CustomFooter = ({
   </TableFooter>
 );
 
-export default CustomFooter;
+export default withStyles(defaultFooterStyles, { withTheme: true })(TabFooter);

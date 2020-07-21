@@ -11,7 +11,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { toggleCheckBox } from '../../../pages/dashboard/dashboardState';
+import { toggleCheckBox } from '../../../pages/dashboard/store/dashboardAction';
 
 const FacetPanel = (classes) => {
   // data from store

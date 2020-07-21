@@ -1,5 +1,24 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { filterData } from '../../../../utils/dashboardUtilFunctions';
+
+/* on row select event
+    @param  data  data for initial the table  sample -> [files]
+    @param  allRowsSelected : selected rows
+    @output [f.uuid]
+*/
+export function SampleOnRowsSelect(data, allRowsSelected) {
+  // use reduce to combine all the files' id into single array
+  return allRowsSelected.reduce((accumulator, currentValue) => {
+    const { files } = data[currentValue.dataIndex];
+    // check if file
+    if (files && files.length > 0) {
+      return accumulator.concat(files.map((f) => f.uuid));
+    }
+    return accumulator;
+  }, []);
+}
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -10,7 +29,7 @@ const tableStyle = (ratio = 1) => ({
 }
 );
 
-export default function COLUMNS(classes) {
+export function SampleColumns(classes) {
   return ([
     {
       name: 'case_id',
@@ -192,4 +211,44 @@ export default function COLUMNS(classes) {
       },
     },
   ]);
+}
+
+export function SampleData() {
+// data from store
+  const sampleData = useSelector((state) => (state.dashboard
+&& state.dashboard.datatable
+    ? state.dashboard.datatable : {}));
+
+  const transform = (accumulator, currentValue) => {
+    const caseAttrs = {};
+    Object.keys(currentValue).forEach((key) => {
+      if (key && !Array.isArray(currentValue[key])) {
+        caseAttrs[key] = currentValue[key];
+      }
+    });
+    if (currentValue.sample_list) {
+      return accumulator.concat(currentValue.sample_list.map((f) => ({ ...f, ...caseAttrs })));
+    }
+    return accumulator;
+  };
+  const tableData = sampleData.data.reduce(transform, []);
+
+  const sampleFilters = JSON.parse(JSON.stringify(sampleData)).filters
+    .filter((f) => f.cata === 'sample')
+    .map((f) => {
+      const tmpF = f;
+      tmpF.datafield = tmpF.datafield.includes('@') ? tmpF.datafield.split('@').pop() : tmpF.datafield;
+      return tmpF;
+    });
+
+  const tableDataAfterFilter = tableData
+    .filter((row) => filterData(row, sampleFilters))
+    .filter((d) => {
+      if (d.case_id) {
+        return true;
+      }
+      return false;
+    });
+
+  return tableDataAfterFilter;
 }

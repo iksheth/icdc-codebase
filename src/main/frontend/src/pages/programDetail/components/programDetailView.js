@@ -11,7 +11,7 @@ import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-Programs.svg';
 import dogForProgramDetail from '../../../assets/programCards/ProgramDetail_Image.jpg';
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/store/dashboardAction';
 
 const options = {
   selectableRows: false,

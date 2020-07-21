@@ -4,12 +4,10 @@ import {
 } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import SwipeableViews from 'react-swipeable-views';
-import CaseData from './caseTable/caseController';
-import FileData from './fileTable/fileController';
-import SampleData from './sampleTable/sampleController';
-import CaseView from './caseTable/caseView';
-import FileView from './fileTable/fileView';
-import SampleView from './sampleTable/sampleView';
+import { CaseData, CaseColumns, CaseOnRowsSelect } from './tabConfigs/caseConfig';
+import { FileData, FileColumns, FileOnRowsSelect } from './tabConfigs/fileConfig';
+import { SampleData, SampleColumns, SampleOnRowsSelect } from './tabConfigs/sampleConfig';
+import TabView from './tabView';
 
 function TabContainer({ children, dir }) {
   return (
@@ -38,18 +36,36 @@ const tabController = () => {
         indicatorColor="primary"
         textColor="primary"
       >
-        <Tab label={`Case(${caseData.length})`} />
-        <Tab label={`Samples(${sampleData.length})`} />
-        <Tab label={`Files(${fileData.length})`} />
+        <Tab label={`Case  (${caseData.length})`} />
+        <Tab label={`Samples  (${sampleData.length})`} />
+        <Tab label={`Files  (${fileData.length})`} />
       </Tabs>
       <SwipeableViews
         index={currentTab}
         onChangeIndex={handleTabChange}
         animateTransitions={false}
       >
-        <TabContainer><CaseView data={caseData} /></TabContainer>
-        <TabContainer><SampleView data={sampleData} /></TabContainer>
-        <TabContainer><FileView data={fileData} /></TabContainer>
+        <TabContainer>
+          <TabView
+            data={caseData}
+            Columns={CaseColumns}
+            customOnRowsSelect={CaseOnRowsSelect}
+          />
+        </TabContainer>
+        <TabContainer>
+          <TabView
+            data={sampleData}
+            Columns={SampleColumns}
+            customOnRowsSelect={SampleOnRowsSelect}
+          />
+        </TabContainer>
+        <TabContainer>
+          <TabView
+            data={fileData}
+            Columns={FileColumns}
+            customOnRowsSelect={FileOnRowsSelect}
+          />
+        </TabContainer>
       </SwipeableViews>
     </>
   );

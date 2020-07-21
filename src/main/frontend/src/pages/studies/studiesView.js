@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import Stats from '../../components/Stats/AllStatsController';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-StudiesDetail.svg';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/store/dashboardAction';
 
 const Studies = ({ classes, data }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(

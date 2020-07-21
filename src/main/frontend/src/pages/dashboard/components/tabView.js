@@ -6,13 +6,15 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import Snackbar from '@material-ui/core/Snackbar';
-import SuccessOutlinedIcon from '../../../../utils/SuccessOutlined';
-import CustomFooter from './customFooter';
-import COLUMNS from './config';
+import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
+import CustomFooter from './tabFooter';
+import { addFiles } from '../../cart/store/cartAction';
 
-const Samples = ({ classes, data }) => {
+const TabView = ({
+  classes, data, Columns, customOnRowsSelect,
+}) => {
   const [snackbarState, setsnackbarState] = React.useState({
-    open: false,
+    open: true,
     value: 0,
   });
   function openSnack(value1) {
@@ -22,11 +24,9 @@ const Samples = ({ classes, data }) => {
     setsnackbarState({ open: false });
   }
 
-  const columns = COLUMNS(classes);
-
   const dispatch = useDispatch();
-
-  const fileIDs = useSelector((state) => state.cart.fileIDs);
+  // Get the existing files ids from  cart state
+  const fileIDs = useSelector((state) => state.cart.files);
 
   const saveButton = useRef(null);
 
@@ -40,22 +40,23 @@ const Samples = ({ classes, data }) => {
     saveButton.current.style.cursor = 'auto';
   });
 
-  let selectedIds = [];
+  let selectedFileIDs = [];
 
-  function exportCases() {
-    // Find the newly added cases by comparing
-    // existing caseIds and selectedIds
-    const uniqueIDs = fileIDs !== null ? selectedIds.filter(
+  function exportFiles() {
+    // Find the newly added files by comparing
+    const newFileIDS = fileIDs !== null ? selectedFileIDs.filter(
       (e) => !fileIDs.find((a) => e === a),
-    ).length : selectedIds.length;
-    if (uniqueIDs > 0) {
-      openSnack(uniqueIDs);
-    }
-    // dispatch(receiveFiles(uniqueIDs));
-    selectedIds = [];
+    ).length : selectedFileIDs.length;
+    openSnack(newFileIDS);
+    dispatch(addFiles({ files: selectedFileIDs }));
+    selectedFileIDs = [];
   }
 
   function onRowsSelect(curr, allRowsSelected) {
+    selectedFileIDs = [...new Set(selectedFileIDs.concat(
+      customOnRowsSelect(data, allRowsSelected),
+    ))];
+
     if (allRowsSelected.length === 0) {
       saveButton.current.disabled = true;
       saveButton.current.style.color = '#FFFFFF';
@@ -74,6 +75,8 @@ const Samples = ({ classes, data }) => {
     }
   }
 
+  const columns = Columns(classes);
+
   const options = () => ({
     selectableRows: true,
     search: false,
@@ -83,28 +86,13 @@ const Samples = ({ classes, data }) => {
     download: false,
     viewColumns: false,
     pagination: true,
-    isRowSelectable: (dataIndex) => {
-      if (data[dataIndex]) {
-        // disable the grey out functionality , change the return to false will bring it back
-        return true;
-      }
-      return true;
-    },
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
-    customToolbarSelect: (selectedRows, displayData) => {
-      const selectedKeys = Object.keys(selectedRows.data).map((keyVlaue) => (
-        selectedRows.data[keyVlaue].index
-      ));
-      const selectedId = selectedKeys.map((keyVlaue) => (
-        displayData[keyVlaue].data[0]
-      ));
-      selectedIds = selectedId;
-      return '';
-    },
+    // eslint-disable-next-line no-unused-vars
+    customToolbarSelect: () => '',
     customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
       <CustomFooter
-        text="SAVE TO MY FILES"
-        onClick={() => exportCases(dispatch)}
+        text="SAVE TO MY CASES"
+        onClick={() => exportFiles(dispatch)}
         classes={classes}
         count={count}
         page={page}
@@ -123,7 +111,7 @@ const Samples = ({ classes, data }) => {
         className={classes.snackBar}
         open={snackbarState.open}
         onClose={closeSnack}
-        autoHideDuration={3000}
+        autoHideDuration={30000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         message={(
           <div className={classes.snackBarMessage}>
@@ -134,12 +122,13 @@ const Samples = ({ classes, data }) => {
             <span className={classes.snackBarText}>
               {snackbarState.value}
               {' '}
-              Case(s) successfully added to the My Cases list
+              File(s) successfully added to the My Cart
             </span>
           </div>
 )}
       />
       <div>
+
         <Grid container>
           <Grid item xs={12} id="table_cases">
             <MUIDataTable
@@ -154,7 +143,7 @@ const Samples = ({ classes, data }) => {
           <button
             type="button"
             ref={saveButton}
-            onClick={exportCases}
+            onClick={exportFiles}
             className={classes.button}
           >
             ADD ASSOCIATED FILES TO MY CART
@@ -229,4 +218,4 @@ const styles = () => ({
   },
 });
 
-export default withStyles(styles, { withTheme: true })(Samples);
+export default withStyles(styles, { withTheme: true })(TabView);

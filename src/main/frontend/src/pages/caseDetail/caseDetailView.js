@@ -13,7 +13,7 @@ import StatsView from '../../components/Stats/StatsView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/store/dashboardAction';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import { receiveCases, deleteCasesAction } from '../selectedCases/selectedCasesState';
 import SuccessOutlinedIcon from '../../utils/SuccessOutlined';

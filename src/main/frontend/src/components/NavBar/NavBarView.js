@@ -22,8 +22,8 @@ import funnelIconBlue from '../../assets/icons/Icon-funnel-blue.svg';
 import funnelIconWhite from '../../assets/icons/Icon-funnel-white.svg';
 // import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
-import { initCart } from '../../pages/selectedCases/selectedCasesState';
-import { toggleCheckBox } from '../../pages/dashboard/dashboardState';
+import { initCart } from '../../pages/cart/store/cartAction';
+import { toggleCheckBox } from '../../pages/dashboard/store/dashboardAction';
 import { unselectFilters } from '../../utils/dashboardUtilFunctions';
 import AboutMenu from './components/AboutMenu';
 
@@ -80,9 +80,9 @@ const NavBar = ({
     }
   }, []);
 
-  const numberOfCases = useSelector((state) => {
-    if (state.cart.cases) {
-      return state.cart.cases.length;
+  const numberOfFiles = useSelector((state) => {
+    if (state.cart.files) {
+      return state.cart.files.length;
     }
     return 0;
   });
@@ -102,7 +102,6 @@ const NavBar = ({
       >
         <Toolbar className={classes.toolbar}>
 
-          {/* Sidebar button */}
           <div className={classes.FilterIconPosition}>
             { (location.pathname === '/cases') && (
             <Button
@@ -171,23 +170,7 @@ const NavBar = ({
             </Button>
             <AboutMenu handleButtonClickEvent={handleButtonClickEvent} clickedEl={clickedEl} />
           </div>
-          {/* <div className={classes.grow} /> */}
-          {/* Start of Theme Switching Icon and logic */}
-          {/* <IconButton
-            color="inherit"
-            aria-haspopup="true"
-            aria-controls="mail-menu"
-            onClick={() => {
-              theme.toggleTheme();
-            }}
-            className={classes.headerMenuButton}
-            classes={{ root: classes.iconButtonRoot }}
-          >
-            <Tooltip title="Light/Dark Theme" placement="bottom-end">
-              <ColorLensIcon classes={{ root: classes.headerIcon }} />
-            </Tooltip>
-          </IconButton> */}
-          {/* Start of Theme Switching Icon and logic */}
+
           <Button
             disableRipple
             variant="h6"
@@ -199,15 +182,7 @@ const NavBar = ({
               className={classes.link}
               to="/myCases"
             >
-              My Cases
-              {/* <IconButton
-                color="inherit"
-                aria-haspopup="true"
-                aria-controls="mail-menu"
-                className={classes.headerMenuButton}
-                classes={{ root: classes.iconButtonRoot }}
-              > */}
-              {/* <Badge badgeContent={numberOfCases} max={99999}> */}
+              My Files
 
               <Tooltip title="Cases" placement="bottom-end">
                 <span className={classes.badge}>
@@ -217,25 +192,13 @@ const NavBar = ({
                     alt="cart_logo"
                   />
                   <span className={classes.badgeText}>
-                    {numberOfCases}
+                    {numberOfFiles}
                   </span>
                 </span>
               </Tooltip>
 
-              {/* </Badge> */}
-              {/* </IconButton> */}
             </NavLink>
           </Button>
-          {/* Login button functionality on Navigation bar */}
-
-          {/* {authState.isAuthorized ? (
-            <ProfileMenu />
-          ) : (
-            <Button href={FENCE_LOGIN_URL} color="inherit">
-              LOGIN
-            </Button>
-          )} */}
-          {/* End Login button functionality on Navigation bar */}
 
         </Toolbar>
       </AppBar>
