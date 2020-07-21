@@ -177,9 +177,6 @@ const styles = () => ({
     color: '#fff',
     backgroundColor: '#ff7f15',
   },
-  snackBarMessageIcon: {
-    verticalAlign: 'middle',
-  },
 });
 
 export default withStyles(styles, { withTheme: true })(TabView);

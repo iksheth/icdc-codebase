@@ -1,10 +1,12 @@
-/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Grid, withStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import MUIDataTable from 'mui-datatables';
 import icon from '../../assets/icons/Icon-MyCases.svg';
 import CustomFooter from './customFooter';
-import SkeletonTable from './components/skeletonTable'
+import SkeletonTable from './components/skeletonTable';
+import { deleteFilesAction } from './store/cartAction';
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -15,362 +17,410 @@ const tableStyle = (ratio = 1) => ({
 }
 );
 
-const cartView = ({ classes, data , isLoading}) => {
+const cartView = ({ classes, data, isLoading }) => {
+  const dispatch = useDispatch();
 
-  const [snackbarState, setsnackbarState] = React.useState({
-    open: false,
-    value: 0,
-  });
-  function openSnack(value1) {
-    setsnackbarState({ open: true, value: value1 });
-  }
-  function closeSnack() {
-    setsnackbarState({ open: false });
-  }
-
-  const saveButton = useRef(null);
+  const deleteButton = useRef(null);
+  const downloadButton = useRef(null);
 
   useEffect(() => {
-    saveButton.current.disabled = true;
-    saveButton.current.style.color = '#FFFF';
-    saveButton.current.style.backgroundColor = '#C53B27';
-    saveButton.current.style.opacity = '0.3';
-    saveButton.current.style.border = '3px solid grey';
-    saveButton.current.style.fontWeight = '600';
-    saveButton.current.style.cursor = 'auto';
+    deleteButton.current.disabled = true;
+    deleteButton.current.style.color = '#FFFF';
+    deleteButton.current.style.backgroundColor = '#C53B27';
+    deleteButton.current.style.opacity = '0.3';
+    deleteButton.current.style.border = '3px solid grey';
+    deleteButton.current.style.fontWeight = '600';
+    deleteButton.current.style.cursor = 'auto';
+
+    downloadButton.current.disabled = true;
+    downloadButton.current.style.color = '#FFFF';
+    downloadButton.current.style.backgroundColor = '#3890c5';
+    downloadButton.current.style.opacity = '0.3';
+    downloadButton.current.style.border = '3px solid grey';
+    downloadButton.current.style.fontWeight = '600';
+    downloadButton.current.style.cursor = 'auto';
   });
 
   function fileName() {
-      const date = new Date();
-      const yyyy = date.getFullYear();
-      let dd = date.getDate();
-      let mm = (date.getMonth() + 1);
+    const date = new Date();
+    const yyyy = date.getFullYear();
+    let dd = date.getDate();
+    let mm = (date.getMonth() + 1);
 
-      if (dd < 10) { dd = `0${dd}`; }
+    if (dd < 10) { dd = `0${dd}`; }
 
-      if (mm < 10) { mm = `0${mm}`; }
+    if (mm < 10) { mm = `0${mm}`; }
 
-      const todaysDate = `${yyyy}-${mm}-${dd}`;
+    const todaysDate = `${yyyy}-${mm}-${dd}`;
 
-      let hours = date.getHours();
-      let minutes = date.getMinutes();
-      let seconds = date.getSeconds();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
 
-      if (hours < 10) { hours = `0${hours}`; }
+    if (hours < 10) { hours = `0${hours}`; }
 
-      if (minutes < 10) { minutes = `0${minutes}`; }
+    if (minutes < 10) { minutes = `0${minutes}`; }
 
-      if (seconds < 10) { seconds = `0${seconds}`; }
+    if (seconds < 10) { seconds = `0${seconds}`; }
 
-      return `${'ICDC File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
-    }
+    return `${'ICDC File Manifest'} ${todaysDate} ${hours}-${minutes}-${seconds}${'.csv'}`;
+  }
 
-    function convertToCSV(jsonse) {
-      const objArray = jsonse;
-      const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-      let str = '';
-      array.map((entry, index) => {
-        let line = '';
-        Object.keys(entry).map((keyName) => {
-          if (line !== '') line += ',';
-          line += entry[keyName];
-          return line;
-        });
-
-        if (index === 0) {
-          str = ['Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
-          str += `\r\n${line},${document.getElementById('multiline-user-coments').value}\r\n`;
-        } else {
-          str += `${line}\r\n`;
-        }
-        return str;
+  function convertToCSV(jsonse) {
+    const objArray = jsonse;
+    const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
+    let str = '';
+    array.map((entry, index) => {
+      let line = '';
+      Object.keys(entry).map((keyName) => {
+        if (line !== '') line += ',';
+        line += entry[keyName];
+        return line;
       });
 
+      if (index === 0) {
+        str = ['Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
+        str += `\r\n${line},${document.getElementById('multiline-user-coments').value}\r\n`;
+      } else {
+        str += `${line}\r\n`;
+      }
       return str;
-    }
+    });
 
-    function downloadJson() {
-      const jsonse = JSON.stringify(globalData);
-      const csv = convertToCSV(jsonse);
-      const data = new Blob([csv], { type: 'text/csv' });
-      const JsonURL = window.URL.createObjectURL(data);
-      let tempLink = '';
-      tempLink = document.createElement('a');
-      tempLink.setAttribute('href', JsonURL);
-      tempLink.setAttribute('download', fileName());
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      document.body.removeChild(tempLink);
-    }
+    return str;
+  }
+  let globalData = [];
+  let selectedFileIDs = [];
 
+  function downloadJson() {
+    const jsonse = JSON.stringify(globalData);
+    const csv = convertToCSV(jsonse);
+    const exportData = new Blob([csv], { type: 'text/csv' });
+    const JsonURL = window.URL.createObjectURL(exportData);
+    let tempLink = '';
+    tempLink = document.createElement('a');
+    tempLink.setAttribute('href', JsonURL);
+    tempLink.setAttribute('download', fileName());
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+  }
+
+  function deleteFiles() {
+    selectedFileIDs = [...new Set(selectedFileIDs)];
+    dispatch(deleteFilesAction({ files: selectedFileIDs }));
+  }
 
   function onRowsSelect(curr, allRowsSelected) {
-
-    allRowsSelected.forEach(row=>{
-      selectedFileIDs.push(data[row.dataIndex]["uuid"])
-    })
+    allRowsSelected.forEach((row) => {
+      selectedFileIDs.push(data[row.dataIndex].uuid);
+    });
     // filter out the duplicate file ids.
     selectedFileIDs = [...new Set(selectedFileIDs)];
 
     if (allRowsSelected.length === 0) {
-      saveButton.current.disabled = true;
-      saveButton.current.style.color = '#FFFFFF';
-      saveButton.current.style.backgroundColor = '#C53B27';
-      saveButton.current.style.opacity = '0.3';
-      saveButton.current.style.border = '3px solid grey';
-      saveButton.current.style.fontWeight = '600';
-      saveButton.current.style.cursor = 'auto';
-    } else {
-      saveButton.current.disabled = false;
-      saveButton.current.style.color = '#FFFFFF';
-      saveButton.current.style.backgroundColor = '#C53B27';
-      saveButton.current.style.cursor = 'pointer';
-      saveButton.current.style.opacity = 'unset';
-      saveButton.current.style.border = 'unset';
-    }
+      deleteButton.current.disabled = true;
+      deleteButton.current.style.color = '#FFFFFF';
+      deleteButton.current.style.backgroundColor = '#C53B27';
+      deleteButton.current.style.opacity = '0.3';
+      deleteButton.current.style.border = '3px solid grey';
+      deleteButton.current.style.fontWeight = '600';
+      deleteButton.current.style.cursor = 'auto';
 
+      downloadButton.current.disabled = true;
+      downloadButton.current.style.color = '#FFFFFF';
+      downloadButton.current.style.backgroundColor = '#3890c5';
+      downloadButton.current.style.opacity = '0.3';
+      downloadButton.current.style.border = '3px solid grey';
+      downloadButton.current.style.fontWeight = '600';
+      downloadButton.current.style.cursor = 'auto';
+    } else {
+      deleteButton.current.disabled = false;
+      deleteButton.current.style.color = '#FFFFFF';
+      deleteButton.current.style.backgroundColor = '#C53B27';
+      deleteButton.current.style.cursor = 'pointer';
+      deleteButton.current.style.opacity = 'unset';
+      deleteButton.current.style.border = 'unset';
+
+      downloadButton.current.disabled = false;
+      downloadButton.current.style.color = '#FFFFFF';
+      downloadButton.current.style.backgroundColor = '#3890c5';
+      downloadButton.current.style.cursor = 'pointer';
+      downloadButton.current.style.opacity = 'unset';
+      downloadButton.current.style.border = 'unset';
+    }
   }
 
-    const columns = [
+  const columns = [
 
-      {
-        name: 'case_id',
-        label: 'Case ID',
-        sortDirection: 'asc',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(1.5)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
+    {
+      name: 'case_id',
+      label: 'Case ID',
+      sortDirection: 'asc',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1.5)}>
+            {' '}
+            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
+            {' '}
+          </div>
+        ),
       },
-      {
-        name: 'file_name',
-        label: 'File Name',
-        sortDirection: 'asc',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(2)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
+    },
+    {
+      name: 'study_code',
+      label: 'Study Code',
+      sortDirection: 'asc',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2)}>
+            {' '}
+            <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
+            {' '}
+          </div>
+        ),
       },
-      {
-        name: 'file_type',
-        label: 'File Type',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(1)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
+    },
+    {
+      name: 'file_name',
+      label: 'File Name',
+      sortDirection: 'asc',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
       },
-      {
-        name: 'parent',
-        label: 'Association',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(1)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
+    },
+    {
+      name: 'file_type',
+      label: 'File Type',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
       },
-      {
-        name: 'file_description',
-        label: 'Description',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(2.5)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
+    },
+    {
+      name: 'parent',
+      label: 'Association',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
       },
-      {
-        name: 'file_format',
-        label: 'Format',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(0.5)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
+    },
+    {
+      name: 'file_description',
+      label: 'Description',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
       },
-      {
-        name: 'file_size',
-        label: 'Size',
-        options: {
-          customBodyRender: (value) => (
-            <div className="mui_td" style={tableStyle(0.5)}>
-              {' '}
-              {value}
-              {' '}
-            </div>
-          ),
-        },
+    },
+    {
+      name: 'file_format',
+      label: 'Format',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
       },
-      {
-        name: 'uuid',
-        label: 'UUID',
-        options: {
-          display: false,
-        },
+    },
+    {
+      name: 'file_size',
+      label: 'Size',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
       },
-      {
-        name: 'md5sum',
-        label: 'Md5Sum',
-        options: {
-          display: false,
-        },
+    },
+    {
+      name: 'uuid',
+      label: 'UUID',
+      options: {
+        display: false,
       },
-    ];
+    },
+    {
+      name: 'md5sum',
+      label: 'Md5Sum',
+      options: {
+        display: false,
+      },
+    },
+  ];
 
-    const options = () => ({
-      selectableRows: true,
-      search: false,
-      filter: false,
-      searchable: false,
-      print: false,
-      download: false,
-      viewColumns: false,
-      pagination: true,
-      onRowsSelect: (curr, allRowsSelected) => this.onRowsSelect(curr, allRowsSelected),
-      customToolbarSelect: (selectedRows, displayData) => {
-        const dataIndex = Object.keys(selectedRows.data).map((keyVlaue) => (
-          selectedRows.data[keyVlaue].index
-        ));
+  const options = () => ({
+    selectableRows: true,
+    search: false,
+    filter: false,
+    searchable: false,
+    print: false,
+    download: false,
+    viewColumns: false,
+    pagination: true,
+    onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
+    customToolbarSelect: (selectedRows, displayData) => {
+      const dataIndex = Object.keys(selectedRows.data).map((keyVlaue) => (
+        selectedRows.data[keyVlaue].index
+      ));
 
-        const keysToInclude = [0, 1, 7, 8];
+      const keysToInclude = [0, 1, 7, 8];
 
-        // NOTE:  displayData[keyVlaue].data[value] is getting values in Object format
-        // instead of Value format, Due to use of "customBodyRender function"
-        const selectedFiles = dataIndex.map((keyVlaue) => (
-          keysToInclude.map((value) => (displayData[keyVlaue].data[value]))
-        ));
+      // NOTE:  displayData[keyVlaue].data[value] is getting values in Object format
+      // instead of Value format, Due to use of "customBodyRender function"
+      const selectedFiles = dataIndex.map((keyVlaue) => (
+        keysToInclude.map((value) => (displayData[keyVlaue].data[value]))
+      ));
 
-        globalData = selectedFiles.map((obj) => ({
-          caseId: obj[0].props.children[1],
-          fileName: obj[1].props.children[1],
-          uuid: obj[2],
-          md5Sum: obj[3],
-        }));
-        return '';
-      },
-      customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
-        <CustomFooter
-          className={classes.customFooterStyle}
-          text="DOWNLOAD MANIFEST"
-          label="User Comments"
-          onClick={downloadJson}
-          count={count}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
+      globalData = selectedFiles.map((obj) => ({
+        caseId: obj[0].props.children[1],
+        fileName: obj[1].props.children[1],
+        uuid: obj[2],
+        md5Sum: obj[3],
+      }));
+      return '';
+    },
+    customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
+      <CustomFooter
+        className={classes.customFooterStyle}
+        text="DOWNLOAD MANIFEST"
+        label="User Comments"
+        onClick={downloadJson}
+        count={count}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
       // eslint-disable-next-line no-shadow
-          onChangePage={(_, page) => changePage(page)}
-        />
-      ),
-    });
+        onChangePage={(_, page) => changePage(page)}
+      />
+    ),
+  });
 
+  function divStyle() {
+    const css = {
+      position: 'absolute',
+      marginTop: '-47px',
+      marginLeft: '30px',
+      display: 'none',
+    };
+    if (isLoading === false) {
+      css.display = 'block';
+    }
+    return css;
+  }
 
-    function divStyle(isLoading){
-      let css = {
-          position: 'absolute',
-          marginTop: '-47px',
-          marginLeft: '30px',
-          display: 'none',
-        };
-      if(isLoading==false){
-        css["display"] = 'block';
-      }
-      return css;
+  const btnStyle = {
+    color: 'rgba(0, 0, 0,0.26)',
+    boxShadow: 'none',
+    backgroundColor: 'rgba(0, 0, 0, 0.12)',
+    padding: '6px 16px',
+    fontSize: '0.875rem',
+    minWidth: '64px',
+    boxSizing: 'border-box',
+    transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+    lineHeight: '1.75',
+    fontWeight: '500',
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    borderRadius: '4px',
+    textTransform: 'uppercase',
   };
 
-    const btnStyle={
-      color: 'rgba(0, 0, 0,0.26)',
-      boxShadow: 'none',
-      backgroundColor: 'rgba(0, 0, 0, 0.12)',
-      padding: '6px 16px',
-      fontSize: '0.875rem',
-      minWidth: '64px',
-      boxSizing: 'border-box',
-      transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-      lineHeight: '1.75',
-      fontWeight: '500',
-      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-      borderRadius: '4px',
-      textTransform: 'uppercase',
-    };
-
-
-
-    const dataTable = isLoading ?  <SkeletonTable /> :
-            <MUIDataTable
-              data={data}
-              columns={columns}
-              options={options()}
-              className={classes.tableStyle}
-            />
+  const dataTable = isLoading ? <SkeletonTable />
+    : (
+      <MUIDataTable
+        data={data}
+        columns={columns}
+        options={options()}
+        className={classes.tableStyle}
+      />
+    );
 
   return (
-      <Grid container>
-        <Grid item xs={12}>
-          <div className={classes.header}>
-            <div className={classes.logo}>
-              <img
-                src={icon}
-                alt="ICDC case detail header logo"
-              />
+    <Grid container>
+      <Grid item xs={12}>
+        <div className={classes.header}>
+          <div className={classes.logo}>
+            <img
+              src={icon}
+              alt="ICDC case detail header logo"
+            />
 
-            </div>
-            <div className={classes.headerTitle}>
-              <div className={classes.headerMainTitle}>
-                <span>
-                  <span>My Cases: Files</span>
-                </span>
-              </div>
+          </div>
+          <div className={classes.headerTitle}>
+            <div className={classes.headerMainTitle}>
+              <span>
+                <span>My Cases: Files</span>
+              </span>
             </div>
           </div>
-        </Grid>
-        <Grid item xs={12}>
-
-          <div className={classes.tableWrapper} id="table_selected_files">
-            { dataTable }
-            <div style={divStyle(isLoading)}>
-              <button
-                type="button"
-                style={btnStyle}
-                ref={saveButton}
-                onClick={downloadJson}
-              >
-                download manifest
-              </button>
-            </div>
-          </div>
-        </Grid>
-
+        </div>
       </Grid>
-    );
-  }
+      <Grid item xs={12}>
+
+        <div className={classes.tableWrapper} id="table_selected_files">
+          { dataTable }
+          <div style={divStyle(isLoading)}>
+            <button
+              type="button"
+              style={btnStyle}
+              ref={downloadButton}
+              onClick={downloadJson}
+            >
+              download manifest
+            </button>
+            {' '}
+            <button
+              type="button"
+              style={btnStyle}
+              ref={deleteButton}
+              onClick={deleteFiles}
+            >
+              Remove From Cart
+            </button>
+          </div>
+        </div>
+      </Grid>
+
+    </Grid>
+  );
+};
 
 const styles = (theme) => ({
+  link: {
+    color: '#DC762F',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+
   logo: {
     position: 'absolute',
     float: 'left',
@@ -423,6 +473,9 @@ const styles = (theme) => ({
     height: '100px',
     maxWidth: theme.custom.maxContentWidth,
     margin: 'auto',
+  },
+  snackBarMessageIcon: {
+    verticalAlign: 'middle',
   },
 });
 export default withStyles(styles, { withTheme: true })(cartView);
