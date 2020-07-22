@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as Actions from './dashboardAction';
 
 import {
@@ -34,6 +35,68 @@ export const initialState = {
     widgets: {},
   },
 };
+
+function rawDataTransform(payload) {
+  // transform data
+  // get all samples and their files
+  const dicSample = payload.data.sample.reduce((acc, obj) => {
+    const map = _.cloneDeep(acc);
+    if (obj.files.length > 0) {
+      map[obj.sample_id] = obj.files;
+    }
+    return map;
+  }, {});
+
+  // eslint-disable-next-line no-param-reassign
+  payload.data.caseOverview = payload.data.caseOverview.map((rowData) => {
+    // deep copy obj
+    const d = _.cloneDeep(rowData);
+    // transform file size's format
+    if (d.files) {
+      d.files.map((f) => {
+        const customFile = f;
+        customFile.file_size = formatFileSize(customFile.file_size);
+        return customFile;
+      });
+    }
+    // add cases id into diagnosis_obj
+    if (d.diagnosis_obj) {
+      if (d.diagnosis_obj.best_response) {
+        d.best_response = d.diagnosis_obj.best_response;
+      } else {
+        d.best_response = '';
+      }
+    }
+
+    if (d.sample_list) {
+      d.sample_list = d.sample_list.map((sample) => {
+        const s = _.cloneDeep(sample);
+        if (s.sample_id in dicSample) {
+          s.files = dicSample[s.sample_id];
+        }
+        return s;
+      });
+    }
+    return d;
+  });
+
+  payload.data.study.forEach((d) => {
+    if (d.files.length > 0) {
+      payload.data.caseOverview.push({
+        program: d.program.program_acronym,
+        study_type: d.clinical_study_type,
+        study_code: d.clinical_study_designation,
+        files: d.files.map((f) => {
+          const tmpF = f;
+          tmpF.parent = 'study';
+          tmpF.file_size = formatFileSize(tmpF.file_size);
+          return tmpF;
+        }),
+      });
+    }
+  });
+  return payload;
+}
 
 // End of actions
 export default function dashboardReducer(state = initialState, action) {
@@ -117,51 +180,10 @@ export default function dashboardReducer(state = initialState, action) {
     }
     case Actions.RECEIVE_DASHBOARD: {
       // get action data
-      const rawData = action.payload.data.caseOverview;
+      const updatedPayload = rawDataTransform(_.cloneDeep(action.payload));
+      const checkboxData = customCheckBox(updatedPayload.data);
 
-      // transform data
-      // eslint-disable-next-line no-param-reassign
-      action.payload.data.caseOverview = rawData.map((rowData) => {
-        // deep copy obj
-        const d = JSON.parse(JSON.stringify(rowData));
-        // 1. transform file size's format
-        if (d.files) {
-          d.files.map((f) => {
-            const customFile = f;
-            customFile.file_size = formatFileSize(customFile.file_size);
-            return customFile;
-          });
-        }
-        // 2. add cases id into diagnosis_obj
-        if (d.diagnosis_obj) {
-          if (d.diagnosis_obj.best_response) {
-            d.best_response = d.diagnosis_obj.best_response;
-          } else {
-            d.best_response = '';
-          }
-        }
-        return d;
-      });
-
-      action.payload.data.study.forEach((d) => {
-        if (d.files.length > 0) {
-          action.payload.data.caseOverview.push({
-            program: d.program.program_acronym,
-            study_type: d.clinical_study_type,
-            study_code: d.clinical_study_designation,
-            files: d.files.map((f) => {
-              const tmpF = f;
-              tmpF.parent = 'study';
-              tmpF.file_size = formatFileSize(tmpF.file_size);
-              return tmpF;
-            }),
-          });
-        }
-      });
-
-      const checkboxData = customCheckBox(action.payload.data);
-
-      return action.payload.data
+      return updatedPayload.data
         ? {
           ...state.dashboard,
           isFetched: true,
@@ -169,14 +191,14 @@ export default function dashboardReducer(state = initialState, action) {
           hasError: false,
           error: '',
           stats: {
-            numberOfStudies: getStatDataFromDashboardData(action.payload.data.caseOverview, 'study', []),
-            numberOfCases: getStatDataFromDashboardData(action.payload.data.caseOverview, 'case', []),
-            numberOfSamples: getStatDataFromDashboardData(action.payload.data.caseOverview, 'sample', []),
-            numberOfFiles: getStatDataFromDashboardData(action.payload.data.caseOverview, 'file', []),
-            numberOfAliquots: getStatDataFromDashboardData(action.payload.data.caseOverview, 'aliquot', []),
+            numberOfStudies: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'study', []),
+            numberOfCases: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'case', []),
+            numberOfSamples: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'sample', []),
+            numberOfFiles: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'file', []),
+            numberOfAliquots: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'aliquot', []),
           },
           caseOverview: {
-            data: action.payload.data.caseOverview,
+            data: updatedPayload.data.caseOverview,
           },
           checkboxForAll: {
             data: checkboxData,
@@ -185,16 +207,16 @@ export default function dashboardReducer(state = initialState, action) {
             data: checkboxData,
           },
           datatable: {
-            data: action.payload.data.caseOverview,
+            data: updatedPayload.data.caseOverview,
             filters: [],
           },
           widgets: {
-            studiesByProgram: getSunburstDataFromDashboardData(action.payload.data.caseOverview),
-            caseCountByBreed: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'breed'),
-            caseCountByDiagnosis: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'diagnosis'),
-            caseCountByDiseaseSite: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'disease_site'),
-            caseCountByGender: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'sex'),
-            caseCountByStageOfDisease: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'stage_of_disease'),
+            studiesByProgram: getSunburstDataFromDashboardData(updatedPayload.data.caseOverview),
+            caseCountByBreed: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'breed'),
+            caseCountByDiagnosis: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'diagnosis'),
+            caseCountByDiseaseSite: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'disease_site'),
+            caseCountByGender: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'sex'),
+            caseCountByStageOfDisease: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'stage_of_disease'),
           },
 
         } : { ...state };

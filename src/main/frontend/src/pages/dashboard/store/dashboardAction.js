@@ -1,8 +1,6 @@
-/* eslint-disable */
+import _ from 'lodash';
 import client from '../../../utils/graphqlClient';
 import { DASHBOARD_QUERY } from '../../../utils/graphqlQueries';
-import _ from 'lodash';
-
 
 export const TOGGLE_CHECKBOX = 'TOGGLE_CHECKBOX';
 export const RECEIVE_DASHBOARD = 'RECEIVE_DASHBOARD';
@@ -61,9 +59,7 @@ function fetchDashboard() {
       .query({
         query: DASHBOARD_QUERY,
       })
-      .then((result) => {
-        return dispatch(receiveDashboard(_.cloneDeep(result)))}
-        )
+      .then((result) => dispatch(receiveDashboard(_.cloneDeep(result))))
       .catch((error) => dispatch(errorhandler(error, DASHBOARD_QUERY_ERR)));
   };
 }

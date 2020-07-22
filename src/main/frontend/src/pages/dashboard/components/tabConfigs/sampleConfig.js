@@ -1,7 +1,38 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 import { filterData } from '../../../../utils/dashboardUtilFunctions';
+
+/*  To check if this row is selectable or not.
+    I want the system to visually communicate ("flag") which of
+    the samples being displayed have already had all of their files added to the cart.
+
+    @param  data  row of data from sample tab
+    @param  cartData, list of fileIDs
+    @output  boolean true-> selectable
+*/
+export function SampleDisableRowSelection(data, cartData) {
+  if (cartData.length > 0) {
+    if (data.files && data.files.length > 0) {
+      // check each files of cases
+      const isAllfileBeSelected = _.cloneDeep(data.files).map((f) => {
+        if (cartData.includes(f.uuid)) {
+          return true;
+        }
+        return false;
+      });
+
+      // if one/more file(s) is not included in the cart, this row is selectable
+      if (isAllfileBeSelected.includes(false)) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
+  return true;
+}
 
 /* on row select event
     @param  data  data for initial the table  sample -> [files]
@@ -219,6 +250,7 @@ export function SampleData() {
 && state.dashboard.datatable
     ? state.dashboard.datatable : {}));
 
+  // combine case properties with samples.
   const transform = (accumulator, currentValue) => {
     const caseAttrs = {};
     Object.keys(currentValue).forEach((key) => {
@@ -233,6 +265,7 @@ export function SampleData() {
   };
   const tableData = sampleData.data.reduce(transform, []);
 
+  // get sample filters
   const sampleFilters = JSON.parse(JSON.stringify(sampleData)).filters
     .filter((f) => f.cata === 'sample')
     .map((f) => {
@@ -241,6 +274,7 @@ export function SampleData() {
       return tmpF;
     });
 
+  // filter out the records which does not match the filters, plus case_id should not be null.
   const tableDataAfterFilter = tableData
     .filter((row) => filterData(row, sampleFilters))
     .filter((d) => {

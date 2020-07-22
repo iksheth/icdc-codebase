@@ -10,6 +10,12 @@ export const STATS_QUERY = gql`{
   `;
 
 export const DASHBOARD_QUERY = gql`{
+   sample{
+    sample_id
+    files{
+      uuid
+    }
+   }
    study{
     clinical_study_type
     clinical_study_designation
