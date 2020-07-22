@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -12,12 +13,12 @@ import { filterData } from '../../../../utils/dashboardUtilFunctions';
     @output  boolean true-> selectable
 */
 export function FileDisableRowSelection(data, cartData) {
-  if (cartData.length > 0) {
-    if (cartData.includes(data.uuid)) {
-      return false;
-    }
-    return true;
-  }
+  // if (cartData.length > 0) {
+  //   if (cartData.includes(data.uuid)) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
   return true;
 }
 
