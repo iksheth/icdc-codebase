@@ -35,17 +35,6 @@ const cartController = () => {
 
   const fileData = datatable && datatable.data ? datatable.data.reduce(transform, []) : [];
 
-  // ?????  Need to remove duplicated records?????
-  //   // reduce duplicated records
-  // const uniqueFiles = [];
-  // const map = new Map();
-  // tableData.forEach((item) => {
-  //   if (!map.has(item.uuid)) {
-  //     map.set(item.uuid, true); // set any value to Map
-  //     result.push(item);
-  //   }
-  // });
-
   return (
     <CartView
       isLoading={dashboardData.isLoading}

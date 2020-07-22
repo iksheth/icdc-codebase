@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Grid, withStyles } from '@material-ui/core';
@@ -7,8 +6,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import MUIDataTable from 'mui-datatables';
 import icon from '../../assets/icons/Icon-MyCases.svg';
@@ -29,22 +26,25 @@ const cartView = ({ classes, data, isLoading }) => {
   const dispatch = useDispatch();
   const deleteButton = useRef(null);
   const downloadButton = useRef(null);
-  const [modalStatus, setModalStatus] = React.useState({ open: false ,selectedFiles : []});
+  const [modalStatus, setModalStatus] = React.useState({ open: false, selectedFiles: [] });
 
   let globalData = [];
   let selectedFileIDs = [];
 
-  function toggleModal(obj) {
-    let status = Object.assign({}, modalStatus);
-    status.open = obj.open;
-    if(typeof(selectedFiles)  === "undefined" && !status.open){
-      // close without empty selectedFiles, to remove teh selectedFiles
-      dispatch(deleteFiles({ files: modalStatus.selectedFiles }));
-      selectedFileIDs=[];
-      setModalStatus({ open: false ,selectedFiles : []});
-    }else{
-      setModalStatus(obj);
-    }
+  function closeModal() {
+    const status = { ...modalStatus };
+    status.open = false;
+    setModalStatus(status);
+  }
+
+  function removeFiles() {
+    selectedFileIDs = [...new Set(selectedFileIDs)];
+    setModalStatus({ open: true, selectedFiles: selectedFileIDs });
+  }
+  function deleteFilesAndCloseModal() {
+    closeModal();
+    dispatch(deleteFiles({ files: modalStatus.selectedFiles }));
+    selectedFileIDs = [];
   }
 
   useEffect(() => {
@@ -112,7 +112,6 @@ const cartView = ({ classes, data, isLoading }) => {
     return str;
   }
 
-
   function downloadJson() {
     const jsonse = JSON.stringify(data);
     const csv = convertToCSV(jsonse);
@@ -127,14 +126,9 @@ const cartView = ({ classes, data, isLoading }) => {
     document.body.removeChild(tempLink);
   }
 
-  function removeFiles() {
-    selectedFileIDs = [...new Set(selectedFileIDs)];
-    toggleModal({open:true , selectedFiles: selectedFileIDs})
-  }
-
   function onRowsSelect(curr, allRowsSelected) {
-    globalData=[];
-    selectedFileIDs=[];
+    globalData = [];
+    selectedFileIDs = [];
     allRowsSelected.forEach((row) => {
       const file = data[row.dataIndex];
       selectedFileIDs.push(file.uuid);
@@ -143,26 +137,25 @@ const cartView = ({ classes, data, isLoading }) => {
         fileName: file.file_name,
         uuid: file.uuid,
         md5Sum: file.md5sum,
-      })
+      });
     });
     // filter out the duplicate file ids.
     selectedFileIDs = [...new Set(selectedFileIDs)];
-     
     if (allRowsSelected.length === 0) {
-        deleteButton.current.disabled = true;
-        deleteButton.current.style.color = '#FFFFFF';
-        deleteButton.current.style.backgroundColor = '#C53B27';
-        deleteButton.current.style.opacity = '0.3';
-        deleteButton.current.style.border = '3px solid grey';
-        deleteButton.current.style.fontWeight = '600';
-        deleteButton.current.style.cursor = 'auto';
+      deleteButton.current.disabled = true;
+      deleteButton.current.style.color = '#FFFFFF';
+      deleteButton.current.style.backgroundColor = '#C53B27';
+      deleteButton.current.style.opacity = '0.3';
+      deleteButton.current.style.border = '3px solid grey';
+      deleteButton.current.style.fontWeight = '600';
+      deleteButton.current.style.cursor = 'auto';
     } else {
-        deleteButton.current.disabled = false;
-        deleteButton.current.style.color = '#FFFFFF';
-        deleteButton.current.style.backgroundColor = '#C53B27';
-        deleteButton.current.style.cursor = 'pointer';
-        deleteButton.current.style.opacity = 'unset';
-        deleteButton.current.style.border = 'unset';
+      deleteButton.current.disabled = false;
+      deleteButton.current.style.color = '#FFFFFF';
+      deleteButton.current.style.backgroundColor = '#C53B27';
+      deleteButton.current.style.cursor = 'pointer';
+      deleteButton.current.style.opacity = 'unset';
+      deleteButton.current.style.border = 'unset';
     }
   }
 
@@ -190,7 +183,7 @@ const cartView = ({ classes, data, isLoading }) => {
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2)}>
             {' '}
-           {value}
+            {value}
             {' '}
           </div>
         ),
@@ -301,9 +294,8 @@ const cartView = ({ classes, data, isLoading }) => {
     viewColumns: false,
     pagination: true,
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
-    customToolbarSelect: (selectedRows, displayData) => {
-      return '';
-    },
+    // eslint-disable-next-line no-unused-vars
+    customToolbarSelect: (selectedRows, displayData) => '',
     customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
       <CustomFooter
         className={classes.customFooterStyle}
@@ -314,7 +306,7 @@ const cartView = ({ classes, data, isLoading }) => {
         page={page}
         rowsPerPage={rowsPerPage}
         onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-      // eslint-disable-next-line no-shadow
+        // eslint-disable-next-line no-shadow
         onChangePage={(_, page) => changePage(page)}
       />
     ),
@@ -359,42 +351,31 @@ const cartView = ({ classes, data, isLoading }) => {
       />
     );
 
-
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-
   return (
     <Grid container>
-     
-     <Dialog
-          open={modalStatus.open}
-          onClose={()=>toggleModal({open:false,selectedFiles:[]})}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              { modalStatus.selectedFiles.length } File(s) will be removed from your cart
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={()=>toggleModal({open:false})} color="primary">
-              Ok
-            </Button>
-            <Button onClick={()=>toggleModal({open:false,selectedFiles:[]})} color="primary" autoFocus>
-              Cancel
-            </Button>
-          </DialogActions>
-        </Dialog>
 
+      <Dialog
+        open={modalStatus.open}
+        onClose={() => closeModal()}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            { modalStatus.selectedFiles.length }
+            {' '}
+            File(s) will be removed from your cart
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => deleteFilesAndCloseModal()} color="primary">
+            Ok
+          </Button>
+          <Button onClick={() => closeModal()} color="primary" autoFocus>
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Grid item xs={12}>
         <div className={classes.header}>
