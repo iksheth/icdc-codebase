@@ -136,8 +136,8 @@ const cartView = ({ classes, data, isLoading }) => {
   }
 
   function removeFiles() {
-    //selectedFileIDs = [...new Set(selectedFileIDs)];
-    //toggleModal({open:true , selectedFiles: selectedFileIDs})
+    selectedFileIDs = [...new Set(selectedFileIDs)];
+    toggleModal({open:true , selectedFiles: selectedFileIDs})
   }
 
   function onRowsSelect(curr, allRowsSelected) {
@@ -406,7 +406,7 @@ function getModalStyle() {
         >
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              { modalStatus.selectedFiles.length }  File(s) will remove from your cart"
+              { modalStatus.selectedFiles.length } File(s) will be removed from your cart
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -432,7 +432,7 @@ function getModalStyle() {
           <div className={classes.headerTitle}>
             <div className={classes.headerMainTitle}>
               <span>
-                <span>My Cases: Files</span>
+                <span>My Files</span>
               </span>
             </div>
           </div>
@@ -458,7 +458,7 @@ function getModalStyle() {
               ref={deleteButton}
               onClick={removeFiles}
             >
-              Remove From Cart
+              Remove From Your Cart
             </button>
           </div>
         </div>
