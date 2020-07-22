@@ -27,16 +27,12 @@ const tableStyle = (ratio = 1) => ({
 
 const cartView = ({ classes, data, isLoading }) => {
   const dispatch = useDispatch();
-
   const deleteButton = useRef(null);
   const downloadButton = useRef(null);
-
   const [modalStatus, setModalStatus] = React.useState({ open: false ,selectedFiles : []});
-
 
   let globalData = [];
   let selectedFileIDs = [];
-
 
   function toggleModal(obj) {
     let status = Object.assign({}, modalStatus);
@@ -49,8 +45,6 @@ const cartView = ({ classes, data, isLoading }) => {
     }else{
       setModalStatus(obj);
     }
-
-    
   }
 
   useEffect(() => {
@@ -62,13 +56,12 @@ const cartView = ({ classes, data, isLoading }) => {
     deleteButton.current.style.fontWeight = '600';
     deleteButton.current.style.cursor = 'auto';
 
-    downloadButton.current.disabled = true;
-    downloadButton.current.style.color = '#FFFF';
+    downloadButton.current.disabled = false;
+    downloadButton.current.style.color = '#FFFFFF';
     downloadButton.current.style.backgroundColor = '#3890c5';
-    downloadButton.current.style.opacity = '0.3';
-    downloadButton.current.style.border = '3px solid grey';
-    downloadButton.current.style.fontWeight = '600';
-    downloadButton.current.style.cursor = 'auto';
+    downloadButton.current.style.cursor = 'pointer';
+    downloadButton.current.style.opacity = 'unset';
+    downloadButton.current.style.border = 'unset';
   });
 
   function fileName() {
@@ -116,13 +109,12 @@ const cartView = ({ classes, data, isLoading }) => {
       }
       return str;
     });
-
     return str;
   }
 
 
   function downloadJson() {
-    const jsonse = JSON.stringify(globalData);
+    const jsonse = JSON.stringify(data);
     const csv = convertToCSV(jsonse);
     const exportData = new Blob([csv], { type: 'text/csv' });
     const JsonURL = window.URL.createObjectURL(exportData);
@@ -156,37 +148,21 @@ const cartView = ({ classes, data, isLoading }) => {
     // filter out the duplicate file ids.
     selectedFileIDs = [...new Set(selectedFileIDs)];
      
-
     if (allRowsSelected.length === 0) {
-      deleteButton.current.disabled = true;
-      deleteButton.current.style.color = '#FFFFFF';
-      deleteButton.current.style.backgroundColor = '#C53B27';
-      deleteButton.current.style.opacity = '0.3';
-      deleteButton.current.style.border = '3px solid grey';
-      deleteButton.current.style.fontWeight = '600';
-      deleteButton.current.style.cursor = 'auto';
-
-      downloadButton.current.disabled = true;
-      downloadButton.current.style.color = '#FFFFFF';
-      downloadButton.current.style.backgroundColor = '#3890c5';
-      downloadButton.current.style.opacity = '0.3';
-      downloadButton.current.style.border = '3px solid grey';
-      downloadButton.current.style.fontWeight = '600';
-      downloadButton.current.style.cursor = 'auto';
+        deleteButton.current.disabled = true;
+        deleteButton.current.style.color = '#FFFFFF';
+        deleteButton.current.style.backgroundColor = '#C53B27';
+        deleteButton.current.style.opacity = '0.3';
+        deleteButton.current.style.border = '3px solid grey';
+        deleteButton.current.style.fontWeight = '600';
+        deleteButton.current.style.cursor = 'auto';
     } else {
-      deleteButton.current.disabled = false;
-      deleteButton.current.style.color = '#FFFFFF';
-      deleteButton.current.style.backgroundColor = '#C53B27';
-      deleteButton.current.style.cursor = 'pointer';
-      deleteButton.current.style.opacity = 'unset';
-      deleteButton.current.style.border = 'unset';
-
-      downloadButton.current.disabled = false;
-      downloadButton.current.style.color = '#FFFFFF';
-      downloadButton.current.style.backgroundColor = '#3890c5';
-      downloadButton.current.style.cursor = 'pointer';
-      downloadButton.current.style.opacity = 'unset';
-      downloadButton.current.style.border = 'unset';
+        deleteButton.current.disabled = false;
+        deleteButton.current.style.color = '#FFFFFF';
+        deleteButton.current.style.backgroundColor = '#C53B27';
+        deleteButton.current.style.cursor = 'pointer';
+        deleteButton.current.style.opacity = 'unset';
+        deleteButton.current.style.border = 'unset';
     }
   }
 
@@ -321,7 +297,7 @@ const cartView = ({ classes, data, isLoading }) => {
     filter: false,
     searchable: false,
     print: false,
-    download: true,
+    download: false,
     viewColumns: false,
     pagination: true,
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
