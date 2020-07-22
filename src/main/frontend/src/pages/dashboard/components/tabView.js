@@ -9,7 +9,7 @@ import CustomFooter from './tabFooter';
 import { addFiles } from '../../cart/store/cartAction';
 
 const TabView = ({
-  classes, data, Columns, customOnRowsSelect, openSnack,
+  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection,
 }) => {
   const dispatch = useDispatch();
   // Get the existing files ids from  cart state
@@ -73,6 +73,7 @@ const TabView = ({
     download: false,
     viewColumns: false,
     pagination: true,
+    isRowSelectable: (dataIndex) => disableRowSelection(data[dataIndex], fileIDs),
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
     // eslint-disable-next-line no-unused-vars
     customToolbarSelect: () => '',

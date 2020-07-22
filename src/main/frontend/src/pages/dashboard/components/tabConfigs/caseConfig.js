@@ -1,7 +1,41 @@
+/* eslint-disable */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
+
+/*  To check if this row is selectable or not.
+    I want the system to visually communicate ("flag") which of
+    the samples being displayed have already had all of their files added to the cart.
+
+    @param  data  row of data from sample tab
+    @param  cartData, list of fileIDs
+    @output  boolean true-> selectable
+*/
+export function CaseDisableRowSelection(data,cartData) {
+  if (cartData.length > 0) {
+    if (data.files && data.files.length > 0) {
+       // check each files of cases
+      const isAllfileBeSelected = _.cloneDeep(data.files).map((f) => {
+        if (cartData.includes(f.uuid)) {
+          return true;
+        }
+        return false;
+      });
+
+      // if one/more file(s) is not included in the cart, this row is selectable
+      if (isAllfileBeSelected.includes(false)) {
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+  return true;
+}
 /* on row select event
     @param  data  data for initial the table  sample -> [files]
     @param  allRowsSelected : selected rows

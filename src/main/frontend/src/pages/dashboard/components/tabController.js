@@ -5,9 +5,15 @@ import {
 import Typography from '@material-ui/core/Typography';
 import SwipeableViews from 'react-swipeable-views';
 import Snackbar from '@material-ui/core/Snackbar';
-import { CaseData, CaseColumns, CaseOnRowsSelect } from './tabConfigs/caseConfig';
-import { FileData, FileColumns, FileOnRowsSelect } from './tabConfigs/fileConfig';
-import { SampleData, SampleColumns, SampleOnRowsSelect } from './tabConfigs/sampleConfig';
+import {
+  CaseData, CaseColumns, CaseOnRowsSelect, CaseDisableRowSelection,
+} from './tabConfigs/caseConfig';
+import {
+  FileData, FileColumns, FileOnRowsSelect, FileDisableRowSelection,
+} from './tabConfigs/fileConfig';
+import {
+  SampleData, SampleColumns, SampleOnRowsSelect, SampleDisableRowSelection,
+} from './tabConfigs/sampleConfig';
 import TabView from './tabView';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 
@@ -87,6 +93,7 @@ const tabController = (classes) => {
             customOnRowsSelect={CaseOnRowsSelect}
             openSnack={openSnack}
             closeSnack={closeSnack}
+            disableRowSelection={CaseDisableRowSelection}
           />
         </TabContainer>
         <TabContainer>
@@ -96,6 +103,7 @@ const tabController = (classes) => {
             customOnRowsSelect={SampleOnRowsSelect}
             openSnack={openSnack}
             closeSnack={closeSnack}
+            disableRowSelection={SampleDisableRowSelection}
           />
         </TabContainer>
         <TabContainer>
@@ -105,6 +113,7 @@ const tabController = (classes) => {
             customOnRowsSelect={FileOnRowsSelect}
             openSnack={openSnack}
             closeSnack={closeSnack}
+            disableRowSelection={FileDisableRowSelection}
           />
         </TabContainer>
       </SwipeableViews>
