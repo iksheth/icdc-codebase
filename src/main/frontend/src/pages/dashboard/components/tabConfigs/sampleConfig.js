@@ -250,6 +250,7 @@ export function SampleData() {
 && state.dashboard.datatable
     ? state.dashboard.datatable : {}));
 
+  // combine case properties with samples.
   const transform = (accumulator, currentValue) => {
     const caseAttrs = {};
     Object.keys(currentValue).forEach((key) => {
@@ -264,6 +265,7 @@ export function SampleData() {
   };
   const tableData = sampleData.data.reduce(transform, []);
 
+  // get sample filters
   const sampleFilters = JSON.parse(JSON.stringify(sampleData)).filters
     .filter((f) => f.cata === 'sample')
     .map((f) => {
@@ -272,6 +274,7 @@ export function SampleData() {
       return tmpF;
     });
 
+  // filter out the records which does not match the filters, plus case_id should not be null.
   const tableDataAfterFilter = tableData
     .filter((row) => filterData(row, sampleFilters))
     .filter((d) => {
