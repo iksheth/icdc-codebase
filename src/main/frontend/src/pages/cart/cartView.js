@@ -321,7 +321,7 @@ const cartView = ({ classes, data, isLoading }) => {
     filter: false,
     searchable: false,
     print: false,
-    download: false,
+    download: true,
     viewColumns: false,
     pagination: true,
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
