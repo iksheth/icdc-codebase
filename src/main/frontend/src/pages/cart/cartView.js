@@ -136,8 +136,8 @@ const cartView = ({ classes, data, isLoading }) => {
   }
 
   function removeFiles() {
-    selectedFileIDs = [...new Set(selectedFileIDs)];
-    toggleModal({open:true , selectedFiles: selectedFileIDs})
+    //selectedFileIDs = [...new Set(selectedFileIDs)];
+    //toggleModal({open:true , selectedFiles: selectedFileIDs})
   }
 
   function onRowsSelect(curr, allRowsSelected) {
