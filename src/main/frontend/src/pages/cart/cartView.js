@@ -9,6 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 import MUIDataTable from 'mui-datatables';
 import icon from '../../assets/icons/Icon-MyCases.svg';
 import CustomFooter from './customFooter';
@@ -375,7 +376,7 @@ const cartView = ({ classes, data, isLoading }) => {
   const dataTable = isLoading ? <SkeletonTable />
     : (
       <MUIDataTable
-        data={data}
+        data={_.cloneDeep(data)}
         columns={columns}
         options={options()}
         className={classes.tableStyle}
