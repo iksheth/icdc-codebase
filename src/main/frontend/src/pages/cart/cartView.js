@@ -176,7 +176,7 @@ const cartView = ({ classes, data, isLoading }) => {
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(1.5)}>
             {' '}
-            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
+            {value}
             {' '}
           </div>
         ),
@@ -190,7 +190,7 @@ const cartView = ({ classes, data, isLoading }) => {
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2)}>
             {' '}
-            <Link to={`/study/${value}`} className={classes.link}>{value}</Link>
+           {value}
             {' '}
           </div>
         ),
