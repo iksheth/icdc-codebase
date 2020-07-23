@@ -17,6 +17,7 @@ import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/store/dashboardAction';
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
 import SelectedFilesView from '../../../components/FileGrid';
+import { FileDisableRowSelection } from '../../../utils/fileTable';
 
 function studyDetailSorting(a, b) {
   if (b && !a) {
@@ -387,6 +388,7 @@ const StudyDetailView = ({ classes, data }) => {
       </div>
 
       <SelectedFilesView
+        disableRowSelection={FileDisableRowSelection}
         data={data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
           const cFile = { ...file };
           cFile.parent = 'Study';
