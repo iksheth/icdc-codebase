@@ -12,12 +12,12 @@ const cartController = () => {
 
   const files = useSelector((state) => state.cart.files);
 
-  // data from store
+  // get all the data from store
   const dashboardData = useSelector((state) => (state.dashboard
         && state.dashboard
     ? state.dashboard : {}));
 
-  const { datatable } = dashboardData;
+  const { caseOverview } = dashboardData;
 
   // combine case properties with files.
   const transform = (accumulator, currentValue) => {
@@ -33,7 +33,7 @@ const cartController = () => {
     return accumulator;
   };
 
-  const fileData = datatable && datatable.data ? datatable.data.reduce(transform, []) : [];
+  const fileData = caseOverview && caseOverview.data ? caseOverview.data.reduce(transform, []) : [];
 
   return (
     <CartView
