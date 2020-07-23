@@ -68,7 +68,6 @@ export function SampleColumns(classes) {
       label: 'Case ID',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}
@@ -97,7 +96,6 @@ export function SampleColumns(classes) {
       label: 'Diagnosis',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2.3)}>
             {' '}
