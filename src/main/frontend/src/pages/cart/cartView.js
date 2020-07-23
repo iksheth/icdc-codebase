@@ -164,40 +164,12 @@ const cartView = ({ classes, data, isLoading }) => {
   const columns = [
 
     {
-      name: 'case_id',
-      label: 'Case ID',
-      sortDirection: 'asc',
-      options: {
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(1.5)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'study_code',
-      label: 'Study Code',
-      sortDirection: 'asc',
-      options: {
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(2)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
       name: 'file_name',
       label: 'File Name',
       sortDirection: 'asc',
       options: {
         customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(2)}>
+          <div className="mui_td" style={tableStyle(2.5)}>
             {' '}
             {value}
             {' '}
@@ -263,6 +235,34 @@ const cartView = ({ classes, data, isLoading }) => {
       options: {
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'case_id',
+      label: 'Case ID',
+      sortDirection: 'asc',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'study_code',
+      label: 'Study Code',
+      sortDirection: 'asc',
+      options: {
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1)}>
             {' '}
             {value}
             {' '}
