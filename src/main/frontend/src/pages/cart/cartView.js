@@ -292,8 +292,14 @@ const cartView = ({ classes, data, isLoading }) => {
     filter: false,
     searchable: false,
     print: false,
-    download: false,
-    viewColumns: false,
+    download: true,
+    downloadOptions: {
+      filename: 'tableDownload.csv',
+      filterOptions: {
+        useDisplayedColumnsOnly: true,
+      },
+    },
+    viewColumns: true,
     pagination: true,
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
     // eslint-disable-next-line no-unused-vars

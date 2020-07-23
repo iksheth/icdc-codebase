@@ -19,8 +19,14 @@ const options = {
   filter: false,
   searchable: false,
   print: false,
-  download: false,
-  viewColumns: false,
+  download: true,
+  downloadOptions: {
+    filename: 'tableDownload.csv',
+    filterOptions: {
+      useDisplayedColumnsOnly: true,
+    },
+  },
+  viewColumns: true,
   pagination: true,
   rowsPerPageOptions: [10, 25, 50, 100],
 };
