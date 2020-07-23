@@ -3,242 +3,20 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import MUIDataTable from 'mui-datatables';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
 import { useDispatch } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
-import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/store/dashboardAction';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
 import { addFiles, deleteFiles } from '../cart/store/cartAction';
 import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
-
-const tableStyle = (ratio = 1) => ({
-  width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  overflow: 'hidden',
-  wordBreak: 'break-word',
-  maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  minWidth: '160px',
-}
-);
-
-function formatBytes(bytes, decimals = 2) {
-  if (bytes === 0) return '0 Bytes';
-
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-  const i = Math.floor(Math.log(bytes) / Math.log(1024));
-
-  return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
-}
-
-const columnsOfSamples = [
-  {
-    name: 'sample_id',
-    label: 'Sample ID',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-    },
-  },
-  {
-    name: 'sample_site',
-    label: 'Sample Site',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-    },
-  },
-  {
-    name: 'summarized_sample_type',
-    label: 'Sample Type',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-    },
-  },
-  {
-    name: 'specific_sample_pathology',
-    label: 'Pathology/Morphology',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-    },
-  },
-  {
-    name: 'tumor_grade',
-    label: 'Tumor Grade',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-    },
-  },
-  {
-    name: 'sample_chronology',
-    label: 'Sample Chronology',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-    },
-  },
-  {
-    name: 'percentage_tumor',
-    label: 'Percentage Tumor',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-    },
-  },
-  {
-    name: 'necropsy_sample',
-    label: 'Necropsy Sample',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-    },
-  },
-  {
-    name: 'sample_preservation',
-    label: 'Sample Preservation',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-    },
-  },
-];
-
-const columnsOfFiles = [
-  {
-    name: 'file_name',
-    label: 'File Name',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2.5)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'file_type',
-    label: 'File Type',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'parent',
-    label: 'Association',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'file_description',
-    label: 'Description',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(4)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'file_format',
-    label: 'Format',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2.3)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'file_size',
-    label: 'Size',
-    options: {
-      customBodyRender: (bytes) => (
-        <div className="mui_td" style={tableStyle(1)}>
-          {' '}
-          {formatBytes(bytes)}
-          {' '}
-        </div>
-      ),
-    },
-  },
-];
-
-const options = (classes) => ({
-  selectableRows: false,
-  search: false,
-  filter: false,
-  searchable: false,
-  print: false,
-  download: false,
-  viewColumns: false,
-  pagination: true,
-  customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
-    <TableFooter>
-      <TableRow>
-        <TablePagination
-          className={classes.root}
-          count={count}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-          // eslint-disable-next-line no-shadow
-          onChangePage={(_, page) => changePage(page)}
-        />
-      </TableRow>
-    </TableFooter>
-  ),
-});
+import GridView from '../../components/FileGridWithCart';
+import FileColumns from './fileConfig';
+import { FileOnRowsSelect, FileDisableRowSelection } from '../../utils/fileTable';
+import SampleColumns from './sampleConfig';
+import { SampleOnRowsSelect, SampleDisableRowSelection } from '../../utils/sampleFileTable';
 
 const CaseDetail = ({ classes, data, selected }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(
@@ -290,6 +68,7 @@ const CaseDetail = ({ classes, data, selected }) => {
     open: false,
     value: 0,
   });
+
   function openSnack(value, action) {
     setsnackbarState({ open: true, value, action });
   }
@@ -322,15 +101,13 @@ const CaseDetail = ({ classes, data, selected }) => {
               {' '}
             </span>
             <span className={classes.snackBarText}>
-              Case :
-              {' '}
               {snackbarState.value}
               {'    '}
-              successfully
+              File(s) successfully
               {' '}
               {snackbarState.action}
               {' '}
-              My Cases list
+              your cart
             </span>
           </div>
 )}
@@ -704,14 +481,14 @@ const CaseDetail = ({ classes, data, selected }) => {
           <Grid item xs={12}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
-                <MUIDataTable
+                <GridView
                   data={data.samplesByCaseId}
-                  columns={columnsOfSamples}
-                  options={options(classes)}
+                  Columns={SampleColumns}
+                  customOnRowsSelect={SampleOnRowsSelect}
+                  openSnack={openSnack}
+                  closeSnack={closeSnack}
+                  disableRowSelection={SampleDisableRowSelection}
                 />
-              </Grid>
-              <Grid item xs={8}>
-                <Typography />
               </Grid>
             </Grid>
           </Grid>
@@ -721,18 +498,14 @@ const CaseDetail = ({ classes, data, selected }) => {
             <span className={classes.tableHeader}>ASSOCIATED FILES</span>
           </div>
           <Grid item xs={12}>
-            <Grid container spacing={4}>
-              <Grid item xs={12}>
-                <MUIDataTable
-                  data={data.filesOfCase}
-                  columns={columnsOfFiles}
-                  options={options(classes)}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <Typography />
-              </Grid>
-            </Grid>
+            <GridView
+              data={data.filesOfCase}
+              Columns={FileColumns}
+              customOnRowsSelect={FileOnRowsSelect}
+              openSnack={openSnack}
+              closeSnack={closeSnack}
+              disableRowSelection={FileDisableRowSelection}
+            />
           </Grid>
         </div>
       </div>
