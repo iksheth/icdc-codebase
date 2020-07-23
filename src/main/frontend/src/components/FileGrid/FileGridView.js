@@ -164,8 +164,14 @@ class FileGridView extends Component {
       filter: false,
       searchable: false,
       print: false,
-      download: false,
-      viewColumns: false,
+      download: true,
+      downloadOptions: {
+        filename: 'tableDownload.csv',
+        filterOptions: {
+          useDisplayedColumnsOnly: true,
+        },
+      },
+      viewColumns: true,
       pagination: true,
       onRowsSelect: (curr, allRowsSelected) => this.onRowsSelect(curr, allRowsSelected),
       customToolbarSelect: (selectedRows, displayData) => {
