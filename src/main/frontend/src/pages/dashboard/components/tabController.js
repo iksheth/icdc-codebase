@@ -6,14 +6,17 @@ import Typography from '@material-ui/core/Typography';
 import SwipeableViews from 'react-swipeable-views';
 import Snackbar from '@material-ui/core/Snackbar';
 import {
-  CaseData, CaseColumns, CaseOnRowsSelect, CaseDisableRowSelection,
+  CaseData, CaseColumns,
 } from './tabConfigs/caseConfig';
+import { CaseOnRowsSelect, CaseDisableRowSelection } from '../../../utils/caseFileTable';
 import {
-  FileData, FileColumns, FileOnRowsSelect, FileDisableRowSelection,
+  FileData, FileColumns,
 } from './tabConfigs/fileConfig';
+import { FileOnRowsSelect, FileDisableRowSelection } from '../../../utils/fileTable';
 import {
-  SampleData, SampleColumns, SampleOnRowsSelect, SampleDisableRowSelection,
+  SampleData, SampleColumns,
 } from './tabConfigs/sampleConfig';
+import { SampleOnRowsSelect, SampleDisableRowSelection } from '../../../utils/sampleFileTable';
 import TabView from './tabView';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 

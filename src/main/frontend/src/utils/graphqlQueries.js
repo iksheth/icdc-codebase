@@ -148,6 +148,7 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
         file_format 
         file_size 
         md5sum 
+        uuid
 
     }
     samplesByCaseId(case_id:$case_id){
@@ -160,6 +161,9 @@ export const GET_CASE_DETAIL_DATA_QUERY = gql`
       percentage_tumor
       necropsy_sample
       sample_preservation
+      files{
+        uuid
+      }
     }
  }`;
 
