@@ -4,6 +4,7 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
+import _ from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import CustomFooter from './customFooter';
@@ -113,7 +114,7 @@ const FileGridView = ({
       <Grid container>
         <Grid item xs={12} id="table_file">
           <MUIDataTable
-            data={data}
+            data={_.cloneDeep(data)}
             columns={columns}
             options={options()}
           />

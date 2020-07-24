@@ -10,9 +10,11 @@ import {
   ExpansionPanelSummary,
   withStyles,
 } from '@material-ui/core';
+import _ from 'lodash';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import { toggleCheckBox } from '../../../pages/dashboard/store/dashboardAction';
+import { Typography } from '../../Wrappers/Wrappers';
 
 const FacetPanel = (classes) => {
   // data from store
@@ -26,20 +28,24 @@ const FacetPanel = (classes) => {
 
   const [expanded, setExpanded] = React.useState(false);
 
-  const [groupExpanded, setGroupExpanded] = React.useState('case');
-
-  React.useEffect(() => {
-    if (!expanded || !(expanded === `${sideBarContent.defaultPanel}false` || expanded !== false)) {
-      setExpanded(sideBarContent.defaultPanel);
-    }
-  });
+  const [groupExpanded, setGroupExpanded] = React.useState(['case']);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   const handleGroupChange = (panel) => (event, isExpanded) => {
-    setGroupExpanded(isExpanded ? panel : false);
+    const groups = _.cloneDeep(groupExpanded);
+    if (isExpanded) {
+      groups.push(panel);
+    } else {
+      const index = groups.indexOf(panel);
+      if (index > -1) {
+        groups.splice(index, 1);
+      }
+    }
+
+    setGroupExpanded(groups);
   };
 
   const handleToggle = (value) => () => {
@@ -58,7 +64,7 @@ const FacetPanel = (classes) => {
   function FacetFilterWrapper(children, name, styles) {
     return (
       <ExpansionPanel
-        expanded={groupExpanded === name}
+        expanded={groupExpanded.includes(name)}
         onChange={handleGroupChange(name)}
         classes={{ expanded: classes.classes.expansionPanelExpanded }}
       >
@@ -137,7 +143,19 @@ const FacetPanel = (classes) => {
                     tabIndex={-1}
                     disableRipple
                   />
-                  <ListItemText primary={`${checkboxItem.name}  (${checkboxItem.cases})`} />
+                  <ListItemText primary={(
+                    <div style={{ display: 'flex' }}>
+                      <Typography>
+                        {checkboxItem.name}
+                      </Typography>
+                      <Typography classes={{ root: styles }}>
+                        (
+                        {checkboxItem.cases}
+                        )
+                      </Typography>
+                    </div>
+)}
+                  />
                 </ListItem>
               );
             })
@@ -228,10 +246,8 @@ const styles = () => ({
     margin: 0,
   },
   unCheckedBg: {
-    background: '#fff',
   },
   checkedBg: {
-    background: '#FDE6D0',
   },
 });
 
