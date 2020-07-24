@@ -201,7 +201,7 @@ export function FileData() {
 
   // get files filters
   const filesFilters = JSON.parse(JSON.stringify(fileData)).filters
-    .filter((f) => f.cata === 'file')
+    .filter((f) => f.section === 'file')
     .map((f) => {
       const tmpF = f;
       tmpF.datafield = tmpF.datafield.includes('@') ? tmpF.datafield.split('@').pop() : tmpF.datafield;
