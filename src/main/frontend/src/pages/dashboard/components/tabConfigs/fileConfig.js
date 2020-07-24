@@ -16,65 +16,6 @@ const tableStyle = (ratio = 1) => ({
 export function FileColumns(classes) {
   return ([
     {
-      name: 'case_id',
-      label: 'Case ID',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.8)}>
-            {' '}
-            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'breed',
-      label: 'Breed',
-      options: {
-        filter: false,
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(0.6)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'diagnosis',
-      label: 'Diagnosis',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(2.3)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
-      name: 'study_code',
-      label: 'Study Code',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(1.8)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
-    {
       name: 'file_name',
       label: 'File Name',
       options: {
@@ -157,6 +98,65 @@ export function FileColumns(classes) {
         sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'case_id',
+      label: 'Case ID',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            <Link to={`/case/${value}`} className={classes.link}>{value}</Link>
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'breed',
+      label: 'Breed',
+      options: {
+        filter: false,
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.6)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'diagnosis',
+      label: 'Diagnosis',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2.3)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'study_code',
+      label: 'Study Code',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1.8)}>
             {' '}
             {value}
             {' '}
