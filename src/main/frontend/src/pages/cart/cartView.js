@@ -94,7 +94,7 @@ const cartView = ({ classes, data, isLoading }) => {
     const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
     let str = '';
     array.map((entry, index) => {
-      const keysToInclude = ['parent', 'case_id', 'file_name', 'uuid', 'md5sum'];
+      const keysToInclude = ['case_id', 'file_name', 'uuid', 'md5sum'];
       let line = '';
 
       keysToInclude.map((keyName) => {
@@ -104,7 +104,7 @@ const cartView = ({ classes, data, isLoading }) => {
       });
 
       if (index === 0) {
-        str = ['What', 'Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
+        str = ['Case ID', 'File Name', 'File ID', 'Md5sum', 'User Comments'].join(',');
         str += `\r\n${line},${document.getElementById('multiline-user-coments').value}\r\n`;
       } else {
         str += `${line}\r\n`;
