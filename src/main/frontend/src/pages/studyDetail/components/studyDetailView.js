@@ -384,7 +384,7 @@ const StudyDetailView = ({ classes, data }) => {
                 <Grid item lg={6} md={6} sm={6} xs={12}>
                   <Grid container spacing={16}>
                     <Grid item xs={12}>
-                      <span className={classes.detailContainerHeader}>FILE TYPE</span>
+                      <span className={classes.detailContainerHeader}>Case File Types</span>
                     </Grid>
                   </Grid>
                   <Grid container spacing={8} className={classes.paddingTop12}>
