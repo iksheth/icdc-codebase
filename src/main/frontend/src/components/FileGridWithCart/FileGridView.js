@@ -4,6 +4,7 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
+import _ from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import CustomFooter from './customFooter';
@@ -71,8 +72,14 @@ const FileGridView = ({
     filter: false,
     searchable: false,
     print: false,
-    download: false,
-    viewColumns: false,
+    download: true,
+    downloadOptions: {
+      filename: 'tableDownload.csv',
+      filterOptions: {
+        useDisplayedColumnsOnly: true,
+      },
+    },
+    viewColumns: true,
     pagination: true,
     isRowSelectable: (dataIndex) => disableRowSelection(data[dataIndex], fileIDs),
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
@@ -113,7 +120,7 @@ const FileGridView = ({
       <Grid container>
         <Grid item xs={12} id="table_file">
           <MUIDataTable
-            data={data}
+            data={_.cloneDeep(data)}
             columns={columns}
             options={options()}
           />
