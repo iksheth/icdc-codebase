@@ -10,7 +10,6 @@ import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
 import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/store/dashboardAction';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
-import { addFiles, deleteFiles } from '../cart/store/cartAction';
 import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
 import GridView from '../../components/FileGridWithCart';
 import FileColumns from './fileConfig';
@@ -18,7 +17,7 @@ import { FileOnRowsSelect, FileDisableRowSelection } from '../../utils/fileTable
 import SampleColumns from './sampleConfig';
 import { SampleOnRowsSelect, SampleDisableRowSelection } from '../../utils/sampleFileTable';
 
-const CaseDetail = ({ classes, data, selected }) => {
+const CaseDetail = ({ classes, data }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(
     dispatch(fetchDataForDashboardDataTable()),
   );
@@ -75,17 +74,6 @@ const CaseDetail = ({ classes, data, selected }) => {
   function closeSnack() {
     setsnackbarState({ open: false });
   }
-
-  const removeFromMyCases = () => {
-    openSnack(caseDetail.case_id, 'removed from');
-    dispatch(deleteFiles([caseDetail.case_id]));
-  };
-
-  const saveToMyCases = () => {
-    openSnack(caseDetail.case_id, 'added to');
-    dispatch(addFiles([caseDetail.case_id]));
-  };
-
   return (
     <>
       <Snackbar
@@ -197,30 +185,6 @@ const CaseDetail = ({ classes, data, selected }) => {
 
             )}
 
-          <div className={classes.headerButton}>
-            <span className={classes.headerButtonLinkSpan}>
-              {selected
-                ? (
-                  <button
-                    type="button"
-                    className={classes.headerButtonLink}
-                    onClick={removeFromMyCases}
-                  >
-                    <span className={classes.headerButtonLinkText}>Remove from My Cases</span>
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className={classes.headerButtonLink}
-                    onClick={saveToMyCases}
-                  >
-                    <span className={classes.headerButtonLinkText}>Save to My Cases</span>
-                  </button>
-                )}
-
-            </span>
-          </div>
         </div>
 
         <div id="case_detail_container" className={classes.detailContainer}>

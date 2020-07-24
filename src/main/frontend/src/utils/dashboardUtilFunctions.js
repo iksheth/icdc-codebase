@@ -18,7 +18,7 @@ export const mappingCheckBoxToDataTable = [
     api: 'caseOverview',
     datafield: 'program',
     show: false,
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -29,7 +29,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'case_id',
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -40,7 +40,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'case_id',
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -51,7 +51,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'case_id',
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -62,7 +62,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'case_id',
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -73,7 +73,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'case_id',
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -84,7 +84,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'case_id',
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -95,7 +95,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'case_id',
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -106,7 +106,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'case_id',
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -117,7 +117,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'case_id',
-    cata: 'case',
+    section: 'case',
 
   },
   {
@@ -128,7 +128,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'sample_id',
-    cata: 'sample',
+    section: 'sample',
 
   },
   {
@@ -139,7 +139,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'sample_id',
-    cata: 'sample',
+    section: 'sample',
 
   },
   {
@@ -150,7 +150,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'uuid',
-    cata: 'file',
+    section: 'file',
 
   },
   {
@@ -161,7 +161,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'uuid',
-    cata: 'file',
+    section: 'file',
 
   },
   {
@@ -172,7 +172,7 @@ export const mappingCheckBoxToDataTable = [
     show: true,
     type: 2,
     key: 'uuid',
-    cata: 'file',
+    section: 'file',
 
   },
 
@@ -182,7 +182,7 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
   groupName: filterElement.groupName,
   name: filterElement.name,
   datafield: filterElement.datafield,
-  cata: filterElement.cata,
+  section: filterElement.section,
   isChecked: false,
 }));
 
@@ -325,7 +325,7 @@ function DFSOfCheckBoxDataType2Input(data, fields) {
                 datafield: "diagnosis"
                 groupName: "Diagnosis"
                 isChecked: true
-                cata:"cata"
+                section:"section"
                 name: "B Cell Lymphoma"
               }
 
@@ -639,7 +639,7 @@ export function customCheckBox(data) {
       checkboxItems: initCheckBoxData(data[mapping.api], mapping.field, mapping.type, mapping.key),
       datafield: mapping.datafield,
       show: mapping.show,
-      cata: mapping.cata,
+      section: mapping.section,
       key: mapping.key,
     }))
   );

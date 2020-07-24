@@ -220,7 +220,7 @@ export function SampleData() {
 
   // get sample filters
   const sampleFilters = JSON.parse(JSON.stringify(sampleData)).filters
-    .filter((f) => f.cata === 'sample')
+    .filter((f) => f.section === 'sample')
     .map((f) => {
       const tmpF = f;
       tmpF.datafield = tmpF.datafield.includes('@') ? tmpF.datafield.split('@').pop() : tmpF.datafield;
