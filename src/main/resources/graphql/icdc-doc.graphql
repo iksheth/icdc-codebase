@@ -652,6 +652,10 @@ type FileDetail {
   file_location: String
   uuid: String
   acl: String
+  GUID: String
+  md5: String
+  size: Float
+  url: String
 }
 
 type FileInfo {
