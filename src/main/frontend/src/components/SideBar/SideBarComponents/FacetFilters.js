@@ -244,6 +244,7 @@ const styles = () => ({
   },
   expansionPanelExpanded: {
     margin: 0,
+    width: '100%',
   },
   unCheckedBg: {
   },
