@@ -71,8 +71,14 @@ const FileGridView = ({
     filter: false,
     searchable: false,
     print: false,
-    download: false,
-    viewColumns: false,
+    download: true,
+    downloadOptions: {
+      filename: 'tableDownload.csv',
+      filterOptions: {
+        useDisplayedColumnsOnly: true,
+      },
+    },
+    viewColumns: true,
     pagination: true,
     isRowSelectable: (dataIndex) => disableRowSelection(data[dataIndex], fileIDs),
     onRowsSelect: (curr, allRowsSelected) => onRowsSelect(curr, allRowsSelected),
