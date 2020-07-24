@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Query } from 'react-apollo';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CaseDetailView from './caseDetailView';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_CASE_DETAIL_DATA_QUERY } from '../../utils/graphqlQueries';
 import Error from '../error/Error';
-import { initCart } from '../selectedCases/selectedCasesState';
+import { initCart } from '../cart/store/cartAction';
 
 const CaseDetailContainer = ({ match }) => {
   const dispatch = useDispatch();
@@ -14,9 +14,6 @@ const CaseDetailContainer = ({ match }) => {
   useEffect(() => {
     dispatch(initCart());
   }, []);
-
-  const cart = useSelector((state) => state.cart);
-  const isSelectedInCart = cart && cart.cases && cart.cases.includes(match.params.id);
 
   return (
     <Query query={GET_CASE_DETAIL_DATA_QUERY} variables={{ case_id: match.params.id }}>
@@ -36,7 +33,7 @@ const CaseDetailContainer = ({ match }) => {
           return <Error />;
         }
 
-        return <CaseDetailView data={data} selected={isSelectedInCart} />;
+        return <CaseDetailView data={data} />;
       }}
     </Query>
   );

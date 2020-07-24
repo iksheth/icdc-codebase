@@ -3,20 +3,24 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
 import MUIDataTable from 'mui-datatables';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
 import StatsView from '../../../components/Stats/StatsView';
 import { Typography } from '../../../components/Wrappers/Wrappers';
 import { customSorting } from '../../../utils/dashboardUtilFunctions';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-StudiesDetail.svg';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/store/dashboardAction';
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
-// import SelectedFilesView from '../../../components/FileGrid';
+import SelectedFilesView from '../../../components/FileGridWithCart';
+import { FileOnRowsSelect, FileDisableRowSelection } from '../../../utils/fileTable';
+import FileColumns from './fileConfig';
 
 function studyDetailSorting(a, b) {
   if (b && !a) {
@@ -67,8 +71,14 @@ const options = (classes) => ({
   filter: false,
   searchable: false,
   print: false,
-  download: false,
-  viewColumns: false,
+  download: true,
+  downloadOptions: {
+    filename: 'tableDownload.csv',
+    filterOptions: {
+      useDisplayedColumnsOnly: true,
+    },
+  },
+  viewColumns: true,
   pagination: true,
   customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
     <TableFooter>
@@ -87,11 +97,12 @@ const options = (classes) => ({
   ),
 });
 
-
 const StudyDetailView = ({ classes, data }) => {
   const studyData = data.study[0];
   const diagnoses = [...new Set(studyData.cases.reduce((output, caseData) => output.concat(caseData.diagnoses ? caseData.diagnoses.map((diagnosis) => (diagnosis.disease_term ? diagnosis.disease_term : '')) : []), []))];
-  const fileTypes = [...new Set(data.filesOfStudy.map((fileOfStudy) => (fileOfStudy.file_type)))];
+  const studyFileTypes = [...new Set(data.studyFiles.map((f) => (f.file_type)))];
+  const caseFileTypes = [...new Set(data.filesOfStudy.map((f) => (f.file_type))
+    .filter((f) => !studyFileTypes.includes(f)))];
   const stat = {
     numberOfStudies: 1,
     numberOfCases: data.caseCountOfStudy,
@@ -148,7 +159,6 @@ const StudyDetailView = ({ classes, data }) => {
     }
     return cohortAndDosing;
   }
-
 
   const cohortAndDosingTableData = [];
   const noArmMessage = 'This study is not divided into arms';
@@ -210,9 +220,45 @@ const StudyDetailView = ({ classes, data }) => {
     isALink: false,
   }];
 
+  const [snackbarState, setsnackbarState] = React.useState({
+    open: false,
+    value: 0,
+  });
+
+  function openSnack(value, action) {
+    setsnackbarState({ open: true, value, action });
+  }
+  function closeSnack() {
+    setsnackbarState({ open: false });
+  }
 
   return (
     <>
+      <Snackbar
+        className={classes.snackBar}
+        open={snackbarState.open}
+        onClose={closeSnack}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        message={(
+          <div className={classes.snackBarMessage}>
+            <span className={classes.snackBarMessageIcon}>
+              <SuccessOutlinedIcon />
+              {' '}
+            </span>
+            <span className={classes.snackBarText}>
+              {snackbarState.value}
+              {'    '}
+              File(s) successfully
+              {' '}
+              {snackbarState.action}
+              {' '}
+              your cart
+            </span>
+          </div>
+)}
+      />
+
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>
@@ -265,7 +311,6 @@ const StudyDetailView = ({ classes, data }) => {
             </span>
           </div>
         </div>
-
 
         <div className={classes.detailContainer}>
 
@@ -339,11 +384,11 @@ const StudyDetailView = ({ classes, data }) => {
                 <Grid item lg={6} md={6} sm={6} xs={12}>
                   <Grid container spacing={16}>
                     <Grid item xs={12}>
-                      <span className={classes.detailContainerHeader}>FILE TYPE</span>
+                      <span className={classes.detailContainerHeader}>Case File Types</span>
                     </Grid>
                   </Grid>
                   <Grid container spacing={8} className={classes.paddingTop12}>
-                    {fileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
+                    {caseFileTypes.sort((a, b) => customSorting(a, b, 'alphabetical')).map((fileType) => (
                       <Grid item xs={12}>
                         <span className={classes.content}>{fileType}</span>
                       </Grid>
@@ -359,7 +404,7 @@ const StudyDetailView = ({ classes, data }) => {
 
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>COHORT AND DOSING</span>
+            <span className={classes.tableHeader}>ARMS AND COHORTS</span>
           </div>
           <Grid item xs={12}>
             <Grid container spacing={8}>
@@ -381,24 +426,33 @@ const StudyDetailView = ({ classes, data }) => {
           </Grid>
         </div>
       </div>
-
-      {/*
-       comment out the file view
-      <SelectedFilesView
-        data={
-          data.studyFiles === null ||
-          data.studyFiles === '' ?
-          [] : data.studyFiles.map((file) => {
-          const cFile = { ...file };
-          cFile.parent = 'Study';
-          cFile.studyDesignation = studyData.clinical_study_designation;
-          return cFile;
-        })}
-      /> */}
+      <div className={classes.tableContainer2}>
+        <div className={classes.tableDiv}>
+          <Grid item xs={12}>
+            <div className={classes.tableTitle}>
+              <span className={classes.tableHeader}>ASSOCIATED FILES</span>
+            </div>
+          </Grid>
+          <Grid item xs={12} id="table_associated_files">
+            <SelectedFilesView
+              Columns={FileColumns}
+              customOnRowsSelect={FileOnRowsSelect}
+              openSnack={openSnack}
+              closeSnack={closeSnack}
+              disableRowSelection={FileDisableRowSelection}
+              data={data.studyFiles === null || data.studyFiles === '' ? [] : data.studyFiles.map((file) => {
+                const cFile = { ...file };
+                cFile.parent = 'Study';
+                cFile.studyDesignation = studyData.clinical_study_designation;
+                return cFile;
+              })}
+            />
+          </Grid>
+        </div>
+      </div>
     </>
   );
 };
-
 
 const styles = (theme) => ({
   hrLine: {
@@ -580,6 +634,9 @@ const styles = (theme) => ({
 
   tableContainer: {
     background: '#f3f3f3',
+  },
+  tableContainer2: {
+    background: '#fff',
   },
   tableHeader: {
     paddingLeft: '32px',

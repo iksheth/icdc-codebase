@@ -4,7 +4,6 @@ import {
   withStyles, Paper,
 } from '@material-ui/core';
 
-
 const CustomDropdownMenu = ({ classes, handleClick }) => (
   <>
     <Paper className={classes.paper}>

@@ -10,7 +10,6 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import StatsView from '../../components/Stats/StatsView';
 
-
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
   overflow: 'hidden',
@@ -154,7 +153,6 @@ const columns = [
   },
 ];
 
-
 const options = (classes) => ({
   selectableRows: false,
   search: false,
@@ -215,7 +213,6 @@ const CasesView = ({ classes, data, study }) => {
           </div>
         </div>
 
-
         <div className={classes.tableDiv}>
           <Grid container spacing={32}>
             <Grid item xs={12} id="table_cases">
@@ -231,7 +228,6 @@ const CasesView = ({ classes, data, study }) => {
     </>
   );
 };
-
 
 const styles = (theme) => ({
   paper: {

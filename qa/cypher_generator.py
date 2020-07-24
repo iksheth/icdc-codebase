@@ -1,11 +1,9 @@
 #https://repl.it/@csga/yizhennciquery
-
 from flask import Flask
 
 # icdc default output schema
 icdc_schema=["case_id","study_code","program","study_type",
     "breed","diagnosis","stage_of_disease","disease_site","age","gender","neutered_status","data_type","file_formats","files","samples"]
-
 
 # icdc query parts
 icdc_query={
@@ -97,7 +95,6 @@ def QueryBuilder(input_filter,output_schema,base_query):
     else:
         return builder("",output_schema,base_query)
 
-
 # combine the icdc_query
 def builder(input_filters,output_schema,base_query)->str:
     query=[]
@@ -113,7 +110,6 @@ def builder(input_filters,output_schema,base_query)->str:
         query.pop()
 
     query.append(str(base_query["part2"]))
-
 
     # query add file's condition
     if input_filters!="":
@@ -132,21 +128,15 @@ def builder(input_filters,output_schema,base_query)->str:
 
     return  " ".join(query)
 
-
-
-
 def builderWithCondition(input_filters,condition,base_query):
     output = []
     #base on the input filter to find the query then replace the place holder"@@@"" with real data
-    for filter in input_filters:
-        if filter in base_query[condition] and input_filters[filter]!="":
-            output.append(base_query[condition][filter].replace("@@@",input_filters[filter]))
+    for input_filter in input_filters:
+        if input_filter in base_query[condition] and input_filters[input_filter]!="":
+            output.append(base_query[condition][input_filter].replace("@@@",input_filters[input_filter]))
             output.append(" AND")
 
     return output
-
-
-
 
 def builderReturn(output_schema,base_query):
     output=[]
@@ -157,20 +147,14 @@ def builderReturn(output_schema,base_query):
           output.append(", ")
     return output
 
-
-
-
 # factory defines which query builder to use
-def QueryBuilderFactory(type,input_schema,output_schema):
+def QueryBuilderFactory(input_type,input_schema,output_schema):
 
       query={
           "icdc": icdc_query,
           "ctdc": ctdc_query
       }
-      return QueryBuilder(input_schema,output_schema,query[type])
-
-
-
+      return QueryBuilder(input_schema,output_schema,query[input_type])
 
 app = Flask('app')
 
@@ -194,7 +178,6 @@ def main():
 
     icdc_output_schema=["number_of_files","number_of_sample","number_of_cases","number_of_study"]
 
-
     ctdc_filter={
         "clinical_trial_code": "",
         "clinical_trial_id": "",
@@ -208,10 +191,7 @@ def main():
     ctdc_output_schema=["case_id", "clinical_trial_code", "arm_id", "arm_drug", "pubmed_id", "disease", "gender", "race",
                    "ethnicity", "clinical_trial_id", "trial_arm", "file_types", "file_formats", "files","number_of_files","number_of_cases","number_of_trial"]
     ctdc_output_schema=["number_of_files","number_of_cases","number_of_trial"]
-  
 
     return  " ".join(["icdc query: ",QueryBuilderFactory("icdc",icdc_filter,icdc_output_schema),"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ ctdc query: ", QueryBuilderFactory("ctdc", ctdc_filter, ctdc_output_schema)])
-    
-  
 
 app.run(host='0.0.0.0', port=8080)

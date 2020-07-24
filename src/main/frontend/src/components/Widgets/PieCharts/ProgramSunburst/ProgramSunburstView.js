@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Sunburst, LabelSeries } from 'react-vis';
 import { withStyles } from '@material-ui/core';
 
-
 function getKeyPath(node) {
   if (!node.parent) {
     return ['root'];
@@ -13,21 +12,22 @@ function getKeyPath(node) {
   );
 }
 
-
 function updateData(d, keyPath) {
   const data = d;
   if (data.children) {
     data.children.map((child) => updateData(child, keyPath));
+    data.style = {
+      ...data.style,
+      fillOpacity: keyPath && !keyPath[data.title] ? 0.2 : 0.7,
+    };
+  } else {
+    data.style = {
+      ...data.style,
+      fillOpacity: keyPath && !keyPath[data.title] ? 0.2 : 1,
+    };
   }
-
-  data.style = {
-    ...data.style,
-    fillOpacity: keyPath && !keyPath[data.title] ? 0.2 : 1,
-  };
-
   return data;
 }
-
 
 function sortData(d) {
   const data = d;
@@ -38,7 +38,6 @@ function sortData(d) {
 
   return data;
 }
-
 
 // find the caseSize of a given title
 function findCaseSizeOfTitle(data, title) {
@@ -61,7 +60,6 @@ function findCaseSizeOfTitle(data, title) {
   return data.caseSize;
 }
 
-
 const styles = (theme) => ({
   title: {
     fontSize: '12px',
@@ -71,6 +69,7 @@ const styles = (theme) => ({
     fontWeight: '600',
     paddingLeft: '28px',
     height: '20px',
+    color: theme.palette.widgetBackground.contrastText,
   },
   customWidget: {
     marginTop: '-21px',
@@ -81,19 +80,17 @@ const styles = (theme) => ({
 
 });
 
-
 class ProgramSunburst extends PureComponent {
   constructor(props) {
     super(props);
     const { data } = this.props;
     this.state = {
-      widgetData: sortData(data),
+      widgetData: updateData(sortData(data)),
       size: data.children[0].size,
       title: '',
-      caseSize: data.children[0].caseSize,
+      caseSize: findCaseSizeOfTitle(data, ''),
     };
   }
-
 
   render() {
     const {
@@ -103,7 +100,6 @@ class ProgramSunburst extends PureComponent {
       width, height, data, textColor, classes,
     } = this.props;
     // update the caseSize  associated with title
-
 
     this.setState({
       widgetData: sortData(data),
@@ -116,7 +112,7 @@ class ProgramSunburst extends PureComponent {
       <>
         <div className={classes.customWidget}>
           <div className={classes.title}>
-            {title}
+            {caseSize > 0 ? title : ''}
           </div>
           <div className={classes.sunburst}>
             <Sunburst
@@ -147,7 +143,7 @@ class ProgramSunburst extends PureComponent {
                 });
               }}
             >
-              {caseSize && (
+              {caseSize > 0 && (
               <LabelSeries data={[{
                 x: 0,
                 y: 0,
@@ -178,6 +174,5 @@ class ProgramSunburst extends PureComponent {
     );
   }
 }
-
 
 export default withStyles(styles)(ProgramSunburst);

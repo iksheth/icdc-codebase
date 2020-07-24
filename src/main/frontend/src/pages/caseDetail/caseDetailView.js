@@ -3,170 +3,26 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import MUIDataTable from 'mui-datatables';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
 import { useDispatch } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
-import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/store/dashboardAction';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
-import { receiveCases, deleteCasesAction } from '../selectedCases/selectedCasesState';
 import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
+import GridView from '../../components/FileGridWithCart';
+import FileColumns from './fileConfig';
+import { FileOnRowsSelect, FileDisableRowSelection } from '../../utils/fileTable';
+import SampleColumns from './sampleConfig';
+import { SampleOnRowsSelect, SampleDisableRowSelection } from '../../utils/sampleFileTable';
 
-const tableStyle = (ratio = 1) => ({
-  width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  overflow: 'hidden',
-  wordBreak: 'break-word',
-  maxWidth: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
-  minWidth: '160px',
-}
-);
-
-function formatBytes(bytes, decimals = 2) {
-  if (bytes === 0) return '0 Bytes';
-
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-  const i = Math.floor(Math.log(bytes) / Math.log(1024));
-
-  return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
-}
-
-
-const columns = [
-
-  {
-    name: 'file_name',
-    label: 'File Name',
-    sortDirection: 'asc',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2.5)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'file_type',
-    label: 'File Type',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'parent',
-    label: 'Association',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'file_description',
-    label: 'Description',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(4)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'file_format',
-    label: 'Format',
-    options: {
-      filter: false,
-      sortDirection: 'asc',
-      customBodyRender: (value) => (
-        <div className="mui_td" style={tableStyle(2.3)}>
-          {' '}
-          {value}
-          {' '}
-        </div>
-      ),
-    },
-  },
-  {
-    name: 'file_size',
-    label: 'Size',
-    options: {
-      customBodyRender: (bytes) => (
-        <div className="mui_td" style={tableStyle(1)}>
-          {' '}
-          {formatBytes(bytes)}
-          {' '}
-        </div>
-      ),
-    },
-  },
-];
-
-
-const options = (classes) => ({
-  selectableRows: false,
-  search: false,
-  filter: false,
-  searchable: false,
-  print: false,
-  download: false,
-  viewColumns: false,
-  pagination: true,
-  customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
-    <TableFooter>
-      <TableRow>
-        <TablePagination
-          className={classes.root}
-          count={count}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-          // eslint-disable-next-line no-shadow
-          onChangePage={(_, page) => changePage(page)}
-        />
-      </TableRow>
-    </TableFooter>
-  ),
-});
-
-
-const CaseDetail = ({ classes, data, selected }) => {
+const CaseDetail = ({ classes, data }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(
     dispatch(fetchDataForDashboardDataTable()),
   );
 
   const dispatch = useDispatch();
-
 
   const redirectTo = (study) => {
     dispatch(initDashboardStatus()).then(() => {
@@ -178,7 +34,6 @@ const CaseDetail = ({ classes, data, selected }) => {
       }]));
     });
   };
-
 
   const stat = {
     numberOfStudies: 1,
@@ -208,28 +63,17 @@ const CaseDetail = ({ classes, data, selected }) => {
     name: caseDetail.case_id,
   }];
 
-
   const [snackbarState, setsnackbarState] = React.useState({
     open: false,
     value: 0,
   });
+
   function openSnack(value, action) {
     setsnackbarState({ open: true, value, action });
   }
   function closeSnack() {
     setsnackbarState({ open: false });
   }
-
-  const removeFromMyCases = () => {
-    openSnack(caseDetail.case_id, 'removed from');
-    dispatch(deleteCasesAction([caseDetail.case_id]));
-  };
-
-  const saveToMyCases = () => {
-    openSnack(caseDetail.case_id, 'added to');
-    dispatch(receiveCases([caseDetail.case_id]));
-  };
-
   return (
     <>
       <Snackbar
@@ -245,15 +89,13 @@ const CaseDetail = ({ classes, data, selected }) => {
               {' '}
             </span>
             <span className={classes.snackBarText}>
-              Case :
-              {' '}
               {snackbarState.value}
               {'    '}
-              successfully
+              File(s) successfully
               {' '}
               {snackbarState.action}
               {' '}
-              My Cases list
+              your cart
             </span>
           </div>
 )}
@@ -343,32 +185,7 @@ const CaseDetail = ({ classes, data, selected }) => {
 
             )}
 
-          <div className={classes.headerButton}>
-            <span className={classes.headerButtonLinkSpan}>
-              {selected
-                ? (
-                  <button
-                    type="button"
-                    className={classes.headerButtonLink}
-                    onClick={removeFromMyCases}
-                  >
-                    <span className={classes.headerButtonLinkText}>Remove from My Cases</span>
-                  </button>
-                )
-                : (
-                  <button
-                    type="button"
-                    className={classes.headerButtonLink}
-                    onClick={saveToMyCases}
-                  >
-                    <span className={classes.headerButtonLinkText}>Save to My Cases</span>
-                  </button>
-                )}
-
-            </span>
-          </div>
         </div>
-
 
         <div id="case_detail_container" className={classes.detailContainer}>
 
@@ -427,7 +244,6 @@ const CaseDetail = ({ classes, data, selected }) => {
                     </Grid>
                   </Grid>
 
-
                   <Grid item xs={12}>
                     <Grid container spacing={4}>
                       <Grid item xs={4}>
@@ -440,11 +256,9 @@ const CaseDetail = ({ classes, data, selected }) => {
                     </Grid>
                   </Grid>
 
-
                 </Grid>
               </Grid>
             </Grid>
-
 
             <Grid item lg={4} md={4} sm={12} xs={12} className={classes.detailContainerRight}>
               <Grid container spacing={32} direction="column">
@@ -526,7 +340,6 @@ const CaseDetail = ({ classes, data, selected }) => {
 
               </Grid>
             </Grid>
-
 
             <Grid item lg={5} md={5} sm={12} xs={12} className={classes.detailContainerRight}>
               <Grid container spacing={32} direction="column">
@@ -625,24 +438,38 @@ const CaseDetail = ({ classes, data, selected }) => {
         </div>
       </div>
       <div id="table_case_detail" className={classes.tableContainer}>
-
+        <div className={classes.tableDiv}>
+          <div className={classes.tableTitle}>
+            <span className={classes.tableHeader}>ASSOCIATED SAMPLES</span>
+          </div>
+          <Grid item xs={12}>
+            <Grid container spacing={4}>
+              <Grid item xs={12}>
+                <GridView
+                  data={data.samplesByCaseId}
+                  Columns={SampleColumns}
+                  customOnRowsSelect={SampleOnRowsSelect}
+                  openSnack={openSnack}
+                  closeSnack={closeSnack}
+                  disableRowSelection={SampleDisableRowSelection}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+        </div>
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
             <span className={classes.tableHeader}>ASSOCIATED FILES</span>
           </div>
           <Grid item xs={12}>
-            <Grid container spacing={4}>
-              <Grid item xs={12}>
-                <MUIDataTable
-                  data={data.filesOfCase}
-                  columns={columns}
-                  options={options(classes)}
-                />
-              </Grid>
-              <Grid item xs={8}>
-                <Typography />
-              </Grid>
-            </Grid>
+            <GridView
+              data={data.filesOfCase}
+              Columns={FileColumns}
+              customOnRowsSelect={FileOnRowsSelect}
+              openSnack={openSnack}
+              closeSnack={closeSnack}
+              disableRowSelection={FileDisableRowSelection}
+            />
           </Grid>
         </div>
       </div>
@@ -650,7 +477,6 @@ const CaseDetail = ({ classes, data, selected }) => {
     </>
   );
 };
-
 
 const styles = (theme) => ({
   paddingLeft8: {
@@ -735,7 +561,6 @@ const styles = (theme) => ({
     fontSize: '12px',
     paddingLeft: '3px',
   },
-
 
   logo: {
     position: 'absolute',

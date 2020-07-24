@@ -6,11 +6,9 @@ import {
 import { useTheme } from '../../components/ThemeContext';
 import Widget from '../../components/Widgets/WidgetView';
 import Stats from '../../components/Stats/DashboardStatsController';
-import Cases from './caseTable/caseController';
-// import PositionedSnackbar from '../../components/Disclaimer/DisclaimerView';
 import ProgramSunburst from '../../components/Widgets/PieCharts/ProgramSunburst/ProgramSunburstController';
 import CustomActiveDonut from '../../components/Widgets/PieCharts/CustomActiveDonut/CustomActiveDonutController';
-
+import Tab from './components/tabController';
 
 const Dashboard = ({
   classes, data, isSidebarOpened, theme,
@@ -190,9 +188,7 @@ const Dashboard = ({
             </Grid>
           </Collapse>
         </div>
-        <Cases />
-        {/* Addingg diclaimer for Dev */}
-        {/* <PositionedSnackbar /> */}
+        <Tab />
       </div>
     </>
   );

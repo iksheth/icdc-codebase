@@ -6,7 +6,6 @@ import { Typography } from '../../components/Wrappers/Wrappers';
 import { GET_STUDY_DETAIL_DATA_QUERY } from '../../utils/graphqlQueries';
 import Error from '../error/Error';
 
-
 const StudyDetailContainer = ({ match }) => (
   <Query query={GET_STUDY_DETAIL_DATA_QUERY} variables={{ csd: match.params.id }}>
     {({ data, loading, error }) => {

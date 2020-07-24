@@ -1,20 +1,21 @@
-import client from '../../utils/graphqlClient';
-import { DASHBOARD_QUERY } from '../../utils/graphqlQueries';
+import _ from 'lodash';
+import * as Actions from './dashboardAction';
+
 import {
   getStatDataFromDashboardData,
   getSunburstDataFromDashboardData,
   getDonutDataFromDashboardData,
   filterData,
   getFilters,
-  getCheckBoxData,
+  updateCheckBoxData,
   customCheckBox,
-} from '../../utils/dashboardUtilFunctions';
-
+  formatFileSize,
+} from '../../../utils/dashboardUtilFunctions';
 
 export const initialState = {
   dashboard: {
     isFetched: false,
-    isLoading: false,
+    isLoading: true,
     error: '',
     hasError: false,
     stats: {},
@@ -35,95 +36,76 @@ export const initialState = {
   },
 };
 
-export const TOGGLE_CHECKBOX = 'TOGGLE_CHECKBOX';
-export const RECEIVE_DASHBOARD = 'RECEIVE_DASHBOARD';
-export const DASHBOARD_QUERY_ERR = 'DASHBOARD_QUERY_ERR';
-export const READY_DASHBOARD = 'READY_DASHBOARD';
-export const REQUEST_DASHBOARD = 'REQUEST_DASHBOARD';
-export const SINGLE_CHECKBOX = 'SINGLE_CHECKBOX';
-// Actions
-
-export const toggleCheckBox = (payload) => ({
-  type: TOGGLE_CHECKBOX,
-  payload,
-});
-
-
-export const singleCheckBox = (payload) => ({
-  type: SINGLE_CHECKBOX,
-  payload,
-});
-
-
-function shouldFetchDataForDashboardDataTable(state) {
-  return !(state.dashboard.isFetched);
-}
-
-function postRequestFetchDataDashboard() {
-  return {
-    type: REQUEST_DASHBOARD,
-  };
-}
-
-function receiveDashboard(json) {
-  return {
-    type: RECEIVE_DASHBOARD,
-    payload:
-    {
-      data: json.data,
-    },
-  };
-}
-
-
-function errorhandler(error, type) {
-  return {
-    type,
-    error,
-  };
-}
-
-
-function readyDashboard() {
-  return {
-    type: READY_DASHBOARD,
-  };
-}
-
-
-// This need to go to dashboard controller
-
-function fetchDashboard() {
-  return (dispatch) => {
-    dispatch(postRequestFetchDataDashboard());
-    return client
-      .query({
-        query: DASHBOARD_QUERY,
-      })
-      .then((result) => dispatch(receiveDashboard(result)))
-      .catch((error) => dispatch(errorhandler(error, DASHBOARD_QUERY_ERR)));
-  };
-}
-
-
-export function fetchDataForDashboardDataTable() {
-  return (dispatch, getState) => {
-    if (shouldFetchDataForDashboardDataTable(getState())) {
-      return dispatch(fetchDashboard());
+function rawDataTransform(payload) {
+  // transform data
+  // get all samples and their files
+  const dicSample = payload.data.sample.reduce((acc, obj) => {
+    const map = _.cloneDeep(acc);
+    if (obj.files.length > 0) {
+      map[obj.sample_id] = obj.files;
     }
-    return dispatch(readyDashboard());
-  };
+    return map;
+  }, {});
+
+  // eslint-disable-next-line no-param-reassign
+  payload.data.caseOverview = payload.data.caseOverview.map((rowData) => {
+    // deep copy obj
+    const d = _.cloneDeep(rowData);
+    // transform file size's format
+    if (d.files) {
+      d.files.map((f) => {
+        const customFile = f;
+        customFile.file_size = formatFileSize(customFile.file_size);
+        return customFile;
+      });
+    }
+    // add cases id into diagnosis_obj
+    if (d.diagnosis_obj) {
+      if (d.diagnosis_obj.best_response) {
+        d.best_response = d.diagnosis_obj.best_response;
+      } else {
+        d.best_response = '';
+      }
+    }
+
+    if (d.sample_list) {
+      d.sample_list = d.sample_list.map((sample) => {
+        const s = _.cloneDeep(sample);
+        if (s.sample_id in dicSample) {
+          s.files = dicSample[s.sample_id];
+        }
+        return s;
+      });
+    }
+    return d;
+  });
+
+  payload.data.study.forEach((d) => {
+    if (d.files.length > 0) {
+      payload.data.caseOverview.push({
+        program: d.program.program_acronym,
+        study_type: d.clinical_study_type,
+        study_code: d.clinical_study_designation,
+        files: d.files.map((f) => {
+          const tmpF = f;
+          tmpF.parent = 'study';
+          tmpF.file_size = formatFileSize(tmpF.file_size);
+          return tmpF;
+        }),
+      });
+    }
+  });
+  return payload;
 }
 
 // End of actions
-
 export default function dashboardReducer(state = initialState, action) {
   switch (action.type) {
-    case SINGLE_CHECKBOX: {
+    case Actions.SINGLE_CHECKBOX: {
       const dataTableFilters = action.payload;
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
       const updatedCheckboxData = dataTableFilters && dataTableFilters.length !== 0
-        ? getCheckBoxData(
+        ? updateCheckBoxData(
           state.caseOverview.data,
           state.checkboxForAll.data,
           state.checkbox.data.filter((d) => action.payload[0].groupName === d.groupName)[0],
@@ -158,11 +140,11 @@ export default function dashboardReducer(state = initialState, action) {
       };
     }
     // if checkbox status has been changed, dashboard data table need to be update as well.
-    case TOGGLE_CHECKBOX: {
+    case Actions.TOGGLE_CHECKBOX: {
       const dataTableFilters = getFilters(state.datatable.filters, action.payload);
       const tableData = state.caseOverview.data.filter((d) => (filterData(d, dataTableFilters)));
       const updatedCheckboxData = dataTableFilters && dataTableFilters.length !== 0
-        ? getCheckBoxData(
+        ? updateCheckBoxData(
           state.caseOverview.data,
           state.checkboxForAll.data,
           state.checkbox.data.filter((d) => action.payload[0].groupName === d.groupName)[0],
@@ -196,10 +178,12 @@ export default function dashboardReducer(state = initialState, action) {
         },
       };
     }
-    case RECEIVE_DASHBOARD: {
+    case Actions.RECEIVE_DASHBOARD: {
       // get action data
-      const checkboxData = customCheckBox(action.payload.data);
-      return action.payload.data
+      const updatedPayload = rawDataTransform(_.cloneDeep(action.payload));
+      const checkboxData = customCheckBox(updatedPayload.data);
+
+      return updatedPayload.data
         ? {
           ...state.dashboard,
           isFetched: true,
@@ -207,14 +191,14 @@ export default function dashboardReducer(state = initialState, action) {
           hasError: false,
           error: '',
           stats: {
-            numberOfStudies: action.payload.data.numberOfStudies,
-            numberOfCases: action.payload.data.numberOfCases,
-            numberOfSamples: action.payload.data.numberOfSamples,
-            numberOfFiles: action.payload.data.numberOfFiles,
-            numberOfAliquots: action.payload.data.numberOfAliquots,
+            numberOfStudies: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'study', []),
+            numberOfCases: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'case', []),
+            numberOfSamples: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'sample', []),
+            numberOfFiles: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'file', []),
+            numberOfAliquots: getStatDataFromDashboardData(updatedPayload.data.caseOverview, 'aliquot', []),
           },
           caseOverview: {
-            data: action.payload.data.caseOverview,
+            data: updatedPayload.data.caseOverview,
           },
           checkboxForAll: {
             data: checkboxData,
@@ -223,21 +207,21 @@ export default function dashboardReducer(state = initialState, action) {
             data: checkboxData,
           },
           datatable: {
-            data: action.payload.data.caseOverview,
+            data: updatedPayload.data.caseOverview,
             filters: [],
           },
           widgets: {
-            studiesByProgram: getSunburstDataFromDashboardData(action.payload.data.caseOverview),
-            caseCountByBreed: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'breed'),
-            caseCountByDiagnosis: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'diagnosis'),
-            caseCountByDiseaseSite: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'disease_site'),
-            caseCountByGender: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'sex'),
-            caseCountByStageOfDisease: getDonutDataFromDashboardData(action.payload.data.caseOverview, 'stage_of_disease'),
+            studiesByProgram: getSunburstDataFromDashboardData(updatedPayload.data.caseOverview),
+            caseCountByBreed: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'breed'),
+            caseCountByDiagnosis: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'diagnosis'),
+            caseCountByDiseaseSite: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'disease_site'),
+            caseCountByGender: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'sex'),
+            caseCountByStageOfDisease: getDonutDataFromDashboardData(updatedPayload.data.caseOverview, 'stage_of_disease'),
           },
 
         } : { ...state };
     }
-    case DASHBOARD_QUERY_ERR:
+    case Actions.DASHBOARD_QUERY_ERR:
       // get action data
       return {
         ...state,
@@ -246,13 +230,13 @@ export default function dashboardReducer(state = initialState, action) {
         isLoading: false,
         isFetched: false,
       };
-    case READY_DASHBOARD:
+    case Actions.READY_DASHBOARD:
       return {
         ...state,
         isLoading: false,
         isFetched: true,
       };
-    case REQUEST_DASHBOARD:
+    case Actions.REQUEST_DASHBOARD:
       return { ...state, isLoading: true };
     default:
       return state;
