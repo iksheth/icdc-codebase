@@ -430,7 +430,7 @@ const StudyDetailView = ({ classes, data }) => {
         <div className={classes.tableDiv}>
           <Grid item xs={12}>
             <div className={classes.tableTitle}>
-              <span className={classes.tableHeader}>ASSOCIATED FILES</span>
+              <span className={classes.tableHeader}>ASSOCIATED STUDY FILES</span>
             </div>
           </Grid>
           <Grid item xs={12} id="table_associated_files">
