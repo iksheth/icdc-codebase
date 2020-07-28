@@ -148,7 +148,53 @@ export function CaseColumns(classes) {
           </div>
         ),
       },
-    }]);
+    },
+    {
+      name: 'weight',
+      label: 'Weight (kg)',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'best_response',
+      label: 'Response to Treatment',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(0.8)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
+      name: 'cohort_description',
+      label: 'Cohort',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    }
+  ]);
 }
 
 export function CaseData() {

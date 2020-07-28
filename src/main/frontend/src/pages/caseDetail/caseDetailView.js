@@ -335,6 +335,17 @@ const CaseDetail = ({ classes, data }) => {
                         </Grid>
                       </Grid>
                     </Grid>
+                    <Grid item xs={12}>
+                      <Grid container spacing={4}>
+                        <Grid item xs={6}>
+                          <span className={classes.title}>RESPONSE TO TREATMENT</span>
+                        </Grid>
+                        <Grid item xs={6} className={classes.content}>
+                          {diagnosis.best_response === '' || diagnosis.best_response === null
+                            ? '' : diagnosis.best_response}
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 ))}
 
