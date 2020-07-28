@@ -154,7 +154,7 @@ export const mappingCheckBoxToDataTable = [
 
   },
   {
-    group: 'Associated File Type',
+    group: 'File Type',
     field: 'files@file_type',
     api: 'caseOverview',
     datafield: 'files@file_type',
@@ -165,7 +165,7 @@ export const mappingCheckBoxToDataTable = [
 
   },
   {
-    group: 'Associated File Format',
+    group: 'File Format',
     field: 'files@file_format',
     api: 'caseOverview',
     datafield: 'files@file_format',
