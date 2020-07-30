@@ -15,6 +15,7 @@ export default ({ children, extraStyles, tableBorder }) => {
     overridesObj.MUIDataTableHeadCell.fixedHeaderCommon.borderTop = tableBorder;
     overridesObj.MUIDataTableHeadCell.fixedHeaderCommon.borderBottom = tableBorder;
     overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
+    overridesObj.MUIDataTableToolbar = { root: { minHeight: '24px' } };
     style.push(overridesObj);
   }
 
