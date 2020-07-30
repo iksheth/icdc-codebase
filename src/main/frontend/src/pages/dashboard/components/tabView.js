@@ -9,7 +9,7 @@ import CustomFooter from './tabFooter';
 import { addFiles } from '../../cart/store/cartAction';
 
 const TabView = ({
-  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection,
+  classes, tabName, data, Columns, customOnRowsSelect, openSnack, disableRowSelection,
 }) => {
   const dispatch = useDispatch();
   // Get the existing files ids from  cart state
@@ -64,6 +64,24 @@ const TabView = ({
 
   const columns = Columns(classes);
 
+  const getBorderColor = () => {
+    let borderColor = '';
+    switch (tabName) {
+      case 'case':
+        borderColor = classes.caseTableBorder;
+        break;
+      case 'file':
+        borderColor = classes.fileTableBorder;
+        break;
+      case 'sample':
+        borderColor = classes.sampleTableBorder;
+        break;
+      default:
+        borderColor = classes.caseTableBorder;
+    }
+    return borderColor;
+  };
+
   const options = () => ({
     selectableRows: true,
     search: false,
@@ -94,6 +112,7 @@ const TabView = ({
         onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
       // eslint-disable-next-line no-shadow
         onChangePage={(_, page) => changePage(page)}
+        borderStyle={getBorderColor(tabName)}
       />
     ),
 
@@ -165,6 +184,7 @@ const styles = () => ({
     },
   },
   root: {
+    borderTop: '4px solid',
     fontFamily: '"Open Sans", sans-serif',
     fontSize: '9pt',
     letterSpacing: '0.025em',
@@ -183,6 +203,15 @@ const styles = () => ({
     fontSize: '10pt',
     color: '#fff',
     backgroundColor: '#ff7f15',
+  },
+  caseTableBorder: {
+    borderTopColor: '#F48439',
+  },
+  fileTableBorder: {
+    borderTopColor: '#2446C6',
+  },
+  sampleTableBorder: {
+    borderTopColor: '#05C5CC',
   },
 });
 

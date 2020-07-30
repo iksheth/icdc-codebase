@@ -91,6 +91,7 @@ const tabController = (classes) => {
       >
         <TabContainer>
           <TabView
+            tabName="case"
             data={caseData}
             Columns={CaseColumns}
             customOnRowsSelect={CaseOnRowsSelect}
@@ -101,6 +102,7 @@ const tabController = (classes) => {
         </TabContainer>
         <TabContainer>
           <TabView
+            tabName="sample"
             data={sampleData}
             Columns={SampleColumns}
             customOnRowsSelect={SampleOnRowsSelect}
@@ -111,6 +113,7 @@ const tabController = (classes) => {
         </TabContainer>
         <TabContainer>
           <TabView
+            tabName="file"
             data={fileData}
             Columns={FileColumns}
             customOnRowsSelect={FileOnRowsSelect}
