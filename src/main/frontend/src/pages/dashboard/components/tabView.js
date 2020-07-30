@@ -7,10 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import CustomFooter from './tabFooter';
 import { addFiles } from '../../cart/store/cartAction';
-import TabThemeProvider from './tabThemeConfig';
 
 const TabView = ({
-  classes, tabName, data, Columns, customOnRowsSelect, openSnack, disableRowSelection,
+  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection,
 }) => {
   const dispatch = useDispatch();
   // Get the existing files ids from  cart state
@@ -65,24 +64,6 @@ const TabView = ({
 
   const columns = Columns(classes);
 
-  const getBorderColorTheme = () => {
-    let borderColor = '4px solid';
-    switch (tabName) {
-      case 'case':
-        borderColor = `#F48439 ${borderColor}`;
-        break;
-      case 'file':
-        borderColor = `#2446C6 ${borderColor}`;
-        break;
-      case 'sample':
-        borderColor = `#05C5CC ${borderColor}`;
-        break;
-      default:
-        borderColor = `#F48439 ${borderColor}`;
-    }
-    return borderColor;
-  };
-
   const options = () => ({
     selectableRows: true,
     search: false,
@@ -122,13 +103,11 @@ const TabView = ({
     <div>
       <Grid container>
         <Grid item xs={12} id="table_cases">
-          <TabThemeProvider tableBorder={getBorderColorTheme()}>
-            <MUIDataTable
-              data={data}
-              columns={columns}
-              options={options()}
-            />
-          </TabThemeProvider>
+          <MUIDataTable
+            data={data}
+            columns={columns}
+            options={options()}
+          />
         </Grid>
 
       </Grid>

@@ -19,6 +19,8 @@ import {
 import { SampleOnRowsSelect, SampleDisableRowSelection } from '../../../utils/sampleFileTable';
 import TabView from './tabView';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
+import TabThemeProvider from './tabThemeConfig';
+import TabLabel from './tabLabel';
 
 function TabContainer({ children, dir }) {
   return (
@@ -49,9 +51,48 @@ const tabController = (classes) => {
     setsnackbarState({ open: false });
   }
 
+  const tabIndex = {
+    0: {
+      title: 'Case',
+      primaryColor: '#F48439',
+      secondaryColor: '#FFDFB8',
+    },
+    1: {
+      title: 'Samples',
+      primaryColor: '#05C5CC',
+      secondaryColor: '#C9F1F1',
+    },
+    2: {
+      title: 'Files',
+      primaryColor: '#2446C6',
+      secondaryColor: '#E1E5FF',
+    },
+  };
+
+  function getBorderStyle() {
+    const style = '3px solid';
+    return `${tabIndex[currentTab].primaryColor} ${style}`;
+  }
+
+  function getTabLalbel(title, count) {
+    const tabObj = tabIndex[currentTab];
+    const primaryColor = (tabObj.title === title) ? tabObj.primaryColor : undefined;
+    const secondaryColor = (tabObj.title === title) ? tabObj.secondaryColor : undefined;
+
+    return (
+      <TabLabel
+        title={title}
+        count={count}
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
+      />
+    );
+  }
+
   const caseData = CaseData();
   const sampleData = SampleData();
   const fileData = FileData();
+
   return (
     <>
       <Snackbar
@@ -74,55 +115,60 @@ const tabController = (classes) => {
           </div>
 )}
       />
-      <Tabs
-        value={currentTab}
-        onChange={handleTabChange}
-        indicatorColor="primary"
-        textColor="primary"
-      >
-        <Tab label={`Case  (${caseData.length})`} />
-        <Tab label={`Samples  (${sampleData.length})`} />
-        <Tab label={`Files  (${fileData.length})`} />
-      </Tabs>
-      <SwipeableViews
-        index={currentTab}
-        onChangeIndex={handleTabChange}
-        animateTransitions={false}
-      >
-        <TabContainer>
-          <TabView
-            tabName="case"
-            data={caseData}
-            Columns={CaseColumns}
-            customOnRowsSelect={CaseOnRowsSelect}
-            openSnack={openSnack}
-            closeSnack={closeSnack}
-            disableRowSelection={CaseDisableRowSelection}
+      <TabThemeProvider tableBorder={getBorderStyle()}>
+        <Tabs
+          value={currentTab}
+          onChange={handleTabChange}
+          indicatorColor="primary"
+          textColor="primary"
+        >
+          <Tab
+            label={getTabLalbel('Case', caseData.length)}
           />
-        </TabContainer>
-        <TabContainer>
-          <TabView
-            tabName="sample"
-            data={sampleData}
-            Columns={SampleColumns}
-            customOnRowsSelect={SampleOnRowsSelect}
-            openSnack={openSnack}
-            closeSnack={closeSnack}
-            disableRowSelection={SampleDisableRowSelection}
+          <Tab
+            label={getTabLalbel('Samples', sampleData.length)}
           />
-        </TabContainer>
-        <TabContainer>
-          <TabView
-            tabName="file"
-            data={fileData}
-            Columns={FileColumns}
-            customOnRowsSelect={FileOnRowsSelect}
-            openSnack={openSnack}
-            closeSnack={closeSnack}
-            disableRowSelection={FileDisableRowSelection}
+          <Tab
+            label={getTabLalbel('Files', fileData.length)}
           />
-        </TabContainer>
-      </SwipeableViews>
+        </Tabs>
+        <SwipeableViews
+          index={currentTab}
+          onChangeIndex={handleTabChange}
+          animateTransitions={false}
+        >
+          <TabContainer>
+            <TabView
+              data={caseData}
+              Columns={CaseColumns}
+              customOnRowsSelect={CaseOnRowsSelect}
+              openSnack={openSnack}
+              closeSnack={closeSnack}
+              disableRowSelection={CaseDisableRowSelection}
+            />
+          </TabContainer>
+          <TabContainer>
+            <TabView
+              data={sampleData}
+              Columns={SampleColumns}
+              customOnRowsSelect={SampleOnRowsSelect}
+              openSnack={openSnack}
+              closeSnack={closeSnack}
+              disableRowSelection={SampleDisableRowSelection}
+            />
+          </TabContainer>
+          <TabContainer>
+            <TabView
+              data={fileData}
+              Columns={FileColumns}
+              customOnRowsSelect={FileOnRowsSelect}
+              openSnack={openSnack}
+              closeSnack={closeSnack}
+              disableRowSelection={FileDisableRowSelection}
+            />
+          </TabContainer>
+        </SwipeableViews>
+      </TabThemeProvider>
     </>
   );
 };
