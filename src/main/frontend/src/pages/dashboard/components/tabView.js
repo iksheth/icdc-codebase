@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import CustomFooter from './tabFooter';
 import { addFiles } from '../../cart/store/cartAction';
+import TabThemeProvider from './tabThemeConfig';
 
 const TabView = ({
   classes, tabName, data, Columns, customOnRowsSelect, openSnack, disableRowSelection,
@@ -64,20 +65,20 @@ const TabView = ({
 
   const columns = Columns(classes);
 
-  const getBorderColor = () => {
-    let borderColor = '';
+  const getBorderColorTheme = () => {
+    let borderColor = '4px solid';
     switch (tabName) {
       case 'case':
-        borderColor = classes.caseTableBorder;
+        borderColor = `#F48439 ${borderColor}`;
         break;
       case 'file':
-        borderColor = classes.fileTableBorder;
+        borderColor = `#2446C6 ${borderColor}`;
         break;
       case 'sample':
-        borderColor = classes.sampleTableBorder;
+        borderColor = `#05C5CC ${borderColor}`;
         break;
       default:
-        borderColor = classes.caseTableBorder;
+        borderColor = `#F48439 ${borderColor}`;
     }
     return borderColor;
   };
@@ -112,7 +113,6 @@ const TabView = ({
         onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
       // eslint-disable-next-line no-shadow
         onChangePage={(_, page) => changePage(page)}
-        borderStyle={getBorderColor(tabName)}
       />
     ),
 
@@ -122,11 +122,13 @@ const TabView = ({
     <div>
       <Grid container>
         <Grid item xs={12} id="table_cases">
-          <MUIDataTable
-            data={data}
-            columns={columns}
-            options={options()}
-          />
+          <TabThemeProvider tableBorder={getBorderColorTheme()}>
+            <MUIDataTable
+              data={data}
+              columns={columns}
+              options={options()}
+            />
+          </TabThemeProvider>
         </Grid>
 
       </Grid>
@@ -184,7 +186,6 @@ const styles = () => ({
     },
   },
   root: {
-    borderTop: '4px solid',
     fontFamily: '"Open Sans", sans-serif',
     fontSize: '9pt',
     letterSpacing: '0.025em',

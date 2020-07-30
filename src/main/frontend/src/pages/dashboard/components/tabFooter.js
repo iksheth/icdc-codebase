@@ -16,12 +16,11 @@ const TabFooter = ({
   rowsPerPage,
   onChangePage,
   onChangeRowsPerPage,
-  borderStyle,
 }) => (
   <TableFooter>
     <TableRow>
       <TablePagination
-        className={[classes.root, borderStyle]}
+        className={classes.root}
         count={count}
         page={page}
         rowsPerPage={rowsPerPage}
