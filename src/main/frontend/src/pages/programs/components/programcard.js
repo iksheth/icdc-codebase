@@ -14,6 +14,7 @@ const ProgramCard = ({
 }) => {
   const programConfig = ProgramImageConfig[data.program_acronym];
   const programImage = programConfig ? programConfig.primaryImage : '';
+  const primaryImageAlt = programConfig ? programConfig.primaryImageAlt : '';
 
   return (
     <div className={classes.detailContainer}>
@@ -62,7 +63,7 @@ const ProgramCard = ({
         <Grid item lg={4} md={4} sm={4} xs={12} className={classes.detailContainerRight}>
           <img
             src={programImage}
-            alt="dog  for program detail"
+            alt={primaryImageAlt}
             className={classes.dogImage}
           />
         </Grid>
