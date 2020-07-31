@@ -12,15 +12,10 @@ import {
   Tooltip,
   withStyles,
 } from '@material-ui/core';
-// import {
-//   ColorLens as ColorLensIcon,
-// } from '@material-ui/icons';
 import classnames from 'classnames';
-// import { useTheme } from '../ThemeContext';
 import caseIcon from '../../assets/icons/Icon-MyCases.svg';
 import funnelIconBlue from '../../assets/icons/Icon-funnel-blue.svg';
 import funnelIconWhite from '../../assets/icons/Icon-funnel-white.svg';
-// import ProfileMenu from '../ProfileMenu/ProfileMenuView';
 import SideBarContent from '../SideBar/SideBarView';
 import { initCart } from '../../pages/cart/store/cartAction';
 import { toggleCheckBox } from '../../pages/dashboard/store/dashboardAction';
@@ -28,8 +23,6 @@ import { unselectFilters } from '../../utils/dashboardUtilFunctions';
 import AboutMenu from './components/AboutMenu';
 
 const drawerWidth = 240;
-// const FENCE_LOGIN_URL = process.env.FENCE_LOGIN_URL;
-// const FENCE_LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 const BACKEND_GETUSERINFO_API = process.env.REACT_APP_BACKEND_GETUSERINFO_API;
 
 const NavBar = ({
@@ -105,7 +98,6 @@ const NavBar = ({
           <div className={classes.FilterIconPosition}>
             { (location.pathname === '/cases') && (
             <Button
-              variant="h6"
               weight="medium"
               aria-label="open drawer"
               onClick={toggleSidebar}
@@ -125,7 +117,7 @@ const NavBar = ({
           </div>
           {/* End Sidebar button */}
           <div className={classes.buttonContainer}>
-            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -135,7 +127,7 @@ const NavBar = ({
                 home
               </NavLink>
             </Button>
-            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -147,7 +139,7 @@ const NavBar = ({
 
             </Button>
 
-            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -158,7 +150,7 @@ const NavBar = ({
               </NavLink>
             </Button>
 
-            <Button disableRipple variant="h6" weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
+            <Button disableRipple weight="medium" className={classes.logotype} classes={{ root: classes.buttonRoot }}>
               <NavLink
                 className={classes.link}
                 activeStyle={{ borderBottom: '2px solid  #39C0F0' }}
@@ -173,9 +165,8 @@ const NavBar = ({
 
           <Button
             disableRipple
-            variant="h6"
             weight="medium"
-            className={[classes.logotype, classes.myCasesPosition]}
+            className={classnames(classes.logotype, classes.myCasesPosition)}
             classes={{ root: classes.buttonRootNoRightPadding }}
           >
             <NavLink
@@ -217,7 +208,6 @@ const NavBar = ({
               <Button
                 variant="outlined"
                 disabled={activeFilters.length === 0}
-                onCl
                 className={classes.customButton}
                 classes={{ root: classes.clearAllButtonRoot }}
                 onClick={() => dispatch(toggleCheckBox(unselectFilters(activeFilters)))}
