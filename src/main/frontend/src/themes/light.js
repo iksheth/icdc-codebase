@@ -386,6 +386,7 @@ export default {
       root: {
         top: 0,
         bottom: 'auto',
+        height: '3px',
       },
     },
   },

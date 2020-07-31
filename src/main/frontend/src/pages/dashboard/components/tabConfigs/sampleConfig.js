@@ -79,7 +79,6 @@ export function SampleColumns(classes) {
       label: 'Sample Site',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2)}>
             {' '}
@@ -94,7 +93,6 @@ export function SampleColumns(classes) {
       label: 'Sample Type',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
             {' '}
@@ -109,7 +107,6 @@ export function SampleColumns(classes) {
       label: 'Pathology/Morphology',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
             {' '}
@@ -124,7 +121,6 @@ export function SampleColumns(classes) {
       label: 'Tumor Grade',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
             {' '}
@@ -139,7 +135,6 @@ export function SampleColumns(classes) {
       label: 'Sample Chronology',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}
@@ -154,7 +149,6 @@ export function SampleColumns(classes) {
       label: 'Percentage Tumor',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}
@@ -169,7 +163,6 @@ export function SampleColumns(classes) {
       label: 'Necropsy Sample',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}
@@ -184,7 +177,6 @@ export function SampleColumns(classes) {
       label: 'Sample Preservation',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}

@@ -184,6 +184,15 @@ const styles = () => ({
     color: '#fff',
     backgroundColor: '#ff7f15',
   },
+  caseTableBorder: {
+    borderTopColor: '#F48439',
+  },
+  fileTableBorder: {
+    borderTopColor: '#2446C6',
+  },
+  sampleTableBorder: {
+    borderTopColor: '#05C5CC',
+  },
 });
 
 export default withStyles(styles, { withTheme: true })(TabView);

@@ -49,7 +49,6 @@ export function CaseColumns(classes) {
       label: 'Study Type',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2.3)}>
             {' '}
@@ -64,7 +63,6 @@ export function CaseColumns(classes) {
       label: 'Breed',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(1)}>
             {' '}
@@ -79,7 +77,6 @@ export function CaseColumns(classes) {
       label: 'Diagnosis',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2)}>
             {' '}
@@ -94,7 +91,6 @@ export function CaseColumns(classes) {
       label: 'Stage of Disease',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
             {' '}
@@ -109,7 +105,6 @@ export function CaseColumns(classes) {
       label: 'Age',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
             {' '}
@@ -124,7 +119,6 @@ export function CaseColumns(classes) {
       label: 'Sex',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
             {' '}
@@ -139,7 +133,6 @@ export function CaseColumns(classes) {
       label: 'Neutered Status',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}
@@ -154,7 +147,6 @@ export function CaseColumns(classes) {
       label: 'Weight (kg)',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}
@@ -169,7 +161,6 @@ export function CaseColumns(classes) {
       label: 'Response to Treatment',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}
@@ -184,7 +175,6 @@ export function CaseColumns(classes) {
       label: 'Cohort',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(1)}>
             {' '}

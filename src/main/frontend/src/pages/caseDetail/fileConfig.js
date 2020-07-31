@@ -15,7 +15,6 @@ export default function FileColumns() {
     {
       name: 'file_name',
       label: 'File Name',
-      sortDirection: 'asc',
       options: {
         filter: false,
         sortDirection: 'asc',
@@ -33,7 +32,6 @@ export default function FileColumns() {
       label: 'File Type',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2)}>
             {' '}
@@ -48,7 +46,6 @@ export default function FileColumns() {
       label: 'Association',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2)}>
             {' '}
@@ -63,7 +60,6 @@ export default function FileColumns() {
       label: 'Description',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(4)}>
             {' '}
@@ -78,7 +74,6 @@ export default function FileColumns() {
       label: 'Format',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2.3)}>
             {' '}

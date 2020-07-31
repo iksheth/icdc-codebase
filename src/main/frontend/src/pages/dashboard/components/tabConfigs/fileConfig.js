@@ -35,7 +35,6 @@ export function FileColumns(classes) {
       label: 'File Type',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2)}>
             {' '}
@@ -50,7 +49,6 @@ export function FileColumns(classes) {
       label: 'Association',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
             {' '}
@@ -65,7 +63,6 @@ export function FileColumns(classes) {
       label: 'Description',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
             {' '}
@@ -80,7 +77,6 @@ export function FileColumns(classes) {
       label: 'Format',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.5)}>
             {' '}
@@ -95,7 +91,6 @@ export function FileColumns(classes) {
       label: 'Size',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}
@@ -110,7 +105,6 @@ export function FileColumns(classes) {
       label: 'Case ID',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(0.8)}>
             {' '}
@@ -139,7 +133,6 @@ export function FileColumns(classes) {
       label: 'Diagnosis',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2.3)}>
             {' '}
@@ -154,7 +147,6 @@ export function FileColumns(classes) {
       label: 'Study Code',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(1.8)}>
             {' '}
