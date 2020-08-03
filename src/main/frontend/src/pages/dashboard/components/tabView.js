@@ -87,7 +87,6 @@ const TabView = ({
       <CustomFooter
         text="SAVE TO MY CASES"
         onClick={() => exportFiles(dispatch)}
-        classes={classes}
         count={count}
         page={page}
         rowsPerPage={rowsPerPage}
