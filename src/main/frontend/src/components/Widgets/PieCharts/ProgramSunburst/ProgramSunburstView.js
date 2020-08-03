@@ -86,28 +86,21 @@ class ProgramSunburst extends PureComponent {
     const { data } = this.props;
     this.state = {
       widgetData: updateData(sortData(data)),
-      size: data.children[0].size,
       title: '',
       caseSize: findCaseSizeOfTitle(data, ''),
     };
   }
 
   render() {
-    const {
-      caseSize, size, widgetData, title,
-    } = this.state;
+    const { title } = this.state;
+
+    let { widgetData, caseSize } = this.state;
     const {
       width, height, data, textColor, classes,
     } = this.props;
-    // update the caseSize  associated with title
 
-    this.setState({
-      widgetData: sortData(data),
-      size,
-      title,
-      caseSize: findCaseSizeOfTitle(data, title),
-    });
-
+    widgetData = sortData(data);
+    caseSize = findCaseSizeOfTitle(data, title);
     return (
       <>
         <div className={classes.customWidget}>
@@ -136,7 +129,6 @@ class ProgramSunburst extends PureComponent {
                 }, {});
                 const wdata = updateData(widgetData, pathAsMap);
                 this.setState({
-                  size: node.size,
                   widgetData: wdata,
                   title: node.title,
                   caseSize: node.size || node.caseSize,
