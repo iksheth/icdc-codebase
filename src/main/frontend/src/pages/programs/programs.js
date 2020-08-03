@@ -8,7 +8,6 @@ import cn from '../../utils/classNameConcat';
 const Programs = ({ classes, data }) => (
   <>
     <Stats />
-
     <div className={classes.container}>
       <div className={classes.header}>
         <div className={classes.logo}>
@@ -16,7 +15,6 @@ const Programs = ({ classes, data }) => (
             src={icon}
             alt="ICDC case detail header logo"
           />
-
         </div>
         <div className={classes.headerTitle}>
           <div className={cn(classes.headerMainTitle, classes.marginTop23)}>
@@ -25,14 +23,11 @@ const Programs = ({ classes, data }) => (
             </span>
           </div>
         </div>
-
       </div>
-
       <div className={classes.detailContainer}>
-
         <Grid container className={classes.gridContainer}>
           {data.program.map((programCardData) => (
-            <Grid item lg={12} md={12} sm={12} xs={12}>
+            <Grid item lg={12} md={12} sm={12} xs={12} key={programCardData.program_name}>
               <ProgramCard data={programCardData} />
             </Grid>
           ))}

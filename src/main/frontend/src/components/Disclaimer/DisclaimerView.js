@@ -38,7 +38,7 @@ function PositionedSnackbar({ classes }) {
           message={(
             <span className={classes.inline}>
               <WarningIcon className={classes.icon} />
-              <Typography color="textWhite">
+              <Typography>
                 <b>Please note:</b>
 &nbsp;Data is purely representational and does not reflect actual values or subjects
                 {' '}
