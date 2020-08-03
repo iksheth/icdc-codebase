@@ -14,6 +14,7 @@ export default ({ children, extraStyles, tableBorder }) => {
     overridesObj.MUIDataTableSelectCell.headerCell.borderBottom = tableBorder;
     overridesObj.MUIDataTableHeadCell.fixedHeaderCommon.borderTop = tableBorder;
     overridesObj.MUIDataTableHeadCell.fixedHeaderCommon.borderBottom = tableBorder;
+    overridesObj.MuiPrivateTabIndicator.root.transitionProperty = 'none';
     overridesObj.MuiPrivateTabIndicator.colorPrimary = { backgroundColor: tableBorder.split(' ')[0] };
     overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
     overridesObj.MUIDataTableToolbar = { root: { minHeight: '24px' } };
