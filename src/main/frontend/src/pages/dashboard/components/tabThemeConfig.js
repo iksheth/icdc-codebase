@@ -35,14 +35,14 @@ export default ({ children, extraStyles, tableBorder }) => {
       height: '52px',
       marginRight: '10px',
       background: '#EAEAEA',
-    },
-    selected: {
-      borderWidth: '2px',
-      borderStyle: 'solid',
-      borderLeftColor: '#6B6B6B',
-      borderRightColor: '#6B6B6B',
-      borderBottomWidth: '0px',
-      background: '#FFFFFF',
+      '&$selected': {
+        borderWidth: '2px',
+        borderStyle: 'solid',
+        borderLeftColor: '#6B6B6B',
+        borderRightColor: '#6B6B6B',
+        borderBottomWidth: '0px',
+        background: '#FFFFFF',
+      },
     },
     labelContainer: {
       fontSize: '18px',

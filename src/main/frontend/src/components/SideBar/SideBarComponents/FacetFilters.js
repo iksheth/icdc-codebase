@@ -101,6 +101,7 @@ const FacetPanel = (classes) => {
     }
     return (
       <ExpansionPanel
+        key={sideBarItem.groupName}
         expanded={expanded === sideBarItem.groupName}
         onChange={handleChange(sideBarItem.groupName)}
         classes={{ expanded: classes.classes.expansionPanelExpanded }}
@@ -143,6 +144,7 @@ const FacetPanel = (classes) => {
                   button
                   onClick={handleToggle(`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}$$${sideBarItem.section}$$${sideBarItem.key}`)}
                   className={classes.nested}
+                  key={`${checkboxItem.name}$$${sideBarItem.groupName}$$${sideBarItem.datafield}$$${checkboxItem.isChecked}$$${sideBarItem.section}$$${sideBarItem.key}`}
                 >
                   <Checkbox
                     classes={{ root: styles }}
