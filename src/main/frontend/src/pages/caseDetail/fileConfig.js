@@ -56,6 +56,20 @@ export default function FileColumns() {
       },
     },
     {
+      name: 'sample_id',
+      label: 'Sample ID',
+      options: {
+        filter: false,
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
       name: 'file_description',
       label: 'Description',
       options: {

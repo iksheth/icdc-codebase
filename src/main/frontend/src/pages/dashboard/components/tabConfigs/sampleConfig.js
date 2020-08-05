@@ -1,9 +1,5 @@
-/* eslint-disable */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
-import { filterData } from '../../../../utils/dashboardUtilFunctions';
-
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -14,7 +10,7 @@ const tableStyle = (ratio = 1) => ({
 }
 );
 
-export function SampleColumns(classes) {
+export default function SampleColumns(classes) {
   return ([
     {
       name: 'case_id',
