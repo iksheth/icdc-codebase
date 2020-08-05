@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { filterData } from '../../../../utils/dashboardUtilFunctions';
 
@@ -159,11 +158,7 @@ export function FileColumns(classes) {
   ]);
 }
 
-export function FileData() {
-  // data from store
-  const fileData = useSelector((state) => (state.dashboard
-        && state.dashboard.datatable
-    ? state.dashboard.datatable : {}));
+export function FileData(fileData) {
 
   // combine case properties with files.
   const transform = (accumulator, currentValue) => {
