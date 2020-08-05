@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Tabs, Tab, withStyles,
 } from '@material-ui/core';
@@ -10,12 +11,11 @@ import {
 } from './tabConfigs/caseConfig';
 import { CaseOnRowsSelect, CaseDisableRowSelection } from '../../../utils/caseFileTable';
 import {
-  FileData, FileColumns,
+  FileColumns,
 } from './tabConfigs/fileConfig';
+import { FileData, SampleData } from '../../../utils/dashboardUtilFunctions';
 import { FileOnRowsSelect, FileDisableRowSelection } from '../../../utils/fileTable';
-import {
-  SampleData, SampleColumns,
-} from './tabConfigs/sampleConfig';
+import { SampleColumns } from './tabConfigs/sampleConfig';
 import { SampleOnRowsSelect, SampleDisableRowSelection } from '../../../utils/sampleFileTable';
 import TabView from './tabView';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
@@ -33,6 +33,16 @@ function TabContainer({ children, dir }) {
 const tabController = (classes) => {
   // tab settings
   const [currentTab, setCurrentTab] = React.useState(0);
+
+  // data from store
+  const samples = useSelector((state) => (state.dashboard
+&& state.dashboard.datatable
+    ? state.dashboard.datatable : {}));
+
+  // data from store
+  const files = useSelector((state) => (state.dashboard
+        && state.dashboard.datatable
+    ? state.dashboard.datatable : {}));
 
   const handleTabChange = (event, value) => {
     setCurrentTab(value);
@@ -90,8 +100,8 @@ const tabController = (classes) => {
   }
 
   const caseData = CaseData();
-  const sampleData = SampleData();
-  const fileData = FileData();
+  const sampleData = SampleData(samples);
+  const fileData = FileData(files);
 
   return (
     <>
