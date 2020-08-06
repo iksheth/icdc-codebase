@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import { filterData } from '../../../../utils/dashboardUtilFunctions';
@@ -187,47 +186,4 @@ export function SampleColumns(classes) {
       },
     },
   ]);
-}
-
-export function SampleData() {
-// data from store
-  const sampleData = useSelector((state) => (state.dashboard
-&& state.dashboard.datatable
-    ? state.dashboard.datatable : {}));
-
-  // combine case properties with samples.
-  const transform = (accumulator, currentValue) => {
-    const caseAttrs = {};
-    Object.keys(currentValue).forEach((key) => {
-      if (key && !Array.isArray(currentValue[key])) {
-        caseAttrs[key] = currentValue[key];
-      }
-    });
-    if (currentValue.sample_list) {
-      return accumulator.concat(currentValue.sample_list.map((f) => ({ ...f, ...caseAttrs })));
-    }
-    return accumulator;
-  };
-  const tableData = sampleData.data.reduce(transform, []);
-
-  // get sample filters
-  const sampleFilters = JSON.parse(JSON.stringify(sampleData)).filters
-    .filter((f) => f.section === 'sample')
-    .map((f) => {
-      const tmpF = f;
-      tmpF.datafield = tmpF.datafield.includes('@') ? tmpF.datafield.split('@').pop() : tmpF.datafield;
-      return tmpF;
-    });
-
-  // filter out the records which does not match the filters, plus case_id should not be null.
-  const tableDataAfterFilter = tableData
-    .filter((row) => filterData(row, sampleFilters))
-    .filter((d) => {
-      if (d.case_id) {
-        return true;
-      }
-      return false;
-    });
-
-  return tableDataAfterFilter;
 }
