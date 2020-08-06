@@ -679,6 +679,17 @@ export function FileData(fileData) {
   return tableDataAfterFilter;
 }
 
+export function CaseData(tableData) {
+  // filter out the records which case_id is null.  ->
+  // this is for the study level file
+  return tableData.filter((d) => {
+    if (d.case_id) {
+      return true;
+    }
+    return false;
+  });
+}
+
 export function SampleData(sampleData) {
   // combine case properties with samples.
   const transform = (accumulator, currentValue) => {
