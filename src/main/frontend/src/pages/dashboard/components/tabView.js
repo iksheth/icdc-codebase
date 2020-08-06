@@ -10,7 +10,7 @@ import { addFiles } from '../../cart/store/cartAction';
 import { FileData } from '../../../utils/dashboardUtilFunctions';
 
 const TabView = ({
-  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection,
+  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection, buttonTitle,
 }) => {
   const dispatch = useDispatch();
   // Get the existing files ids from  cart state
@@ -129,7 +129,7 @@ const TabView = ({
           onClick={exportFiles}
           className={classes.button}
         >
-          ADD ASSOCIATED FILES TO MY CART
+          { buttonTitle }
         </button>
       </Grid>
     </div>
@@ -188,7 +188,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '330px',
+    width: '400px',
     height: '27px',
     lineHeight: '18px',
     fontSize: '10pt',

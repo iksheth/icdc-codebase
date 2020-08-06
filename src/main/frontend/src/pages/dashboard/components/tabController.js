@@ -146,6 +146,7 @@ const tabController = (classes) => {
               openSnack={openSnack}
               closeSnack={closeSnack}
               disableRowSelection={CaseDisableRowSelection}
+              buttonTitle="Add Filtered Files Associated With Selected Case(s)"
             />
           </TabContainer>
           <TabContainer>
@@ -156,6 +157,7 @@ const tabController = (classes) => {
               openSnack={openSnack}
               closeSnack={closeSnack}
               disableRowSelection={SampleDisableRowSelection}
+              buttonTitle="Add Filtered Files Associated With Selected Sample(s)"
             />
           </TabContainer>
           <TabContainer>
@@ -166,6 +168,7 @@ const tabController = (classes) => {
               openSnack={openSnack}
               closeSnack={closeSnack}
               disableRowSelection={FileDisableRowSelection}
+              buttonTitle=" Add Files Associated With Your Selection"
             />
           </TabContainer>
         </SwipeableViews>
