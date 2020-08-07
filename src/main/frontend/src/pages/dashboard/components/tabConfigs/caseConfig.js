@@ -1,8 +1,5 @@
-/* eslint-disable */
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import _ from 'lodash';
 
 const tableStyle = (ratio = 1) => ({
   width: (((document.documentElement.clientWidth * 0.6) / 10) * ratio),
@@ -13,7 +10,7 @@ const tableStyle = (ratio = 1) => ({
 }
 );
 
-export function CaseColumns(classes) {
+export default function CaseColumns(classes) {
   return ([
     {
       name: 'case_id',
@@ -183,22 +180,6 @@ export function CaseColumns(classes) {
           </div>
         ),
       },
-    }
+    },
   ]);
-}
-
-export function CaseData() {
-// data from store
-  const tableData = useSelector((state) => (state.dashboard
-&& state.dashboard.datatable
-&& state.dashboard.datatable.data
-    ? state.dashboard.datatable.data : {}));
-  // filter out the records which case_id is null.  ->
-  // this is for the study level file
-  return tableData.filter((d) => {
-    if (d.case_id) {
-      return true;
-    }
-    return false;
-  });
 }

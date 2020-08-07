@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import MUIDataTable from 'mui-datatables';
 import CustomFooter from './tabFooter';
 import { addFiles } from '../../cart/store/cartAction';
+import { FileData } from '../../../utils/dashboardUtilFunctions';
 
 const TabView = ({
   classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection,
@@ -14,6 +15,10 @@ const TabView = ({
   const dispatch = useDispatch();
   // Get the existing files ids from  cart state
   const fileIDs = useSelector((state) => state.cart.files);
+
+  const dashboard = useSelector((state) => (state.dashboard
+&& state.dashboard.datatable
+    ? state.dashboard.datatable : {}));
 
   const saveButton = useRef(null);
 
@@ -30,6 +35,12 @@ const TabView = ({
   let selectedFileIDs = [];
 
   function exportFiles() {
+    // filter out the ones  which are not int the file tab.
+    const files = FileData(dashboard).map((f) => f.uuid);
+
+    if (files && files.length > 0) {
+      selectedFileIDs = selectedFileIDs.filter((uuid) => files.includes(uuid));
+    }
     // Find the newly added files by comparing
     const newFileIDS = fileIDs !== null ? selectedFileIDs.filter(
       (e) => !fileIDs.find((a) => e === a),

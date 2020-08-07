@@ -6,16 +6,12 @@ import {
 import Typography from '@material-ui/core/Typography';
 import SwipeableViews from 'react-swipeable-views';
 import Snackbar from '@material-ui/core/Snackbar';
-import {
-  CaseData, CaseColumns,
-} from './tabConfigs/caseConfig';
+import CaseColumns from './tabConfigs/caseConfig';
 import { CaseOnRowsSelect, CaseDisableRowSelection } from '../../../utils/caseFileTable';
-import {
-  FileColumns,
-} from './tabConfigs/fileConfig';
-import { FileData, SampleData } from '../../../utils/dashboardUtilFunctions';
+import FileColumns from './tabConfigs/fileConfig';
+import { FileData, SampleData, CaseData } from '../../../utils/dashboardUtilFunctions';
 import { FileOnRowsSelect, FileDisableRowSelection } from '../../../utils/fileTable';
-import { SampleColumns } from './tabConfigs/sampleConfig';
+import SampleColumns from './tabConfigs/sampleConfig';
 import { SampleOnRowsSelect, SampleDisableRowSelection } from '../../../utils/sampleFileTable';
 import TabView from './tabView';
 import SuccessOutlinedIcon from '../../../utils/SuccessOutlined';
@@ -35,13 +31,8 @@ const tabController = (classes) => {
   const [currentTab, setCurrentTab] = React.useState(0);
 
   // data from store
-  const samples = useSelector((state) => (state.dashboard
+  const dashboard = useSelector((state) => (state.dashboard
 && state.dashboard.datatable
-    ? state.dashboard.datatable : {}));
-
-  // data from store
-  const files = useSelector((state) => (state.dashboard
-        && state.dashboard.datatable
     ? state.dashboard.datatable : {}));
 
   const handleTabChange = (event, value) => {
@@ -99,9 +90,9 @@ const tabController = (classes) => {
     );
   }
 
-  const caseData = CaseData();
-  const sampleData = SampleData(samples);
-  const fileData = FileData(files);
+  const caseData = CaseData(dashboard.data);
+  const sampleData = SampleData(dashboard);
+  const fileData = FileData(dashboard);
 
   return (
     <>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -74,6 +75,17 @@ const CaseDetail = ({ classes, data }) => {
   function closeSnack() {
     setsnackbarState({ open: false });
   }
+
+  const files = [...data.filesOfCase].map((f) => {
+    const customF = { ...f };
+    const parentSample = data.samplesByCaseId.filter((s) => {
+     return s.files.map(sf=>sf.uuid).includes(f.uuid);
+    });
+    if (parentSample && parentSample.length > 0) {
+      customF.sample_id = parentSample[0].sample_id;
+    }
+    return customF;
+  });
   return (
     <>
       <Snackbar
@@ -474,7 +486,7 @@ const CaseDetail = ({ classes, data }) => {
           </div>
           <Grid item xs={12}>
             <GridView
-              data={data.filesOfCase}
+              data={files}
               Columns={FileColumns}
               customOnRowsSelect={FileOnRowsSelect}
               openSnack={openSnack}
