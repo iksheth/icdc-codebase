@@ -12,12 +12,26 @@ const tableStyle = (ratio = 1) => ({
 
 export default function FileColumns() {
   return ([
+     {
+      name: 'sample_id',
+      label: 'Sample ID',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(2.5)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
     {
       name: 'file_name',
       label: 'File Name',
       options: {
         filter: false,
-        sortDirection: 'asc',
         customBodyRender: (value) => (
           <div className="mui_td" style={tableStyle(2.5)}>
             {' '}
