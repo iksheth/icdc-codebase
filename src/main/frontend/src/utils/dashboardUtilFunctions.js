@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { v1 as uuid } from 'uuid';
 
 const COLORS = [
@@ -187,7 +188,6 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
 }));
 
 // getStudiesProgramWidgetFromDT
-
 export function getSunburstDataFromDashboardData(data) {
   // construct data tree
   const widgetData = [];
@@ -292,6 +292,11 @@ function DFSOfCheckBoxDataType2Input(data, fields) {
   return [];
 }
 
+
+
+
+
+
 /* filterData function evaluates a row of data with filters,
       to check if this row will be showed in the data table.
 
@@ -350,6 +355,32 @@ export const filterData = (row, filters) => {
   }
   return true;
 };
+
+
+// DFS search to get all the data for Checkbox
+function DFSFiltering(data, fields) {
+  const targetField = fields.shift();
+
+  // leaf
+  if (fields.length === 0) {
+    return data;
+  }
+  // branches
+  if (data[targetField]) {
+    if (Array.isArray(data[targetField])) {
+      // it is an array of object
+      return data[targetField].reduce(
+        (accumulator, currentValue) => accumulator.concat(
+          DFSOfCheckBoxDataType2Input(currentValue, [...fields]),
+        ),
+        [],
+      );
+    }
+    // if it is an Object
+    return DFSOfCheckBoxDataType2Input(data[targetField], [...fields]);
+  }
+  return [];
+}
 
 export function getFilters(orginFilter, newCheckBoxs) {
   let ogFilter = orginFilter;
@@ -554,20 +585,32 @@ export const updateCheckBoxData = (data, allCheckBoxes, activeCheckBoxes, filter
         (f) => (f.groupName !== checkbox.groupName),
       );
 
+      if(checkbox.groupName=="sample"){
+        console.log(1);
+      }
+
       // filter data
+      // this is case centric filtering, because it filter the top level of the data.
+      // In this case, we give a list of cases, return a list cases match the query.
+      // however, if combines filters of sample or files will have a problem.
+      // Beacuse it returns cases not the files and sample.
+      // So we have to do the filering again to filter out the file or sample later on.
       const subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
 
-      // for the other groups
+      // Interate filter options
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
         const item = el;
         item.cases = 0;
 
+        // interate data
         subData.forEach((d) => {
+          // filter option name
           const fName = (item.name === NOT_PROVIDED ? '' : item.name);
 
-          // DFS get a single array
+          //  data field, define how to find the data
           const filterOpts = checkbox.datafield.includes('@') ? checkbox.datafield.split('@') : [].concat(checkbox.datafield);
 
+          // find the data and put into a array
           const rawTargetObjs = [].concat(DFSOfCheckBoxDataType2Input(d, [...filterOpts]));
 
           const targetField = filterOpts.pop();

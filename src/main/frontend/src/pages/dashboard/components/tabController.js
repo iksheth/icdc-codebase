@@ -124,12 +124,15 @@ const tabController = (classes) => {
           textColor="primary"
         >
           <Tab
+            id="case_tab"
             label={getTabLalbel('Case', caseData.length)}
           />
           <Tab
+            id="sample_tab"
             label={getTabLalbel('Samples', sampleData.length)}
           />
           <Tab
+            id="file_tab"
             label={getTabLalbel('Files', fileData.length)}
           />
         </Tabs>
@@ -138,7 +141,7 @@ const tabController = (classes) => {
           onChangeIndex={handleTabChange}
           animateTransitions={false}
         >
-          <TabContainer>
+          <TabContainer id="case_tab_view">
             <TabView
               data={caseData}
               Columns={CaseColumns}
@@ -149,7 +152,7 @@ const tabController = (classes) => {
               buttonTitle="Add Filtered Files Associated With Selected Case(s)"
             />
           </TabContainer>
-          <TabContainer>
+          <TabContainer id="sample_tab_view">
             <TabView
               data={sampleData}
               Columns={SampleColumns}
@@ -160,7 +163,7 @@ const tabController = (classes) => {
               buttonTitle="Add Filtered Files Associated With Selected Sample(s)"
             />
           </TabContainer>
-          <TabContainer>
+          <TabContainer id="file_tab_view">
             <TabView
               data={fileData}
               Columns={FileColumns}
