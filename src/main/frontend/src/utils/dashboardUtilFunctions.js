@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { v1 as uuid } from 'uuid';
+import _ from 'lodash';
 
 const COLORS = [
   '#39C0F0',
@@ -357,29 +358,37 @@ export const filterData = (row, filters) => {
 };
 
 
-// DFS search to get all the data for Checkbox
-function DFSFiltering(data, fields) {
-  const targetField = fields.shift();
+/* DFS search to get all the data for Checkbox
+  @param filter : {
+                    datafield: ["diagnosis","sdf"]
+                    groupName: "Diagnosis"
+                    isChecked: true
+                    section:"section"
+                    name: "B Cell Lymphoma"
+                  }
+*/
+function DFSFiltering(nestedData, filter) {
+  
+  const targetField = filter.datafield.shift();
 
-  // leaf
-  if (fields.length === 0) {
-    return data;
-  }
-  // branches
-  if (data[targetField]) {
-    if (Array.isArray(data[targetField])) {
-      // it is an array of object
-      return data[targetField].reduce(
-        (accumulator, currentValue) => accumulator.concat(
-          DFSOfCheckBoxDataType2Input(currentValue, [...fields]),
-        ),
-        [],
-      );
+  let data = _.cloneDeep(nestedData)
+
+  if (fields.length === 1) {
+     // find the targeting data
+    if(data[targetField]&&data[targetField]==filter.name){
+        return data[targetField];
+    }else{
+      return '';
     }
-    // if it is an Object
-    return DFSOfCheckBoxDataType2Input(data[targetField], [...fields]);
+  }else{
+   if (data[targetField]) {
+      if (Array.isArray(data[targetField])) {
+           data[targetField] = data[targetField].map((d)=>DFSFiltering(d, filter));
+      }else{
+           data[targetField] = DFSFiltering(data, filter);
+      }
+   }
   }
-  return [];
 }
 
 export function getFilters(orginFilter, newCheckBoxs) {
@@ -595,7 +604,10 @@ export const updateCheckBoxData = (data, allCheckBoxes, activeCheckBoxes, filter
       // however, if combines filters of sample or files will have a problem.
       // Beacuse it returns cases not the files and sample.
       // So we have to do the filering again to filter out the file or sample later on.
-      const subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
+      let subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
+          filterWithOutCurrentCate.forEach((filter)=>{ 
+            subData = DFSFiltering(subData,filter);
+          })
 
       // Interate filter options
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {

@@ -69,8 +69,8 @@ const CaseDetail = ({ classes, data }) => {
     value: 0,
   });
 
-  function openSnack(value, action) {
-    setsnackbarState({ open: true, value, action });
+  function openSnack(value) {
+    setsnackbarState({ open: true, value, action: 'added' });
   }
   function closeSnack() {
     setsnackbarState({ open: false });
