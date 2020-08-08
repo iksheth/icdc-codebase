@@ -12,7 +12,7 @@ const tableStyle = (ratio = 1) => ({
 
 export default function FileColumns() {
   return ([
-     {
+    {
       name: 'sample_id',
       label: 'Sample ID',
       options: {

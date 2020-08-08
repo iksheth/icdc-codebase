@@ -358,6 +358,34 @@ export const filterData = (row, filters) => {
 };
 
 
+function sayNoToParent(parent){
+   if(parent){
+          // not root, 
+          if(Array.isArray(parent)){
+              return false;
+          }else{
+             return undefined;
+          }
+        }else{
+          // root 
+          return undefined;
+        }
+}
+
+function sayYesToParent(parent,nestedData){
+  if(parent){
+          // not root, 
+          if(Array.isArray(parent)){
+              return true;
+          }else{
+             return nestedData;
+          }
+        }else{
+          // root 
+          return nestedData;
+        }
+}
+
 /* DFS search to get all the data for Checkbox
   @param filter : {
                     datafield: ["diagnosis","sdf"]
@@ -367,27 +395,46 @@ export const filterData = (row, filters) => {
                     name: "B Cell Lymphoma"
                   }
 */
-function DFSFiltering(nestedData, filter) {
+/* DFS search to get all the data for Checkbox
+  @param filter : {
+                    datafield: ["diagnosis","sdf"]
+                    groupName: "Diagnosis"
+                    isChecked: true
+                    section:"section"
+                    name: "B Cell Lymphoma"
+                  }
+*/
+
+function DFSFiltering(nestedData, filter , parent) {
   
-  const targetField = filter.datafield.shift();
-
-  let data = _.cloneDeep(nestedData)
-
-  if (fields.length === 1) {
-     // find the targeting data
-    if(data[targetField]&&data[targetField]==filter.name){
-        return data[targetField];
+  if(filter.datafield.length === 1 ){
+    // do the matching job. 
+    if(nestedData[filter.datafield[0]] && nestedData[filter.datafield[0]] == filter.name){
+        // match the filter
+        // tell the parent, Yes, I am your kid. 
+        return sayYesToParent(parent,nestedData)
     }else{
-      return '';
+       // not match the filter
+       // tell the parent, No, I am not your kid. 
+        return sayNoToParent(parent);
     }
   }else{
-   if (data[targetField]) {
-      if (Array.isArray(data[targetField])) {
-           data[targetField] = data[targetField].map((d)=>DFSFiltering(d, filter));
-      }else{
-           data[targetField] = DFSFiltering(data, filter);
-      }
-   }
+    // filter datafield not reach the end. have to go deep
+    const targetField = filter.datafield.shift();
+    if(nestedData[targetField]){
+       // if has target the field
+        if (Array.isArray(nestedData[targetField])) {
+          nestedData[targetField] =  nestedData[targetField].filter(d=>DFSFiltering(d, filter , nestedData[targetField]));
+        }else{
+          nestedData[targetField] = DFSFiltering(nestedData[targetField], filter , nestedData[targetField]);
+        }
+        return nestedData;
+    }else{
+      // target field not found
+      // tell the parent, No, I am not your kid. 
+      return sayNoToParent(parent);
+    }
+
   }
 }
 
@@ -605,10 +652,16 @@ export const updateCheckBoxData = (data, allCheckBoxes, activeCheckBoxes, filter
       // Beacuse it returns cases not the files and sample.
       // So we have to do the filering again to filter out the file or sample later on.
       let subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
-          filterWithOutCurrentCate.forEach((filter)=>{ 
-            subData = DFSFiltering(subData,filter);
+          filterWithOutCurrentCate.forEach((f)=>{ 
+            // DFS get a single array
+            let filter = {...f};
+            const filterOpts = filter.datafield.includes('@') ? filter.datafield.split('@') : [].concat(filter.datafield);
+            filter.datafield= filterOpts;
+            subData=subData.map(d=>{
+              return DFSFiltering(d,_.cloneDeep( filter ))
+            });
           })
-
+          subData.filter(d=>d);
       // Interate filter options
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
         const item = el;

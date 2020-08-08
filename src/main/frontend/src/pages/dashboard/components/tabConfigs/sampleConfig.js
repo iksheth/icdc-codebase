@@ -13,6 +13,21 @@ const tableStyle = (ratio = 1) => ({
 export default function SampleColumns(classes) {
   return ([
     {
+      name: 'sample_id',
+      label: 'Sample ID',
+      options: {
+        filter: false,
+        sortDirection: 'asc',
+        customBodyRender: (value) => (
+          <div className="mui_td" style={tableStyle(1)}>
+            {' '}
+            {value}
+            {' '}
+          </div>
+        ),
+      },
+    },
+    {
       name: 'case_id',
       label: 'Case ID',
       options: {
@@ -54,21 +69,7 @@ export default function SampleColumns(classes) {
         ),
       },
     },
-    {
-      name: 'sample_id',
-      label: 'Sample ID',
-      options: {
-        filter: false,
-        sortDirection: 'asc',
-        customBodyRender: (value) => (
-          <div className="mui_td" style={tableStyle(1)}>
-            {' '}
-            {value}
-            {' '}
-          </div>
-        ),
-      },
-    },
+
     {
       name: 'sample_site',
       label: 'Sample Site',
