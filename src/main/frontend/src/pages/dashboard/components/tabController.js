@@ -54,7 +54,7 @@ const tabController = (classes) => {
 
   const tabIndex = {
     0: {
-      title: 'Case',
+      title: 'Cases',
       primaryColor: '#F48439',
       secondaryColor: '#FFDFB8',
     },
@@ -124,12 +124,15 @@ const tabController = (classes) => {
           textColor="primary"
         >
           <Tab
-            label={getTabLalbel('Case', caseData.length)}
+            id="case_tab"
+            label={getTabLalbel('Cases', caseData.length)}
           />
           <Tab
+            id="sample_tab"
             label={getTabLalbel('Samples', sampleData.length)}
           />
           <Tab
+            id="file_tab"
             label={getTabLalbel('Files', fileData.length)}
           />
         </Tabs>
@@ -138,7 +141,7 @@ const tabController = (classes) => {
           onChangeIndex={handleTabChange}
           animateTransitions={false}
         >
-          <TabContainer>
+          <TabContainer id="case_tab_view">
             <TabView
               data={caseData}
               Columns={CaseColumns}
@@ -146,9 +149,10 @@ const tabController = (classes) => {
               openSnack={openSnack}
               closeSnack={closeSnack}
               disableRowSelection={CaseDisableRowSelection}
+              buttonTitle="Add Filtered Files Associated With Selected Case(s)"
             />
           </TabContainer>
-          <TabContainer>
+          <TabContainer id="sample_tab_view">
             <TabView
               data={sampleData}
               Columns={SampleColumns}
@@ -156,9 +160,10 @@ const tabController = (classes) => {
               openSnack={openSnack}
               closeSnack={closeSnack}
               disableRowSelection={SampleDisableRowSelection}
+              buttonTitle="Add Filtered Files Associated With Selected Sample(s)"
             />
           </TabContainer>
-          <TabContainer>
+          <TabContainer id="file_tab_view">
             <TabView
               data={fileData}
               Columns={FileColumns}
@@ -166,6 +171,7 @@ const tabController = (classes) => {
               openSnack={openSnack}
               closeSnack={closeSnack}
               disableRowSelection={FileDisableRowSelection}
+              buttonTitle=" Add Files Associated With Your Selection"
             />
           </TabContainer>
         </SwipeableViews>

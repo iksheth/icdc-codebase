@@ -1,4 +1,6 @@
+/* eslint-disable */
 import { v1 as uuid } from 'uuid';
+import _ from 'lodash';
 
 const COLORS = [
   '#39C0F0',
@@ -187,7 +189,6 @@ export const unselectFilters = (filtersObj) => filtersObj.map((filterElement) =>
 }));
 
 // getStudiesProgramWidgetFromDT
-
 export function getSunburstDataFromDashboardData(data) {
   // construct data tree
   const widgetData = [];
@@ -292,6 +293,11 @@ function DFSOfCheckBoxDataType2Input(data, fields) {
   return [];
 }
 
+
+
+
+
+
 /* filterData function evaluates a row of data with filters,
       to check if this row will be showed in the data table.
 
@@ -350,6 +356,87 @@ export const filterData = (row, filters) => {
   }
   return true;
 };
+
+
+function sayNoToParent(parent){
+   if(parent){
+          // not root, 
+          if(Array.isArray(parent)){
+              return false;
+          }else{
+             return undefined;
+          }
+        }else{
+          // root 
+          return undefined;
+        }
+}
+
+function sayYesToParent(parent,nestedData){
+  if(parent){
+          // not root, 
+          if(Array.isArray(parent)){
+              return true;
+          }else{
+             return nestedData;
+          }
+        }else{
+          // root 
+          return nestedData;
+        }
+}
+
+/* DFS search to get all the data for Checkbox
+  @param filter : {
+                    datafield: ["diagnosis","sdf"]
+                    groupName: "Diagnosis"
+                    isChecked: true
+                    section:"section"
+                    name: "B Cell Lymphoma"
+                  }
+*/
+/* DFS search to get all the data for Checkbox
+  @param filter : {
+                    datafield: ["diagnosis","sdf"]
+                    groupName: "Diagnosis"
+                    isChecked: true
+                    section:"section"
+                    name: "B Cell Lymphoma"
+                  }
+*/
+
+function DFSFiltering(nestedData, filter , parent) {
+  
+  if(filter.datafield.length === 1 ){
+    // do the matching job. 
+    if(nestedData[filter.datafield[0]] && nestedData[filter.datafield[0]] == filter.name){
+        // match the filter
+        // tell the parent, Yes, I am your kid. 
+        return sayYesToParent(parent,nestedData)
+    }else{
+       // not match the filter
+       // tell the parent, No, I am not your kid. 
+        return sayNoToParent(parent);
+    }
+  }else{
+    // filter datafield not reach the end. have to go deep
+    const targetField = filter.datafield.shift();
+    if(nestedData[targetField]){
+       // if has target the field
+        if (Array.isArray(nestedData[targetField])) {
+          nestedData[targetField] =  nestedData[targetField].filter(d=>DFSFiltering(d, filter , nestedData[targetField]));
+        }else{
+          nestedData[targetField] = DFSFiltering(nestedData[targetField], filter , nestedData[targetField]);
+        }
+        return nestedData;
+    }else{
+      // target field not found
+      // tell the parent, No, I am not your kid. 
+      return sayNoToParent(parent);
+    }
+
+  }
+}
 
 export function getFilters(orginFilter, newCheckBoxs) {
   let ogFilter = orginFilter;
@@ -554,20 +641,41 @@ export const updateCheckBoxData = (data, allCheckBoxes, activeCheckBoxes, filter
         (f) => (f.groupName !== checkbox.groupName),
       );
 
-      // filter data
-      const subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
+      if(checkbox.groupName=="sample"){
+        console.log(1);
+      }
 
-      // for the other groups
+      // filter data
+      // this is case centric filtering, because it filter the top level of the data.
+      // In this case, we give a list of cases, return a list cases match the query.
+      // however, if combines filters of sample or files will have a problem.
+      // Beacuse it returns cases not the files and sample.
+      // So we have to do the filering again to filter out the file or sample later on.
+      let subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
+          filterWithOutCurrentCate.forEach((f)=>{ 
+            // DFS get a single array
+            let filter = {...f};
+            const filterOpts = filter.datafield.includes('@') ? filter.datafield.split('@') : [].concat(filter.datafield);
+            filter.datafield= filterOpts;
+            subData=subData.map(d=>{
+              return DFSFiltering(d,_.cloneDeep( filter ))
+            });
+          })
+          subData.filter(d=>d);
+      // Interate filter options
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
         const item = el;
         item.cases = 0;
 
+        // interate data
         subData.forEach((d) => {
+          // filter option name
           const fName = (item.name === NOT_PROVIDED ? '' : item.name);
 
-          // DFS get a single array
+          //  data field, define how to find the data
           const filterOpts = checkbox.datafield.includes('@') ? checkbox.datafield.split('@') : [].concat(checkbox.datafield);
 
+          // find the data and put into a array
           const rawTargetObjs = [].concat(DFSOfCheckBoxDataType2Input(d, [...filterOpts]));
 
           const targetField = filterOpts.pop();
