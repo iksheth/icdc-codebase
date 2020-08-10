@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Grid,
@@ -78,9 +77,8 @@ const CaseDetail = ({ classes, data }) => {
 
   const files = [...data.filesOfCase].map((f) => {
     const customF = { ...f };
-    const parentSample = data.samplesByCaseId.filter((s) => {
-     return s.files.map(sf=>sf.uuid).includes(f.uuid);
-    });
+    const parentSample = data.samplesByCaseId
+      .filter((s) => s.files.map((sf) => sf.uuid).includes(f.uuid));
     if (parentSample && parentSample.length > 0) {
       customF.sample_id = parentSample[0].sample_id;
     }
@@ -101,13 +99,15 @@ const CaseDetail = ({ classes, data }) => {
               {' '}
             </span>
             <span className={classes.snackBarText}>
+
               {snackbarState.value}
               {'    '}
               File(s) successfully
               {' '}
               {snackbarState.action}
               {' '}
-              your cart
+              to your cart
+
             </span>
           </div>
 )}
