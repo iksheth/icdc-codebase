@@ -188,8 +188,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '400px',
-    height: '27px',
+    width: '230px',
     lineHeight: '18px',
     fontSize: '10pt',
     color: '#fff',
