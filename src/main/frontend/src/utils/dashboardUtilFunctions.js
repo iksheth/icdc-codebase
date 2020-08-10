@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { v1 as uuid } from 'uuid';
 import _ from 'lodash';
 
@@ -293,11 +292,6 @@ function DFSOfCheckBoxDataType2Input(data, fields) {
   return [];
 }
 
-
-
-
-
-
 /* filterData function evaluates a row of data with filters,
       to check if this row will be showed in the data table.
 
@@ -357,87 +351,83 @@ export const filterData = (row, filters) => {
   return true;
 };
 
-
-function sayNoToParent(parent){
-   if(parent){
-          // not root, 
-          if(Array.isArray(parent)){
-              return false;
-          }else{
-             return undefined;
-          }
-        }else{
-          // root 
-          return undefined;
-        }
-}
-
-function sayYesToParent(parent,nestedData){
-  if(parent){
-          // not root, 
-          if(Array.isArray(parent)){
-              return true;
-          }else{
-             return nestedData;
-          }
-        }else{
-          // root 
-          return nestedData;
-        }
-}
-
-/* DFS search to get all the data for Checkbox
-  @param filter : {
-                    datafield: ["diagnosis","sdf"]
-                    groupName: "Diagnosis"
-                    isChecked: true
-                    section:"section"
-                    name: "B Cell Lymphoma"
-                  }
-*/
-/* DFS search to get all the data for Checkbox
-  @param filter : {
-                    datafield: ["diagnosis","sdf"]
-                    groupName: "Diagnosis"
-                    isChecked: true
-                    section:"section"
-                    name: "B Cell Lymphoma"
-                  }
-*/
-
-function DFSFiltering(nestedData, filter , parent ) {
-
-  if(filter.datafield.length === 1 ){
-    // do the matching job. 
-    if(nestedData[filter.datafield[0]] && filter.name.includes(nestedData[filter.datafield[0]])){
-        // match the filter
-        // tell the parent, Yes, I am your kid. 
-        return sayYesToParent(parent,nestedData)
-    }else{
-       // not match the filter
-       // tell the parent, No, I am not your kid. 
-        return sayNoToParent(parent);
+function sayNoToParent(parent) {
+  if (parent) {
+    // not root,
+    if (Array.isArray(parent)) {
+      return false;
     }
-  }else{
-    // filter datafield not reach the end. have to go deep
-    const targetField = filter.datafield.shift();
-    if(nestedData[targetField]){
-       // if has target the field
-        if (Array.isArray(nestedData[targetField])) {
-          nestedData[targetField] =  nestedData[targetField].filter(d=>DFSFiltering(d, filter , nestedData[targetField]));
-        }else{
-          nestedData[targetField] = DFSFiltering(nestedData[targetField], filter , nestedData[targetField]);
-        }
-        return nestedData;
-    }else{
-      // target field not found
-      // tell the parent, No, I am not your kid. 
-      return sayNoToParent(parent);
-    }
-
+    return undefined;
   }
+  // root
+  return undefined;
 }
 
+function sayYesToParent(parent, nestedData) {
+  if (parent) {
+    // not root,
+    if (Array.isArray(parent)) {
+      return true;
+    }
+    return nestedData;
+  }
+  // root
+  return nestedData;
+}
+
+/* DFS search to get all the data for Checkbox
+  @param filter : {
+                    datafield: ["diagnosis","sdf"]
+                    groupName: "Diagnosis"
+                    isChecked: true
+                    section:"section"
+                    name: "B Cell Lymphoma"
+                  }
+*/
+/* DFS search to get all the data for Checkbox
+  @param filter : {
+                    datafield: ["diagnosis","sdf"]
+                    groupName: "Diagnosis"
+                    isChecked: true
+                    section:"section"
+                    name: "B Cell Lymphoma"
+                  }
+*/
+
+function DFSFiltering(nestedData, filter, parent) {
+  if (filter.datafield.length === 1) {
+    // do the matching job.
+    if (nestedData[filter.datafield[0]] && filter.name.includes(nestedData[filter.datafield[0]])) {
+      // match the filter
+      // tell the parent, Yes, I am your kid.
+      return sayYesToParent(parent, nestedData);
+    }
+    // not match the filter
+    // tell the parent, No, I am not your kid.
+    return sayNoToParent(parent);
+  }
+  // filter datafield not reach the end. have to go deep
+  const targetField = filter.datafield.shift();
+  if (nestedData[targetField]) {
+    // if has target the field
+    if (Array.isArray(nestedData[targetField])) {
+      // eslint-disable-next-line no-param-reassign
+      nestedData[targetField] = nestedData[targetField]
+        .filter((d) => DFSFiltering(d, filter, nestedData[targetField]));
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      nestedData[targetField] = DFSFiltering(
+        nestedData[targetField],
+        filter,
+        nestedData[targetField],
+      );
+    }
+    return nestedData;
+  }
+  // target field not found
+  // tell the parent, No, I am not your kid.
+  return sayNoToParent(parent);
+}
 
 export function getFilters(orginFilter, newCheckBoxs) {
   let ogFilter = orginFilter;
@@ -642,47 +632,42 @@ export const updateCheckBoxData = (data, allCheckBoxes, activeCheckBoxes, filter
         (f) => (f.groupName !== checkbox.groupName),
       );
 
-      if(checkbox.groupName=="sample"){
-        console.log(1);
-      }
-
       // filter data
       // this is case centric filtering, because it filter the top level of the data.
       // In this case, we give a list of cases, return a list cases match the query.
       // however, if combines filters of sample or files will have a problem.
       // Beacuse it returns cases not the files and sample.
       // So we have to do the filering again to filter out the file or sample later on.
-     let subData = _.cloneDeep(data).filter((d) => (filterData(d, filterWithOutCurrentCate)));
-      
-      // merge filters in a same group. 
-        let transformedfilterWithOutCurrentCate = {};
-        filterWithOutCurrentCate.forEach((f)=>{ 
-          if(f.datafield in transformedfilterWithOutCurrentCate){
-            transformedfilterWithOutCurrentCate[f.datafield].name.push(f.name)
-          }else{
-            transformedfilterWithOutCurrentCate[f.datafield]=_.cloneDeep( f );
-            transformedfilterWithOutCurrentCate[f.datafield].name = [transformedfilterWithOutCurrentCate[f.datafield].name];
-          }
-        })
-        // convert to array
-        transformedfilterWithOutCurrentCate = Object.values(transformedfilterWithOutCurrentCate);
+      let subData = _.cloneDeep(data).filter((d) => (filterData(d, filterWithOutCurrentCate)));
 
-        subData=subData.map(d=>{
-          let trueGroup =[] // skip the same group's filter, when the record has already statisifed. 
-          // filtering 
-          transformedfilterWithOutCurrentCate.forEach((f)=>{ 
-              if(!trueGroup.includes(f.groupName)){
-                 let filter = {...f};
-                  const filterOpts = filter.datafield.includes('@') ? filter.datafield.split('@') : [].concat(filter.datafield);
-                  filter.datafield= filterOpts;
-                  d = DFSFiltering(d,_.cloneDeep( filter ),undefined)
-              }
-            });
-            return d;
+      // merge filters in a same group.
+      let transformedfilterWithOutCurrentCate = {};
+      filterWithOutCurrentCate.forEach((f) => {
+        if (f.datafield in transformedfilterWithOutCurrentCate) {
+          transformedfilterWithOutCurrentCate[f.datafield].name.push(f.name);
+        } else {
+          transformedfilterWithOutCurrentCate[f.datafield] = _.cloneDeep(f);
+          // eslint-disable-next-line max-len
+          transformedfilterWithOutCurrentCate[f.datafield].name = [transformedfilterWithOutCurrentCate[f.datafield].name];
+        }
+      });
+      // convert to array
+      transformedfilterWithOutCurrentCate = Object.values(transformedfilterWithOutCurrentCate);
+
+      subData = subData.map((d) => {
+        // filtering
+        transformedfilterWithOutCurrentCate.forEach((f) => {
+          const filter = { ...f };
+          const filterOpts = filter.datafield.includes('@') ? filter.datafield.split('@') : [].concat(filter.datafield);
+          filter.datafield = filterOpts;
+          // eslint-disable-next-line no-param-reassign
+          d = DFSFiltering(d, _.cloneDeep(filter), undefined);
         });
-        // remove underfined ones
-      subData=subData.filter(d=>{
-          if(d){ return true} else {return false};
+        return d;
+      });
+      // remove underfined ones
+      subData = subData.filter((d) => {
+        if (d) { return true; } return false;
       });
       // Interate filter options
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
