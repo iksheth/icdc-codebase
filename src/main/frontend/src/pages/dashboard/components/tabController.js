@@ -54,7 +54,7 @@ const tabController = (classes) => {
 
   const tabIndex = {
     0: {
-      title: 'Case',
+      title: 'Cases',
       primaryColor: '#F48439',
       secondaryColor: '#FFDFB8',
     },
@@ -124,7 +124,7 @@ const tabController = (classes) => {
           textColor="primary"
         >
           <Tab
-            label={getTabLalbel('Case', caseData.length)}
+            label={getTabLalbel('Cases', caseData.length)}
           />
           <Tab
             label={getTabLalbel('Samples', sampleData.length)}
