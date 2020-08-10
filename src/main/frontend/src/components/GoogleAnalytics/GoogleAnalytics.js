@@ -5,11 +5,15 @@ import { GA_TRACKING_ID } from './config';
 const createHistoryInGA = (pathname) => {
   const { gtag } = window;
 
+  // Removing /# from path name. Ref: https://regex101.com/r/bn7U8I/2/
+  const regex = /^\/#/;
+  const sanitizedPathname = pathname.replace(regex, '');
+
   if (typeof (gtag) === 'function') {
     gtag('config', GA_TRACKING_ID, {
       page_title: document.title,
       page_location: window.location.href,
-      page_path: pathname,
+      page_path: sanitizedPathname,
     });
   }
 };
