@@ -405,11 +405,11 @@ function sayYesToParent(parent,nestedData){
                   }
 */
 
-function DFSFiltering(nestedData, filter , parent) {
-  
+function DFSFiltering(nestedData, filter , parent ) {
+
   if(filter.datafield.length === 1 ){
     // do the matching job. 
-    if(nestedData[filter.datafield[0]] && nestedData[filter.datafield[0]] == filter.name){
+    if(nestedData[filter.datafield[0]] && filter.name.includes(nestedData[filter.datafield[0]])){
         // match the filter
         // tell the parent, Yes, I am your kid. 
         return sayYesToParent(parent,nestedData)
@@ -437,6 +437,7 @@ function DFSFiltering(nestedData, filter , parent) {
 
   }
 }
+
 
 export function getFilters(orginFilter, newCheckBoxs) {
   let ogFilter = orginFilter;
@@ -651,17 +652,38 @@ export const updateCheckBoxData = (data, allCheckBoxes, activeCheckBoxes, filter
       // however, if combines filters of sample or files will have a problem.
       // Beacuse it returns cases not the files and sample.
       // So we have to do the filering again to filter out the file or sample later on.
-      let subData = data.filter((d) => (filterData(d, filterWithOutCurrentCate)));
-          filterWithOutCurrentCate.forEach((f)=>{ 
-            // DFS get a single array
-            let filter = {...f};
-            const filterOpts = filter.datafield.includes('@') ? filter.datafield.split('@') : [].concat(filter.datafield);
-            filter.datafield= filterOpts;
-            subData=subData.map(d=>{
-              return DFSFiltering(d,_.cloneDeep( filter ))
+     let subData = _.cloneDeep(data).filter((d) => (filterData(d, filterWithOutCurrentCate)));
+      
+      // merge filters in a same group. 
+        let transformedfilterWithOutCurrentCate = {};
+        filterWithOutCurrentCate.forEach((f)=>{ 
+          if(f.datafield in transformedfilterWithOutCurrentCate){
+            transformedfilterWithOutCurrentCate[f.datafield].name.push(f.name)
+          }else{
+            transformedfilterWithOutCurrentCate[f.datafield]=_.cloneDeep( f );
+            transformedfilterWithOutCurrentCate[f.datafield].name = [transformedfilterWithOutCurrentCate[f.datafield].name];
+          }
+        })
+        // convert to array
+        transformedfilterWithOutCurrentCate = Object.values(transformedfilterWithOutCurrentCate);
+
+        subData=subData.map(d=>{
+          let trueGroup =[] // skip the same group's filter, when the record has already statisifed. 
+          // filtering 
+          transformedfilterWithOutCurrentCate.forEach((f)=>{ 
+              if(!trueGroup.includes(f.groupName)){
+                 let filter = {...f};
+                  const filterOpts = filter.datafield.includes('@') ? filter.datafield.split('@') : [].concat(filter.datafield);
+                  filter.datafield= filterOpts;
+                  d = DFSFiltering(d,_.cloneDeep( filter ),undefined)
+              }
             });
-          })
-          subData.filter(d=>d);
+            return d;
+        });
+        // remove underfined ones
+      subData=subData.filter(d=>{
+          if(d){ return true} else {return false};
+      });
       // Interate filter options
       checkbox.checkboxItems = checkbox.checkboxItems.map((el) => {
         const item = el;
