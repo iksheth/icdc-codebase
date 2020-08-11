@@ -134,7 +134,7 @@ const FileGridView = ({
         onClick={exportFiles}
         className={classes.button}
       >
-          ADD ASSOCIATED FILES TO MY CART
+          Add Associated Files to My Cart
       </button>
       </Grid>
     </div>
@@ -193,7 +193,7 @@ const styles = () => ({
   },
   button: {
     borderRadius: '10px',
-    width: '330px',
+    width: '260px',
     height: '27px',
     lineHeight: '18px',
     fontSize: '10pt',
