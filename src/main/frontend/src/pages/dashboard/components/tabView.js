@@ -10,7 +10,7 @@ import { addFiles } from '../../cart/store/cartAction';
 import { FileData } from '../../../utils/dashboardUtilFunctions';
 
 const TabView = ({
-  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection, buttonTitle,
+  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection, buttonTitle, tableID,
 }) => {
   const dispatch = useDispatch();
   // Get the existing files ids from  cart state
@@ -113,7 +113,7 @@ const TabView = ({
   return (
     <div>
       <Grid container>
-        <Grid item xs={12} id="table_cases">
+        <Grid item xs={12} id={tableID}>
           <MUIDataTable
             data={data}
             columns={columns}
