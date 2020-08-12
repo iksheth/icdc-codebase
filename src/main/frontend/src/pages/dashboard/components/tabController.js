@@ -75,9 +75,13 @@ const tabController = (classes) => {
     return `${tabIndex[currentTab].primaryColor} ${style}`;
   }
 
+  function getTableColor() {
+    return `${tabIndex[currentTab].primaryColor}`;
+  }
+
   function getTabLalbel(title, count) {
     const tabObj = tabIndex[currentTab];
-    const primaryColor = (tabObj.title === title) ? tabObj.primaryColor : undefined;
+    const primaryColor = (tabObj.title === title) ? '#FFF' : undefined;
     const secondaryColor = (tabObj.title === title) ? tabObj.secondaryColor : undefined;
 
     return (
@@ -116,7 +120,7 @@ const tabController = (classes) => {
           </div>
 )}
       />
-      <TabThemeProvider tableBorder={getBorderStyle()}>
+      <TabThemeProvider tableBorder={getBorderStyle()} tablecolor={getTableColor()}>
         <Tabs
           value={currentTab}
           onChange={handleTabChange}
