@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useRef, useEffect } from 'react';
 import {
   Grid,
@@ -11,7 +10,7 @@ import CustomFooter from './customFooter';
 import { addFiles } from '../../pages/cart/store/cartAction';
 
 const FileGridView = ({
-  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection,
+  classes, data, Columns, customOnRowsSelect, openSnack, disableRowSelection, bottonText = 'Add Associated Files to My Cart',
 }) => {
   const dispatch = useDispatch();
   // Get the existing files ids from  cart state
@@ -99,7 +98,6 @@ const FileGridView = ({
 
   });
 
-
   function saveButtonDiv(flag) {
     const css = {
       position: 'absolute',
@@ -113,8 +111,6 @@ const FileGridView = ({
     return css;
   }
 
-
-
   return (
     <div>
       <Grid container>
@@ -127,15 +123,15 @@ const FileGridView = ({
         </Grid>
 
       </Grid>
-      <Grid item xs={12} style={saveButtonDiv(data.length>0)}>
+      <Grid item xs={12} style={saveButtonDiv(data.length > 0)}>
         <button
-        type="button"
-        ref={saveButton}
-        onClick={exportFiles}
-        className={classes.button}
-      >
-          Add Associated Files to My Cart
-      </button>
+          type="button"
+          ref={saveButton}
+          onClick={exportFiles}
+          className={classes.button}
+        >
+          { bottonText }
+        </button>
       </Grid>
     </div>
   );
