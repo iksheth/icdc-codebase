@@ -2,7 +2,9 @@ import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import themes, { overrides } from '../../../themes';
 
-export default ({ children, extraStyles, tableBorder }) => {
+export default ({
+  children, extraStyles, tableBorder, tablecolor,
+}) => {
   const style = [];
 
   const overridesObj = themes.light.overrides;
@@ -17,12 +19,12 @@ export default ({ children, extraStyles, tableBorder }) => {
     overridesObj.MuiPrivateTabIndicator.root.transitionProperty = 'none';
     overridesObj.MuiPrivateTabIndicator.colorPrimary = { backgroundColor: tableBorder.split(' ')[0] };
     overridesObj.MuiTableFooter = { root: { borderTop: tableBorder } };
-    overridesObj.MUIDataTableToolbar = { root: { minHeight: '24px' } };
+    overridesObj.MUIDataTableToolbar = { root: { minHeight: '15px' } };
   }
 
   const MuiTabs = {
     root: {
-      marginTop: '20px',
+      marginTop: '15px',
     },
     flexContainer: {
       borderBottom: '1px solid #6B6B6B',
@@ -33,17 +35,13 @@ export default ({ children, extraStyles, tableBorder }) => {
   const MuiTab = {
     root: {
       width: '250px',
-      height: '52px',
+      height: '45px',
+      minHeight: '40px',
       marginRight: '10px',
       background: '#EAEAEA',
     },
     selected: {
-      borderWidth: '2px',
-      borderStyle: 'solid',
-      borderLeftColor: '#6B6B6B',
-      borderRightColor: '#6B6B6B',
-      borderBottomWidth: '0px',
-      background: '#FFFFFF',
+      background: tablecolor,
     },
     labelContainer: {
       fontSize: '18px',

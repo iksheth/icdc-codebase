@@ -492,6 +492,7 @@ const CaseDetail = ({ classes, data }) => {
               openSnack={openSnack}
               closeSnack={closeSnack}
               disableRowSelection={FileDisableRowSelection}
+              bottonText="Add Selected Files to My Cart"
             />
           </Grid>
         </div>
