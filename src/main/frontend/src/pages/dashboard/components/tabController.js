@@ -81,6 +81,7 @@ const tabController = (classes) => {
 
   function getTabLalbel(title, count) {
     const tabObj = tabIndex[currentTab];
+    // NOTE: refactor white color to theme's white color.
     const primaryColor = (tabObj.title === title) ? '#FFF' : undefined;
     const secondaryColor = (tabObj.title === title) ? tabObj.secondaryColor : undefined;
 
