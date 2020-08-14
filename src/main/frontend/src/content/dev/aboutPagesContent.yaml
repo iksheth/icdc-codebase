@@ -135,7 +135,13 @@
                 - CGCGB/NHGRI
                 - NIH
                 - BPSC
-            - 
+            -
+              row:
+                - "Anju Singh"
+                - IOB/DTP/DCTD/NCI
+                - NIH
+                - "-"
+            -
               row: 
                 - "Connie Sommers"
                 - IOB/DTP/DCTD/NCI
