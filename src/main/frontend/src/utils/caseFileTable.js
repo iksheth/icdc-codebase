@@ -37,6 +37,11 @@ export function CaseDisableRowSelection(data, cartData) {
     @output [f.uuid]
 */
 export function CaseOnRowsSelect(data, allRowsSelected) {
+  data.forEach((d)=>{
+    if(!d.files){
+      console.log("find undefined");
+    }
+  })
   // use reduce to combine all the files' id into single array
   return allRowsSelected.reduce((accumulator, currentValue) => {
     const { files } = data[currentValue.dataIndex];
