@@ -7,6 +7,8 @@ import TextField from '@material-ui/core/TextField';
 
 import { withStyles } from '@material-ui/core/styles';
 
+import externalIcon from '../../assets/cart/ExternalLink.svg';
+
 const defaultFooterStyles = {
   link: {
     color: '#dc762f',
@@ -14,6 +16,18 @@ const defaultFooterStyles = {
     '&:hover': {
       color: '#dc762f',
     },
+  },
+  linkIcon: {
+    color: '#dc762f',
+    width: '20px',
+    verticalAlign: 'sub',
+    margin: '0px 0px 0px 2px',
+  },
+  message: {
+    color: '#000000',
+    fontSize: '15px',
+    fontFamily: '"Open Sans", sans-serif',
+    lineHeight: '22px',
   },
 };
 
@@ -38,17 +52,22 @@ const CustomFooter = ({
       />
     </TableRow>
     <TableRow>
-      <div style={{ marginTop: '20px', marginBottom: '5px' }}>
+      <div className={classes.message} style={{ marginTop: '-8px', marginBottom: '5px' }}>
         <span>
           To access and analyze files: select and remove unwanted files,
           click the “Download Manifest” button, and upload the resulting
           Manifest file to your
           {' '}
-        </span>
-        <span>
           <Link target="_blank" className={classes.link} href="http://www.cancergenomicscloud.org/">
-            Seven Bridges Genomics account.
+            Seven Bridges Genomics
           </Link>
+          <img
+            src={externalIcon}
+            alt="outbounnd web site icon"
+            className={classes.linkIcon}
+          />
+          {' '}
+          account.
         </span>
       </div>
       <TextField
