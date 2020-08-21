@@ -63,7 +63,6 @@ const renderActiveShape = (props) => {
   );
 };
 
-
 export default class CustomActiveDonut extends PureComponent {
   constructor(props) {
     super(props);
@@ -81,14 +80,14 @@ export default class CustomActiveDonut extends PureComponent {
       data: DataObj, textColor,
     } = this.props;
     const data = DataObj.map((obj) => ({
-      name: obj.item,
+      name: obj.item == null ? 'Not Specified' : obj.item,
       value: obj.cases,
-    }));
+    })).sort((a, b) => b.name.localeCompare(a.name));
 
     const { activeIndex } = this.state;
 
     return (
-      <ResponsiveContainer width={180} height={185}>
+      <ResponsiveContainer width={185} height={185}>
         <PieChart textColor={textColor}>
           <Pie
             activeIndex={activeIndex}

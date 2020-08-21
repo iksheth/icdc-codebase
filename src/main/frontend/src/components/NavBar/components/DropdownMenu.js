@@ -4,7 +4,6 @@ import {
   withStyles, Paper,
 } from '@material-ui/core';
 
-
 const CustomDropdownMenu = ({ classes, handleClick }) => (
   <>
     <Paper className={classes.paper}>
@@ -71,7 +70,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
   </>
 );
 
-const styles = () => ({
+const styles = (theme) => ({
   paper: {
     background: '#309EC4',
     width: '170px',
@@ -83,7 +82,7 @@ const styles = () => ({
   link: {
     textDecoration: 'none',
     color: 'black',
-    fontFamily: 'Lato',
+    fontFamily: theme.custom.fontFamilyRaleway,
     fontSize: '13px',
     fontWeight: '800',
     lineSpacing: '1px',

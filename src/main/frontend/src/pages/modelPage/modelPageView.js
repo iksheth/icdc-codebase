@@ -15,7 +15,6 @@ import ZoomOutIcon from '../../assets/about/Model-Buttons-ZoomOut.svg';
 
 const ABOUT_CONTENT_URL = process.env.REACT_APP_ABOUT_CONTENT_URL;
 
-
 const limitToBounds = false;
 const panningEnabled = true;
 const transformEnabled = true;
@@ -34,17 +33,20 @@ const disableLimitsOnWheel = true;
 const ModelPage = ({ classes }) => {
   const [data, setData] = useState([]);
 
-  useEffect(async () => {
-    let resultData = [];
-    try {
-      const result = await axios.get(ABOUT_CONTENT_URL);
-      resultData = yaml.safeLoad(result.data);
-    } catch (error) {
-      const result = await axios(YAMLData);
-      resultData = yaml.safeLoad(result.data);
-    }
-    const supportObj = resultData.find(({ page }) => page === '/icdc-data-model');
-    setData(supportObj);
+  useEffect(() => {
+    const fetchData = async () => {
+      let resultData = [];
+      try {
+        const result = await axios.get(ABOUT_CONTENT_URL);
+        resultData = yaml.safeLoad(result.data);
+      } catch (error) {
+        const result = await axios(YAMLData);
+        resultData = yaml.safeLoad(result.data);
+      }
+      const supportObj = resultData.find(({ page }) => page === '/icdc-data-model');
+      setData(supportObj);
+    };
+    fetchData();
   }, []);
   return (
     <>

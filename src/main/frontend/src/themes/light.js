@@ -186,6 +186,11 @@ export default {
         padding: '0px',
       },
     },
+    MuiList: {
+      root: {
+        width: '100%',
+      },
+    },
     MuiListItemText: {
       root: {
         padding: '0 8px',
@@ -369,6 +374,19 @@ export default {
     MuiSwitch: {
       bar: {
         backgroundColor: '#ABADB0',
+      },
+    },
+    MUIDataTableBodyCell: {
+      stackedCommon: {
+        height: 'auto !important',
+        whiteSpace: 'normal !important',
+      },
+    },
+    MuiPrivateTabIndicator: {
+      root: {
+        top: 0,
+        bottom: 'auto',
+        height: '3px',
       },
     },
   },

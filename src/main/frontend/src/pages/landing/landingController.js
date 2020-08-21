@@ -155,7 +155,7 @@ const LandingController = ({ classes }) => (
               on human cancers by enabling comparative
               analysis with canine cancer. The data in the ICDC is sourced
               from multiple different programs and projects; all focused on
-              the canine subjects.
+              canine subjects.
             </div>
             <div className={classes.aboutButtonSection}>
               <div className={classes.aboutButtonLeft}>
@@ -561,7 +561,6 @@ const styles = (theme) => ({
     top: '-2150px',
     left: '220px',
   },
-
 
   dog: {
     position: 'relative',

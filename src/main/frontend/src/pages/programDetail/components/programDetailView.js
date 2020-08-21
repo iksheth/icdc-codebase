@@ -9,10 +9,9 @@ import { useDispatch } from 'react-redux';
 import StatsView from '../../../components/Stats/StatsView';
 import cn from '../../../utils/classNameConcat';
 import icon from '../../../assets/icons/Icon-Programs.svg';
-import dogForProgramDetail from '../../../assets/programCards/ProgramDetail_Image.jpg';
 import CustomBreadcrumb from '../../../components/Breadcrumb/BreadcrumbView';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/dashboardState';
-
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../../dashboard/store/dashboardAction';
+import ProgramImageConfig from '../../../components/programImageConfig';
 
 const options = {
   selectableRows: false,
@@ -20,8 +19,14 @@ const options = {
   filter: false,
   searchable: false,
   print: false,
-  download: false,
-  viewColumns: false,
+  download: true,
+  downloadOptions: {
+    filename: 'tableDownload.csv',
+    filterOptions: {
+      useDisplayedColumnsOnly: true,
+    },
+  },
+  viewColumns: true,
   pagination: true,
   rowsPerPageOptions: [10, 25, 50, 100],
 };
@@ -42,7 +47,6 @@ const ProgramDetailView = ({ classes, data }) => {
       }]));
     });
   };
-
 
   const columns = [
     { name: 'program_id', label: 'Program' },
@@ -100,6 +104,8 @@ const ProgramDetailView = ({ classes, data }) => {
     isALink: true,
   }];
 
+  const programConfig = ProgramImageConfig[programDetail.program_acronym];
+  const programImage = programConfig ? programConfig.secondaryImage : '';
 
   return (
     <>
@@ -125,7 +131,6 @@ const ProgramDetailView = ({ classes, data }) => {
 
         </div>
 
-
         <div className={classes.detailContainer}>
 
           <Grid container spacing={8}>
@@ -135,14 +140,16 @@ const ProgramDetailView = ({ classes, data }) => {
                   ? programDetail.program_full_description.split('**').map((item, i) => <p key={i}>{item}</p>) : null}
               </span>
             </Grid>
+            {programConfig && (
             <Grid item lg={4} md={4} sm={4} xs={12} className={classes.detailContainerRight}>
               <img
-                src={dogForProgramDetail}
+                src={programImage}
                 alt="dog for program detail"
                 className={classes.dogImage}
               />
 
             </Grid>
+            )}
           </Grid>
         </div>
       </div>
@@ -154,7 +161,7 @@ const ProgramDetailView = ({ classes, data }) => {
           </div>
           <Grid item xs={12}>
             <Grid container spacing={8}>
-              <Grid item xs={12}>
+              <Grid item xs={12} id="table_studies">
                 <MUIDataTable
                   data={data.studiesByProgramId}
                   columns={columns}
@@ -168,7 +175,6 @@ const ProgramDetailView = ({ classes, data }) => {
     </>
   );
 };
-
 
 const styles = (theme) => ({
   link: {
@@ -268,7 +274,6 @@ const styles = (theme) => ({
     paddingLeft: '3px',
   },
 
-
   logo: {
     position: 'absolute',
     float: 'left',
@@ -355,6 +360,5 @@ const styles = (theme) => ({
     paddingBottom: '20px',
   },
 });
-
 
 export default withStyles(styles, { withTheme: true })(ProgramDetailView);

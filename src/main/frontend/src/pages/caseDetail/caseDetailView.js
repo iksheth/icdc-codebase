@@ -3,73 +3,19 @@ import {
   Grid,
   withStyles,
 } from '@material-ui/core';
-import MUIDataTable from 'mui-datatables';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
 import { useDispatch } from 'react-redux';
+import Snackbar from '@material-ui/core/Snackbar';
 import StatsView from '../../components/Stats/StatsView';
-import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-CaseDetail.svg';
 import cn from '../../utils/classNameConcat';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/store/dashboardAction';
 import CustomBreadcrumb from '../../components/Breadcrumb/BreadcrumbView';
-
-function formatBytes(bytes, decimals = 2) {
-  if (bytes === 0) return '0 Bytes';
-
-  const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-
-  const i = Math.floor(Math.log(bytes) / Math.log(1024));
-
-  return `${parseFloat((bytes / (1024 ** i)).toFixed(dm))} ${sizes[i]}`;
-}
-
-
-const columns = [
-
-  { name: 'file_name', label: 'File Name', sortDirection: 'asc' },
-  { name: 'file_type', label: 'File Type' },
-  { name: 'parent', label: 'Association' },
-  { name: 'file_description', label: 'Description' },
-  { name: 'file_format', label: 'Format' },
-  {
-    name: 'file_size',
-    label: 'Size',
-    options: {
-      customBodyRender: (bytes) => (formatBytes(bytes)),
-    },
-  },
-];
-
-
-const options = (classes) => ({
-  selectableRows: false,
-  search: false,
-  filter: false,
-  searchable: false,
-  print: false,
-  download: false,
-  viewColumns: false,
-  pagination: true,
-  customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
-    <TableFooter>
-      <TableRow>
-        <TablePagination
-          className={classes.root}
-          count={count}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={(event) => changeRowsPerPage(event.target.value)}
-          // eslint-disable-next-line no-shadow
-          onChangePage={(_, page) => changePage(page)}
-        />
-      </TableRow>
-    </TableFooter>
-  ),
-});
-
+import SuccessOutlinedIcon from '../../utils/SuccessOutlined';
+import GridView from '../../components/FileGridWithCart';
+import FileColumns from './fileConfig';
+import { FileOnRowsSelect, FileDisableRowSelection } from '../../utils/fileTable';
+import SampleColumns from './sampleConfig';
+import { SampleOnRowsSelect, SampleDisableRowSelection } from '../../utils/sampleFileTable';
 
 const CaseDetail = ({ classes, data }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(
@@ -77,6 +23,7 @@ const CaseDetail = ({ classes, data }) => {
   );
 
   const dispatch = useDispatch();
+
   const redirectTo = (study) => {
     dispatch(initDashboardStatus()).then(() => {
       dispatch(singleCheckBox([{
@@ -116,9 +63,56 @@ const CaseDetail = ({ classes, data }) => {
     name: caseDetail.case_id,
   }];
 
+  const [snackbarState, setsnackbarState] = React.useState({
+    open: false,
+    value: 0,
+  });
 
+  function openSnack(value) {
+    setsnackbarState({ open: true, value, action: 'added' });
+  }
+  function closeSnack() {
+    setsnackbarState({ open: false });
+  }
+
+  const files = [...data.filesOfCase].map((f) => {
+    const customF = { ...f };
+    const parentSample = data.samplesByCaseId
+      .filter((s) => s.files.map((sf) => sf.uuid).includes(f.uuid));
+    if (parentSample && parentSample.length > 0) {
+      customF.sample_id = parentSample[0].sample_id;
+    }
+    return customF;
+  });
   return (
     <>
+      <Snackbar
+        className={classes.snackBar}
+        open={snackbarState.open}
+        onClose={closeSnack}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        message={(
+          <div className={classes.snackBarMessage}>
+            <span className={classes.snackBarMessageIcon}>
+              <SuccessOutlinedIcon />
+              {' '}
+            </span>
+            <span className={classes.snackBarText}>
+
+              {snackbarState.value}
+              {'    '}
+              File(s) successfully
+              {' '}
+              {snackbarState.action}
+              {' '}
+              to your cart
+
+            </span>
+          </div>
+)}
+      />
+
       <StatsView data={stat} />
       <div className={classes.container}>
         <div className={classes.header}>
@@ -200,13 +194,12 @@ const CaseDetail = ({ classes, data }) => {
 
                 <CustomBreadcrumb data={breadCrumbJson} />
               </div>
-            )}
 
+            )}
 
         </div>
 
-
-        <div className={classes.detailContainer}>
+        <div id="case_detail_container" className={classes.detailContainer}>
 
           <Grid container spacing={4}>
 
@@ -263,7 +256,6 @@ const CaseDetail = ({ classes, data }) => {
                     </Grid>
                   </Grid>
 
-
                   <Grid item xs={12}>
                     <Grid container spacing={4}>
                       <Grid item xs={4}>
@@ -276,11 +268,9 @@ const CaseDetail = ({ classes, data }) => {
                     </Grid>
                   </Grid>
 
-
                 </Grid>
               </Grid>
             </Grid>
-
 
             <Grid item lg={4} md={4} sm={12} xs={12} className={classes.detailContainerRight}>
               <Grid container spacing={32} direction="column">
@@ -357,12 +347,22 @@ const CaseDetail = ({ classes, data }) => {
                         </Grid>
                       </Grid>
                     </Grid>
+                    <Grid item xs={12}>
+                      <Grid container spacing={4}>
+                        <Grid item xs={6}>
+                          <span className={classes.title}>RESPONSE TO TREATMENT</span>
+                        </Grid>
+                        <Grid item xs={6} className={classes.content}>
+                          {diagnosis.best_response === '' || diagnosis.best_response === null
+                            ? '' : diagnosis.best_response}
+                        </Grid>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 ))}
 
               </Grid>
             </Grid>
-
 
             <Grid item lg={5} md={5} sm={12} xs={12} className={classes.detailContainerRight}>
               <Grid container spacing={32} direction="column">
@@ -460,25 +460,40 @@ const CaseDetail = ({ classes, data }) => {
           </Grid>
         </div>
       </div>
-      <div className={classes.tableContainer}>
-
+      <div id="table_case_detail" className={classes.tableContainer}>
         <div className={classes.tableDiv}>
           <div className={classes.tableTitle}>
-            <span className={classes.tableHeader}>AVAILABLE DATA</span>
+            <span className={classes.tableHeader}>ASSOCIATED SAMPLES</span>
           </div>
           <Grid item xs={12}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
-                <MUIDataTable
-                  data={data.filesOfCase}
-                  columns={columns}
-                  options={options(classes)}
+                <GridView
+                  data={data.samplesByCaseId}
+                  Columns={SampleColumns}
+                  customOnRowsSelect={SampleOnRowsSelect}
+                  openSnack={openSnack}
+                  closeSnack={closeSnack}
+                  disableRowSelection={SampleDisableRowSelection}
                 />
               </Grid>
-              <Grid item xs={8}>
-                <Typography />
-              </Grid>
             </Grid>
+          </Grid>
+        </div>
+        <div className={classes.tableDiv}>
+          <div className={classes.tableTitle}>
+            <span className={classes.tableHeader}>ASSOCIATED FILES</span>
+          </div>
+          <Grid item xs={12}>
+            <GridView
+              data={files}
+              Columns={FileColumns}
+              customOnRowsSelect={FileOnRowsSelect}
+              openSnack={openSnack}
+              closeSnack={closeSnack}
+              disableRowSelection={FileDisableRowSelection}
+              bottonText="Add Selected Files to My Cart"
+            />
           </Grid>
         </div>
       </div>
@@ -486,7 +501,6 @@ const CaseDetail = ({ classes, data }) => {
     </>
   );
 };
-
 
 const styles = (theme) => ({
   paddingLeft8: {
@@ -572,7 +586,6 @@ const styles = (theme) => ({
     paddingLeft: '3px',
   },
 
-
   logo: {
     position: 'absolute',
     float: 'left',
@@ -624,9 +637,7 @@ const styles = (theme) => ({
     maxWidth: theme.custom.maxContentWidth,
     margin: '10px auto',
   },
-  headerButtonLink: {
-    textDecoration: 'none',
-  },
+
   button: {
     borderRadius: '10px',
     width: '178px',
@@ -660,6 +671,35 @@ const styles = (theme) => ({
     letterSpacing: '0.017em',
     color: '#ff17f15',
     paddingBottom: '20px',
+  },
+  headerButton: {
+    fontFamily: theme.custom.fontFamilySans,
+    float: 'right',
+    marginTop: '15px',
+    width: '125px',
+    height: '33px',
+    marginRight: '20px',
+  },
+  headerButtonLink: {
+    fontFamily: theme.custom.fontFamilySans,
+    color: 'rgb(255, 255, 255)',
+    backgroundColor: '#DC762F',
+    opacity: 'unset',
+    border: 'unset',
+    fontWeight: '600',
+    cursor: 'pointer',
+    height: '27px',
+    fontSize: '10pt',
+    lineHeight: '18px',
+    borderRadius: '10px',
+    width: '178px',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  snackBarMessageIcon: {
+    verticalAlign: 'middle',
   },
 });
 

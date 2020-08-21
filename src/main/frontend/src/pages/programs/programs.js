@@ -5,7 +5,6 @@ import ProgramCard from './components/programcard';
 import icon from '../../assets/icons/Icon-Programs.svg';
 import cn from '../../utils/classNameConcat';
 
-
 const Programs = ({ classes, data }) => (
   <>
     <Stats />
@@ -28,7 +27,6 @@ const Programs = ({ classes, data }) => (
         </div>
 
       </div>
-
 
       <div className={classes.detailContainer}>
 
@@ -135,7 +133,6 @@ const styles = (theme) => ({
     fontSize: '12px',
     paddingLeft: '3px',
   },
-
 
   logo: {
     position: 'absolute',

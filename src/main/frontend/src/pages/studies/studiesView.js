@@ -13,8 +13,7 @@ import { useDispatch } from 'react-redux';
 import Stats from '../../components/Stats/AllStatsController';
 import { Typography } from '../../components/Wrappers/Wrappers';
 import icon from '../../assets/icons/Icon-StudiesDetail.svg';
-import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/dashboardState';
-
+import { singleCheckBox, fetchDataForDashboardDataTable } from '../dashboard/store/dashboardAction';
 
 const Studies = ({ classes, data }) => {
   const initDashboardStatus = () => (dispatch) => Promise.resolve(
@@ -70,8 +69,14 @@ const Studies = ({ classes, data }) => {
     filter: false,
     searchable: false,
     print: false,
-    download: false,
-    viewColumns: false,
+    download: true,
+    downloadOptions: {
+      filename: 'tableDownload.csv',
+      filterOptions: {
+        useDisplayedColumnsOnly: true,
+      },
+    },
+    viewColumns: true,
     pagination: true,
     rowsPerPageOptions: [10, 25, 50, 100],
     customFooter: (count, page, rowsPerPage, changeRowsPerPage, changePage) => (
@@ -90,7 +95,6 @@ const Studies = ({ classes, data }) => {
       </TableFooter>
     ),
   });
-
 
   return (
     <>
@@ -116,10 +120,9 @@ const Studies = ({ classes, data }) => {
             </div>
           </div>
 
-
           <div className={classes.tableDiv}>
             <Grid container>
-              <Grid item xs={12}>
+              <Grid item xs={12} id="table_studies">
                 <MUIDataTable
                   data={data.studiesByProgram}
                   columns={columns}
@@ -129,7 +132,6 @@ const Studies = ({ classes, data }) => {
             </Grid>
           </div>
         </div>
-
 
       </div>
     </>
