@@ -52,7 +52,7 @@ const CustomFooter = ({
       />
     </TableRow>
     <TableRow>
-      <div className={classes.message} style={{ marginTop: '20px', marginBottom: '5px' }}>
+      <div className={classes.message} style={{ marginTop: '-8px', marginBottom: '5px' }}>
         <span>
           To access and analyze files: select and remove unwanted files,
           click the “Download Manifest” button, and upload the resulting
