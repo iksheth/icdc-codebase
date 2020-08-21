@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@material-ui/core';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -7,7 +8,13 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
 const defaultFooterStyles = {
-
+  link: {
+    color: '#dc762f',
+    fontWeight: 'bolder',
+    '&:hover': {
+      color: '#dc762f',
+    },
+  },
 };
 
 const CustomFooter = ({
@@ -31,6 +38,19 @@ const CustomFooter = ({
       />
     </TableRow>
     <TableRow>
+      <div style={{ marginTop: '20px', marginBottom: '5px' }}>
+        <span>
+          To access and analyze files: select and remove unwanted files,
+          click the “Download Manifest” button, and upload the resulting
+          Manifest file to your
+          {' '}
+        </span>
+        <span>
+          <Link target="_blank" className={classes.link} href="http://www.cancergenomicscloud.org/">
+            Seven Bridges Genomics account.
+          </Link>
+        </span>
+      </div>
       <TextField
         id="multiline-user-coments"
         label={label}
