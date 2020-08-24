@@ -228,7 +228,7 @@
     - 
       paragraph: "The ICDC will adhere to $$[FAIR](https://www.go-fair.org/fair-principles/)$$ principles of data stewardship: Findable, Accessible, Interoperable, and Reusable. Please credit the ICDC in your manuscript. When citing individual projects, please refer to the attribution policies of the project when available."
     - 
-      paragraph: "$$#LICENCE#$$"
+      paragraph: "$$#LICENSE#$$"
     - 
       paragraph: "Data made available through the ICDC is for research purposes only. The ICDC provides researchers with access to data from canine cancer studies to enable exploratory analysis that cannot be considered definitive for outcomes. All data is publicly available."
     - 
@@ -252,7 +252,7 @@
     - 
       paragraph: "https://caninecommons.cancer.gov/v1/graphql/"
     - 
-      paragraph: "Users do not require authentication to the system - the data is public."
+      paragraph: "Users do not require authentication to the system - the data are public."
     - 
       paragraph: "These APIs are provided “as is”; there are no warranties or conditions arising out of usage of these services."
     - 
