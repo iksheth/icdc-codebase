@@ -62,7 +62,9 @@ const About = ({ match }) => {
 
   return (
     <>
-      <AboutBody data={{
+      <AboutBody 
+       key={match.path + data.title}
+      data={{
         img: data.image ? data.image : '',
         title: data.title ? data.title : '',
         content: data.content ? data.content : '',

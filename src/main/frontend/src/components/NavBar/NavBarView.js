@@ -172,9 +172,8 @@ const NavBar = ({
 
           <Button
             disableRipple
-
             weight="medium"
-            className={[classes.logotype, classes.myCasesPosition]}
+            className={classnames(classes.logotype, classes.myCasesPosition)}
             classes={{ root: classes.buttonRootNoRightPadding }}
           >
             <NavLink
