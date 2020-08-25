@@ -56,7 +56,18 @@ export default ({
   overridesObj.MuiTabs = MuiTabs;
   overridesObj.MuiTab = MuiTab;
 
+  const MUIDataTable = {
+    responsiveStacked: {
+      transform: 'rotateX(180deg)',
+    },
+    tableRoot: {
+      transform: 'rotateX(180deg)',
+    },
+  };
+
+  overridesObj.MUIDataTable = MUIDataTable;
   style.push(overridesObj);
+
   const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });
 
   return (
