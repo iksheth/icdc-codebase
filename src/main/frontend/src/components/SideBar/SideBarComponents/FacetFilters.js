@@ -64,6 +64,7 @@ const FacetPanel = (classes) => {
   function FacetFilterWrapper(children, name, styles) {
     return (
       <ExpansionPanel
+        key={name}
         expanded={groupExpanded.includes(name)}
         onChange={handleGroupChange(name)}
         classes={{ expanded: classes.classes.expansionPanelExpanded }}
@@ -77,10 +78,10 @@ const FacetPanel = (classes) => {
             expandIcon: classes.classes.expansionPanelSummaryCateRootExpandIcon,
           }}
         >
-          <ListItemText classes={{ primary: classes.classes.expansionPanelSummaryCateTitle }} primary={`Filter By ${name[0].toUpperCase()}${name.slice(1)}s`} />
+          <ListItemText key={name} classes={{ primary: classes.classes.expansionPanelSummaryCateTitle }} primary={`Filter By ${name[0].toUpperCase()}${name.slice(1)}s`} />
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <List component="div" disablePadding dense>
+          <List component="div" disablePadding>
             {children}
           </List>
         </ExpansionPanelDetails>
