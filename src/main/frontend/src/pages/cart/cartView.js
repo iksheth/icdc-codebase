@@ -323,6 +323,7 @@ const cartView = ({ classes, data, isLoading }) => {
       marginTop: '-47px',
       marginLeft: '30px',
       display: 'none',
+      padding: '0 16px',
     };
     if (isLoading === false) {
       css.display = 'block';
