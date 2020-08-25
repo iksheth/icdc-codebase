@@ -39,9 +39,9 @@ export default ({
       minHeight: '40px',
       marginRight: '10px',
       background: '#EAEAEA',
-    },
-    selected: {
-      background: tablecolor,
+      '&$selected': {
+        background: tablecolor,
+      },
     },
     labelContainer: {
       fontSize: '18px',
@@ -57,7 +57,14 @@ export default ({
   overridesObj.MuiTab = MuiTab;
 
   style.push(overridesObj);
-  const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });
+  const computedTheme = createMuiTheme({
+    ...themes.light,
+    ...overrides,
+    ...style,
+    typography: {
+      useNextVariants: true,
+    },
+  });
 
   return (
     <MuiThemeProvider theme={computedTheme}>
