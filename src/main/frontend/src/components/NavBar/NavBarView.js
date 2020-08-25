@@ -184,7 +184,7 @@ const NavBar = ({
             >
               My Files
 
-              <Tooltip title="Cases" placement="bottom-end">
+              <Tooltip title="Files" placement="bottom-end">
                 <span className={classes.badge}>
                   <img
                     className={classes.cartLogoImg}
