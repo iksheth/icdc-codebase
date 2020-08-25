@@ -39,9 +39,9 @@ export default ({
       minHeight: '40px',
       marginRight: '10px',
       background: '#EAEAEA',
-    },
-    selected: {
-      background: tablecolor,
+      '&$selected': {
+        background: tablecolor,
+      },
     },
     labelContainer: {
       fontSize: '18px',
