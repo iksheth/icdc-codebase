@@ -11,7 +11,7 @@ const styles = (theme) => ({
 });
 
 const SideBarContent = () => (
-    <FacetFilter/>
+  <FacetFilter />
 );
 
 export default withStyles(styles)(SideBarContent);
