@@ -92,21 +92,31 @@ class ProgramSunburst extends PureComponent {
     };
   }
 
-  render() {
-    const {
-      caseSize, size, widgetData, title,
-    } = this.state;
-    const {
-      width, height, data, textColor, classes,
-    } = this.props;
-    // update the caseSize  associated with title
+  componentDidUpdate(prevProps) {
+    // eslint-disable-next-line react/destructuring-assignment
+    if (prevProps.data !== this.props.data) {
+      this.updateStateIfNeeded();
+    }
+  }
 
+  updateStateIfNeeded() {
+    const { size, title } = this.state;
+    const { data } = this.props;
     this.setState({
       widgetData: sortData(data),
       size,
       title,
       caseSize: findCaseSizeOfTitle(data, title),
     });
+  }
+
+  render() {
+    const {
+      caseSize, widgetData, title,
+    } = this.state;
+    const {
+      width, height, textColor, classes,
+    } = this.props;
 
     return (
       <>
