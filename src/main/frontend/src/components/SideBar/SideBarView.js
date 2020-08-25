@@ -13,7 +13,7 @@ const styles = (theme) => ({
 
 const SideBarContent = () => (
   <List component="nav" aria-label="main mailbox folders">
-    <FacetFilter />
+    <FacetFilter key="facetFilter"/>
   </List>
 );
 
