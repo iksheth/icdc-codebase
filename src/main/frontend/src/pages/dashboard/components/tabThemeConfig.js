@@ -57,7 +57,14 @@ export default ({
   overridesObj.MuiTab = MuiTab;
 
   style.push(overridesObj);
-  const computedTheme = createMuiTheme({ ...themes.light, ...overrides, ...style });
+  const computedTheme = createMuiTheme({
+    ...themes.light,
+    ...overrides,
+    ...style,
+    typography: {
+      useNextVariants: true,
+    },
+  });
 
   return (
     <MuiThemeProvider theme={computedTheme}>
