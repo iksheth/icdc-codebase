@@ -147,7 +147,7 @@ class ProgramSunburst extends PureComponent {
               <LabelSeries data={[{
                 x: 0,
                 y: 0,
-                label: caseSize,
+                label: caseSize.toString(),
                 style: {
                   fontSize: '12px',
                   textAnchor: 'middle',
