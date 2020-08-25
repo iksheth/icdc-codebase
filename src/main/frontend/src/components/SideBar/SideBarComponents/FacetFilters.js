@@ -119,7 +119,7 @@ const FacetPanel = (classes) => {
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails>
-          <List component="div" classes={{ root: classes.classes.nested }}>
+          <List key={sideBarItem.groupName}  component="div" classes={{ root: classes.classes.nested }}>
             {
             sideBarItem.checkboxItems.map((checkboxItem) => {
               if (checkboxItem.cases === 0 && !checkboxItem.isChecked) {
