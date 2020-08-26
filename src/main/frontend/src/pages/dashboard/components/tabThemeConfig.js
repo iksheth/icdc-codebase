@@ -77,7 +77,6 @@ export default ({
     },
   });
 
-
   return (
     <MuiThemeProvider theme={computedTheme}>
       {children}
