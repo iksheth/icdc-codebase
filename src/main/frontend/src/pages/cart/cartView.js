@@ -320,7 +320,7 @@ const cartView = ({ classes, data, isLoading }) => {
   function divStyle() {
     const css = {
       position: 'absolute',
-      marginTop: '-47px',
+      marginTop: '-51px',
       marginLeft: '30px',
       display: 'none',
       padding: '0 16px',
