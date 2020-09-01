@@ -42,7 +42,7 @@ function sortData(d) {
 // find the caseSize of a given title
 function findCaseSizeOfTitle(data, title) {
   if (title === '') {
-    return data.caseSize;
+    return data.children.reduce((a, c) => a + c.caseSize, 0);
   }
   if (data.title !== title) {
     if (data.children) {
