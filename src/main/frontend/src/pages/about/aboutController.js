@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import yaml from 'js-yaml';
 import axios from 'axios';
-import YAMLData from '../../content/dev/aboutPagesContent.yaml';
+import YAMLData from '../../content/prod/aboutPagesContent.yaml';
 import CRDCImg from '../../assets/about/Photo-About_CRDC.jpg';
 import developerImg from '../../assets/about/Photo-About_Developer.jpg';
 import dataViewImg from '../../assets/about/Photo-About_ICDC_model.jpg';

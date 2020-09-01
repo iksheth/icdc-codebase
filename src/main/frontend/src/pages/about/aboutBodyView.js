@@ -85,7 +85,7 @@ const AboutBody = ({ classes, data }) => {
                           );
 
                           return (
-                            <div>
+                            <>
                               {link}
                               {type ? '' : (
                                 <img
@@ -95,7 +95,7 @@ const AboutBody = ({ classes, data }) => {
                                 />
                               )}
 
-                            </div>
+                            </>
                           );
                         }
                         // For email
