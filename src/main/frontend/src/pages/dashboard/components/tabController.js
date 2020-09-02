@@ -178,7 +178,7 @@ const tabController = (classes) => {
               openSnack={openSnack}
               closeSnack={closeSnack}
               disableRowSelection={FileDisableRowSelection}
-              buttonTitle=" Add Selected Files to My Cart"
+              buttonTitle=" Add Selected Files to My Files"
               tableID="file_tab_table"
             />
           </TabContainer>
