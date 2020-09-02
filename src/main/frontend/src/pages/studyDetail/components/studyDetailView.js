@@ -253,7 +253,7 @@ const StudyDetailView = ({ classes, data }) => {
               {' '}
               {snackbarState.action}
               {' '}
-              your cart
+              your files
             </span>
           </div>
 )}
