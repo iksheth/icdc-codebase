@@ -43,6 +43,12 @@ const About = ({ match }) => {
         case '/steeringCommittee':
           supportObj.image = committeeImg;
           break;
+        case '/DGAB':
+          supportObj.image = committeeImg;
+          break;
+        case '/BPSC':
+          supportObj.image = committeeImg;
+          break;
         case '/support':
           supportObj.image = supportImg;
           break;
