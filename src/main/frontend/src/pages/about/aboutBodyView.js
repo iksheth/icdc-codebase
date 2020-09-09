@@ -22,7 +22,9 @@ const AboutBody = ({ classes, data }) => {
   return (
     <>
       <Stats />
-      <Header title={data.title} />
+      <div className={classes.paddingTop60}>
+        <Header title={data.title} className={classes.container} />
+      </div>
       <div className={classes.container}>
         <Grid container spacing={16} direction="row" className={classes.aboutSection}>
           <Grid item lg={3} md={3} sm={12} xs={12} className={classes.leftSection}>
@@ -171,6 +173,9 @@ const AboutBody = ({ classes, data }) => {
 };
 
 const styles = (theme) => ({
+  paddingTop60: {
+    paddingTop: '60px',
+  },
   container: {
     margin: '16px auto 16px auto',
     color: '#000000',
