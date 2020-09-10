@@ -226,7 +226,7 @@ const styles = (theme) => ({
     },
   },
   tableDiv: {
-    marginTop: '45px',
+    marginTop: '0px',
   },
   table: {
     borderSpacing: '0',
