@@ -11,7 +11,7 @@ import supportImg from '../../assets/about/About_Support.jpg';
 import submitDataImg from '../../assets/about/Photo-About_SubmittingData.jpg';
 import AboutBody from './aboutBodyView';
 
-const ABOUT_CONTENT_URL = process.env.REACT_APP_ABOUT_CONTENT_URL;
+const ABOUT_CONTENT_URL = YAMLData;
 
 const About = ({ match }) => {
   const [data, setData] = useState([]);

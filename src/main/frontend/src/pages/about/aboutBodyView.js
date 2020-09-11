@@ -139,11 +139,25 @@ const AboutBody = ({ classes, data }) => {
                         <thead className={classes.tableHeader}>
                           <tr className={classes.tableBodyRow}>
                             <th className={classes.headerCell} aria-label="Index" />
-                            { contentObj.table[0].head.map((rowObj) => (
-                              <>
-                                <th className={classes.headerCell}>{rowObj}</th>
-                              </>
-                            )) }
+                            { contentObj.table[0].head.map((rowObj) => {
+                              let outputHTML = <th className={classes.headerCell}>{rowObj}</th>;
+                              if (rowObj != null && (/{(.*)}/.test(rowObj))) {
+                                const thAttrs = rowObj.match(/{(.*)}/).pop().split('$$');
+                                const inlineStyleStr = thAttrs.find((thAttr) => thAttr.includes('style:')).replace('style:', '').replace(/'/g, '');
+                                const inlineStyleMap = {};
+                                inlineStyleStr.split(',').forEach((style) => {
+                                  // eslint-disable-next-line prefer-destructuring
+                                  inlineStyleMap[style.split(':')[0]] = style.split(':')[1];
+                                });
+                                const text = thAttrs.find((thAttr) => thAttr.includes('text:'));
+                                outputHTML = (
+                                  <th className={classes.headerCell} style={inlineStyleMap}>
+                                    {text.replace('text:', '')}
+                                  </th>
+                                );
+                              }
+                              return outputHTML;
+                            })}
                           </tr>
                         </thead>
                         <tbody>
@@ -152,7 +166,29 @@ const AboutBody = ({ classes, data }) => {
                               <tr className={classes.tableBodyRow}>
                                 <td className={classes.tableCell}>{index + 1}</td>
                                 {/* eslint-disable-next-line max-len */}
-                                { rowObj.row.map((rowValue) => <td className={classes.tableCell}>{rowValue}</td>)}
+                                { rowObj.row.map((rowValue) => {
+                                  let outputHTML = (
+                                    <td className={classes.tableCell}>
+                                      {rowValue}
+                                    </td>
+                                  );
+                                  if (rowValue != null && (/{(.*)}/.test(rowValue))) {
+                                    const thAttrs = rowValue.match(/{(.*)}/).pop().split('$$');
+                                    const inlineStyleStr = thAttrs.find((thAttr) => thAttr.includes('style:')).replace('style:', '').replace(/'/g, '');
+                                    const inlineStyleMap = {};
+                                    inlineStyleStr.split(',').forEach((style) => {
+                                      // eslint-disable-next-line prefer-destructuring
+                                      inlineStyleMap[style.split(':')[0]] = style.split(':')[1];
+                                    });
+                                    const text = thAttrs.find((thAttr) => thAttr.includes('text:'));
+                                    outputHTML = (
+                                      <td className={classes.tableCell} style={inlineStyleMap}>
+                                        {text.replace('text:', '')}
+                                      </td>
+                                    );
+                                  }
+                                  return outputHTML;
+                                })}
                               </tr>
                             </>
                           )) }
@@ -254,6 +290,7 @@ const styles = (theme) => ({
     fontSize: '14px',
     padding: '8px 15px 8px 0px',
     borderBottom: '0.66px solid #087CA5',
+    width: '1px',
   },
   headerCell: {
     borderBottom: '4px solid #087CA5',
