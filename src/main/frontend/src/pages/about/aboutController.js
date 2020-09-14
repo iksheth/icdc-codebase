@@ -41,7 +41,7 @@ const About = ({ match }) => {
           break;
         case '/purpose':
           supportObj.image = purposeImg;
-          supportObj.imageAlt = 'purpose';
+          supportObj.imageAlt = 'Man holding dog closely';
           break;
         case '/steeringCommittee':
           supportObj.image = committeeImg;
