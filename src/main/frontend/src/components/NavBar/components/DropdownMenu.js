@@ -31,7 +31,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           to="/DGAB"
           onClick={handleClick}
         >
-          - DGAB
+          - Data Governance Advisory Board
         </NavLink>
         <NavLink
           className={cn(classes.sublink, classes.link)}
@@ -39,7 +39,7 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
           to="/BPSC"
           onClick={handleClick}
         >
-          - BPSC
+          - Best Practices Sub-Committee
         </NavLink>
         <NavLink
           className={classes.link}
@@ -90,14 +90,14 @@ const CustomDropdownMenu = ({ classes, handleClick }) => (
 const styles = (theme) => ({
   paper: {
     background: '#309EC4',
-    width: '170px',
+    width: '220px',
     padding: '0px 16px 16px 16px',
     position: 'absolute',
     marginTop: '-5px',
     borderRadius: '0',
   },
   sublink: {
-    paddingLeft: '20px',
+    paddingLeft: '10px',
     fontSize: '11px !important',
   },
   link: {
@@ -115,7 +115,7 @@ const styles = (theme) => ({
     },
   },
   aboutItemsWrapper: {
-    maxWidth: '150px',
+    maxWidth: '190px',
   },
 });
 
